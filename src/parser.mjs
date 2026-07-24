@@ -259,16 +259,21 @@ function parseBelowRelations(graph, body, source, context) {
       const parent = graph.addNode(parentName, { source });
       if (!parent) continue;
       for (const childName of parseNameList(match[2])) {
+        const existing = graph.nodeByName(childName);
+        const isAffiliated = existing?.metadata?.unitRole === "affiliated-institution";
         const inferredKind = inferKind(childName);
         const isSpine = inferredKind === "head" || inferredKind === "deputy";
         const child = graph.addNode(childName, {
-          kind: isSpine ? inferredKind : "advisor",
+          kind: isSpine ? inferredKind : isAffiliated ? "affiliated" : "advisor",
           source,
           forceKind: true,
+          metadata: isAffiliated
+            ? { unitRole: "affiliated-institution" }
+            : undefined,
         });
         if (!child) continue;
         graph.addEdge(parent.id, child.id, {
-          type: isSpine ? "structural" : "advisor",
+          type: isSpine ? "structural" : isAffiliated ? "affiliated" : "advisor",
           source,
           metadata: { legalBasis: "밑에 둔다" },
         });
@@ -322,31 +327,38 @@ function parseInRelations(graph, body, source, context, { articleIsAffiliated = 
             : "affiliated"
       : null;
     for (const childName of parseNameList(match[2])) {
+      const existing = graph.nodeByName(childName);
+      const isAlreadyAffiliated = existing?.metadata?.unitRole === "affiliated-institution";
+      const isAffiliated = articleIsAffiliated || isAlreadyAffiliated;
       const inferredKind = inferKind(childName);
       const child = graph.addNode(childName, {
         kind:
           inferredKind === "head" || inferredKind === "deputy"
             ? inferredKind
-            : articleIsAffiliated
+            : isAffiliated
               ? "affiliated"
               : isAdvisoryPurpose
                 ? "advisor"
                 : "assistant",
         source,
         forceKind: true,
-        metadata: affiliationType
+        metadata: affiliationType || isAlreadyAffiliated
           ? {
-              affiliationType,
-              responsible: affiliationType === "responsible",
+              ...(affiliationType
+                ? { affiliationType, responsible: affiliationType === "responsible" }
+                : {}),
+              unitRole: "affiliated-institution",
             }
-          : undefined,
+          : /본부$/.test(childName)
+            ? { unitRole: "headquarters" }
+            : undefined,
       });
       if (!child) continue;
       graph.addEdge(parent.id, child.id, {
         type:
           inferredKind === "head" || inferredKind === "deputy"
             ? "structural"
-            : articleIsAffiliated
+            : isAffiliated
               ? "affiliated"
               : isAdvisoryPurpose
                 ? "advisor"
@@ -354,7 +366,14 @@ function parseInRelations(graph, body, source, context, { articleIsAffiliated = 
         source,
         metadata: {
           legalBasis: isAdvisoryPurpose ? "보좌하기 위하여 에 둔다" : "에 둔다",
-          ...(affiliationType ? { affiliationType } : {}),
+          ...(affiliationType || isAlreadyAffiliated
+            ? {
+                ...(affiliationType ? { affiliationType } : {}),
+                unitRole: "affiliated-institution",
+              }
+            : /본부$/.test(childName)
+              ? { unitRole: "headquarters" }
+              : {}),
         },
       });
     }
@@ -412,6 +431,7 @@ function parseAffiliatedRelations(graph, body, source, context) {
           metadata: {
             affiliationType,
             responsible: affiliationType === "responsible",
+            unitRole: "affiliated-institution",
           },
         });
         if (child) {

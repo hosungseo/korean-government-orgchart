@@ -101,12 +101,15 @@ test("문형이 접미사보다 우선하여 보조기관과 보좌기관을 구
 @기관: 시험부
 제4조(하부조직) 시험부에 정책실 및 독립정책관을 둔다.
 장관 밑에 기획조정실장 및 감사관 각 1명을 둔다.
+차관 밑에 정책지원본부를 둔다.
 정책실에 정책국을 둔다.
 `,
   ]);
 
   assert.equal(graph.nodeByName("기획조정실").kind, "advisor");
   assert.equal(graph.nodeByName("감사관").kind, "advisor");
+  assert.equal(graph.nodeByName("정책지원본부").kind, "advisor");
+  assert.equal(graph.nodeByName("정책지원본부").metadata.unitRole, undefined);
   assert.equal(graph.nodeByName("독립정책관").kind, "assistant");
   assert.equal(
     graph.parentsOf("기획조정실").some(({ edge, node }) => node.name === "장관" && edge.type === "advisor"),
@@ -153,6 +156,26 @@ test("소속기관 유형과 한시조직·한시정원을 분리한다", () => 
   assert.deepEqual(graph.meta.temporaryHeadcounts.map(({ target, expires }) => ({ target, expires })), [
     { target: "시험행정부", expires: "2027-12-31" },
   ]);
+});
+
+test("본부 명칭과 부속기관은 설치 문형으로 구분한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(소속기관) 장관의 관장 사무를 지원하기 위하여 장관 소속으로 정부청사관리본부를 둔다.
+제4조(하부조직) 시험부에 재난안전관리본부를 둔다.
+`,
+  ]);
+
+  const headquarters = graph.nodeByName("재난안전관리본부");
+  const subsidiary = graph.nodeByName("정부청사관리본부");
+  assert.equal(headquarters.kind, "assistant");
+  assert.equal(headquarters.metadata.unitRole, "headquarters");
+  assert.equal(graph.parentsOf(headquarters).some(({ edge }) => edge.type === "assistant"), true);
+  assert.equal(subsidiary.kind, "affiliated");
+  assert.equal(subsidiary.metadata.unitRole, "affiliated-institution");
+  assert.equal(subsidiary.metadata.affiliationType, "subsidiary");
+  assert.equal(graph.parentsOf(subsidiary).some(({ edge }) => edge.type === "affiliated"), true);
 });
 
 test("직무등급·특정직 보직·겸직·합의제 구성을 메타데이터로 보존한다", () => {

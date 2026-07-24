@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="대한민국 행정기관 직제 문언을 조직도 구조로 읽는 브라우저 데모">
+  <meta name="theme-color" content="#14233b">
+  <title>직제 문언 → 기구도 생성기</title>
+  <style>
+    :root {
+      --navy: #14233b;
+      --navy-2: #213b62;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #dfe5ee;
+      --paper: #fbfcfe;
+      --blue: #b8d2f1;
+      --blue-line: #315a8a;
+      --green: #d8efd7;
+      --green-line: #398041;
+      --sand: #f5efe3;
+      --shadow: 0 24px 60px rgba(20, 35, 59, .12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 86% -10%, rgba(184, 210, 241, .45), transparent 34rem),
+        #f3f6fa;
+      font-family: Inter, Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .topbar {
+      height: 76px; display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(223, 229, 238, .85);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.03em; }
+    .brand-mark { width: 28px; height: 28px; border: 2px solid var(--navy); border-radius: 8px; position: relative; }
+    .brand-mark::before, .brand-mark::after { content: ""; position: absolute; background: var(--navy); }
+    .brand-mark::before { width: 2px; height: 20px; left: 12px; top: 2px; }
+    .brand-mark::after { width: 20px; height: 2px; left: 2px; top: 12px; }
+    .nav { display: flex; align-items: center; gap: 20px; color: var(--muted); font-size: 13px; }
+    .nav a { text-decoration: none; }
+    .nav a:hover { color: var(--ink); }
+    .nav .github { color: var(--navy); font-weight: 700; }
+    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 60px; align-items: center; padding: 72px 0 56px; }
+    .eyebrow { color: var(--blue-line); font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { margin: 13px 0 17px; max-width: 650px; color: var(--navy); font-family: Georgia, "Noto Serif KR", serif; font-size: clamp(42px, 6vw, 72px); line-height: 1.03; letter-spacing: -.065em; }
+    .hero p { max-width: 590px; color: #536075; font-size: 17px; margin: 0; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 17px; border: 1px solid var(--navy); border-radius: 7px; font-size: 13px; font-weight: 750; text-decoration: none; cursor: pointer; transition: transform .16s ease, box-shadow .16s ease, background .16s ease; }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(20, 35, 59, .12); }
+    .button.primary { color: #fff; background: var(--navy); }
+    .button.secondary { color: var(--navy); background: #fff; border-color: var(--line); }
+    .hero-note { display: flex; gap: 10px; align-items: center; margin-top: 23px; color: var(--muted); font-size: 12px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #55a45e; box-shadow: 0 0 0 4px #dcefdc; }
+    .hero-card { padding: 18px; border: 1px solid rgba(255,255,255,.9); border-radius: 18px; background: rgba(255,255,255,.7); box-shadow: var(--shadow); transform: rotate(1.5deg); }
+    .hero-card-inner { min-height: 290px; padding: 21px; border: 1px solid #cbd8e8; border-radius: 11px; background: #fff; }
+    .mini-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 10px; font-weight: 700; }
+    .mini-title { color: var(--navy); font-family: Georgia, serif; font-size: 18px; font-weight: 700; }
+    .mini-spine { display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 18px; }
+    .mini-box { min-width: 120px; padding: 8px 12px; border: 1.5px solid var(--blue-line); border-radius: 5px; color: var(--navy); background: var(--blue); text-align: center; font-size: 12px; font-weight: 800; }
+    .mini-box.sub { border-color: #8c98a9; color: var(--ink); background: #fff; font-weight: 650; }
+    .mini-line { width: 1px; height: 17px; background: #8c98a9; }
+    .mini-row { display: flex; gap: 7px; }
+    .mini-row .mini-box { min-width: 72px; font-size: 10px; }
+    .mini-staff { position: absolute; margin: 42px 0 0 185px; padding: 5px 9px; border: 1px dashed #8999ae; border-radius: 6px; color: var(--navy-2); background: #f3f7fc; font-size: 10px; }
+    .section { padding: 34px 0 92px; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 20px; }
+    .section-heading h2 { margin: 0; color: var(--navy); font-size: 26px; letter-spacing: -.04em; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+    .workbench { display: grid; grid-template-columns: 340px 1fr; min-height: 650px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: #fff; box-shadow: var(--shadow); }
+    .input-panel { padding: 22px; border-right: 1px solid var(--line); background: #fbfcfe; }
+    .panel-kicker { margin-bottom: 7px; color: var(--blue-line); font-size: 10px; font-weight: 850; letter-spacing: .14em; }
+    .input-panel h3 { margin: 0 0 8px; font-size: 20px; letter-spacing: -.04em; }
+    .input-panel p { margin: 0 0 15px; color: var(--muted); font-size: 12px; }
+    textarea { width: 100%; height: 355px; resize: vertical; padding: 13px; border: 1px solid #cad5e3; border-radius: 8px; outline: none; color: #27364d; background: #fff; font: 12px/1.75 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    textarea:focus { border-color: var(--blue-line); box-shadow: 0 0 0 3px rgba(49, 90, 138, .12); }
+    .input-actions { display: flex; gap: 8px; margin-top: 11px; }
+    .input-actions .button { flex: 1; min-height: 39px; padding: 0 10px; font-size: 12px; }
+    .status { min-height: 21px; margin-top: 11px; color: var(--muted); font-size: 11px; }
+    .status.error { color: #a33b3b; }
+    .chart-panel { min-width: 0; padding: 22px; background: linear-gradient(#fff, #fbfcff); }
+    .chart-toolbar { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+    .chart-toolbar strong { color: var(--navy); font-size: 16px; }
+    .stats { display: flex; gap: 13px; color: var(--muted); font-size: 11px; }
+    .stats b { color: var(--ink); }
+    .chart-scroll { min-height: 525px; overflow: auto; padding: 29px 5px 16px; }
+    .chart { min-width: 650px; min-height: 420px; display: flex; flex-direction: column; align-items: center; color: var(--ink); }
+    .chart-agency { color: var(--navy); font-family: Georgia, "Noto Serif KR", serif; font-size: 24px; font-weight: 800; letter-spacing: .08em; }
+    .chart-spine { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 14px; }
+    .chart-card { position: relative; min-width: 122px; padding: 9px 13px; border: 1px solid #7a8799; border-radius: 5px; background: #fff; text-align: center; font-size: 12px; font-weight: 650; }
+    .chart-card.head { min-width: 148px; border: 2px solid #1b3e70; color: var(--navy); background: var(--blue); font-weight: 850; }
+    .chart-card.staff { border-style: dashed; color: var(--navy-2); background: #f2f6fb; }
+    .chart-card.affil { border-color: var(--green-line); color: #1d5724; background: var(--green); }
+    .chart-staff-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 5px 0 3px; }
+    .chart-staff-row .chart-card { min-width: 104px; padding: 7px 10px; font-size: 11px; }
+    .chart-line { width: 1px; height: 20px; background: #8390a1; }
+    .chart-bus { width: 80%; max-width: 740px; height: 23px; border-top: 1px solid #8390a1; position: relative; }
+    .chart-bus::before { content: ""; position: absolute; left: 50%; top: -23px; width: 1px; height: 23px; background: #8390a1; }
+    .unit-row { width: 100%; display: flex; justify-content: center; align-items: flex-start; gap: 13px; }
+    .unit { min-width: 125px; max-width: 185px; display: flex; flex-direction: column; align-items: center; }
+    .unit > .chart-card::before { content: ""; position: absolute; left: 50%; top: -24px; width: 1px; height: 24px; background: #8390a1; }
+    .unit-children { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 13px; padding-top: 10px; border-left: 1px solid #c4ccd7; }
+    .unit-children .chart-card { width: 100%; min-width: 106px; font-size: 11px; }
+    .unit-children .chart-card.staff { color: var(--navy-2); }
+    .affiliates { width: 100%; margin-top: 28px; padding-top: 15px; border-top: 1px dashed #b7c0cd; }
+    .affiliates-label { margin-bottom: 9px; color: var(--muted); font-size: 11px; font-weight: 750; }
+    .affiliate-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .marker { display: inline-block; margin-left: 3px; color: var(--blue-line); font-size: 10px; font-weight: 800; }
+    .legend { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
+    .legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .legend i { display: inline-block; width: 17px; height: 9px; border: 1px solid #7a8799; background: #fff; }
+    .legend .staff i { border-style: dashed; background: #f2f6fb; }
+    .legend .affil i { border-color: var(--green-line); background: var(--green); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .info-card { min-height: 175px; padding: 22px; border: 1px solid var(--line); border-radius: 11px; background: rgba(255,255,255,.72); }
+    .info-card .number { color: var(--blue-line); font-size: 11px; font-weight: 850; letter-spacing: .12em; }
+    .info-card h3 { margin: 14px 0 7px; font-size: 17px; letter-spacing: -.04em; }
+    .info-card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .footer { padding: 24px 0 38px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+    .footer a { color: var(--navy); font-weight: 700; text-decoration: none; }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 48px; }
+      .hero-card { max-width: 520px; transform: none; }
+      .workbench { grid-template-columns: 1fr; }
+      .input-panel { border-right: 0; border-bottom: 1px solid var(--line); }
+    }
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 28px, 1180px); }
+      .topbar { height: 65px; }
+      .nav a:not(.github) { display: none; }
+      h1 { font-size: 45px; }
+      .hero p { font-size: 15px; }
+      .section { padding-bottom: 58px; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 6px; }
+      .cards { grid-template-columns: 1fr; }
+      .chart-panel { padding: 15px; }
+      .chart-toolbar { align-items: flex-start; flex-direction: column; gap: 7px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell topbar">
+    <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span><span>직제 문언 → 기구도</span></a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#demo">브라우저 데모</a>
+      <a href="#method">판정 규칙</a>
+      <a class="github" href="https://github.com/hosungseo/korean-government-orgchart" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="shell hero">
+      <div>
+        <div class="eyebrow">Korean government orgchart</div>
+        <h1>직제 문언을<br>기구도로 읽다.</h1>
+        <p>대통령령 직제와 직제 시행규칙의 문장을 보조기관·보좌기관·소속기관 관계로 읽고, 편집 가능한 조직도 데이터로 바꾸는 오픈 도구입니다.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#demo">샘플 문언 실행</a>
+          <a class="button secondary" href="https://github.com/hosungseo/korean-government-orgchart" target="_blank" rel="noreferrer">소스 보기</a>
+        </div>
+        <div class="hero-note"><span class="dot" aria-hidden="true"></span><span>법정 설치관계와 운영상 소관을 분리해 보존합니다.</span></div>
+      </div>
+      <div class="hero-card" aria-label="조직도 미리보기">
+        <div class="hero-card-inner">
+          <div class="mini-header"><span class="mini-title">산업통상부</span><span>2026. 7. 24. 기준</span></div>
+          <div class="mini-spine">
+            <div class="mini-box">장관</div><div class="mini-line"></div><div class="mini-box">차관</div>
+            <div class="mini-staff">대변인 · 기획조정실장</div>
+            <div class="mini-line"></div>
+            <div class="mini-row"><div class="mini-box sub">산업정책실</div><div class="mini-box sub">산업성장실</div><div class="mini-box sub">산업안보실</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="shell section">
+      <div class="section-heading">
+        <div><h2>문언을 붙여넣어 보세요</h2><p>브라우저에서 동작하는 축약 파서입니다. 전체 법적 파서는 CLI에서 실행합니다.</p></div>
+      </div>
+      <div class="workbench">
+        <div class="input-panel">
+          <div class="panel-kicker">STEP 01 · INPUT</div>
+          <h3>직제 문언</h3>
+          <p>실·국·관·과와 보좌·소속기관 설치 문형을 한 줄씩 넣어보세요.</p>
+          <label for="lawText" class="sr-only">직제 문언 입력</label>
+          <textarea id="lawText" spellcheck="false"></textarea>
+          <div class="input-actions"><button class="button primary" id="parseBtn" type="button">기구도 생성</button><button class="button secondary" id="resetBtn" type="button">예시로 초기화</button></div>
+          <div class="status" id="status" role="status" aria-live="polite"></div>
+          <div class="legend" aria-label="범례">
+            <span><i></i>보조기관</span><span class="staff"><i></i>보좌기관</span><span class="affil"><i></i>소속기관</span>
+          </div>
+        </div>
+        <div class="chart-panel">
+          <div class="chart-toolbar"><strong id="chartTitle">산업통상부</strong><div class="stats"><span>노드 <b id="nodeStat">0</b></span><span>계선 <b id="edgeStat">0</b></span><button class="button secondary" id="downloadBtn" type="button" style="min-height:30px;padding:0 10px;font-size:11px">SVG 저장</button></div></div>
+          <div class="chart-scroll"><div id="chart" class="chart"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="method" class="shell section">
+      <div class="section-heading"><div><h2>판정 규칙은 문형에서 시작합니다</h2><p>접미사보다 법령의 설치·보좌 문언을 먼저 읽습니다.</p></div></div>
+      <div class="cards">
+        <article class="info-card"><div class="number">01 · LINE</div><h3>“X에 A를 둔다”</h3><p>A는 X의 보조기관입니다. 실·국·본부·관·과를 계선으로 연결합니다.</p></article>
+        <article class="info-card"><div class="number">02 · STAFF</div><h3>“Y 밑에 D를 둔다”</h3><p>D는 Y의 보좌기관입니다. 기획조정실장처럼 이름이 실장이어도 문형이 우선합니다.</p></article>
+        <article class="info-card"><div class="number">03 · OPERATING</div><h3>“정책관 내 다른 과”</h3><p>시행규칙의 업무분장상 소관은 법정 설치계선과 분리해 운영형 도표에 점선으로 표시합니다.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell footer"><div class="footer-inner"><span>직제 문언 → 기구도 생성기 · 초안·분석 도구</span><span><a href="https://github.com/hosungseo/korean-government-orgchart" target="_blank" rel="noreferrer">GitHub</a> · <a href="../" download>프로젝트 파일</a></span></div></footer>
+
+  <script>
+    const EXAMPLE = `@기관: 산업통상부
+@소관: 산업정책관 > 산업정책과ㆍ기업정책과 [공식 조직표 2026-07-24]
+제4조 산업통상부에 산업정책실ㆍ산업성장실 및 산업자원안보실을 둔다.
+산업정책실에 산업정책관ㆍ지역경제정책관 및 산업정책과ㆍ기업정책과를 둔다.
+산업성장실에 산업기술융합정책관 및 첨단산업정책관을 둔다.
+산업성장실에 산업기술융합정책과ㆍ첨단산업정책과를 둔다.
+산업자원안보실에 자원산업정책관 및 산업공급망정책관을 둔다.
+산업자원안보실에 자원산업정책과ㆍ산업공급망정책과를 둔다.
+장관 밑에 대변인 1명을 둔다.
+차관 밑에 기획조정실장 및 감사관 각 1명을 둔다.
+장관의 관장 사무를 지원하기 위하여 장관 소속으로 국가기술표준원을 둔다.`;
+
+    const state = { model: null };
+    const $ = (selector) => document.querySelector(selector);
+    const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char]));
+    const escapeXml = (value) => escapeHtml(value);
+    const splitNames = (value) => value
+      .replace(/\s*각\s*\d+\s*명(?:씩)?/g, "")
+      .replace(/\s*\d+\s*명/g, "")
+      .split(/ㆍ|·|,|\s+및\s+/)
+      .map((item) => item.trim().replace(/^(?:그리고|및)\s*/, "").replace(/[을를]$/, ""))
+      .filter((item) => item && !/^(?:기관|위원|정원|공무원)$/.test(item));
+    const cleanParent = (value) => {
+      let parent = value.replace(/^.*?\)\s*/, "").trim().split(/\s+/).at(-1) || value;
+      if (/^(?:장관|차관|처장|청장|위원장|부위원장|차장)$/.test(parent)) return parent;
+      return parent.replace(/(실장|국장|과장|팀장|본부장|단장|관장|원장)$/, (_, suffix) => suffix.slice(0, -1));
+    };
+    const kindFor = (name, relation) => {
+      if (relation === "staff") return "staff";
+      if (relation === "affiliated") return "affil";
+      return "line";
+    };
+    const markerFor = (name) => {
+      if (/연구/.test(name)) return "연";
+      if (/지도/.test(name)) return "지";
+      if (/전문/.test(name)) return "전";
+      return "";
+    };
+    function parse(text) {
+      const lines = text.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+      let agency = lines.find((line) => line.startsWith("@기관:"))?.slice(4).trim();
+      if (!agency) agency = (text.match(/이\s*영은\s*([가-힣0-9]+?(?:부|처|청|위원회))/) || [])[1] || "행정기관";
+      const nodes = new Map();
+      const edges = [];
+      const jurisdiction = [];
+      const get = (name, kind = "line") => {
+        if (!name || name.length < 2) return null;
+        if (!nodes.has(name)) nodes.set(name, { name, kind, children: [], staff: [], parent: null, marker: markerFor(name) });
+        const node = nodes.get(name);
+        if (kind === "affil" || kind === "staff") node.kind = kind;
+        return node;
+      };
+      const attach = (parentName, childName, relation) => {
+        const parent = get(parentName);
+        const child = get(childName, kindFor(childName, relation));
+        if (!parent || !child || parent.name === child.name) return;
+        if (!edges.some((edge) => edge.parent === parent.name && edge.child === child.name && edge.type === relation)) edges.push({ parent: parent.name, child: child.name, type: relation });
+        child.parent ||= parent.name;
+        if (relation === "staff") parent.staff.push(child.name);
+        else parent.children.push(child.name);
+      };
+      get(agency, "root");
+      for (const line of lines) {
+        if (line.startsWith("@기관:") || line.startsWith("@소관:")) {
+          if (line.startsWith("@소관:")) {
+            const match = line.match(/@소관:\s*(.+?)\s*>\s*(.+?)(?:\s*\[|$)/);
+            if (match) splitNames(match[2]).forEach((child) => jurisdiction.push({ parent: match[1].trim(), child }));
+          }
+          continue;
+        }
+        const staff = line.match(/(.+?)\s*밑에\s+(.+?)(?:을|를)?\s*(?:둔다|두며|두되)(?:[.。]|$)/);
+        if (staff) { splitNames(staff[2]).forEach((child) => attach(cleanParent(staff[1]), child, "staff")); continue; }
+        const affiliation = line.match(/(?:장관|청장|처장|위원장)[^.]*(?:소속으로|소속의 책임운영기관으로)\s+(.+?)(?:을|를)\s*둔다/);
+        if (affiliation) { splitNames(affiliation[1]).forEach((child) => attach(agency, child, "affiliated")); continue; }
+        const install = line.match(/(.+?)에\s+(.+?)(?:을|를)\s*(?:둔다|두며|두되)(?:[.。]|$)/);
+        if (install) {
+          const parent = cleanParent(install[1]);
+          splitNames(install[2]).forEach((child) => attach(parent || agency, child, "line"));
+        }
+      }
+      const headName = /위원회$/.test(agency) ? "위원장" : /청$/.test(agency) ? "청장" : /처$/.test(agency) ? "처장" : "장관";
+      const deputyName = /위원회$/.test(agency) ? "부위원장" : /(?:청|처)$/.test(agency) ? "차장" : "차관";
+      get(headName, "head"); get(deputyName, "head");
+      const top = nodes.get(agency);
+      const explicitRoots = [...nodes.values()].filter((node) => node.name !== agency && !node.parent && ![headName, deputyName].includes(node.name));
+      explicitRoots.forEach((node) => attach(deputyName, node.name, "line"));
+      attach(agency, headName, "line"); attach(headName, deputyName, "line");
+      for (const relation of jurisdiction) {
+        const parent = get(relation.parent); const child = get(relation.child);
+        if (parent && child) child.jurisdiction = parent.name;
+      }
+      return { agency, headName, deputyName, nodes, edges, jurisdiction };
+    }
+    function card(node, extra = "") {
+      const marker = node.marker ? `<span class="marker">(${node.marker})</span>` : "";
+      return `<div class="chart-card ${node.kind} ${extra}">${escapeHtml(node.name)}${marker}</div>`;
+    }
+    function renderUnit(model, name, seen = new Set()) {
+      const node = model.nodes.get(name); if (!node || seen.has(name)) return "";
+      const nextSeen = new Set(seen); nextSeen.add(name);
+      const children = (node.children || []).map((child) => renderUnit(model, child, nextSeen)).join("");
+      const staff = (node.staff || []).map((child) => { const childNode = model.nodes.get(child); return childNode ? card(childNode) : ""; }).join("");
+      return `<div class="unit">${card(node)}${staff ? `<div class="chart-staff-row">${staff}</div>` : ""}${children ? `<div class="unit-children">${children}</div>` : ""}</div>`;
+    }
+    function render(model) {
+      const agency = model.nodes.get(model.agency);
+      const head = model.nodes.get(model.headName);
+      const deputy = model.nodes.get(model.deputyName);
+      const topUnits = [...model.nodes.values()].filter((node) => [model.agency, model.deputyName].includes(node.parent) && ![model.headName, model.deputyName].includes(node.name) && node.kind !== "affil" && node.kind !== "staff");
+      const affils = [...model.nodes.values()].filter((node) => node.kind === "affil");
+      const units = topUnits.map((node) => renderUnit(model, node.name)).join("");
+      const staff = (head?.staff || []).map((name) => model.nodes.get(name)).filter(Boolean).map((node) => card(node)).join("");
+      const html = `<div class="chart-agency">${escapeHtml(model.agency)}</div><div class="chart-spine">${card(head, "head")} ${staff ? `<div class="chart-staff-row">${staff}</div>` : ""}<div class="chart-line"></div>${card(deputy, "head")}<div class="chart-line"></div><div class="chart-bus"></div><div class="unit-row">${units || `<div class="chart-card">문언에서 하부조직을 찾지 못했습니다</div>`}</div>${affils.length ? `<div class="affiliates"><div class="affiliates-label">소속기관</div><div class="affiliate-row">${affils.map((node) => card(node)).join("")}</div></div>` : ""}</div>`;
+      $("#chart").innerHTML = html;
+      $("#chartTitle").textContent = model.agency;
+      $("#nodeStat").textContent = model.nodes.size - 1;
+      $("#edgeStat").textContent = model.edges.length;
+      const jurisdictionCount = model.jurisdiction.length;
+      $("#status").textContent = `${model.nodes.size - 1}개 조직을 읽었습니다${jurisdictionCount ? ` · 운영 소관 ${jurisdictionCount}건` : ""}.`;
+      $("#status").classList.remove("error");
+    }
+    function renderSvg(model) {
+      const units = [...model.nodes.values()].filter((node) => [model.agency, model.deputyName].includes(node.parent) && ![model.headName, model.deputyName].includes(node.name) && node.kind !== "affil" && node.kind !== "staff");
+      const width = Math.max(820, units.length * 150 + 80); let y = 32; const parts = [`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="620" viewBox="0 0 ${width} 620"><rect width="100%" height="100%" fill="#ffffff"/><text x="${width / 2}" y="${y}" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="800" fill="#14233b">${escapeXml(model.agency)}</text>`];
+      const box = (x, top, name, fill = "#ffffff", stroke = "#7a8799") => `<rect x="${x - 58}" y="${top}" width="116" height="34" rx="5" fill="${fill}" stroke="${stroke}"/><text x="${x}" y="${top + 22}" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#172033">${escapeXml(name)}</text>`;
+      y += 35; parts.push(box(width / 2, y, model.headName, "#b8d2f1", "#315a8a"), `<line x1="${width / 2}" y1="${y + 34}" x2="${width / 2}" y2="${y + 58}" stroke="#8390a1"/>`); y += 70; parts.push(box(width / 2, y, model.deputyName, "#b8d2f1", "#315a8a")); y += 78; const gap = width / (units.length + 1); units.forEach((node, index) => { const x = gap * (index + 1); parts.push(`<line x1="${width / 2}" y1="${y - 18}" x2="${x}" y2="${y - 18}" stroke="#8390a1"/>`, box(x, y, node.name)); (node.children || []).slice(0, 4).forEach((child, childIndex) => { const childY = y + 58 + childIndex * 42; parts.push(`<line x1="${x}" y1="${y + 34}" x2="${x}" y2="${childY}" stroke="#c4ccd7"/>`, box(x, childY, child, "#fbfcfe", "#a8b2c1")); }); }); parts.push("</svg>"); return parts.join("");
+    }
+    function run() { try { state.model = parse($("#lawText").value); render(state.model); } catch (error) { $("#status").textContent = `해석 오류: ${error.message}`; $("#status").classList.add("error"); } }
+    $("#lawText").value = EXAMPLE;
+    $("#parseBtn").addEventListener("click", run);
+    $("#resetBtn").addEventListener("click", () => { $("#lawText").value = EXAMPLE; run(); });
+    $("#downloadBtn").addEventListener("click", () => { if (!state.model) return; const blob = new Blob([renderSvg(state.model)], { type: "image/svg+xml" }); const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = `${state.model.agency}-기구도.svg`; link.click(); URL.revokeObjectURL(link.href); });
+    run();
+  </script>
+</body>
+</html>

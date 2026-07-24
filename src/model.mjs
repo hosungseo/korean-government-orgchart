@@ -223,6 +223,7 @@ export class OrgGraph {
 
   validateLegalStructure() {
     this.meta.validation = [];
+    this.meta.spanDiagnostics = [];
     for (const node of this.nodes.values()) {
       const children = this.childrenOf(node.id);
       if (/차관보$/.test(node.name) && children.length) {
@@ -254,6 +255,29 @@ export class OrgGraph {
             `실 밑 국에는 국장 보좌기관을 둘 수 없습니다: ${parent.name} → ${node.name}`,
           );
         }
+      }
+    }
+
+    // The corpus shows 3–6 direct departments as the usual bureau span. Keep
+    // this as a diagnostic, not a legal violation: small and large bureaus
+    // can both be valid under the decree.
+    for (const node of this.nodes.values()) {
+      if (!/국$/.test(node.name)) continue;
+      const count = this.childrenOf(node.id).filter(({ node: child }) => /(?:과|팀|담당관)$/.test(child.name)).length;
+      if (count < 3) {
+        this.meta.spanDiagnostics.push({
+          node: node.name,
+          directUnits: count,
+          status: "consolidation-candidate",
+          message: "직속 과·팀이 3개 미만입니다.",
+        });
+      } else if (count > 9) {
+        this.meta.spanDiagnostics.push({
+          node: node.name,
+          directUnits: count,
+          status: "split-candidate",
+          message: "직속 과·팀이 9개를 초과합니다.",
+        });
       }
     }
     return this.meta.validation;
@@ -408,4 +432,53 @@ export function inferDeputyTitle(institution) {
   if (/위원회$/.test(institution)) return "부위원장";
   if (/(?:청|처)$/.test(institution)) return "차장";
   return "차관";
+}
+
+/**
+ * Returns the organization-table counts used by the 2026 government-chart
+ * convention. These are unit counts, not personnel headcounts. Personnel
+ * totals still require the relevant annex or operating-headcount table.
+ */
+export function summarizeStructure(graph) {
+  const rootId = graph.rootId;
+  const excluded = (node) =>
+    node.id === rootId ||
+    node.kind === "head" ||
+    node.kind === "deputy" ||
+    node.metadata?.countsTowardStructure === false ||
+    (node.metadata?.concurrentOffice && /사무처|사무총장/.test(node.name));
+  const nodes = [...graph.nodes.values()].filter((node) => !excluded(node));
+  const countBy = (predicate) => nodes.filter(predicate).length;
+  const line = countBy((node) => ["assistant", "temporary"].includes(node.kind));
+  const staff = countBy((node) => node.kind === "advisor");
+  const affiliated = countBy((node) => node.kind === "affiliated");
+  const grade = (value) => countBy((node) => node.metadata?.grade === value);
+  const rank = (value) => countBy((node) => node.metadata?.gradeRange === value);
+  const staffing = {
+    knownUnits: nodes.length,
+    grade: { 가: grade("가"), 나: grade("나") },
+    gradeRange: {
+      "3.4급": rank("3.4급"),
+      "4급": rank("4급"),
+      "4.5급": rank("4.5급"),
+    },
+    staffCategories: Object.fromEntries(
+      ["일반직", "연구직", "지도직", "전문직", "전문경력관", "임기제", "별정직", "특정직"].map(
+        (category) => [category, countBy((node) => node.metadata?.staffCategories?.includes(category))],
+      ),
+    ),
+  };
+  return {
+    unitCounts: { line, staff, affiliated, total: line + staff + affiliated },
+    staffing,
+    countingRules: {
+      temporaryIncluded: true,
+      payrollIncluded: true,
+      autonomousIncluded: false,
+      deputyExcluded: true,
+      policyAssistantExcluded: true,
+      commissionSecretariatExcluded: true,
+      note: "단위기관 수이며 운영정원·직급별 정원은 별표 또는 운영정원표를 별도로 읽어야 합니다.",
+    },
+  };
 }

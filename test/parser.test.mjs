@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { planPages } from "../src/layout.mjs";
-import { projectOperationalView } from "../src/model.mjs";
+import { displayNodeName, planPages } from "../src/layout.mjs";
+import { projectOperationalView, summarizeStructure } from "../src/model.mjs";
 import { parseNameList, parseOrganizationTexts } from "../src/parser.mjs";
 
 const text = `
@@ -328,4 +328,47 @@ test("시행규칙 보직 범위·혼합보직·별표 요구를 메타데이터
       { type: "headcount", annex: "별표 7" },
     ],
   );
+});
+
+test("직종 복수 보임은 배지 집합으로 보존하고 일반직 단독은 숨긴다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 연구과ㆍ임기과ㆍ일반과를 둔다.
+제3조(보직) 연구과장은 일반직 또는 연구직으로 보한다. 임기과장은 일반직 또는 임기제공무원으로 보한다. 일반과장은 일반직공무원으로 보한다.
+`,
+  ]);
+  assert.deepEqual(graph.nodeByName("연구과").metadata.staffCategories, ["일반직", "연구직"]);
+  assert.deepEqual(graph.nodeByName("임기과").metadata.staffCategories, ["일반직", "임기제"]);
+  assert.deepEqual(graph.nodeByName("일반과").metadata.staffCategories, ["일반직"]);
+  assert.match(displayNodeName(graph.nodeByName("연구과")), /\(일\).*\(연\)/);
+  assert.doesNotMatch(displayNodeName(graph.nodeByName("일반과")), /\(일\)/);
+});
+
+test("자율기구 훈령의 제2조 소속 위치와 존속기한을 읽고 기구 수에서 제외한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+「자율기구 정보자원관리혁신과 설치 및 운영에 관한 규정」
+제2조(조직의 설치) 정보자원관리혁신과는 인공지능정부실 인공지능정부기반국에 둔다.
+제6조(존속기한) 이 훈령은 2026년 12월 31일까지 효력을 가진다.
+`,
+  ]);
+  const node = graph.nodeByName("정보자원관리혁신과");
+  assert.equal(node.metadata.autonomous, true);
+  assert.equal(node.metadata.countsTowardStructure, false);
+  assert.equal(node.metadata.expires, "2026-12-31");
+  assert.equal(graph.parentsOf(node).some(({ node: parent }) => parent.name === "인공지능정부기반국"), true);
+  assert.equal(summarizeStructure(graph).countingRules.autonomousIncluded, false);
+});
+
+test("조직도 숫자 표기와 국별 관리폭 진단을 보존한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(소속기관) 시험부 장관 소속으로 지방사무소(5)를 둔다.
+제3조(하부조직) 시험부에 정책국을 둔다. 정책국에 산업과ㆍ지역과ㆍ기획과ㆍ예산과ㆍ법무과ㆍ홍보과ㆍ운영과ㆍ관리과ㆍ조정과ㆍ지원과를 둔다.
+`,
+  ]);
+  assert.equal(graph.nodeByName("지방사무소").metadata.institutionCount, 5);
+  assert.equal(graph.meta.spanDiagnostics.some((item) => item.node === "정책국" && item.status === "split-candidate"), true);
 });

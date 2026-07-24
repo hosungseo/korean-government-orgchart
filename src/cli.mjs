@@ -5,7 +5,7 @@ import path from "node:path";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
 import { planPages } from "./layout.mjs";
-import { projectOperationalView } from "./model.mjs";
+import { projectOperationalView, summarizeStructure } from "./model.mjs";
 import { parseOrganizationTexts } from "./parser.mjs";
 import { renderPptx } from "./render-pptx.mjs";
 import { renderSvg } from "./render-svg.mjs";
@@ -157,6 +157,8 @@ function summarize(graph, pages) {
     validation: graph.meta.validation,
     temporaryHeadcounts: graph.meta.temporaryHeadcounts?.length || 0,
     jurisdictionRelations: graph.meta.jurisdictionRelations?.length || 0,
+    structure: summarizeStructure(graph),
+    spanDiagnostics: graph.meta.spanDiagnostics || [],
     lawMappedDepartments: graph.meta.lawMap?.matchedDepartments || 0,
     lawMappedLaws: graph.meta.lawMap?.lawCount || 0,
   };

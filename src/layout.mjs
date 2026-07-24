@@ -337,13 +337,18 @@ export function displayNodeName(node, vertical = false, { showLawCounts = false 
   if (node.metadata?.employmentType === "임기제") markers.push("임");
   if (node.metadata?.employmentType === "별정직") markers.push("별");
   const staffMarkers = {
+    일반직: "일",
     연구직: "연",
     지도직: "지",
     전문직: "전",
     전문경력관: "전",
+    임기제: "임",
+    별정직: "별",
     특정직: "특",
   };
-  for (const category of node.metadata?.staffCategories || []) {
+  const categories = node.metadata?.staffCategories || [];
+  for (const category of categories) {
+    if (category === "일반직" && categories.length === 1) continue;
     if (staffMarkers[category] && !markers.includes(staffMarkers[category])) markers.push(staffMarkers[category]);
   }
   if (node.metadata?.responsible) markers.push("책");

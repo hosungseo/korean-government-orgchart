@@ -135,11 +135,65 @@ function parseDocumentIntoGraph(graph, text, source) {
     parseAffiliatedRelations(graph, body, source, context);
     parseDeputyJurisdictions(graph, body, source);
     parseBelowRelations(graph, body, source, context);
+    parseAdministrativeRulePlacement(graph, body, source, context);
     parseInRelations(graph, body, source, context, { articleIsAffiliated });
     parseAdvisorDefinitions(graph, body, source, context);
     parseAdvisorySentences(graph, body, source, context);
     collectJurisdictionRelations(graph, body, source);
     markSpecialMetadata(graph, body, source);
+  }
+}
+
+/**
+ * Administrative rules for autonomous organizations use a different legal
+ * form from a decree: "X는 A B에 둔다". The last unit is the immediate parent;
+ * the preceding unit, when present, is retained as its structural ancestor.
+ */
+function parseAdministrativeRulePlacement(graph, body, source, context) {
+  const pattern =
+    /([가-힣A-Za-z0-9]+(?:과|팀|담당관|단|실|국|관))(?:은|는)\s+((?:[가-힣A-Za-z0-9]+(?:실|국|본부|단|관)\s+)?[가-힣A-Za-z0-9]+(?:국|실|본부|단|관|과|팀))에\s*둔다/g;
+  for (const match of body.matchAll(pattern)) {
+    const childName = normalizeNodeName(match[1]);
+    const holders = match[2].trim().split(/\s+/).map(normalizeNodeName).filter(Boolean);
+    const parentName = holders.at(-1) || context?.name || graph.meta.institution;
+    const child = graph.addNode(childName, {
+      kind: /(?:과|팀|담당관)$/.test(childName) ? "assistant" : "temporary",
+      source,
+      forceKind: true,
+      metadata: {
+        autonomous: true,
+        countsTowardStructure: false,
+        sourceKind: "administrative-rule",
+        placementBasis: "훈령 제2조제2항",
+      },
+    });
+    const parent = graph.addNode(parentName, { source });
+    if (!child || !parent) continue;
+    graph.addEdge(parent.id, child.id, {
+      type: "structural",
+      source,
+      metadata: { autonomous: true, legalBasis: "행정규칙 소속 위치 지정" },
+    });
+    if (holders.length > 1) {
+      const ancestor = graph.addNode(holders.at(-2), { source });
+      if (ancestor) {
+        graph.addEdge(ancestor.id, parent.id, {
+          type: "structural",
+          source,
+          metadata: { autonomous: true, legalBasis: "행정규칙 소속 위치 지정" },
+        });
+      }
+    }
+  }
+  const expiry = body.match(/제\s*6\s*조[^\n]*?(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일까지/);
+  if (expiry) {
+    const expires = `${expiry[1]}-${String(expiry[2]).padStart(2, "0")}-${String(expiry[3]).padStart(2, "0")}`;
+    for (const node of graph.nodes.values()) {
+      if (!node.metadata?.autonomous) continue;
+      node.metadata.expires ||= expires;
+      node.metadata.autonomous = true;
+      node.metadata.countsTowardStructure = false;
+    }
   }
 }
 
@@ -483,8 +537,22 @@ function markSpecialMetadata(graph, body, source) {
     for (const match of body.matchAll(regex)) {
       for (const name of parseNameList(match[1])) {
         const node = graph.addNode(name, { source });
-        if (node) node.metadata[key] = true;
+        if (node) {
+          node.metadata[key] = true;
+          if (key === "autonomous") node.metadata.countsTowardStructure = false;
+          if (key === "payroll" || key === "temporary") node.metadata.countsTowardStructure = true;
+        }
       }
+    }
+  }
+
+  // A standalone administrative-rule title often carries the only explicit
+  // autonomous marker; the placement parser above supplies the node itself.
+  if (/자율기구/.test(body)) {
+    for (const node of graph.nodes.values()) {
+      if (node.metadata?.sourceKind !== "administrative-rule") continue;
+      node.metadata.autonomous = true;
+      node.metadata.countsTowardStructure = false;
     }
   }
 }
@@ -494,8 +562,37 @@ function applyDocumentMetadata(graph, text, source) {
   markConcurrentOffices(graph, text, source);
   markCommissionComposition(graph, text, source);
   markAnnexMetadata(graph, text, source);
+  markDisplayCounts(graph, text, source);
   collectAnnexRequirements(graph, text, source);
   collectTemporaryHeadcounts(graph, text, source);
+}
+
+function markDisplayCounts(graph, text, source) {
+  const escaped = [...graph.nodes.values()]
+    .map((node) => node.name)
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length)
+    .map(escapeRegExp)
+    .join("|");
+  if (!escaped) return;
+  const headcountPattern = new RegExp(`(?:${escaped})\\s*<\\s*([\\d,]+)\\s*>`, "g");
+  for (const match of text.matchAll(headcountPattern)) {
+    const full = match[0].replace(/\s*<.*$/, "").trim();
+    const node = graph.nodeByName(full);
+    if (node) {
+      node.metadata.headcount = Number(match[1].replaceAll(",", ""));
+      node.sources = uniq([...node.sources, source]);
+    }
+  }
+  const institutionCountPattern = new RegExp(`(?:${escaped})\\s*\\(\\s*(\\d+)\\s*(?:개|관|곳)?\\s*\\)`, "g");
+  for (const match of text.matchAll(institutionCountPattern)) {
+    const full = match[0].replace(/\s*\(.*$/, "").trim();
+    const node = graph.nodeByName(full);
+    if (node) {
+      node.metadata.institutionCount = Number(match[1]);
+      node.sources = uniq([...node.sources, source]);
+    }
+  }
 }
 
 function markAppointmentMetadata(graph, text, source) {
@@ -565,10 +662,13 @@ function markAppointmentMetadata(graph, text, source) {
 
 function applyStaffCategories(node, clause) {
   const categories = new Set(node.metadata.staffCategories || []);
+  if (/일반직/.test(clause)) categories.add("일반직");
   if (/(?:연구직|연구관|연구사)/.test(clause)) categories.add("연구직");
   if (/(?:지도직|지도관|지도사)/.test(clause)) categories.add("지도직");
   if (/전문직(?:공무원|으로|인\s*경우|인\s*직위)/.test(clause)) categories.add("전문직");
   if (/전문경력관/.test(clause)) categories.add("전문경력관");
+  if (/임기제/.test(clause)) categories.add("임기제");
+  if (/별정직/.test(clause)) categories.add("별정직");
   if (/특정직/.test(clause) || node.metadata.specificRank) categories.add("특정직");
   if (categories.size) node.metadata.staffCategories = [...categories];
 }

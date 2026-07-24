@@ -1,0 +1,1762 @@
+{
+  "meta": {
+    "institution": "공정거래위원회",
+    "title": "공정거래위원회",
+    "asOf": "2025-10-13",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+      "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+    ],
+    "commissionComposition": {
+      "total": 9,
+      "chair": 1,
+      "viceChair": 1,
+      "standing": 3,
+      "nonStanding": 4,
+      "source": "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+    },
+    "laws": [
+      {
+        "name": "공정거래위원회와 그 소속기관 직제",
+        "requestedDate": "20251013",
+        "effectiveDate": "20250923",
+        "mst": "273787",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=273787&efYd=20250923&BD=on"
+      },
+      {
+        "name": "공정거래위원회와 그 소속기관 직제 시행규칙",
+        "requestedDate": "20251013",
+        "effectiveDate": "20250929",
+        "mst": "276019",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=276019&efYd=20250929&BD=on"
+      }
+    ]
+  },
+  "rootId": "n-19d0d63d",
+  "nodes": [
+    {
+      "id": "n-19d0d63d",
+      "name": "공정거래위원회",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-d7763b1c",
+      "name": "지방공정거래사무소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "special-local",
+        "responsible": false,
+        "grade": "나"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-e9f8e82f",
+      "name": "사무처",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-8df81214",
+      "name": "위원장",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {
+        "employmentType": "정무직"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ]
+    },
+    {
+      "id": "n-618c7eaf",
+      "name": "기획조정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ]
+    },
+    {
+      "id": "n-27ed0000",
+      "name": "경쟁정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-62e2a75c",
+      "name": "소비자정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-74aeb2f1",
+      "name": "시장감시국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-0eabfcc6",
+      "name": "카르텔조사국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-18b0f40a",
+      "name": "기업집단감시국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-7c0e0924",
+      "name": "기업거래결합심사국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-195e69d7",
+      "name": "심판관리관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-d02ea452",
+      "name": "부위원장",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {
+        "employmentType": "정무직"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ]
+    },
+    {
+      "id": "n-afb5df2f",
+      "name": "조사관리관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]",
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-39a702cc",
+      "name": "상임위원",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "count": 3,
+        "grade": "가",
+        "employmentType": "임기제"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]",
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ]
+    },
+    {
+      "id": "n-67f14651",
+      "name": "홍보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-df68e1fd",
+      "name": "심판총괄담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-7113c8b8",
+      "name": "경쟁심판담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-2dd9cacb",
+      "name": "기업거래심판담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-fa20a89c",
+      "name": "소비자거래심판담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-d528e215",
+      "name": "송무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-9d82c825",
+      "name": "조사총괄담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-d6d5cf70",
+      "name": "중점조사팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-3ea7d450",
+      "name": "혁신행정법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-fbf09f55",
+      "name": "정보화담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-5cfe3367",
+      "name": "고객지원담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-3ad38e52",
+      "name": "기업협력정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-b8ef7743",
+      "name": "경쟁정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-6c4391a8",
+      "name": "시장감시정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-094c12dc",
+      "name": "시장구조개선정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-7de68d4e",
+      "name": "국제협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-ad510a52",
+      "name": "기업집단결합정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-03186fb8",
+      "name": "기업거래정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-9f40aafc",
+      "name": "가맹거래정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-d90801d8",
+      "name": "유통대리점정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-e2de59ec",
+      "name": "소비자정책총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-b8cf37b4",
+      "name": "소비자안전교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-849f0d8f",
+      "name": "소비자거래정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-fa8dddb2",
+      "name": "특수거래정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-36c6e23e",
+      "name": "서비스업감시과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-8c2150fc",
+      "name": "제조업감시과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-1a91deef",
+      "name": "지식산업감시과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-bb25beb7",
+      "name": "약관특수거래과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-96567b1f",
+      "name": "전자거래감시팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-5c34be0d",
+      "name": "제조카르텔조사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-8666532d",
+      "name": "입찰담합조사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-c8962d38",
+      "name": "국제카르텔조사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-b0f1d149",
+      "name": "경제분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-0ad39c33",
+      "name": "서비스카르텔조사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-21cf50ed",
+      "name": "기업집단관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-5cf90278",
+      "name": "공시점검과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-dd8ded5b",
+      "name": "내부거래감시과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-479ed996",
+      "name": "부당지원감시과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-910263a8",
+      "name": "하도급조사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-5017626e",
+      "name": "기술유용조사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-3021c112",
+      "name": "유통대리점조사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-b52a1f5f",
+      "name": "기업결합과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-82e58154",
+      "name": "국제기업결합과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-fb288b62",
+      "name": "가맹거래조사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-9837f0e9",
+      "name": "신산업하도급조사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-36327cd0",
+      "name": "서울지방공정거래사무소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-f62708c8",
+      "name": "총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-af9de755",
+      "name": "경쟁과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-fb7890f1",
+      "name": "소비자과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-49c60824",
+      "name": "건설하도급과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-6556c5c0",
+      "name": "제조하도급과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-2b090c3b",
+      "name": "가맹유통팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-e8acee80",
+      "name": "대구지방공정거래사무소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-7941ace4",
+      "name": "하도급과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ]
+    },
+    {
+      "id": "n-218034b2",
+      "name": "비상임위원",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "count": 4
+      },
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-adab16eb",
+      "parent": "n-19d0d63d",
+      "child": "n-d7763b1c",
+      "type": "affiliated",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "affiliationType": "special-local"
+      }
+    },
+    {
+      "id": "e-208f5880",
+      "parent": "n-8df81214",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6a1e4394",
+      "parent": "n-8df81214",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-a51e6d0c",
+      "parent": "n-8df81214",
+      "child": "n-618c7eaf",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-09ba5bde",
+      "parent": "n-e9f8e82f",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-433e988e",
+      "parent": "n-e9f8e82f",
+      "child": "n-27ed0000",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2796622b",
+      "parent": "n-e9f8e82f",
+      "child": "n-62e2a75c",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e72f5398",
+      "parent": "n-e9f8e82f",
+      "child": "n-74aeb2f1",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ba8980a6",
+      "parent": "n-e9f8e82f",
+      "child": "n-0eabfcc6",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aebb25c2",
+      "parent": "n-e9f8e82f",
+      "child": "n-18b0f40a",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7a12ea74",
+      "parent": "n-e9f8e82f",
+      "child": "n-7c0e0924",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ce51b266",
+      "parent": "n-d02ea452",
+      "child": "n-195e69d7",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-1891daf9",
+      "parent": "n-d02ea452",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-4255f1cc",
+      "parent": "n-e9f8e82f",
+      "child": "n-afb5df2f",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-89192343",
+      "parent": "n-e9f8e82f",
+      "child": "n-618c7eaf",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-011be0c0",
+      "parent": "n-e618142f",
+      "child": "n-67f14651",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-03e4d277",
+      "parent": "n-195e69d7",
+      "child": "n-df68e1fd",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3cce55fa",
+      "parent": "n-195e69d7",
+      "child": "n-7113c8b8",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3421f1fb",
+      "parent": "n-195e69d7",
+      "child": "n-2dd9cacb",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-c3c7a171",
+      "parent": "n-195e69d7",
+      "child": "n-fa20a89c",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-bf62093b",
+      "parent": "n-195e69d7",
+      "child": "n-d528e215",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-a0cbb04e",
+      "parent": "n-afb5df2f",
+      "child": "n-9d82c825",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-c3d282f8",
+      "parent": "n-afb5df2f",
+      "child": "n-d6d5cf70",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-c1a1e64b",
+      "parent": "n-618c7eaf",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-0c8ea5c7",
+      "parent": "n-618c7eaf",
+      "child": "n-3ea7d450",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-75a3cbad",
+      "parent": "n-618c7eaf",
+      "child": "n-fbf09f55",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b383cec6",
+      "parent": "n-618c7eaf",
+      "child": "n-5cfe3367",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-354f02b8",
+      "parent": "n-27ed0000",
+      "child": "n-3ad38e52",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-e0fa2f7f",
+      "parent": "n-27ed0000",
+      "child": "n-b8ef7743",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2d1050e8",
+      "parent": "n-27ed0000",
+      "child": "n-6c4391a8",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cd7ec6b1",
+      "parent": "n-27ed0000",
+      "child": "n-094c12dc",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f002932e",
+      "parent": "n-27ed0000",
+      "child": "n-7de68d4e",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a890bc46",
+      "parent": "n-27ed0000",
+      "child": "n-ad510a52",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-50e7080f",
+      "parent": "n-27ed0000",
+      "child": "n-03186fb8",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5034716b",
+      "parent": "n-27ed0000",
+      "child": "n-9f40aafc",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3cc2c46d",
+      "parent": "n-27ed0000",
+      "child": "n-d90801d8",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e81cafb8",
+      "parent": "n-62e2a75c",
+      "child": "n-e2de59ec",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-338a5e01",
+      "parent": "n-62e2a75c",
+      "child": "n-b8cf37b4",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ecd0ce83",
+      "parent": "n-62e2a75c",
+      "child": "n-849f0d8f",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7c6da0b3",
+      "parent": "n-62e2a75c",
+      "child": "n-fa8dddb2",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ce396078",
+      "parent": "n-74aeb2f1",
+      "child": "n-36c6e23e",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f11f68b5",
+      "parent": "n-74aeb2f1",
+      "child": "n-8c2150fc",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7473479f",
+      "parent": "n-74aeb2f1",
+      "child": "n-1a91deef",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ae4b0d98",
+      "parent": "n-74aeb2f1",
+      "child": "n-bb25beb7",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6915238d",
+      "parent": "n-74aeb2f1",
+      "child": "n-96567b1f",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6279baff",
+      "parent": "n-0eabfcc6",
+      "child": "n-5c34be0d",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b4c4b005",
+      "parent": "n-0eabfcc6",
+      "child": "n-8666532d",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-47b3c9dc",
+      "parent": "n-0eabfcc6",
+      "child": "n-c8962d38",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e6ca6f1e",
+      "parent": "n-0eabfcc6",
+      "child": "n-b0f1d149",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7676193d",
+      "parent": "n-0eabfcc6",
+      "child": "n-0ad39c33",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2a60b0f9",
+      "parent": "n-18b0f40a",
+      "child": "n-21cf50ed",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cb24cd51",
+      "parent": "n-18b0f40a",
+      "child": "n-5cf90278",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f4e89ffb",
+      "parent": "n-18b0f40a",
+      "child": "n-dd8ded5b",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d77c8772",
+      "parent": "n-18b0f40a",
+      "child": "n-479ed996",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-613f3915",
+      "parent": "n-7c0e0924",
+      "child": "n-910263a8",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ef2dd15b",
+      "parent": "n-7c0e0924",
+      "child": "n-5017626e",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ed9168b2",
+      "parent": "n-7c0e0924",
+      "child": "n-3021c112",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-22ab802f",
+      "parent": "n-7c0e0924",
+      "child": "n-b52a1f5f",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f396e905",
+      "parent": "n-7c0e0924",
+      "child": "n-82e58154",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-67b6d3cf",
+      "parent": "n-7c0e0924",
+      "child": "n-fb288b62",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b3207928",
+      "parent": "n-7c0e0924",
+      "child": "n-9837f0e9",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6de523a9",
+      "parent": "n-36327cd0",
+      "child": "n-f62708c8",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-071265fd",
+      "parent": "n-36327cd0",
+      "child": "n-af9de755",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e953bc42",
+      "parent": "n-36327cd0",
+      "child": "n-fb7890f1",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f5c251d9",
+      "parent": "n-36327cd0",
+      "child": "n-49c60824",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ba4a0674",
+      "parent": "n-36327cd0",
+      "child": "n-6556c5c0",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2f04ecfe",
+      "parent": "n-36327cd0",
+      "child": "n-2b090c3b",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-738b0ac2",
+      "parent": "n-e8acee80",
+      "child": "n-f62708c8",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-75dfce7e",
+      "parent": "n-e8acee80",
+      "child": "n-af9de755",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bac20a45",
+      "parent": "n-e8acee80",
+      "child": "n-fb7890f1",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2be06f78",
+      "parent": "n-e8acee80",
+      "child": "n-7941ace4",
+      "type": "assistant",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 시행규칙 [시행 20250929]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ef7be912",
+      "parent": "n-19d0d63d",
+      "child": "n-8df81214",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-44257cc0",
+      "parent": "n-8df81214",
+      "child": "n-d02ea452",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-6d7b1393",
+      "parent": "n-d02ea452",
+      "child": "n-e9f8e82f",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-610405d7",
+      "parent": "n-8df81214",
+      "child": "n-39a702cc",
+      "type": "advisor",
+      "sources": [
+        "inferred",
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-96217e1c",
+      "parent": "n-19d0d63d",
+      "child": "n-36327cd0",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-9d0d5641",
+      "parent": "n-19d0d63d",
+      "child": "n-e8acee80",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-fab72e09",
+      "parent": "n-8df81214",
+      "child": "n-218034b2",
+      "type": "advisor",
+      "sources": [
+        "공정거래위원회와 그 소속기관 직제 [시행 20250923]"
+      ],
+      "metadata": {}
+    }
+  ]
+}

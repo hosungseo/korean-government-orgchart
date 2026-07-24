@@ -1,0 +1,4430 @@
+{
+  "meta": {
+    "institution": "문화체육관광부",
+    "title": "문화체육관광부",
+    "asOf": "2025-07-01",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+      "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+    ],
+    "temporaryHeadcounts": [
+      {
+        "target": "문화체육관광부",
+        "expires": "2026-02-28",
+        "source": "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      },
+      {
+        "target": "문화체육관광부",
+        "expires": "2026-01-31",
+        "source": "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      }
+    ],
+    "laws": [
+      {
+        "name": "문화체육관광부와 그 소속기관 직제",
+        "requestedDate": "20250701",
+        "effectiveDate": "20250225",
+        "mst": "269269",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=269269&efYd=20250225&BD=on"
+      },
+      {
+        "name": "문화체육관광부와 그 소속기관 직제 시행규칙",
+        "requestedDate": "20250701",
+        "effectiveDate": "20250701",
+        "mst": "272465",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=272465&efYd=20250701&BD=on"
+      }
+    ]
+  },
+  "rootId": "n-c41e7dff",
+  "nodes": [
+    {
+      "id": "n-c41e7dff",
+      "name": "문화체육관광부",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred",
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-397ca1cd",
+      "name": "한국예술종합학교",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-a788d73f",
+      "name": "국립국악고등학교",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-03bf80a9",
+      "name": "국립국악중학교",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-e68938ee",
+      "name": "국립전통예술고등학교",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-bbadd586",
+      "name": "국립전통예술중학교",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-caa02a08",
+      "name": "국립중앙박물관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f3d0d982",
+      "name": "국립국어원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "grade": "가"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-eadd7003",
+      "name": "국립중앙도서관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "grade": "가"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-bacaf8db",
+      "name": "국립국악원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "grade": "가"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-7bbc578f",
+      "name": "국립민속박물관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-cc1321aa",
+      "name": "대한민국역사박물관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-27e77306",
+      "name": "국립한글박물관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f1a5715a",
+      "name": "국립장애인도서관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-1d4a6db9",
+      "name": "국립현대미술관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f28d725a",
+      "name": "한국정책방송원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-c578cbbe",
+      "name": "국립아시아문화전당",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-7ce28e1b",
+      "name": "감사관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-a4fafae2",
+      "name": "장관정책보좌관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-c74d22a6",
+      "name": "제1차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-7da5dac3",
+      "name": "기획조정실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-39f20985",
+      "name": "문화예술정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-6c29db4d",
+      "name": "국제문화홍보정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-212e3468",
+      "name": "종무실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-9de6ef91",
+      "name": "국민소통실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-fa63fa74",
+      "name": "콘텐츠정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-1af5b4cd",
+      "name": "저작권국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f0a833ac",
+      "name": "미디어정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-c0c54651",
+      "name": "체육국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-df69842f",
+      "name": "관광정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-8a775f5b",
+      "name": "제2차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-98908cd3",
+      "name": "차관보",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-e9de530e",
+      "name": "교학처",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-89828e3a",
+      "name": "기획처",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f591ac80",
+      "name": "사무국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-24b31fdc",
+      "name": "행정운영단",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-5e53bfec",
+      "name": "학예연구실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-c773f832",
+      "name": "교육문화교류단",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f1517c71",
+      "name": "지방박물관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-36b4acea",
+      "name": "기획연수부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-83c9783b",
+      "name": "어문연구실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-af6d0151",
+      "name": "지식정보관리부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-888443d8",
+      "name": "국립어린이청소년도서관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false,
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-d6fe4111",
+      "name": "자료보존연구센터",
+      "kind": "affiliated",
+      "rank": 5,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-6d8fccf0",
+      "name": "국립세종도서관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f5dcad47",
+      "name": "기획운영단",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-841fbd0d",
+      "name": "국악연구실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-eee7dee8",
+      "name": "지방국악원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-2f3074bc",
+      "name": "옛전남도청복원추진단",
+      "kind": "temporary",
+      "rank": 4,
+      "metadata": {
+        "temporary": true,
+        "expires": "2025-12-31",
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]",
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-433e6b52",
+      "name": "문화시설기획과",
+      "kind": "temporary",
+      "rank": 5,
+      "metadata": {
+        "temporary": true,
+        "expires": "2026-12-31"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ]
+    },
+    {
+      "id": "n-67f14651",
+      "name": "홍보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-ad88cef8",
+      "name": "디지털소통팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f1907300",
+      "name": "정책기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "employmentType": "임기제"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-d35fd50b",
+      "name": "비상안전기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "employmentType": "임기제"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-2e69f5e8",
+      "name": "기획혁신담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-6659eaab",
+      "name": "재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-dadc7298",
+      "name": "규제개혁법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-745b6826",
+      "name": "지능정보화담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-924ddcb4",
+      "name": "양성평등정책담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-ae0468d9",
+      "name": "문화정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-aa8ab3ad",
+      "name": "예술정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-78b26db8",
+      "name": "지역문화정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-ea03344d",
+      "name": "문화정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-93675a2a",
+      "name": "국어정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-2d0f8926",
+      "name": "전통문화과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-0660e756",
+      "name": "문화예술교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-2e885d79",
+      "name": "예술정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-4797cdf5",
+      "name": "공연전통예술과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-907911d6",
+      "name": "시각예술디자인과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-da9bb08d",
+      "name": "예술인지원팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-a4b445fc",
+      "name": "지역문화정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-021c781f",
+      "name": "문화기반과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-94e04e5e",
+      "name": "도서관정책기획단",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-68453162",
+      "name": "국제문화정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-d08a208a",
+      "name": "해외홍보정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-bc47489e",
+      "name": "국제문화정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-7a400659",
+      "name": "한류지원협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-e6a03b45",
+      "name": "국제문화사업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-78ed4fd1",
+      "name": "해외홍보기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-9414f65c",
+      "name": "해외홍보콘텐츠과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-5c4c1d37",
+      "name": "해외미디어협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f69e50e2",
+      "name": "해외뉴스분석팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-72439de0",
+      "name": "종무1담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-7c461e7b",
+      "name": "종무2담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-d6f3dc38",
+      "name": "소통정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-d97a0bce",
+      "name": "소통지원관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-adb808f8",
+      "name": "디지털소통관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-02f0fb7c",
+      "name": "소통정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-3e9a52c0",
+      "name": "소통협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-b01603aa",
+      "name": "소통기반과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-6c90a774",
+      "name": "콘텐츠기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-4a1cab77",
+      "name": "여론과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-0b537e02",
+      "name": "분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-6620eeee",
+      "name": "디지털소통정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-deb502bd",
+      "name": "정책포털과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-dfdbb094",
+      "name": "디지털소통콘텐츠과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-8af3d70e",
+      "name": "뉴미디어소통지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-7681f3fc",
+      "name": "문화산업정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-157bb676",
+      "name": "영상콘텐츠산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-ecbd4c04",
+      "name": "게임콘텐츠산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-c66f35fb",
+      "name": "대중문화산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-7685cc54",
+      "name": "저작권정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-114f4bff",
+      "name": "저작권산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-76dc8526",
+      "name": "저작권보호과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-19c08b23",
+      "name": "문화통상협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-81a784ef",
+      "name": "미디어정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-8969b324",
+      "name": "방송영상광고과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-c1a94fd1",
+      "name": "출판인쇄독서진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-033a45f0",
+      "name": "체육협력관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-aff69a88",
+      "name": "체육정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-d842863f",
+      "name": "체육진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-923b9454",
+      "name": "스포츠산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-517fdf55",
+      "name": "국제체육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-9a1ddd69",
+      "name": "장애인체육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-1eb279ed",
+      "name": "스포츠유산팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-e07b44f1",
+      "name": "관광산업정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-4e6bc5ec",
+      "name": "관광정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f66ac438",
+      "name": "국내관광진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-d8471c89",
+      "name": "국제관광과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f253d3ba",
+      "name": "관광기반과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-0c786435",
+      "name": "관광산업정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-315aec39",
+      "name": "융합관광산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-d0fc7612",
+      "name": "관광개발과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-b876c627",
+      "name": "교무과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-ec344671",
+      "name": "입학관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-46a64335",
+      "name": "학생과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-e61a3f0e",
+      "name": "기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-61738305",
+      "name": "대외협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-2d30fb18",
+      "name": "총무과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-c1a8b427",
+      "name": "시설관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-bf4bf7ab",
+      "name": "미래전략담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-8765af75",
+      "name": "행정지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-bc7fea66",
+      "name": "디지털박물관과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-74cae8b2",
+      "name": "고객지원팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-4054f2af",
+      "name": "유물관리부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-7f14a16c",
+      "name": "고고역사부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-baf4787f",
+      "name": "미술부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-79bd561f",
+      "name": "세계문화부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-a57b4242",
+      "name": "보존과학부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-cafea86c",
+      "name": "문화교류홍보과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-3561fdb3",
+      "name": "전시과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-b0cffea2",
+      "name": "교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-a026e5d2",
+      "name": "어린이박물관과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-84f9b7f9",
+      "name": "디자인팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-bac9654b",
+      "name": "익산박물관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-e1ff2fcb",
+      "name": "기획운영과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-f9089ecd",
+      "name": "공공언어과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-a3c1cd1a",
+      "name": "교육연수과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-6b355873",
+      "name": "어문연구과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-92545cd4",
+      "name": "언어정보과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-0f702dab",
+      "name": "한국어진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-7d55b926",
+      "name": "수어점자진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-3468ed19",
+      "name": "기획총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-9599fdb7",
+      "name": "디지털정보기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-c85cdd1d",
+      "name": "도서관인재개발과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-89c14a18",
+      "name": "정보기술기반과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-4d669277",
+      "name": "국제교류홍보팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-a7c53a70",
+      "name": "장서개발과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-e93eee31",
+      "name": "온라인자료과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-dd3c5c78",
+      "name": "국가서지과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-11cb07a7",
+      "name": "지식정보서비스과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-277b95b5",
+      "name": "고문헌과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-cd7ae572",
+      "name": "기획관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-cd04971d",
+      "name": "정책자료과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-76e304d0",
+      "name": "서비스이용과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-ee883ab9",
+      "name": "장악과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-5a8021b8",
+      "name": "국악진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-e03ed53f",
+      "name": "무대과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-977fc8a7",
+      "name": "민속기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-598c25ad",
+      "name": "섭외교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-8fe2a166",
+      "name": "전시운영과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-5690bad6",
+      "name": "민속연구과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-84419e8a",
+      "name": "유물과학과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-21903b3b",
+      "name": "조사연구과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-bfca8feb",
+      "name": "자료관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-63597578",
+      "name": "교류홍보과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-b150fb06",
+      "name": "연구교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-b2514d7d",
+      "name": "지원협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    },
+    {
+      "id": "n-2deb9cff",
+      "name": "자료개발과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-00c1033a",
+      "parent": "n-c41e7dff",
+      "child": "n-397ca1cd",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-e29d7455",
+      "parent": "n-c41e7dff",
+      "child": "n-a788d73f",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-84a9edda",
+      "parent": "n-c41e7dff",
+      "child": "n-03bf80a9",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-afe7afe4",
+      "parent": "n-c41e7dff",
+      "child": "n-e68938ee",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-32fde77d",
+      "parent": "n-c41e7dff",
+      "child": "n-bbadd586",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-baeefbe5",
+      "parent": "n-c41e7dff",
+      "child": "n-caa02a08",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-aed730db",
+      "parent": "n-c41e7dff",
+      "child": "n-f3d0d982",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-9cee9045",
+      "parent": "n-c41e7dff",
+      "child": "n-eadd7003",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-f894aeb0",
+      "parent": "n-c41e7dff",
+      "child": "n-bacaf8db",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-91bc9ae9",
+      "parent": "n-c41e7dff",
+      "child": "n-7bbc578f",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-4d7f6e20",
+      "parent": "n-c41e7dff",
+      "child": "n-cc1321aa",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-bffa2f1e",
+      "parent": "n-c41e7dff",
+      "child": "n-27e77306",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-bb9c2924",
+      "parent": "n-c41e7dff",
+      "child": "n-f1a5715a",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-4c0cb3c4",
+      "parent": "n-c41e7dff",
+      "child": "n-1d4a6db9",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-a627897e",
+      "parent": "n-c41e7dff",
+      "child": "n-f28d725a",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-203871c2",
+      "parent": "n-c41e7dff",
+      "child": "n-c578cbbe",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-ddbf5eed",
+      "parent": "n-6d736a60",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8e59b7bb",
+      "parent": "n-6d736a60",
+      "child": "n-7ce28e1b",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d24d5124",
+      "parent": "n-6d736a60",
+      "child": "n-a4fafae2",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-e942c600",
+      "parent": "n-c74d22a6",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6232454a",
+      "parent": "n-c74d22a6",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-d59c94a4",
+      "parent": "n-c74d22a6",
+      "child": "n-39f20985",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-ff55687c",
+      "parent": "n-c74d22a6",
+      "child": "n-6c29db4d",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-950f35f1",
+      "parent": "n-c74d22a6",
+      "child": "n-212e3468",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-f93092d4",
+      "parent": "n-c74d22a6",
+      "child": "n-fa63fa74",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-bb06b59e",
+      "parent": "n-c74d22a6",
+      "child": "n-1af5b4cd",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-24048615",
+      "parent": "n-c74d22a6",
+      "child": "n-f0a833ac",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-56448ad3",
+      "parent": "n-8a775f5b",
+      "child": "n-9de6ef91",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-2d85c823",
+      "parent": "n-8a775f5b",
+      "child": "n-c0c54651",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-dc6cd25b",
+      "parent": "n-8a775f5b",
+      "child": "n-df69842f",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-6208394a",
+      "parent": "n-6d736a60",
+      "child": "n-98908cd3",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-208a02fc",
+      "parent": "n-8a775f5b",
+      "child": "n-98908cd3",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-bfed23f0",
+      "parent": "n-397ca1cd",
+      "child": "n-e9de530e",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-61bde498",
+      "parent": "n-397ca1cd",
+      "child": "n-89828e3a",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-87137c6d",
+      "parent": "n-397ca1cd",
+      "child": "n-f591ac80",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ffb224a4",
+      "parent": "n-caa02a08",
+      "child": "n-24b31fdc",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a335ece5",
+      "parent": "n-caa02a08",
+      "child": "n-5e53bfec",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-81f0b680",
+      "parent": "n-caa02a08",
+      "child": "n-c773f832",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-42ea0144",
+      "parent": "n-f3d0d982",
+      "child": "n-36b4acea",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-354d22ca",
+      "parent": "n-f3d0d982",
+      "child": "n-83c9783b",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8a6e5346",
+      "parent": "n-eadd7003",
+      "child": "n-36b4acea",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0f61a9db",
+      "parent": "n-eadd7003",
+      "child": "n-af6d0151",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9732449a",
+      "parent": "n-eadd7003",
+      "child": "n-888443d8",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-3a9f6bd9",
+      "parent": "n-eadd7003",
+      "child": "n-d6fe4111",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-7325cd5b",
+      "parent": "n-eadd7003",
+      "child": "n-6d8fccf0",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-acb72be9",
+      "parent": "n-c41e7dff",
+      "child": "n-6d8fccf0",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-2e365c84",
+      "parent": "n-bacaf8db",
+      "child": "n-f5dcad47",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bc9640d1",
+      "parent": "n-bacaf8db",
+      "child": "n-841fbd0d",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c363d240",
+      "parent": "n-bacaf8db",
+      "child": "n-eee7dee8",
+      "type": "affiliated",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-ad156df5",
+      "parent": "n-39f20985",
+      "child": "n-433e6b52",
+      "type": "temporary",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-011be0c0",
+      "parent": "n-e618142f",
+      "child": "n-67f14651",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e5da7c49",
+      "parent": "n-e618142f",
+      "child": "n-ad88cef8",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7f59d817",
+      "parent": "n-7ce28e1b",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-49d09c81",
+      "parent": "n-7da5dac3",
+      "child": "n-f1907300",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-3020239c",
+      "parent": "n-7da5dac3",
+      "child": "n-d35fd50b",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8052a10b",
+      "parent": "n-7da5dac3",
+      "child": "n-2e69f5e8",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d6e0aeec",
+      "parent": "n-7da5dac3",
+      "child": "n-6659eaab",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1799a8d5",
+      "parent": "n-7da5dac3",
+      "child": "n-dadc7298",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1e816031",
+      "parent": "n-7da5dac3",
+      "child": "n-745b6826",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-876bf63b",
+      "parent": "n-7da5dac3",
+      "child": "n-924ddcb4",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8ff86934",
+      "parent": "n-39f20985",
+      "child": "n-ae0468d9",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-fcd8b36c",
+      "parent": "n-39f20985",
+      "child": "n-aa8ab3ad",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-2f7577c8",
+      "parent": "n-39f20985",
+      "child": "n-78b26db8",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-55f1a227",
+      "parent": "n-39f20985",
+      "child": "n-ea03344d",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aa5be4c7",
+      "parent": "n-39f20985",
+      "child": "n-93675a2a",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7ac13cc8",
+      "parent": "n-39f20985",
+      "child": "n-2d0f8926",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3475be10",
+      "parent": "n-39f20985",
+      "child": "n-0660e756",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1b62f657",
+      "parent": "n-39f20985",
+      "child": "n-2e885d79",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f562e9a0",
+      "parent": "n-39f20985",
+      "child": "n-4797cdf5",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f4938796",
+      "parent": "n-39f20985",
+      "child": "n-907911d6",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a1baa669",
+      "parent": "n-39f20985",
+      "child": "n-da9bb08d",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f1f557cc",
+      "parent": "n-39f20985",
+      "child": "n-a4b445fc",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-454b3a91",
+      "parent": "n-39f20985",
+      "child": "n-021c781f",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5fbf8e66",
+      "parent": "n-39f20985",
+      "child": "n-94e04e5e",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6ab3ff26",
+      "parent": "n-6c29db4d",
+      "child": "n-68453162",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7ddb0cb9",
+      "parent": "n-6c29db4d",
+      "child": "n-d08a208a",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-31b367f3",
+      "parent": "n-6c29db4d",
+      "child": "n-bc47489e",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4ef66b2b",
+      "parent": "n-6c29db4d",
+      "child": "n-7a400659",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1bee182b",
+      "parent": "n-6c29db4d",
+      "child": "n-e6a03b45",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-44b8e3a8",
+      "parent": "n-6c29db4d",
+      "child": "n-78ed4fd1",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6c269f93",
+      "parent": "n-6c29db4d",
+      "child": "n-9414f65c",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-000471f1",
+      "parent": "n-6c29db4d",
+      "child": "n-5c4c1d37",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c30d4ebb",
+      "parent": "n-6c29db4d",
+      "child": "n-f69e50e2",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-39c9f1f0",
+      "parent": "n-212e3468",
+      "child": "n-72439de0",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4d791b3b",
+      "parent": "n-212e3468",
+      "child": "n-7c461e7b",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e2e707b1",
+      "parent": "n-9de6ef91",
+      "child": "n-d6f3dc38",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-217d54b3",
+      "parent": "n-9de6ef91",
+      "child": "n-d97a0bce",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-a31d2187",
+      "parent": "n-9de6ef91",
+      "child": "n-adb808f8",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-618a3e10",
+      "parent": "n-9de6ef91",
+      "child": "n-02f0fb7c",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5bab4578",
+      "parent": "n-9de6ef91",
+      "child": "n-3e9a52c0",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-77090c1c",
+      "parent": "n-9de6ef91",
+      "child": "n-b01603aa",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-99ace4cf",
+      "parent": "n-9de6ef91",
+      "child": "n-6c90a774",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d7032ee8",
+      "parent": "n-9de6ef91",
+      "child": "n-4a1cab77",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9eafe29a",
+      "parent": "n-9de6ef91",
+      "child": "n-0b537e02",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-281b53ec",
+      "parent": "n-9de6ef91",
+      "child": "n-6620eeee",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1e336b0c",
+      "parent": "n-9de6ef91",
+      "child": "n-deb502bd",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-32796785",
+      "parent": "n-9de6ef91",
+      "child": "n-dfdbb094",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9ca0f608",
+      "parent": "n-9de6ef91",
+      "child": "n-8af3d70e",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-187daff5",
+      "parent": "n-fa63fa74",
+      "child": "n-7681f3fc",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-88d03ee1",
+      "parent": "n-fa63fa74",
+      "child": "n-157bb676",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7813bfbc",
+      "parent": "n-fa63fa74",
+      "child": "n-ecbd4c04",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f415ce56",
+      "parent": "n-fa63fa74",
+      "child": "n-c66f35fb",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1dd68a40",
+      "parent": "n-1af5b4cd",
+      "child": "n-7685cc54",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-efc6b73f",
+      "parent": "n-1af5b4cd",
+      "child": "n-114f4bff",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c60ae1e2",
+      "parent": "n-1af5b4cd",
+      "child": "n-76dc8526",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-265dca45",
+      "parent": "n-1af5b4cd",
+      "child": "n-19c08b23",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8e0c9bac",
+      "parent": "n-f0a833ac",
+      "child": "n-81a784ef",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1ca8ca4b",
+      "parent": "n-f0a833ac",
+      "child": "n-8969b324",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5c0cf8db",
+      "parent": "n-f0a833ac",
+      "child": "n-c1a94fd1",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-88eecffe",
+      "parent": "n-c0c54651",
+      "child": "n-033a45f0",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-6fc32c4b",
+      "parent": "n-c0c54651",
+      "child": "n-aff69a88",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ce311847",
+      "parent": "n-c0c54651",
+      "child": "n-d842863f",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c7cf9034",
+      "parent": "n-c0c54651",
+      "child": "n-923b9454",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-deeb0715",
+      "parent": "n-c0c54651",
+      "child": "n-517fdf55",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-06a958ac",
+      "parent": "n-c0c54651",
+      "child": "n-9a1ddd69",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-72b45731",
+      "parent": "n-c0c54651",
+      "child": "n-1eb279ed",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bda2fdff",
+      "parent": "n-df69842f",
+      "child": "n-e07b44f1",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-6b7ebce9",
+      "parent": "n-df69842f",
+      "child": "n-4e6bc5ec",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f0db0de3",
+      "parent": "n-df69842f",
+      "child": "n-f66ac438",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6ffa8d20",
+      "parent": "n-df69842f",
+      "child": "n-d8471c89",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9afb4472",
+      "parent": "n-df69842f",
+      "child": "n-f253d3ba",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6e72630e",
+      "parent": "n-df69842f",
+      "child": "n-0c786435",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-13d5bbb8",
+      "parent": "n-df69842f",
+      "child": "n-315aec39",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a3d16cb3",
+      "parent": "n-df69842f",
+      "child": "n-d0fc7612",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b7702358",
+      "parent": "n-e9de530e",
+      "child": "n-b876c627",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e1c0b8dc",
+      "parent": "n-e9de530e",
+      "child": "n-ec344671",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0c2de419",
+      "parent": "n-e9de530e",
+      "child": "n-46a64335",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8a0de1d2",
+      "parent": "n-89828e3a",
+      "child": "n-e61a3f0e",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1b9753f4",
+      "parent": "n-89828e3a",
+      "child": "n-61738305",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8eb16466",
+      "parent": "n-f591ac80",
+      "child": "n-2d30fb18",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-caf6c186",
+      "parent": "n-f591ac80",
+      "child": "n-c1a8b427",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e95f95a1",
+      "parent": "n-caa02a08",
+      "child": "n-bf4bf7ab",
+      "type": "advisor",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7ec30965",
+      "parent": "n-24b31fdc",
+      "child": "n-8765af75",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2d84bdca",
+      "parent": "n-24b31fdc",
+      "child": "n-bc7fea66",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-209e0502",
+      "parent": "n-24b31fdc",
+      "child": "n-c1a8b427",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aa11d85c",
+      "parent": "n-24b31fdc",
+      "child": "n-74cae8b2",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a2a8712b",
+      "parent": "n-5e53bfec",
+      "child": "n-4054f2af",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-11def294",
+      "parent": "n-5e53bfec",
+      "child": "n-7f14a16c",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d945bea0",
+      "parent": "n-5e53bfec",
+      "child": "n-baf4787f",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b4e92837",
+      "parent": "n-5e53bfec",
+      "child": "n-79bd561f",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6b21aeee",
+      "parent": "n-5e53bfec",
+      "child": "n-a57b4242",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8f127add",
+      "parent": "n-c773f832",
+      "child": "n-cafea86c",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-056c409e",
+      "parent": "n-c773f832",
+      "child": "n-3561fdb3",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7c132523",
+      "parent": "n-c773f832",
+      "child": "n-b0cffea2",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f8b90c5b",
+      "parent": "n-c773f832",
+      "child": "n-a026e5d2",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5ae6f1f1",
+      "parent": "n-c773f832",
+      "child": "n-84f9b7f9",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-13265992",
+      "parent": "n-bac9654b",
+      "child": "n-e1ff2fcb",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f534a953",
+      "parent": "n-bac9654b",
+      "child": "n-5e53bfec",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6eab23eb",
+      "parent": "n-36b4acea",
+      "child": "n-e1ff2fcb",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-577a9d8c",
+      "parent": "n-36b4acea",
+      "child": "n-f9089ecd",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e049d515",
+      "parent": "n-36b4acea",
+      "child": "n-a3c1cd1a",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3f61dbcd",
+      "parent": "n-83c9783b",
+      "child": "n-6b355873",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-752189c0",
+      "parent": "n-83c9783b",
+      "child": "n-92545cd4",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0c6b1be2",
+      "parent": "n-83c9783b",
+      "child": "n-0f702dab",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c892c552",
+      "parent": "n-83c9783b",
+      "child": "n-7d55b926",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f84e6cf6",
+      "parent": "n-36b4acea",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-263c9b72",
+      "parent": "n-36b4acea",
+      "child": "n-3468ed19",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6bc7e811",
+      "parent": "n-36b4acea",
+      "child": "n-9599fdb7",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-00f43942",
+      "parent": "n-36b4acea",
+      "child": "n-c85cdd1d",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0f113d21",
+      "parent": "n-36b4acea",
+      "child": "n-89c14a18",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f673ac69",
+      "parent": "n-36b4acea",
+      "child": "n-4d669277",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9faabdf8",
+      "parent": "n-af6d0151",
+      "child": "n-a7c53a70",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-987b0343",
+      "parent": "n-af6d0151",
+      "child": "n-e93eee31",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0d21c83a",
+      "parent": "n-af6d0151",
+      "child": "n-dd3c5c78",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dbdc3de1",
+      "parent": "n-af6d0151",
+      "child": "n-11cb07a7",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5fc80346",
+      "parent": "n-af6d0151",
+      "child": "n-277b95b5",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bbc5f2a7",
+      "parent": "n-6d8fccf0",
+      "child": "n-cd7ae572",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-85acbd35",
+      "parent": "n-6d8fccf0",
+      "child": "n-cd04971d",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bdb6b172",
+      "parent": "n-6d8fccf0",
+      "child": "n-76e304d0",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-12777e4b",
+      "parent": "n-f5dcad47",
+      "child": "n-cd7ae572",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dc824a60",
+      "parent": "n-f5dcad47",
+      "child": "n-ee883ab9",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-707313ea",
+      "parent": "n-f5dcad47",
+      "child": "n-5a8021b8",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e7fd6f20",
+      "parent": "n-f5dcad47",
+      "child": "n-e03ed53f",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1be9f6fc",
+      "parent": "n-eee7dee8",
+      "child": "n-8765af75",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ee369364",
+      "parent": "n-eee7dee8",
+      "child": "n-ee883ab9",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9f0cb499",
+      "parent": "n-7bbc578f",
+      "child": "n-977fc8a7",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5a06fa84",
+      "parent": "n-7bbc578f",
+      "child": "n-598c25ad",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e0310670",
+      "parent": "n-7bbc578f",
+      "child": "n-8fe2a166",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-149a920a",
+      "parent": "n-7bbc578f",
+      "child": "n-5690bad6",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-514ffd5d",
+      "parent": "n-7bbc578f",
+      "child": "n-84419e8a",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9914a052",
+      "parent": "n-7bbc578f",
+      "child": "n-a026e5d2",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-32148c2b",
+      "parent": "n-cc1321aa",
+      "child": "n-e1ff2fcb",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-abb11fd4",
+      "parent": "n-cc1321aa",
+      "child": "n-21903b3b",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e90fd979",
+      "parent": "n-cc1321aa",
+      "child": "n-bfca8feb",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9475c403",
+      "parent": "n-cc1321aa",
+      "child": "n-8fe2a166",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-97fde70d",
+      "parent": "n-cc1321aa",
+      "child": "n-b0cffea2",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-938ea2ce",
+      "parent": "n-cc1321aa",
+      "child": "n-63597578",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e188f741",
+      "parent": "n-27e77306",
+      "child": "n-e1ff2fcb",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a04d74a1",
+      "parent": "n-27e77306",
+      "child": "n-8fe2a166",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-93fb28e4",
+      "parent": "n-27e77306",
+      "child": "n-b150fb06",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6fce72e5",
+      "parent": "n-f1a5715a",
+      "child": "n-b2514d7d",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-33c2c2f1",
+      "parent": "n-f1a5715a",
+      "child": "n-2deb9cff",
+      "type": "assistant",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 시행규칙 [시행 20250701]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-efaf9dba",
+      "parent": "n-c41e7dff",
+      "child": "n-6d736a60",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-965e9c53",
+      "parent": "n-6d736a60",
+      "child": "n-c74d22a6",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-05b1de4f",
+      "parent": "n-6d736a60",
+      "child": "n-8a775f5b",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-b4b8d64d",
+      "parent": "n-6d736a60",
+      "child": "n-2f3074bc",
+      "type": "temporary",
+      "sources": [
+        "문화체육관광부와 그 소속기관 직제 [시행 20250225]"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-93608840",
+      "parent": "n-c41e7dff",
+      "child": "n-f1517c71",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-f36ebcaf",
+      "parent": "n-c41e7dff",
+      "child": "n-bac9654b",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

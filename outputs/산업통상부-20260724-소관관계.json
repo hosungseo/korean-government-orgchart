@@ -1,0 +1,4706 @@
+{
+  "meta": {
+    "institution": "산업통상부",
+    "title": "산업통상부",
+    "asOf": "2026-07-24",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+      "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+    ],
+    "jurisdictionRelations": [
+      {
+        "parent": "지역경제정책관",
+        "child": "지역경제총괄과",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt",
+        "evidence": "explicit-duty-clause",
+        "legalBasis": "정책관 내 다른 과의 주관·소관"
+      },
+      {
+        "parent": "제조산업정책관",
+        "child": "자동차과",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt",
+        "evidence": "explicit-duty-clause",
+        "legalBasis": "정책관 내 다른 과의 주관·소관"
+      },
+      {
+        "parent": "중견기업정책관",
+        "child": "중견기업정책과",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt",
+        "evidence": "explicit-duty-clause",
+        "legalBasis": "정책관 내 다른 과의 주관·소관"
+      },
+      {
+        "parent": "산업인공지능정책관",
+        "child": "산업인공지능정책과",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt",
+        "evidence": "explicit-duty-clause",
+        "legalBasis": "정책관 내 다른 과의 주관·소관"
+      },
+      {
+        "parent": "첨단산업정책관",
+        "child": "반도체과",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt",
+        "evidence": "explicit-duty-clause",
+        "legalBasis": "정책관 내 다른 과의 주관·소관"
+      },
+      {
+        "parent": "산업공급망정책관",
+        "child": "산업공급망정책과",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt",
+        "evidence": "explicit-duty-clause",
+        "legalBasis": "정책관 내 다른 과의 주관·소관"
+      },
+      {
+        "parent": "무역안보정책관",
+        "child": "무역안보정책과",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt",
+        "evidence": "explicit-duty-clause",
+        "legalBasis": "정책관 내 다른 과의 주관·소관"
+      },
+      {
+        "parent": "투자정책관",
+        "child": "투자정책과",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt",
+        "evidence": "explicit-duty-clause",
+        "legalBasis": "정책관 내 다른 과의 주관·소관"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "jurisdiction",
+        "annex": "별표 1",
+        "description": "관할·등급은 별표를 읽어야 확정됩니다",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      },
+      {
+        "type": "jurisdiction",
+        "annex": "별표 2",
+        "description": "관할·등급은 별표를 읽어야 확정됩니다",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      },
+      {
+        "type": "jurisdiction",
+        "annex": "별표 1",
+        "description": "관할·등급은 별표를 읽어야 확정됩니다",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      },
+      {
+        "type": "jurisdiction",
+        "annex": "별표 2",
+        "description": "관할·등급은 별표를 읽어야 확정됩니다",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 4",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 5",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 6",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 7의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      }
+    ],
+    "temporaryHeadcounts": [
+      {
+        "target": "산업통상부",
+        "expires": "2027-12-31",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      },
+      {
+        "target": "산업통상부",
+        "expires": "2028-12-31",
+        "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      }
+    ]
+  },
+  "rootId": "n-7f335130",
+  "nodes": [
+    {
+      "id": "n-7f335130",
+      "name": "산업통상부",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-e6b88efc",
+      "name": "국가기술표준원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "grade": "가",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-27669d50",
+      "name": "경제자유구역기획단",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "grade": "나"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-a3204a77",
+      "name": "광업등록사무소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-8e880c47",
+      "name": "자유무역지역관리원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "special-local",
+        "responsible": false,
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-c1229d94",
+      "name": "광산안전사무소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "special-local",
+        "responsible": false,
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-7ce28e1b",
+      "name": "감사관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-a4fafae2",
+      "name": "장관정책보좌관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-4481f335",
+      "name": "차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-7da5dac3",
+      "name": "기획조정실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-2ad0ba08",
+      "name": "산업정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-36f3c644",
+      "name": "산업성장실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-42a0a302",
+      "name": "산업자원안보실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-97fa6614",
+      "name": "통상교섭본부",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-4522cc35",
+      "name": "통상차관보",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-56613d98",
+      "name": "통상정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-0dc8ccac",
+      "name": "통상협력국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-d32336b8",
+      "name": "통상교섭실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-1a2c44a6",
+      "name": "무역투자실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-c5a8d322",
+      "name": "표준정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-b97330b6",
+      "name": "제품안전정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-3f5f536f",
+      "name": "적합성정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-a057583d",
+      "name": "기술규제대응국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-8f452c53",
+      "name": "한미통상협력과",
+      "kind": "temporary",
+      "rank": 5,
+      "metadata": {
+        "temporary": true,
+        "expires": "2028-12-31",
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-67f14651",
+      "name": "홍보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-ad88cef8",
+      "name": "디지털소통팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-dd5ea767",
+      "name": "혁신행정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-fbd46cf9",
+      "name": "법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-e104a345",
+      "name": "정보관리담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-d37110fd",
+      "name": "정보보호담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-798782bf",
+      "name": "산업재난담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-f1907300",
+      "name": "정책기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "employmentType": "임기제"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-35758b77",
+      "name": "비상기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-d35fd50b",
+      "name": "비상안전기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "employmentType": "임기제"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-8eaeb574",
+      "name": "산업정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-bfe65ffb",
+      "name": "지역경제정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-fae2b450",
+      "name": "제조산업정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-552391f3",
+      "name": "중견기업정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-12adf240",
+      "name": "산업정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-eab4e48d",
+      "name": "산업일자리혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-0c2f23f3",
+      "name": "산업환경과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-76d91456",
+      "name": "지역경제총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "jurisdiction": {
+          "parent": "지역경제정책관",
+          "evidence": "explicit-duty-clause",
+          "legalBasis": "정책관 내 다른 과의 주관·소관",
+          "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+        },
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-e96d0fe8",
+      "name": "지역경제진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-0fd826ff",
+      "name": "입지총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-06e5ae66",
+      "name": "자동차과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "jurisdiction": {
+          "parent": "제조산업정책관",
+          "evidence": "explicit-duty-clause",
+          "legalBasis": "정책관 내 다른 과의 주관·소관",
+          "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+        },
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-c495797a",
+      "name": "조선해양플랜트과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-ab486294",
+      "name": "엔지니어링디자인과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-42b93db1",
+      "name": "첨단민군협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-11264ce7",
+      "name": "중견기업정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "jurisdiction": {
+          "parent": "중견기업정책관",
+          "evidence": "explicit-duty-clause",
+          "legalBasis": "정책관 내 다른 과의 주관·소관",
+          "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+        },
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-19276281",
+      "name": "중견기업지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-12a33492",
+      "name": "유통물류과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-42ee9df4",
+      "name": "기업정책팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-deefa292",
+      "name": "산업기술융합정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-2d38c404",
+      "name": "산업인공지능정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-132b298c",
+      "name": "첨단산업정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-d71c3220",
+      "name": "산업기술정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-995569bf",
+      "name": "산업기술시장과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-1e97dd21",
+      "name": "산업규제혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-513a8fb0",
+      "name": "산업인공지능정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "jurisdiction": {
+          "parent": "산업인공지능정책관",
+          "evidence": "explicit-duty-clause",
+          "legalBasis": "정책관 내 다른 과의 주관·소관",
+          "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+        },
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-c89c2bc4",
+      "name": "인공지능기계로봇과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-aea6003a",
+      "name": "인공지능바이오융합산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-bc6d6b31",
+      "name": "반도체과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "jurisdiction": {
+          "parent": "첨단산업정책관",
+          "evidence": "explicit-duty-clause",
+          "legalBasis": "정책관 내 다른 과의 주관·소관",
+          "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+        },
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-ebea6d4d",
+      "name": "배터리전기전자과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-71b756b7",
+      "name": "섬유탄소나노과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-410acab9",
+      "name": "디스플레이가전팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-c62ab6ec",
+      "name": "자원산업정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-e9819103",
+      "name": "산업공급망정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-a2820e1c",
+      "name": "무역안보정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-9d2f9295",
+      "name": "자원안보정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-d3cdd8c1",
+      "name": "석유산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-fa0c86ca",
+      "name": "가스산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-7f3904c5",
+      "name": "석탄산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-458221d7",
+      "name": "산업공급망정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "jurisdiction": {
+          "parent": "산업공급망정책관",
+          "evidence": "explicit-duty-clause",
+          "legalBasis": "정책관 내 다른 과의 주관·소관",
+          "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+        },
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-c0df4d38",
+      "name": "소재부품장비개발과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-75a4c5cf",
+      "name": "철강세라믹과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-781afc03",
+      "name": "화학산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-b6822d98",
+      "name": "무역안보정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "jurisdiction": {
+          "parent": "무역안보정책관",
+          "evidence": "explicit-duty-clause",
+          "legalBasis": "정책관 내 다른 과의 주관·소관",
+          "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+        },
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-0833674e",
+      "name": "무역안보심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-a340a2a7",
+      "name": "기술안보과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-2c1721e0",
+      "name": "광물자원팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-4615fb53",
+      "name": "자원안전팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-e29b5e6e",
+      "name": "신통상전략지원관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-252769e8",
+      "name": "통상정책총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-757eaf21",
+      "name": "미주통상과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-4abac7dd",
+      "name": "구주통상과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-e428d0d2",
+      "name": "신통상전략과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-dbb422c0",
+      "name": "디지털경제통상과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-d48bfdaa",
+      "name": "기후경제통상과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-55e2949d",
+      "name": "중남미대양주통상팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-c2355ebc",
+      "name": "통상협력총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-9627dd71",
+      "name": "동북아통상과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-695cab25",
+      "name": "아주통상과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-b6a003ab",
+      "name": "중동아프리카통상과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-258bcee9",
+      "name": "통상협정정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-6f959256",
+      "name": "통상협정교섭관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-b248161a",
+      "name": "다자통상법무관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-aff35d00",
+      "name": "통상협정정책기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-f9d43c92",
+      "name": "통상협정이행과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-52bb0a3a",
+      "name": "통상협정활용과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-bf81bc3a",
+      "name": "통상협정협상총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-8548f254",
+      "name": "통상협정상품과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-09c60e65",
+      "name": "통상협정서비스투자과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-e2d5ae0e",
+      "name": "통상협정무역규범과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-c6bec3c7",
+      "name": "통상법무기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-7c28a77a",
+      "name": "세계무역기구과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-57f8cf93",
+      "name": "다자통상협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-bb07b129",
+      "name": "통상분쟁대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-4947da60",
+      "name": "인도태평양통상기획팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-1c78df48",
+      "name": "무역정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-be82ada1",
+      "name": "투자정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-877c006f",
+      "name": "원전전략기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-e87a206c",
+      "name": "무역정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-5d1dab13",
+      "name": "무역진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-d70580f0",
+      "name": "수출입과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-ca845385",
+      "name": "투자정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "jurisdiction": {
+          "parent": "투자정책관",
+          "evidence": "explicit-duty-clause",
+          "legalBasis": "정책관 내 다른 과의 주관·소관",
+          "source": "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+        },
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-0236fd77",
+      "name": "투자유치과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-b5770a7b",
+      "name": "해외투자과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-b02f766a",
+      "name": "원전수출진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-71648555",
+      "name": "원전수출협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-9727b390",
+      "name": "지원총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-36a65f05",
+      "name": "표준정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-cda079ba",
+      "name": "국제표준협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-91f75eb5",
+      "name": "산업표준혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-cbee38b4",
+      "name": "전기전자정보표준과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-c177b0d8",
+      "name": "기계융합산업표준과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-244ef820",
+      "name": "바이오화학서비스표준과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-4f5320c8",
+      "name": "국제표준화기구전략대응팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-2a757599",
+      "name": "제품안전정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-3d1b1d9a",
+      "name": "제품시장관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-5dcf1760",
+      "name": "제품안전정보과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-d4aef750",
+      "name": "전기통신제품안전과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-dbb2c158",
+      "name": "생활어린이제품안전과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-46f6e0ac",
+      "name": "시험인증정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-2215f645",
+      "name": "적합성평가과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-f0e018a2",
+      "name": "인증산업진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-1567946c",
+      "name": "계량측정제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-b45aa9c1",
+      "name": "기술규제정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-5e33050e",
+      "name": "무역기술장벽협상과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-a52643ee",
+      "name": "기술규제조정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "연구직"
+        ],
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-9c1ef6bd",
+      "name": "기술규제협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-759509e9",
+      "name": "등록팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-616fc3ff",
+      "name": "심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-cdf96cc7",
+      "name": "마산자유무역지역관리원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-c6d6f16f",
+      "name": "관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-04896d8a",
+      "name": "수출산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-25cb5524",
+      "name": "투자홍보과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-0745146f",
+      "name": "군산자유무역지역관리원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-5758a2b7",
+      "name": "대불자유무역지역관리원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-5e4ce433",
+      "name": "김제자유무역지역관리원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    },
+    {
+      "id": "n-8a88bad7",
+      "name": "울산자유무역지역관리원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-1c18c31c",
+      "parent": "n-7f335130",
+      "child": "n-e6b88efc",
+      "type": "affiliated",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-16ba5636",
+      "parent": "n-7f335130",
+      "child": "n-27669d50",
+      "type": "affiliated",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-ee54836a",
+      "parent": "n-7f335130",
+      "child": "n-a3204a77",
+      "type": "affiliated",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-ef77c362",
+      "parent": "n-7f335130",
+      "child": "n-8e880c47",
+      "type": "affiliated",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "affiliationType": "special-local"
+      }
+    },
+    {
+      "id": "e-ac1ee895",
+      "parent": "n-7f335130",
+      "child": "n-c1229d94",
+      "type": "affiliated",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "affiliationType": "special-local"
+      }
+    },
+    {
+      "id": "e-ddbf5eed",
+      "parent": "n-6d736a60",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8e59b7bb",
+      "parent": "n-6d736a60",
+      "child": "n-7ce28e1b",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d24d5124",
+      "parent": "n-6d736a60",
+      "child": "n-a4fafae2",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6a94cd83",
+      "parent": "n-4481f335",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-9f8a309b",
+      "parent": "n-6d736a60",
+      "child": "n-4522cc35",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-ea7e4b8e",
+      "parent": "n-97fa6614",
+      "child": "n-4522cc35",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-bbfcbf1f",
+      "parent": "n-97fa6614",
+      "child": "n-56613d98",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f676c0ca",
+      "parent": "n-97fa6614",
+      "child": "n-0dc8ccac",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-10be423e",
+      "parent": "n-97fa6614",
+      "child": "n-d32336b8",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2c9ad071",
+      "parent": "n-97fa6614",
+      "child": "n-1a2c44a6",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-590739b8",
+      "parent": "n-e6b88efc",
+      "child": "n-c5a8d322",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-55072a48",
+      "parent": "n-e6b88efc",
+      "child": "n-b97330b6",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-93683b52",
+      "parent": "n-e6b88efc",
+      "child": "n-3f5f536f",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt",
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8fc6771f",
+      "parent": "n-e6b88efc",
+      "child": "n-a057583d",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bb9f949d",
+      "parent": "n-56613d98",
+      "child": "n-8f452c53",
+      "type": "temporary",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-011be0c0",
+      "parent": "n-e618142f",
+      "child": "n-67f14651",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e5da7c49",
+      "parent": "n-e618142f",
+      "child": "n-ad88cef8",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7f59d817",
+      "parent": "n-7ce28e1b",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b5600516",
+      "parent": "n-7da5dac3",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8c355572",
+      "parent": "n-7da5dac3",
+      "child": "n-dd5ea767",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-399f02ed",
+      "parent": "n-7da5dac3",
+      "child": "n-fbd46cf9",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-0679aee6",
+      "parent": "n-7da5dac3",
+      "child": "n-e104a345",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-b0d66a75",
+      "parent": "n-7da5dac3",
+      "child": "n-d37110fd",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-451b6354",
+      "parent": "n-7da5dac3",
+      "child": "n-798782bf",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-49d09c81",
+      "parent": "n-7da5dac3",
+      "child": "n-f1907300",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-0d0e57d7",
+      "parent": "n-7da5dac3",
+      "child": "n-35758b77",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3020239c",
+      "parent": "n-7da5dac3",
+      "child": "n-d35fd50b",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-409a351c",
+      "parent": "n-2ad0ba08",
+      "child": "n-8eaeb574",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-fd3f3b4b",
+      "parent": "n-2ad0ba08",
+      "child": "n-bfe65ffb",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e0ce49d2",
+      "parent": "n-2ad0ba08",
+      "child": "n-fae2b450",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-c0260f6f",
+      "parent": "n-2ad0ba08",
+      "child": "n-552391f3",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-9d9d0d4d",
+      "parent": "n-2ad0ba08",
+      "child": "n-12adf240",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4d089dfe",
+      "parent": "n-2ad0ba08",
+      "child": "n-eab4e48d",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e7e1594a",
+      "parent": "n-2ad0ba08",
+      "child": "n-0c2f23f3",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-786a7c07",
+      "parent": "n-2ad0ba08",
+      "child": "n-76d91456",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f3c0e60c",
+      "parent": "n-2ad0ba08",
+      "child": "n-e96d0fe8",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1f9f3d59",
+      "parent": "n-2ad0ba08",
+      "child": "n-0fd826ff",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bc583cb1",
+      "parent": "n-2ad0ba08",
+      "child": "n-06e5ae66",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6a36493a",
+      "parent": "n-2ad0ba08",
+      "child": "n-c495797a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8c960099",
+      "parent": "n-2ad0ba08",
+      "child": "n-ab486294",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e8398a0a",
+      "parent": "n-2ad0ba08",
+      "child": "n-42b93db1",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8b9dfc38",
+      "parent": "n-2ad0ba08",
+      "child": "n-11264ce7",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ff093d3d",
+      "parent": "n-2ad0ba08",
+      "child": "n-19276281",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0c0636b8",
+      "parent": "n-2ad0ba08",
+      "child": "n-12a33492",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-280f291c",
+      "parent": "n-2ad0ba08",
+      "child": "n-42ee9df4",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bebf5ab2",
+      "parent": "n-36f3c644",
+      "child": "n-deefa292",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-c810fe08",
+      "parent": "n-36f3c644",
+      "child": "n-2d38c404",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-73a72b12",
+      "parent": "n-36f3c644",
+      "child": "n-132b298c",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-6d771f90",
+      "parent": "n-36f3c644",
+      "child": "n-d71c3220",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-98ae725b",
+      "parent": "n-36f3c644",
+      "child": "n-995569bf",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-eed2a601",
+      "parent": "n-36f3c644",
+      "child": "n-1e97dd21",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b33b9718",
+      "parent": "n-36f3c644",
+      "child": "n-513a8fb0",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4227c292",
+      "parent": "n-36f3c644",
+      "child": "n-c89c2bc4",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7d90e137",
+      "parent": "n-36f3c644",
+      "child": "n-aea6003a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f9ef748b",
+      "parent": "n-36f3c644",
+      "child": "n-bc6d6b31",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-07abbb75",
+      "parent": "n-36f3c644",
+      "child": "n-ebea6d4d",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ff5b3969",
+      "parent": "n-36f3c644",
+      "child": "n-71b756b7",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2c9c6bd7",
+      "parent": "n-36f3c644",
+      "child": "n-410acab9",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f6d9b9e4",
+      "parent": "n-42a0a302",
+      "child": "n-c62ab6ec",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-58ebd98e",
+      "parent": "n-42a0a302",
+      "child": "n-e9819103",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-d8759592",
+      "parent": "n-42a0a302",
+      "child": "n-a2820e1c",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-8bbb323c",
+      "parent": "n-42a0a302",
+      "child": "n-9d2f9295",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b4a460d6",
+      "parent": "n-42a0a302",
+      "child": "n-d3cdd8c1",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-55585d7a",
+      "parent": "n-42a0a302",
+      "child": "n-fa0c86ca",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1c0c53dd",
+      "parent": "n-42a0a302",
+      "child": "n-7f3904c5",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5cead2cd",
+      "parent": "n-42a0a302",
+      "child": "n-458221d7",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-76b3563e",
+      "parent": "n-42a0a302",
+      "child": "n-c0df4d38",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d3e2ab68",
+      "parent": "n-42a0a302",
+      "child": "n-75a4c5cf",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-042222bb",
+      "parent": "n-42a0a302",
+      "child": "n-781afc03",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ac9da72d",
+      "parent": "n-42a0a302",
+      "child": "n-b6822d98",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4072d566",
+      "parent": "n-42a0a302",
+      "child": "n-0833674e",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9101a5f3",
+      "parent": "n-42a0a302",
+      "child": "n-a340a2a7",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b3f09fdb",
+      "parent": "n-42a0a302",
+      "child": "n-2c1721e0",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d5c5dd58",
+      "parent": "n-42a0a302",
+      "child": "n-4615fb53",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c569dcb4",
+      "parent": "n-56613d98",
+      "child": "n-e29b5e6e",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e893583d",
+      "parent": "n-56613d98",
+      "child": "n-252769e8",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-55831aad",
+      "parent": "n-56613d98",
+      "child": "n-757eaf21",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2116a57b",
+      "parent": "n-56613d98",
+      "child": "n-4abac7dd",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bba797e6",
+      "parent": "n-56613d98",
+      "child": "n-e428d0d2",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-48687e58",
+      "parent": "n-56613d98",
+      "child": "n-dbb422c0",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a0a0d1c5",
+      "parent": "n-56613d98",
+      "child": "n-d48bfdaa",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a498576e",
+      "parent": "n-56613d98",
+      "child": "n-55e2949d",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d305d95c",
+      "parent": "n-0dc8ccac",
+      "child": "n-c2355ebc",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c27ee7a8",
+      "parent": "n-0dc8ccac",
+      "child": "n-9627dd71",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-86a55d8b",
+      "parent": "n-0dc8ccac",
+      "child": "n-695cab25",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-caf393d7",
+      "parent": "n-0dc8ccac",
+      "child": "n-b6a003ab",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-268f9611",
+      "parent": "n-d32336b8",
+      "child": "n-258bcee9",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-5e183bfe",
+      "parent": "n-d32336b8",
+      "child": "n-6f959256",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-0773c1c5",
+      "parent": "n-d32336b8",
+      "child": "n-b248161a",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-a3583ef5",
+      "parent": "n-d32336b8",
+      "child": "n-aff35d00",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f16ab5cc",
+      "parent": "n-d32336b8",
+      "child": "n-f9d43c92",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3e44e300",
+      "parent": "n-d32336b8",
+      "child": "n-52bb0a3a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3ac00a3c",
+      "parent": "n-d32336b8",
+      "child": "n-bf81bc3a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a2cb4582",
+      "parent": "n-d32336b8",
+      "child": "n-8548f254",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8b589fc4",
+      "parent": "n-d32336b8",
+      "child": "n-09c60e65",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2ebeba39",
+      "parent": "n-d32336b8",
+      "child": "n-e2d5ae0e",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bd760354",
+      "parent": "n-d32336b8",
+      "child": "n-c6bec3c7",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ae1dcfd4",
+      "parent": "n-d32336b8",
+      "child": "n-7c28a77a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1bc8cd53",
+      "parent": "n-d32336b8",
+      "child": "n-57f8cf93",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fa2c55a9",
+      "parent": "n-d32336b8",
+      "child": "n-bb07b129",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-57acae73",
+      "parent": "n-d32336b8",
+      "child": "n-4947da60",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a8d823a4",
+      "parent": "n-1a2c44a6",
+      "child": "n-1c78df48",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-02a6c241",
+      "parent": "n-1a2c44a6",
+      "child": "n-be82ada1",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7ad0a552",
+      "parent": "n-1a2c44a6",
+      "child": "n-877c006f",
+      "type": "advisor",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-f68e4475",
+      "parent": "n-1a2c44a6",
+      "child": "n-e87a206c",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-52aba0d6",
+      "parent": "n-1a2c44a6",
+      "child": "n-5d1dab13",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-50817c51",
+      "parent": "n-1a2c44a6",
+      "child": "n-d70580f0",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a3f616ee",
+      "parent": "n-1a2c44a6",
+      "child": "n-ca845385",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-81297fa6",
+      "parent": "n-1a2c44a6",
+      "child": "n-0236fd77",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e126123c",
+      "parent": "n-1a2c44a6",
+      "child": "n-b5770a7b",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b5dbf5af",
+      "parent": "n-1a2c44a6",
+      "child": "n-b02f766a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cc6b498a",
+      "parent": "n-1a2c44a6",
+      "child": "n-71648555",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-794c2261",
+      "parent": "n-c5a8d322",
+      "child": "n-36a65f05",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-19cffd64",
+      "parent": "n-c5a8d322",
+      "child": "n-cda079ba",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-96c55329",
+      "parent": "n-c5a8d322",
+      "child": "n-91f75eb5",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cf7d3ad1",
+      "parent": "n-c5a8d322",
+      "child": "n-cbee38b4",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7751a0af",
+      "parent": "n-c5a8d322",
+      "child": "n-c177b0d8",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d630d62e",
+      "parent": "n-c5a8d322",
+      "child": "n-244ef820",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f1892a64",
+      "parent": "n-c5a8d322",
+      "child": "n-4f5320c8",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c8a702d4",
+      "parent": "n-b97330b6",
+      "child": "n-2a757599",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7416da18",
+      "parent": "n-b97330b6",
+      "child": "n-3d1b1d9a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1682f279",
+      "parent": "n-b97330b6",
+      "child": "n-5dcf1760",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3a8ddeb3",
+      "parent": "n-b97330b6",
+      "child": "n-d4aef750",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-27c703d4",
+      "parent": "n-b97330b6",
+      "child": "n-dbb2c158",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-389f9f72",
+      "parent": "n-3f5f536f",
+      "child": "n-46f6e0ac",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-705d6284",
+      "parent": "n-3f5f536f",
+      "child": "n-2215f645",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b5b14574",
+      "parent": "n-3f5f536f",
+      "child": "n-f0e018a2",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-67965dda",
+      "parent": "n-3f5f536f",
+      "child": "n-1567946c",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dfcdf048",
+      "parent": "n-a057583d",
+      "child": "n-b45aa9c1",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7bc2be5a",
+      "parent": "n-a057583d",
+      "child": "n-5e33050e",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c9a62ce7",
+      "parent": "n-a057583d",
+      "child": "n-a52643ee",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c0e4021e",
+      "parent": "n-a057583d",
+      "child": "n-9c1ef6bd",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-caaff219",
+      "parent": "n-a3204a77",
+      "child": "n-759509e9",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-24e2d28d",
+      "parent": "n-a3204a77",
+      "child": "n-616fc3ff",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d6628f48",
+      "parent": "n-cdf96cc7",
+      "child": "n-c6d6f16f",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0291f234",
+      "parent": "n-cdf96cc7",
+      "child": "n-04896d8a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-db8d700a",
+      "parent": "n-cdf96cc7",
+      "child": "n-25cb5524",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cd007684",
+      "parent": "n-0745146f",
+      "child": "n-c6d6f16f",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-eece9398",
+      "parent": "n-0745146f",
+      "child": "n-04896d8a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-071c4dd1",
+      "parent": "n-0745146f",
+      "child": "n-0236fd77",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-eaa24046",
+      "parent": "n-5758a2b7",
+      "child": "n-c6d6f16f",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e0dea626",
+      "parent": "n-5758a2b7",
+      "child": "n-04896d8a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-81b1bfe5",
+      "parent": "n-5e4ce433",
+      "child": "n-c6d6f16f",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6f72edc9",
+      "parent": "n-5e4ce433",
+      "child": "n-04896d8a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-09aad368",
+      "parent": "n-8a88bad7",
+      "child": "n-c6d6f16f",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5a4c2754",
+      "parent": "n-8a88bad7",
+      "child": "n-04896d8a",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제 시행규칙-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5b6599de",
+      "parent": "n-7f335130",
+      "child": "n-6d736a60",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-fb6f75f2",
+      "parent": "n-6d736a60",
+      "child": "n-4481f335",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-7d314a9d",
+      "parent": "n-4481f335",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2cd6b8ff",
+      "parent": "n-4481f335",
+      "child": "n-2ad0ba08",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5cfb9e28",
+      "parent": "n-4481f335",
+      "child": "n-36f3c644",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-efd519d6",
+      "parent": "n-4481f335",
+      "child": "n-42a0a302",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-715ca817",
+      "parent": "n-4481f335",
+      "child": "n-97fa6614",
+      "type": "assistant",
+      "sources": [
+        "/tmp/산업통상부-20260724-law/산업통상부와 그 소속기관 직제-20260721.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fd5d217e",
+      "parent": "n-4481f335",
+      "child": "n-9727b390",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-4d93bfd6",
+      "parent": "n-7f335130",
+      "child": "n-cdf96cc7",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-00c7b9b6",
+      "parent": "n-7f335130",
+      "child": "n-0745146f",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-fdb78068",
+      "parent": "n-7f335130",
+      "child": "n-5758a2b7",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-63ae0de9",
+      "parent": "n-7f335130",
+      "child": "n-5e4ce433",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-4a8ae18a",
+      "parent": "n-7f335130",
+      "child": "n-8a88bad7",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

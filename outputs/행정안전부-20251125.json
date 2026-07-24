@@ -1,0 +1,6146 @@
+{
+  "meta": {
+    "institution": "행정안전부",
+    "title": "행정안전부",
+    "asOf": "2025-11-25",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "행정안전부와 그 소속기관 직제 [시행 20251125]",
+      "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+    ],
+    "temporaryHeadcounts": [
+      {
+        "target": "행정안전부",
+        "expires": "2026-12-31",
+        "source": "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      },
+      {
+        "target": "행정안전부",
+        "expires": "2027-03-31",
+        "source": "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      },
+      {
+        "target": "행정안전부",
+        "expires": "2026-02-28",
+        "source": "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      }
+    ],
+    "laws": [
+      {
+        "name": "행정안전부와 그 소속기관 직제",
+        "requestedDate": "20251125",
+        "effectiveDate": "20251125",
+        "mst": "279905",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=279905&efYd=20251125&BD=on"
+      },
+      {
+        "name": "행정안전부와 그 소속기관 직제 시행규칙",
+        "requestedDate": "20251125",
+        "effectiveDate": "20251125",
+        "mst": "279941",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=279941&efYd=20251125&BD=on"
+      }
+    ]
+  },
+  "rootId": "n-364caefd",
+  "nodes": [
+    {
+      "id": "n-364caefd",
+      "name": "행정안전부",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-a7999a8a",
+      "name": "지방자치인재개발원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "evaluation": true
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-886ffbcd",
+      "name": "국가기록원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8018702d",
+      "name": "정부청사관리본부",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "grade": "가"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f2213d55",
+      "name": "국가재난안전교육원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ed851562",
+      "name": "대통령기록관",
+      "kind": "affiliated",
+      "rank": 4,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-1df88277",
+      "name": "이북5도",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "special-local",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-808039a8",
+      "name": "국립과학수사연구원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-54b44817",
+      "name": "국가정보자원관리원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-d74186ad",
+      "name": "국립재난안전연구원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-e597a744",
+      "name": "주민등록번호변경위원회",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-a4fafae2",
+      "name": "장관정책보좌관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-4481f335",
+      "name": "차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-7da5dac3",
+      "name": "기획조정실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-2c157682",
+      "name": "의정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-7ce28e1b",
+      "name": "감사관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-274000ce",
+      "name": "인사기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-3b01aefc",
+      "name": "인공지능정부실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-d69fbf30",
+      "name": "자치혁신실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-faacece0",
+      "name": "지방재정경제실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-7d826907",
+      "name": "참여혁신국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-7c34e405",
+      "name": "조직국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ab808015",
+      "name": "재난안전관리본부",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f5907c1d",
+      "name": "부대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-6865ad99",
+      "name": "인공지능정부정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-9c8de693",
+      "name": "인공지능정부서비스국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-dbbbe3ff",
+      "name": "인공지능정부기반국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-3f6bb173",
+      "name": "지방행정국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-b3447630",
+      "name": "자치분권국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-75b035fb",
+      "name": "사회연대경제국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-085788f1",
+      "name": "균형발전국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-98a94640",
+      "name": "지방재정국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-6a837ce1",
+      "name": "지방세제국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-c363c4ae",
+      "name": "지역경제국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-0b25260b",
+      "name": "중앙재난안전상황실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-85416396",
+      "name": "안전감찰담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f9ff3078",
+      "name": "안전예방정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-e97da9fb",
+      "name": "자연재난실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8d4ffac3",
+      "name": "사회재난실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-3d7e72bb",
+      "name": "재난복구지원국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-e038b6d7",
+      "name": "비상대비정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-503ea92a",
+      "name": "안전정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-caadb19f",
+      "name": "예방정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-469b1f20",
+      "name": "재난안전정보통신국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-2095d1da",
+      "name": "재난관리정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-00dc76fd",
+      "name": "자연재난대응국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-b369e556",
+      "name": "사회재난정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-2043df15",
+      "name": "사회재난대응국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-72312572",
+      "name": "기획부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8e254b6f",
+      "name": "교수부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-490814fc",
+      "name": "기록정책부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-df0fb61e",
+      "name": "기록관리부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-571d73da",
+      "name": "기록서비스부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-db844008",
+      "name": "성남분원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-9baf8531",
+      "name": "부산분원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-2b2a2d9d",
+      "name": "대전분원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-0fa82408",
+      "name": "서울청사관리소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false,
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-a83bc1ad",
+      "name": "춘천지소",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-6ff22ed6",
+      "name": "고양지소",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8ca4092c",
+      "name": "과천청사관리소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false,
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-7d2df2c0",
+      "name": "대전청사관리소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false,
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-32653a40",
+      "name": "충남지소",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-c4950567",
+      "name": "경북지소",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8ce764d3",
+      "name": "광주청사관리소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f7625d6c",
+      "name": "제주청사관리소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-feebecd8",
+      "name": "대구청사관리소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-b6c3e6d3",
+      "name": "경남청사관리소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-9226dfc0",
+      "name": "인천청사관리소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f591ac80",
+      "name": "사무국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-094c858d",
+      "name": "차세대지방재정세입정보화추진단",
+      "kind": "temporary",
+      "rank": 4,
+      "metadata": {
+        "temporary": true,
+        "expires": "2025-12-31",
+        "evaluation": true
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-67f14651",
+      "name": "홍보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f02b3bbf",
+      "name": "안전소통담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ad88cef8",
+      "name": "디지털소통팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-dd5ea767",
+      "name": "혁신행정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-225837b1",
+      "name": "성과관리담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-fbd46cf9",
+      "name": "법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ca391c93",
+      "name": "데이터정보화담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-946d4490",
+      "name": "정보보호팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-0c663167",
+      "name": "국제협력담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ba7a45b8",
+      "name": "행정한류담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f1907300",
+      "name": "정책기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-6deaabb8",
+      "name": "국제행정협력관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "employmentType": "임기제"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-d35fd50b",
+      "name": "비상안전기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "employmentType": "임기제"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-698a97b7",
+      "name": "의정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-e66bc4b9",
+      "name": "상훈담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-5137e479",
+      "name": "복무감찰담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f76368b6",
+      "name": "인공지능정부정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-08413606",
+      "name": "공공인공지능혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-281552e5",
+      "name": "공공데이터정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f63a1572",
+      "name": "공공데이터분석관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8a1b177a",
+      "name": "인공지능정부협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-3589572c",
+      "name": "공공서비스혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-39927ce9",
+      "name": "행정정보공유과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-dd4a13a6",
+      "name": "국민맞춤서비스과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f0e36c7f",
+      "name": "디지털보안정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-59f1931c",
+      "name": "디지털인프라혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-5147f31c",
+      "name": "지역디지털협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-2b6e495d",
+      "name": "자치행정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-36440dc7",
+      "name": "자치새마을협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-4585f5bb",
+      "name": "주민과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8937104d",
+      "name": "사회통합지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-77080c0b",
+      "name": "자치분권제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-cdd7cf98",
+      "name": "주민자치혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-607b9e2b",
+      "name": "자치분권지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-a4601606",
+      "name": "지방인사제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-b4243bbc",
+      "name": "선거의회자치법규과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ef67ba78",
+      "name": "사회연대경제제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-09dd31e8",
+      "name": "사회연대경제지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-daefe4e9",
+      "name": "민간협력공동체과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-985f8dab",
+      "name": "지역금융지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-6e94f846",
+      "name": "균형발전제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ea4a891f",
+      "name": "균형발전진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-cd80e079",
+      "name": "기본사회정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-9000cf7c",
+      "name": "재정정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-640636c0",
+      "name": "재정협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-b2bc5b79",
+      "name": "교부세과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-76de2322",
+      "name": "회계계약제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-c68690b2",
+      "name": "공유재산정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-c5f9cf50",
+      "name": "지방세정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-2688e8ea",
+      "name": "부동산세제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ac4c6c4f",
+      "name": "지방소득소비세제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-a3e499f1",
+      "name": "지방세특례제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-3462e391",
+      "name": "지역경제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8d4444a5",
+      "name": "민생경제지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-46c41ed0",
+      "name": "지방공기업정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-6d9217b8",
+      "name": "지방공공기관관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-b992c73b",
+      "name": "주소정보혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-62d522ed",
+      "name": "혁신기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-7b82fa16",
+      "name": "국민참여정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-0ef7a115",
+      "name": "행정제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-980d2acf",
+      "name": "민원제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-155fa803",
+      "name": "정보공개제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-093b047f",
+      "name": "조직기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-6ea2902e",
+      "name": "조직진단과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-bc4fdb59",
+      "name": "경제조직과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-01d062a2",
+      "name": "사회조직과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f3e4dc36",
+      "name": "안전조직과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ac290c07",
+      "name": "상황총괄담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-0894f3a8",
+      "name": "상황담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-4921ffd7",
+      "name": "서울상황센터",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-149aad92",
+      "name": "안전정책총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-1da5b4f3",
+      "name": "안전사업조정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-a7c59e62",
+      "name": "재난안전산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-742e403b",
+      "name": "재난안전연구개발과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-460a5ad6",
+      "name": "예방안전제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-23823413",
+      "name": "안전개선과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-69b3d052",
+      "name": "안전문화교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-d3b5d8fd",
+      "name": "승강기정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-0465a897",
+      "name": "재난정보통신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-cce554ad",
+      "name": "재난안전통신망과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-e4a3cd61",
+      "name": "재난안전데이터과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-919683bd",
+      "name": "재난관리정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-7a0340d2",
+      "name": "재난대응훈련과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ff8fb2f7",
+      "name": "재난자원관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-80765863",
+      "name": "기후재난관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-3c945d04",
+      "name": "재난영향분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ca60f6fd",
+      "name": "재난대응총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8fdbc51a",
+      "name": "자연재난대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f6dfd5ac",
+      "name": "재난경감과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-b64a7f02",
+      "name": "지진방재정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-e532799c",
+      "name": "지진방재관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-24690439",
+      "name": "사회재난정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-db050cd7",
+      "name": "재난안전점검과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-6bdfac3b",
+      "name": "재난안전조사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-7f304e7d",
+      "name": "사회재난대응총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-9bd2a080",
+      "name": "국토산업재난대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f69b9a82",
+      "name": "보건사회재난대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-a61bf3cf",
+      "name": "농축산해양재난대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-25ad5fbb",
+      "name": "환경산림재난대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-b1497f88",
+      "name": "복구지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-190d763f",
+      "name": "재난구호과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-71f73197",
+      "name": "재난보험과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-e958a67e",
+      "name": "수습지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-3e868242",
+      "name": "수습관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-200d0e46",
+      "name": "민방위심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나"
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-5a29e4d7",
+      "name": "비상대비기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-1ed21d1a",
+      "name": "비상대비자원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-b51e800a",
+      "name": "비상대비훈련과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-c6a54dde",
+      "name": "민방위과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-46c528a3",
+      "name": "위기관리지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8ffdc6e8",
+      "name": "중앙민방위경보통제센터",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8765af75",
+      "name": "행정지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-4f7c23a4",
+      "name": "기획협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-1eb133e3",
+      "name": "국제교육협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-c032ae6d",
+      "name": "교육총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f3500d15",
+      "name": "지방의정연수센터",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-b3e9ac1f",
+      "name": "정책리더양성과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-13117a60",
+      "name": "전문역량교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-68e8c408",
+      "name": "지방자치역량센터",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-ed906cb4",
+      "name": "정책기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-77282134",
+      "name": "기록협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-06476e9a",
+      "name": "디지털혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-62a8da8c",
+      "name": "기록관리정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-9726a13e",
+      "name": "사회기록과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-cd7bdde5",
+      "name": "경제기록과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-417ec7fd",
+      "name": "특수기록과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-552e0ac3",
+      "name": "서비스정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-b2348d9f",
+      "name": "보존관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-c025b1e8",
+      "name": "복원관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-42b860d9",
+      "name": "기록관리교육센터",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-33d8763c",
+      "name": "관리총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-74b0d911",
+      "name": "청사보안기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-e4df03be",
+      "name": "노사후생과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-d5dc0955",
+      "name": "청사기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-5280eec0",
+      "name": "시설총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-c1a8b427",
+      "name": "시설관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-cab6c0d1",
+      "name": "청사건축과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-c6d6f16f",
+      "name": "관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-0786c8c3",
+      "name": "시설과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-f52d0053",
+      "name": "심사지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-1a8d5f06",
+      "name": "재난안전교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-92f4525e",
+      "name": "민방위비상대비교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-d20f1730",
+      "name": "행정기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-d7ffdb4c",
+      "name": "생산지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-e13994df",
+      "name": "지정기록관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-8255945e",
+      "name": "기록보존과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-db3773a6",
+      "name": "기록서비스과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-0d8d0847",
+      "name": "지방과학수사연구소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-c722b8cc",
+      "name": "광주센터",
+      "kind": "affiliated",
+      "rank": 5,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    },
+    {
+      "id": "n-9e31f68d",
+      "name": "대구센터",
+      "kind": "affiliated",
+      "rank": 5,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false
+      },
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-a87d4c30",
+      "parent": "n-364caefd",
+      "child": "n-a7999a8a",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-6c68bcb4",
+      "parent": "n-364caefd",
+      "child": "n-886ffbcd",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-0c951d6f",
+      "parent": "n-364caefd",
+      "child": "n-8018702d",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-305453e3",
+      "parent": "n-364caefd",
+      "child": "n-f2213d55",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-247a439f",
+      "parent": "n-364caefd",
+      "child": "n-ed851562",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-759b4a78",
+      "parent": "n-364caefd",
+      "child": "n-1df88277",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "special-local"
+      }
+    },
+    {
+      "id": "e-ba3132ae",
+      "parent": "n-364caefd",
+      "child": "n-808039a8",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-a71e7c20",
+      "parent": "n-364caefd",
+      "child": "n-54b44817",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-da7ceb1a",
+      "parent": "n-364caefd",
+      "child": "n-d74186ad",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-69123ab9",
+      "parent": "n-364caefd",
+      "child": "n-e597a744",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다",
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-ddbf5eed",
+      "parent": "n-6d736a60",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d24d5124",
+      "parent": "n-6d736a60",
+      "child": "n-a4fafae2",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6a94cd83",
+      "parent": "n-4481f335",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-9713aedd",
+      "parent": "n-4481f335",
+      "child": "n-2c157682",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-576e9be6",
+      "parent": "n-4481f335",
+      "child": "n-7ce28e1b",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-c9993a28",
+      "parent": "n-4481f335",
+      "child": "n-274000ce",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-fa5fcd0d",
+      "parent": "n-e618142f",
+      "child": "n-f5907c1d",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-94736ec6",
+      "parent": "n-3b01aefc",
+      "child": "n-6865ad99",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-09026e3d",
+      "parent": "n-3b01aefc",
+      "child": "n-9c8de693",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-587a8e38",
+      "parent": "n-3b01aefc",
+      "child": "n-dbbbe3ff",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6d9bf9cf",
+      "parent": "n-d69fbf30",
+      "child": "n-3f6bb173",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0e40a514",
+      "parent": "n-d69fbf30",
+      "child": "n-b3447630",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5c5cb777",
+      "parent": "n-d69fbf30",
+      "child": "n-75b035fb",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7b3c37d4",
+      "parent": "n-d69fbf30",
+      "child": "n-085788f1",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-511091d6",
+      "parent": "n-faacece0",
+      "child": "n-98a94640",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7c039af3",
+      "parent": "n-faacece0",
+      "child": "n-6a837ce1",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-79c5cf5f",
+      "parent": "n-faacece0",
+      "child": "n-c363c4ae",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-46cbd6c5",
+      "parent": "n-ab808015",
+      "child": "n-0b25260b",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-48050c90",
+      "parent": "n-ab808015",
+      "child": "n-85416396",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-67bcbf0d",
+      "parent": "n-ab808015",
+      "child": "n-f9ff3078",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b1689d4f",
+      "parent": "n-ab808015",
+      "child": "n-e97da9fb",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d7411f2d",
+      "parent": "n-ab808015",
+      "child": "n-8d4ffac3",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6e9c2bd2",
+      "parent": "n-ab808015",
+      "child": "n-3d7e72bb",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-21db092b",
+      "parent": "n-ab808015",
+      "child": "n-e038b6d7",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a5290d86",
+      "parent": "n-f9ff3078",
+      "child": "n-503ea92a",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-59bf939f",
+      "parent": "n-f9ff3078",
+      "child": "n-caadb19f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-02fe6780",
+      "parent": "n-f9ff3078",
+      "child": "n-469b1f20",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c42822aa",
+      "parent": "n-e97da9fb",
+      "child": "n-2095d1da",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d03479a4",
+      "parent": "n-e97da9fb",
+      "child": "n-00dc76fd",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aebafbe3",
+      "parent": "n-8d4ffac3",
+      "child": "n-b369e556",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ace6e7d3",
+      "parent": "n-8d4ffac3",
+      "child": "n-2043df15",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3bccac07",
+      "parent": "n-a7999a8a",
+      "child": "n-72312572",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ec15eb3e",
+      "parent": "n-a7999a8a",
+      "child": "n-8e254b6f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7fce25e3",
+      "parent": "n-886ffbcd",
+      "child": "n-490814fc",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4a55c034",
+      "parent": "n-886ffbcd",
+      "child": "n-df0fb61e",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2c290eea",
+      "parent": "n-886ffbcd",
+      "child": "n-571d73da",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-48ab69c9",
+      "parent": "n-364caefd",
+      "child": "n-db844008",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-7d8634c8",
+      "parent": "n-364caefd",
+      "child": "n-9baf8531",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-6c9d1a41",
+      "parent": "n-364caefd",
+      "child": "n-2b2a2d9d",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-f998e6dd",
+      "parent": "n-0fa82408",
+      "child": "n-a83bc1ad",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c4fd0a33",
+      "parent": "n-0fa82408",
+      "child": "n-6ff22ed6",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-57822bed",
+      "parent": "n-7d2df2c0",
+      "child": "n-32653a40",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-27687b10",
+      "parent": "n-7d2df2c0",
+      "child": "n-c4950567",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]",
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ed101901",
+      "parent": "n-364caefd",
+      "child": "n-8ce764d3",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-c0b08cb6",
+      "parent": "n-364caefd",
+      "child": "n-f7625d6c",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-e02c2f85",
+      "parent": "n-364caefd",
+      "child": "n-feebecd8",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-472c9a0f",
+      "parent": "n-364caefd",
+      "child": "n-b6c3e6d3",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-97629885",
+      "parent": "n-364caefd",
+      "child": "n-9226dfc0",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-465aaf02",
+      "parent": "n-e597a744",
+      "child": "n-f591ac80",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dc55883e",
+      "parent": "n-faacece0",
+      "child": "n-094c858d",
+      "type": "temporary",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-011be0c0",
+      "parent": "n-e618142f",
+      "child": "n-67f14651",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b3671299",
+      "parent": "n-e618142f",
+      "child": "n-f02b3bbf",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e5da7c49",
+      "parent": "n-e618142f",
+      "child": "n-ad88cef8",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b5600516",
+      "parent": "n-7da5dac3",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8c355572",
+      "parent": "n-7da5dac3",
+      "child": "n-dd5ea767",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-53cea8b9",
+      "parent": "n-7da5dac3",
+      "child": "n-225837b1",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-399f02ed",
+      "parent": "n-7da5dac3",
+      "child": "n-fbd46cf9",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-3517c68f",
+      "parent": "n-7da5dac3",
+      "child": "n-ca391c93",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-a5bbcd09",
+      "parent": "n-7da5dac3",
+      "child": "n-946d4490",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-38b572e1",
+      "parent": "n-7da5dac3",
+      "child": "n-0c663167",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-30274297",
+      "parent": "n-7da5dac3",
+      "child": "n-ba7a45b8",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-49d09c81",
+      "parent": "n-7da5dac3",
+      "child": "n-f1907300",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6e022d06",
+      "parent": "n-7da5dac3",
+      "child": "n-6deaabb8",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-3020239c",
+      "parent": "n-7da5dac3",
+      "child": "n-d35fd50b",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-7406a528",
+      "parent": "n-2c157682",
+      "child": "n-698a97b7",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-93ada740",
+      "parent": "n-2c157682",
+      "child": "n-e66bc4b9",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7f59d817",
+      "parent": "n-7ce28e1b",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-361b8251",
+      "parent": "n-7ce28e1b",
+      "child": "n-5137e479",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-6f6bae95",
+      "parent": "n-6865ad99",
+      "child": "n-f76368b6",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e3ffe0b3",
+      "parent": "n-6865ad99",
+      "child": "n-08413606",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1267f63e",
+      "parent": "n-6865ad99",
+      "child": "n-281552e5",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9ea2d3dc",
+      "parent": "n-6865ad99",
+      "child": "n-f63a1572",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7bde3173",
+      "parent": "n-6865ad99",
+      "child": "n-8a1b177a",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1f355ece",
+      "parent": "n-9c8de693",
+      "child": "n-3589572c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-79d32119",
+      "parent": "n-9c8de693",
+      "child": "n-39927ce9",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-06a793b6",
+      "parent": "n-9c8de693",
+      "child": "n-dd4a13a6",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a97b608d",
+      "parent": "n-dbbbe3ff",
+      "child": "n-f0e36c7f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-98a60bda",
+      "parent": "n-dbbbe3ff",
+      "child": "n-59f1931c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c85a2af9",
+      "parent": "n-dbbbe3ff",
+      "child": "n-5147f31c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-17f2b3d0",
+      "parent": "n-3b01aefc",
+      "child": "n-f76368b6",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6994a9de",
+      "parent": "n-3b01aefc",
+      "child": "n-08413606",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-692e4c4b",
+      "parent": "n-3b01aefc",
+      "child": "n-281552e5",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-622b94e5",
+      "parent": "n-3b01aefc",
+      "child": "n-f63a1572",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-80c1af76",
+      "parent": "n-3b01aefc",
+      "child": "n-8a1b177a",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7a05158e",
+      "parent": "n-3b01aefc",
+      "child": "n-3589572c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c938e859",
+      "parent": "n-3b01aefc",
+      "child": "n-39927ce9",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-12967df6",
+      "parent": "n-3b01aefc",
+      "child": "n-dd4a13a6",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bc42a85a",
+      "parent": "n-3b01aefc",
+      "child": "n-f0e36c7f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9ec291e1",
+      "parent": "n-3b01aefc",
+      "child": "n-59f1931c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1f027756",
+      "parent": "n-3b01aefc",
+      "child": "n-5147f31c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f448579a",
+      "parent": "n-3f6bb173",
+      "child": "n-2b6e495d",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-60568842",
+      "parent": "n-3f6bb173",
+      "child": "n-36440dc7",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-46f7698c",
+      "parent": "n-3f6bb173",
+      "child": "n-4585f5bb",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5c54800d",
+      "parent": "n-3f6bb173",
+      "child": "n-8937104d",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-36b03349",
+      "parent": "n-b3447630",
+      "child": "n-77080c0b",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-97d155f6",
+      "parent": "n-b3447630",
+      "child": "n-cdd7cf98",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9e8e1621",
+      "parent": "n-b3447630",
+      "child": "n-607b9e2b",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9eafd98a",
+      "parent": "n-b3447630",
+      "child": "n-a4601606",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d4501326",
+      "parent": "n-b3447630",
+      "child": "n-b4243bbc",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5df23cdf",
+      "parent": "n-75b035fb",
+      "child": "n-ef67ba78",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9424a273",
+      "parent": "n-75b035fb",
+      "child": "n-09dd31e8",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-50ba9b1e",
+      "parent": "n-75b035fb",
+      "child": "n-daefe4e9",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cb7d7cec",
+      "parent": "n-75b035fb",
+      "child": "n-985f8dab",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d367a4c8",
+      "parent": "n-085788f1",
+      "child": "n-6e94f846",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-03a67e29",
+      "parent": "n-085788f1",
+      "child": "n-ea4a891f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f7c5b5d2",
+      "parent": "n-085788f1",
+      "child": "n-cd80e079",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a1fafa5e",
+      "parent": "n-d69fbf30",
+      "child": "n-2b6e495d",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ca8f2c96",
+      "parent": "n-d69fbf30",
+      "child": "n-36440dc7",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-50610c70",
+      "parent": "n-d69fbf30",
+      "child": "n-4585f5bb",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-07b37731",
+      "parent": "n-d69fbf30",
+      "child": "n-8937104d",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f8886d94",
+      "parent": "n-d69fbf30",
+      "child": "n-77080c0b",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1098807b",
+      "parent": "n-d69fbf30",
+      "child": "n-cdd7cf98",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-03cd29bc",
+      "parent": "n-d69fbf30",
+      "child": "n-607b9e2b",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2fe0071b",
+      "parent": "n-d69fbf30",
+      "child": "n-a4601606",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7481cafb",
+      "parent": "n-d69fbf30",
+      "child": "n-b4243bbc",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-833ce553",
+      "parent": "n-d69fbf30",
+      "child": "n-ef67ba78",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2cf6a617",
+      "parent": "n-d69fbf30",
+      "child": "n-09dd31e8",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e4aa37ca",
+      "parent": "n-d69fbf30",
+      "child": "n-daefe4e9",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ad36cd60",
+      "parent": "n-d69fbf30",
+      "child": "n-985f8dab",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-41955b31",
+      "parent": "n-d69fbf30",
+      "child": "n-6e94f846",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-77259e68",
+      "parent": "n-d69fbf30",
+      "child": "n-ea4a891f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6aba880f",
+      "parent": "n-d69fbf30",
+      "child": "n-cd80e079",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d8f56896",
+      "parent": "n-98a94640",
+      "child": "n-9000cf7c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ac5f89ea",
+      "parent": "n-98a94640",
+      "child": "n-640636c0",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-eccf4c68",
+      "parent": "n-98a94640",
+      "child": "n-b2bc5b79",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-54dab5f9",
+      "parent": "n-98a94640",
+      "child": "n-76de2322",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9eb03e22",
+      "parent": "n-98a94640",
+      "child": "n-c68690b2",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4db9d996",
+      "parent": "n-6a837ce1",
+      "child": "n-c5f9cf50",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-25986f6c",
+      "parent": "n-6a837ce1",
+      "child": "n-2688e8ea",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fbacfc2b",
+      "parent": "n-6a837ce1",
+      "child": "n-ac4c6c4f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-41ee1fed",
+      "parent": "n-6a837ce1",
+      "child": "n-a3e499f1",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6c34dd82",
+      "parent": "n-c363c4ae",
+      "child": "n-3462e391",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-58b8eb59",
+      "parent": "n-c363c4ae",
+      "child": "n-8d4444a5",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e18d1f80",
+      "parent": "n-c363c4ae",
+      "child": "n-46c41ed0",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8eab9958",
+      "parent": "n-c363c4ae",
+      "child": "n-6d9217b8",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ed64c646",
+      "parent": "n-c363c4ae",
+      "child": "n-b992c73b",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1cc9a0ed",
+      "parent": "n-faacece0",
+      "child": "n-9000cf7c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d14738b1",
+      "parent": "n-faacece0",
+      "child": "n-640636c0",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8c0e17cf",
+      "parent": "n-faacece0",
+      "child": "n-b2bc5b79",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9c6f3736",
+      "parent": "n-faacece0",
+      "child": "n-76de2322",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2f8b2aad",
+      "parent": "n-faacece0",
+      "child": "n-c68690b2",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c28bbd12",
+      "parent": "n-faacece0",
+      "child": "n-c5f9cf50",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-400539d0",
+      "parent": "n-faacece0",
+      "child": "n-2688e8ea",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-945959e7",
+      "parent": "n-faacece0",
+      "child": "n-ac4c6c4f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-91ab7261",
+      "parent": "n-faacece0",
+      "child": "n-a3e499f1",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5b9a50fa",
+      "parent": "n-faacece0",
+      "child": "n-3462e391",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d263b9b1",
+      "parent": "n-faacece0",
+      "child": "n-8d4444a5",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fbc9b2e8",
+      "parent": "n-faacece0",
+      "child": "n-46c41ed0",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-af912480",
+      "parent": "n-faacece0",
+      "child": "n-6d9217b8",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6d92d20e",
+      "parent": "n-faacece0",
+      "child": "n-b992c73b",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6f7165a2",
+      "parent": "n-7d826907",
+      "child": "n-62d522ed",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7906bdc9",
+      "parent": "n-7d826907",
+      "child": "n-7b82fa16",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3632e7e4",
+      "parent": "n-7d826907",
+      "child": "n-0ef7a115",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-95c15ea1",
+      "parent": "n-7d826907",
+      "child": "n-980d2acf",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-becfeac1",
+      "parent": "n-7d826907",
+      "child": "n-155fa803",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5e68d4d1",
+      "parent": "n-7c34e405",
+      "child": "n-093b047f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-15180de4",
+      "parent": "n-7c34e405",
+      "child": "n-6ea2902e",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6531fe27",
+      "parent": "n-7c34e405",
+      "child": "n-bc4fdb59",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4925bd1e",
+      "parent": "n-7c34e405",
+      "child": "n-01d062a2",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8710d5cc",
+      "parent": "n-7c34e405",
+      "child": "n-f3e4dc36",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-944ac3d5",
+      "parent": "n-0b25260b",
+      "child": "n-ac290c07",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d0f682d3",
+      "parent": "n-0b25260b",
+      "child": "n-0894f3a8",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-4427ada7",
+      "parent": "n-0b25260b",
+      "child": "n-4921ffd7",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-f5b1ee94",
+      "parent": "n-503ea92a",
+      "child": "n-149aad92",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9463331f",
+      "parent": "n-503ea92a",
+      "child": "n-1da5b4f3",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-03456beb",
+      "parent": "n-503ea92a",
+      "child": "n-a7c59e62",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1eb0468a",
+      "parent": "n-503ea92a",
+      "child": "n-742e403b",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-71e60f93",
+      "parent": "n-caadb19f",
+      "child": "n-460a5ad6",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d8342448",
+      "parent": "n-caadb19f",
+      "child": "n-23823413",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0397148b",
+      "parent": "n-caadb19f",
+      "child": "n-69b3d052",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a218ab20",
+      "parent": "n-caadb19f",
+      "child": "n-d3b5d8fd",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a20ad203",
+      "parent": "n-469b1f20",
+      "child": "n-0465a897",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dcc8760f",
+      "parent": "n-469b1f20",
+      "child": "n-cce554ad",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-24276e0c",
+      "parent": "n-469b1f20",
+      "child": "n-e4a3cd61",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3b4dd38d",
+      "parent": "n-f9ff3078",
+      "child": "n-149aad92",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-061868d2",
+      "parent": "n-f9ff3078",
+      "child": "n-1da5b4f3",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1c8883c6",
+      "parent": "n-f9ff3078",
+      "child": "n-a7c59e62",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4c54b543",
+      "parent": "n-f9ff3078",
+      "child": "n-742e403b",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-644fa6d1",
+      "parent": "n-f9ff3078",
+      "child": "n-460a5ad6",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7cfc0eb2",
+      "parent": "n-f9ff3078",
+      "child": "n-23823413",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-56683971",
+      "parent": "n-f9ff3078",
+      "child": "n-69b3d052",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3adac5fa",
+      "parent": "n-f9ff3078",
+      "child": "n-d3b5d8fd",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8eee0708",
+      "parent": "n-f9ff3078",
+      "child": "n-0465a897",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-500e4214",
+      "parent": "n-f9ff3078",
+      "child": "n-cce554ad",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ed5b92e7",
+      "parent": "n-f9ff3078",
+      "child": "n-e4a3cd61",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-001f3075",
+      "parent": "n-2095d1da",
+      "child": "n-919683bd",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-25df4bcc",
+      "parent": "n-2095d1da",
+      "child": "n-7a0340d2",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7decd492",
+      "parent": "n-2095d1da",
+      "child": "n-ff8fb2f7",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-207ee56c",
+      "parent": "n-2095d1da",
+      "child": "n-80765863",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4be98f59",
+      "parent": "n-2095d1da",
+      "child": "n-3c945d04",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2f7d73b5",
+      "parent": "n-00dc76fd",
+      "child": "n-ca60f6fd",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-91fd0b2f",
+      "parent": "n-00dc76fd",
+      "child": "n-8fdbc51a",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2ee187dc",
+      "parent": "n-00dc76fd",
+      "child": "n-f6dfd5ac",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e5ca55a1",
+      "parent": "n-00dc76fd",
+      "child": "n-b64a7f02",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bbb4707e",
+      "parent": "n-00dc76fd",
+      "child": "n-e532799c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bcc60714",
+      "parent": "n-e97da9fb",
+      "child": "n-919683bd",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5f021edd",
+      "parent": "n-e97da9fb",
+      "child": "n-7a0340d2",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e34a78e7",
+      "parent": "n-e97da9fb",
+      "child": "n-ff8fb2f7",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9f6a7fe1",
+      "parent": "n-e97da9fb",
+      "child": "n-80765863",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-916ee2b8",
+      "parent": "n-e97da9fb",
+      "child": "n-3c945d04",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b88c478e",
+      "parent": "n-e97da9fb",
+      "child": "n-ca60f6fd",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0f5dddd8",
+      "parent": "n-e97da9fb",
+      "child": "n-8fdbc51a",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2544504f",
+      "parent": "n-e97da9fb",
+      "child": "n-f6dfd5ac",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d0d44c3a",
+      "parent": "n-e97da9fb",
+      "child": "n-b64a7f02",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a340aa51",
+      "parent": "n-e97da9fb",
+      "child": "n-e532799c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5c79f6c5",
+      "parent": "n-b369e556",
+      "child": "n-24690439",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d06e713f",
+      "parent": "n-b369e556",
+      "child": "n-db050cd7",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-198ced2d",
+      "parent": "n-b369e556",
+      "child": "n-6bdfac3b",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c1f16800",
+      "parent": "n-2043df15",
+      "child": "n-7f304e7d",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a0a6304e",
+      "parent": "n-2043df15",
+      "child": "n-9bd2a080",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f795f35d",
+      "parent": "n-2043df15",
+      "child": "n-f69b9a82",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-68c3dc0c",
+      "parent": "n-2043df15",
+      "child": "n-a61bf3cf",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-994d48f9",
+      "parent": "n-2043df15",
+      "child": "n-25ad5fbb",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f11fa69b",
+      "parent": "n-8d4ffac3",
+      "child": "n-24690439",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-42388b1d",
+      "parent": "n-8d4ffac3",
+      "child": "n-db050cd7",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-27fd20df",
+      "parent": "n-8d4ffac3",
+      "child": "n-6bdfac3b",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8c8b271a",
+      "parent": "n-8d4ffac3",
+      "child": "n-7f304e7d",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bc3a0e28",
+      "parent": "n-8d4ffac3",
+      "child": "n-9bd2a080",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7e4ec8a7",
+      "parent": "n-8d4ffac3",
+      "child": "n-f69b9a82",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8dea26be",
+      "parent": "n-8d4ffac3",
+      "child": "n-a61bf3cf",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-52e02ccb",
+      "parent": "n-8d4ffac3",
+      "child": "n-25ad5fbb",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3325d4e6",
+      "parent": "n-3d7e72bb",
+      "child": "n-b1497f88",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a877ca23",
+      "parent": "n-3d7e72bb",
+      "child": "n-190d763f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5c465cde",
+      "parent": "n-3d7e72bb",
+      "child": "n-71f73197",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a00da035",
+      "parent": "n-3d7e72bb",
+      "child": "n-e958a67e",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-be507347",
+      "parent": "n-3d7e72bb",
+      "child": "n-3e868242",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7dca4735",
+      "parent": "n-e038b6d7",
+      "child": "n-200d0e46",
+      "type": "advisor",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-72c547d5",
+      "parent": "n-e038b6d7",
+      "child": "n-5a29e4d7",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ff12a389",
+      "parent": "n-e038b6d7",
+      "child": "n-1ed21d1a",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-56dac53e",
+      "parent": "n-e038b6d7",
+      "child": "n-b51e800a",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-43aeed66",
+      "parent": "n-e038b6d7",
+      "child": "n-c6a54dde",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0a5dce92",
+      "parent": "n-e038b6d7",
+      "child": "n-46c528a3",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dbda96be",
+      "parent": "n-e038b6d7",
+      "child": "n-8ffdc6e8",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fd46425b",
+      "parent": "n-72312572",
+      "child": "n-8765af75",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e243ec92",
+      "parent": "n-72312572",
+      "child": "n-4f7c23a4",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3df32eb5",
+      "parent": "n-72312572",
+      "child": "n-1eb133e3",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c6d85c91",
+      "parent": "n-8e254b6f",
+      "child": "n-c032ae6d",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-55c3761f",
+      "parent": "n-8e254b6f",
+      "child": "n-f3500d15",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-659e593d",
+      "parent": "n-8e254b6f",
+      "child": "n-b3e9ac1f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7c2f2b13",
+      "parent": "n-8e254b6f",
+      "child": "n-13117a60",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f072c463",
+      "parent": "n-8e254b6f",
+      "child": "n-68e8c408",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-980c5cc7",
+      "parent": "n-490814fc",
+      "child": "n-8765af75",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-515f7019",
+      "parent": "n-490814fc",
+      "child": "n-ed906cb4",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e7626f2a",
+      "parent": "n-490814fc",
+      "child": "n-77282134",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0102e06c",
+      "parent": "n-490814fc",
+      "child": "n-06476e9a",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-86c69566",
+      "parent": "n-df0fb61e",
+      "child": "n-62a8da8c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-34a6aa07",
+      "parent": "n-df0fb61e",
+      "child": "n-9726a13e",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c3693ead",
+      "parent": "n-df0fb61e",
+      "child": "n-cd7bdde5",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b2f6b932",
+      "parent": "n-df0fb61e",
+      "child": "n-417ec7fd",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d32b94d5",
+      "parent": "n-571d73da",
+      "child": "n-552e0ac3",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c7d76beb",
+      "parent": "n-571d73da",
+      "child": "n-b2348d9f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-da348769",
+      "parent": "n-571d73da",
+      "child": "n-c025b1e8",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2bb1d4f6",
+      "parent": "n-571d73da",
+      "child": "n-42b860d9",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5e491182",
+      "parent": "n-8018702d",
+      "child": "n-33d8763c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0ce5e947",
+      "parent": "n-8018702d",
+      "child": "n-74b0d911",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cc79df8c",
+      "parent": "n-8018702d",
+      "child": "n-e4df03be",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e7b1c334",
+      "parent": "n-8018702d",
+      "child": "n-d5dc0955",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-08d98589",
+      "parent": "n-8018702d",
+      "child": "n-5280eec0",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fbb18123",
+      "parent": "n-8018702d",
+      "child": "n-c1a8b427",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-11d15a3f",
+      "parent": "n-8018702d",
+      "child": "n-cab6c0d1",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f4a8e2d6",
+      "parent": "n-0fa82408",
+      "child": "n-c6d6f16f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-18439c2a",
+      "parent": "n-0fa82408",
+      "child": "n-0786c8c3",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3019c9d5",
+      "parent": "n-8ca4092c",
+      "child": "n-c6d6f16f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-15351749",
+      "parent": "n-8ca4092c",
+      "child": "n-0786c8c3",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-09a8b0af",
+      "parent": "n-7d2df2c0",
+      "child": "n-c6d6f16f",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e08130b7",
+      "parent": "n-7d2df2c0",
+      "child": "n-0786c8c3",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-36a8abe5",
+      "parent": "n-f591ac80",
+      "child": "n-f52d0053",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d5d52e21",
+      "parent": "n-f2213d55",
+      "child": "n-4f7c23a4",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7637d110",
+      "parent": "n-f2213d55",
+      "child": "n-1a8d5f06",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-14c06637",
+      "parent": "n-f2213d55",
+      "child": "n-92f4525e",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c03f8aa8",
+      "parent": "n-ed851562",
+      "child": "n-d20f1730",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c2b9529d",
+      "parent": "n-ed851562",
+      "child": "n-d7ffdb4c",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c6e2a71e",
+      "parent": "n-ed851562",
+      "child": "n-e13994df",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-569bf85c",
+      "parent": "n-ed851562",
+      "child": "n-8255945e",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-621f7e82",
+      "parent": "n-ed851562",
+      "child": "n-db3773a6",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fa6da531",
+      "parent": "n-808039a8",
+      "child": "n-0d8d0847",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-64890e94",
+      "parent": "n-54b44817",
+      "child": "n-c722b8cc",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-38df6f00",
+      "parent": "n-54b44817",
+      "child": "n-9e31f68d",
+      "type": "affiliated",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 시행규칙 [시행 20251125]"
+      ],
+      "metadata": {
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-532f85a0",
+      "parent": "n-364caefd",
+      "child": "n-6d736a60",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-fb6f75f2",
+      "parent": "n-6d736a60",
+      "child": "n-4481f335",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-7d314a9d",
+      "parent": "n-4481f335",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-05747c14",
+      "parent": "n-4481f335",
+      "child": "n-3b01aefc",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b86318bd",
+      "parent": "n-4481f335",
+      "child": "n-d69fbf30",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7b71fe3f",
+      "parent": "n-4481f335",
+      "child": "n-faacece0",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cd6c1406",
+      "parent": "n-4481f335",
+      "child": "n-7d826907",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c8beaff8",
+      "parent": "n-4481f335",
+      "child": "n-7c34e405",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-71ea3832",
+      "parent": "n-4481f335",
+      "child": "n-ab808015",
+      "type": "assistant",
+      "sources": [
+        "행정안전부와 그 소속기관 직제 [시행 20251125]"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-57179a56",
+      "parent": "n-364caefd",
+      "child": "n-0fa82408",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-39348e43",
+      "parent": "n-364caefd",
+      "child": "n-8ca4092c",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-c0e88c41",
+      "parent": "n-364caefd",
+      "child": "n-7d2df2c0",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

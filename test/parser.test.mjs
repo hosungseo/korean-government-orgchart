@@ -1,0 +1,331 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { planPages } from "../src/layout.mjs";
+import { projectOperationalView } from "../src/model.mjs";
+import { parseNameList, parseOrganizationTexts } from "../src/parser.mjs";
+
+const text = `
+시험행정부와 그 소속기관 직제
+제2조(소속기관) 시험행정부장관 소속으로 국가시험연구원 및 행정교육원을 둔다.
+제4조(하부조직) 시험행정부에 운영지원과ㆍ디지털정부실 및 자치행정국을 둔다.
+장관 밑에 대변인 1명을 두고, 차관 밑에 기획조정실장 및 감사관 각 1명을 둔다.
+제5조(대변인) 대변인은 장관을 보좌한다.
+제6조(디지털정부실) 디지털정부실에 인공지능정책국 및 공공데이터국을 둔다.
+인공지능정책국에 인공지능정책과ㆍ서비스혁신과 및 디지털포용팀을 둔다.
+제7조(미래행정추진단) 디지털정부실에 2027년 12월 31일까지 존속하는 한시조직으로 미래행정추진단을 둔다.
+`;
+
+test("직제 문언에서 조직과 관계를 추출한다", () => {
+  const graph = parseOrganizationTexts([text], { asOf: "2025-11-25" });
+  assert.equal(graph.meta.institution, "시험행정부");
+  assert.ok(graph.nodeByName("장관"));
+  assert.ok(graph.nodeByName("차관"));
+  assert.ok(graph.nodeByName("디지털정부실"));
+  assert.ok(graph.nodeByName("인공지능정책국"));
+  assert.ok(graph.nodeByName("인공지능정책과"));
+  assert.equal(graph.nodeByName("대변인").kind, "advisor");
+  assert.equal(graph.nodeByName("국가시험연구원").kind, "affiliated");
+  assert.equal(graph.nodeByName("미래행정추진단").metadata.expires, "2027-12-31");
+
+  const edge = [...graph.edges.values()].find(
+    (candidate) =>
+      graph.nodes.get(candidate.parent)?.name === "디지털정부실" &&
+      graph.nodes.get(candidate.child)?.name === "인공지능정책국",
+  );
+  assert.ok(edge);
+});
+
+test("한국어 열거를 조직명으로 정리한다", () => {
+  assert.deepEqual(parseNameList("정책과ㆍ혁신과 및 디지털소통팀장 각 1명"), [
+    "정책과",
+    "혁신과",
+    "디지털소통팀",
+  ]);
+});
+
+test("자동 레이아웃은 페이지 계획을 만든다", () => {
+  const graph = parseOrganizationTexts([text]);
+  const pages = planPages(graph, { mode: "auto", maxNodes: 12 });
+  assert.ok(pages.length >= 2);
+  assert.equal(pages[0].pageNumber, 1);
+  assert.equal(pages.at(-1).pageCount, pages.length);
+});
+
+test("법령의 약칭과 복수 부기관장을 보존한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험문화부
+@기관장: 장관
+제2조(하부조직) 시험문화부에 문화정책실(이하 "정책실"이라 한다)을 둔다.
+정책실에 문화정책국을 둔다.
+장관 밑에 제1차관 및 제2차관을 둔다.
+`,
+  ]);
+
+  assert.ok(graph.nodeByName("문화정책실"));
+  assert.equal(graph.nodeByName("정책실")?.id, graph.nodeByName("문화정책실")?.id);
+  assert.ok(graph.nodeByName("문화정책국"));
+  assert.equal(graph.findDeputies().length, 2);
+  for (const deputy of graph.findDeputies()) {
+    assert.equal(graph.parentsOf(deputy).some(({ node }) => node.name === "장관"), true);
+  }
+});
+
+test("조문 경계를 넘는 오탐을 막고 재사용 약칭을 문맥별로 해석한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험행정부
+제2조(직무) 제1연구원(이하 "연구원"이라 한다)은 연구 업무를 수행한다.
+제3조(하부조직) 연구원에 분석과를 둔다.
+제4조(직무) 제2연구원(이하 이 장에서 "연구원"이라 한다)은 교육 업무를 수행한다.
+제5조(하부조직) 연구원에 교육과를 둔다.
+제6조(대변인) 대변인은 고위공무원단에 속하는 일반직공무원으로 보한다. 다음 조에서 운영지원과를 둔다.
+`,
+  ]);
+
+  assert.equal(graph.nodeByName("고위공무원단"), undefined);
+  assert.equal(graph.nodeByName("연구원")?.name, "제2연구원");
+  assert.equal(
+    graph.parentsOf("분석과").some(({ node }) => node.name === "제1연구원"),
+    true,
+  );
+  assert.equal(
+    graph.parentsOf("교육과").some(({ node }) => node.name === "제2연구원"),
+    true,
+  );
+});
+
+test("문형이 접미사보다 우선하여 보조기관과 보좌기관을 구분한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제4조(하부조직) 시험부에 정책실 및 독립정책관을 둔다.
+장관 밑에 기획조정실장 및 감사관 각 1명을 둔다.
+정책실에 정책국을 둔다.
+`,
+  ]);
+
+  assert.equal(graph.nodeByName("기획조정실").kind, "advisor");
+  assert.equal(graph.nodeByName("감사관").kind, "advisor");
+  assert.equal(graph.nodeByName("독립정책관").kind, "assistant");
+  assert.equal(
+    graph.parentsOf("기획조정실").some(({ edge, node }) => node.name === "장관" && edge.type === "advisor"),
+    true,
+  );
+  assert.equal(
+    graph.parentsOf("정책국").some(({ edge, node }) => node.name === "정책실" && edge.type === "assistant"),
+    true,
+  );
+});
+
+test("복수차관 소관 열거를 각 차관의 계선으로 배치한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험문화부
+제4조(차관) 시험문화부에 제1차관 및 제2차관을 둔다.
+제1차관은 운영지원과ㆍ문화정책실 및 저작권국의 소관업무에 관하여 장관을 보조한다.
+제2차관은 국민소통실ㆍ체육국 및 관광정책국의 소관업무에 관하여 장관을 보조한다.
+`,
+  ]);
+
+  assert.equal(graph.parentsOf("문화정책실").some(({ node }) => node.name === "제1차관"), true);
+  assert.equal(graph.parentsOf("관광정책국").some(({ node }) => node.name === "제2차관"), true);
+  assert.equal(graph.parentsOf("관광정책국").some(({ node }) => node.name === "제1차관"), false);
+});
+
+test("소속기관 유형과 한시조직·한시정원을 분리한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험행정부
+제2조(소속기관) 장관의 관장 사무를 지원하기 위하여 장관 소속으로 국가시험박물관을 둔다.
+소관 사무를 분장하기 위하여 장관 소속으로 북부시험사무소를 둔다.
+「책임운영기관의 설치ㆍ운영에 관한 법률」에 따라 장관 소속의 책임운영기관으로 국가시험연구원을 둔다.
+제20조(한시조직) 시험행정부 정책실에 2028년 2월 29일까지 존속하는 한시조직으로 신제도과를 둔다.
+제21조(한시정원) 신규 사업을 위하여 2027년 12월 31일까지 별표 5에 따른 한시정원을 시험행정부에 둔다.
+`,
+  ]);
+
+  assert.equal(graph.nodeByName("국가시험박물관").metadata.affiliationType, "subsidiary");
+  assert.equal(graph.nodeByName("북부시험사무소").metadata.affiliationType, "special-local");
+  assert.equal(graph.nodeByName("국가시험연구원").metadata.responsible, true);
+  assert.equal(graph.nodeByName("신제도과").metadata.expires, "2028-02-29");
+  assert.equal(graph.nodeByName("한시정원"), undefined);
+  assert.deepEqual(graph.meta.temporaryHeadcounts.map(({ target, expires }) => ({ target, expires })), [
+    { target: "시험행정부", expires: "2027-12-31" },
+  ]);
+});
+
+test("직무등급·특정직 보직·겸직·합의제 구성을 메타데이터로 보존한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험위원회
+제2조(구성) 위원회는 위원장 1명과 부위원장 1명을 포함한 11명의 위원으로 구성하며, 그 중 5명은 비상임위원으로 한다.
+제3조(사무처) 위원회의 사무를 처리하기 위하여 위원회에 사무처를 둔다.
+사무처장 1명을 두되, 부위원장 1명이 겸직한다.
+제4조(조사관리관) 조사관리관은 고위공무원단에 속하는 임기제공무원으로 보하되, 그 직위의 직무등급은 나등급으로 한다.
+제5조(위원장) 위원장은 소방총감으로 보한다.
+`,
+  ]);
+
+  assert.deepEqual(
+    {
+      total: graph.meta.commissionComposition.total,
+      standing: graph.meta.commissionComposition.standing,
+      nonStanding: graph.meta.commissionComposition.nonStanding,
+    },
+    { total: 11, standing: 4, nonStanding: 5 },
+  );
+  assert.equal(graph.nodeByName("상임위원").metadata.count, 4);
+  assert.equal(graph.nodeByName("사무처").metadata.concurrentWith, "부위원장");
+  assert.equal(graph.nodeByName("조사관리관").metadata.grade, "나");
+  assert.equal(graph.nodeByName("조사관리관").metadata.employmentType, "임기제");
+  assert.equal(graph.nodeByName("위원장").metadata.specificRank, "소방총감");
+});
+
+test("조직통칙 위반 가능성을 검증 결과로 남긴다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+@관계: 차관보 > 지원과
+@관계: 정책실 > 혁신실
+`,
+  ]);
+
+  assert.equal(graph.meta.validation.some((message) => message.includes("차관보 밑")), true);
+  assert.equal(graph.meta.validation.some((message) => message.includes("실 밑에 실")), true);
+});
+
+test("시행규칙의 보좌기관 하부조직과 팀을 보좌 계열로 보존한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(하부조직) 장관 밑에 대변인 1명을 둔다.
+제3조(대변인) 대변인 밑에 홍보담당관ㆍ안전소통담당관 및 디지털소통팀장 각 1명을 두되, 디지털소통팀장은 대변인을 보좌한다.
+`,
+  ]);
+
+  for (const name of ["홍보담당관", "안전소통담당관", "디지털소통팀"]) {
+    assert.equal(graph.nodeByName(name).kind, "advisor");
+    assert.equal(
+      graph.parentsOf(name).some(({ edge, node }) => node.name === "대변인" && edge.type === "advisor"),
+      true,
+    );
+  }
+});
+
+test("시행규칙의 정책관 소관 과는 법정 설치 계선과 별도로 기록한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(시험실) 시험실장 밑에 지역정책관을 둔다.
+시험실에 지역총괄과ㆍ지역진흥과 및 입지과를 둔다.
+① 지역총괄과장은 다음 사항을 분장한다.
+1. 지역 산업 정책 총괄
+2. 그 밖에 지역정책관 내 다른 과의 주관에 속하지 않는 사항
+② 지역진흥과장은 다음 사항을 분장한다.
+1. 지역 진흥 사업
+`,
+  ]);
+
+  // "시험실에 …과를 둔다"는 법정 설치관계로 남는다.
+  assert.equal(
+    graph.parentsOf("지역총괄과").some(({ edge, node }) => node.name === "시험실" && edge.type === "assistant"),
+    true,
+  );
+  // "지역정책관 내 다른 과"는 별도의 소관관계다.
+  assert.deepEqual(graph.nodeByName("지역총괄과").metadata.jurisdiction, {
+    parent: "지역정책관",
+    evidence: "explicit-duty-clause",
+    legalBasis: "정책관 내 다른 과의 주관·소관",
+    source: "입력 1",
+  });
+  assert.deepEqual(graph.meta.jurisdictionRelations, [
+    {
+      parent: "지역정책관",
+      child: "지역총괄과",
+      source: "입력 1",
+      evidence: "explicit-duty-clause",
+      legalBasis: "정책관 내 다른 과의 주관·소관",
+    },
+  ]);
+  // 인접한 과는 문언만으로 추정해 붙이지 않는다.
+  assert.equal(graph.nodeByName("지역진흥과").metadata.jurisdiction, undefined);
+});
+
+test("@소관 지시문으로 확인된 운영 소관 묶음을 보강한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+@소관: 지역정책관 > 지역총괄과ㆍ지역진흥과 [공식 조직표]
+제2조(시험실) 시험실장 밑에 지역정책관을 둔다.
+시험실에 지역총괄과ㆍ지역진흥과를 둔다.
+`,
+  ]);
+
+  assert.equal(graph.nodeByName("지역총괄과").metadata.jurisdiction.parent, "지역정책관");
+  assert.equal(graph.nodeByName("지역진흥과").metadata.jurisdiction.source, "공식 조직표");
+  assert.equal(graph.meta.jurisdictionRelations.length, 2);
+});
+
+test("운영형 투영은 법정 설치계선을 보존한 채 소관 관계만 재배치한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+@소관: 지역정책관 > 지역총괄과 [공식 조직표]
+제2조(시험실) 시험실장 밑에 지역정책관을 둔다.
+시험실에 지역총괄과를 둔다.
+`,
+  ]);
+  const operational = projectOperationalView(graph);
+
+  assert.equal(
+    graph.parentsOf("지역총괄과").some(({ edge, node }) => node.name === "시험실" && edge.type === "assistant"),
+    true,
+  );
+  assert.equal(
+    operational.parentsOf("지역총괄과").some(({ edge, node }) => node.name === "지역정책관" && edge.type === "jurisdiction"),
+    true,
+  );
+  assert.equal(
+    operational.parentsOf("지역총괄과").some(({ node }) => node.name === "시험실"),
+    false,
+  );
+  assert.equal(operational.meta.renderView, "operational");
+});
+
+test("보직 조문의 연구·지도·전문직·전문경력·특정직 표식을 보존한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험청
+제2조(하부조직) 시험청에 연구과ㆍ지도과ㆍ전문직과ㆍ전문과 및 소방과를 둔다.
+제3조(보직) 연구과장은 연구관으로, 지도과장은 지도관으로, 전문직과장은 전문직공무원으로, 전문과장은 전문경력관으로, 소방과장은 특정직공무원으로 보한다.
+`,
+  ]);
+  assert.deepEqual(graph.nodeByName("연구과").metadata.staffCategories, ["연구직"]);
+  assert.deepEqual(graph.nodeByName("지도과").metadata.staffCategories, ["지도직"]);
+  assert.deepEqual(graph.nodeByName("전문직과").metadata.staffCategories, ["전문직"]);
+  assert.deepEqual(graph.nodeByName("전문과").metadata.staffCategories, ["전문경력관"]);
+  assert.deepEqual(graph.nodeByName("소방과").metadata.staffCategories, ["특정직"]);
+});
+
+test("시행규칙 보직 범위·혼합보직·별표 요구를 메타데이터로 남긴다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험청
+제2조(하부조직) 시험청에 정책과 및 구급의료팀을 둔다.
+제3조(보직) 각 과장은 부이사관 또는 서기관으로 보한다. 구급의료팀장은 과학기술서기관ㆍ의무사무관ㆍ소방정 또는 소방령으로 보한다.
+제4조(현장조직) 각 세무서에 두는 과 및 이에 상당하는 담당관은 별표 5와 같다. 직급별 정원은 별표 7과 같다.
+`,
+  ]);
+
+  assert.equal(graph.nodeByName("정책과").metadata.gradeRange, "3.4급");
+  assert.equal(graph.nodeByName("구급의료팀").metadata.gradeRange, "4.5급");
+  assert.equal(graph.nodeByName("구급의료팀").metadata.mixedAppointment, true);
+  assert.deepEqual(
+    graph.meta.annexRequirements.map(({ type, annex }) => ({ type, annex })),
+    [
+      { type: "organization-matrix", annex: "별표 5" },
+      { type: "headcount", annex: "별표 7" },
+    ],
+  );
+});

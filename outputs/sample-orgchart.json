@@ -1,0 +1,1037 @@
+{
+  "meta": {
+    "institution": "행정혁신부",
+    "title": "행정혁신부",
+    "asOf": "2025-11-25",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "examples/sample-law.txt"
+    ]
+  },
+  "rootId": "n-eca346d6",
+  "nodes": [
+    {
+      "id": "n-eca346d6",
+      "name": "행정혁신부",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-b2cb730a",
+      "name": "국가행정연구원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-3496e32d",
+      "name": "지방행정교육원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false
+      },
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-a4fafae2",
+      "name": "장관정책보좌관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-4481f335",
+      "name": "차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt",
+        "사용자 지시문"
+      ]
+    },
+    {
+      "id": "n-7da5dac3",
+      "name": "기획조정실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-7ce28e1b",
+      "name": "감사관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt",
+        "사용자 지시문"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-4ffb2316",
+      "name": "디지털정부실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-ba6d977a",
+      "name": "자치행정국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-59587b29",
+      "name": "재난안전본부",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-67f14651",
+      "name": "홍보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-ad88cef8",
+      "name": "디지털소통팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-f1907300",
+      "name": "정책기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-d35fd50b",
+      "name": "비상안전기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-dce1c846",
+      "name": "인공지능정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-fe39e424",
+      "name": "공공데이터국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-6de43f89",
+      "name": "인공지능정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-3589572c",
+      "name": "공공서비스혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-7e692e90",
+      "name": "디지털포용과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-841800bb",
+      "name": "데이터정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-e5653bfc",
+      "name": "데이터분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-946d4490",
+      "name": "정보보호팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-24439513",
+      "name": "자치분권과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-f55de84e",
+      "name": "지방인사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-07bfd9a9",
+      "name": "지역혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-503ea92a",
+      "name": "안전정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-32c62895",
+      "name": "재난대응국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-22489e6b",
+      "name": "복구지원국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-ef17ce5a",
+      "name": "안전기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-59acffbc",
+      "name": "예방정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-b8e24bc0",
+      "name": "재난정보과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-8fdbc51a",
+      "name": "자연재난대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-8f4167d2",
+      "name": "사회재난대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-b861413d",
+      "name": "상황관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-8478d449",
+      "name": "미래행정추진단",
+      "kind": "temporary",
+      "rank": 4,
+      "metadata": {
+        "temporary": true,
+        "expires": "2027-12-31"
+      },
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-95341872",
+      "name": "미래전략과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    },
+    {
+      "id": "n-6569ce3f",
+      "name": "제도개선과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "examples/sample-law.txt"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-0cfd966b",
+      "parent": "n-eca346d6",
+      "child": "n-b2cb730a",
+      "type": "affiliated",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-3aa55925",
+      "parent": "n-eca346d6",
+      "child": "n-3496e32d",
+      "type": "affiliated",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-ddbf5eed",
+      "parent": "n-6d736a60",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d24d5124",
+      "parent": "n-6d736a60",
+      "child": "n-a4fafae2",
+      "type": "advisor",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-6a94cd83",
+      "parent": "n-4481f335",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-576e9be6",
+      "parent": "n-4481f335",
+      "child": "n-7ce28e1b",
+      "type": "advisor",
+      "sources": [
+        "examples/sample-law.txt",
+        "사용자 지시문"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-011be0c0",
+      "parent": "n-e618142f",
+      "child": "n-67f14651",
+      "type": "advisor",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e5da7c49",
+      "parent": "n-e618142f",
+      "child": "n-ad88cef8",
+      "type": "advisor",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-49d09c81",
+      "parent": "n-7da5dac3",
+      "child": "n-f1907300",
+      "type": "advisor",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3020239c",
+      "parent": "n-7da5dac3",
+      "child": "n-d35fd50b",
+      "type": "advisor",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-d309afe7",
+      "parent": "n-4ffb2316",
+      "child": "n-dce1c846",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4055ff2f",
+      "parent": "n-4ffb2316",
+      "child": "n-fe39e424",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f8da6c7c",
+      "parent": "n-dce1c846",
+      "child": "n-6de43f89",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-134c5971",
+      "parent": "n-dce1c846",
+      "child": "n-3589572c",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-31fc6028",
+      "parent": "n-dce1c846",
+      "child": "n-7e692e90",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4311f8e0",
+      "parent": "n-fe39e424",
+      "child": "n-841800bb",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-28067180",
+      "parent": "n-fe39e424",
+      "child": "n-e5653bfc",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a685b667",
+      "parent": "n-fe39e424",
+      "child": "n-946d4490",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-343bdd9c",
+      "parent": "n-4ffb2316",
+      "child": "n-6de43f89",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-386a8b11",
+      "parent": "n-4ffb2316",
+      "child": "n-3589572c",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2c1e9548",
+      "parent": "n-4ffb2316",
+      "child": "n-7e692e90",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4bee5cd8",
+      "parent": "n-4ffb2316",
+      "child": "n-841800bb",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ae8acc58",
+      "parent": "n-4ffb2316",
+      "child": "n-e5653bfc",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b6013c3f",
+      "parent": "n-4ffb2316",
+      "child": "n-946d4490",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c29d14bf",
+      "parent": "n-ba6d977a",
+      "child": "n-24439513",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8e9c7a28",
+      "parent": "n-ba6d977a",
+      "child": "n-f55de84e",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1f182002",
+      "parent": "n-ba6d977a",
+      "child": "n-07bfd9a9",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-17bc655c",
+      "parent": "n-59587b29",
+      "child": "n-503ea92a",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0e6080ea",
+      "parent": "n-59587b29",
+      "child": "n-32c62895",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2d123d14",
+      "parent": "n-59587b29",
+      "child": "n-22489e6b",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-79b67564",
+      "parent": "n-503ea92a",
+      "child": "n-ef17ce5a",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3711053c",
+      "parent": "n-503ea92a",
+      "child": "n-59acffbc",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d35c1f45",
+      "parent": "n-503ea92a",
+      "child": "n-b8e24bc0",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8a5f3829",
+      "parent": "n-32c62895",
+      "child": "n-8fdbc51a",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9f0706cb",
+      "parent": "n-32c62895",
+      "child": "n-8f4167d2",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fc3b824c",
+      "parent": "n-32c62895",
+      "child": "n-b861413d",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3d2a0183",
+      "parent": "n-59587b29",
+      "child": "n-ef17ce5a",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-01239c57",
+      "parent": "n-59587b29",
+      "child": "n-59acffbc",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-153d7bf2",
+      "parent": "n-59587b29",
+      "child": "n-b8e24bc0",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0a68d9f0",
+      "parent": "n-59587b29",
+      "child": "n-8fdbc51a",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6bc4b7fe",
+      "parent": "n-59587b29",
+      "child": "n-8f4167d2",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-572b7a75",
+      "parent": "n-59587b29",
+      "child": "n-b861413d",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6dd24ee9",
+      "parent": "n-4ffb2316",
+      "child": "n-8478d449",
+      "type": "temporary",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-7b1fb436",
+      "parent": "n-8478d449",
+      "child": "n-95341872",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f2353f06",
+      "parent": "n-8478d449",
+      "child": "n-6569ce3f",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-22b8dda4",
+      "parent": "n-eca346d6",
+      "child": "n-6d736a60",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-fb6f75f2",
+      "parent": "n-6d736a60",
+      "child": "n-4481f335",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-7d314a9d",
+      "parent": "n-4481f335",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-db5df199",
+      "parent": "n-4481f335",
+      "child": "n-4ffb2316",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-be2bb878",
+      "parent": "n-4481f335",
+      "child": "n-ba6d977a",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4c6cdcf4",
+      "parent": "n-4481f335",
+      "child": "n-59587b29",
+      "type": "assistant",
+      "sources": [
+        "examples/sample-law.txt"
+      ],
+      "metadata": {
+        "legalBasis": "에 둔다"
+      }
+    }
+  ]
+}

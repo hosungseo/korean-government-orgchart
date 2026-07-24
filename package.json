@@ -1,0 +1,14 @@
+{
+  "name": "korean-government-orgchart",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "대한민국 행정기관 직제 문언을 조직도 PPTX/SVG로 변환하는 도구",
+  "bin": {
+    "orgchart": "./src/cli.mjs"
+  },
+  "scripts": {
+    "test": "node --test",
+    "demo": "node src/cli.mjs build --input examples/sample-law.txt --out outputs/sample-orgchart.pptx --svg outputs/sample-orgchart.svg --json outputs/sample-orgchart.json --preview-dir outputs/sample-preview"
+  }
+}

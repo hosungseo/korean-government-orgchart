@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="대한민국 행정기관 직제 문언을 조직도 구조로 읽는 브라우저 데모">
+<meta name="theme-color" content="#14233b">
+<title>직제 문언 → 기구도 생성기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{--ink:#16202f;--navy:#14233b;--blue:#2f5787;--line:#dde3ec;--muted:#6b7789}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f4f2ed;color:var(--ink);font-family:Pretendard,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}a:hover{color:var(--navy)}
+.shell{max-width:1240px;margin:0 auto;padding:0 40px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 40px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;letter-spacing:-.02em;color:var(--navy)}
+.mark{width:26px;height:26px;border:1.5px solid var(--navy);position:relative}
+.mark::before,.mark::after{content:"";position:absolute;background:var(--navy)}
+.mark::before{left:11px;top:-1px;width:1.5px;height:14px}
+.mark::after{left:11px;top:12px;width:14px;height:1.5px}
+.nav{display:flex;align-items:center;gap:26px;font-size:13px;color:#5b6779}
+.nav a{color:#5b6779}.nav a.gh{font-weight:600;color:var(--navy)}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;padding:76px 40px 64px}
+.eyebrow{display:inline-flex;padding:4px 10px;border:1px solid #cdd7e5;background:#fff;font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--blue);text-transform:uppercase}
+h1{margin:20px 0 18px;font-family:'Noto Serif KR',Georgia,serif;font-weight:700;font-size:60px;line-height:1.12;letter-spacing:-.045em;color:var(--navy);text-wrap:balance}
+.lede{margin:0;max-width:31em;font-size:16.5px;line-height:1.75;color:#4c5869;text-wrap:pretty}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 20px;border:1px solid #cdd7e5;background:#fff;color:var(--navy);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+.stats-hero{display:flex;gap:36px;margin-top:40px;padding-top:22px;border-top:1px solid var(--line)}
+.stats-hero b{display:block;font-family:'Noto Serif KR',Georgia,serif;font-size:24px;font-weight:700;color:var(--navy)}
+.stats-hero span{font-size:11.5px;color:var(--muted)}
+.herocard{padding:20px;background:#fff;border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(20,35,59,.28)}
+.herocard .hd{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid #e6ebf2}
+.herocard .hd b{font-family:'Noto Serif KR',Georgia,serif;font-size:17px;color:var(--navy)}
+.herocard .hd span{font-size:10.5px;color:#8290a3}
+.spine{display:flex;flex-direction:column;align-items:center;gap:7px;padding:26px 0 6px}
+.hbox{min-width:132px;padding:8px 14px;border:1.5px solid var(--blue);background:#dfe9f6;color:var(--navy);text-align:center;font-size:12.5px;font-weight:700}
+.vline{width:1px;background:#9aa6b6}
+.section-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:18px}
+.section-hd h2{margin:0;font-family:'Noto Serif KR',Georgia,serif;font-size:28px;font-weight:700;letter-spacing:-.03em;color:var(--navy)}
+.section-hd p{margin:7px 0 0;font-size:13.5px;color:var(--muted)}
+.tabs{display:flex;gap:6px;padding:3px;border:1px solid var(--line);background:#fff}
+.tab{height:30px;padding:0 14px;border:0;background:#fff;color:#5b6779;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer}
+.tab.on{background:var(--navy);color:#fff}
+.workbench{display:grid;grid-template-columns:352px 1fr;border:1px solid var(--line);background:#fff;box-shadow:0 30px 60px -34px rgba(20,35,59,.22)}
+.panel{padding:24px;border-right:1px solid var(--line);background:#fbfaf7}
+.kicker{font-size:10.5px;font-weight:700;letter-spacing:.16em;color:var(--blue)}
+.panel h3{margin:9px 0 6px;font-size:19px;font-weight:700;letter-spacing:-.03em;color:var(--navy)}
+.panel p{margin:0 0 14px;font-size:12px;line-height:1.7;color:var(--muted)}
+.panel code{padding:1px 4px;background:#eef1f6;font-size:11px}
+textarea{width:100%;height:352px;padding:14px;border:1px solid #cdd7e5;outline:none;resize:vertical;color:#27364d;background:#fff;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;line-height:1.8}
+textarea:focus{border-color:var(--blue)}
+.panel .row{display:flex;gap:8px;margin-top:12px}
+.panel .row .btn{flex:1;height:40px;font-size:12.5px}
+.status{min-height:20px;margin-top:12px;font-size:11.5px;color:var(--muted)}
+.status.err{color:#a33b3b}
+.chartwrap{min-width:0;padding:24px;background:linear-gradient(#fff,#fbfbfd)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding-bottom:14px;border-bottom:1px solid #e6ebf2}
+.toolbar b{font-family:'Noto Serif KR',Georgia,serif;font-size:18px;color:var(--navy)}
+.toolbar .meta{display:flex;align-items:center;gap:14px;font-size:11px;color:var(--muted)}
+.scroll{overflow:auto;padding:22px 8px;min-height:520px;background:#eaedf3}
+.sheet{min-width:700px;background:#fff;border:1px solid #b9c3d1;padding:26px 30px 20px;box-shadow:0 10px 24px -18px rgba(20,35,59,.5)}
+.sheet+.sheet{margin-top:20px}
+.sheet-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-bottom:14px;border-bottom:2px solid var(--navy)}
+.sheet-hd .title{font-family:'Noto Serif KR',Georgia,serif;font-size:23px;font-weight:700;letter-spacing:.09em;color:var(--navy)}
+.sheet-hd .sub{margin-top:5px;font-size:11px;color:#7b8798}
+.tally{display:flex;border:1px solid #a9b4c3}
+.tally>div{min-width:54px;border-left:1px solid var(--line)}
+.tally .k{padding:3px 9px;border-bottom:1px solid var(--line);background:#f2f5f9;text-align:center;font-size:10px;color:#5b6779}
+.tally .v{padding:5px 9px;text-align:center;font-family:'Noto Serif KR',Georgia,serif;font-size:14px;font-weight:700;color:var(--navy)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:22px;padding-top:12px;border-top:1px solid var(--navy);font-size:10px;color:#7b8798}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:16px;height:9px;border:1px solid #b3bdcc;background:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.cards article{padding:26px;background:#fff}
+.cards .n{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--blue)}
+.cards h3{margin:14px 0 8px;font-family:'Noto Serif KR',Georgia,serif;font-size:18px;font-weight:700;color:var(--navy)}
+.cards p{margin:0;font-size:13px;line-height:1.75;color:#5b6779;text-wrap:pretty}
+footer{padding:24px 40px 44px;border-top:1px solid var(--line)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:12px;color:#8290a3}
+@media (max-width:1000px){.hero{grid-template-columns:1fr;gap:28px}.workbench{grid-template-columns:1fr}.panel{border-right:0;border-bottom:1px solid var(--line)}h1{font-size:44px}.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./"><span class="mark" aria-hidden="true"></span><span>직제 문언 → 기구도</span></a>
+  <nav class="nav" aria-label="주요 메뉴">
+    <a href="#demo">브라우저 데모</a>
+    <a href="#rules">판정 규칙</a>
+    <a class="gh" href="https://github.com/hosungseo/korean-government-orgchart" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <div>
+    <div class="eyebrow">대통령령 · 부령 파서</div>
+    <h1>법령 문장을<br>기구도로 읽습니다.</h1>
+    <p class="lede">직제와 직제 시행규칙의 설치 문언을 보조기관·보좌기관·소속기관 관계로 판정하고, 편집 가능한 PPTX·SVG·JSON으로 내보내는 오픈 도구입니다. 법정 설치계선과 운영상 소관은 분리해 보존합니다.</p>
+    <div class="actions">
+      <a class="btn primary" href="#demo">샘플 문언 실행</a>
+      <a class="btn" href="https://github.com/hosungseo/korean-government-orgchart" target="_blank" rel="noreferrer">소스 보기</a>
+    </div>
+    <div class="stats-hero">
+      <div><b>66</b><span>대조한 중앙행정기관 기구도</span></div>
+      <div><b>195</b><span>검증 지면</span></div>
+      <div><b>3</b><span>출력 형식 PPTX·SVG·JSON</span></div>
+    </div>
+  </div>
+  <div class="herocard">
+    <div class="hd"><b>산업통상부</b><span>2026. 7. 24. 기준</span></div>
+    <div class="spine">
+      <div class="hbox">장관</div>
+      <div style="position:relative;display:flex;justify-content:center;width:100%">
+        <div class="vline" style="height:34px"></div>
+        <div style="position:absolute;top:4px;left:calc(50% + 74px);display:flex;align-items:center;gap:6px">
+          <div style="width:16px;border-top:1px dashed #9aa6b6"></div>
+          <div style="padding:5px 10px;border:1px dashed #9aa6b6;background:#f7f9fc;font-size:10.5px;white-space:nowrap;color:#3d5679">대변인 · 기획조정실장</div>
+        </div>
+      </div>
+      <div class="hbox">차관</div>
+      <div class="vline" style="height:20px"></div>
+      <div style="display:flex;gap:8px">
+        <div style="padding:8px 11px;border:1px solid #b3bdcc;background:#fff;font-size:11px;font-weight:600">산업정책실</div>
+        <div style="padding:8px 11px;border:1px solid #b3bdcc;background:#fff;font-size:11px;font-weight:600">산업성장실</div>
+        <div style="padding:8px 11px;border:1px solid #b3bdcc;background:#fff;font-size:11px;font-weight:600">산업안보실</div>
+      </div>
+      <div style="margin-top:14px;padding:7px 11px;border:1px solid #3c7a44;background:#e2efe1;font-size:11px;font-weight:600;color:#1f5527">국가기술표준원 · 소속기관</div>
+    </div>
+  </div>
+</section>
+
+<section id="demo" class="shell" style="padding-bottom:96px">
+  <div class="section-hd">
+    <div>
+      <h2>문언을 붙여넣어 보세요</h2>
+      <p>브라우저에서 도는 축약 파서입니다. 전체 법적 파서와 PPTX 출력은 CLI에서 실행합니다.</p>
+    </div>
+    <div class="tabs"><button class="tab on" id="tabLegal" type="button">법정 설치계선</button><button class="tab" id="tabOper" type="button">운영상 소관</button></div>
+  </div>
+  <div class="workbench">
+    <div class="panel">
+      <div class="kicker">STEP 01 · INPUT</div>
+      <h3>직제 문언</h3>
+      <p>실·국·관·과와 보좌·소속기관 설치 문형을 한 줄씩 넣습니다. <code>@기관</code> <code>@소관</code> 지시문도 읽습니다.</p>
+      <textarea id="lawText" spellcheck="false"></textarea>
+      <div class="row"><button class="btn primary" id="parseBtn" type="button">기구도 생성</button><button class="btn" id="resetBtn" type="button">예시로 초기화</button></div>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+    </div>
+    <div class="chartwrap">
+      <div class="toolbar">
+        <div style="display:flex;align-items:baseline;gap:10px"><b id="chartTitle">산업통상부</b><span style="font-size:11px;color:#8290a3" id="viewLabel"></span></div>
+        <div class="meta">
+          <span>노드 <b id="nodeStat" style="font-family:inherit;font-size:11px;color:#16202f">0</b></span>
+          <span>계선 <b id="edgeStat" style="font-family:inherit;font-size:11px;color:#16202f">0</b></span>
+          <span>소관 <b id="jurStat" style="font-family:inherit;font-size:11px;color:#16202f">0</b></span>
+          <button class="btn" id="downloadBtn" type="button" style="height:30px;padding:0 12px;font-size:11px">SVG 저장</button>
+        </div>
+      </div>
+      <div class="scroll" id="sheets"></div>
+    </div>
+  </div>
+</section>
+
+<section id="rules" class="shell" style="padding-bottom:100px">
+  <div style="margin-bottom:20px">
+    <h2 style="margin:0;font-family:'Noto Serif KR',Georgia,serif;font-size:28px;font-weight:700;letter-spacing:-.03em;color:#14233b">판정은 접미사보다 문형에서 시작합니다</h2>
+    <p style="margin:7px 0 0;font-size:13.5px;color:#6b7789">이름이 실장이어도 “밑에 둔다”면 보좌기관입니다.</p>
+  </div>
+  <div class="cards">
+    <article><div class="n">01 · LINE</div><h3>“X에 A를 둔다”</h3><p>A는 X의 보조기관입니다. 실·국·본부·관·과를 실선 계선으로 잇습니다. 다만 “장관 소속으로 … 지원하기 위하여”가 붙으면 본부라는 이름이어도 부속기관으로 분리합니다.</p></article>
+    <article><div class="n">02 · STAFF</div><h3>“Y 밑에 D를 둔다”</h3><p>D는 Y의 보좌기관입니다. 기획조정실장·대변인처럼 계선 이름을 가진 직위도 문형이 우선합니다.</p></article>
+    <article><div class="n">03 · OPERATING</div><h3>“정책관 내 다른 과”</h3><p>관도 과·담당관·팀을 거느립니다. 시행규칙 업무분장상 소관은 법정 설치계선과 분리해 운영형에서만 점선으로 얹습니다.</p></article>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="foot">
+    <span>직제 문언 → 기구도 생성기 · 조직도 초안·분석 도구이며 법률 자문이 아닙니다.</span>
+    <span style="display:flex;gap:14px"><a href="https://github.com/hosungseo/korean-government-orgchart" target="_blank" rel="noreferrer">GitHub</a><a href="https://github.com/hosungseo/korean-government-orgchart/blob/main/docs/drafting-rulebook.md" target="_blank" rel="noreferrer">작도 규칙집</a></span>
+  </div>
+</footer>
+
+<script>
+const EXAMPLE = `@기관: 산업통상부
+@소관: 산업정책관 > 산업정책과ㆍ기업정책과 [공식 조직표 2026-07-24]
+제4조 산업통상부에 산업정책실ㆍ산업성장실 및 산업자원안보실을 둔다.
+산업정책실에 산업정책관ㆍ지역경제정책관 및 산업정책과ㆍ기업정책과를 둔다.
+산업성장실에 산업기술융합정책관 및 첨단산업정책관을 둔다.
+산업성장실에 산업기술융합정책과ㆍ첨단산업정책과를 둔다.
+산업자원안보실에 자원산업정책관 및 산업공급망정책관을 둔다.
+산업자원안보실에 자원산업정책과ㆍ산업공급망정책과를 둔다.
+장관 밑에 대변인 1명을 둔다.
+차관 밑에 기획조정실장 및 감사관 각 1명을 둔다.
+장관의 관장 사무를 지원하기 위하여 장관 소속으로 국가기술표준원을 둔다.`;
+
+const $ = (s) => document.querySelector(s);
+const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+const state = { model: null, view: "legal" };
+
+/* ---------- 문형 파서 ---------- */
+const splitNames = (value) => value
+  .replace(/\s*각\s*\d+\s*명(?:씩)?/g, "").replace(/\s*\d+\s*명/g, "")
+  .split(/ㆍ|·|,|\s+및\s+/)
+  .map((i) => i.trim().replace(/^(?:그리고|및)\s*/, "").replace(/[을를]$/, ""))
+  .filter((i) => i && !/^(?:기관|위원|정원|공무원)$/.test(i));
+const cleanParent = (value) => {
+  let p = value.replace(/^.*?\)\s*/, "").trim().split(/\s+/).at(-1) || value;
+  if (/^(?:장관|차관|처장|청장|위원장|부위원장|차장)$/.test(p)) return p;
+  return p.replace(/(실장|국장|과장|팀장|본부장|단장|관장|원장)$/, (_, s) => s.slice(0, -1));
+};
+const markerFor = (n) => /연구/.test(n) ? "연" : /지도/.test(n) ? "지" : /전문/.test(n) ? "전" : "";
+
+function parse(text) {
+  const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+  let agency = lines.find((l) => l.startsWith("@기관:"))?.slice(4).trim();
+  if (!agency) agency = (text.match(/이\s*영은\s*([가-힣0-9]+?(?:부|처|청|위원회))/) || [])[1] || "행정기관";
+  const nodes = new Map(); const edges = []; const jurisdiction = [];
+  const get = (name, kind = "line") => {
+    if (!name || name.length < 2) return null;
+    if (!nodes.has(name)) nodes.set(name, { name, kind, children: [], staff: [], parent: null, marker: markerFor(name) });
+    const n = nodes.get(name);
+    if (kind === "affil" || kind === "staff") n.kind = kind;
+    return n;
+  };
+  const attach = (pn, cn, rel) => {
+    const p = get(pn); const kind = rel === "staff" ? "staff" : rel === "affiliated" ? "affil" : "line";
+    const c = get(cn, kind);
+    if (!p || !c || p.name === c.name) return;
+    if (!edges.some((e) => e.parent === p.name && e.child === c.name && e.type === rel)) edges.push({ parent: p.name, child: c.name, type: rel });
+    c.parent ||= p.name;
+    if (rel === "staff") p.staff.push(c.name); else p.children.push(c.name);
+  };
+  get(agency, "root");
+  for (const line of lines) {
+    if (line.startsWith("@기관:") || line.startsWith("@소관:")) {
+      if (line.startsWith("@소관:")) {
+        const m = line.match(/@소관:\s*(.+?)\s*>\s*(.+?)(?:\s*\[|$)/);
+        if (m) splitNames(m[2]).forEach((c) => jurisdiction.push({ parent: m[1].trim(), child: c }));
+      }
+      continue;
+    }
+    const staff = line.match(/(.+?)\s*밑에\s+(.+?)(?:을|를)?\s*(?:둔다|두며|두되)(?:[.。]|$)/);
+    if (staff) { splitNames(staff[2]).forEach((c) => attach(cleanParent(staff[1]), c, "staff")); continue; }
+    const aff = line.match(/(?:장관|청장|처장|위원장)[^.]*(?:소속으로|소속의 책임운영기관으로)\s+(.+?)(?:을|를)\s*둔다/);
+    if (aff) { splitNames(aff[1]).forEach((c) => attach(agency, c, "affiliated")); continue; }
+    const inst = line.match(/(.+?)에\s+(.+?)(?:을|를)\s*(?:둔다|두며|두되)(?:[.。]|$)/);
+    if (inst) { const p = cleanParent(inst[1]); splitNames(inst[2]).forEach((c) => attach(p || agency, c, "line")); }
+  }
+  const headName = /위원회$/.test(agency) ? "위원장" : /청$/.test(agency) ? "청장" : /처$/.test(agency) ? "처장" : "장관";
+  const deputyName = /위원회$/.test(agency) ? "부위원장" : /(?:청|처)$/.test(agency) ? "차장" : "차관";
+  get(headName, "head"); get(deputyName, "head");
+  [...nodes.values()].filter((n) => n.name !== agency && !n.parent && ![headName, deputyName].includes(n.name))
+    .forEach((n) => attach(deputyName, n.name, "line"));
+  attach(agency, headName, "line"); attach(headName, deputyName, "line");
+  for (const r of jurisdiction) { const p = get(r.parent), c = get(r.child); if (p && c) c.jurisdiction = p.name; }
+  return { agency, headName, deputyName, nodes, edges, jurisdiction };
+}
+
+/* ---------- 상자 규칙 ---------- */
+const REL = "position:relative;";
+const BOX_GROUP = REL + "padding:7px 10px;border:1px solid #8e9aab;border-left:3px solid #2f5787;background:#fff;font-size:11.5px;font-weight:700;color:#16202f";
+const BOX = REL + "padding:6px 9px 6px 11px;border:1px solid #d6dce5;background:#fbfcfd;font-size:10.5px;font-weight:500;color:#3d4a5c";
+const BOX_STAFF = REL + "padding:6px 9px;border:1px dashed #9aa6b6;background:#f7f9fc;font-size:10.5px;color:#3d5679";
+const BOX_OPER = REL + "padding:6px 9px;border:1px dashed #2f5787;background:#eef4fb;font-size:10.5px;font-weight:600;color:#2f5787";
+const V_BASE = "height:28px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:0 8px;text-align:center;position:relative;";
+const V_GROUP = V_BASE + "border:1.5px solid #1d2330;background:#e8ecf2;font-size:11.5px;font-weight:700;color:#1d2330";
+const V_LEAF = V_BASE + "border:1px solid #767f8d;background:#fff;font-size:11px;color:#2b3240";
+const V_STAFF = V_BASE + "border:1px solid #7a6fa5;background:#f1ecfa;font-size:11px;color:#39306b";
+const V_OPER = V_BASE + "border:1px dashed #2f5787;background:#eef4fb;font-size:11px;font-weight:600;color:#2f5787";
+const V_ROW_W = 178;
+
+function buildNode(model, name, seen, depth) {
+  const n = model.nodes.get(name);
+  if (!n || seen.has(name)) return null;
+  const next = new Set(seen); next.add(name);
+  const oper = state.view === "operational" && n.jurisdiction;
+  let kids = depth < 2 ? (n.children || []).map((c) => buildNode(model, c, next, depth + 1)).filter(Boolean) : [];
+  if (state.view === "operational" && kids.length > 1) {
+    const byName = new Map(kids.map((k) => [k.name, k])); const keep = [];
+    kids.forEach((k) => {
+      const host = byName.get(model.nodes.get(k.name)?.jurisdiction);
+      if (host && host !== k) { host.children = [...(host.children || []), k]; } else keep.push(k);
+    });
+    kids = keep;
+  }
+  const rank = kids.length || /(관|본부|단|원)$/.test(n.name);
+  return {
+    name: n.name,
+    label: n.name + (n.marker ? ` (${n.marker})` : ""),
+    boxStyle: n.kind === "staff" ? BOX_STAFF : oper ? BOX_OPER : (rank ? BOX_GROUP : BOX),
+    vStyle: n.kind === "staff" ? V_STAFF : oper ? V_OPER : (rank ? V_GROUP : V_LEAF),
+    staff: (n.staff || []).map((s) => model.nodes.get(s)).filter(Boolean).map((s) => ({ name: s.name })),
+    children: kids
+  };
+}
+
+function topUnits(model) {
+  return [...model.nodes.values()].filter((n) => [model.agency, model.deputyName].includes(n.parent)
+    && ![model.headName, model.deputyName].includes(n.name) && n.kind !== "affil" && n.kind !== "staff");
+}
+
+function tallyOf(model) {
+  const names = [...model.nodes.values()]
+    .filter((n) => n.kind !== "root" && n.kind !== "head" && n.kind !== "staff" && ![model.headName, model.deputyName].includes(n.name))
+    .map((n) => n.name);
+  return [
+    { k: "실", v: names.filter((n) => /실$/.test(n)).length },
+    { k: "국", v: names.filter((n) => /국$/.test(n)).length },
+    { k: "관", v: names.filter((n) => /관$/.test(n) && !/기관$/.test(n)).length },
+    { k: "과", v: names.filter((n) => /과$/.test(n)).length },
+    { k: "소속", v: [...model.nodes.values()].filter((n) => n.kind === "affil").length }
+  ].filter((t) => t.v > 0);
+}
+
+/* ---------- 가로 계선형 ---------- */
+function horizontalSheet(model, units, affils, headStaff, deputyStaff, dateLabel, viewLabel) {
+  const tally = tallyOf(model).map((t) => `<div><div class="k">${t.k}</div><div class="v">${t.v}</div></div>`).join("");
+  const staffBranch = (list, top) => list.length
+    ? `<div style="position:absolute;top:${top}px;left:14px;display:flex;align-items:center;gap:6px">
+         <div style="width:18px;border-top:1px dashed #9aa6b6"></div>
+         ${list.map((s) => `<div style="padding:7px 11px;border:1px dashed #9aa6b6;background:#f7f9fc;color:#3d5679;font-size:11px;font-weight:600;white-space:nowrap">${esc(s.name)}</div>`).join("")}
+       </div>` : "";
+  const leaves = (child) => (child.children || []).length
+    ? `<div style="display:flex;flex-direction:column;gap:4px;margin:5px 0 2px 11px;padding-left:11px;border-left:1px solid #dfe4ec">
+         ${child.children.map((l) => `<div style="${l.boxStyle}"><span style="position:absolute;left:-11px;top:50%;width:11px;height:1px;background:#dfe4ec"></span>${esc(l.label)}</div>`).join("")}
+       </div>` : "";
+  const col = (u) => `
+    <div style="flex:none;width:166px;display:flex;flex-direction:column;align-items:center">
+      <div style="width:1px;height:20px;background:#6f7d90"></div>
+      <div style="width:100%;padding:10px 8px;border:1.5px solid #2f5787;background:#eff4fa;text-align:center;font-size:12.5px;font-weight:700;color:#14233b">${esc(u.name)}</div>
+      ${(u.staff || []).length ? `<div style="display:flex;flex-direction:column;gap:5px;margin-top:8px;width:100%">${u.staff.map((s) => `<div style="padding:6px 9px;border:1px dashed #9aa6b6;background:#f7f9fc;color:#3d5679;font-size:10.5px;text-align:center">${esc(s.name)}</div>`).join("")}</div>` : ""}
+      ${(u.children || []).length ? `
+        <div style="width:100%;display:flex;flex-direction:column;align-items:flex-start">
+          <div style="width:1px;height:14px;margin-left:14px;background:#c3ccd8"></div>
+          <div style="width:calc(100% - 14px);display:flex;flex-direction:column;gap:7px;padding-left:13px;margin-left:14px;border-left:1px solid #c3ccd8">
+            ${u.children.map((c) => `<div style="position:relative"><span style="position:absolute;left:-13px;top:14px;width:13px;height:1px;background:#c3ccd8"></span><div style="${c.boxStyle}">${esc(c.label)}</div>${leaves(c)}</div>`).join("")}
+          </div>
+        </div>` : ""}
+    </div>`;
+  const affilRail = affils.length > 1 ? `${(affils.length - 1) * 166}px` : "0px";
+  return `
+  <div class="sheet">
+    <div class="sheet-hd">
+      <div><div class="title">${esc(model.agency)} 기구도</div><div class="sub">${esc(viewLabel)} · 기준일 ${esc(dateLabel)}</div></div>
+      <div class="tally">${tally}</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;padding:34px 0 4px">
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <div style="min-width:166px;padding:10px 18px;border:1.5px solid #14233b;background:#14233b;color:#fff;text-align:center;font-size:13px;font-weight:700;letter-spacing:.04em">${esc(model.headName)}</div>
+        <div style="position:relative;display:flex;justify-content:center"><div style="width:1px;height:44px;background:#6f7d90"></div>${staffBranch(headStaff, 6)}</div>
+        <div style="min-width:166px;padding:10px 18px;border:1.5px solid #2f5787;background:#dfe9f6;color:#14233b;text-align:center;font-size:13px;font-weight:700;letter-spacing:.04em">${esc(model.deputyName)}</div>
+        <div style="position:relative;display:flex;justify-content:center"><div style="width:1px;height:34px;background:#6f7d90"></div>${staffBranch(deputyStaff, 2)}</div>
+      </div>
+      <div style="width:${units.length > 1 ? (units.length - 1) * 214 : 1}px;height:1px;background:#6f7d90"></div>
+      <div style="display:flex;justify-content:center;align-items:flex-start;gap:48px;width:100%">${units.map(col).join("")}</div>
+    </div>
+    ${affils.length ? `
+    <div style="display:flex;align-items:flex-start;gap:16px;margin-top:30px;padding-top:16px;border-top:1px solid #dfe4ec">
+      <div style="flex:none;margin-top:9px;padding:4px 9px;background:#f0f5f0;border:1px solid #cbdccb;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:#2c6334">소속기관</div>
+      <div style="flex:1;display:flex;flex-direction:column">
+        <div style="width:${affilRail};height:1px;margin:14px 0 0 85px;background:#9ec1a0"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;margin-left:10px">
+          ${affils.map((a) => `<div style="display:flex;flex-direction:column;align-items:center;width:150px"><div style="width:1px;height:14px;background:#9ec1a0"></div><div style="width:100%;padding:8px 10px;border:1px solid #3c7a44;background:#e2efe1;color:#1f5527;font-size:11.5px;font-weight:600;text-align:center">${esc(a.name)}</div></div>`).join("")}
+        </div>
+      </div>
+    </div>` : ""}
+    <div class="legend">
+      <span><i style="border:1.5px solid #2f5787;background:#eff4fa"></i>보조기관</span>
+      <span><i style="border:1px dashed #9aa6b6;background:#f7f9fc"></i>보좌기관</span>
+      <span><i style="border:1px solid #3c7a44;background:#e2efe1"></i>소속기관</span>
+      <span><i style="border:1px dashed #2f5787;background:#eef4fb"></i>운영상 소관</span>
+      <span style="margin-left:auto">(연)연구직 · (지)지도직 · (전)전문직</span>
+    </div>
+  </div>`;
+}
+
+/* ---------- 세로형 ---------- */
+function verticalSheet(model, units, affils, deputyStaff) {
+  const stub = (indent) => `position:absolute;left:${-(16 + indent)}px;top:14px;width:${16 + indent}px;height:1px;background:#1d2330`;
+  const block = (u, last) => {
+    const rows = [];
+    (u.children || []).forEach((c) => {
+      const subs = (c.children || []).map((l) => ({ label: l.label, style: `${l.vStyle};width:${V_ROW_W - 26}px;font-size:10.5px` }));
+      rows.push({ label: c.label, style: `${c.vStyle};width:${V_ROW_W}px`, stub: stub(0), subs });
+    });
+    (u.staff || []).forEach((s) => rows.push({ label: s.name, style: `${V_STAFF};width:${V_ROW_W}px`, stub: stub(0), subs: [] }));
+    const lastRow = rows[rows.length - 1];
+    const nSubs = lastRow ? lastRow.subs.length : 0;
+    const railBottom = 14 + (nSubs ? 5 + nSubs * 28 + (nSubs - 1) * 5 : 0);
+    return `
+    <div style="position:relative">
+      <div style="position:absolute;left:-26px;top:0;width:1px;background:#1d2330;${last ? "height:16px" : "bottom:-22px"}"></div>
+      <div style="position:absolute;left:-26px;top:16px;width:26px;height:1px;background:#1d2330"></div>
+      <div style="width:212px;height:32px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:1px solid #1d2330;background:#fdf3a3;font-size:12.5px;font-weight:700;color:#1d2330">${esc(u.name)}</div>
+      ${rows.length ? `
+        <div style="position:absolute;left:18px;top:32px;bottom:${railBottom}px;width:1px;background:#1d2330"></div>
+        <div style="display:flex;flex-direction:column;gap:5px;margin:9px 0 0 34px">
+          ${rows.map((r) => `
+            <div style="position:relative">
+              <div style="${r.stub}"></div>
+              <div style="${r.style}">${esc(r.label)}</div>
+              ${r.subs.length ? `
+                <div style="position:absolute;left:13px;top:28px;bottom:14px;width:1px;background:#9aa3b2"></div>
+                <div style="display:flex;flex-direction:column;gap:5px;margin:5px 0 0 26px">
+                  ${r.subs.map((s) => `<div style="position:relative"><span style="position:absolute;left:-13px;top:14px;width:13px;height:1px;background:#9aa3b2"></span><div style="${s.style}">${esc(s.label)}</div></div>`).join("")}
+                </div>` : ""}
+            </div>`).join("")}
+        </div>` : ""}
+    </div>`;
+  };
+  return `
+  <div class="sheet">
+    <div class="sheet-hd">
+      <div class="title" style="font-size:18px">${esc(model.agency)} · 세로형(직제 검토용)</div>
+      <div style="font-size:10.5px;color:#7b8798">실별로 하부 과를 세로 스택 · 좌측 계선에서 가지</div>
+    </div>
+    <div style="padding:20px 0 4px">
+      <div style="width:212px;box-sizing:border-box;padding:8px 12px;border:1.5px solid #1d2330;background:#fff;text-align:center;font-size:12.5px;font-weight:700;letter-spacing:.04em;color:#1d2330">${esc(model.headName)}</div>
+      <div style="width:1px;height:14px;margin-left:106px;background:#1d2330"></div>
+      <div style="display:flex;align-items:center">
+        <div style="width:212px;box-sizing:border-box;padding:8px 12px;border:1.5px solid #1d2330;background:#f4f5f7;text-align:center;font-size:12.5px;font-weight:700;letter-spacing:.04em;color:#1d2330">${esc(model.deputyName)}</div>
+        ${deputyStaff.length ? `<div style="display:flex;align-items:center;gap:6px"><div style="width:22px;border-top:1px dashed #7a6fa5"></div>${deputyStaff.map((d) => `<div style="padding:5px 9px;border:1px solid #7a6fa5;background:#f1ecfa;font-size:10.5px;white-space:nowrap;color:#39306b">${esc(d.name)}</div>`).join("")}</div>` : ""}
+      </div>
+      <div style="width:1px;height:24px;margin-left:106px;background:#1d2330"></div>
+      <div style="margin-left:106px;padding-left:26px;display:flex;flex-direction:column;gap:22px">
+        ${units.map((u, i) => block(u, i === units.length - 1)).join("")}
+      </div>
+      ${affils.length ? `
+      <div style="margin:24px 0 0 74px">
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          ${affils.map((a) => `<div style="height:34px;box-sizing:border-box;display:flex;align-items:center;padding:0 16px;border:1.5px solid #1d2330;background:#fff;font-size:12.5px;font-weight:700;color:#1d2330">${esc(a.name)}</div>`).join("")}
+        </div>
+        <div style="margin-top:6px;font-size:10px;color:#7b8798">소속기관 · 책임운영기관 (별도 계통)</div>
+      </div>` : ""}
+    </div>
+  </div>`;
+}
+
+/* ---------- 렌더 ---------- */
+function render() {
+  const model = state.model;
+  if (!model) return;
+  const units = topUnits(model).map((n) => buildNode(model, n.name, new Set(), 0)).filter(Boolean);
+  const affils = [...model.nodes.values()].filter((n) => n.kind === "affil").map((n) => ({ name: n.name }));
+  const headStaff = (model.nodes.get(model.headName)?.staff || []).map((s) => ({ name: s }));
+  const deputyStaff = (model.nodes.get(model.deputyName)?.staff || []).map((s) => ({ name: s }));
+  const dateLabel = ((($("#lawText").value.match(/@기준일:\s*([0-9.\-\s]+)/) || [])[1]) || ($("#lawText").value.match(/(\d{4}-\d{2}-\d{2})/) || [])[1] || "미지정").trim();
+  const viewLabel = state.view === "operational" ? "운영형 · 관별 소관 과를 관 밑으로 묶음" : "법정 설치계선 · 과는 실 직속";
+  $("#sheets").innerHTML = horizontalSheet(model, units, affils, headStaff, deputyStaff, dateLabel, viewLabel)
+    + verticalSheet(model, units, affils, deputyStaff);
+  $("#chartTitle").textContent = model.agency;
+  $("#viewLabel").textContent = viewLabel;
+  $("#nodeStat").textContent = model.nodes.size - 1;
+  $("#edgeStat").textContent = model.edges.length;
+  $("#jurStat").textContent = model.jurisdiction.length;
+  $("#status").textContent = `${model.nodes.size - 1}개 조직을 읽었습니다${model.jurisdiction.length ? ` · 운영 소관 ${model.jurisdiction.length}건` : ""}.`;
+  $("#status").classList.remove("err");
+  $("#tabLegal").classList.toggle("on", state.view === "legal");
+  $("#tabOper").classList.toggle("on", state.view === "operational");
+}
+
+function run() {
+  try { state.model = parse($("#lawText").value); render(); }
+  catch (e) { $("#status").textContent = `해석 오류: ${e.message}`; $("#status").classList.add("err"); }
+}
+
+/* ---------- SVG 출력 ---------- */
+function renderSvg(model) {
+  const trees = topUnits(model).map((n) => buildNode(model, n.name, new Set(), 0)).filter(Boolean);
+  const affils = [...model.nodes.values()].filter((n) => n.kind === "affil");
+  const COL = 166, GAP = 48, PAD = 40, ROW = 30, W_BOX = 166;
+  const flat = (nodes, depth, out) => { nodes.forEach((n) => { out.push({ ...n, depth }); flat(n.children || [], depth + 1, out); }); return out; };
+  const columns = trees.map((t) => ({ head: t, rows: flat(t.children || [], 0, []) }));
+  const bodyW = columns.length * COL + (columns.length - 1) * GAP;
+  const width = Math.max(920, bodyW + PAD * 2);
+  const deepest = Math.max(0, ...columns.map((c) => c.rows.length));
+  const height = 300 + deepest * ROW + (affils.length ? 90 : 40);
+  const cx = width / 2;
+  const box = (x, top, w, name, fill, stroke, size, weight, color) =>
+    `<rect x="${x}" y="${top}" width="${w}" height="26" fill="${fill}" stroke="${stroke}"/><text x="${x + w / 2}" y="${top + 17.5}" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="${size}" font-weight="${weight}" fill="${color}">${esc(name)}</text>`;
+  const parts = [`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="100%" height="100%" fill="#ffffff"/><rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" fill="none" stroke="#b9c3d1"/>`];
+  parts.push(`<text x="${PAD}" y="52" font-family="serif" font-size="22" font-weight="700" letter-spacing="2" fill="#14233b">${esc(model.agency)} 기구도</text>`);
+  parts.push(`<line x1="${PAD}" y1="68" x2="${width - PAD}" y2="68" stroke="#14233b" stroke-width="2"/>`);
+  let y = 100;
+  parts.push(box(cx - 83, y, 166, model.headName, "#14233b", "#14233b", 12, 700, "#ffffff"));
+  const hs = model.nodes.get(model.headName)?.staff || [];
+  if (hs.length) {
+    parts.push(`<line x1="${cx}" y1="${y + 40}" x2="${cx + 30}" y2="${y + 40}" stroke="#9aa6b6" stroke-dasharray="3 2"/>`);
+    parts.push(box(cx + 30, y + 27, 200, hs.join(" · "), "#f7f9fc", "#9aa6b6", 10.5, 500, "#3d5679"));
+  }
+  parts.push(`<line x1="${cx}" y1="${y + 26}" x2="${cx}" y2="${y + 66}" stroke="#6f7d90"/>`);
+  y += 66;
+  parts.push(box(cx - 83, y, 166, model.deputyName, "#dfe9f6", "#2f5787", 12, 700, "#14233b"));
+  const ds = model.nodes.get(model.deputyName)?.staff || [];
+  if (ds.length) {
+    parts.push(`<line x1="${cx}" y1="${y + 13}" x2="${cx + 100}" y2="${y + 13}" stroke="#9aa6b6" stroke-dasharray="3 2"/>`);
+    parts.push(box(cx + 100, y, 210, ds.join(" · "), "#f7f9fc", "#9aa6b6", 10.5, 500, "#3d5679"));
+  }
+  const busY = y + 50;
+  const startX = (width - bodyW) / 2;
+  parts.push(`<line x1="${cx}" y1="${y + 26}" x2="${cx}" y2="${busY}" stroke="#6f7d90"/>`);
+  parts.push(`<line x1="${startX + COL / 2}" y1="${busY}" x2="${startX + bodyW - COL / 2}" y2="${busY}" stroke="#6f7d90"/>`);
+  columns.forEach((col, i) => {
+    const left = startX + i * (COL + GAP) + (COL - W_BOX) / 2;
+    const mid = left + W_BOX / 2;
+    parts.push(`<line x1="${mid}" y1="${busY}" x2="${mid}" y2="${busY + 20}" stroke="#6f7d90"/>`);
+    parts.push(box(left, busY + 20, W_BOX, col.head.name, "#eff4fa", "#2f5787", 12, 700, "#14233b"));
+    const railX = left + 14;
+    let ry = busY + 58;
+    const bottom = ry + col.rows.length * ROW - ROW + 13;
+    if (col.rows.length) parts.push(`<line x1="${railX}" y1="${busY + 46}" x2="${railX}" y2="${bottom}" stroke="#c3ccd8"/>`);
+    col.rows.forEach((row) => {
+      const bx = railX + 13 + row.depth * 11;
+      const bw = W_BOX - 27 - row.depth * 11;
+      const group = (row.children || []).length > 0;
+      parts.push(`<line x1="${railX}" y1="${ry + 13}" x2="${bx}" y2="${ry + 13}" stroke="#c3ccd8"/>`);
+      parts.push(box(bx, ry, bw, row.name, group ? "#ffffff" : "#fbfcfd", group ? "#8e9aab" : "#cfd6e0", group ? 11 : 10, group ? 700 : 400, group ? "#16202f" : "#3d4a5c"));
+      ry += ROW;
+    });
+  });
+  if (affils.length) {
+    const ay = height - 62;
+    parts.push(`<line x1="${PAD}" y1="${ay - 16}" x2="${width - PAD}" y2="${ay - 16}" stroke="#dfe4ec"/>`);
+    parts.push(`<text x="${PAD}" y="${ay + 17}" font-family="'Noto Sans KR',sans-serif" font-size="10.5" font-weight="700" fill="#2c6334">소속기관</text>`);
+    affils.forEach((n, i) => parts.push(box(PAD + 70 + i * 150, ay, 140, n.name, "#e2efe1", "#3c7a44", 11, 600, "#1f5527")));
+  }
+  parts.push("</svg>");
+  return parts.join("");
+}
+
+$("#lawText").value = EXAMPLE;
+$("#parseBtn").addEventListener("click", run);
+$("#resetBtn").addEventListener("click", () => { $("#lawText").value = EXAMPLE; run(); });
+$("#tabLegal").addEventListener("click", () => { state.view = "legal"; render(); });
+$("#tabOper").addEventListener("click", () => { state.view = "operational"; render(); });
+$("#downloadBtn").addEventListener("click", () => {
+  if (!state.model) return;
+  const blob = new Blob([renderSvg(state.model)], { type: "image/svg+xml" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `${state.model.agency}-기구도.svg`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+});
+run();
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-labelledby="title desc">
+  <title id="title">대한민국 정부 직제 문언에서 기구도로</title>
+  <desc id="desc">법령 문장으로부터 법정 조직계선과 운영상 소관을 구분해 조직 그래프로 만드는 도구</desc>
+  <rect width="1200" height="400" rx="24" fill="#0b1220"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#3b82f6"/>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif">
+    <text x="64" y="78" fill="#93c5fd" font-size="18" font-weight="700" letter-spacing="2">KOREAN GOVERNMENT ORGCHART</text>
+    <text x="64" y="145" fill="#ffffff" font-size="46" font-weight="800">법령의 문장을</text>
+    <text x="64" y="202" fill="#ffffff" font-size="46" font-weight="800">정부 조직의 지도로</text>
+    <text x="64" y="260" fill="#bfdbfe" font-size="21">법정 설치관계와 실제 운영상 소관을 혼동하지 않고 함께 읽습니다.</text>
+    <text x="64" y="322" fill="#93c5fd" font-size="18" font-weight="700">LEGAL GRAPH  +  OPERATIONAL VIEW  →  PPTX · SVG · JSON</text>
+  </g>
+  <g transform="translate(770 48)" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif">
+    <rect x="0" y="0" width="360" height="294" rx="16" fill="#f8fafc"/>
+    <rect x="112" y="24" width="136" height="42" rx="8" fill="#2563eb"/>
+    <text x="180" y="51" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="800">장관</text>
+    <path d="M180 66V102H78V126M180 102H282V126" fill="none" stroke="#53675d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M180 102H282V126" fill="none" stroke="#0f8a65" stroke-width="3" stroke-dasharray="8 6" stroke-linecap="round"/>
+    <rect x="20" y="126" width="116" height="48" rx="8" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <text x="78" y="156" text-anchor="middle" fill="#17231d" font-size="14" font-weight="800">보조기관</text>
+    <rect x="224" y="126" width="116" height="48" rx="8" fill="#eaf8f2" stroke="#0f8a65" stroke-width="2"/>
+    <text x="282" y="156" text-anchor="middle" fill="#146b4f" font-size="14" font-weight="800">보좌기관</text>
+    <path d="M78 174V215M282 174V215" fill="none" stroke="#53675d" stroke-width="4" stroke-linecap="round"/>
+    <rect x="20" y="215" width="116" height="48" rx="8" fill="#eef6ff" stroke="#3b82f6" stroke-width="2"/>
+    <text x="78" y="245" text-anchor="middle" fill="#1e3a5f" font-size="14" font-weight="800">법정 계선</text>
+    <rect x="224" y="215" width="116" height="48" rx="8" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="282" y="245" text-anchor="middle" fill="#312e81" font-size="14" font-weight="800">운영상 소관</text>
+  </g>
+</svg>

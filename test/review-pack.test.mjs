@@ -4,7 +4,12 @@ import { mkdtemp, readFile, stat, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { runBatchAudit } from "../src/batch-audit.mjs";
-import { buildSuggestedCasesDocument, formatReviewWorklistMarkdown, runReviewPack } from "../src/review-pack.mjs";
+import {
+  buildAcceptedCasesDocument,
+  buildSuggestedCasesDocument,
+  formatReviewWorklistMarkdown,
+  runReviewPack,
+} from "../src/review-pack.mjs";
 
 test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든다", async () => {
   const dir = await mkdtemp(path.join(os.tmpdir(), "orgchart-review-pack-"));
@@ -52,10 +57,12 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(await readFile(result.files.readme, "utf8"), /케이스별 산출물/);
   assert.match(await readFile(result.files.readme, "utf8"), /검토 작업목록/);
   assert.match(await readFile(result.files.readme, "utf8"), /자동 보강 재실행/);
+  assert.match(await readFile(result.files.readme, "utf8"), /채택 케이스/);
   assert.match(await readFile(result.files.worklist, "utf8"), /조직도 검토 작업목록/);
   assert.match(await readFile(result.files.worklist, "utf8"), /입력에 붙여넣을 보강 지시문 후보/);
   assert.ok((await stat(result.files.cases)).size > 0);
   assert.ok((await stat(result.files.suggestedCases)).size > 0);
+  assert.ok((await stat(result.files.acceptedCases)).size > 0);
   assert.match(await readFile(result.files.audit, "utf8"), /조직도 batch audit/);
   assert.match(await readFile(result.files.manifest, "utf8"), /조직도 batch build/);
   assert.ok((await stat(result.files.auditJson)).size > 0);
@@ -79,6 +86,13 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.equal(result.rerun.comparison.before.jurisdictionCandidates, 2);
   assert.equal(result.rerun.comparison.after.jurisdictionCandidates, 0);
   assert.equal(result.rerun.comparison.delta.jurisdictionCandidates, -2);
+
+  const accepted = JSON.parse(await readFile(result.files.acceptedCases, "utf8"));
+  assert.equal(accepted.evaluated, true);
+  assert.equal(accepted.acceptedCases, 1);
+  assert.equal(accepted.rejectedCases, 0);
+  assert.equal(accepted.cases[0].accepted.decision, "accepted");
+  assert.match(accepted.cases[0].directives.join("\n"), /@소관: 산업정책관 > 정책과ㆍ지원과/);
 });
 
 test("review-pack 작업목록은 지시문·별표·레이아웃·소관법령 문제를 요약한다", () => {
@@ -211,4 +225,65 @@ test("review-pack 자동 보강 케이스는 단일 @소관 후보와 layout 패
     "@소관: 산업정책관 > 정책과ㆍ지원과 [시행규칙 분장사무 확인 필요]",
   ]);
   assert.equal(suggested.cases[0].suggested.changes.length, 2);
+});
+
+test("review-pack 채택 케이스는 악화된 자동 보강안을 거절한다", () => {
+  const originalCase = {
+    id: "case-a",
+    institution: "시험부",
+    paper: "a4-half",
+    layout: "best",
+  };
+  const suggestedCase = {
+    ...originalCase,
+    layout: "catalog",
+    suggested: {
+      source: "review-pack",
+      changes: [{ type: "layout", patch: { layout: "catalog" } }],
+    },
+  };
+  const accepted = buildAcceptedCasesDocument({
+    generatedAt: "2026-08-02T00:00:00.000Z",
+    exportedCases: [originalCase],
+    suggestedCases: {
+      cases: [suggestedCase],
+    },
+    audit: {
+      cases: [
+        {
+          summary: {
+            id: "case-a",
+            institution: "시험부",
+            reviewActions: { high: 0, medium: 0, low: 1 },
+            layoutDiagnostics: { totalIssues: 0, qualityIssues: 1 },
+            jurisdiction: { candidateDepartments: 0 },
+            annex: { missing: 0 },
+          },
+        },
+      ],
+    },
+    rerun: {
+      audit: {
+        cases: [
+          {
+            summary: {
+              id: "case-a",
+              institution: "시험부",
+              reviewActions: { high: 1, medium: 0, low: 0 },
+              layoutDiagnostics: { totalIssues: 0, qualityIssues: 0 },
+              jurisdiction: { candidateDepartments: 0 },
+              annex: { missing: 0 },
+            },
+          },
+        ],
+      },
+    },
+  });
+
+  assert.equal(accepted.acceptedCases, 0);
+  assert.equal(accepted.rejectedCases, 1);
+  assert.equal(accepted.decisions[0].decision, "rejected");
+  assert.equal(accepted.decisions[0].selected, "original");
+  assert.equal(accepted.cases[0].layout, "best");
+  assert.equal(accepted.cases[0].accepted.decision, "rejected");
 });

@@ -282,14 +282,14 @@ node src/cli.mjs review-pack \
   --rerun-suggested
 ```
 
-`outputs/review-pack/`에는 `README.md`, `worklist.md`, `cases.json`, `suggested-cases.json`, `audit.md`, `audit.json`, `manifest.md`, `manifest.json`이 남고, 실제 조직도 파일은 기본적으로 `outputs/review-pack/artifacts/` 아래에 생성됩니다. `README.md`는 먼저 열 파일, 우선 확인 항목, 케이스별 산출물 링크를 묶은 검토용 첫 화면입니다. `worklist.md`는 입력에 붙일 수 있는 `@소관` 지시문 후보, 별표 확보 항목, 레이아웃 재시도 보정 예, 소관법령 매칭 문제를 작업목록으로 분리합니다. `suggested-cases.json`은 단일 보좌기관의 `@소관` 후보와 hard/polish layout 문제의 보수적 재시도 패치를 자동 반영한 재실행용 케이스 파일입니다. `--rerun-suggested`를 붙이면 이 후보 파일을 `outputs/review-pack/rerun/`에 즉시 2차 실행하고, README에 1차/2차의 높은 확인·소관 후보·배치 문제·품질 문제 변화를 비교합니다. 각 `*.trace.csv`는 부모 조직, 자식 조직, 보조·보좌·소속기관·운영상 소관 관계, 조문, 근거 문형, 근거 문장, 출처, 한시·책임운영·본부 같은 표식을 행 단위로 펼칩니다. 법제처 조회 원문을 이미 모아 둔 경우에는 `--cases examples/audit-cases.json`처럼 케이스 파일을 넘기면 같은 검토팩 구조로 재생성할 수 있습니다. `--strict`를 붙이면 감사상 오류·수정 필요 또는 산출물 생성 오류가 있을 때 종료코드 2로 실패합니다.
+`outputs/review-pack/`에는 `README.md`, `worklist.md`, `cases.json`, `suggested-cases.json`, `accepted-cases.json`, `audit.md`, `audit.json`, `manifest.md`, `manifest.json`이 남고, 실제 조직도 파일은 기본적으로 `outputs/review-pack/artifacts/` 아래에 생성됩니다. `README.md`는 먼저 열 파일, 우선 확인 항목, 케이스별 산출물 링크를 묶은 검토용 첫 화면입니다. `worklist.md`는 입력에 붙일 수 있는 `@소관` 지시문 후보, 별표 확보 항목, 레이아웃 재시도 보정 예, 소관법령 매칭 문제를 작업목록으로 분리합니다. `suggested-cases.json`은 단일 보좌기관의 `@소관` 후보와 hard/polish layout 문제의 보수적 재시도 패치를 자동 반영한 재실행용 케이스 파일입니다. `--rerun-suggested`를 붙이면 이 후보 파일을 `outputs/review-pack/rerun/`에 즉시 2차 실행하고, README에 1차/2차의 높은 확인·소관 후보·배치 문제·품질 문제 변화를 비교합니다. `accepted-cases.json`은 이 비교에서 핵심 지표가 악화되지 않고 가중 위험점수가 1차 이하인 케이스만 자동 보강안을 채택하고, 나머지는 원본 케이스를 유지합니다. 각 `*.trace.csv`는 부모 조직, 자식 조직, 보조·보좌·소속기관·운영상 소관 관계, 조문, 근거 문형, 근거 문장, 출처, 한시·책임운영·본부 같은 표식을 행 단위로 펼칩니다. 법제처 조회 원문을 이미 모아 둔 경우에는 `--cases examples/audit-cases.json`처럼 케이스 파일을 넘기면 같은 검토팩 구조로 재생성할 수 있습니다. `--strict`를 붙이면 감사상 오류·수정 필요 또는 산출물 생성 오류가 있을 때 종료코드 2로 실패합니다.
 
 자동 보강 후보를 검토한 뒤에는 그대로 다시 실행할 수 있습니다.
 
 ```bash
 node src/cli.mjs review-pack \
-  --cases outputs/review-pack/suggested-cases.json \
-  --out-dir outputs/review-pack-rerun \
+  --cases outputs/review-pack/accepted-cases.json \
+  --out-dir outputs/review-pack-accepted \
   --outputs svg,json,audit,trace,pptx,deck
 ```
 

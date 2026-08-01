@@ -37,6 +37,7 @@ export async function runReviewPack(args = {}) {
     worklist: path.join(outDir, stringArg(args, "worklist-out") || "worklist.md"),
     cases: path.join(outDir, stringArg(args, "cases-out") || "cases.json"),
     suggestedCases: path.join(outDir, stringArg(args, "suggested-cases-out") || "suggested-cases.json"),
+    acceptedCases: path.join(outDir, stringArg(args, "accepted-cases-out") || "accepted-cases.json"),
     audit: path.join(outDir, stringArg(args, "audit-out") || "audit.md"),
     auditJson: path.join(outDir, stringArg(args, "audit-json-out") || "audit.json"),
     manifest: path.join(outDir, stringArg(args, "manifest-out") || "manifest.md"),
@@ -64,6 +65,8 @@ export async function runReviewPack(args = {}) {
   if (args["rerun-suggested"] === true) {
     result.rerun = await runSuggestedReviewPack(result, args, sharedLawFetchCache);
   }
+  result.acceptedCases = buildAcceptedCasesDocument(result);
+  await writeText(files.acceptedCases, `${JSON.stringify(result.acceptedCases, jsonReplacer, 2)}\n`);
   await writeText(files.worklist, formatReviewWorklistMarkdown(result));
   await writeText(files.readme, formatReviewPackMarkdown(result));
   return result;
@@ -98,6 +101,7 @@ export function formatReviewPackMarkdown(result) {
   lines.push(`- 산출물 매니페스트: ${linkPath(result.outDir, result.files.manifest)}`);
   lines.push(`- 케이스 정의: ${linkPath(result.outDir, result.files.cases)}`);
   lines.push(`- 자동 보강 케이스 후보: ${linkPath(result.outDir, result.files.suggestedCases)}`);
+  lines.push(`- 채택 케이스: ${linkPath(result.outDir, result.files.acceptedCases)}`);
   lines.push(`- 기계 판독용 감사 JSON: ${linkPath(result.outDir, result.files.auditJson)}`);
   lines.push(`- 기계 판독용 매니페스트 JSON: ${linkPath(result.outDir, result.files.manifestJson)}`);
   lines.push("");
@@ -156,6 +160,9 @@ export function formatReviewWorklistMarkdown(result) {
   lines.push(`- 케이스: ${result.caseCount}`);
   if (result.files?.suggestedCases) {
     lines.push(`- 자동 보강 케이스 후보: ${linkPath(result.outDir, result.files.suggestedCases)} (${suggested.changedCases}/${suggested.cases.length}건 보강)`);
+  }
+  if (result.files?.acceptedCases && result.acceptedCases) {
+    lines.push(`- 채택 케이스: ${linkPath(result.outDir, result.files.acceptedCases)} (채택 ${result.acceptedCases.acceptedCases || 0} · 거절 ${result.acceptedCases.rejectedCases || 0})`);
   }
   if (result.rerun?.outDir) {
     lines.push(`- 자동 보강 재실행: ${linkPath(result.outDir, result.rerun.outDir)}`);
@@ -283,6 +290,9 @@ function appendRerunSection(lines, result) {
   }
   lines.push(`- 2차 리뷰팩: ${linkPath(result.outDir, result.rerun.outDir)}`);
   lines.push(`- 적용된 보강 케이스: ${result.rerun.changedCases}/${result.caseCount}`);
+  if (result.files?.acceptedCases && result.acceptedCases) {
+    lines.push(`- 채택 케이스: ${linkPath(result.outDir, result.files.acceptedCases)} (채택 ${result.acceptedCases.acceptedCases || 0} · 거절 ${result.acceptedCases.rejectedCases || 0} · 유지 ${result.acceptedCases.unchangedCases || 0})`);
+  }
   if (result.rerun.files?.readme) lines.push(`- 2차 README: ${linkPath(result.outDir, result.rerun.files.readme)}`);
   if (result.rerun.files?.audit) lines.push(`- 2차 감사 요약: ${linkPath(result.outDir, result.rerun.files.audit)}`);
   if (result.rerun.files?.manifest) lines.push(`- 2차 산출물 매니페스트: ${linkPath(result.outDir, result.rerun.files.manifest)}`);
@@ -377,20 +387,204 @@ export function buildSuggestedCasesDocument(result) {
   };
 }
 
+export function buildAcceptedCasesDocument(result) {
+  const baseCases = result.exportedCases || (result.audit?.cases || []).map((item) => item.case || {});
+  const suggestedCases = result.suggestedCases?.cases || baseCases;
+  const beforeCases = result.audit?.cases || [];
+  const afterCases = result.rerun?.audit?.cases || [];
+  const evaluated = Boolean(result.rerun && !result.rerun.skipped);
+  const decisions = [];
+  const cases = [];
+  for (let index = 0; index < baseCases.length; index += 1) {
+    const decision = decideAcceptedCase({
+      original: baseCases[index] || {},
+      suggested: suggestedCases[index] || baseCases[index] || {},
+      beforeCase: beforeCases[index],
+      afterCase: afterCases[index],
+      evaluated,
+    });
+    decisions.push(decision);
+    cases.push(decision.caseSpec);
+  }
+  return {
+    generatedAt: result.generatedAt,
+    source: "review-pack",
+    evaluated,
+    acceptedCases: decisions.filter((item) => item.decision === "accepted").length,
+    rejectedCases: decisions.filter((item) => item.decision === "rejected").length,
+    unchangedCases: decisions.filter((item) => item.decision === "unchanged").length,
+    notEvaluatedCases: decisions.filter((item) => item.decision === "not-evaluated").length,
+    notes: [
+      "이 파일은 2차 자동 보강 결과가 원본보다 나빠지지 않은 케이스만 suggested-cases.json에서 채택합니다.",
+      "높은/중간 확인, hard layout issue, 별표 누락, 소관법령 미매칭·중복 후보가 증가하면 자동 거절합니다.",
+      "그 밖의 항목은 가중 위험점수가 1차 이하일 때만 채택합니다.",
+    ],
+    decisions: decisions.map(({ caseSpec, ...rest }) => rest),
+    cases,
+  };
+}
+
+function decideAcceptedCase({ original = {}, suggested = {}, beforeCase, afterCase, evaluated }) {
+  const originalCase = clonePlain(original);
+  const suggestedCase = clonePlain(suggested);
+  const caseId = original.id || suggested.id || beforeCase?.summary?.id || afterCase?.summary?.id || "case";
+  const institution = beforeCase?.summary?.institution || afterCase?.summary?.institution || original.institution || suggested.institution || caseId;
+  const changes = suggestedCase.suggested?.changes || [];
+  if (!changes.length) {
+    return {
+      id: caseId,
+      institution,
+      decision: "unchanged",
+      selected: "original",
+      reason: "자동 보강 변경사항이 없습니다.",
+      caseSpec: markAcceptedCase(originalCase, "unchanged"),
+    };
+  }
+  const before = caseMetrics(beforeCase?.summary);
+  const after = caseMetrics(afterCase?.summary);
+  const score = {
+    before: scoreMetrics(before),
+    after: scoreMetrics(after),
+  };
+  score.delta = score.after - score.before;
+  if (!evaluated || !afterCase) {
+    return {
+      id: caseId,
+      institution,
+      decision: "not-evaluated",
+      selected: "original",
+      reason: "2차 자동 보강 결과가 없어 원본을 유지합니다.",
+      metrics: { before, after: null },
+      score: { before: score.before, after: null, delta: null },
+      changes,
+      caseSpec: markAcceptedCase(originalCase, "not-evaluated"),
+    };
+  }
+  const regressions = criticalRegressions(before, after);
+  if (afterCase.summary?.status === "error") {
+    regressions.push({ key: "status", before: beforeCase?.summary?.status || "", after: "error" });
+  }
+  if (regressions.length) {
+    return {
+      id: caseId,
+      institution,
+      decision: "rejected",
+      selected: "original",
+      reason: `핵심 지표가 악화되어 원본을 유지합니다: ${regressions.map((item) => item.key).join(", ")}`,
+      metrics: { before, after, delta: deltaMetrics(before, after) },
+      score,
+      regressions,
+      changes,
+      caseSpec: markAcceptedCase(originalCase, "rejected"),
+    };
+  }
+  if (score.after > score.before) {
+    return {
+      id: caseId,
+      institution,
+      decision: "rejected",
+      selected: "original",
+      reason: `가중 위험점수가 증가했습니다(${score.before} → ${score.after}).`,
+      metrics: { before, after, delta: deltaMetrics(before, after) },
+      score,
+      regressions: [],
+      changes,
+      caseSpec: markAcceptedCase(originalCase, "rejected"),
+    };
+  }
+  return {
+    id: caseId,
+    institution,
+    decision: "accepted",
+    selected: "suggested",
+    reason: score.after < score.before ? `가중 위험점수가 감소했습니다(${score.before} → ${score.after}).` : "핵심 지표 악화 없이 자동 보강을 적용할 수 있습니다.",
+    metrics: { before, after, delta: deltaMetrics(before, after) },
+    score,
+    regressions: [],
+    changes,
+    caseSpec: markAcceptedCase(suggestedCase, "accepted", score.delta),
+  };
+}
+
+function markAcceptedCase(caseSpec, decision, scoreDelta) {
+  const { suggested: _suggested, ...stableCaseSpec } = caseSpec;
+  return {
+    ...stableCaseSpec,
+    accepted: {
+      source: "review-pack",
+      decision,
+      ...(scoreDelta == null ? {} : { scoreDelta }),
+    },
+  };
+}
+
+function caseMetrics(summary = {}) {
+  return {
+    high: summary.reviewActions?.high || 0,
+    medium: summary.reviewActions?.medium || 0,
+    low: summary.reviewActions?.low || 0,
+    layoutIssues: summary.layoutDiagnostics?.totalIssues || 0,
+    qualityIssues: summary.layoutDiagnostics?.qualityIssues || 0,
+    jurisdictionCandidates: summary.jurisdiction?.candidateDepartments || 0,
+    missingAnnexes: summary.annex?.missing || 0,
+    lawMapUnmatched: summary.lawMap?.unmatchedDepartments || 0,
+    lawMapAmbiguous: summary.lawMap?.ambiguousDepartments || 0,
+  };
+}
+
+function scoreMetrics(metrics = {}) {
+  return (
+    (metrics.high || 0) * 1000 +
+    (metrics.layoutIssues || 0) * 700 +
+    (metrics.missingAnnexes || 0) * 600 +
+    (metrics.medium || 0) * 300 +
+    (metrics.lawMapUnmatched || 0) * 180 +
+    (metrics.lawMapAmbiguous || 0) * 180 +
+    (metrics.jurisdictionCandidates || 0) * 60 +
+    (metrics.qualityIssues || 0) * 5 +
+    (metrics.low || 0)
+  );
+}
+
+function criticalRegressions(before = {}, after = {}) {
+  return [
+    "high",
+    "medium",
+    "layoutIssues",
+    "missingAnnexes",
+    "lawMapUnmatched",
+    "lawMapAmbiguous",
+  ]
+    .filter((key) => (after[key] || 0) > (before[key] || 0))
+    .map((key) => ({ key, before: before[key] || 0, after: after[key] || 0 }));
+}
+
+function deltaMetrics(before = {}, after = {}) {
+  const delta = {};
+  for (const key of Object.keys(before)) delta[key] = (after[key] || 0) - (before[key] || 0);
+  return delta;
+}
+
 function suggestCaseSpec(baseCase = {}, auditCase = {}) {
   const next = clonePlain(baseCase);
   const changes = [];
   const directives = suggestedDirectives(auditCase);
   if (directives.length) {
-    next.directives = uniqueStrings([...asArray(next.directives).map(String), ...directives]);
-    changes.push({ type: "directives", count: directives.length });
+    const existing = uniqueStrings(asArray(next.directives).map(String));
+    const merged = uniqueStrings([...existing, ...directives]);
+    const added = merged.filter((directive) => !existing.includes(directive));
+    if (added.length) {
+      next.directives = merged;
+      changes.push({ type: "directives", count: added.length });
+    }
   }
 
   const layoutPatch = suggestedLayoutPatchObject(auditCase.summary || {});
-  if (Object.keys(layoutPatch).length) {
-    if (layoutPatch.layout) delete next.layouts;
-    Object.assign(next, layoutPatch);
-    changes.push({ type: "layout", patch: layoutPatch });
+  const materialPatch = materialLayoutPatch(next, layoutPatch);
+  if (Object.keys(materialPatch).length) {
+    if (materialPatch.layout) delete next.layouts;
+    Object.assign(next, materialPatch);
+    changes.push({ type: "layout", patch: materialPatch });
   }
 
   if (changes.length) {
@@ -401,6 +595,18 @@ function suggestCaseSpec(baseCase = {}, auditCase = {}) {
     };
   }
   return { caseSpec: next, changes };
+}
+
+function materialLayoutPatch(caseSpec, patch = {}) {
+  const material = {};
+  for (const [key, value] of Object.entries(patch)) {
+    if (key === "layout" && caseSpec.layouts) {
+      material[key] = value;
+      continue;
+    }
+    if (caseSpec[key] !== value) material[key] = value;
+  }
+  return material;
 }
 
 function suggestedDirectives(auditCase = {}) {

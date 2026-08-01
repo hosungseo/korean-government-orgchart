@@ -92,9 +92,12 @@ jobs:
             import fs from "node:fs";
             const summary = JSON.parse(fs.readFileSync("/tmp/orgchart-review-pack-summary.json", "utf8"));
             if (summary.cases !== 2) throw new Error(`expected 2 review cases, got ${summary.cases}`);
-            for (const key of ["readme", "worklist", "cases", "suggestedCases", "audit", "auditJson", "manifest", "manifestJson"]) {
+            for (const key of ["readme", "worklist", "cases", "suggestedCases", "acceptedCases", "audit", "auditJson", "manifest", "manifestJson"]) {
               const filePath = summary.files?.[key];
               if (!filePath || !fs.existsSync(filePath)) throw new Error(`missing review-pack file: ${key}`);
+            }
+            if (!summary.acceptedCases?.evaluated || !summary.acceptedCases.acceptedCases) {
+              throw new Error("expected evaluated accepted cases");
             }
             if (!summary.rerun || summary.rerun.skipped) throw new Error("expected suggested rerun");
             if (!summary.rerun.files?.readme || !fs.existsSync(summary.rerun.files.readme)) {

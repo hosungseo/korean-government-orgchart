@@ -209,13 +209,10 @@ function parseAdministrativeRulePlacement(graph, body, source, context) {
  * operational chart, but it is not a new "X에 과를 둔다" installation clause.
  */
 function collectJurisdictionRelations(graph, body, source) {
-  const paragraphPattern = new RegExp(
-    `(?:^|\\n)\\s*${DUTY_PARAGRAPH_MARKER}\\s*([가-힣A-Za-z0-9]+(?:과|팀))장은[^\\n]*(?:\\n|$)([\\s\\S]*?)(?=(?:\\n\\s*${DUTY_PARAGRAPH_MARKER}\\s*[가-힣A-Za-z0-9]+(?:과|팀))장은|\\n제\\d+조|$)`,
-    "g",
-  );
-  for (const match of body.matchAll(paragraphPattern)) {
-    const departmentName = normalizeNodeName(match[1]);
-    const advisorName = extractJurisdictionAdvisorName(match[2]);
+  const paragraphs = extractDepartmentDutyParagraphs(body);
+  for (const paragraph of paragraphs) {
+    const departmentName = normalizeNodeName(paragraph.departmentName);
+    const advisorName = extractJurisdictionAdvisorName(paragraph.text);
     if (!departmentName || !advisorName) continue;
     const department = graph.addNode(departmentName, { kind: "assistant", source });
     const advisor = graph.addNode(advisorName, { kind: "advisor", source });
@@ -226,6 +223,55 @@ function collectJurisdictionRelations(graph, body, source) {
       legalBasis: "보좌기관 내 다른 과의 주관·소관",
     });
   }
+  collectJurisdictionRangeRelations(graph, body, source, paragraphs);
+}
+
+function extractDepartmentDutyParagraphs(body) {
+  const paragraphs = [];
+  const paragraphPattern = new RegExp(
+    `(?:^|\\n|\\s)${DUTY_PARAGRAPH_MARKER}\\s*([가-힣A-Za-z0-9]+(?:과|팀))장은([\\s\\S]*?)(?=(?:\\n|\\s)${DUTY_PARAGRAPH_MARKER}\\s*[가-힣A-Za-z0-9]+(?:과|팀)장은|\\n제\\d+조|$)`,
+    "g",
+  );
+  for (const match of body.matchAll(paragraphPattern)) {
+    paragraphs.push({
+      departmentName: match[1],
+      text: match[2] || "",
+    });
+  }
+  return paragraphs;
+}
+
+function collectJurisdictionRangeRelations(graph, body, source, paragraphs) {
+  const advisorHints = extractAdvisorDutyRangeHints(body, source);
+  if (!advisorHints.length) return;
+  graph.meta.jurisdictionRangeHints ||= [];
+  for (const hint of advisorHints) upsertByKey(graph.meta.jurisdictionRangeHints, hint, ["advisor", "source", "reference"]);
+
+  graph.meta.jurisdictionRangeCandidates ||= [];
+  for (const paragraph of paragraphs) {
+    const departmentName = normalizeNodeName(paragraph.departmentName);
+    if (!departmentName) continue;
+    const department = graph.addNode(departmentName, { kind: "assistant", source });
+    if (!department || department.metadata.jurisdiction) continue;
+    const refs = extractDecreeItemReferences(paragraph.text);
+    if (!refs.length) continue;
+    const matchingHints = advisorHints.filter((hint) => hintCoversAllReferences(hint, refs));
+    const candidate = {
+      department: department.name,
+      reference: formatDutyReferences(refs),
+      advisors: matchingHints.map((hint) => hint.advisor),
+      source,
+    };
+    upsertByKey(graph.meta.jurisdictionRangeCandidates, candidate, ["department", "source", "reference"]);
+    if (matchingHints.length !== 1) continue;
+    const hint = matchingHints[0];
+    setJurisdictionRelation(graph, hint.advisor, department.name, {
+      source,
+      evidence: "duty-item-range",
+      legalBasis: "직제 호 번호 범위 대조",
+      reference: candidate.reference,
+    });
+  }
 }
 
 function extractJurisdictionAdvisorName(text) {
@@ -233,6 +279,109 @@ function extractJurisdictionAdvisorName(text) {
     `([가-힣A-Za-z0-9]+${JURISDICTION_ADVISOR_SUFFIX})(?:\\s*내|\\s*이\\s*보좌하는\\s*사항\\s*중(?:에서)?)\\s*[^.。\\n]{0,100}?(?:다른\\s*(?:과|팀)(?:\\s*(?:및|ㆍ|·)\\s*(?:과|팀))?의\\s*(?:주관|소관)|주관에\\s*속하지|소관에\\s*해당하지)`,
   );
   return text.match(advisorPattern)?.[1] || null;
+}
+
+function extractAdvisorDutyRangeHints(body, source) {
+  const hints = [];
+  const pattern = new RegExp(
+    `([가-힣A-Za-z0-9]+${JURISDICTION_ADVISOR_SUFFIX})(?:은|는)\\s+([^.。\\n]{0,360}?직제[^.。\\n]{0,260}?사항[^.。\\n]{0,160}?보좌한다)`,
+    "g",
+  );
+  for (const match of body.matchAll(pattern)) {
+    const advisor = normalizeNodeName(match[1]);
+    const refs = extractDecreeItemReferences(match[2]);
+    if (!advisor || !refs.length) continue;
+    hints.push({
+      advisor,
+      refs,
+      reference: formatDutyReferences(refs),
+      source,
+      legalBasis: "보좌기관 직제 호 번호 범위",
+    });
+  }
+  return hints;
+}
+
+function extractDecreeItemReferences(text) {
+  const refs = [];
+  const lawRefPattern =
+    /직제\s+(제\s*\d+\s*조(?:의\s*\d+)?(?:\s*제\s*\d+\s*항)?)([^.。\n]{0,260})/g;
+  for (const match of String(text ?? "").matchAll(lawRefPattern)) {
+    const refKey = compactLawReference(match[1]);
+    for (const range of extractItemRanges(match[2])) refs.push({ ...range, refKey });
+  }
+  return uniqReferences(refs);
+}
+
+function extractItemRanges(text) {
+  const ranges = [];
+  const source = String(text ?? "");
+  const rangeSpans = [];
+  const rangePattern = /제\s*(\d+)\s*호\s*부터\s*제\s*(\d+)\s*호\s*까지/g;
+  for (const match of source.matchAll(rangePattern)) {
+    const start = Number(match[1]);
+    const end = Number(match[2]);
+    if (Number.isFinite(start) && Number.isFinite(end)) ranges.push(normalizeItemRange(start, end));
+    rangeSpans.push([match.index, match.index + match[0].length]);
+  }
+  const singlePattern = /제\s*(\d+)\s*호/g;
+  for (const match of source.matchAll(singlePattern)) {
+    if (rangeSpans.some(([start, end]) => match.index >= start && match.index < end)) continue;
+    const item = Number(match[1]);
+    if (Number.isFinite(item)) ranges.push({ start: item, end: item });
+  }
+  return uniqReferences(ranges);
+}
+
+function normalizeItemRange(start, end) {
+  return start <= end ? { start, end } : { start: end, end: start };
+}
+
+function compactLawReference(value) {
+  return String(value ?? "").replace(/\s+/g, "");
+}
+
+function uniqReferences(refs) {
+  const seen = new Set();
+  const result = [];
+  for (const ref of refs) {
+    if (!Number.isFinite(ref.start) || !Number.isFinite(ref.end)) continue;
+    const key = `${ref.refKey || ""}:${ref.start}-${ref.end}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    result.push(ref);
+  }
+  return result.sort(
+    (a, b) =>
+      String(a.refKey || "").localeCompare(String(b.refKey || ""), "ko") ||
+      a.start - b.start ||
+      a.end - b.end,
+  );
+}
+
+function hintCoversAllReferences(hint, refs) {
+  return refs.every((ref) =>
+    hint.refs.some((candidate) => {
+      const sameReference = !candidate.refKey || !ref.refKey || candidate.refKey === ref.refKey;
+      return sameReference && candidate.start <= ref.start && candidate.end >= ref.end;
+    }),
+  );
+}
+
+function formatDutyReferences(refs) {
+  const grouped = new Map();
+  for (const ref of refs) {
+    const key = ref.refKey || "직제";
+    if (!grouped.has(key)) grouped.set(key, []);
+    grouped.get(key).push(ref.start === ref.end ? `제${ref.start}호` : `제${ref.start}호부터 제${ref.end}호까지`);
+  }
+  return [...grouped.entries()].map(([key, items]) => `${key} ${uniq(items).join("ㆍ")}`).join(", ");
+}
+
+function upsertByKey(collection, entry, keys) {
+  const existing = collection.find((item) => keys.every((key) => item[key] === entry[key]));
+  if (existing) Object.assign(existing, entry);
+  else collection.push(entry);
 }
 
 function setJurisdictionRelation(graph, parentName, childName, attrs) {
@@ -245,12 +394,14 @@ function setJurisdictionRelation(graph, parentName, childName, attrs) {
     source: attrs.source,
     evidence: attrs.evidence,
     legalBasis: attrs.legalBasis,
+    ...(attrs.reference ? { reference: attrs.reference } : {}),
   };
   child.metadata.jurisdiction = {
     parent: parent.name,
     evidence: attrs.evidence,
     legalBasis: attrs.legalBasis,
     source: attrs.source,
+    ...(attrs.reference ? { reference: attrs.reference } : {}),
   };
   graph.meta.jurisdictionRelations ||= [];
   const existing = graph.meta.jurisdictionRelations.find(

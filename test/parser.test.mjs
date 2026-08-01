@@ -534,6 +534,55 @@ test("시행규칙의 다양한 보좌기관 소관 문형을 과 소관관계�
   );
 });
 
+test("직제 호 번호 범위가 과 분장 조문에 재인용되면 보좌기관 소관으로 기록한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(시험실) 시험실장 밑에 지역정책관 및 산업정책관을 둔다.
+시험실에 지역총괄과ㆍ지역개발과ㆍ산업지원과를 둔다.
+지역정책관은 직제 제10조제3항제1호부터 제4호까지의 사항에 관하여 시험실장을 보좌한다.
+산업정책관은 직제 제10조제3항제5호부터 제9호까지의 사항에 관하여 시험실장을 보좌한다.
+① 지역총괄과장은 직제 제10조제3항제1호부터 제2호까지의 사항을 분장한다.
+② 지역개발과장은 직제 제10조제3항제3호 및 제4호의 사항을 분장한다.
+③ 산업지원과장은 직제 제10조제3항제5호부터 제6호까지의 사항을 분장한다.
+`,
+  ]);
+
+  assert.equal(graph.nodeByName("지역총괄과").metadata.jurisdiction.parent, "지역정책관");
+  assert.equal(graph.nodeByName("지역개발과").metadata.jurisdiction.parent, "지역정책관");
+  assert.equal(graph.nodeByName("산업지원과").metadata.jurisdiction.parent, "산업정책관");
+  assert.equal(graph.nodeByName("지역총괄과").metadata.jurisdiction.evidence, "duty-item-range");
+  assert.match(graph.nodeByName("지역개발과").metadata.jurisdiction.reference, /제10조제3항/);
+  assert.deepEqual(
+    graph.meta.jurisdictionRangeHints.map((item) => [item.advisor, item.reference]),
+    [
+      ["지역정책관", "제10조제3항 제1호부터 제4호까지"],
+      ["산업정책관", "제10조제3항 제5호부터 제9호까지"],
+    ],
+  );
+});
+
+test("직제 호 번호 범위가 둘 이상에 걸치면 보좌기관 소관을 추정하지 않는다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(시험실) 시험실장 밑에 지역정책관 및 산업정책관을 둔다.
+시험실에 조정과를 둔다.
+지역정책관은 직제 제10조제3항제1호부터 제4호까지의 사항에 관하여 시험실장을 보좌한다.
+산업정책관은 직제 제10조제3항제5호부터 제9호까지의 사항에 관하여 시험실장을 보좌한다.
+① 조정과장은 직제 제10조제3항제4호 및 제5호의 사항을 분장한다.
+`,
+  ]);
+
+  assert.equal(graph.nodeByName("조정과").metadata.jurisdiction, undefined);
+  assert.deepEqual(graph.meta.jurisdictionRangeCandidates.at(-1), {
+    department: "조정과",
+    reference: "제10조제3항 제4호ㆍ제5호",
+    advisors: [],
+    source: "입력 1",
+  });
+});
+
 test("@소관 지시문으로 확인된 운영 소관 묶음을 보강한다", () => {
   const graph = parseOrganizationTexts([
     `

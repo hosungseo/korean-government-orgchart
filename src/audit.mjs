@@ -285,6 +285,14 @@ function formatAnnexOrganization(item) {
   if (item.type === "regional-tax-office-jurisdiction") {
     return `- ${item.annex} · ${item.title}: 지방청 ${item.updatedCount}개의 위치·관할구역 메타데이터 반영`;
   }
+  if (item.type === "tax-office-jurisdiction") {
+    const skipped = item.skippedOffices?.length ? `, 미매칭 세무서 ${item.skippedOffices.length}개` : "";
+    return `- ${item.annex} · ${item.title}: 세무서 ${item.updatedCount}개의 위치·관할구역 메타데이터 반영${skipped}`;
+  }
+  if (item.type === "tax-office-branch-jurisdiction") {
+    const skipped = item.skippedTaxOffices?.length ? `, 미매칭 세무서 ${item.skippedTaxOffices.length}개` : "";
+    return `- ${item.annex} · ${item.title}: 지서 ${item.branchCount}개를 세무서 하위 소속기관으로 반영${skipped}`;
+  }
   if (item.type === "tax-office-department-matrix") {
     const skipped = item.skippedOffices?.length ? `, 미매칭 세무서 ${item.skippedOffices.length}개` : "";
     return `- ${item.annex} · ${item.title}: 세무서 ${item.officeCount}개에 과 ${item.departmentCount}개를 scoped 하부조직으로 반영${skipped}`;

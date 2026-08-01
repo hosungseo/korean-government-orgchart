@@ -67,6 +67,15 @@ export function applyAnnexOrganizations(graph, annexes = graph.meta.annexes || [
     }
   }
   for (const annex of annexes) {
+    if (isTaxOfficeJurisdictionAnnex(annex)) {
+      const summary = applyTaxOfficeJurisdictionAnnex(graph, annex);
+      if (summary.updatedCount || summary.skippedOffices.length) summaries.push(summary);
+    } else if (isTaxOfficeBranchAnnex(annex)) {
+      const summary = applyTaxOfficeBranchAnnex(graph, annex);
+      if (summary.branchCount || summary.skippedTaxOffices.length) summaries.push(summary);
+    }
+  }
+  for (const annex of annexes) {
     if (isTaxOfficeDepartmentMatrixAnnex(annex)) {
       const summary = applyTaxOfficeDepartmentMatrixAnnex(graph, annex);
       if (summary.officeCount || summary.skippedOffices.length) summaries.push(summary);
@@ -91,7 +100,12 @@ export function findAnnex(graph, annexLabel, { source } = {}) {
 
 export function parseBoxTable(text) {
   const rows = [];
+  let forceNewRow = false;
   for (const line of String(text || "").split(/\r?\n/)) {
+    if (isRowSeparator(line)) {
+      forceNewRow = true;
+      continue;
+    }
     if (!/[┃│]/.test(line)) continue;
     if (/[┏┓┗┛┠┨┯┷┼━─]/.test(line)) continue;
     const firstBorder = line.search(/[┃│]/);
@@ -107,8 +121,8 @@ export function parseBoxTable(text) {
       .split(/[│┃]/)
       .map(cleanCell);
     if (!cells.some(Boolean)) continue;
-    const hasLeadingCell = Boolean(cells[0]);
-    if (!hasLeadingCell && rows.length) {
+    const startsNewUnseparatedRow = rows.length && !forceNewRow && startsNumberedRow(cells, rows.at(-1));
+    if (rows.length && !forceNewRow && !startsNewUnseparatedRow) {
       const previous = rows.at(-1);
       cells.forEach((cell, index) => {
         if (!cell) return;
@@ -117,8 +131,9 @@ export function parseBoxTable(text) {
     } else {
       rows.push(cells);
     }
+    forceNewRow = false;
   }
-  return stripHeaderRows(rows);
+  return fillLeadingBlankCells(stripHeaderRows(rows));
 }
 
 function flattenAnnexUnits(value) {
@@ -147,11 +162,43 @@ function cleanCell(value) {
   );
 }
 
+function isRowSeparator(line) {
+  const trimmed = String(line || "").trimStart();
+  return /[┌┐└┘├┤┠┨┼┬┴┯┷─━]/.test(trimmed);
+}
+
+function startsNumberedRow(cells, previous) {
+  return /^\d+(?:의\d+)?$/.test(cells[0] || "") && /^\d+(?:의\d+)?$/.test(previous?.[0] || "");
+}
+
 function stripHeaderRows(rows) {
-  if (!rows.length) return rows;
-  const first = rows[0].join(" ");
-  if (/(?:명칭|기관|직급|계|구분|위치|관할|소속)/.test(first)) return rows.slice(1);
-  return rows;
+  const result = [...rows];
+  while (result.length && isHeaderRow(result[0])) result.shift();
+  return result;
+}
+
+function isHeaderRow(row) {
+  const text = row.join(" ");
+  const nonEmpty = row.filter(Boolean).length;
+  if (/(?:명칭|기관|직급|계|구분|위치|관할|소속|시ㆍ도|시·도|세무서명|국세청명)/.test(text)) return true;
+  return nonEmpty <= 1 && /(?:국세청|기관|부서|과)$/.test(text.trim());
+}
+
+function fillLeadingBlankCells(rows) {
+  const last = [];
+  return rows.map((row) => {
+    const filled = [...row];
+    const firstNonEmpty = filled.findIndex(Boolean);
+    if (firstNonEmpty > 0) {
+      for (let index = 0; index < firstNonEmpty; index += 1) {
+        if (!filled[index] && last[index]) filled[index] = last[index];
+      }
+    }
+    filled.forEach((cell, index) => {
+      if (cell) last[index] = cell;
+    });
+    return filled;
+  });
 }
 
 function classifyAnnex(title, text) {
@@ -191,6 +238,16 @@ function isRegionalJurisdictionAnnex(annex) {
 function isTaxOfficeDepartmentMatrixAnnex(annex) {
   const title = normalizeAnnexTitle(annex?.title);
   return /세무서에\s*두는\s*과\s*단위\s*기구/.test(title);
+}
+
+function isTaxOfficeJurisdictionAnnex(annex) {
+  const title = normalizeAnnexTitle(annex?.title);
+  return !/지서/.test(title) && /세무서의\s*명칭.*위치.*관할구역/.test(title);
+}
+
+function isTaxOfficeBranchAnnex(annex) {
+  const title = normalizeAnnexTitle(annex?.title);
+  return /지서의\s*명칭.*위치.*관할구역/.test(title);
 }
 
 function applyRegionalTaxOfficeAnnex(graph, annex) {
@@ -261,6 +318,99 @@ function applyRegionalTaxOfficeAnnex(graph, annex) {
       summary.childCount += 1;
     }
   }
+  return summary;
+}
+
+function applyTaxOfficeJurisdictionAnnex(graph, annex) {
+  const rows = normalizeAnnexRows(annex);
+  const source = annex.source || annex.title || annex.annex;
+  const summary = {
+    annex: annex.annex,
+    title: annex.title,
+    type: "tax-office-jurisdiction",
+    updatedCount: 0,
+    skippedOffices: [],
+  };
+  for (const row of rows) {
+    const officeName = normalizeTaxOfficeName(row[2]);
+    if (!officeName) continue;
+    const office = graph.nodeByName(officeName);
+    if (!office) {
+      summary.skippedOffices.push(officeName);
+      continue;
+    }
+    graph.addNode(officeName, {
+      kind: "affiliated",
+      forceKind: true,
+      source,
+      metadata: {
+        regionalOffice: normalizeRegionalOfficeName(row[0]),
+        province: cleanLocation(row[1]),
+        location: cleanLocation(row[3]),
+        jurisdictionArea: cleanJurisdiction(row[4]),
+        jurisdictionAnnex: annex.annex,
+        jurisdictionAnnexTitle: annex.title,
+      },
+    });
+    summary.updatedCount += 1;
+  }
+  summary.skippedOffices = uniq(summary.skippedOffices);
+  return summary;
+}
+
+function applyTaxOfficeBranchAnnex(graph, annex) {
+  const rows = normalizeAnnexRows(annex);
+  const source = annex.source || annex.title || annex.annex;
+  const summary = {
+    annex: annex.annex,
+    title: annex.title,
+    type: "tax-office-branch-jurisdiction",
+    branchCount: 0,
+    skippedTaxOffices: [],
+  };
+  for (const row of rows) {
+    const taxOfficeName = normalizeTaxOfficeName(row[2]);
+    const branchName = normalizeBranchOfficeName(row[3]);
+    if (!taxOfficeName || !branchName) continue;
+    const taxOffice = graph.nodeByName(taxOfficeName);
+    if (!taxOffice) {
+      summary.skippedTaxOffices.push(taxOfficeName);
+      continue;
+    }
+    const branch = graph.addNode(branchName, {
+      id: `${taxOffice.id}/${branchName}`,
+      kind: "affiliated",
+      forceKind: true,
+      source,
+      metadata: {
+        affiliationType: "special-local",
+        annex: annex.annex,
+        annexTitle: annex.title,
+        annexRole: "tax-office-branch",
+        parentTaxOffice: taxOfficeName,
+        regionalOffice: normalizeRegionalOfficeName(row[0]),
+        province: cleanLocation(row[1]),
+        location: cleanLocation(row[4]),
+        jurisdictionArea: cleanJurisdiction(row[5]),
+        unitRole: "affiliated-institution",
+        scoped: true,
+      },
+    });
+    if (!branch) continue;
+    graph.addEdge(taxOffice.id, branch.id, {
+      type: "affiliated",
+      source,
+      metadata: {
+        affiliationType: "special-local",
+        annex: annex.annex,
+        annexTitle: annex.title,
+        annexRole: "tax-office-branch",
+        scoped: true,
+      },
+    });
+    summary.branchCount += 1;
+  }
+  summary.skippedTaxOffices = uniq(summary.skippedTaxOffices);
   return summary;
 }
 
@@ -393,6 +543,23 @@ function normalizeTaxOfficeName(value) {
   if (!name || /^(?:및|외|등)$/.test(name)) return "";
   if (/(?:세무서|지서)$/.test(name)) return name;
   return `${name}세무서`;
+}
+
+function normalizeRegionalOfficeName(value) {
+  const name = String(value || "").replace(/\s+/g, "").trim();
+  if (!name) return "";
+  if (/(?:지방국세청)$/.test(name)) return name;
+  return name;
+}
+
+function normalizeBranchOfficeName(value) {
+  const name = String(value || "")
+    .replace(/\([^)]*\)/g, "")
+    .replace(/\s+/g, "")
+    .replace(/[.;:，、]/g, "")
+    .trim();
+  if (!name || /^(?:및|외|등)$/.test(name)) return "";
+  return name;
 }
 
 function splitDepartmentList(value) {

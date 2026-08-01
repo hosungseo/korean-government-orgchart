@@ -37,6 +37,25 @@ test("법제처 별표의 가벼운 선그리기 표도 행 단위로 추출한�
   assert.deepEqual(parseBoxTable(lightTable), [["가", "종로, 중부 남대문", "징세과 조사과"]]);
 });
 
+test("법제처 별표의 셀 병합 부분 구분선을 새 행으로 해석한다", () => {
+  const rowSpanTable = `
+┌────┬───┬────┬─────┬──────┐
+│지방    │시ㆍ도│명칭    │위치      │관할구역│
+│국세청  │      │        │          │        │
+├────┼───┼────┼─────┼──────┤
+│서울지방│서울  │종로    │서울      │종로구  │
+│국세청  │특별시│세무서  │특별시    │        │
+│        │      ├────┼─────┼──────┤
+│        │      │중부    │서울      │중구    │
+│        │      │세무서  │특별시    │명동    │
+└────┴───┴────┴─────┴──────┘
+`;
+  assert.deepEqual(parseBoxTable(rowSpanTable), [
+    ["서울지방 국세청", "서울 특별시", "종로 세무서", "서울 특별시", "종로구"],
+    ["서울지방 국세청", "서울 특별시", "중부 세무서", "서울 특별시", "중구 명동"],
+  ]);
+});
+
 test("법제처 JSON에서 별표 인벤토리를 추출하고 감사 리포트에 연결한다", () => {
   const annexes = extractAnnexesFromLawJson(
     {
@@ -102,6 +121,24 @@ test("지방국세청 명칭·위치·소속세무서 별표를 소속기관 트
       ],
     },
     {
+      annex: "별표 2",
+      title: "세무서의 명칭ㆍ위치 및 관할구역(제19조제2항 관련)",
+      source: "국세청과 그 소속기관 직제 시행규칙 [시행 20260701]",
+      rows: [
+        ["서울지방 국세청", "서울 특별시", "종로 세무서", "서울 특별시", "서울특별시 종로구"],
+        ["서울지방 국세청", "서울 특별시", "관악 세무서", "서울 특별시", "서울특별시 관악구"],
+      ],
+    },
+    {
+      annex: "별표 4",
+      title: "지서의 명칭ㆍ위치 및 관할구역(제19조제4항 관련)",
+      source: "국세청과 그 소속기관 직제 시행규칙 [시행 20260701]",
+      rows: [
+        ["서울지방 국세청", "서울 특별시", "종로 세무서", "북부지서", "서울 특별시", "서울특별시 북부"],
+        ["서울지방 국세청", "서울 특별시", "없는 세무서", "미상지서", "서울 특별시", "서울특별시 미상"],
+      ],
+    },
+    {
       annex: "별표 5",
       title: "세무서에 두는 과 단위 기구(제30조제2항 관련)",
       source: "국세청과 그 소속기관 직제 시행규칙 [시행 20260701]",
@@ -122,7 +159,13 @@ test("지방국세청 명칭·위치·소속세무서 별표를 소속기관 트
   assert.equal(jungbu.metadata.location, "경기도");
   assert.equal(jungbu.metadata.jurisdictionArea, "경기도 안양시ㆍ수원시");
   assert.equal(jongno.kind, "affiliated");
+  assert.equal(jongno.metadata.location, "서울특별시");
+  assert.equal(jongno.metadata.jurisdictionArea, "서울특별시 종로구");
   assert.equal(gwanak.metadata.parentRegionalOffice, "서울지방국세청");
+  const branch = graph.childrenOf(jongno).find(({ node }) => node.name === "북부지서")?.node;
+  assert.equal(branch?.kind, "affiliated");
+  assert.equal(branch?.metadata.parentTaxOffice, "종로세무서");
+  assert.equal(branch?.metadata.jurisdictionArea, "서울특별시 북부");
   const jongnoDepartments = graph.childrenOf(jongno).map(({ node }) => node);
   const gwanakDepartments = graph.childrenOf(gwanak).map(({ node }) => node);
   assert.equal(jongnoDepartments.some((node) => node.name === "징세과" && node.metadata.parentTaxOffice === "종로세무서"), true);
@@ -139,8 +182,13 @@ test("지방국세청 명칭·위치·소속세무서 별표를 소속기관 트
   assert.deepEqual(graph.meta.annexOrganizations.map((item) => item.type), [
     "regional-tax-office-tree",
     "regional-tax-office-jurisdiction",
+    "tax-office-jurisdiction",
+    "tax-office-branch-jurisdiction",
     "tax-office-department-matrix",
   ]);
+  assert.equal(graph.meta.annexOrganizations.find((item) => item.type === "tax-office-jurisdiction").updatedCount, 2);
+  assert.equal(graph.meta.annexOrganizations.find((item) => item.type === "tax-office-branch-jurisdiction").branchCount, 1);
+  assert.deepEqual(graph.meta.annexOrganizations.find((item) => item.type === "tax-office-branch-jurisdiction").skippedTaxOffices, ["없는세무서"]);
   assert.equal(graph.meta.annexOrganizations.at(-1).officeCount, 2);
   assert.equal(graph.meta.annexOrganizations.at(-1).departmentCount, 6);
   assert.deepEqual(graph.meta.annexOrganizations.at(-1).skippedOffices, ["없는세무서"]);
@@ -158,7 +206,7 @@ test("지방국세청 명칭·위치·소속세무서 별표를 소속기관 트
     source: "국세청과 그 소속기관 직제 시행규칙 [시행 20260701]",
   });
   const report = buildAuditReport(graph, planPages(graph, { paper: "a4-half", layout: "vertical" }));
-  assert.equal(report.annexOrganizations.length, 3);
+  assert.equal(report.annexOrganizations.length, 5);
   assert.equal(
     report.annexRequirements.find((item) => item.description === "시행규칙 관할구역 확인").matchedAnnex.title,
     "지방국세청의 관할구역(제19조제1항 관련)",
@@ -169,5 +217,7 @@ test("지방국세청 명칭·위치·소속세무서 별표를 소속기관 트
   );
   assert.match(formatAuditMarkdown(report), /별표 조직 반영/);
   assert.match(formatAuditMarkdown(report), /지방청 2개, 세무서 5개/);
+  assert.match(formatAuditMarkdown(report), /세무서 2개의 위치·관할구역/);
+  assert.match(formatAuditMarkdown(report), /지서 1개/);
   assert.match(formatAuditMarkdown(report), /세무서 2개에 과 6개/);
 });

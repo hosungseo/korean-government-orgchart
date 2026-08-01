@@ -1,8 +1,9 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { Presentation, PresentationFile } from "@oai/artifact-tool";
+import { nodeLabelLines, nodeLabelMetrics } from "./label.mjs";
 import { displayDate } from "./utils.mjs";
-import { displayNodeName, layoutPage, nodeStyle, resolvePageSize } from "./layout.mjs";
+import { layoutPage, nodeStyle, resolvePageSize } from "./layout.mjs";
 
 const TYPEFACE = "맑은 고딕";
 
@@ -133,6 +134,8 @@ function formatLayoutWarning(diagnostics) {
 
 function addNode(slide, node, position, { showLawCounts, pageSize }) {
   const style = nodeStyle(node);
+  const labelLines = nodeLabelLines(node, position, { showLawCounts });
+  const labelMetrics = nodeLabelMetrics(node, position, labelLines);
   const shape = slide.shapes.add({
     geometry: position.vertical ? "rect" : "roundRect",
     name: `조직-${node.id}`,
@@ -146,20 +149,16 @@ function addNode(slide, node, position, { showLawCounts, pageSize }) {
     line: { style: style.lineStyle, fill: style.line, width: 1.15 },
     borderRadius: position.vertical ? 1 : 4,
   });
-  shape.text = displayNodeName(node, position.vertical, { showLawCounts });
-  const verticalLines = position.vertical ? displayNodeName(node, true, { showLawCounts }).split("\n").length : 1;
-  const verticalLineHeight = position.vertical
-    ? Math.min(10.5, Math.max(6.8, position.height / Math.max(1, verticalLines) - 1.2))
-    : 14;
+  shape.text = labelLines.join("\n");
   shape.text.style = {
-    fontSize: position.vertical ? Math.min(10.6, Math.max(6.4, verticalLineHeight - 0.2)) : node.name.length > 13 ? 10.5 : 12.5,
+    fontSize: labelMetrics.fontSize,
     bold: style.bold,
     color: style.text,
     alignment: "center",
     verticalAlignment: "middle",
     autoFit: "shrinkText",
     typeface: TYPEFACE,
-    lineSpacing: position.vertical ? Math.max(0.58, Math.min(0.76, verticalLineHeight / 13.5)) : 0.95,
+    lineSpacing: position.vertical ? Math.max(0.58, Math.min(0.76, labelMetrics.lineHeight / 13.5)) : labelLines.length > 1 ? 0.86 : 0.95,
     insets: position.vertical
       ? { top: 3, right: 2, bottom: 3, left: 2 }
       : { top: 3, right: 4, bottom: 3, left: 4 },

@@ -1,5 +1,6 @@
 import { displayDate, xmlEscape } from "./utils.mjs";
-import { displayNodeName, layoutPage, nodeStyle, resolvePageSize } from "./layout.mjs";
+import { nodeLabelLines, nodeLabelMetrics } from "./label.mjs";
+import { layoutPage, nodeStyle, resolvePageSize } from "./layout.mjs";
 
 export function renderSvg(graph, pages, { showLawCounts = false, paper } = {}) {
   const gap = 24;
@@ -148,13 +149,8 @@ function svgLayoutWarning(diagnostics, pageSize) {
 
 function svgNode(node, position, { showLawCounts, pageSize }) {
   const style = nodeStyle(node);
-  const lines = position.vertical
-    ? displayNodeName(node, true, { showLawCounts }).split("\n")
-    : [displayNodeName(node, false, { showLawCounts })];
-  const lineHeight = position.vertical
-    ? Math.min(10.5, Math.max(6.8, position.height / Math.max(1, lines.length) - 1.2))
-    : 14;
-  const fontSize = position.vertical ? Math.min(10.8, Math.max(6.4, lineHeight - 0.2)) : node.name.length > 13 ? 10.5 : 12.5;
+  const lines = nodeLabelLines(node, position, { showLawCounts });
+  const { lineHeight, fontSize } = nodeLabelMetrics(node, position, lines);
   const dash = style.lineStyle === "dashed" ? ` stroke-dasharray="4 3"` : "";
   const totalTextHeight = lines.length * lineHeight;
   const startY = position.top + (position.height - totalTextHeight) / 2 + lineHeight * 0.8;

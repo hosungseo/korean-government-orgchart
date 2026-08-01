@@ -86,6 +86,7 @@ jobs:
             --cases examples/audit-cases.json \
             --out-dir /tmp/orgchart-review-pack \
             --outputs svg,json,audit,trace,deck \
+            --rerun-suggested \
             --strict > /tmp/orgchart-review-pack-summary.json
           node --input-type=module -e '
             import fs from "node:fs";
@@ -94,6 +95,10 @@ jobs:
             for (const key of ["readme", "worklist", "cases", "suggestedCases", "audit", "auditJson", "manifest", "manifestJson"]) {
               const filePath = summary.files?.[key];
               if (!filePath || !fs.existsSync(filePath)) throw new Error(`missing review-pack file: ${key}`);
+            }
+            if (!summary.rerun || summary.rerun.skipped) throw new Error("expected suggested rerun");
+            if (!summary.rerun.files?.readme || !fs.existsSync(summary.rerun.files.readme)) {
+              throw new Error("missing rerun README");
             }
             const manifest = JSON.parse(fs.readFileSync(summary.files.manifestJson, "utf8"));
             if (manifest.total !== 2) throw new Error(`expected 2 built cases, got ${manifest.total}`);

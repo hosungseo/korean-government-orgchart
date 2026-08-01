@@ -59,7 +59,11 @@ export async function runReviewPack(args = {}) {
     audit,
     build,
   };
-  await writeText(files.suggestedCases, `${JSON.stringify(buildSuggestedCasesDocument(result), jsonReplacer, 2)}\n`);
+  result.suggestedCases = buildSuggestedCasesDocument(result);
+  await writeText(files.suggestedCases, `${JSON.stringify(result.suggestedCases, jsonReplacer, 2)}\n`);
+  if (args["rerun-suggested"] === true) {
+    result.rerun = await runSuggestedReviewPack(result, args, sharedLawFetchCache);
+  }
   await writeText(files.worklist, formatReviewWorklistMarkdown(result));
   await writeText(files.readme, formatReviewPackMarkdown(result));
   return result;
@@ -97,6 +101,8 @@ export function formatReviewPackMarkdown(result) {
   lines.push(`- 기계 판독용 감사 JSON: ${linkPath(result.outDir, result.files.auditJson)}`);
   lines.push(`- 기계 판독용 매니페스트 JSON: ${linkPath(result.outDir, result.files.manifestJson)}`);
   lines.push("");
+
+  appendRerunSection(lines, result);
 
   const topActions = topReviewActions(result.audit?.cases || []);
   lines.push("## 우선 확인");
@@ -143,13 +149,18 @@ export function formatReviewPackMarkdown(result) {
 
 export function formatReviewWorklistMarkdown(result) {
   const lines = [];
-  const suggested = buildSuggestedCasesDocument(result);
+  const suggested = result.suggestedCases || buildSuggestedCasesDocument(result);
   lines.push("# 조직도 검토 작업목록");
   lines.push("");
   lines.push(`- 생성시각: ${result.generatedAt}`);
   lines.push(`- 케이스: ${result.caseCount}`);
   if (result.files?.suggestedCases) {
     lines.push(`- 자동 보강 케이스 후보: ${linkPath(result.outDir, result.files.suggestedCases)} (${suggested.changedCases}/${suggested.cases.length}건 보강)`);
+  }
+  if (result.rerun?.outDir) {
+    lines.push(`- 자동 보강 재실행: ${linkPath(result.outDir, result.rerun.outDir)}`);
+  } else if (result.rerun?.skipped) {
+    lines.push(`- 자동 보강 재실행: 생략(${result.rerun.reason})`);
   }
   lines.push("");
 
@@ -226,6 +237,123 @@ export function formatReviewWorklistMarkdown(result) {
   return `${lines.join("\n")}\n`;
 }
 
+async function runSuggestedReviewPack(result, args, sharedLawFetchCache) {
+  const suggested = result.suggestedCases || buildSuggestedCasesDocument(result);
+  if (!suggested.changedCases) {
+    return {
+      skipped: true,
+      reason: "자동 반영 가능한 보강안이 없습니다.",
+      changedCases: 0,
+    };
+  }
+  const rerunOutDir = path.resolve(stringArg(args, "rerun-out-dir") || path.join(result.outDir, "rerun"));
+  const rerunArtifactDir = path.resolve(stringArg(args, "rerun-artifact-dir") || path.join(rerunOutDir, "artifacts"));
+  const rerunDeck = path.resolve(stringArg(args, "rerun-deck") || path.join(rerunArtifactDir, "review-deck.pptx"));
+  const rerunResult = await runReviewPack({
+    ...args,
+    caseSpecs: suggested.cases,
+    casesBaseDir: result.outDir,
+    cases: undefined,
+    "out-dir": rerunOutDir,
+    "artifact-dir": rerunArtifactDir,
+    deck: rerunDeck,
+    "rerun-suggested": false,
+    lawFetchCache: sharedLawFetchCache,
+  });
+  return {
+    outDir: rerunResult.outDir,
+    artifactDir: rerunResult.artifactDir,
+    files: rerunResult.files,
+    changedCases: suggested.changedCases,
+    caseCount: rerunResult.caseCount,
+    audit: rerunResult.audit,
+    build: rerunResult.build,
+    comparison: compareAuditMetrics(result.audit, rerunResult.audit),
+  };
+}
+
+function appendRerunSection(lines, result) {
+  if (!result.rerun) return;
+  lines.push("## 자동 보강 재실행");
+  lines.push("");
+  if (result.rerun.skipped) {
+    lines.push(`- 생략: ${result.rerun.reason}`);
+    lines.push("");
+    return;
+  }
+  lines.push(`- 2차 리뷰팩: ${linkPath(result.outDir, result.rerun.outDir)}`);
+  lines.push(`- 적용된 보강 케이스: ${result.rerun.changedCases}/${result.caseCount}`);
+  if (result.rerun.files?.readme) lines.push(`- 2차 README: ${linkPath(result.outDir, result.rerun.files.readme)}`);
+  if (result.rerun.files?.audit) lines.push(`- 2차 감사 요약: ${linkPath(result.outDir, result.rerun.files.audit)}`);
+  if (result.rerun.files?.manifest) lines.push(`- 2차 산출물 매니페스트: ${linkPath(result.outDir, result.rerun.files.manifest)}`);
+  lines.push("");
+  lines.push("| 지표 | 1차 | 2차 | 변화 |");
+  lines.push("| --- | ---: | ---: | ---: |");
+  for (const row of comparisonRows(result.rerun.comparison)) {
+    lines.push(`| ${row.label} | ${row.before} | ${row.after} | ${formatDelta(row.delta)} |`);
+  }
+  lines.push("");
+}
+
+function compareAuditMetrics(beforeAudit, afterAudit) {
+  const before = auditMetrics(beforeAudit);
+  const after = auditMetrics(afterAudit);
+  const delta = {};
+  for (const key of Object.keys(before)) delta[key] = (after[key] || 0) - (before[key] || 0);
+  return { before, after, delta };
+}
+
+function auditMetrics(audit = {}) {
+  const totals = {
+    high: 0,
+    medium: 0,
+    low: 0,
+    layoutIssues: 0,
+    qualityIssues: 0,
+    jurisdictionCandidates: 0,
+    missingAnnexes: 0,
+    lawMapUnmatched: 0,
+    lawMapAmbiguous: 0,
+  };
+  for (const item of audit.cases || []) {
+    const summary = item.summary || {};
+    totals.high += summary.reviewActions?.high || 0;
+    totals.medium += summary.reviewActions?.medium || 0;
+    totals.low += summary.reviewActions?.low || 0;
+    totals.layoutIssues += summary.layoutDiagnostics?.totalIssues || 0;
+    totals.qualityIssues += summary.layoutDiagnostics?.qualityIssues || 0;
+    totals.jurisdictionCandidates += summary.jurisdiction?.candidateDepartments || 0;
+    totals.missingAnnexes += summary.annex?.missing || 0;
+    totals.lawMapUnmatched += summary.lawMap?.unmatchedDepartments || 0;
+    totals.lawMapAmbiguous += summary.lawMap?.ambiguousDepartments || 0;
+  }
+  return totals;
+}
+
+function comparisonRows(comparison = {}) {
+  const labels = [
+    ["high", "높은 확인"],
+    ["medium", "중간 확인"],
+    ["layoutIssues", "배치 hard issue"],
+    ["qualityIssues", "작도 polish issue"],
+    ["jurisdictionCandidates", "소관 후보 과·팀"],
+    ["missingAnnexes", "미확보 별표"],
+    ["lawMapUnmatched", "소관법령 미매칭"],
+    ["lawMapAmbiguous", "소관법령 중복 후보"],
+  ];
+  return labels.map(([key, label]) => ({
+    label,
+    before: comparison.before?.[key] || 0,
+    after: comparison.after?.[key] || 0,
+    delta: comparison.delta?.[key] || 0,
+  }));
+}
+
+function formatDelta(value) {
+  if (!value) return "0";
+  return value > 0 ? `+${value}` : String(value);
+}
+
 export function buildSuggestedCasesDocument(result) {
   const baseCases = result.exportedCases || (result.audit?.cases || []).map((item) => item.case || {});
   const cases = [];
@@ -242,7 +370,7 @@ export function buildSuggestedCasesDocument(result) {
     changedCases,
     notes: [
       "이 파일은 원본 cases.json을 보존한 채 자동 적용 가능한 보강안만 반영한 후보입니다.",
-      "단일 보좌기관의 @소관 후보와 hard layout 문제의 보수적 레이아웃 재시도만 자동 반영합니다.",
+      "단일 보좌기관의 @소관 후보와 hard/polish layout 문제의 보수적 레이아웃 재시도만 자동 반영합니다.",
       "별표 확보, 복수 보좌기관 소관 대조, 소관법령 지도 충돌은 worklist.md에서 별도 확인하세요.",
     ],
     cases,
@@ -288,7 +416,11 @@ async function resolveReviewContext(args) {
   if (args.caseSpecs) {
     return {
       caseSpecs: args.caseSpecs,
-      casesBaseDir: stringArg(args, "cases") ? path.dirname(path.resolve(stringArg(args, "cases"))) : process.cwd(),
+      casesBaseDir: args.casesBaseDir
+        ? path.resolve(String(args.casesBaseDir))
+        : stringArg(args, "cases")
+          ? path.dirname(path.resolve(stringArg(args, "cases")))
+          : process.cwd(),
     };
   }
   if (stringArg(args, "cases")) {

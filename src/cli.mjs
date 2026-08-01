@@ -235,6 +235,13 @@ async function reviewPackCommand(args) {
     deck: result.build.deck,
     decks: result.build.decks,
     files: result.files,
+    suggestedCases: result.suggestedCases
+      ? {
+          changedCases: result.suggestedCases.changedCases,
+          cases: result.suggestedCases.cases.length,
+        }
+      : undefined,
+    rerun: summarizeReviewPackRerun(result.rerun),
   };
   console.log(JSON.stringify(summary, jsonReplacer, 2));
   if (args.strict === true) {
@@ -242,8 +249,34 @@ async function reviewPackCommand(args) {
       ["error", "needs-correction"].includes(item.summary.status),
     );
     const buildFailing = result.build.deckError || result.build.cases.some((item) => item.status === "error");
-    if (auditFailing || buildFailing) process.exitCode = 2;
+    const rerunAuditFailing = result.rerun?.audit?.cases?.some((item) =>
+      ["error", "needs-correction"].includes(item.summary.status),
+    );
+    const rerunBuildFailing = result.rerun?.build?.deckError || result.rerun?.build?.cases?.some((item) => item.status === "error");
+    if (auditFailing || buildFailing || rerunAuditFailing || rerunBuildFailing) process.exitCode = 2;
   }
+}
+
+function summarizeReviewPackRerun(rerun) {
+  if (!rerun) return undefined;
+  if (rerun.skipped) {
+    return {
+      skipped: true,
+      reason: rerun.reason,
+      changedCases: rerun.changedCases || 0,
+    };
+  }
+  return {
+    outDir: rerun.outDir,
+    artifactDir: rerun.artifactDir,
+    cases: rerun.caseCount,
+    auditStatusCounts: rerun.audit?.statusCounts,
+    buildStatusCounts: rerun.build?.statusCounts,
+    deck: rerun.build?.deck,
+    decks: rerun.build?.decks,
+    files: rerun.files,
+    comparison: rerun.comparison,
+  };
 }
 
 async function graphFromInputs(args) {
@@ -427,6 +460,8 @@ function printHelp() {
   --deck <file.pptx>        batch-build 통합 PPTX deck 경로(--outputs deck 없이도 활성화)
   --artifact-dir <dir>      review-pack 내부 산출물 폴더(기본: <out-dir>/artifacts)
   --suggested-cases-out <file> review-pack 자동 보강 케이스 파일명(기본: suggested-cases.json)
+  --rerun-suggested         review-pack에서 suggested-cases.json을 바로 2차 실행
+  --rerun-out-dir <dir>     2차 리뷰팩 폴더(기본: <out-dir>/rerun)
   --institutions "A,B"      make-cases/review-pack 기관명 목록(쉼표 또는 줄바꿈)
   --strict                  batch-audit에서 오류·수정 필요가 있으면 종료코드 2
 

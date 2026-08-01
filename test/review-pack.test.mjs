@@ -41,6 +41,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
     cases: path.join(dir, "cases.json"),
     "out-dir": path.join(dir, "pack"),
     outputs: "svg,json,audit,trace,deck",
+    "rerun-suggested": true,
   });
 
   assert.equal(result.caseCount, 1);
@@ -50,6 +51,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(await readFile(result.files.readme, "utf8"), /조직도 검토팩/);
   assert.match(await readFile(result.files.readme, "utf8"), /케이스별 산출물/);
   assert.match(await readFile(result.files.readme, "utf8"), /검토 작업목록/);
+  assert.match(await readFile(result.files.readme, "utf8"), /자동 보강 재실행/);
   assert.match(await readFile(result.files.worklist, "utf8"), /조직도 검토 작업목록/);
   assert.match(await readFile(result.files.worklist, "utf8"), /입력에 붙여넣을 보강 지시문 후보/);
   assert.ok((await stat(result.files.cases)).size > 0);
@@ -70,6 +72,13 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   const suggestedAudit = await runBatchAudit({ cases: result.files.suggestedCases });
   assert.equal(suggestedAudit.cases[0].summary.jurisdiction.relations, 2);
   assert.equal(suggestedAudit.cases[0].summary.jurisdiction.candidateDepartments, 0);
+
+  assert.equal(result.rerun.skipped, undefined);
+  assert.equal(result.rerun.changedCases, 1);
+  assert.ok((await stat(result.rerun.files.readme)).size > 0);
+  assert.equal(result.rerun.comparison.before.jurisdictionCandidates, 2);
+  assert.equal(result.rerun.comparison.after.jurisdictionCandidates, 0);
+  assert.equal(result.rerun.comparison.delta.jurisdictionCandidates, -2);
 });
 
 test("review-pack 작업목록은 지시문·별표·레이아웃·소관법령 문제를 요약한다", () => {
@@ -150,7 +159,7 @@ test("review-pack 작업목록은 지시문·별표·레이아웃·소관법령 
   assert.match(markdown, /중복 후보/);
 });
 
-test("review-pack 자동 보강 케이스는 단일 @소관 후보와 hard layout 패치를 반영한다", () => {
+test("review-pack 자동 보강 케이스는 단일 @소관 후보와 layout 패치를 반영한다", () => {
   const suggested = buildSuggestedCasesDocument({
     generatedAt: "2026-08-02T00:00:00.000Z",
     exportedCases: [

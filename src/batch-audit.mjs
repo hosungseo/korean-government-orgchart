@@ -255,7 +255,11 @@ export async function loadBatchContext(args) {
   return {
     caseSpecs,
     casesPath: args.cases ? path.resolve(String(args.cases)) : null,
-    casesBaseDir: args.cases ? path.dirname(path.resolve(String(args.cases))) : process.cwd(),
+    casesBaseDir: args.casesBaseDir
+      ? path.resolve(String(args.casesBaseDir))
+      : args.cases
+        ? path.dirname(path.resolve(String(args.cases)))
+        : process.cwd(),
     date: stringArg(args, "date"),
     view: stringArg(args, "view"),
     paper: stringArg(args, "paper"),

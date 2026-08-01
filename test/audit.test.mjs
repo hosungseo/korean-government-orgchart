@@ -94,3 +94,32 @@ test("감사 리포트는 직제 호 번호 범위 대조 결과를 확정과 �
   assert.match(markdown, /자동 확정:[\s\S]*지역정책관 > 지역총괄과/);
   assert.match(markdown, /확인 필요:[\s\S]*조정과/);
 });
+
+test("감사 리포트는 순서 기반 보좌기관 소관 보강을 표시한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(시험실) 시험실장 밑에 제도정책관ㆍ현장지원관 및 산업협력관을 둔다.
+시험실에 제도총괄과ㆍ제도개선과ㆍ현장총괄과ㆍ현장지원과ㆍ협력총괄과ㆍ협력지원과를 둔다.
+① 제도총괄과장은 다음 사항을 분장한다.
+1. 그 밖에 제도정책관 내 다른 과의 주관에 속하지 않는 사항
+② 제도개선과장은 다음 사항을 분장한다.
+1. 제도 개선
+③ 현장총괄과장은 다음 사항을 분장한다.
+1. 그 밖에 현장지원관 내 다른 과의 주관에 속하지 않는 사항
+④ 현장지원과장은 다음 사항을 분장한다.
+1. 현장 지원
+⑤ 협력총괄과장은 다음 사항을 분장한다.
+1. 그 밖에 산업협력관 내 다른 과의 주관에 속하지 않는 사항
+⑥ 협력지원과장은 다음 사항을 분장한다.
+1. 협력 지원
+`,
+  ]);
+  const report = buildAuditReport(graph, planPages(graph, { paper: "a4-half", layout: "vertical" }));
+  const markdown = formatAuditMarkdown(report);
+
+  assert.equal(report.jurisdictionRunInferences.length, 3);
+  assert.match(markdown, /순서 기반 소관 보강/);
+  assert.match(markdown, /제도정책관: 제도개선과/);
+  assert.match(markdown, /산업협력관: 협력지원과/);
+});

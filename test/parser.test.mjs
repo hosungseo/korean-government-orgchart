@@ -619,6 +619,59 @@ test("직제 호 번호 범위가 둘 이상에 걸치면 보좌기관 소관을
   });
 });
 
+test("보좌기관 anchor와 과 조문 순서가 맞으면 중간 과 소관을 자동 보강한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(시험실) 시험실장 밑에 제도정책관ㆍ현장지원관 및 산업협력관을 둔다.
+시험실에 제도총괄과ㆍ제도개선과ㆍ현장총괄과ㆍ현장지원과ㆍ협력총괄과ㆍ협력지원과를 둔다.
+① 제도총괄과장은 다음 사항을 분장한다.
+1. 그 밖에 제도정책관 내 다른 과의 주관에 속하지 않는 사항
+② 제도개선과장은 다음 사항을 분장한다.
+1. 제도 개선
+③ 현장총괄과장은 다음 사항을 분장한다.
+1. 그 밖에 현장지원관 내 다른 과의 주관에 속하지 않는 사항
+④ 현장지원과장은 다음 사항을 분장한다.
+1. 현장 지원
+⑤ 협력총괄과장은 다음 사항을 분장한다.
+1. 그 밖에 산업협력관 내 다른 과의 주관에 속하지 않는 사항
+⑥ 협력지원과장은 다음 사항을 분장한다.
+1. 협력 지원
+`,
+  ]);
+
+  assert.equal(graph.nodeByName("제도개선과").metadata.jurisdiction.parent, "제도정책관");
+  assert.equal(graph.nodeByName("현장지원과").metadata.jurisdiction.parent, "현장지원관");
+  assert.equal(graph.nodeByName("협력지원과").metadata.jurisdiction.parent, "산업협력관");
+  assert.equal(graph.nodeByName("현장지원과").metadata.jurisdiction.evidence, "ordered-anchor-run");
+  assert.deepEqual(
+    graph.meta.jurisdictionRunInferences.map((item) => [item.advisor, item.departments]),
+    [
+      ["제도정책관", ["제도개선과"]],
+      ["현장지원관", ["현장지원과"]],
+      ["산업협력관", ["협력지원과"]],
+    ],
+  );
+});
+
+test("보좌기관 anchor 순서에 빈 구간이 크면 중간 과 소관을 추정하지 않는다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(시험실) 시험실장 밑에 제도정책관ㆍ현장지원관 및 산업협력관을 둔다.
+시험실에 제도과ㆍ현장과ㆍ협력총괄과ㆍ협력지원과를 둔다.
+① 협력총괄과장은 다음 사항을 분장한다.
+1. 그 밖에 산업협력관 내 다른 과의 주관에 속하지 않는 사항
+② 협력지원과장은 다음 사항을 분장한다.
+1. 협력 지원
+`,
+  ]);
+
+  assert.equal(graph.nodeByName("제도과").metadata.jurisdiction, undefined);
+  assert.equal(graph.nodeByName("현장과").metadata.jurisdiction, undefined);
+  assert.equal(graph.nodeByName("협력지원과").metadata.jurisdiction.parent, "산업협력관");
+});
+
 test("@소관 지시문으로 확인된 운영 소관 묶음을 보강한다", () => {
   const graph = parseOrganizationTexts([
     `

@@ -45,6 +45,7 @@ export function buildAuditReport(graph, pages = [], options = {}) {
     jurisdictionRelations: graph.meta.jurisdictionRelations || [],
     jurisdictionCandidates,
     jurisdictionCrosswalks,
+    jurisdictionRunInferences: graph.meta.jurisdictionRunInferences || [],
     lawMap: graph.meta.lawMap || null,
     spanDiagnostics: graph.meta.spanDiagnostics || [],
     layoutDiagnostics: pageDiagnostics,
@@ -67,6 +68,7 @@ export function formatAuditMarkdown(report) {
   appendSection(lines, "별표 조직 반영", report.annexOrganizations, formatAnnexOrganization);
   appendSection(lines, "한시정원", report.temporaryHeadcounts, (item) => `- ${item.target}: ${item.expires}까지 (${item.source})`);
   appendJurisdictionCrosswalkSection(lines, report.jurisdictionCrosswalks);
+  appendSection(lines, "순서 기반 소관 보강", report.jurisdictionRunInferences, formatJurisdictionRunInference);
   appendSection(lines, "정책관·관 소관 후보", report.jurisdictionCandidates, formatJurisdictionCandidate);
   appendSection(lines, "관리폭 진단", report.spanDiagnostics, (item) => `- ${item.node}: ${item.directUnits}개 · ${item.message}`);
 
@@ -321,6 +323,10 @@ function formatJurisdictionCandidate(item) {
   if (item.directive) lines.push(`  - 지시문 초안: \`${item.directive}\``);
   else lines.push("  - 지시문 초안: 복수 보좌기관이므로 직제 호 번호 범위와 시행규칙 과 분장사무를 먼저 대조해야 합니다.");
   return lines.join("\n");
+}
+
+function formatJurisdictionRunInference(item) {
+  return `- ${item.parent} > ${item.advisor}: ${item.departments.join("ㆍ")} (${item.source})`;
 }
 
 function formatAnnexRequirement(item) {

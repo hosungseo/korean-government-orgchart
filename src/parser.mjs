@@ -10,9 +10,11 @@ import { normalizeWhitespace, uniq } from "./utils.mjs";
 const STRUCTURAL_SUFFIX =
   /(?:부|처|청|위원회|실|국|본부|단|과|팀|관|원|소|센터|사무국|사무소|학교|박물관|미술관|도서관|극장|전당|세무서|소방서|연구원|기록원|관리원|교육원|개발원|분원|지소)$/;
 const JURISDICTION_ADVISOR_SUFFIX =
-  "(?:정책관|기획관|관리관|심의관|교섭관|법무관|지원관|소통관)";
+  "(?:정책관|기획관|관리관|심의관|교섭관|법무관|지원관|소통관|협력관)";
+const JURISDICTION_ADVISOR_NAME = new RegExp(`${JURISDICTION_ADVISOR_SUFFIX}$`);
 const DUTY_PARAGRAPH_MARKER =
   "(?:[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑]|<\\d+>)";
+const DEPARTMENT_SUFFIX = /(?:과|팀|담당관)$/;
 const GENERIC_NAMES = new Set([
   "보조기관",
   "보좌기관",
@@ -80,6 +82,7 @@ export function parseOrganizationTexts(texts, options = {}) {
     headName: options.headName || directives.head || inferHeadTitle(institution),
     deputyName: options.deputyName || directives.deputy,
   });
+  inferJurisdictionRuns(graph);
   for (const document of documents) {
     applyDocumentMetadata(graph, document.text, document.source);
   }
@@ -409,6 +412,119 @@ function setJurisdictionRelation(graph, parentName, childName, attrs) {
   );
   if (existing) Object.assign(existing, relation);
   else graph.meta.jurisdictionRelations.push(relation);
+}
+
+function inferJurisdictionRuns(graph) {
+  for (const parent of graph.nodes.values()) {
+    const orderedChildren = orderedChildrenByEdge(graph, parent.id);
+    const advisors = orderedChildren
+      .filter(({ edge, node }) => edge.type === "advisor" && node.kind === "advisor" && JURISDICTION_ADVISOR_NAME.test(node.name))
+      .map(({ node }) => node);
+    if (advisors.length < 3) continue;
+    const advisorIndex = new Map(advisors.map((node, index) => [node.name, index]));
+    const departments = orderedChildren
+      .filter(({ edge, node }) => ["assistant", "temporary"].includes(edge.type) && DEPARTMENT_SUFFIX.test(node.name))
+      .map(({ node }, index) => ({ node, index }));
+    if (departments.length < 2) continue;
+
+    const anchors = departments
+      .map((entry, index) => {
+        const jurisdiction = entry.node.metadata?.jurisdiction;
+        if (jurisdiction?.evidence !== "explicit-duty-clause") return null;
+        const advisorOrder = advisorIndex.get(jurisdiction.parent);
+        if (advisorOrder == null) return null;
+        return {
+          departmentIndex: index,
+          advisorOrder,
+          advisor: jurisdiction.parent,
+          source: jurisdiction.source,
+        };
+      })
+      .filter(Boolean);
+    if (!anchors.length || !isMonotonicAnchorOrder(anchors)) continue;
+
+    const ranges = jurisdictionRunRanges(anchors, advisors.length, departments.length);
+    for (const range of ranges) {
+      const advisor = advisors[range.advisorOrder];
+      if (!advisor) continue;
+      const children = departments.slice(range.start, range.end + 1).map(({ node }) => node);
+      const inferredChildren = [];
+      for (const child of children) {
+        if (child.metadata?.jurisdiction) continue;
+        setJurisdictionRelation(graph, advisor.name, child.name, {
+          source: range.source || "시행규칙 소관 순서",
+          evidence: "ordered-anchor-run",
+          legalBasis: "시행규칙 보좌기관 anchor 및 과 조문 순서",
+          reference: `${parent.name} 내 ${advisor.name} 구간`,
+        });
+        inferredChildren.push(child);
+      }
+      graph.meta.jurisdictionRunInferences ||= [];
+      if (!inferredChildren.length) continue;
+      upsertByKey(
+        graph.meta.jurisdictionRunInferences,
+        {
+          parent: parent.name,
+          advisor: advisor.name,
+          departments: inferredChildren.map((node) => node.name),
+          source: range.source || "시행규칙 소관 순서",
+          evidence: "ordered-anchor-run",
+        },
+        ["parent", "advisor"],
+      );
+    }
+  }
+}
+
+function orderedChildrenByEdge(graph, parentId) {
+  return [...graph.edges.values()]
+    .filter((edge) => edge.parent === parentId)
+    .map((edge) => ({ edge, node: graph.nodes.get(edge.child) }))
+    .filter(({ node }) => node);
+}
+
+function isMonotonicAnchorOrder(anchors) {
+  for (let index = 1; index < anchors.length; index += 1) {
+    if (anchors[index].advisorOrder < anchors[index - 1].advisorOrder) return false;
+  }
+  return true;
+}
+
+function jurisdictionRunRanges(anchors, advisorCount, departmentCount) {
+  const ranges = [];
+  const first = anchors[0];
+  if (first.advisorOrder === 1 && first.departmentIndex > 0) {
+    ranges.push({
+      advisorOrder: 0,
+      start: 0,
+      end: first.departmentIndex - 1,
+      source: first.source,
+    });
+  }
+  for (let index = 0; index < anchors.length; index += 1) {
+    const current = anchors[index];
+    const next = anchors[index + 1];
+    if (!next) {
+      if (current.advisorOrder === advisorCount - 1) {
+        ranges.push({
+          advisorOrder: current.advisorOrder,
+          start: current.departmentIndex,
+          end: departmentCount - 1,
+          source: current.source,
+        });
+      }
+      continue;
+    }
+    if (next.advisorOrder === current.advisorOrder + 1 || next.advisorOrder === current.advisorOrder) {
+      ranges.push({
+        advisorOrder: current.advisorOrder,
+        start: current.departmentIndex,
+        end: next.departmentIndex - 1,
+        source: current.source,
+      });
+    }
+  }
+  return ranges.filter((range) => range.start <= range.end);
 }
 
 function parseBelowRelations(graph, body, source, context) {

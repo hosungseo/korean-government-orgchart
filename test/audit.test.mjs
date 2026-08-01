@@ -1,0 +1,53 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { buildAuditReport, formatAuditMarkdown, suggestJurisdictionCandidates } from "../src/audit.mjs";
+import { enrichGraphWithLawMap } from "../src/law-map.mjs";
+import { planPages } from "../src/layout.mjs";
+import { parseOrganizationTexts } from "../src/parser.mjs";
+
+test("감사 리포트는 정책관 소관 후보 지시문을 제안한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실을 둔다.
+시험실장 밑에 지역정책관을 둔다.
+시험실에 지역총괄과ㆍ지역진흥과 및 입지과를 둔다.
+`,
+  ]);
+  const candidates = suggestJurisdictionCandidates(graph);
+  assert.equal(candidates.length, 1);
+  assert.equal(candidates[0].advisor, "지역정책관");
+  assert.deepEqual(candidates[0].departments, ["지역총괄과", "지역진흥과", "입지과"]);
+  assert.match(candidates[0].directive, /^@소관: 지역정책관 > 지역총괄과ㆍ지역진흥과ㆍ입지과/);
+
+  const report = buildAuditReport(graph, planPages(graph, { paper: "a4-half", layout: "vertical" }));
+  assert.equal(report.meta.status, "needs-review");
+  assert.equal(report.reviewActions.some((action) => action.topic === "jurisdiction"), true);
+  assert.match(formatAuditMarkdown(report), /정책관·관 소관 후보/);
+});
+
+test("감사 리포트는 별표 요구와 소관법령 미매칭을 우선 확인 항목으로 올린다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험청
+제2조(하부조직) 시험청에 운영지원과 및 정책국을 둔다.
+각 세무서에 두는 과 및 이에 상당하는 담당관은 별표 5와 같다. 직급별 정원은 별표 7과 같다.
+`,
+  ]);
+  enrichGraphWithLawMap(
+    graph,
+    {
+      시험청: {
+        운영지원과: { laws: [{ 법령명: "시험청 운영규칙" }] },
+        미설치과: { laws: [{ 법령명: "미설치 법령" }] },
+      },
+    },
+    { asOf: "2026-07-24", source: "dept_map.json" },
+  );
+
+  const report = buildAuditReport(graph, planPages(graph, { paper: "a4-landscape" }));
+  assert.equal(report.annexRequirements.length, 2);
+  assert.equal(report.lawMap.unmatchedDepartments.length, 1);
+  assert.equal(report.reviewActions.some((action) => action.topic === "annex" && action.priority === "high"), true);
+  assert.equal(report.reviewActions.some((action) => action.topic === "law-map"), true);
+});

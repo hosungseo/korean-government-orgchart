@@ -2,6 +2,7 @@
 
 import fs from "node:fs/promises";
 import path from "node:path";
+import { buildAuditReport, formatAuditMarkdown } from "./audit.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
 import { planLayoutVariants, planPages } from "./layout.mjs";
@@ -19,6 +20,7 @@ try {
   else if (command === "from-law") await fromLawCommand(args);
   else if (command === "fetch") await fetchCommand(args);
   else if (command === "inspect") await inspectCommand(args);
+  else if (command === "audit") await auditCommand(args);
   else printHelp();
 } catch (error) {
   console.error(process.env.DEBUG ? error.stack : `오류: ${error.message}`);
@@ -26,19 +28,16 @@ try {
 }
 
 async function buildCommand(args) {
-  const texts = await readInputs(args.input);
-  const graph = parseOrganizationTexts(texts, {
-    institution: stringArg(args, "institution"),
-    title: stringArg(args, "title"),
-    asOf: stringArg(args, "date"),
-    headName: stringArg(args, "head"),
-    deputyName: stringArg(args, "deputy"),
-    sources: args.input,
-  });
+  const graph = await graphFromInputs(args);
   await emitOutputs(graph, args);
 }
 
 async function fromLawCommand(args) {
+  const graph = await graphFromLawArgs(args);
+  await emitOutputs(graph, args);
+}
+
+async function graphFromLawArgs(args) {
   const date = required(args, "date");
   const names = [
     stringArg(args, "decree"),
@@ -73,7 +72,7 @@ async function fromLawCommand(args) {
     mst: item.mst,
     sourceUrl: item.sourceUrl,
   }));
-  await emitOutputs(graph, args);
+  return graph;
 }
 
 async function fetchCommand(args) {
@@ -91,14 +90,41 @@ async function fetchCommand(args) {
 }
 
 async function inspectCommand(args) {
-  const texts = await readInputs(args.input);
-  const graph = parseOrganizationTexts(texts, {
-    institution: stringArg(args, "institution"),
-    asOf: stringArg(args, "date"),
-    sources: args.input,
-  });
+  const graph = await graphFromInputs(args);
   const summary = summarize(graph, planRequestedPages(graph, args));
   console.log(JSON.stringify(summary, null, 2));
+}
+
+async function auditCommand(args) {
+  const graph = args.input?.length ? await graphFromInputs(args) : await graphFromLawArgs(args);
+  await enrichWithLawMapIfRequested(graph, args);
+  const view = stringArg(args, "view") || "legal";
+  if (!new Set(["legal", "operational"]).has(view)) {
+    throw new Error(`--view는 legal 또는 operational이어야 합니다: ${view}`);
+  }
+  const displayGraph = view === "operational" ? projectOperationalView(graph) : graph;
+  const pages = planRequestedPages(displayGraph, args);
+  const report = buildAuditReport(displayGraph, pages);
+  const format = String(args.format || "markdown").toLowerCase();
+  const output = format === "json" ? `${JSON.stringify(report, jsonReplacer, 2)}\n` : formatAuditMarkdown(report);
+  if (args.out) {
+    await writeText(path.resolve(args.out), output);
+    console.log(`감사 리포트 저장: ${path.resolve(args.out)}`);
+  } else {
+    console.log(output);
+  }
+}
+
+async function graphFromInputs(args) {
+  const texts = await readInputs(args.input);
+  return parseOrganizationTexts(texts, {
+    institution: stringArg(args, "institution"),
+    title: stringArg(args, "title"),
+    asOf: stringArg(args, "date"),
+    headName: stringArg(args, "head"),
+    deputyName: stringArg(args, "deputy"),
+    sources: args.input,
+  });
 }
 
 async function emitOutputs(graph, args) {
@@ -222,6 +248,7 @@ function printHelp() {
   from-law   법제처 OPEN API에서 기준일 연혁을 찾아 바로 생성
   fetch      법령 문언만 로컬 텍스트로 저장
   inspect    파싱 결과 요약 출력
+  audit      파싱·소관·별표·배치 품질 감사 리포트 출력
 
 주요 옵션
   --layout auto|compact|split|vertical|horizontal|two-column|matrix|flow|change-lanes|affiliate-strip|catalog|all
@@ -236,5 +263,6 @@ function printHelp() {
   --law-appendix            PPTX·SVG 뒤에 부서별 소관법령 색인 부록 추가(--law-map 필요)
   --oc <인증값>             LAW_API_OC 환경변수로도 지정 가능
   --source-dir <dir>        조회한 기준일 법령 문언 보관
+  --format markdown|json    audit 리포트 출력 형식
 `);
 }

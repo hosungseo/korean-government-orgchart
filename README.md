@@ -171,6 +171,27 @@ node src/cli.mjs build --input 직제.txt --layout all --out outputs/기관-유�
 
 HWPX 취합본에서 확인한 유형과 대표 표본은 [HWPX 취합본 분석](docs/hwpx-corpus-analysis.md)에 정리했습니다.
 
+### 검토 전 감사 리포트 만들기
+
+조직도 초안을 바로 편집하기 전에, 파서가 놓칠 가능성이 큰 지점을 먼저 확인할 수 있습니다. `audit`은 통칙 위반 가능성, 별표 필요 항목, 정책관·관 소관 후보, 소관법령 미매칭, 페이지 넘침·겹침을 한 번에 보여줍니다.
+
+```bash
+node src/cli.mjs audit \
+  --input 직제.txt --input 직제시행규칙.txt \
+  --date 2026-07-24 \
+  --paper a4-half --layout vertical \
+  --law-map dept_map.json --law-map-date 2026-07-24 \
+  --out outputs/기관-감사리포트.md
+```
+
+정책관이 설치되어 있는데 과가 여전히 실·국 직속으로만 잡힌 경우에는 다음처럼 확인용 지시문 초안도 제안합니다.
+
+```text
+@소관: 지역정책관 > 지역총괄과ㆍ지역진흥과 [시행규칙 분장사무 확인 필요]
+```
+
+이 지시문은 자동 적용되지 않습니다. 시행규칙의 분장사무나 공식 조직표로 확인한 뒤 입력에 추가하면 `--view operational`에서 해당 묶음으로 투영됩니다.
+
 ### 작도 품질 규칙
 
 - `본부`는 하부조직 계선으로 연한 파란 상자에 `(본부)`를 붙이고, 소속기관은 설치 문형의 유형에 따라 초록 계열로 구분합니다. `책임운영기관`은 기존의 `(책)` 표식을 유지합니다.
@@ -192,6 +213,7 @@ HWPX 취합본에서 확인한 유형과 대표 표본은 [HWPX 취합본 분석
 
 ```text
 src/law-api.mjs       법제처 기준일 연혁 조회
+src/audit.mjs         파싱·소관·별표·배치 품질 감사 리포트
 src/parser.mjs        직제·시행규칙 문언 파싱
 src/model.mjs         조직 그래프·법적 관계·운영형 투영
 src/law-map.mjs       과 단위 소관법령 지도 병합

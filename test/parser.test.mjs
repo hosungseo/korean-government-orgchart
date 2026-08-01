@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { displayNodeName, planPages } from "../src/layout.mjs";
+import { displayNodeName, planPages, resolvePageSize } from "../src/layout.mjs";
 import { projectOperationalView, summarizeStructure } from "../src/model.mjs";
 import { parseNameList, parseOrganizationTexts } from "../src/parser.mjs";
 
@@ -49,6 +49,38 @@ test("자동 레이아웃은 페이지 계획을 만든다", () => {
   assert.ok(pages.length >= 2);
   assert.equal(pages[0].pageNumber, 1);
   assert.equal(pages.at(-1).pageCount, pages.length);
+});
+
+test("A4 세로 형식은 반쪽 면에 맞는 세로 스택 레이아웃을 선택한다", () => {
+  const graph = parseOrganizationTexts([text]);
+  const pages = planPages(graph, { paper: "a4-portrait", mode: "auto" });
+  assert.equal(pages[0].paper, "a4-portrait");
+  assert.equal(pages[0].layoutStyle, "vertical-stack");
+  assert.equal(resolvePageSize("a4-portrait").height > resolvePageSize("a4-portrait").width, true);
+});
+
+test("focus 옵션은 한 실·국의 한쪽 조직도만 남긴다", () => {
+  const graph = parseOrganizationTexts([text]);
+  const pages = planPages(graph, { paper: "a4-half", mode: "vertical", focus: "디지털정부실" });
+  assert.equal(pages.length, 1);
+  assert.equal(pages[0].subtitle, "디지털정부실");
+  assert.equal(pages[0].paper, "a4-half");
+  assert.ok(pages[0].nodeIds.includes(graph.nodeByName("인공지능정책국").id));
+  assert.equal(pages[0].nodeIds.includes(graph.nodeByName("자치행정국").id), false);
+});
+
+test("검토서의 신설·이체 표식을 지시문으로 보존한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+@변경: 신설과 = 신설
+@변경: 이체과 = 이체
+시험부에 신설과 및 이체과를 둔다.
+`,
+  ]);
+  assert.equal(graph.nodeByName("신설과").metadata.change, "신설");
+  assert.equal(graph.nodeByName("이체과").metadata.change, "이체");
+  assert.match(displayNodeName(graph.nodeByName("신설과")), /신설/);
 });
 
 test("법령의 약칭과 복수 부기관장을 보존한다", () => {

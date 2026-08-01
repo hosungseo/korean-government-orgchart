@@ -97,7 +97,14 @@ async function inspectCommand(args) {
     asOf: stringArg(args, "date"),
     sources: args.input,
   });
-  const summary = summarize(graph, planPages(graph, { mode: stringArg(args, "layout") || "auto" }));
+  const summary = summarize(
+    graph,
+    planPages(graph, {
+      mode: stringArg(args, "layout") || "auto",
+      paper: stringArg(args, "paper") || "slide",
+      focus: stringArg(args, "focus"),
+    }),
+  );
   console.log(JSON.stringify(summary, null, 2));
 }
 
@@ -111,6 +118,8 @@ async function emitOutputs(graph, args) {
   let pages = planPages(displayGraph, {
     mode: stringArg(args, "layout") || "auto",
     maxNodes: args["max-nodes"] ? Number(args["max-nodes"]) : 38,
+    paper: stringArg(args, "paper") || "slide",
+    focus: stringArg(args, "focus"),
   });
   const lawAppendix = args["law-appendix"] === true;
   const showLawCounts = args["law-counts"] === true || lawAppendix;
@@ -215,7 +224,9 @@ function printHelp() {
   inspect    파싱 결과 요약 출력
 
 주요 옵션
-  --layout auto|compact|split
+  --layout auto|compact|split|vertical|horizontal|two-column|matrix
+  --paper slide|a4-portrait|a4-landscape|a4-half  출력 용지와 방향
+  --focus <조직명>  해당 조직과 하위조직만 한 장으로 출력
   --view legal|operational  법정 설치형(기본) 또는 확인된 정책관·국 소관 묶음형
   --preview-dir <dir>       슬라이드 PNG·layout JSON·montage 생성
   --law-map <dept_map.json> 부서별 소관법령을 정확히 일치하는 조직 노드에 연결

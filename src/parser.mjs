@@ -942,7 +942,7 @@ function inferInstitution(text) {
 }
 
 function parseDirectives(text) {
-  const result = { relations: [], kinds: [], jurisdictions: [] };
+  const result = { relations: [], kinds: [], jurisdictions: [], changes: [] };
   for (const line of String(text).split(/\r?\n/)) {
     let match;
     if ((match = line.match(/^@기관\s*:\s*(.+)$/))) result.institution = match[1].trim();
@@ -959,6 +959,8 @@ function parseDirectives(text) {
       });
     } else if ((match = line.match(/^@유형\s*:\s*(.+?)\s*=\s*(.+)$/))) {
       result.kinds.push({ name: match[1].trim(), kind: directiveKind(match[2]) });
+    } else if ((match = line.match(/^@변경\s*:\s*(.+?)\s*=\s*(신설|폐지|명칭변경|이체|상계신설)$/))) {
+      result.changes.push({ name: match[1].trim(), change: match[2].trim() });
     }
   }
   return result;
@@ -967,6 +969,10 @@ function parseDirectives(text) {
 function applyDirectives(graph, directives) {
   for (const item of directives.kinds || []) {
     graph.addNode(item.name, { kind: item.kind, source: "사용자 지시문" });
+  }
+  for (const item of directives.changes || []) {
+    const node = graph.addNode(item.name, { source: "사용자 지시문" });
+    if (node) node.metadata.change = item.change;
   }
   for (const relation of directives.relations || []) {
     const parent = graph.addNode(relation.parent, { source: "사용자 지시문" });

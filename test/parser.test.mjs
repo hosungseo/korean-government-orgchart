@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { displayNodeName, layoutPage, parseLayoutStyles, planLayoutVariants, planPages, resolvePageSize } from "../src/layout.mjs";
+import { diagnoseLayout, displayNodeName, layoutPage, nodeStyle, parseLayoutStyles, planLayoutVariants, planPages, resolvePageSize } from "../src/layout.mjs";
 import { projectOperationalView, summarizeStructure } from "../src/model.mjs";
 import { parseNameList, parseOrganizationTexts } from "../src/parser.mjs";
 
@@ -109,6 +109,41 @@ test("검토서형 추가 프리셋은 흐름·변경·소속기관·카드 목�
     if (page.layoutStyle === "flow" && layout.edges.length) assert.ok(layout.edges.some((edge) => edge.orientation === "horizontal"));
     if (page.layoutStyle === "catalog") assert.equal(layout.edgeMode, "none");
   }
+});
+
+test("A4 모든 프리셋은 인쇄 프레임 안에 배치 진단을 남긴다", () => {
+  const graph = parseOrganizationTexts([text]);
+  const pages = planLayoutVariants(graph, { layouts: "all", paper: "a4-landscape", maxNodes: 50 });
+  for (const page of pages) {
+    const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
+    assert.equal(layout.diagnostics.ok, true, `${page.layoutStyle}에 넘침·겹침이 없어야 함`);
+    assert.deepEqual(diagnoseLayout(layout), layout.diagnostics);
+  }
+});
+
+test("카드 목록형은 상위 조직별 묶음으로 법정 계층을 보존한다", () => {
+  const graph = parseOrganizationTexts([text]);
+  const page = planPages(graph, { paper: "a4-landscape", layoutStyle: "catalog", maxNodes: 50 }).find((candidate) => candidate.nodeIds.length > 2);
+  const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
+  assert.ok(layout.groupBoxes.length > 0);
+  assert.ok(layout.groupBoxes.some((group) => group.caption?.startsWith("상위:") || group.caption === "직속 하부조직"));
+  assert.equal(new Set(layout.nodes.map(({ node }) => node.id)).size, layout.nodes.length);
+  assert.equal(layout.edges.length, 0);
+});
+
+test("본부와 소속기관은 작도 색·표식으로 구분한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(소속기관) 장관 소속으로 정부청사관리본부 및 북부시험사무소를 둔다.
+제3조(하부조직) 시험부에 재난안전관리본부를 둔다.
+`,
+  ]);
+  const headquarters = graph.nodeByName("재난안전관리본부");
+  const subsidiary = graph.nodeByName("정부청사관리본부");
+  assert.notEqual(nodeStyle(headquarters).fill, nodeStyle(subsidiary).fill);
+  assert.match(displayNodeName(headquarters), /본부/);
+  assert.match(displayNodeName(subsidiary), /부속|특지|소속/);
 });
 
 test("focus 옵션은 한 실·국의 한쪽 조직도만 남긴다", () => {

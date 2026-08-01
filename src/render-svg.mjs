@@ -14,6 +14,12 @@ export function renderSvg(graph, pages, { showLawCounts = false, paper } = {}) {
   return [
     `<?xml version="1.0" encoding="UTF-8"?>`,
     `<svg xmlns="http://www.w3.org/2000/svg" width="${pageSize.width}" height="${totalHeight}" viewBox="0 0 ${pageSize.width} ${totalHeight}">`,
+    `<defs>
+      <marker id="org-arrow-gray" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#6B7280"/></marker>
+      <marker id="org-arrow-blue" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#4F7EA8"/></marker>
+      <marker id="org-arrow-green" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#3D8B3D"/></marker>
+      <marker id="org-arrow-staff" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#8B8B8B"/></marker>
+    </defs>`,
     `<rect width="100%" height="100%" fill="#E5E7EB"/>`,
     ...groups,
     `</svg>`,
@@ -49,6 +55,9 @@ function renderPage(graph, page, offsetY, { showLawCounts, pageSize }) {
 
   const layout = layoutPage(graph, page, { pageSize });
 
+  for (const group of layout.groupBoxes || []) {
+    pageGroup.push(svgGroupBox(group));
+  }
   for (const edge of layout.edges) {
     pageGroup.push(...svgEdge(edge));
   }
@@ -57,6 +66,9 @@ function renderPage(graph, page, offsetY, { showLawCounts, pageSize }) {
   }
   for (const entry of layout.nodes) {
     pageGroup.push(svgNode(entry.node, entry.position, { showLawCounts, pageSize }));
+  }
+  if (layout.diagnostics?.overflow?.length) {
+    pageGroup.push(svgLayoutWarning(layout.diagnostics, pageSize));
   }
   pageGroup.push(svgLegend({ showLawCounts, operational: graph.meta.renderView === "operational", pageSize }));
   pageGroup.push(`<text x="${pageSize.width - margin}" y="${footerY}" text-anchor="end" font-family="Malgun Gothic, sans-serif" font-size="10" fill="#6B7280">${page.pageNumber} / ${page.pageCount}</text>`);
@@ -75,12 +87,13 @@ function svgEdge(edge) {
     const endY = edge.to.centerY ?? edge.to.top;
     const midX = startX + Math.max(10, (endX - startX) * 0.48);
     const common = `stroke="${color}" stroke-width="1.1" fill="none"${dash}`;
+    const marker = ` marker-end="url(#${markerIdForEdge(edge)})"`;
     return [
       `<line x1="${startX}" y1="${startY}" x2="${midX}" y2="${startY}" ${common}/>`,
       Math.abs(startY - endY) > 0.5
         ? `<line x1="${midX}" y1="${startY}" x2="${midX}" y2="${endY}" ${common}/>`
         : "",
-      `<line x1="${midX}" y1="${endY}" x2="${endX}" y2="${endY}" ${common}/>`,
+      `<line x1="${midX}" y1="${endY}" x2="${endX}" y2="${endY}" ${common}${marker}/>`,
     ].filter(Boolean);
   }
   const startX = edge.from.centerX;
@@ -98,19 +111,42 @@ function svgEdge(edge) {
   ].filter(Boolean);
 }
 
+function markerIdForEdge(edge) {
+  if (edge.type === "affiliated" || edge.type === "temporary") return "org-arrow-green";
+  if (edge.type === "jurisdiction") return "org-arrow-blue";
+  if (edge.type === "advisor") return "org-arrow-staff";
+  return "org-arrow-gray";
+}
+
+function svgGroupBox(group) {
+  const caption = group.caption
+    ? `<text x="${group.left + 8}" y="${group.top + 12}" font-family="Malgun Gothic, sans-serif" font-size="8.5" fill="#64748B">${xmlEscape(group.caption)}</text>`
+    : "";
+  return `<g><rect x="${group.left}" y="${group.top}" width="${group.width}" height="${group.height}" rx="5" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="0.9"/>${caption}</g>`;
+}
+
 function svgLayoutLabel(label, pageSize) {
   const portrait = pageSize.height > pageSize.width;
-  return `<text x="${label.x}" y="${label.y}" text-anchor="${label.align || "start"}" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? 8.5 : 10}" font-weight="700" fill="#6B7280">${xmlEscape(label.text)}</text>`;
+  const muted = label.muted;
+  return `<text x="${label.x}" y="${label.y}" text-anchor="${label.align || "start"}" font-family="Malgun Gothic, sans-serif" font-size="${muted ? (portrait ? 7.5 : 8.5) : (portrait ? 8.5 : 10)}" font-weight="${muted ? 400 : 700}" fill="${muted ? "#94A3B8" : "#6B7280"}">${xmlEscape(label.text)}</text>`;
+}
+
+function svgLayoutWarning(diagnostics, pageSize) {
+  const count = diagnostics.overflow.length;
+  const portrait = pageSize.height > pageSize.width;
+  return `<text x="${portrait ? 28 : 42}" y="${pageSize.height - (portrait ? 45 : 38)}" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? 7.5 : 8}" fill="#B45309">⚠ ${count}개 조직이 인쇄 영역을 벗어났습니다. 분할 또는 다른 작도 유형을 사용하세요.</text>`;
 }
 
 function svgNode(node, position, { showLawCounts, pageSize }) {
   const style = nodeStyle(node);
-  const dash = style.lineStyle === "dashed" ? ` stroke-dasharray="4 3"` : "";
-  const fontSize = position.vertical ? 10.8 : node.name.length > 13 ? 10.5 : 12.5;
   const lines = position.vertical
     ? displayNodeName(node, true, { showLawCounts }).split("\n")
     : [displayNodeName(node, false, { showLawCounts })];
-  const lineHeight = position.vertical ? 10.5 : 14;
+  const lineHeight = position.vertical
+    ? Math.min(10.5, Math.max(6.8, position.height / Math.max(1, lines.length) - 1.2))
+    : 14;
+  const fontSize = position.vertical ? Math.min(10.8, Math.max(6.4, lineHeight - 0.2)) : node.name.length > 13 ? 10.5 : 12.5;
+  const dash = style.lineStyle === "dashed" ? ` stroke-dasharray="4 3"` : "";
   const totalTextHeight = lines.length * lineHeight;
   const startY = position.top + (position.height - totalTextHeight) / 2 + lineHeight * 0.8;
   const text = lines

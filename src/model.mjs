@@ -103,13 +103,17 @@ export class OrgGraph {
     if (!parent || !child || parent.id === child.id) return null;
     const key = `${parent.id}>${child.id}`;
     const type = attrs.type || "structural";
+    const metadata = {
+      ...(attrs.article || this._currentArticleRef ? { article: attrs.article || this._currentArticleRef } : {}),
+      ...(attrs.metadata || {}),
+    };
     const existing = this.edges.get(key);
     if (existing) {
       if ((EDGE_PRIORITY[type] || 0) > (EDGE_PRIORITY[existing.type] || 0)) {
         existing.type = type;
       }
       existing.sources = uniq([...existing.sources, ...(attrs.source ? [attrs.source] : [])]);
-      existing.metadata = { ...existing.metadata, ...(attrs.metadata || {}) };
+      existing.metadata = { ...existing.metadata, ...metadata };
       return existing;
     }
     const edge = {
@@ -118,7 +122,7 @@ export class OrgGraph {
       child: child.id,
       type,
       sources: attrs.source ? [attrs.source] : [],
-      metadata: { ...(attrs.metadata || {}) },
+      metadata,
     };
     this.edges.set(key, edge);
     return edge;

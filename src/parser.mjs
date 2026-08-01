@@ -138,16 +138,22 @@ function parseDocumentIntoGraph(graph, text, source) {
       : null;
     const body = stripAmendmentNotes(article.body);
     const articleIsAffiliated = /소속기관/.test(article.heading);
-    parseTemporaryRelations(graph, body, source, context);
-    parseAffiliatedRelations(graph, body, source, context);
-    parseDeputyJurisdictions(graph, body, source);
-    parseBelowRelations(graph, body, source, context);
-    parseAdministrativeRulePlacement(graph, body, source, context);
-    parseInRelations(graph, body, source, context, { articleIsAffiliated });
-    parseAdvisorDefinitions(graph, body, source, context);
-    parseAdvisorySentences(graph, body, source, context);
-    collectJurisdictionRelations(graph, body, source);
-    markSpecialMetadata(graph, body, source);
+    const previousArticleRef = graph._currentArticleRef;
+    graph._currentArticleRef = article.lead || article.heading || null;
+    try {
+      parseTemporaryRelations(graph, body, source, context);
+      parseAffiliatedRelations(graph, body, source, context);
+      parseDeputyJurisdictions(graph, body, source);
+      parseBelowRelations(graph, body, source, context);
+      parseAdministrativeRulePlacement(graph, body, source, context);
+      parseInRelations(graph, body, source, context, { articleIsAffiliated });
+      parseAdvisorDefinitions(graph, body, source, context);
+      parseAdvisorySentences(graph, body, source, context);
+      collectJurisdictionRelations(graph, body, source);
+      markSpecialMetadata(graph, body, source);
+    } finally {
+      graph._currentArticleRef = previousArticleRef;
+    }
   }
 }
 

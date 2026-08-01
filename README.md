@@ -281,7 +281,7 @@ node src/cli.mjs review-pack \
   --outputs svg,json,audit,trace,pptx,deck
 ```
 
-`outputs/review-pack/`에는 `README.md`, `cases.json`, `audit.md`, `audit.json`, `manifest.md`, `manifest.json`이 남고, 실제 조직도 파일은 기본적으로 `outputs/review-pack/artifacts/` 아래에 생성됩니다. `README.md`는 먼저 열 파일, 우선 확인 항목, 케이스별 산출물 링크를 묶은 검토용 첫 화면입니다. 각 `*.trace.csv`는 부모 조직, 자식 조직, 보조·보좌·소속기관 관계, 근거 문형, 출처, 한시·책임운영·본부 같은 표식을 행 단위로 펼칩니다. 법제처 조회 원문을 이미 모아 둔 경우에는 `--cases examples/audit-cases.json`처럼 케이스 파일을 넘기면 같은 검토팩 구조로 재생성할 수 있습니다. `--strict`를 붙이면 감사상 오류·수정 필요 또는 산출물 생성 오류가 있을 때 종료코드 2로 실패합니다.
+`outputs/review-pack/`에는 `README.md`, `cases.json`, `audit.md`, `audit.json`, `manifest.md`, `manifest.json`이 남고, 실제 조직도 파일은 기본적으로 `outputs/review-pack/artifacts/` 아래에 생성됩니다. `README.md`는 먼저 열 파일, 우선 확인 항목, 케이스별 산출물 링크를 묶은 검토용 첫 화면입니다. 각 `*.trace.csv`는 부모 조직, 자식 조직, 보조·보좌·소속기관 관계, 조문, 근거 문형, 출처, 한시·책임운영·본부 같은 표식을 행 단위로 펼칩니다. 법제처 조회 원문을 이미 모아 둔 경우에는 `--cases examples/audit-cases.json`처럼 케이스 파일을 넘기면 같은 검토팩 구조로 재생성할 수 있습니다. `--strict`를 붙이면 감사상 오류·수정 필요 또는 산출물 생성 오류가 있을 때 종료코드 2로 실패합니다.
 
 ### 작도 품질 규칙
 

@@ -58,7 +58,11 @@ export class OrgGraph {
     let cleanName = normalizeNodeName(name);
     cleanName = this.aliases.get(cleanName) || cleanName;
     if (!cleanName) return null;
-    const id = stableId(cleanName);
+    // Most legal units are globally identifiable by name. Annex matrices can
+    // repeat the same displayed department under many affiliated institutions
+    // (e.g. every tax office has its own "징세과").  In those cases callers
+    // pass attrs.id as a qualified key while keeping node.name as the label.
+    const id = stableId(attrs.id || cleanName);
     const existing = this.nodes.get(id);
     const hasExplicitKind = Boolean(attrs.kind);
     const incomingKind = attrs.kind || inferKind(cleanName);

@@ -135,12 +135,15 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates) {
   }
   for (const item of graph.meta.annexRequirements || []) {
     const annex = findAnnex(graph, item.annex, { source: item.source });
+    const applied = findAppliedAnnexOrganization(graph, annex);
     actions.push({
-      priority: item.type === "organization-matrix" ? "high" : "medium",
+      priority: applied ? "low" : item.type === "organization-matrix" ? "high" : "medium",
       topic: "annex",
-      message: annex
-        ? `${item.annex} 확보됨(${annex.rowCount}행): ${item.description}`
-        : `${item.annex} 확인 필요: ${item.description}`,
+      message: applied
+        ? `${item.annex} 조직 반영됨: ${item.description}`
+        : annex
+          ? `${item.annex} 확보됨(${annex.rowCount}행): ${item.description}`
+          : `${item.annex} 확인 필요: ${item.description}`,
     });
   }
   for (const item of jurisdictionCandidates) {
@@ -249,12 +252,23 @@ function formatAnnexInventory(item) {
   return `- ${item.annex} · ${item.type} · ${item.title}${suffix}`;
 }
 
+function findAppliedAnnexOrganization(graph, annex) {
+  if (!annex) return null;
+  return (graph.meta.annexOrganizations || []).find(
+    (item) => item.annex === annex.annex && item.title === annex.title,
+  ) || null;
+}
+
 function formatAnnexOrganization(item) {
   if (item.type === "regional-tax-office-tree") {
     return `- ${item.annex} · ${item.title}: 지방청 ${item.parentCount}개, 세무서 ${item.childCount}개를 소속기관 트리로 반영`;
   }
   if (item.type === "regional-tax-office-jurisdiction") {
     return `- ${item.annex} · ${item.title}: 지방청 ${item.updatedCount}개의 위치·관할구역 메타데이터 반영`;
+  }
+  if (item.type === "tax-office-department-matrix") {
+    const skipped = item.skippedOffices?.length ? `, 미매칭 세무서 ${item.skippedOffices.length}개` : "";
+    return `- ${item.annex} · ${item.title}: 세무서 ${item.officeCount}개에 과 ${item.departmentCount}개를 scoped 하부조직으로 반영${skipped}`;
   }
   return `- ${item.annex} · ${item.title}: ${item.type}`;
 }

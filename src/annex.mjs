@@ -58,9 +58,18 @@ export function applyAnnexOrganizations(graph, annexes = graph.meta.annexes || [
     if (isRegionalTaxOfficeAnnex(annex)) {
       const summary = applyRegionalTaxOfficeAnnex(graph, annex);
       if (summary.parentCount || summary.childCount) summaries.push(summary);
-    } else if (isRegionalJurisdictionAnnex(annex)) {
+    }
+  }
+  for (const annex of annexes) {
+    if (isRegionalJurisdictionAnnex(annex)) {
       const summary = applyRegionalJurisdictionAnnex(graph, annex);
       if (summary.updatedCount) summaries.push(summary);
+    }
+  }
+  for (const annex of annexes) {
+    if (isTaxOfficeDepartmentMatrixAnnex(annex)) {
+      const summary = applyTaxOfficeDepartmentMatrixAnnex(graph, annex);
+      if (summary.officeCount || summary.skippedOffices.length) summaries.push(summary);
     }
   }
   if (summaries.length) {
@@ -179,6 +188,11 @@ function isRegionalJurisdictionAnnex(annex) {
   return /지방국세청의\s*관할구역/.test(title);
 }
 
+function isTaxOfficeDepartmentMatrixAnnex(annex) {
+  const title = normalizeAnnexTitle(annex?.title);
+  return /세무서에\s*두는\s*과\s*단위\s*기구/.test(title);
+}
+
 function applyRegionalTaxOfficeAnnex(graph, annex) {
   const rows = normalizeAnnexRows(annex);
   const source = annex.source || annex.title || annex.annex;
@@ -250,6 +264,73 @@ function applyRegionalTaxOfficeAnnex(graph, annex) {
   return summary;
 }
 
+function applyTaxOfficeDepartmentMatrixAnnex(graph, annex) {
+  const rows = normalizeAnnexRows(annex);
+  const source = annex.source || annex.title || annex.annex;
+  const summary = {
+    annex: annex.annex,
+    title: annex.title,
+    type: "tax-office-department-matrix",
+    groupCount: 0,
+    officeCount: 0,
+    departmentCount: 0,
+    skippedOffices: [],
+  };
+  for (const row of rows) {
+    const group = normalizeWhitespace(row[0]);
+    const offices = splitTaxOfficeList(row[1]);
+    const departments = splitDepartmentList(row[2]);
+    if (!offices.length || !departments.length) continue;
+    summary.groupCount += 1;
+    for (const officeName of offices) {
+      const office = graph.nodeByName(officeName);
+      if (!office) {
+        summary.skippedOffices.push(officeName);
+        continue;
+      }
+      summary.officeCount += 1;
+      office.metadata = {
+        ...office.metadata,
+        departmentMatrixGroup: group || null,
+        departmentMatrixAnnex: annex.annex,
+        departmentMatrixAnnexTitle: annex.title,
+      };
+      for (const departmentName of departments) {
+        const department = graph.addNode(departmentName, {
+          id: `${office.id}/${departmentName}`,
+          kind: "assistant",
+          forceKind: true,
+          source,
+          metadata: {
+            annex: annex.annex,
+            annexTitle: annex.title,
+            annexRole: "tax-office-department",
+            parentTaxOffice: officeName,
+            matrixGroup: group || null,
+            scoped: true,
+            countsTowardStructure: false,
+          },
+        });
+        if (!department) continue;
+        graph.addEdge(office.id, department.id, {
+          type: "assistant",
+          source,
+          metadata: {
+            annex: annex.annex,
+            annexTitle: annex.title,
+            annexRole: "tax-office-department",
+            matrixGroup: group || null,
+            scoped: true,
+          },
+        });
+        summary.departmentCount += 1;
+      }
+    }
+  }
+  summary.skippedOffices = uniq(summary.skippedOffices);
+  return summary;
+}
+
 function applyRegionalJurisdictionAnnex(graph, annex) {
   const rows = normalizeAnnexRows(annex);
   const source = annex.source || annex.title || annex.annex;
@@ -312,6 +393,25 @@ function normalizeTaxOfficeName(value) {
   if (!name || /^(?:및|외|등)$/.test(name)) return "";
   if (/(?:세무서|지서)$/.test(name)) return name;
   return `${name}세무서`;
+}
+
+function splitDepartmentList(value) {
+  return uniq(
+    normalizeWhitespace(value)
+      .split(/\s*,\s*|\s+및\s+/)
+      .map(normalizeDepartmentUnitName),
+  );
+}
+
+function normalizeDepartmentUnitName(value) {
+  const name = String(value || "")
+    .replace(/\([^)]*\)/g, "")
+    .replace(/\s+/g, "")
+    .replace(/[.;:，、]/g, "")
+    .trim();
+  if (!name || /^(?:및|외|등)$/.test(name)) return "";
+  if (!/(?:과|팀|담당관|센터)$/.test(name)) return "";
+  return name;
 }
 
 function cleanLocation(value) {

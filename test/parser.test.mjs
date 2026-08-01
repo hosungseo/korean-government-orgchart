@@ -176,6 +176,28 @@ test("대량 소속기관 상세는 자동 모드에서 카드형으로 전환�
   assert.equal(explicitPage.layoutStyle, "horizontal-bus");
 });
 
+test("같은 표시명의 과도 부모별 scoped node로 따로 보존한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험청
+제2조(소속기관) 시험청장 소속으로 강남세무서 및 삼성세무서를 둔다.
+`,
+  ]);
+  const gangnam = graph.nodeByName("강남세무서");
+  const samsung = graph.nodeByName("삼성세무서");
+  const first = graph.addNode("징세과", { id: "강남세무서/징세과", kind: "assistant" });
+  const second = graph.addNode("징세과", { id: "삼성세무서/징세과", kind: "assistant" });
+  graph.addEdge(gangnam.id, first.id, { type: "assistant" });
+  graph.addEdge(samsung.id, second.id, { type: "assistant" });
+
+  assert.notEqual(first.id, second.id);
+  assert.equal(first.name, "징세과");
+  assert.equal(second.name, "징세과");
+  assert.equal(graph.childrenOf(gangnam).map(({ node }) => node.id).includes(first.id), true);
+  assert.equal(graph.childrenOf(samsung).map(({ node }) => node.id).includes(second.id), true);
+  assert.equal(displayNodeName(first), "징세과");
+});
+
 test("본부와 소속기관은 작도 색·표식으로 구분한다", () => {
   const graph = parseOrganizationTexts([
     `

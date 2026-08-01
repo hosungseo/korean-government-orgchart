@@ -526,8 +526,20 @@ export function layoutPage(graph, page, options = {}) {
       ? 112
       : 132
     : 34;
+  // The old layout expanded a shallow tree until it filled the entire page.
+  // That left a visually awkward amount of white space between a minister
+  // and the first row of bureaux (and made the connectors look fragmented).
+  // Treat the hierarchy as a compact diagram instead: keep a predictable
+  // reading rhythm and use the remaining lower space as breathing room.
   const usableHeight = Math.max(220, frame.height - leafHeight - 20);
-  const levelGap = maxDepth ? Math.min(209, usableHeight / maxDepth) : 0;
+  const narrowHalf = portrait && pageSize.width < 400;
+  const preferredLevelGap = verticalLeaves
+    ? (narrowHalf ? 148 : portrait ? 96 : 104)
+    : (narrowHalf ? 118 : 92);
+  const levelGap = maxDepth ? Math.min(preferredLevelGap, usableHeight / maxDepth) : 0;
+  const contentHeight = maxDepth * levelGap + leafHeight;
+  const topInset = Math.min(narrowHalf ? 48 : 24, Math.max(0, (frame.height - contentHeight) * 0.18));
+  const siblingGutter = verticalLeaves ? 8 : 14;
   const positions = new Map();
 
   let cursor = frame.left;
@@ -546,28 +558,32 @@ export function layoutPage(graph, page, options = {}) {
     let width;
     let height;
     let vertical = false;
+    const availableWidth = Math.max(18, spanWidth - siblingGutter);
     if (isLeaf && verticalLeaves && level > 0) {
-      width = Math.min(portrait ? 34 : 32, Math.max(24, spanWidth * 0.7));
+      width = Math.min(
+        portrait ? 34 : 32,
+        Math.max(Math.min(24, availableWidth), availableWidth * 0.7),
+      );
       height = leafHeight;
       vertical = true;
     } else {
-      width = Math.min(168, Math.max(28, Math.min(spanWidth * 0.78, 88 + node.name.length * 4.6)));
+      width = Math.min(
+        168,
+        Math.max(
+          Math.min(28, availableWidth),
+          Math.min(availableWidth, 88 + node.name.length * 4.6),
+        ),
+      );
       height = 32;
     }
     const centerX = spanLeft + spanWidth / 2;
-    const top = frame.top + level * levelGap;
-    positions.set(id, {
-      left: centerX - width / 2,
-      top,
-      width,
-      height,
-      centerX,
-      bottom: top + height,
+    const top = frame.top + topInset + level * levelGap;
+    positions.set(id, boxPosition(centerX, top, width, height, {
       vertical,
       depth: level,
       spanLeft,
       spanWidth,
-    });
+    }));
     let childCursor = spanLeft;
     const parentWeight = leafWeight(id);
     for (const childId of childIds) {

@@ -80,35 +80,40 @@ function svgEdge(edge) {
   const color =
     edge.type === "affiliated" || edge.type === "temporary" ? "#3D8B3D" : edge.type === "jurisdiction" ? "#4F7EA8" : edge.type === "advisor" ? "#8B8B8B" : "#6B7280";
   const dash = edge.type === "advisor" || edge.type === "temporary" || edge.type === "jurisdiction" ? ` stroke-dasharray="5 4"` : "";
+  const route = edgeRoute(edge);
+  const common = `stroke="${color}" stroke-width="1.15" fill="none" stroke-linecap="round" stroke-linejoin="round"${dash}`;
+  const marker = edge.orientation === "horizontal" ? ` marker-end="url(#${markerIdForEdge(edge)})"` : "";
+  return [`<path d="${route}" ${common}${marker}/>`];
+}
+
+/**
+ * One continuous path prevents the hairline gaps that appear when three SVG
+ * <line> primitives meet at an elbow.  The tiny endpoint overlap is hidden
+ * by the node, which is rendered after the connector, so the line reads as
+ * attached to the box rather than stopping one pixel short of it.
+ */
+function edgeRoute(edge) {
+  const overlap = 0.65;
+  const f = edge.from;
+  const t = edge.to;
   if (edge.orientation === "horizontal") {
-    const startX = edge.from.right ?? edge.from.centerX;
-    const startY = edge.from.centerY ?? edge.from.bottom;
-    const endX = edge.to.left ?? edge.to.centerX;
-    const endY = edge.to.centerY ?? edge.to.top;
-    const midX = startX + Math.max(10, (endX - startX) * 0.48);
-    const common = `stroke="${color}" stroke-width="1.1" fill="none"${dash}`;
-    const marker = ` marker-end="url(#${markerIdForEdge(edge)})"`;
-    return [
-      `<line x1="${startX}" y1="${startY}" x2="${midX}" y2="${startY}" ${common}/>`,
-      Math.abs(startY - endY) > 0.5
-        ? `<line x1="${midX}" y1="${startY}" x2="${midX}" y2="${endY}" ${common}/>`
-        : "",
-      `<line x1="${midX}" y1="${endY}" x2="${endX}" y2="${endY}" ${common}${marker}/>`,
-    ].filter(Boolean);
+    const startX = (f.right ?? f.left + f.width) - overlap;
+    const startY = f.centerY ?? f.top + f.height / 2;
+    const endX = (t.left ?? t.centerX) + overlap;
+    const endY = t.centerY ?? t.top + t.height / 2;
+    const midX = (startX + endX) / 2;
+    return `M ${coordinate(startX)} ${coordinate(startY)} H ${coordinate(midX)} V ${coordinate(endY)} H ${coordinate(endX)}`;
   }
-  const startX = edge.from.centerX;
-  const startY = edge.from.bottom;
-  const endX = edge.to.centerX;
-  const endY = edge.to.top;
-  const midY = startY + Math.max(10, (endY - startY) * 0.48);
-  const common = `stroke="${color}" stroke-width="1.1" fill="none"${dash}`;
-  return [
-    `<line x1="${startX}" y1="${startY}" x2="${startX}" y2="${midY}" ${common}/>`,
-    Math.abs(startX - endX) > 0.5
-      ? `<line x1="${startX}" y1="${midY}" x2="${endX}" y2="${midY}" ${common}/>`
-      : "",
-    `<line x1="${endX}" y1="${midY}" x2="${endX}" y2="${endY}" ${common}/>`,
-  ].filter(Boolean);
+  const startX = f.centerX ?? f.left + f.width / 2;
+  const startY = (f.bottom ?? f.top + f.height) - overlap;
+  const endX = t.centerX ?? t.left + t.width / 2;
+  const endY = (t.top ?? t.centerY) + overlap;
+  const midY = (startY + endY) / 2;
+  return `M ${coordinate(startX)} ${coordinate(startY)} V ${coordinate(midY)} H ${coordinate(endX)} V ${coordinate(endY)}`;
+}
+
+function coordinate(value) {
+  return Number(value.toFixed(2));
 }
 
 function markerIdForEdge(edge) {

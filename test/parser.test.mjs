@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { diagnoseLayout, displayNodeName, layoutPage, nodeStyle, parseLayoutStyles, planLayoutVariants, planPages, resolvePageSize } from "../src/layout.mjs";
 import { projectOperationalView, summarizeStructure } from "../src/model.mjs";
 import { parseNameList, parseOrganizationTexts } from "../src/parser.mjs";
+import { renderSvg } from "../src/render-svg.mjs";
 
 const text = `
 시험행정부와 그 소속기관 직제
@@ -119,6 +120,19 @@ test("A4 모든 프리셋은 인쇄 프레임 안에 배치 진단을 남긴다"
     assert.equal(layout.diagnostics.ok, true, `${page.layoutStyle}에 넘침·겹침이 없어야 함`);
     assert.deepEqual(diagnoseLayout(layout), layout.diagnostics);
   }
+});
+
+test("작도 연결선은 상자 좌표에 붙고 SVG에서는 연속 경로로 출력한다", () => {
+  const graph = parseOrganizationTexts([text]);
+  const page = planPages(graph, { paper: "a4-landscape", layoutStyle: "horizontal-bus", maxNodes: 50 })[0];
+  const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
+  for (const { position } of layout.nodes) {
+    assert.equal(Number.isFinite(position.right), true);
+    assert.equal(Number.isFinite(position.centerY), true);
+  }
+  const svg = renderSvg(graph, [page]);
+  assert.equal((svg.match(/stroke-linecap="round"/g) || []).length, layout.edges.length);
+  assert.match(svg, /<path d="M [^"]+" stroke="#(?:6B7280|8B8B8B|3D8B3D|4F7EA8)"/);
 });
 
 test("카드 목록형은 상위 조직별 묶음으로 법정 계층을 보존한다", () => {

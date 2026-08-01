@@ -90,53 +90,57 @@
     .stats { display: flex; gap: 13px; align-items: center; color: var(--muted); font-size: 11px; }
     .stats b { color: var(--ink); }
     .layout-select { min-height: 30px; padding: 0 8px; border: 1px solid var(--line); border-radius: 6px; color: var(--navy); background: #fff; font: 11px Inter, Pretendard, sans-serif; }
-    .chart-scroll { min-height: 525px; overflow: auto; padding: 29px 5px 16px; }
-    .chart { min-width: 650px; min-height: 420px; display: flex; flex-direction: column; align-items: center; color: var(--ink); }
+    .chart-scroll { min-height: 525px; overflow: auto; padding: 32px 12px 24px; }
+    .chart { --branch-line: #8390a1; --child-line: #c4ccd7; min-width: 680px; min-height: 420px; display: flex; flex-direction: column; align-items: center; color: var(--ink); }
     .chart-agency { color: var(--navy); font-family: Georgia, "Noto Serif KR", serif; font-size: 24px; font-weight: 800; letter-spacing: .08em; }
-    .chart-spine { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 14px; }
-    .chart-card { position: relative; min-width: 122px; padding: 9px 13px; border: 1px solid #7a8799; border-radius: 5px; background: #fff; text-align: center; font-size: 12px; font-weight: 650; }
+    .chart-spine { display: flex; flex-direction: column; align-items: center; gap: 0; margin-top: 18px; }
+    .spine-node { position: relative; display: flex; align-items: center; justify-content: center; }
+    .spine-staff { position: absolute; left: calc(100% + 31px); top: 50%; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; width: max-content; max-width: 270px; transform: translateY(-50%); }
+    .spine-staff::before { content: ""; position: absolute; right: 100%; top: 50%; width: 25px; border-top: 1px dashed #8999ae; }
+    .spine-staff .chart-card { min-width: 102px; min-height: 32px; padding: 6px 9px; font-size: 10.5px; }
+    .chart-card { position: relative; display: flex; align-items: center; justify-content: center; min-width: 122px; min-height: 38px; padding: 8px 13px; border: 1px solid #7a8799; border-radius: 5px; background: #fff; text-align: center; font-size: 12px; font-weight: 650; line-height: 1.25; box-shadow: 0 1px 0 rgba(20,35,59,.04); }
     .chart-card.head { min-width: 148px; border: 2px solid #1b3e70; color: var(--navy); background: var(--blue); font-weight: 850; }
     .chart-card.staff { border-style: dashed; color: var(--navy-2); background: #f2f6fb; }
     .chart-card.affil { border-color: var(--green-line); color: #1d5724; background: var(--green); }
-    .chart-staff-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 5px 0 3px; }
+    .chart-staff-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin: 9px 0 7px; }
     .chart-staff-row .chart-card { min-width: 104px; padding: 7px 10px; font-size: 11px; }
-    .chart-line { width: 1px; height: 20px; background: #8390a1; }
-    .chart-bus { width: 80%; max-width: 740px; height: 23px; border-top: 1px solid #8390a1; position: relative; }
-    .chart-bus::before { content: ""; position: absolute; left: 50%; top: -23px; width: 1px; height: 23px; background: #8390a1; }
-    .unit-row { width: 100%; display: flex; justify-content: center; align-items: flex-start; gap: 13px; }
+    .chart-line { width: 1px; height: 23px; flex: 0 0 23px; background: var(--branch-line); }
+    .chart-bus { width: min(86%, 760px); height: 26px; border-top: 1px solid var(--branch-line); position: relative; }
+    .chart-bus::before { content: ""; position: absolute; left: 50%; top: -23px; width: 1px; height: 23px; background: var(--branch-line); }
+    .unit-row { width: min(100%, 800px); display: flex; justify-content: center; align-items: flex-start; gap: 18px; }
     .unit { min-width: 125px; max-width: 185px; display: flex; flex-direction: column; align-items: center; }
-    .unit > .chart-card::before { content: ""; position: absolute; left: 50%; top: -24px; width: 1px; height: 24px; background: #8390a1; }
-    .unit-children { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 13px; padding-top: 10px; border-left: 1px solid #c4ccd7; }
+    .unit > .chart-card::before { content: ""; position: absolute; left: 50%; top: -26px; width: 1px; height: 26px; background: var(--branch-line); }
+    .unit-children { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 15px; padding-top: 12px; border-left: 1px solid var(--child-line); }
     .unit-children .chart-card { width: 100%; min-width: 106px; font-size: 11px; }
     .unit-children .chart-card.staff { color: var(--navy-2); }
     /* The browser demo uses the same eight visual grammars as the CLI.  The
        full legal parser remains in src/, while these CSS transforms keep the
        public page dependency-free. */
-    .chart.layout-vertical .unit-row { flex-direction: column; align-items: center; gap: 16px; }
+    .chart.layout-vertical .unit-row { flex-direction: column; align-items: center; gap: 19px; }
     .chart.layout-vertical .unit { width: min(78%, 245px); max-width: 245px; }
-    .chart.layout-vertical .unit-children { width: 100%; flex-direction: row; flex-wrap: wrap; border-left: 0; border-top: 1px solid #c4ccd7; padding: 10px 0 0; }
+    .chart.layout-vertical .unit-children { width: 100%; flex-direction: row; flex-wrap: wrap; gap: 9px; border-left: 0; border-top: 1px solid var(--child-line); padding: 11px 0 0; }
     .chart.layout-vertical .unit-children .unit { width: 100%; max-width: none; }
-    .chart.layout-two-column .unit-row { width: min(100%, 700px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 18px; }
+    .chart.layout-two-column .unit-row { width: min(100%, 740px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; column-gap: 24px; row-gap: 20px; }
     .chart.layout-two-column .unit { width: 100%; max-width: none; }
     .chart.layout-two-column .unit-children { width: 100%; }
-    .chart.layout-matrix .unit-row { width: min(100%, 800px); display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); align-items: start; gap: 10px; }
+    .chart.layout-matrix .unit-row { width: min(100%, 800px); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); align-items: start; gap: 14px; }
     .chart.layout-matrix .unit { width: 100%; max-width: none; }
-    .chart.layout-matrix .unit-children { width: 100%; border-left: 0; border-top: 1px solid #c4ccd7; padding-top: 8px; }
+    .chart.layout-matrix .unit-children { width: 100%; border-left: 0; border-top: 1px solid var(--child-line); padding-top: 9px; }
     .chart.layout-matrix .unit-children .chart-card { border-radius: 2px; padding: 6px 5px; font-size: 10px; }
-    .chart.layout-flow .unit-row { width: min(100%, 800px); display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); align-items: start; gap: 10px; }
+    .chart.layout-flow .unit-row { width: min(100%, 800px); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); align-items: start; gap: 14px; }
     .chart.layout-flow .unit { width: 100%; max-width: none; }
     .chart.layout-flow .chart-bus { border-top-style: dashed; }
-    .chart.layout-change-lanes .unit-row { width: min(100%, 700px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 18px; }
+    .chart.layout-change-lanes .unit-row { width: min(100%, 740px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; column-gap: 24px; row-gap: 18px; }
     .chart.layout-change-lanes .unit { width: 100%; max-width: none; }
     .chart.layout-change-lanes .unit:nth-child(even) > .chart-card { border-color: #b4362a; background: #fff1f0; }
     .chart.layout-change-lanes.no-changes .unit-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .layout-note { width: min(100%, 760px); margin: 9px 0 0; padding: 7px 10px; border: 1px dashed #cbd5e1; border-radius: 6px; color: #64748b; background: #f8fafc; text-align: center; font-size: 10px; }
     .chart.layout-affiliate-strip .affiliates { border-top: 2px solid var(--green-line); background: #f4fbf3; }
     .chart.layout-catalog .chart-bus, .chart.layout-catalog .chart-line { display: none; }
-    .chart.layout-catalog .unit-row { width: min(100%, 800px); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); align-items: start; gap: 10px; }
-    .chart.layout-catalog .unit { width: 100%; max-width: none; padding: 7px; border: 1px solid #d7dee8; border-radius: 7px; background: #f8fafc; }
+    .chart.layout-catalog .unit-row { width: min(100%, 800px); display: grid; grid-template-columns: repeat(auto-fit, minmax(154px, 1fr)); align-items: start; gap: 14px; }
+    .chart.layout-catalog .unit { width: 100%; max-width: none; padding: 9px; border: 1px solid #d7dee8; border-radius: 7px; background: #f8fafc; }
     .chart.layout-catalog .unit > .chart-card { border-width: 1.5px; }
-    .chart.layout-catalog .unit-children { border-left: 0; border-top: 1px solid #c4ccd7; }
+    .chart.layout-catalog .unit-children { border-left: 0; border-top: 1px solid var(--child-line); }
     .chart-card.headquarters { border-color: #315a8a; color: #17345d; background: #e7f0ff; font-weight: 800; }
     .chart-card.changed { box-shadow: inset 0 0 0 2px rgba(184, 134, 11, .18); }
     .affiliates { width: 100%; margin-top: 28px; padding-top: 15px; border-top: 1px dashed #b7c0cd; }
@@ -175,6 +179,8 @@
       .cards { grid-template-columns: 1fr; }
       .chart-panel { padding: 15px; }
       .chart-toolbar { align-items: flex-start; flex-direction: column; gap: 7px; }
+      .spine-staff { position: static; width: min(100%, 320px); justify-content: center; margin-top: 9px; transform: none; }
+      .spine-staff::before { display: none; }
     }
   </style>
 </head>
@@ -372,12 +378,14 @@
       const topUnits = [...model.nodes.values()].filter((node) => [model.agency, model.deputyName].includes(node.parent) && ![model.headName, model.deputyName].includes(node.name) && node.kind !== "affil" && node.kind !== "staff");
       const affils = [...model.nodes.values()].filter((node) => node.kind === "affil");
       const units = topUnits.map((node) => renderUnit(model, node.name)).join("");
-      const staff = (head?.staff || []).map((name) => model.nodes.get(name)).filter(Boolean).map((node) => card(node)).join("");
+      const headStaff = (head?.staff || []).map((name) => model.nodes.get(name)).filter(Boolean).map((node) => card(node)).join("");
+      const deputyStaff = (deputy?.staff || []).map((name) => model.nodes.get(name)).filter(Boolean).map((node) => card(node)).join("");
+      const spineNode = (node, staff) => `<div class="spine-node">${card(node, "head")}${staff ? `<div class="spine-staff">${staff}</div>` : ""}</div>`;
       const changed = [...model.nodes.values()].filter((node) => node.change);
       const changeNote = state.layout === "change-lanes"
         ? `<div class="layout-note">${changed.length ? `변경 표식 ${changed.length}개를 오른쪽 레인으로 구분했습니다.` : "변경 표식 없음 · @변경 지시문이 있으면 오른쪽 레인에 표시합니다."}</div>`
         : "";
-      const html = `<div class="chart-agency">${escapeHtml(model.agency)}</div><div class="chart-spine">${card(head, "head")} ${staff ? `<div class="chart-staff-row">${staff}</div>` : ""}<div class="chart-line"></div>${card(deputy, "head")}<div class="chart-line"></div><div class="chart-bus"></div><div class="unit-row">${units || `<div class="chart-card">문언에서 하부조직을 찾지 못했습니다</div>`}</div>${changeNote}${affils.length ? `<div class="affiliates"><div class="affiliates-label">소속기관</div><div class="affiliate-row">${affils.map((node) => card(node)).join("")}</div></div>` : ""}</div>`;
+      const html = `<div class="chart-agency">${escapeHtml(model.agency)}</div><div class="chart-spine">${spineNode(head, headStaff)}<div class="chart-line"></div>${spineNode(deputy, deputyStaff)}<div class="chart-line"></div><div class="chart-bus"></div><div class="unit-row">${units || `<div class="chart-card">문언에서 하부조직을 찾지 못했습니다</div>`}</div>${changeNote}${affils.length ? `<div class="affiliates"><div class="affiliates-label">소속기관</div><div class="affiliate-row">${affils.map((node) => card(node)).join("")}</div></div>` : ""}</div>`;
       $("#chart").className = `chart layout-${layoutClass(state.layout)}${state.layout === "change-lanes" && !changed.length ? " no-changes" : ""}`;
       $("#chart").innerHTML = html;
       $("#chartTitle").textContent = model.agency;
@@ -395,32 +403,44 @@
       const height = Math.max(620, 390 + units.reduce((sum, node) => sum + Math.min(4, (node.children || []).length) * 42, 0));
       let y = 32;
       const parts = [`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="100%" height="100%" fill="#ffffff"/><text x="${width / 2}" y="${y}" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="800" fill="#14233b">${escapeXml(model.agency)}</text><text x="${width / 2}" y="${y + 20}" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#667085">${escapeXml(LAYOUT_LABELS[style])}</text>`];
+      const nodes = [];
+      const links = [];
       const box = (x, top, name, fill = "#ffffff", stroke = "#7a8799") => `<rect x="${x - boxWidth / 2}" y="${top}" width="${boxWidth}" height="34" rx="5" fill="${fill}" stroke="${stroke}"/><text x="${x}" y="${top + 22}" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#172033">${escapeXml(name)}</text>`;
-      y += 55; parts.push(box(width / 2, y, model.headName, "#b8d2f1", "#315a8a"), `<line x1="${width / 2}" y1="${y + 34}" x2="${width / 2}" y2="${y + 58}" stroke="#8390a1"/>`); y += 70; parts.push(box(width / 2, y, model.deputyName, "#b8d2f1", "#315a8a")); y += 78;
+      const route = (x1, y1, x2, y2, color = "#8390a1") => {
+        const midY = (y1 + y2) / 2;
+        const d = Math.abs(x1 - x2) < .1 ? `M ${x1} ${y1} V ${y2}` : `M ${x1} ${y1} V ${midY} H ${x2} V ${y2}`;
+        return `<path d="${d}" fill="none" stroke="${color}" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>`;
+      };
+      const headTop = y + 55;
+      const deputyTop = headTop + 70;
+      const unitTop = deputyTop + 78;
+      nodes.push(box(width / 2, headTop, model.headName, "#b8d2f1", "#315a8a"));
+      nodes.push(box(width / 2, deputyTop, model.deputyName, "#b8d2f1", "#315a8a"));
+      links.push(route(width / 2, headTop + 34 - .6, width / 2, deputyTop + .6));
       const positions = style === "vertical-stack"
-        ? units.map((_node, index) => ({ x: width / 2, y: y + index * 90 }))
+        ? units.map((_node, index) => ({ x: width / 2, y: unitTop + index * 90 }))
         : style === "two-column"
-          ? units.map((_node, index) => ({ x: width * (index % 2 ? .72 : .28), y: y + Math.floor(index / 2) * 155 }))
+          ? units.map((_node, index) => ({ x: width * (index % 2 ? .72 : .28), y: unitTop + Math.floor(index / 2) * 155 }))
           : style === "matrix"
-            ? units.map((_node, index) => ({ x: width * ((index + .5) / Math.max(1, units.length)), y }))
+            ? units.map((_node, index) => ({ x: width * ((index + .5) / Math.max(1, units.length)), y: unitTop }))
             : style === "flow"
-              ? units.map((_node, index) => ({ x: width * (.14 + (index / Math.max(1, units.length - 1)) * .72), y: y + (index % 2) * 52 }))
+              ? units.map((_node, index) => ({ x: width * (.14 + (index / Math.max(1, units.length - 1)) * .72), y: unitTop + (index % 2) * 52 }))
               : style === "change-lanes"
-                ? units.map((_node, index) => ({ x: width * (index % 2 ? .72 : .28), y: y + Math.floor(index / 2) * 78 }))
+                ? units.map((_node, index) => ({ x: width * (index % 2 ? .72 : .28), y: unitTop + Math.floor(index / 2) * 78 }))
                 : style === "catalog"
-                  ? units.map((_node, index) => ({ x: width * ((index % 4 + .5) / 4), y: y + Math.floor(index / 4) * 62 }))
-            : units.map((_node, index) => ({ x: width / (units.length + 1) * (index + 1), y }));
-      if (style === "vertical-stack") parts.push(`<line x1="${width / 2}" y1="${y - 18}" x2="${width / 2}" y2="${y + Math.max(0, units.length - 1) * 90 + 16}" stroke="#8390a1"/>`);
-      else if (style !== "matrix") parts.push(`<line x1="${width / 2}" y1="${y - 18}" x2="${style === "two-column" ? width * .28 : positions.at(-1)?.x || width / 2}" y2="${y - 18}" stroke="#8390a1"/>`);
+                  ? units.map((_node, index) => ({ x: width * ((index % 4 + .5) / 4), y: unitTop + Math.floor(index / 4) * 62 }))
+                  : units.map((_node, index) => ({ x: width / (units.length + 1) * (index + 1), y: unitTop }));
       units.forEach((node, index) => {
         const position = positions[index]; const x = position.x; const top = position.y;
-        parts.push(box(x, top, node.name));
+        if (style !== "catalog") links.push(route(width / 2, deputyTop + 34 - .6, x, top + .6));
+        nodes.push(box(x, top, node.name));
         (node.children || []).slice(0, 4).forEach((child, childIndex) => {
           const childY = top + 58 + childIndex * 42;
-          parts.push(`<line x1="${x}" y1="${top + 34}" x2="${x}" y2="${childY}" stroke="#c4ccd7"/>`, box(x, childY, child, "#fbfcfe", "#a8b2c1"));
+          if (style !== "catalog") links.push(route(x, top + 34 - .6, x, childY + .6, "#c4ccd7"));
+          nodes.push(box(x, childY, child, "#fbfcfe", "#a8b2c1"));
         });
       });
-      parts.push("</svg>"); return parts.join("");
+      parts.push(...links, ...nodes, "</svg>"); return parts.join("");
     }
     function run() { try { state.model = parse($("#lawText").value); render(state.model); } catch (error) { $("#status").textContent = `해석 오류: ${error.message}`; $("#status").classList.add("error"); } }
     $("#lawText").value = EXAMPLE;

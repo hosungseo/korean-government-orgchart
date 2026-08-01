@@ -93,9 +93,15 @@ function addPage(presentation, graph, page, { showLawCounts, pageSize }) {
   const layout = layoutPage(graph, page, { pageSize });
 
   for (const group of layout.groupBoxes || []) addGroupBox(slide, group);
-  for (const edge of layout.edges) addEdge(slide, edge);
+  // Use shape-attached connectors rather than independently positioned line
+  // fragments. PowerPoint then keeps every elbow joined to its two boxes
+  // when it is opened, resized, or edited by the user.
+  const nodeShapes = new Map();
+  for (const entry of layout.nodes) {
+    nodeShapes.set(entry.node.id, addNode(slide, entry.node, entry.position, { showLawCounts, pageSize }));
+  }
+  for (const edge of layout.edges) addEdge(slide, edge, nodeShapes);
   for (const label of layout.labels || []) addLayoutLabel(slide, label, pageSize);
-  for (const entry of layout.nodes) addNode(slide, entry.node, entry.position, { showLawCounts, pageSize });
 
   if (layout.diagnostics?.overflow?.length) {
     addText(
@@ -153,6 +159,7 @@ function addNode(slide, node, position, { showLawCounts, pageSize }) {
   if (showLawCounts && position.vertical && node.metadata?.lawResponsibility?.lawCount) {
     addVerticalLawCount(slide, node.metadata.lawResponsibility.lawCount, position, pageSize);
   }
+  return shape;
 }
 
 function addGroupBox(slide, group) {
@@ -201,29 +208,26 @@ function addVerticalLawCount(slide, lawCount, position, pageSize) {
   };
 }
 
-function addEdge(slide, edge) {
+function addEdge(slide, edge, nodeShapes) {
   const color =
     edge.type === "affiliated" || edge.type === "temporary" ? "#3D8B3D" : edge.type === "jurisdiction" ? "#4F7EA8" : edge.type === "advisor" ? "#8B8B8B" : "#6B7280";
   const style = edge.type === "advisor" || edge.type === "temporary" || edge.type === "jurisdiction" ? "dashed" : "solid";
-  if (edge.orientation === "horizontal") {
-    const startX = edge.from.right ?? edge.from.centerX;
-    const startY = edge.from.centerY ?? edge.from.bottom;
-    const endX = edge.to.left ?? edge.to.centerX;
-    const endY = edge.to.centerY ?? edge.to.top;
-    const midX = startX + Math.max(10, (endX - startX) * 0.48);
-    addLine(slide, startX, startY, midX, startY, color, style, 1.05);
-    if (Math.abs(startY - endY) > 0.5) addLine(slide, midX, startY, midX, endY, color, style, 1.05);
-    addLine(slide, midX, endY, endX, endY, color, style, 1.05);
-    return;
-  }
-  const startX = edge.from.centerX;
-  const startY = edge.from.bottom;
-  const endX = edge.to.centerX;
-  const endY = edge.to.top;
-  const midY = startY + Math.max(10, (endY - startY) * 0.48);
-  addLine(slide, startX, startY, startX, midY, color, style, 1.05);
-  if (Math.abs(startX - endX) > 0.5) addLine(slide, startX, midY, endX, midY, color, style, 1.05);
-  addLine(slide, endX, midY, endX, endY, color, style, 1.05);
+  const fromShape = nodeShapes.get(edge.parent);
+  const toShape = nodeShapes.get(edge.child);
+  if (!fromShape || !toShape) return;
+  const horizontal = edge.orientation === "horizontal";
+  slide.shapes.connect(fromShape, toShape, {
+    kind: "elbow",
+    fromSide: horizontal ? "right" : "bottom",
+    toSide: horizontal ? "left" : "top",
+    line: { style, fill: color, width: 1.1 },
+    cap: "round",
+    join: "round",
+    // Artifact Tool's PPTX connector geometry uses `tail` for the visual end
+    // of a left-to-right route.  Keeping it here (rather than `head`) makes
+    // the arrow point toward the receiving unit in exported PowerPoint.
+    ...(horizontal ? { tail: { type: "arrow", width: "sm", length: "sm" } } : {}),
+  });
 }
 
 function addLayoutLabel(slide, label, pageSize) {

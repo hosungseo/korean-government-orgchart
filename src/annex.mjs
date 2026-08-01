@@ -1,4 +1,5 @@
-import { normalizeWhitespace } from "./utils.mjs";
+import { normalizeNodeName } from "./model.mjs";
+import { normalizeWhitespace, uniq } from "./utils.mjs";
 
 export function extractAnnexesFromLawJson(json, { source } = {}) {
   const law = json?.["법령"];
@@ -50,9 +51,33 @@ export function attachAnnexes(graph, annexes) {
   return graph;
 }
 
-export function findAnnex(graph, annexLabel) {
+export function applyAnnexOrganizations(graph, annexes = graph.meta.annexes || []) {
+  if (!annexes?.length) return graph;
+  const summaries = [];
+  for (const annex of annexes) {
+    if (isRegionalTaxOfficeAnnex(annex)) {
+      const summary = applyRegionalTaxOfficeAnnex(graph, annex);
+      if (summary.parentCount || summary.childCount) summaries.push(summary);
+    } else if (isRegionalJurisdictionAnnex(annex)) {
+      const summary = applyRegionalJurisdictionAnnex(graph, annex);
+      if (summary.updatedCount) summaries.push(summary);
+    }
+  }
+  if (summaries.length) {
+    graph.meta.annexOrganizations = mergeAnnexOrganizationSummaries(graph.meta.annexOrganizations || [], summaries);
+  }
+  return graph;
+}
+
+export function findAnnex(graph, annexLabel, { source } = {}) {
   const target = normalizeAnnexLabel(annexLabel);
-  return (graph.meta.annexes || []).find((annex) => normalizeAnnexLabel(annex.annex) === target) || null;
+  const matches = (graph.meta.annexes || []).filter((annex) => normalizeAnnexLabel(annex.annex) === target);
+  if (!matches.length) return null;
+  if (source) {
+    const exact = matches.find((annex) => annex.source === source);
+    if (exact) return exact;
+  }
+  return matches[0];
 }
 
 export function parseBoxTable(text) {
@@ -137,4 +162,189 @@ function normalizeAnnexNumber(value) {
 function normalizeAnnexLabel(value) {
   const match = String(value || "").match(/별표\s*(\d+(?:의\d+)?)/);
   return match ? `별표 ${normalizeAnnexNumber(match[1])}` : String(value || "").trim();
+}
+
+function isRegionalTaxOfficeAnnex(annex) {
+  const title = normalizeAnnexTitle(annex?.title);
+  return /지방국세청의\s*명칭.*위치.*소속세무서/.test(title);
+}
+
+function isRegionalJurisdictionAnnex(annex) {
+  const title = normalizeAnnexTitle(annex?.title);
+  return /지방국세청의\s*관할구역/.test(title);
+}
+
+function applyRegionalTaxOfficeAnnex(graph, annex) {
+  const rows = normalizeAnnexRows(annex);
+  const source = annex.source || annex.title || annex.annex;
+  const summary = {
+    annex: annex.annex,
+    title: annex.title,
+    type: "regional-tax-office-tree",
+    parentCount: 0,
+    childCount: 0,
+  };
+  markGenericAffiliatedPlaceholders(graph, ["지방국세청", "세무서"]);
+  for (const row of rows) {
+    const regionalName = normalizeNodeName(row[0]);
+    if (!regionalName || !/지방국세청$/.test(regionalName)) continue;
+    const location = cleanLocation(row[1]);
+    const regional = graph.addNode(regionalName, {
+      kind: "affiliated",
+      forceKind: true,
+      source,
+      metadata: {
+        affiliationType: "special-local",
+        annex: annex.annex,
+        annexTitle: annex.title,
+        annexRole: "regional-tax-office",
+        location,
+        unitRole: "affiliated-institution",
+      },
+    });
+    if (!regional) continue;
+    graph.addEdge(graph.rootId, regional.id, {
+      type: "affiliated",
+      source,
+      metadata: {
+        affiliationType: "special-local",
+        annex: annex.annex,
+        annexTitle: annex.title,
+        annexRole: "regional-tax-office",
+      },
+    });
+    summary.parentCount += 1;
+    for (const officeName of splitTaxOfficeList(row[2])) {
+      const office = graph.addNode(officeName, {
+        kind: "affiliated",
+        forceKind: true,
+        source,
+        metadata: {
+          affiliationType: "special-local",
+          annex: annex.annex,
+          annexTitle: annex.title,
+          annexRole: "tax-office",
+          parentRegionalOffice: regionalName,
+          unitRole: "affiliated-institution",
+        },
+      });
+      if (!office) continue;
+      graph.addEdge(regional.id, office.id, {
+        type: "affiliated",
+        source,
+        metadata: {
+          affiliationType: "special-local",
+          annex: annex.annex,
+          annexTitle: annex.title,
+          annexRole: "tax-office",
+        },
+      });
+      summary.childCount += 1;
+    }
+  }
+  return summary;
+}
+
+function applyRegionalJurisdictionAnnex(graph, annex) {
+  const rows = normalizeAnnexRows(annex);
+  const source = annex.source || annex.title || annex.annex;
+  const summary = {
+    annex: annex.annex,
+    title: annex.title,
+    type: "regional-tax-office-jurisdiction",
+    updatedCount: 0,
+  };
+  for (const row of rows) {
+    const regionalName = normalizeNodeName(row[0]);
+    if (!regionalName || !/지방국세청$/.test(regionalName)) continue;
+    const node = graph.nodeByName(regionalName);
+    if (!node) continue;
+    const location = cleanLocation(row[1]);
+    const jurisdictionArea = cleanJurisdiction(row[2]);
+    graph.addNode(regionalName, {
+      kind: "affiliated",
+      forceKind: true,
+      source,
+      metadata: {
+        location: node.metadata?.location || location,
+        jurisdictionArea,
+        jurisdictionAnnex: annex.annex,
+        jurisdictionAnnexTitle: annex.title,
+      },
+    });
+    summary.updatedCount += 1;
+  }
+  return summary;
+}
+
+function normalizeAnnexRows(annex) {
+  return (annex?.rows || [])
+    .map((row) => row.map((cell) => normalizeWhitespace(cell)))
+    .filter((row) => row.some(Boolean));
+}
+
+function normalizeAnnexTitle(title) {
+  return normalizeWhitespace(title)
+    .replace(/[ㆍ‧∙･·]/g, "·")
+    .replace(/\s+/g, "");
+}
+
+function splitTaxOfficeList(value) {
+  return uniq(
+    normalizeWhitespace(value)
+      .replace(/[ㆍ‧∙･·]/g, ",")
+      .split(/\s*,\s*|\s+및\s+/)
+      .map(normalizeTaxOfficeName),
+  );
+}
+
+function normalizeTaxOfficeName(value) {
+  const name = String(value || "")
+    .replace(/\([^)]*\)/g, "")
+    .replace(/\s+/g, "")
+    .replace(/[.;:，、]/g, "")
+    .trim();
+  if (!name || /^(?:및|외|등)$/.test(name)) return "";
+  if (/(?:세무서|지서)$/.test(name)) return name;
+  return `${name}세무서`;
+}
+
+function cleanLocation(value) {
+  const text = normalizeWhitespace(value);
+  const compact = text.replace(/\s+/g, "");
+  if (/^[가-힣]+(?:특별시|광역시|특별자치시|특별자치도|도)$/.test(compact)) return compact;
+  return text.replace(/\s*([ㆍ·])\s*/g, "$1").replace(/\s*,\s*/g, ", ");
+}
+
+function cleanJurisdiction(value) {
+  return normalizeWhitespace(value)
+    .replace(/\s*([ㆍ·])\s*/g, "$1")
+    .replace(/\s*,\s*/g, ", ")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+function markGenericAffiliatedPlaceholders(graph, names) {
+  for (const name of names) {
+    const node = graph.nodeByName(name);
+    if (!node) continue;
+    node.metadata = {
+      ...node.metadata,
+      placeholderFromAnnexRequirement: true,
+      countsTowardStructure: false,
+    };
+    for (const edge of [...graph.edges.values()]) {
+      if (edge.child === node.id && edge.parent === graph.rootId && edge.type === "affiliated") {
+        graph.edges.delete(`${edge.parent}>${edge.child}`);
+      }
+    }
+  }
+}
+
+function mergeAnnexOrganizationSummaries(existing, incoming) {
+  const byKey = new Map();
+  for (const item of [...existing, ...incoming]) {
+    byKey.set(`${item.annex}|${item.title}|${item.type}`, item);
+  }
+  return [...byKey.values()];
 }

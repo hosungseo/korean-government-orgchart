@@ -11,7 +11,7 @@ export function buildAuditReport(graph, pages = [], options = {}) {
   const reviewActions = collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates);
   const annexRequirements = (graph.meta.annexRequirements || []).map((item) => ({
     ...item,
-    matchedAnnex: findAnnex(graph, item.annex),
+    matchedAnnex: findAnnex(graph, item.annex, { source: item.source }),
   }));
   const kindCounts = {};
   for (const node of graph.nodes.values()) kindCounts[node.kind] = (kindCounts[node.kind] || 0) + 1;
@@ -39,6 +39,7 @@ export function buildAuditReport(graph, pages = [], options = {}) {
     validation: graph.meta.validation || [],
     annexRequirements,
     annexes: graph.meta.annexes || [],
+    annexOrganizations: graph.meta.annexOrganizations || [],
     temporaryHeadcounts: graph.meta.temporaryHeadcounts || [],
     jurisdictionRelations: graph.meta.jurisdictionRelations || [],
     jurisdictionCandidates,
@@ -61,6 +62,7 @@ export function formatAuditMarkdown(report) {
   appendSection(lines, "통칙·구조 검증", report.validation, (item) => `- ${item}`);
   appendSection(lines, "별표 필요", report.annexRequirements, formatAnnexRequirement);
   appendSection(lines, "별표 인벤토리", report.annexes, formatAnnexInventory);
+  appendSection(lines, "별표 조직 반영", report.annexOrganizations, formatAnnexOrganization);
   appendSection(lines, "한시정원", report.temporaryHeadcounts, (item) => `- ${item.target}: ${item.expires}까지 (${item.source})`);
   appendSection(lines, "정책관·관 소관 후보", report.jurisdictionCandidates, formatJurisdictionCandidate);
   appendSection(lines, "관리폭 진단", report.spanDiagnostics, (item) => `- ${item.node}: ${item.directUnits}개 · ${item.message}`);
@@ -132,7 +134,7 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates) {
     }
   }
   for (const item of graph.meta.annexRequirements || []) {
-    const annex = findAnnex(graph, item.annex);
+    const annex = findAnnex(graph, item.annex, { source: item.source });
     actions.push({
       priority: item.type === "organization-matrix" ? "high" : "medium",
       topic: "annex",
@@ -245,6 +247,16 @@ function formatAnnexRequirement(item) {
 function formatAnnexInventory(item) {
   const suffix = item.rowCount ? ` · 표 ${item.rowCount}행` : "";
   return `- ${item.annex} · ${item.type} · ${item.title}${suffix}`;
+}
+
+function formatAnnexOrganization(item) {
+  if (item.type === "regional-tax-office-tree") {
+    return `- ${item.annex} · ${item.title}: 지방청 ${item.parentCount}개, 세무서 ${item.childCount}개를 소속기관 트리로 반영`;
+  }
+  if (item.type === "regional-tax-office-jurisdiction") {
+    return `- ${item.annex} · ${item.title}: 지방청 ${item.updatedCount}개의 위치·관할구역 메타데이터 반영`;
+  }
+  return `- ${item.annex} · ${item.title}: ${item.type}`;
 }
 
 function statusLabel(value) {

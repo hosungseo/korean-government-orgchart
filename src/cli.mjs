@@ -2,7 +2,7 @@
 
 import fs from "node:fs/promises";
 import path from "node:path";
-import { attachAnnexes } from "./annex.mjs";
+import { applyAnnexOrganizations, attachAnnexes } from "./annex.mjs";
 import { buildAuditReport, formatAuditMarkdown } from "./audit.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
@@ -81,6 +81,8 @@ async function graphFromLawArgs(args) {
     annexCount: item.annexes?.length || 0,
   }));
   attachAnnexes(graph, fetched.flatMap((item) => item.annexes || []));
+  applyAnnexOrganizations(graph);
+  graph.validateLegalStructure();
   return graph;
 }
 
@@ -202,6 +204,7 @@ function summarize(graph, pages) {
     temporaryHeadcounts: graph.meta.temporaryHeadcounts?.length || 0,
     jurisdictionRelations: graph.meta.jurisdictionRelations?.length || 0,
     annexes: graph.meta.annexes?.length || 0,
+    annexOrganizations: graph.meta.annexOrganizations?.length || 0,
     structure: summarizeStructure(graph),
     spanDiagnostics: graph.meta.spanDiagnostics || [],
     lawMappedDepartments: graph.meta.lawMap?.matchedDepartments || 0,

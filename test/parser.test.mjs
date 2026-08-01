@@ -60,6 +60,22 @@ test("A4 세로 형식은 반쪽 면에 맞는 세로 스택 레이아웃을 선
   assert.equal(resolvePageSize("a4-portrait").height > resolvePageSize("a4-portrait").width, true);
 });
 
+test("A4 반쪽 세로형은 단계 간격을 검토서형으로 압축한다", () => {
+  const graph = parseOrganizationTexts([text]);
+  const page = planPages(graph, { paper: "a4-half", layoutStyle: "vertical-stack", maxNodes: 50 })[0];
+  const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
+  const topByDepth = new Map();
+  for (const { position } of layout.nodes) {
+    if (!topByDepth.has(position.depth)) topByDepth.set(position.depth, position.top);
+    else topByDepth.set(position.depth, Math.min(topByDepth.get(position.depth), position.top));
+  }
+
+  assert.equal(layout.diagnostics.ok, true);
+  assert.ok(topByDepth.get(0) - layout.frame.top <= 32);
+  assert.ok(topByDepth.get(1) - topByDepth.get(0) <= 100);
+  assert.ok(topByDepth.get(2) - topByDepth.get(1) <= 100);
+});
+
 test("같은 그래프를 여러 시각 유형으로 한 번에 계획한다", () => {
   const graph = parseOrganizationTexts([text]);
   assert.deepEqual(parseLayoutStyles("vertical,horizontal,two-column,matrix"), [

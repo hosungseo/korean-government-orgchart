@@ -558,11 +558,11 @@ export function layoutPage(graph, page, options = {}) {
   const usableHeight = Math.max(220, frame.height - leafHeight - 20);
   const narrowHalf = portrait && pageSize.width < 400;
   const preferredLevelGap = verticalLeaves
-    ? (narrowHalf ? 148 : portrait ? 96 : 104)
-    : (narrowHalf ? 118 : 92);
+    ? (narrowHalf ? 96 : portrait ? 96 : 104)
+    : (narrowHalf ? 86 : 92);
   const levelGap = maxDepth ? Math.min(preferredLevelGap, usableHeight / maxDepth) : 0;
   const contentHeight = maxDepth * levelGap + leafHeight;
-  const topInset = Math.min(narrowHalf ? 48 : 24, Math.max(0, (frame.height - contentHeight) * 0.18));
+  const topInset = Math.min(narrowHalf ? 28 : 24, Math.max(0, (frame.height - contentHeight) * 0.18));
   const siblingGutter = verticalLeaves ? (narrowHalf ? 6 : 12) : 18;
   const positions = new Map();
 

@@ -126,11 +126,25 @@ node src/cli.mjs build \
   --out outputs/소관법령-기구도.pptx
 ```
 
-### A4에 맞춘 여러 작도 유형
+### 같은 문언에서 여러 작도 유형 뽑기
 
-검토서에서 반복되는 세로 척추형·가로 버스형·반쪽 면 조직도에 맞춰 출력 용지와 작도 방향을 선택할 수 있습니다.
+용지 방향과 작도 유형은 별개의 선택입니다. 하나의 직제·시행규칙 입력을 가로 버스형, 세로 척추형, 좌우 2열형, 관·국–과 매트릭스형으로 반복 계획해 한 PPTX/SVG에 비교 페이지로 넣을 수 있습니다.
+
+| 프리셋 | 용도 |
+| --- | --- |
+| `horizontal` | 기관장 척추에서 실·국을 가로 버스로 펼치는 전체 개요 |
+| `vertical` | 실·국 아래 관·과·팀을 세로로 쌓는 좁은 면·반쪽 면 |
+| `two-column` | 상위 계선을 좌우 두 레인으로 나누는 비교·검토서형 |
+| `matrix` | 관·국을 열로 고정하고 하위 과·팀을 행으로 배열 |
+
+`--layouts`에 쉼표로 여러 프리셋을 지정하면 순서대로 한 파일에 들어가고, `--layout all`은 네 유형을 모두 생성합니다.
 
 ```bash
+# 네 유형을 A4 가로 비교 묶음으로 출력
+node src/cli.mjs build --input 직제.txt --input 직제시행규칙.txt \
+  --paper a4-landscape --layouts vertical,horizontal,two-column,matrix \
+  --out outputs/기관-유형모음.pptx --svg outputs/기관-유형모음.svg
+
 # 한 장짜리 A4 세로 조직도
 node src/cli.mjs build --input 직제.txt --paper a4-portrait --layout vertical \
   --out outputs/기관-a4.pptx --svg outputs/기관-a4.svg
@@ -140,9 +154,8 @@ node src/cli.mjs build --input 직제.txt --paper a4-half --layout vertical \
   --focus 산업정책실 \
   --out outputs/기관-반쪽.pptx --svg outputs/기관-반쪽.svg
 
-# 가로 검토서형
-node src/cli.mjs build --input 직제.txt --paper a4-landscape --layout horizontal \
-  --out outputs/기관-가로.pptx
+# 네 유형을 모두 한 번에 생성하는 별칭
+node src/cli.mjs build --input 직제.txt --layout all --out outputs/기관-유형모음.pptx
 ```
 
 신설·폐지·명칭변경·이체를 검토서처럼 표시하려면 입력에 다음 지시문을 덧붙입니다.
@@ -170,7 +183,7 @@ src/law-api.mjs       법제처 기준일 연혁 조회
 src/parser.mjs        직제·시행규칙 문언 파싱
 src/model.mjs         조직 그래프·법적 관계·운영형 투영
 src/law-map.mjs       과 단위 소관법령 지도 병합
-src/layout.mjs        한 장형·분할형 페이지 계획
+src/layout.mjs        작도 프리셋·한 장형·분할형 페이지 계획
 src/render-pptx.mjs   편집 가능한 PowerPoint 도형 출력
 src/render-svg.mjs    SVG 검토 출력
 src/cli.mjs           build/from-law/fetch/inspect 명령

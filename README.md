@@ -128,7 +128,7 @@ node src/cli.mjs build \
 
 ### 같은 문언에서 여러 작도 유형 뽑기
 
-용지 방향과 작도 유형은 별개의 선택입니다. 하나의 직제·시행규칙 입력을 가로 버스형, 세로 척추형, 좌우 2열형, 관·국–과 매트릭스형으로 반복 계획해 한 PPTX/SVG에 비교 페이지로 넣을 수 있습니다.
+용지 방향과 작도 유형은 별개의 선택입니다. 하나의 직제·시행규칙 입력을 여러 시각 문법으로 반복 계획해 한 PPTX/SVG에 비교 페이지로 넣을 수 있습니다.
 
 | 프리셋 | 용도 |
 | --- | --- |
@@ -136,13 +136,17 @@ node src/cli.mjs build \
 | `vertical` | 실·국 아래 관·과·팀을 세로로 쌓는 좁은 면·반쪽 면 |
 | `two-column` | 상위 계선을 좌우 두 레인으로 나누는 비교·검토서형 |
 | `matrix` | 관·국을 열로 고정하고 하위 과·팀을 행으로 배열 |
+| `flow` | 조직 관계를 왼쪽에서 오른쪽으로 읽는 기능·이관 검토형 |
+| `change-lanes` | 기존 조직과 신설·폐지·명칭변경·이체 조직을 좌우 레인으로 분리 |
+| `affiliate-strip` | 본부 계층 아래 부속기관·책임운영기관을 별도 띠로 표시 |
+| `catalog` | 관·국별 하위 과·팀을 연결선 없이 카드 목록으로 인쇄 |
 
-`--layouts`에 쉼표로 여러 프리셋을 지정하면 순서대로 한 파일에 들어가고, `--layout all`은 네 유형을 모두 생성합니다.
+`--layouts`에 쉼표로 여러 프리셋을 지정하면 순서대로 한 파일에 들어가고, `--layout all`은 여덟 유형을 모두 생성합니다. `change-lanes`는 `@변경` 지시문이 있을 때 변경 조직이 오른쪽 레인으로 이동합니다.
 
 ```bash
-# 네 유형을 A4 가로 비교 묶음으로 출력
+# 여러 유형을 A4 가로 비교 묶음으로 출력
 node src/cli.mjs build --input 직제.txt --input 직제시행규칙.txt \
-  --paper a4-landscape --layouts vertical,horizontal,two-column,matrix \
+  --paper a4-landscape --layouts vertical,horizontal,two-column,matrix,flow,change-lanes,affiliate-strip,catalog \
   --out outputs/기관-유형모음.pptx --svg outputs/기관-유형모음.svg
 
 # 한 장짜리 A4 세로 조직도
@@ -154,7 +158,7 @@ node src/cli.mjs build --input 직제.txt --paper a4-half --layout vertical \
   --focus 산업정책실 \
   --out outputs/기관-반쪽.pptx --svg outputs/기관-반쪽.svg
 
-# 네 유형을 모두 한 번에 생성하는 별칭
+# 여덟 유형을 모두 한 번에 생성하는 별칭
 node src/cli.mjs build --input 직제.txt --layout all --out outputs/기관-유형모음.pptx
 ```
 

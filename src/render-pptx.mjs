@@ -93,6 +93,7 @@ function addPage(presentation, graph, page, { showLawCounts, pageSize }) {
   const layout = layoutPage(graph, page, { pageSize });
 
   for (const edge of layout.edges) addEdge(slide, edge);
+  for (const label of layout.labels || []) addLayoutLabel(slide, label, pageSize);
   for (const entry of layout.nodes) addNode(slide, entry.node, entry.position, { showLawCounts, pageSize });
 
   addLegend(slide, { showLawCounts, operational: graph.meta.renderView === "operational", pageSize });
@@ -168,6 +169,17 @@ function addEdge(slide, edge) {
   const color =
     edge.type === "affiliated" || edge.type === "temporary" ? "#3D8B3D" : edge.type === "jurisdiction" ? "#4F7EA8" : edge.type === "advisor" ? "#8B8B8B" : "#6B7280";
   const style = edge.type === "advisor" || edge.type === "temporary" || edge.type === "jurisdiction" ? "dashed" : "solid";
+  if (edge.orientation === "horizontal") {
+    const startX = edge.from.right ?? edge.from.centerX;
+    const startY = edge.from.centerY ?? edge.from.bottom;
+    const endX = edge.to.left ?? edge.to.centerX;
+    const endY = edge.to.centerY ?? edge.to.top;
+    const midX = startX + Math.max(10, (endX - startX) * 0.48);
+    addLine(slide, startX, startY, midX, startY, color, style, 1.05);
+    if (Math.abs(startY - endY) > 0.5) addLine(slide, midX, startY, midX, endY, color, style, 1.05);
+    addLine(slide, midX, endY, endX, endY, color, style, 1.05);
+    return;
+  }
   const startX = edge.from.centerX;
   const startY = edge.from.bottom;
   const endX = edge.to.centerX;
@@ -176,6 +188,17 @@ function addEdge(slide, edge) {
   addLine(slide, startX, startY, startX, midY, color, style, 1.05);
   if (Math.abs(startX - endX) > 0.5) addLine(slide, startX, midY, endX, midY, color, style, 1.05);
   addLine(slide, endX, midY, endX, endY, color, style, 1.05);
+}
+
+function addLayoutLabel(slide, label, pageSize) {
+  const portrait = pageSize.height > pageSize.width;
+  addText(
+    slide,
+    label.text,
+    { left: label.x - (label.align === "middle" ? 80 : 0), top: label.y - 12, width: label.align === "middle" ? 160 : 220, height: 14 },
+    { fontSize: portrait ? 8.5 : 10, bold: true, color: "#6B7280", alignment: label.align === "middle" ? "center" : "left" },
+    `레이아웃표식-${label.text}`,
+  );
 }
 
 function addLine(slide, x1, y1, x2, y2, color, style = "solid", width = 1) {
@@ -233,28 +256,34 @@ function addLegend(slide, { showLawCounts, operational, pageSize }) {
     addText(slide, half ? "(가/나) · (책) · (한) · (임)" : "(가/나) 직무등급 · (책) 책임운영 · (한) 한시 · (임) 임기제", { left: half ? margin : 198, top: pageSize.height - (half ? 24 : 39), width: half ? pageSize.width - margin * 2 : pageSize.width - 226, height: 14 }, { fontSize, color: "#4B5563", alignment: "left", autoFit: "shrinkText" }, "범례-표식");
     return;
   }
-  addLine(slide, 42, 697, 62, 697, "#6B7280", "solid", 1);
-  addText(slide, "보조·지휘", { left: 67, top: 688, width: 58, height: 16 }, { fontSize: 9.5, color: "#4B5563", alignment: "left" }, "범례-보조");
-  addLine(slide, 135, 697, 155, 697, "#8B8B8B", "dashed", 1);
-  addText(slide, "보좌", { left: 160, top: 688, width: 38, height: 16 }, { fontSize: 9.5, color: "#4B5563", alignment: "left" }, "범례-보좌");
+  const compact = pageSize.width < 1000;
+  const legendY = pageSize.height - 23;
+  const textTop = legendY - 9;
+  const fontSize = compact ? 7.2 : 9.5;
+  addLine(slide, 42, legendY, 62, legendY, "#6B7280", "solid", 1);
+  addText(slide, "보조·지휘", { left: 67, top: textTop, width: 58, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-보조");
+  addLine(slide, 135, legendY, 155, legendY, "#8B8B8B", "dashed", 1);
+  addText(slide, "보좌", { left: 160, top: textTop, width: 38, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-보좌");
   if (operational) {
-    addLine(slide, 201, 697, 221, 697, "#4F7EA8", "dashed", 1);
-    addText(slide, "소관 묶음", { left: 226, top: 688, width: 58, height: 16 }, { fontSize: 9.5, color: "#4B5563", alignment: "left" }, "범례-소관");
+    addLine(slide, 201, legendY, 221, legendY, "#4F7EA8", "dashed", 1);
+    addText(slide, "소관 묶음", { left: 226, top: textTop, width: 58, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-소관");
   }
+  const affiliateLeft = operational ? 294 : 208;
   const affiliate = slide.shapes.add({
     geometry: "rect",
     name: "범례-소속기관-색",
-    position: { left: operational ? 294 : 208, top: 691, width: 14, height: 10 },
+    position: { left: affiliateLeft, top: legendY - 6, width: 14, height: 10 },
     fill: "#55B947",
     line: { style: "solid", fill: "#2D7D2D", width: 0.8 },
   });
   affiliate.text = "";
-  addText(slide, "소속기관", { left: operational ? 313 : 227, top: 688, width: 60, height: 16 }, { fontSize: 9.5, color: "#4B5563", alignment: "left" }, "범례-소속");
+  addText(slide, "소속기관", { left: affiliateLeft + 19, top: textTop, width: 60, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-소속");
+  const markerLeft = operational ? 386 : 300;
   addText(
     slide,
     `${showLawCounts ? "법령수: (법 n)·회색 숫자  " : ""}(가/나) 직무등급  (연) 연구직  (지) 지도직  (전) 전문직·전문경력관  (임) 임기제  (별) 별정직  (특) 특정직  (책) 책임운영  (총) 총액  (자) 자율  (평) 평가  (한) 한시`,
-    { left: operational ? 386 : 300, top: 688, width: operational ? 484 : 570, height: 16 },
-    { fontSize: 9.5, color: "#4B5563", alignment: "left" },
+    { left: markerLeft, top: textTop, width: Math.max(160, pageSize.width - markerLeft - 42), height: 16 },
+    { fontSize, color: "#4B5563", alignment: "left", autoFit: "shrinkText" },
     "범례-표식",
   );
 }

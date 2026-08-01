@@ -52,6 +52,9 @@ function renderPage(graph, page, offsetY, { showLawCounts, pageSize }) {
   for (const edge of layout.edges) {
     pageGroup.push(...svgEdge(edge));
   }
+  for (const label of layout.labels || []) {
+    pageGroup.push(svgLayoutLabel(label, pageSize));
+  }
   for (const entry of layout.nodes) {
     pageGroup.push(svgNode(entry.node, entry.position, { showLawCounts, pageSize }));
   }
@@ -65,6 +68,21 @@ function svgEdge(edge) {
   const color =
     edge.type === "affiliated" || edge.type === "temporary" ? "#3D8B3D" : edge.type === "jurisdiction" ? "#4F7EA8" : edge.type === "advisor" ? "#8B8B8B" : "#6B7280";
   const dash = edge.type === "advisor" || edge.type === "temporary" || edge.type === "jurisdiction" ? ` stroke-dasharray="5 4"` : "";
+  if (edge.orientation === "horizontal") {
+    const startX = edge.from.right ?? edge.from.centerX;
+    const startY = edge.from.centerY ?? edge.from.bottom;
+    const endX = edge.to.left ?? edge.to.centerX;
+    const endY = edge.to.centerY ?? edge.to.top;
+    const midX = startX + Math.max(10, (endX - startX) * 0.48);
+    const common = `stroke="${color}" stroke-width="1.1" fill="none"${dash}`;
+    return [
+      `<line x1="${startX}" y1="${startY}" x2="${midX}" y2="${startY}" ${common}/>`,
+      Math.abs(startY - endY) > 0.5
+        ? `<line x1="${midX}" y1="${startY}" x2="${midX}" y2="${endY}" ${common}/>`
+        : "",
+      `<line x1="${midX}" y1="${endY}" x2="${endX}" y2="${endY}" ${common}/>`,
+    ].filter(Boolean);
+  }
   const startX = edge.from.centerX;
   const startY = edge.from.bottom;
   const endX = edge.to.centerX;
@@ -78,6 +96,11 @@ function svgEdge(edge) {
       : "",
     `<line x1="${endX}" y1="${midY}" x2="${endX}" y2="${endY}" ${common}/>`,
   ].filter(Boolean);
+}
+
+function svgLayoutLabel(label, pageSize) {
+  const portrait = pageSize.height > pageSize.width;
+  return `<text x="${label.x}" y="${label.y}" text-anchor="${label.align || "start"}" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? 8.5 : 10}" font-weight="700" fill="#6B7280">${xmlEscape(label.text)}</text>`;
 }
 
 function svgNode(node, position, { showLawCounts, pageSize }) {
@@ -134,8 +157,9 @@ function svgLegend({ showLawCounts, operational, pageSize }) {
   const jurisdiction = operational
     ? `<line x1="159" y1="-3" x2="179" y2="-3" stroke="#4F7EA8" stroke-dasharray="4 3"/><text x="184" y="0">소관 묶음</text>`
     : "";
+  const legendY = pageSize.height - 24;
   return [
-    `<g transform="translate(42 696)" font-family="Malgun Gothic, sans-serif" font-size="9.5" fill="#4B5563">`,
+    `<g transform="translate(42 ${legendY})" font-family="Malgun Gothic, sans-serif" font-size="${pageSize.width < 1000 ? 7.2 : 9.5}" fill="#4B5563">`,
     `<line x1="0" y1="-3" x2="20" y2="-3" stroke="#6B7280"/><text x="25" y="0">보조·지휘</text>`,
     `<line x1="92" y1="-3" x2="112" y2="-3" stroke="#8B8B8B" stroke-dasharray="4 3"/><text x="117" y="0">보좌</text>`,
     jurisdiction,

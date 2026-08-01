@@ -92,9 +92,20 @@ function addPage(presentation, graph, page, { showLawCounts, pageSize }) {
 
   const layout = layoutPage(graph, page, { pageSize });
 
+  for (const group of layout.groupBoxes || []) addGroupBox(slide, group);
   for (const edge of layout.edges) addEdge(slide, edge);
   for (const label of layout.labels || []) addLayoutLabel(slide, label, pageSize);
   for (const entry of layout.nodes) addNode(slide, entry.node, entry.position, { showLawCounts, pageSize });
+
+  if (layout.diagnostics?.overflow?.length) {
+    addText(
+      slide,
+      `⚠ ${layout.diagnostics.overflow.length}개 조직이 인쇄 영역을 벗어났습니다. 분할 또는 다른 작도 유형을 사용하세요.`,
+      { left: margin, top: pageSize.height - (portrait ? 44 : 38), width: pageSize.width - margin * 2 - 90, height: 14 },
+      { fontSize: portrait ? 7.5 : 8, color: "#B45309", alignment: "left" },
+      "배치진단-넘침",
+    );
+  }
 
   addLegend(slide, { showLawCounts, operational: graph.meta.renderView === "operational", pageSize });
   addText(
@@ -122,21 +133,46 @@ function addNode(slide, node, position, { showLawCounts, pageSize }) {
     borderRadius: position.vertical ? 1 : 4,
   });
   shape.text = displayNodeName(node, position.vertical, { showLawCounts });
+  const verticalLines = position.vertical ? displayNodeName(node, true, { showLawCounts }).split("\n").length : 1;
+  const verticalLineHeight = position.vertical
+    ? Math.min(10.5, Math.max(6.8, position.height / Math.max(1, verticalLines) - 1.2))
+    : 14;
   shape.text.style = {
-    fontSize: position.vertical ? 10.6 : node.name.length > 13 ? 10.5 : 12.5,
+    fontSize: position.vertical ? Math.min(10.6, Math.max(6.4, verticalLineHeight - 0.2)) : node.name.length > 13 ? 10.5 : 12.5,
     bold: style.bold,
     color: style.text,
     alignment: "center",
     verticalAlignment: "middle",
     autoFit: "shrinkText",
     typeface: TYPEFACE,
-    lineSpacing: position.vertical ? 0.76 : 0.95,
+    lineSpacing: position.vertical ? Math.max(0.58, Math.min(0.76, verticalLineHeight / 13.5)) : 0.95,
     insets: position.vertical
       ? { top: 3, right: 2, bottom: 3, left: 2 }
       : { top: 3, right: 4, bottom: 3, left: 4 },
   };
   if (showLawCounts && position.vertical && node.metadata?.lawResponsibility?.lawCount) {
     addVerticalLawCount(slide, node.metadata.lawResponsibility.lawCount, position, pageSize);
+  }
+}
+
+function addGroupBox(slide, group) {
+  const shape = slide.shapes.add({
+    geometry: "roundRect",
+    name: `카드묶음-${group.caption || "상위조직"}`,
+    position: { left: group.left, top: group.top, width: group.width, height: group.height },
+    fill: "#F8FAFC",
+    line: { style: "solid", fill: "#D7DEE8", width: 0.8 },
+    borderRadius: 5,
+  });
+  shape.text = "";
+  if (group.caption) {
+    addText(
+      slide,
+      group.caption,
+      { left: group.left + 8, top: group.top + 2, width: group.width - 16, height: 14 },
+      { fontSize: 8.5, color: "#64748B", alignment: "left" },
+      `카드묶음표식-${group.caption}`,
+    );
   }
 }
 
@@ -196,7 +232,7 @@ function addLayoutLabel(slide, label, pageSize) {
     slide,
     label.text,
     { left: label.x - (label.align === "middle" ? 80 : 0), top: label.y - 12, width: label.align === "middle" ? 160 : 220, height: 14 },
-    { fontSize: portrait ? 8.5 : 10, bold: true, color: "#6B7280", alignment: label.align === "middle" ? "center" : "left" },
+    { fontSize: label.muted ? (portrait ? 7.5 : 8.5) : (portrait ? 8.5 : 10), bold: !label.muted, color: label.muted ? "#94A3B8" : "#6B7280", alignment: label.align === "middle" ? "center" : "left" },
     `레이아웃표식-${label.text}`,
   );
 }

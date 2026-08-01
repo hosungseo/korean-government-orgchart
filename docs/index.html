@@ -109,7 +109,7 @@
     .unit-children { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 13px; padding-top: 10px; border-left: 1px solid #c4ccd7; }
     .unit-children .chart-card { width: 100%; min-width: 106px; font-size: 11px; }
     .unit-children .chart-card.staff { color: var(--navy-2); }
-    /* The browser demo uses the same four visual grammars as the CLI.  The
+    /* The browser demo uses the same eight visual grammars as the CLI.  The
        full legal parser remains in src/, while these CSS transforms keep the
        public page dependency-free. */
     .chart.layout-vertical .unit-row { flex-direction: column; align-items: center; gap: 16px; }
@@ -129,11 +129,16 @@
     .chart.layout-change-lanes .unit-row { width: min(100%, 700px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 18px; }
     .chart.layout-change-lanes .unit { width: 100%; max-width: none; }
     .chart.layout-change-lanes .unit:nth-child(even) > .chart-card { border-color: #b4362a; background: #fff1f0; }
+    .chart.layout-change-lanes.no-changes .unit-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .layout-note { width: min(100%, 760px); margin: 9px 0 0; padding: 7px 10px; border: 1px dashed #cbd5e1; border-radius: 6px; color: #64748b; background: #f8fafc; text-align: center; font-size: 10px; }
     .chart.layout-affiliate-strip .affiliates { border-top: 2px solid var(--green-line); background: #f4fbf3; }
     .chart.layout-catalog .chart-bus, .chart.layout-catalog .chart-line { display: none; }
     .chart.layout-catalog .unit-row { width: min(100%, 800px); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); align-items: start; gap: 10px; }
-    .chart.layout-catalog .unit { width: 100%; max-width: none; }
+    .chart.layout-catalog .unit { width: 100%; max-width: none; padding: 7px; border: 1px solid #d7dee8; border-radius: 7px; background: #f8fafc; }
+    .chart.layout-catalog .unit > .chart-card { border-width: 1.5px; }
     .chart.layout-catalog .unit-children { border-left: 0; border-top: 1px solid #c4ccd7; }
+    .chart-card.headquarters { border-color: #315a8a; color: #17345d; background: #e7f0ff; font-weight: 800; }
+    .chart-card.changed { box-shadow: inset 0 0 0 2px rgba(184, 134, 11, .18); }
     .affiliates { width: 100%; margin-top: 28px; padding-top: 15px; border-top: 1px dashed #b7c0cd; }
     .affiliates-label { margin-bottom: 9px; color: var(--muted); font-size: 11px; font-weight: 750; }
     .affiliate-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
@@ -280,6 +285,7 @@
       return "line";
     };
     const markerFor = (name) => {
+      if (/본부$/.test(name)) return "본부";
       if (/연구/.test(name)) return "연";
       if (/지도/.test(name)) return "지";
       if (/전문/.test(name)) return "전";
@@ -297,6 +303,7 @@
         if (!nodes.has(name)) nodes.set(name, { name, kind, children: [], staff: [], parent: null, marker: markerFor(name) });
         const node = nodes.get(name);
         if (kind === "affil" || kind === "staff") node.kind = kind;
+        if (name.endsWith("본부")) node.unitRole = kind === "affil" ? "affiliated-institution" : "headquarters";
         return node;
       };
       const attach = (parentName, childName, relation) => {
@@ -317,6 +324,8 @@
           }
           continue;
         }
+        const change = line.match(/^@변경:\s*(.+?)\s*=\s*(신설|폐지|명칭변경|이체|상계신설)\s*$/);
+        if (change) { const node = get(change[1].trim()); if (node) node.change = change[2]; continue; }
         const staff = line.match(/(.+?)\s*밑에\s+(.+?)(?:을|를)?\s*(?:둔다|두며|두되)(?:[.。]|$)/);
         if (staff) { splitNames(staff[2]).forEach((child) => attach(cleanParent(staff[1]), child, "staff")); continue; }
         const affiliation = line.match(/(?:장관|청장|처장|위원장)[^.]*(?:소속으로|소속의 책임운영기관으로)\s+(.+?)(?:을|를)\s*둔다/);
@@ -341,8 +350,11 @@
       return { agency, headName, deputyName, nodes, edges, jurisdiction };
     }
     function card(node, extra = "") {
-      const marker = node.marker ? `<span class="marker">(${node.marker})</span>` : "";
-      return `<div class="chart-card ${node.kind} ${extra}">${escapeHtml(node.name)}${marker}</div>`;
+      const markers = [node.marker, node.change].filter(Boolean);
+      const marker = markers.length ? `<span class="marker">${markers.map((value) => `(${escapeHtml(value)})`).join("")}</span>` : "";
+      const roleClass = node.unitRole === "headquarters" ? "headquarters" : "";
+      const changedClass = node.change ? "changed" : "";
+      return `<div class="chart-card ${node.kind} ${roleClass} ${changedClass} ${extra}">${escapeHtml(node.name)}${marker}</div>`;
     }
     function renderUnit(model, name, seen = new Set()) {
       const node = model.nodes.get(name); if (!node || seen.has(name)) return "";
@@ -361,8 +373,12 @@
       const affils = [...model.nodes.values()].filter((node) => node.kind === "affil");
       const units = topUnits.map((node) => renderUnit(model, node.name)).join("");
       const staff = (head?.staff || []).map((name) => model.nodes.get(name)).filter(Boolean).map((node) => card(node)).join("");
-      const html = `<div class="chart-agency">${escapeHtml(model.agency)}</div><div class="chart-spine">${card(head, "head")} ${staff ? `<div class="chart-staff-row">${staff}</div>` : ""}<div class="chart-line"></div>${card(deputy, "head")}<div class="chart-line"></div><div class="chart-bus"></div><div class="unit-row">${units || `<div class="chart-card">문언에서 하부조직을 찾지 못했습니다</div>`}</div>${affils.length ? `<div class="affiliates"><div class="affiliates-label">소속기관</div><div class="affiliate-row">${affils.map((node) => card(node)).join("")}</div></div>` : ""}</div>`;
-      $("#chart").className = `chart layout-${layoutClass(state.layout)}`;
+      const changed = [...model.nodes.values()].filter((node) => node.change);
+      const changeNote = state.layout === "change-lanes"
+        ? `<div class="layout-note">${changed.length ? `변경 표식 ${changed.length}개를 오른쪽 레인으로 구분했습니다.` : "변경 표식 없음 · @변경 지시문이 있으면 오른쪽 레인에 표시합니다."}</div>`
+        : "";
+      const html = `<div class="chart-agency">${escapeHtml(model.agency)}</div><div class="chart-spine">${card(head, "head")} ${staff ? `<div class="chart-staff-row">${staff}</div>` : ""}<div class="chart-line"></div>${card(deputy, "head")}<div class="chart-line"></div><div class="chart-bus"></div><div class="unit-row">${units || `<div class="chart-card">문언에서 하부조직을 찾지 못했습니다</div>`}</div>${changeNote}${affils.length ? `<div class="affiliates"><div class="affiliates-label">소속기관</div><div class="affiliate-row">${affils.map((node) => card(node)).join("")}</div></div>` : ""}</div>`;
+      $("#chart").className = `chart layout-${layoutClass(state.layout)}${state.layout === "change-lanes" && !changed.length ? " no-changes" : ""}`;
       $("#chart").innerHTML = html;
       $("#chartTitle").textContent = model.agency;
       $("#nodeStat").textContent = model.nodes.size - 1;

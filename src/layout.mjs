@@ -482,19 +482,19 @@ export function layoutPage(graph, page, options = {}) {
   };
   const totalWeight = Math.max(1, roots.reduce((sum, id) => sum + leafWeight(id), 0));
   if (layoutStyle === "affiliate-strip") {
-    return layoutAffiliateStripPage({ graph, page, pageSize, frame, parentEdge, children, roots, selected, depth });
+    return decorateLayout(layoutAffiliateStripPage({ graph, page, pageSize, frame, parentEdge, children, roots, selected, depth }));
   }
   if (layoutStyle === "flow") {
-    return layoutFlowPage({ graph, frame, parentEdge, roots, selected, depth });
+    return decorateLayout(layoutFlowPage({ graph, frame, parentEdge, roots, selected, depth }));
   }
   if (layoutStyle === "change-lanes") {
-    return layoutChangeLanesPage({ graph, frame, parentEdge, roots, selected, depth });
+    return decorateLayout(layoutChangeLanesPage({ graph, frame, parentEdge, roots, selected, depth }));
   }
   if (layoutStyle === "catalog") {
-    return layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, portrait });
+    return decorateLayout(layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, portrait }));
   }
   if (layoutStyle === "matrix") {
-    return layoutMatrixPage({
+    return decorateLayout(layoutMatrixPage({
       graph,
       pageSize,
       frame,
@@ -503,10 +503,10 @@ export function layoutPage(graph, page, options = {}) {
       roots,
       selected,
       depth,
-    });
+    }));
   }
   if (layoutStyle === "two-column") {
-    return layoutTwoColumnPage({
+    return decorateLayout(layoutTwoColumnPage({
       graph,
       pageSize,
       frame,
@@ -516,7 +516,7 @@ export function layoutPage(graph, page, options = {}) {
       selected,
       depth,
       leafWeight,
-    });
+    }));
   }
   const verticalLeaves =
     layoutStyle === "vertical-stack" ||
@@ -588,7 +588,7 @@ export function layoutPage(graph, page, options = {}) {
     node: graph.nodes.get(id),
     position,
   }));
-  return { frame, nodes, edges, roots, maxDepth, verticalLeaves };
+  return decorateLayout({ frame, nodes, edges, roots, maxDepth, verticalLeaves });
 }
 
 function boxPosition(centerX, top, width, height, { vertical = false, depth = 0, spanLeft, spanWidth } = {}) {
@@ -617,6 +617,62 @@ function positionedEdges(parentEdge, positions, orientation) {
       to: positions.get(edge.child),
     }))
     .filter((edge) => edge.from && edge.to);
+}
+
+/**
+ * Keep geometry checks next to the layout model.  A chart can be legally
+ * parsed and still be unusable on paper when a dense branch runs outside the
+ * printable frame.  Renderers may choose how prominently to surface these
+ * diagnostics; callers can always inspect them programmatically.
+ */
+export function diagnoseLayout(layout, { tolerance = 0.5 } = {}) {
+  const frame = layout?.frame;
+  if (!frame) return { ok: true, overflow: [], overlaps: [] };
+  const overflow = [];
+  for (const entry of layout.nodes || []) {
+    const p = entry.position;
+    if (!p) continue;
+    const right = p.right ?? p.left + p.width;
+    const bottom = p.bottom ?? p.top + p.height;
+    if (
+      p.left < frame.left - tolerance ||
+      p.top < frame.top - tolerance ||
+      right > frame.left + frame.width + tolerance ||
+      bottom > frame.top + frame.height + tolerance
+    ) {
+      overflow.push(entry.node?.name || entry.node?.id || "(이름 없음)");
+    }
+  }
+  const overlaps = [];
+  const entries = layout.nodes || [];
+  for (let i = 0; i < entries.length; i += 1) {
+    const a = entries[i]?.position;
+    if (!a) continue;
+    const aRight = a.right ?? a.left + a.width;
+    const aBottom = a.bottom ?? a.top + a.height;
+    for (let j = i + 1; j < entries.length; j += 1) {
+      const b = entries[j]?.position;
+      if (!b) continue;
+      const bRight = b.right ?? b.left + b.width;
+      const bBottom = b.bottom ?? b.top + b.height;
+      const separated =
+        aRight <= b.left + tolerance ||
+        bRight <= a.left + tolerance ||
+        aBottom <= b.top + tolerance ||
+        bBottom <= a.top + tolerance;
+      if (!separated) {
+        overlaps.push({
+          a: entries[i].node?.name || entries[i].node?.id || "(이름 없음)",
+          b: entries[j].node?.name || entries[j].node?.id || "(이름 없음)",
+        });
+      }
+    }
+  }
+  return { ok: overflow.length === 0 && overlaps.length === 0, overflow, overlaps };
+}
+
+function decorateLayout(layout) {
+  return { ...layout, diagnostics: diagnoseLayout(layout) };
 }
 
 /** Left-to-right levels used for function-transfer and 업무흐름형 pages. */
@@ -693,24 +749,69 @@ function layoutChangeLanesPage({ graph, frame, parentEdge, roots, selected, dept
   ];
   const laneGap = 20;
   const laneWidth = (frame.width - laneGap) / 2;
-  const rowGap = Math.min(49, Math.max(31, (frame.height - 67) / Math.max(1, ...lanes.map((lane) => lane.length))));
-  lanes.forEach((lane, laneIndex) => {
-    const left = laneIndex === 0 ? frame.left : frame.left + laneWidth + laneGap;
-    const centerX = left + laneWidth / 2;
-    lane.forEach((id, index) => {
+  const bodyTop = frame.top + 62;
+  const bodyHeight = Math.max(108, frame.height - 72);
+  const labels = [];
+
+  // A comparison page with no @변경 marks is still useful as a baseline, but
+  // it must not leave a large empty lane or run a single column off the A4
+  // page.  Reflow the baseline into a compact card grid and say explicitly
+  // that the right lane is empty.
+  if (!lanes[1].length) {
+    const columns = Math.max(1, Math.min(frame.width < 420 ? 2 : 3, lanes[0].length || 1));
+    const columnWidth = frame.width / columns;
+    const rows = Math.max(1, Math.ceil(lanes[0].length / columns));
+    const rowGap = Math.min(48, Math.max(31, bodyHeight / rows));
+    lanes[0].forEach((id, index) => {
       const node = graph.nodes.get(id);
       if (!node) return;
-      const width = Math.min(174, Math.max(66, laneWidth * 0.78));
-      const vertical = width < 102 && node.name.length > 8;
-      const height = vertical ? 76 : 31;
-      positions.set(id, boxPosition(centerX, frame.top + 62 + index * rowGap, vertical ? 34 : width, height, {
+      const column = index % columns;
+      const row = Math.floor(index / columns);
+      const left = frame.left + column * columnWidth;
+      const width = Math.min(174, Math.max(58, columnWidth * 0.78));
+      const vertical = width < 96 && node.name.length > 8;
+      positions.set(id, boxPosition(left + columnWidth / 2, bodyTop + row * rowGap, vertical ? 34 : width, vertical ? 74 : 31, {
         vertical,
         depth: depth.get(id) ?? 1,
         spanLeft: left,
-        spanWidth: laneWidth,
+        spanWidth: columnWidth,
       }));
     });
-  });
+    labels.push(
+      { text: "기준 조직", x: frame.left + frame.width * 0.34, y: frame.top + 51, align: "middle" },
+      { text: "변경 표식 없음", x: frame.left + frame.width * 0.78, y: frame.top + 51, align: "middle", muted: true },
+    );
+  } else {
+    const maxRows = Math.max(1, Math.floor(bodyHeight / 37));
+    const laneColumns = lanes.map((lane) => Math.max(1, Math.min(3, Math.ceil(lane.length / maxRows))));
+    const laneRows = lanes.map((lane, index) => Math.max(1, Math.ceil(lane.length / laneColumns[index])));
+    const rowGap = Math.min(48, Math.max(31, bodyHeight / Math.max(...laneRows)));
+    lanes.forEach((lane, laneIndex) => {
+      const left = laneIndex === 0 ? frame.left : frame.left + laneWidth + laneGap;
+      const columns = laneColumns[laneIndex];
+      const columnWidth = laneWidth / columns;
+      lane.forEach((id, index) => {
+        const node = graph.nodes.get(id);
+        if (!node) return;
+        const column = index % columns;
+        const row = Math.floor(index / columns);
+        const columnLeft = left + column * columnWidth;
+        const width = Math.min(174, Math.max(54, columnWidth * 0.78));
+        const vertical = width < 96 && node.name.length > 8;
+        const height = vertical ? 74 : 31;
+        positions.set(id, boxPosition(columnLeft + columnWidth / 2, bodyTop + row * rowGap, vertical ? 34 : width, height, {
+          vertical,
+          depth: depth.get(id) ?? 1,
+          spanLeft: columnLeft,
+          spanWidth: columnWidth,
+        }));
+      });
+    });
+    labels.push(
+      { text: "기존·유지", x: frame.left + laneWidth / 2, y: frame.top + 51, align: "middle" },
+      { text: "신설·폐지·명칭변경·이체", x: frame.left + laneWidth + laneGap + laneWidth / 2, y: frame.top + 51, align: "middle" },
+    );
+  }
   const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
   return {
     frame,
@@ -719,16 +820,14 @@ function layoutChangeLanesPage({ graph, frame, parentEdge, roots, selected, dept
     roots,
     maxDepth: Math.max(0, ...depth.values()),
     verticalLeaves: false,
-    labels: [
-      { text: "기존·유지", x: frame.left + laneWidth / 2, y: frame.top + 51, align: "middle" },
-      { text: "신설·폐지·명칭변경·이체", x: frame.left + laneWidth + laneGap + laneWidth / 2, y: frame.top + 51, align: "middle" },
-    ],
+    labels,
   };
 }
 
 /** Card catalogue for long bureau/department lists where connectors obscure text. */
 function layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, portrait }) {
   const positions = new Map();
+  const groupBoxes = [];
   const rootIds = roots.filter((id) => selected.has(id));
   rootIds.forEach((id, index) => {
     const node = graph.nodes.get(id);
@@ -738,31 +837,104 @@ function layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, p
       : frame.left + frame.width * ((index + 0.5) / rootIds.length);
     positions.set(id, boxPosition(centerX, frame.top, Math.min(170, Math.max(90, frame.width / Math.max(1, rootIds.length) * 0.6)), 34, { depth: 0 }));
   });
-  const body = [...selected]
-    .filter((id) => !rootIds.includes(id))
-    .sort((a, b) => {
+
+  // Catalogue pages intentionally omit long connector paths, but they do not
+  // flatten the law-defined hierarchy.  Each immediate parent becomes a
+  // lightly framed card group, with a small "상위" caption and the direct
+  // children beneath it.  A child that is itself a group header is rendered
+  // in its own group exactly once, avoiding the duplicate-card problem that a
+  // naive parent-prefix list creates.
+  const directChildren = new Map();
+  for (const edge of parentEdge.values()) {
+    if (!directChildren.has(edge.parent)) directChildren.set(edge.parent, []);
+    directChildren.get(edge.parent).push(edge.child);
+  }
+  for (const ids of directChildren.values()) {
+    ids.sort((a, b) => {
       const left = graph.nodes.get(a);
       const right = graph.nodes.get(b);
-      return (depth.get(a) ?? 9) - (depth.get(b) ?? 9) || (left?.rank ?? 9) - (right?.rank ?? 9) || left?.name.localeCompare(right?.name, "ko");
+      return (left?.rank ?? 9) - (right?.rank ?? 9) || left?.name.localeCompare(right?.name, "ko");
     });
-  const columns = Math.max(1, Math.min(portrait ? 2 : 4, body.length || 1));
-  const columnWidth = frame.width / columns;
-  const rowGap = Math.min(47, Math.max(31, (frame.height - 66) / Math.max(1, Math.ceil(body.length / columns))));
-  body.forEach((id, index) => {
-    const node = graph.nodes.get(id);
-    if (!node) return;
-    const column = index % columns;
-    const row = Math.floor(index / columns);
-    const centerX = frame.left + columnWidth * (column + 0.5);
-    const width = Math.min(176, Math.max(72, columnWidth * 0.82));
-    const vertical = width < 98 && node.name.length > 8;
-    positions.set(id, boxPosition(centerX, frame.top + 61 + row * rowGap, vertical ? 34 : width, vertical ? 76 : 31, {
-      vertical,
-      depth: depth.get(id) ?? 1,
-      spanLeft: frame.left + column * columnWidth,
-      spanWidth: columnWidth,
-    }));
+  }
+  const bodyIds = [...selected].filter((id) => !rootIds.includes(id));
+  const groupParentIds = new Set(bodyIds.filter((id) => (directChildren.get(id) || []).length));
+  const groupSpecs = [];
+  const represented = new Set(rootIds);
+  const addSpec = (id, childrenIds, caption) => {
+    const filtered = childrenIds.filter((childId) => selected.has(childId) && !groupParentIds.has(childId));
+    groupSpecs.push({ id, children: filtered, caption });
+    if (id) represented.add(id);
+    filtered.forEach((childId) => represented.add(childId));
+  };
+
+  // Root-direct leaf cards (usually 기관장 보좌기관 or 운영지원과).
+  for (const rootId of rootIds) {
+    addSpec(null, directChildren.get(rootId) || [], "직속 하부조직");
+  }
+  // Every 관·국·실 with direct children gets its own compact group.
+  const orderedGroupParents = [...groupParentIds].sort((a, b) => {
+    const left = graph.nodes.get(a);
+    const right = graph.nodes.get(b);
+    return (depth.get(a) ?? 9) - (depth.get(b) ?? 9) || (left?.rank ?? 9) - (right?.rank ?? 9) || left?.name.localeCompare(right?.name, "ko");
   });
+  for (const id of orderedGroupParents) {
+    const parentId = parentEdge.get(id)?.parent;
+    const parentName = parentId ? graph.nodes.get(parentId)?.name : "관계 미확인";
+    addSpec(id, directChildren.get(id) || [], `상위: ${parentName || "관계 미확인"}`);
+  }
+  // Detail pages can contain a selected orphan when a branch was packed by a
+  // caller.  Keep it visible rather than silently losing it from the cards.
+  const missing = bodyIds.filter((id) => !represented.has(id));
+  if (missing.length) addSpec(null, missing, "관계 미확인");
+
+  const nonEmptySpecs = groupSpecs.filter((spec) => spec.id || spec.children.length);
+  const columns = Math.max(1, Math.min(portrait ? 1 : 4, nonEmptySpecs.length || 1));
+  const columnWidth = frame.width / columns;
+  const startTop = frame.top + 57;
+  const columnTops = Array.from({ length: columns }, () => startTop);
+  for (const spec of nonEmptySpecs) {
+    const column = columnTops.indexOf(Math.min(...columnTops));
+    const left = frame.left + column * columnWidth + 6;
+    const groupWidth = Math.max(80, columnWidth - 12);
+    const captionHeight = 17;
+    const headerHeight = spec.id ? 31 : 0;
+    const childColumns = spec.children.length > 4 && groupWidth >= 170 ? 2 : 1;
+    const childColumnWidth = groupWidth / childColumns;
+    const childRows = Math.max(1, Math.ceil(spec.children.length / childColumns));
+    const rowGap = Math.min(31, Math.max(23, (frame.height - 100) / Math.max(1, childRows)));
+    const groupHeight = Math.max(50, captionHeight + headerHeight + childRows * rowGap + 8);
+    const top = columnTops[column];
+    groupBoxes.push({ left, top, width: groupWidth, height: groupHeight, caption: spec.caption });
+    let cursorTop = top + captionHeight;
+    if (spec.id) {
+      const node = graph.nodes.get(spec.id);
+      if (node) {
+        const width = Math.min(176, Math.max(72, groupWidth * 0.78));
+        positions.set(spec.id, boxPosition(left + groupWidth / 2, cursorTop, width, 28, {
+          depth: depth.get(spec.id) ?? 1,
+          spanLeft: left,
+          spanWidth: groupWidth,
+        }));
+      }
+      cursorTop += headerHeight;
+    }
+    spec.children.forEach((id, index) => {
+      const node = graph.nodes.get(id);
+      if (!node) return;
+      const childColumn = index % childColumns;
+      const row = Math.floor(index / childColumns);
+      const childLeft = left + childColumn * childColumnWidth;
+      const width = Math.min(176, Math.max(62, childColumnWidth * 0.82));
+      const vertical = width < 98 && node.name.length > 8;
+      positions.set(id, boxPosition(childLeft + childColumnWidth / 2, cursorTop + row * rowGap, vertical ? 34 : width, vertical ? 70 : 27, {
+        vertical,
+        depth: depth.get(id) ?? 1,
+        spanLeft: childLeft,
+        spanWidth: childColumnWidth,
+      }));
+    });
+    columnTops[column] = top + groupHeight + 4;
+  }
   const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
   return {
     frame,
@@ -772,7 +944,8 @@ function layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, p
     maxDepth: Math.max(0, ...depth.values()),
     verticalLeaves: false,
     edgeMode: "none",
-    labels: [{ text: "부서 카드 목록", x: frame.left, y: frame.top - 10, align: "start" }],
+    groupBoxes,
+    labels: [{ text: "상위 조직별 카드 묶음 · 연결선 생략", x: frame.left, y: frame.top - 10, align: "start" }],
   };
 }
 
@@ -883,7 +1056,7 @@ function layoutMatrixPage({ graph, pageSize, frame, parentEdge, children, roots,
     const root = graph.nodes.get(rootHeaders[0]);
     if (root) put(root.id, frame.left + frame.width / 2, frame.top, Math.min(176, Math.max(96, root.name.length * 5.2 + 50)), headerHeight, false, 0);
   } else {
-    const headerWidth = Math.min(150, Math.max(70, columnWidth * 0.82));
+    const headerWidth = Math.min(150, Math.max(42, columnWidth * 0.82));
     rootHeaders.forEach((rootId, index) => {
       const centerX = frame.left + columnWidth * (index + 0.5);
       const root = graph.nodes.get(rootId);
@@ -901,7 +1074,7 @@ function layoutMatrixPage({ graph, pageSize, frame, parentEdge, children, roots,
       const width = vertical
         ? Math.min(34, Math.max(26, columnWidth * 0.48))
         : Math.min(172, Math.max(60, columnWidth * 0.82));
-      const height = vertical ? Math.min(82, Math.max(58, rowGap * 1.75)) : rowHeight;
+      const height = vertical ? Math.min(82, Math.max(40, rowGap - 5)) : rowHeight;
       put(id, centerX, frame.top + headerHeight + 15 + rowIndex * rowGap, width, height, vertical, depth.get(id) || 1);
     });
   });
@@ -1046,6 +1219,19 @@ export function nodeStyle(node) {
     return { fill: "#AEC6F0", line: "#00004E", text: "#111827", lineStyle: "solid", bold: true };
   }
   if (node.kind === "affiliated") {
+    const affiliationStyles = {
+      responsible: { fill: "#55B947", line: "#2D7D2D", text: "#FFFFFF" },
+      "special-local": { fill: "#E7F4D7", line: "#4F8A3D", text: "#23451D" },
+      subsidiary: { fill: "#ECF8E8", line: "#398041", text: "#1F5A27" },
+      affiliated: { fill: "#DFF3D8", line: "#398041", text: "#245C2A" },
+    };
+    const affiliation = affiliationStyles[metadata.affiliationType] || affiliationStyles.affiliated;
+    return { ...affiliation, lineStyle: "solid", bold: true };
+  }
+  if (metadata.unitRole === "headquarters") {
+    return { fill: "#E7F0FF", line: "#315A8A", text: "#17345D", lineStyle: "solid", bold: true };
+  }
+  if (metadata.unitRole === "affiliated-institution") {
     return { fill: "#55B947", line: "#2D7D2D", text: "#FFFFFF", lineStyle: "solid", bold: true };
   }
   if (node.kind === "temporary" || metadata.temporary || metadata.autonomous) {
@@ -1085,6 +1271,15 @@ export function displayNodeName(node, vertical = false, { showLawCounts = false 
     if (staffMarkers[category] && !markers.includes(staffMarkers[category])) markers.push(staffMarkers[category]);
   }
   if (node.metadata?.responsible) markers.push("책");
+  if (node.metadata?.unitRole === "headquarters") markers.push("본부");
+  if (node.kind === "affiliated" && !node.metadata?.responsible) {
+    const affiliationMarker = {
+      "special-local": "특지",
+      subsidiary: "부속",
+      affiliated: "소속",
+    }[node.metadata?.affiliationType];
+    if (affiliationMarker) markers.push(affiliationMarker);
+  }
   if (node.metadata?.payroll) markers.push("총");
   if (node.metadata?.autonomous) markers.push("자");
   if (node.metadata?.evaluation) markers.push("평");

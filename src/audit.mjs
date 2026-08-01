@@ -100,7 +100,7 @@ export function formatAuditMarkdown(report) {
     lines,
     "페이지 배치",
     report.layoutDiagnostics,
-    (item) => `- ${item.pageNumber}/${item.pageCount} ${item.layoutStyle} · ${item.subtitle}: 노드 ${item.nodes}, 관계 ${item.edges}, ${item.diagnostics.ok ? "정상" : `넘침 ${item.diagnostics.overflow.length} · 겹침 ${item.diagnostics.overlaps.length}`}`,
+    (item) => `- ${item.pageNumber}/${item.pageCount} ${item.layoutStyle} · ${item.subtitle}: 노드 ${item.nodes}, 관계 ${item.edges}, ${formatLayoutStatus(item.diagnostics)}`,
   );
   appendSection(lines, "파서 경고", report.warnings, (item) => `- ${item}`);
   return `${lines.join("\n")}\n`;
@@ -142,6 +142,13 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates) {
         priority: "high",
         topic: "layout",
         message: `${page.pageNumber}쪽 ${page.subtitle}에서 상자 겹침 ${page.diagnostics.overlaps.length}건이 있습니다.`,
+      });
+    }
+    if (page.diagnostics?.edgeIssues?.length) {
+      actions.push({
+        priority: "high",
+        topic: "layout",
+        message: `${page.pageNumber}쪽 ${page.subtitle}에서 연결선 품질 문제 ${page.diagnostics.edgeIssues.length}건이 있습니다.`,
       });
     }
   }
@@ -190,6 +197,11 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates) {
     actions.push({ priority: "low", topic: "warning", message });
   }
   return actions;
+}
+
+function formatLayoutStatus(diagnostics) {
+  if (diagnostics?.ok) return "정상";
+  return `넘침 ${diagnostics?.overflow?.length || 0} · 겹침 ${diagnostics?.overlaps?.length || 0} · 연결선 ${diagnostics?.edgeIssues?.length || 0}`;
 }
 
 export function suggestJurisdictionCandidates(graph) {

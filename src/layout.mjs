@@ -563,7 +563,7 @@ export function layoutPage(graph, page, options = {}) {
   const levelGap = maxDepth ? Math.min(preferredLevelGap, usableHeight / maxDepth) : 0;
   const contentHeight = maxDepth * levelGap + leafHeight;
   const topInset = Math.min(narrowHalf ? 48 : 24, Math.max(0, (frame.height - contentHeight) * 0.18));
-  const siblingGutter = verticalLeaves ? 8 : 14;
+  const siblingGutter = verticalLeaves ? (narrowHalf ? 6 : 12) : 18;
   const positions = new Map();
 
   let cursor = frame.left;
@@ -648,6 +648,44 @@ function boxPosition(centerX, top, width, height, { vertical = false, depth = 0,
   };
 }
 
+function normalizePosition(position) {
+  if (!position) return null;
+  const width = position.width ?? 0;
+  const height = position.height ?? 0;
+  const left = position.left ?? (position.centerX ?? 0) - width / 2;
+  const top = position.top ?? (position.centerY ?? 0) - height / 2;
+  const right = position.right ?? left + width;
+  const bottom = position.bottom ?? top + height;
+  const centerX = position.centerX ?? left + width / 2;
+  const centerY = position.centerY ?? top + height / 2;
+  return {
+    ...position,
+    left,
+    top,
+    width,
+    height,
+    centerX,
+    centerY,
+    right,
+    bottom,
+  };
+}
+
+function normalizeLayoutGeometry(layout) {
+  const positionByNode = new Map();
+  const nodes = (layout.nodes || []).map((entry) => {
+    const position = normalizePosition(entry.position);
+    if (entry.node?.id && position) positionByNode.set(entry.node.id, position);
+    return { ...entry, position };
+  });
+  const edges = (layout.edges || []).map((edge) => ({
+    ...edge,
+    from: normalizePosition(edge.from) || positionByNode.get(edge.parent) || null,
+    to: normalizePosition(edge.to) || positionByNode.get(edge.child) || null,
+  }));
+  return { ...layout, nodes, edges };
+}
+
 function positionedEdges(parentEdge, positions, orientation) {
   return [...parentEdge.values()]
     .map((edge) => ({
@@ -665,20 +703,18 @@ function positionedEdges(parentEdge, positions, orientation) {
  * printable frame.  Renderers may choose how prominently to surface these
  * diagnostics; callers can always inspect them programmatically.
  */
-export function diagnoseLayout(layout, { tolerance = 0.5 } = {}) {
+export function diagnoseLayout(layout, { tolerance = 0.5, minimumConnectorLength = 6 } = {}) {
   const frame = layout?.frame;
-  if (!frame) return { ok: true, overflow: [], overlaps: [] };
+  if (!frame) return { ok: true, overflow: [], overlaps: [], edgeIssues: [] };
   const overflow = [];
   for (const entry of layout.nodes || []) {
-    const p = entry.position;
+    const p = normalizePosition(entry.position);
     if (!p) continue;
-    const right = p.right ?? p.left + p.width;
-    const bottom = p.bottom ?? p.top + p.height;
     if (
       p.left < frame.left - tolerance ||
       p.top < frame.top - tolerance ||
-      right > frame.left + frame.width + tolerance ||
-      bottom > frame.top + frame.height + tolerance
+      p.right > frame.left + frame.width + tolerance ||
+      p.bottom > frame.top + frame.height + tolerance
     ) {
       overflow.push(entry.node?.name || entry.node?.id || "(이름 없음)");
     }
@@ -686,20 +722,16 @@ export function diagnoseLayout(layout, { tolerance = 0.5 } = {}) {
   const overlaps = [];
   const entries = layout.nodes || [];
   for (let i = 0; i < entries.length; i += 1) {
-    const a = entries[i]?.position;
+    const a = normalizePosition(entries[i]?.position);
     if (!a) continue;
-    const aRight = a.right ?? a.left + a.width;
-    const aBottom = a.bottom ?? a.top + a.height;
     for (let j = i + 1; j < entries.length; j += 1) {
-      const b = entries[j]?.position;
+      const b = normalizePosition(entries[j]?.position);
       if (!b) continue;
-      const bRight = b.right ?? b.left + b.width;
-      const bBottom = b.bottom ?? b.top + b.height;
       const separated =
-        aRight <= b.left + tolerance ||
-        bRight <= a.left + tolerance ||
-        aBottom <= b.top + tolerance ||
-        bBottom <= a.top + tolerance;
+        a.right <= b.left + tolerance ||
+        b.right <= a.left + tolerance ||
+        a.bottom <= b.top + tolerance ||
+        b.bottom <= a.top + tolerance;
       if (!separated) {
         overlaps.push({
           a: entries[i].node?.name || entries[i].node?.id || "(이름 없음)",
@@ -708,11 +740,46 @@ export function diagnoseLayout(layout, { tolerance = 0.5 } = {}) {
       }
     }
   }
-  return { ok: overflow.length === 0 && overlaps.length === 0, overflow, overlaps };
+  const nodeNames = new Map(
+    (layout.nodes || []).map((entry) => [entry.node?.id, entry.node?.name || entry.node?.id || "(이름 없음)"]),
+  );
+  const edgeIssues = [];
+  for (const edge of layout.edges || []) {
+    const issue = diagnoseEdge(edge, { tolerance, minimumConnectorLength });
+    if (!issue) continue;
+    edgeIssues.push({
+      parent: nodeNames.get(edge.parent) || edge.parent || "(부모 없음)",
+      child: nodeNames.get(edge.child) || edge.child || "(자식 없음)",
+      ...issue,
+    });
+  }
+  return {
+    ok: overflow.length === 0 && overlaps.length === 0 && edgeIssues.length === 0,
+    overflow,
+    overlaps,
+    edgeIssues,
+  };
 }
 
 function decorateLayout(layout) {
-  return { ...layout, diagnostics: diagnoseLayout(layout) };
+  const normalized = normalizeLayoutGeometry(layout);
+  return { ...normalized, diagnostics: diagnoseLayout(normalized) };
+}
+
+function diagnoseEdge(edge, { tolerance, minimumConnectorLength }) {
+  const from = normalizePosition(edge.from);
+  const to = normalizePosition(edge.to);
+  if (!from || !to) return { reason: "missing-endpoint" };
+  if (edge.orientation === "horizontal") {
+    const gap = to.left - from.right;
+    if (gap < -tolerance) return { reason: "reversed-horizontal", gap: Number(gap.toFixed(2)) };
+    if (gap < minimumConnectorLength) return { reason: "too-short-horizontal", gap: Number(gap.toFixed(2)) };
+    return null;
+  }
+  const gap = to.top - from.bottom;
+  if (gap < -tolerance) return { reason: "reversed-vertical", gap: Number(gap.toFixed(2)) };
+  if (gap < minimumConnectorLength) return { reason: "too-short-vertical", gap: Number(gap.toFixed(2)) };
+  return null;
 }
 
 /** Left-to-right levels used for function-transfer and 업무흐름형 pages. */
@@ -856,10 +923,16 @@ function layoutChangeLanesPage({ graph, frame, parentEdge, roots, selected, dept
   return {
     frame,
     nodes,
-    edges: positionedEdges(parentEdge, positions),
+    // Change-lane pages are comparison sheets, not strict hierarchy trees.
+    // Drawing inherited parent-child edges over a lane grid creates reversed
+    // or crossing connectors when a parent and its child are sorted into
+    // different card rows.  Keep the legal hierarchy in the data and omit
+    // connectors in this visual preset.
+    edges: [],
     roots,
     maxDepth: Math.max(0, ...depth.values()),
     verticalLeaves: false,
+    edgeMode: "none",
     labels,
   };
 }
@@ -981,7 +1054,7 @@ function layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, p
         spanWidth: childColumnWidth,
       }));
     });
-    columnTops[column] = top + groupHeight + 4;
+    columnTops[column] = top + groupHeight + 8;
   }
   const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
   return {
@@ -1082,7 +1155,7 @@ function layoutMatrixPage({ graph, pageSize, frame, parentEdge, children, roots,
   const maxRows = Math.max(1, ...columns.map(({ ids }) => ids.length));
   const headerHeight = 34;
   const rowGap = Math.min(46, Math.max(28, (frame.height - headerHeight - 22) / Math.max(1, maxRows)));
-  const rowHeight = Math.max(22, Math.min(34, rowGap - 5));
+  const rowHeight = Math.max(20, Math.min(32, rowGap - 8));
   const positions = new Map();
 
   const put = (id, centerX, top, width, height, vertical = false, depthValue = 0) => {

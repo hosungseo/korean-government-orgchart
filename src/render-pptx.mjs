@@ -103,13 +103,13 @@ function addPage(presentation, graph, page, { showLawCounts, pageSize }) {
   for (const edge of layout.edges) addEdge(slide, edge, nodeShapes);
   for (const label of layout.labels || []) addLayoutLabel(slide, label, pageSize);
 
-  if (layout.diagnostics?.overflow?.length) {
+  if (!layout.diagnostics?.ok) {
     addText(
       slide,
-      `⚠ ${layout.diagnostics.overflow.length}개 조직이 인쇄 영역을 벗어났습니다. 분할 또는 다른 작도 유형을 사용하세요.`,
+      `⚠ ${formatLayoutWarning(layout.diagnostics)}. 분할 또는 다른 작도 유형을 사용하세요.`,
       { left: margin, top: pageSize.height - (portrait ? 44 : 38), width: pageSize.width - margin * 2 - 90, height: 14 },
       { fontSize: portrait ? 7.5 : 8, color: "#B45309", alignment: "left" },
-      "배치진단-넘침",
+      "배치진단",
     );
   }
 
@@ -121,6 +121,14 @@ function addPage(presentation, graph, page, { showLawCounts, pageSize }) {
     { fontSize: 10, color: "#6B7280", alignment: "right" },
     "쪽번호",
   );
+}
+
+function formatLayoutWarning(diagnostics) {
+  const parts = [];
+  if (diagnostics?.overflow?.length) parts.push(`넘침 ${diagnostics.overflow.length}`);
+  if (diagnostics?.overlaps?.length) parts.push(`겹침 ${diagnostics.overlaps.length}`);
+  if (diagnostics?.edgeIssues?.length) parts.push(`연결선 ${diagnostics.edgeIssues.length}`);
+  return parts.length ? parts.join(" · ") : "배치 확인 필요";
 }
 
 function addNode(slide, node, position, { showLawCounts, pageSize }) {

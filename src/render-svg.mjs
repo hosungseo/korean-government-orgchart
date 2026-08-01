@@ -67,7 +67,7 @@ function renderPage(graph, page, offsetY, { showLawCounts, pageSize }) {
   for (const entry of layout.nodes) {
     pageGroup.push(svgNode(entry.node, entry.position, { showLawCounts, pageSize }));
   }
-  if (layout.diagnostics?.overflow?.length) {
+  if (!layout.diagnostics?.ok) {
     pageGroup.push(svgLayoutWarning(layout.diagnostics, pageSize));
   }
   pageGroup.push(svgLegend({ showLawCounts, operational: graph.meta.renderView === "operational", pageSize }));
@@ -137,9 +137,13 @@ function svgLayoutLabel(label, pageSize) {
 }
 
 function svgLayoutWarning(diagnostics, pageSize) {
-  const count = diagnostics.overflow.length;
   const portrait = pageSize.height > pageSize.width;
-  return `<text x="${portrait ? 28 : 42}" y="${pageSize.height - (portrait ? 45 : 38)}" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? 7.5 : 8}" fill="#B45309">⚠ ${count}개 조직이 인쇄 영역을 벗어났습니다. 분할 또는 다른 작도 유형을 사용하세요.</text>`;
+  const parts = [];
+  if (diagnostics.overflow?.length) parts.push(`넘침 ${diagnostics.overflow.length}`);
+  if (diagnostics.overlaps?.length) parts.push(`겹침 ${diagnostics.overlaps.length}`);
+  if (diagnostics.edgeIssues?.length) parts.push(`연결선 ${diagnostics.edgeIssues.length}`);
+  const message = parts.length ? parts.join(" · ") : "배치 확인 필요";
+  return `<text x="${portrait ? 28 : 42}" y="${pageSize.height - (portrait ? 45 : 38)}" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? 7.5 : 8}" fill="#B45309">⚠ ${message}. 분할 또는 다른 작도 유형을 사용하세요.</text>`;
 }
 
 function svgNode(node, position, { showLawCounts, pageSize }) {

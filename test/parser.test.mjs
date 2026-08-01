@@ -108,6 +108,7 @@ test("검토서형 추가 프리셋은 흐름·변경·소속기관·카드 목�
     assert.ok(layout.nodes.length > 0, `${page.layoutStyle} 노드가 있어야 함`);
     assert.ok(layout.edges.every((edge) => edge.from && edge.to), `${page.layoutStyle} 연결선 좌표가 있어야 함`);
     if (page.layoutStyle === "flow" && layout.edges.length) assert.ok(layout.edges.some((edge) => edge.orientation === "horizontal"));
+    if (page.layoutStyle === "change-lanes") assert.equal(layout.edgeMode, "none");
     if (page.layoutStyle === "catalog") assert.equal(layout.edgeMode, "none");
   }
 });
@@ -128,11 +129,49 @@ test("작도 연결선은 상자 좌표에 붙고 SVG에서는 연속 경로로 
   const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
   for (const { position } of layout.nodes) {
     assert.equal(Number.isFinite(position.right), true);
+    assert.equal(Number.isFinite(position.bottom), true);
     assert.equal(Number.isFinite(position.centerY), true);
   }
+  assert.deepEqual(layout.diagnostics.edgeIssues, []);
   const svg = renderSvg(graph, [page]);
   assert.equal((svg.match(/stroke-linecap="round"/g) || []).length, layout.edges.length);
   assert.match(svg, /<path d="M [^"]+" stroke="#(?:6B7280|8B8B8B|3D8B3D|4F7EA8)"/);
+});
+
+test("배치 진단은 너무 짧거나 역방향인 연결선을 잡는다", () => {
+  const short = diagnoseLayout(
+    {
+      frame: { left: 0, top: 0, width: 220, height: 160 },
+      nodes: [],
+      edges: [
+        {
+          parent: "a",
+          child: "b",
+          from: { left: 40, top: 20, width: 80, height: 30 },
+          to: { left: 40, top: 53, width: 80, height: 30 },
+        },
+      ],
+    },
+    { minimumConnectorLength: 6 },
+  );
+  assert.equal(short.ok, false);
+  assert.equal(short.edgeIssues[0].reason, "too-short-vertical");
+
+  const reversed = diagnoseLayout({
+    frame: { left: 0, top: 0, width: 220, height: 160 },
+    nodes: [],
+    edges: [
+      {
+        parent: "a",
+        child: "b",
+        orientation: "horizontal",
+        from: { left: 120, top: 40, width: 60, height: 28 },
+        to: { left: 80, top: 40, width: 50, height: 28 },
+      },
+    ],
+  });
+  assert.equal(reversed.ok, false);
+  assert.equal(reversed.edgeIssues[0].reason, "reversed-horizontal");
 });
 
 test("카드 목록형은 상위 조직별 묶음으로 법정 계층을 보존한다", () => {

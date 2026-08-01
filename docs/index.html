@@ -84,6 +84,8 @@
     .input-actions .button { flex: 1; min-height: 39px; padding: 0 10px; font-size: 12px; }
     .status { min-height: 21px; margin-top: 11px; color: var(--muted); font-size: 11px; }
     .status.error { color: #a33b3b; }
+    .diagnostics { margin-top: 11px; padding: 8px 10px; border: 1px solid #d7dee8; border-radius: 7px; color: #536075; background: #f8fafc; font-size: 11px; }
+    .diagnostics.warn { border-color: #e9c46a; color: #8a5a00; background: #fff8e6; }
     .chart-panel { min-width: 0; padding: 22px; background: linear-gradient(#fff, #fbfcff); }
     .chart-toolbar { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
     .chart-toolbar strong { color: var(--navy); font-size: 16px; }
@@ -134,6 +136,9 @@
     .chart.layout-change-lanes .unit { width: 100%; max-width: none; }
     .chart.layout-change-lanes .unit:nth-child(even) > .chart-card { border-color: #b4362a; background: #fff1f0; }
     .chart.layout-change-lanes.no-changes .unit-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .chart.layout-change-lanes .chart-bus, .chart.layout-change-lanes .chart-line { display: none; }
+    .chart.layout-change-lanes .unit > .chart-card::before, .chart.layout-catalog .unit > .chart-card::before { display: none; }
+    .chart.layout-change-lanes .unit-children { border-left: 0; border-top: 1px solid var(--child-line); }
     .layout-note { width: min(100%, 760px); margin: 9px 0 0; padding: 7px 10px; border: 1px dashed #cbd5e1; border-radius: 6px; color: #64748b; background: #f8fafc; text-align: center; font-size: 10px; }
     .chart.layout-affiliate-strip .affiliates { border-top: 2px solid var(--green-line); background: #f4fbf3; }
     .chart.layout-catalog .chart-bus, .chart.layout-catalog .chart-line { display: none; }
@@ -238,6 +243,7 @@
         </div>
         <div class="chart-panel">
           <div class="chart-toolbar"><strong id="chartTitle">산업통상부</strong><div class="stats"><span>노드 <b id="nodeStat">0</b></span><span>계선 <b id="edgeStat">0</b></span><label for="layoutSelect" class="sr-only">작도 유형</label><select id="layoutSelect" class="layout-select"><option value="horizontal-bus">가로 버스형</option><option value="vertical-stack">세로 척추형</option><option value="two-column">좌우 2열형</option><option value="matrix">관·국–과 매트릭스형</option><option value="flow">업무 흐름형</option><option value="change-lanes">변경 전후 레인형</option><option value="affiliate-strip">본부·소속기관 띠형</option><option value="catalog">부서 카드 목록형</option></select><button class="button secondary" id="downloadBtn" type="button" style="min-height:30px;padding:0 10px;font-size:11px">SVG 저장</button></div></div>
+          <div id="diagnostics" class="diagnostics">배치 진단 대기 중</div>
           <div class="chart-scroll"><div id="chart" class="chart"></div></div>
         </div>
       </div>
@@ -251,6 +257,7 @@
         <article class="info-card"><div class="number">03 · OPERATING</div><h3>“정책관 내 다른 과”</h3><p>관도 과·담당관·팀을 거느릴 수 있습니다. 시행규칙의 업무분장상 소관은 법정 설치계선과 분리해 운영형 도표에 점선으로 표시합니다.</p></article>
         <article class="info-card"><div class="number">04 · VISUAL PRESETS</div><h3>여덟 가지 작도 유형</h3><p>가로·세로·2열·매트릭스에 더해 업무 흐름, 변경 전후 레인, 본부·소속기관 띠, 부서 카드 목록형을 선택할 수 있습니다.</p></article>
         <article class="info-card"><div class="number">05 · A4 OUTPUT</div><h3>용지와 유형을 분리</h3><p>A4 세로·가로·반쪽 면은 용지 선택이고, 작도 유형은 별도 선택입니다. 같은 문언을 여러 유형으로 한 파일에 묶을 수 있습니다.</p></article>
+        <article class="info-card"><div class="number">06 · QUALITY</div><h3>선 품질을 먼저 봅니다</h3><p>CLI는 넘침·겹침·짧은 연결선·역방향 연결선을 진단합니다. 비교형과 카드형은 계층선을 억지로 긋지 않고 카드 묶음으로 읽게 합니다.</p></article>
       </div>
     </section>
   </main>
@@ -271,6 +278,7 @@
 장관의 관장 사무를 지원하기 위하여 장관 소속으로 국가기술표준원을 둔다.`;
 
     const state = { model: null, layout: "horizontal-bus" };
+    const EDGELESS_LAYOUTS = new Set(["catalog", "change-lanes"]);
     const $ = (selector) => document.querySelector(selector);
     const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char]));
     const escapeXml = (value) => escapeHtml(value);
@@ -370,7 +378,28 @@
       return `<div class="unit">${card(node)}${staff ? `<div class="chart-staff-row">${staff}</div>` : ""}${children ? `<div class="unit-children">${children}</div>` : ""}</div>`;
     }
     const LAYOUT_LABELS = { "horizontal-bus": "가로 버스형", "vertical-stack": "세로 척추형", "two-column": "좌우 2열형", matrix: "관·국–과 매트릭스형", flow: "업무 흐름형", "change-lanes": "변경 전후 레인형", "affiliate-strip": "본부·소속기관 띠형", catalog: "부서 카드 목록형" };
+    const requestedLayout = new URLSearchParams(location.search).get("layout");
+    if (LAYOUT_LABELS[requestedLayout]) state.layout = requestedLayout;
     function layoutClass(style) { return style === "vertical-stack" ? "vertical" : style; }
+    function demoDiagnostics(model, units, changed) {
+      const nodeCount = model.nodes.size - 1;
+      const maxChildren = Math.max(0, ...units.map((node) => (node.children || []).length));
+      const parts = [];
+      let warning = false;
+      if (EDGELESS_LAYOUTS.has(state.layout)) {
+        parts.push(`${LAYOUT_LABELS[state.layout]}은 연결선을 생략합니다. 카드 위치와 상위 묶음으로 계층을 읽습니다.`);
+      } else {
+        parts.push("연결선은 상자 경계에 붙는 연속 꺾은선으로 출력합니다.");
+      }
+      if (state.layout === "change-lanes" && !changed.length) parts.push("@변경 표식이 없어 기준 조직 카드만 배치합니다.");
+      if (nodeCount > 70 || units.length > 10 || maxChildren > 10) {
+        warning = true;
+        parts.push("대형 조직은 CLI audit 또는 --focus/분할 출력으로 넘침·겹침·짧은 선을 검증하세요.");
+      } else {
+        parts.push("현재 데모 규모에서는 배치 위험이 낮습니다.");
+      }
+      return { warning, text: parts.join(" ") };
+    }
     function render(model) {
       const agency = model.nodes.get(model.agency);
       const head = model.nodes.get(model.headName);
@@ -393,6 +422,9 @@
       $("#edgeStat").textContent = model.edges.length;
       const jurisdictionCount = model.jurisdiction.length;
       $("#status").textContent = `${model.nodes.size - 1}개 조직을 읽었습니다 · ${LAYOUT_LABELS[state.layout]}${jurisdictionCount ? ` · 운영 소관 ${jurisdictionCount}건` : ""}.`;
+      const diagnostics = demoDiagnostics(model, topUnits, changed);
+      $("#diagnostics").textContent = diagnostics.text;
+      $("#diagnostics").classList.toggle("warn", diagnostics.warning);
       $("#status").classList.remove("error");
     }
     function renderSvg(model) {
@@ -405,6 +437,7 @@
       const parts = [`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="100%" height="100%" fill="#ffffff"/><text x="${width / 2}" y="${y}" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="800" fill="#14233b">${escapeXml(model.agency)}</text><text x="${width / 2}" y="${y + 20}" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#667085">${escapeXml(LAYOUT_LABELS[style])}</text>`];
       const nodes = [];
       const links = [];
+      const drawLinks = !EDGELESS_LAYOUTS.has(style);
       const box = (x, top, name, fill = "#ffffff", stroke = "#7a8799") => `<rect x="${x - boxWidth / 2}" y="${top}" width="${boxWidth}" height="34" rx="5" fill="${fill}" stroke="${stroke}"/><text x="${x}" y="${top + 22}" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#172033">${escapeXml(name)}</text>`;
       const route = (x1, y1, x2, y2, color = "#8390a1") => {
         const midY = (y1 + y2) / 2;
@@ -416,7 +449,7 @@
       const unitTop = deputyTop + 78;
       nodes.push(box(width / 2, headTop, model.headName, "#b8d2f1", "#315a8a"));
       nodes.push(box(width / 2, deputyTop, model.deputyName, "#b8d2f1", "#315a8a"));
-      links.push(route(width / 2, headTop + 34 - .6, width / 2, deputyTop + .6));
+      if (drawLinks) links.push(route(width / 2, headTop + 34 - .6, width / 2, deputyTop + .6));
       const positions = style === "vertical-stack"
         ? units.map((_node, index) => ({ x: width / 2, y: unitTop + index * 90 }))
         : style === "two-column"
@@ -432,11 +465,11 @@
                   : units.map((_node, index) => ({ x: width / (units.length + 1) * (index + 1), y: unitTop }));
       units.forEach((node, index) => {
         const position = positions[index]; const x = position.x; const top = position.y;
-        if (style !== "catalog") links.push(route(width / 2, deputyTop + 34 - .6, x, top + .6));
+        if (drawLinks) links.push(route(width / 2, deputyTop + 34 - .6, x, top + .6));
         nodes.push(box(x, top, node.name));
         (node.children || []).slice(0, 4).forEach((child, childIndex) => {
           const childY = top + 58 + childIndex * 42;
-          if (style !== "catalog") links.push(route(x, top + 34 - .6, x, childY + .6, "#c4ccd7"));
+          if (drawLinks) links.push(route(x, top + 34 - .6, x, childY + .6, "#c4ccd7"));
           nodes.push(box(x, childY, child, "#fbfcfe", "#a8b2c1"));
         });
       });
@@ -444,6 +477,7 @@
     }
     function run() { try { state.model = parse($("#lawText").value); render(state.model); } catch (error) { $("#status").textContent = `해석 오류: ${error.message}`; $("#status").classList.add("error"); } }
     $("#lawText").value = EXAMPLE;
+    $("#layoutSelect").value = state.layout;
     $("#parseBtn").addEventListener("click", run);
     $("#resetBtn").addEventListener("click", () => { $("#lawText").value = EXAMPLE; run(); });
     $("#layoutSelect").addEventListener("change", (event) => { state.layout = event.target.value; if (state.model) render(state.model); });

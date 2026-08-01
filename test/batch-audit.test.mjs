@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { mkdtemp, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import {
@@ -183,4 +183,49 @@ test("배치 감사는 같은 실행 안에서 동일 법령 조회를 캐시한
     "시험부와 그 소속기관 직제:2026-07-24",
     "시험부와 그 소속기관 직제 시행규칙:2026-07-24",
   ]);
+});
+
+test("배치 감사는 source-dir의 법령 원문 캐시를 다음 실행에서 재사용한다", async () => {
+  const dir = await mkdtemp(path.join(os.tmpdir(), "orgchart-source-cache-"));
+  const sourceDir = path.join(dir, "sources");
+  const caseSpecs = [
+    { id: "cached", institution: "시험부", date: "2026-07-24", layout: "best" },
+  ];
+  let calls = 0;
+  const fetchLawAtDate = async (lawName, requestedDate) => {
+    calls += 1;
+    return {
+      lawName,
+      requestedDate: requestedDate.replaceAll("-", ""),
+      effectiveDate: requestedDate.replaceAll("-", ""),
+      mst: lawName,
+      sourceUrl: "https://example.test/law",
+      metadata: { lawName },
+      json: null,
+      annexes: [],
+      text: `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실을 둔다.
+시험실에 정책과 및 지원과를 둔다.
+`,
+    };
+  };
+
+  const first = await runBatchAudit({ caseSpecs, "source-dir": sourceDir, fetchLawAtDate });
+  assert.equal(first.cases[0].summary.status, "ready");
+  assert.equal(calls, 2);
+
+  const cachedFile = path.join(sourceDir, ".law-cache", "시험부와 그 소속기관 직제-20260724.json");
+  assert.match(await readFile(cachedFile, "utf8"), /시험부와 그 소속기관 직제/);
+
+  const second = await runBatchAudit({
+    caseSpecs,
+    "source-dir": sourceDir,
+    fetchLawAtDate: async () => {
+      throw new Error("API를 호출하면 안 됩니다.");
+    },
+  });
+
+  assert.equal(second.total, 1);
+  assert.equal(second.cases[0].summary.status, "ready");
 });

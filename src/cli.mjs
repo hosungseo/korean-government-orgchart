@@ -387,7 +387,7 @@ function printHelp() {
   --law-counts              소관법령이 연결된 조직 상자에 법령 수 배지 표시
   --law-appendix            PPTX·SVG 뒤에 부서별 소관법령 색인 부록 추가(--law-map 필요)
   --oc <인증값>             LAW_API_OC 환경변수로도 지정 가능
-  --source-dir <dir>        조회한 기준일 법령 문언 보관
+  --source-dir <dir>        조회한 기준일 법령 문언 보관 및 다음 실행 재사용 캐시
   --format markdown|json    audit 리포트 출력 형식
   --cases <cases.json>      batch-audit 케이스 목록
   --out-dir <dir>           batch-build 산출물 폴더

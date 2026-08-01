@@ -8,7 +8,7 @@ import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
 import { planBestPages, planLayoutVariants, planPages } from "./layout.mjs";
 import { projectOperationalView } from "./model.mjs";
 import { parseOrganizationTexts } from "./parser.mjs";
-import { jsonReplacer, writeText } from "./utils.mjs";
+import { compactDate, jsonReplacer, writeText } from "./utils.mjs";
 
 const STATUS_LABELS = {
   ready: "사용 가능",
@@ -382,9 +382,76 @@ async function fetchLawCached(lawName, date, caseSpec, context) {
   const oc = caseSpec.oc || context.oc || process.env.LAW_API_OC || "test";
   const key = `${lawName}\u0000${date}\u0000${oc}`;
   if (!context.lawFetchCache.has(key)) {
-    context.lawFetchCache.set(key, context.fetchLawAtDate(lawName, date, { oc }));
+    context.lawFetchCache.set(key, readOrFetchLaw(lawName, date, caseSpec, context, oc));
   }
   return context.lawFetchCache.get(key);
+}
+
+async function readOrFetchLaw(lawName, date, caseSpec, context, oc) {
+  const cached = await readFetchedSourceCache(lawName, date, caseSpec, context);
+  if (cached) return cached;
+  const fetched = await context.fetchLawAtDate(lawName, date, { oc });
+  await writeFetchedSourceCache(fetched, lawName, date, caseSpec, context);
+  return fetched;
+}
+
+async function readFetchedSourceCache(lawName, date, caseSpec, context) {
+  const filePath = fetchedSourceCachePath(lawName, date, caseSpec, context);
+  if (!filePath) return null;
+  let raw;
+  try {
+    raw = await fs.readFile(filePath, "utf8");
+  } catch (error) {
+    if (error.code === "ENOENT") return null;
+    throw error;
+  }
+  const parsed = JSON.parse(raw.replace(/^\uFEFF/, ""));
+  if (parsed.lawName !== lawName || parsed.requestedDate !== compactDate(date) || typeof parsed.text !== "string") {
+    return null;
+  }
+  return {
+    lawName: parsed.lawName,
+    requestedDate: parsed.requestedDate,
+    effectiveDate: parsed.effectiveDate,
+    mst: parsed.mst,
+    metadata: parsed.metadata || {},
+    json: parsed.json || null,
+    annexes: parsed.annexes || [],
+    text: parsed.text,
+    sourceUrl: parsed.sourceUrl || "",
+    cached: true,
+  };
+}
+
+async function writeFetchedSourceCache(item, lawName, date, caseSpec, context) {
+  const filePath = fetchedSourceCachePath(lawName, date, caseSpec, context);
+  if (!filePath) return;
+  await writeText(
+    filePath,
+    `${JSON.stringify({
+      lawName: item.lawName || lawName,
+      requestedDate: item.requestedDate || compactDate(date),
+      effectiveDate: item.effectiveDate,
+      mst: item.mst,
+      metadata: item.metadata || {},
+      json: item.json || null,
+      annexes: item.annexes || [],
+      text: item.text,
+      sourceUrl: item.sourceUrl || "",
+    }, jsonReplacer, 2)}\n`,
+  );
+}
+
+function fetchedSourceCachePath(lawName, date, caseSpec, context) {
+  const dir = fetchedSourceDir(caseSpec, context);
+  if (!dir) return null;
+  return path.join(dir, ".law-cache", `${safeFilePart(lawName)}-${compactDate(date)}.json`);
+}
+
+function fetchedSourceDir(caseSpec, context) {
+  if (caseSpec.sourceDir) return resolveCasePath(caseSpec.sourceDir, context.casesBaseDir);
+  if (context.sourceDir) return path.resolve(context.sourceDir);
+  return null;
 }
 
 async function localTextsFromCase(caseSpec, baseDir) {
@@ -429,11 +496,7 @@ async function applyCaseAnnexes(graph, caseSpec, context) {
 }
 
 async function writeFetchedSourcesIfRequested(fetched, caseSpec, context) {
-  const dir = caseSpec.sourceDir
-    ? resolveCasePath(caseSpec.sourceDir, context.casesBaseDir)
-    : context.sourceDir
-      ? path.resolve(context.sourceDir)
-      : null;
+  const dir = fetchedSourceDir(caseSpec, context);
   if (!dir) return;
   await fs.mkdir(dir, { recursive: true });
   const prefix = safeFilePart(caseSpec.id || caseSpec.institution || "case");

@@ -1,8 +1,88 @@
 import { inferRank } from "./model.mjs";
 
-export const SLIDE_SIZE = { width: 1122.67, height: 720 };
+/**
+ * Page formats used by the renderers.  The old 16:10 canvas remains the
+ * default for backwards compatibility; the A4 sizes use CSS points so that
+ * the SVG and editable PPTX have the same proportions when printed.
+ */
+export const SLIDE_SIZE = { width: 1122.67, height: 720, name: "slide" };
+export const A4_PORTRAIT = { width: 595.28, height: 841.89, name: "a4-portrait" };
+export const A4_LANDSCAPE = { width: 841.89, height: 595.28, name: "a4-landscape" };
+// One independently printable half of a portrait A4 sheet.  This is the
+// format used by the two-column review sheets in the corpus: callers can
+// generate one side and impose two outputs on a sheet later.
+export const A4_HALF = { width: 297.64, height: 841.89, name: "a4-half" };
 
-export function planPages(graph, { mode = "auto", maxNodes = 38 } = {}) {
+export const PAGE_FORMATS = {
+  slide: SLIDE_SIZE,
+  "a4-portrait": A4_PORTRAIT,
+  "a4-landscape": A4_LANDSCAPE,
+  "a4-half": A4_HALF,
+};
+
+const VISUAL_LAYOUTS = new Set([
+  "vertical",
+  "vertical-stack",
+  "horizontal",
+  "horizontal-bus",
+  "two-column",
+  "matrix",
+]);
+
+export function resolvePageSize(value = "slide") {
+  if (value && typeof value === "object" && Number.isFinite(value.width) && Number.isFinite(value.height)) {
+    return value;
+  }
+  return PAGE_FORMATS[normalizePaper(value)] || SLIDE_SIZE;
+}
+
+export function normalizePaper(value) {
+  const normalized = String(value || "slide").toLowerCase();
+  if (normalized === "a4" || normalized === "portrait" || normalized === "a4p") return "a4-portrait";
+  if (normalized === "landscape" || normalized === "a4l") return "a4-landscape";
+  if (normalized === "half" || normalized === "a4-half" || normalized === "a4-half-portrait") return "a4-half";
+  return PAGE_FORMATS[normalized] ? normalized : "slide";
+}
+
+export function inferLayoutStyle(graph, { paper = "slide", mode } = {}) {
+  if (VISUAL_LAYOUTS.has(mode)) return normalizeLayoutStyle(mode);
+  const format = normalizePaper(paper);
+  if (format === "a4-portrait" || format === "a4-half") return "vertical-stack";
+  if (format === "a4-landscape") return "horizontal-bus";
+
+  const ordinary = [...graph.nodes.values()].filter(
+    (node) => node.kind !== "institution" && node.kind !== "affiliated",
+  );
+  const affiliated = graph.childrenOf(graph.rootId).filter(
+    ({ edge, node }) => edge.type === "affiliated" || node.kind === "affiliated",
+  );
+  if (affiliated.length && ordinary.length > 24) return "two-column";
+  return ordinary.length > 18 ? "matrix" : "horizontal-bus";
+}
+
+function normalizeLayoutStyle(value) {
+  if (value === "vertical" || value === "vertical-stack") return "vertical-stack";
+  if (value === "horizontal" || value === "horizontal-bus") return "horizontal-bus";
+  return value;
+}
+
+export function planPages(
+  graph,
+  { mode = "auto", maxNodes = 38, paper = "slide", layoutStyle, focus } = {},
+) {
+  const format = normalizePaper(paper);
+  const requestedVisual = layoutStyle || (VISUAL_LAYOUTS.has(mode) ? mode : undefined);
+  const visual = inferLayoutStyle(graph, { paper: format, mode: requestedVisual });
+  // A portrait A4 page has less horizontal room.  Splitting earlier avoids
+  // unreadable one-character-wide leaf boxes while still allowing callers to
+  // override the limit explicitly through --max-nodes.
+  const effectiveMaxNodes =
+    maxNodes === 38 && format === "a4-half"
+      ? 20
+      : maxNodes === 38 && format === "a4-portrait"
+        ? 28
+        : maxNodes;
+  const planningMode = requestedVisual ? "auto" : mode;
   const head = graph.findHead() || graph.nodes.get(graph.rootId);
   const deputy = graph.findDeputy();
   const affiliates = graph
@@ -12,11 +92,35 @@ export function planPages(graph, { mode = "auto", maxNodes = 38 } = {}) {
   const ordinaryCount = [...graph.nodes.values()].filter(
     (node) => node.kind !== "institution" && node.kind !== "affiliated",
   ).length;
-  const compactLimit = Math.min(maxNodes, 32);
-  const selectedMode = mode === "auto" ? (ordinaryCount <= compactLimit ? "compact" : "split") : mode;
+  const compactLimit = Math.min(effectiveMaxNodes, 32);
+  const selectedMode =
+    planningMode === "auto"
+      ? ordinaryCount <= compactLimit
+        ? "compact"
+        : "split"
+      : planningMode;
   const pages = [];
   const mainDetails = [];
   const affiliateDetails = [];
+
+  if (focus) {
+    const focused = graph.nodeByName(focus);
+    if (focused) {
+      const nodeIds = [focused.id, ...graph.descendantsOf(focused.id).map((node) => node.id)];
+      const focusedPage = {
+        kind: focused.kind === "affiliated" ? "affiliate-detail" : "compact",
+        title: graph.meta.title,
+        subtitle: focused.name,
+        rootIds: [focused.id],
+        nodeIds: [...new Set(nodeIds)],
+        breadcrumb: [focused.name],
+        paper: format,
+        layoutStyle: visual,
+      };
+      return [{ ...focusedPage, pageNumber: 1, pageCount: 1 }];
+    }
+    graph.addWarning(`--focus 대상 조직을 찾지 못했습니다: ${focus}`);
+  }
 
   if (selectedMode === "compact") {
     const nodeIds = new Set([head.id, ...graph.descendantsOf(head.id).map((node) => node.id)]);
@@ -27,6 +131,8 @@ export function planPages(graph, { mode = "auto", maxNodes = 38 } = {}) {
       rootIds: [head.id],
       nodeIds: [...nodeIds],
       breadcrumb: [],
+      paper: format,
+      layoutStyle: visual,
     });
   } else {
     const overviewNodes = new Set([
@@ -40,6 +146,8 @@ export function planPages(graph, { mode = "auto", maxNodes = 38 } = {}) {
       rootIds: [head.id],
       nodeIds: [...overviewNodes],
       breadcrumb: [],
+      paper: format,
+      layoutStyle: visual,
     });
 
     const branchParent = deputy || head;
@@ -63,9 +171,9 @@ export function planPages(graph, { mode = "auto", maxNodes = 38 } = {}) {
       .map(({ node }) => node);
     const branchMap = new Map([...branchCandidates, ...headBranches].map((node) => [node.id, node]));
     for (const branch of branchMap.values()) {
-      mainDetails.push(...splitBranchPages(graph, branch, maxNodes, [graph.meta.institution]));
+      mainDetails.push(...splitBranchPages(graph, branch, effectiveMaxNodes, [graph.meta.institution], format, visual));
     }
-    pages.push(...packDetailPages(mainDetails, maxNodes, "본부 하부조직"));
+    pages.push(...packDetailPages(mainDetails, effectiveMaxNodes, "본부 하부조직", format, visual));
   }
 
   for (const affiliate of affiliates) {
@@ -78,18 +186,20 @@ export function planPages(graph, { mode = "auto", maxNodes = 38 } = {}) {
         rootIds: [affiliate.id],
         nodeIds: [affiliate.id],
         breadcrumb: ["소속기관", affiliate.name],
+        paper: format,
+        layoutStyle: visual,
       });
     } else {
-      affiliateDetails.push(...splitBranchPages(graph, affiliate, maxNodes, ["소속기관"]));
+      affiliateDetails.push(...splitBranchPages(graph, affiliate, effectiveMaxNodes, ["소속기관"], format, visual));
     }
   }
 
-  pages.push(...packDetailPages(affiliateDetails, maxNodes, "소속기관"));
+  pages.push(...packDetailPages(affiliateDetails, effectiveMaxNodes, "소속기관", format, visual));
 
   return pages.map((page, index) => ({ ...page, pageNumber: index + 1, pageCount: pages.length }));
 }
 
-function packDetailPages(specs, maxNodes, label) {
+function packDetailPages(specs, maxNodes, label, paper, layoutStyle) {
   const packed = [];
   let current = null;
   for (const spec of specs) {
@@ -100,6 +210,8 @@ function packDetailPages(specs, maxNodes, label) {
         rootIds: [...spec.rootIds],
         nodeIds: [...ids],
         subtitle: label,
+        paper: spec.paper || paper,
+        layoutStyle: spec.layoutStyle || layoutStyle,
       };
       continue;
     }
@@ -119,16 +231,22 @@ function packDetailPages(specs, maxNodes, label) {
       rootIds: [...spec.rootIds],
       nodeIds: [...ids],
       subtitle: label,
+      paper: spec.paper || paper,
+      layoutStyle: spec.layoutStyle || layoutStyle,
     };
   }
   if (current) packed.push(current);
   return packed.map((page, index) => ({
     ...page,
     subtitle: packed.length > 1 ? `${label} (${index + 1})` : label,
+  })).map((page) => ({
+    ...page,
+    paper: page.paper || paper,
+    layoutStyle: page.layoutStyle || layoutStyle,
   }));
 }
 
-function splitBranchPages(graph, branch, maxNodes, breadcrumb) {
+function splitBranchPages(graph, branch, maxNodes, breadcrumb, paper = "slide", layoutStyle) {
   const all = [branch, ...graph.descendantsOf(branch.id)];
   if (all.length <= maxNodes) {
     return [
@@ -139,6 +257,8 @@ function splitBranchPages(graph, branch, maxNodes, breadcrumb) {
         rootIds: [branch.id],
         nodeIds: all.map((node) => node.id),
         breadcrumb: [...breadcrumb, branch.name],
+        paper,
+        layoutStyle,
       },
     ];
   }
@@ -153,6 +273,8 @@ function splitBranchPages(graph, branch, maxNodes, breadcrumb) {
         rootIds: [branch.id],
         nodeIds: [branch.id],
         breadcrumb: [...breadcrumb, branch.name],
+        paper,
+        layoutStyle,
       },
     ];
   }
@@ -163,23 +285,33 @@ function splitBranchPages(graph, branch, maxNodes, breadcrumb) {
   for (const child of children) {
     const subtree = [child, ...graph.descendantsOf(child.id)];
     if (subtree.length >= maxNodes - 2) {
-      pages.push(...splitBranchPages(graph, child, maxNodes, [...breadcrumb, branch.name]));
+      pages.push(...splitBranchPages(graph, child, maxNodes, [...breadcrumb, branch.name], paper, layoutStyle));
       continue;
     }
     if (smallCount + subtree.length > maxNodes && smallGroups.length) {
-      pages.push(branchChunkPage(graph, branch, smallGroups.splice(0), breadcrumb, pages.length));
+      pages.push(
+        branchChunkPage(
+          graph,
+          branch,
+          smallGroups.splice(0),
+          breadcrumb,
+          pages.length,
+          paper,
+          layoutStyle,
+        ),
+      );
       smallCount = 1;
     }
     smallGroups.push(...subtree);
     smallCount += subtree.length;
   }
   if (smallGroups.length) {
-    pages.push(branchChunkPage(graph, branch, smallGroups, breadcrumb, pages.length));
+    pages.push(branchChunkPage(graph, branch, smallGroups, breadcrumb, pages.length, paper, layoutStyle));
   }
   return pages;
 }
 
-function branchChunkPage(graph, branch, nodes, breadcrumb, chunkIndex) {
+function branchChunkPage(graph, branch, nodes, breadcrumb, chunkIndex, paper = "slide", layoutStyle) {
   return {
     kind: branch.kind === "affiliated" ? "affiliate-detail" : "branch",
     title: graph.meta.title,
@@ -187,15 +319,21 @@ function branchChunkPage(graph, branch, nodes, breadcrumb, chunkIndex) {
     rootIds: [branch.id],
     nodeIds: [branch.id, ...nodes.map((node) => node.id)],
     breadcrumb: [...breadcrumb, branch.name],
+    paper,
+    layoutStyle,
   };
 }
 
 export function layoutPage(graph, page, options = {}) {
+  const pageSize = resolvePageSize(options.pageSize || page.paper || "slide");
+  const layoutStyle = normalizeLayoutStyle(page.layoutStyle || options.layoutStyle || "horizontal-bus");
+  const portrait = pageSize.height > pageSize.width;
+  const pageMargin = options.margin ?? (portrait ? (pageSize.width < 400 ? 17 : 28) : 38);
   const frame = {
-    left: options.left ?? 38,
-    top: options.top ?? 118,
-    width: options.width ?? SLIDE_SIZE.width - 76,
-    height: options.height ?? SLIDE_SIZE.height - 150,
+    left: options.left ?? pageMargin,
+    top: options.top ?? (portrait ? 104 : 118),
+    width: options.width ?? pageSize.width - pageMargin * 2,
+    height: options.height ?? pageSize.height - (portrait ? 132 : 150),
   };
   const selected = new Set(page.nodeIds);
   const parentEdge = new Map();
@@ -240,8 +378,16 @@ export function layoutPage(graph, page, options = {}) {
     return Math.max(1, value);
   };
   const totalWeight = Math.max(1, roots.reduce((sum, id) => sum + leafWeight(id), 0));
-  const verticalLeaves = totalWeight > 11 || selected.size > 18;
-  const leafHeight = verticalLeaves ? 132 : 34;
+  const verticalLeaves =
+    layoutStyle === "vertical-stack" ||
+    layoutStyle === "matrix" ||
+    totalWeight > 11 ||
+    selected.size > 18;
+  const leafHeight = verticalLeaves
+    ? layoutStyle === "vertical-stack" && portrait
+      ? 112
+      : 132
+    : 34;
   const usableHeight = Math.max(220, frame.height - leafHeight - 20);
   const levelGap = maxDepth ? Math.min(209, usableHeight / maxDepth) : 0;
   const positions = new Map();
@@ -263,7 +409,7 @@ export function layoutPage(graph, page, options = {}) {
     let height;
     let vertical = false;
     if (isLeaf && verticalLeaves && level > 0) {
-      width = Math.min(32, Math.max(24, spanWidth * 0.7));
+      width = Math.min(portrait ? 34 : 32, Math.max(24, spanWidth * 0.7));
       height = leafHeight;
       vertical = true;
     } else {
@@ -309,6 +455,14 @@ export function layoutPage(graph, page, options = {}) {
 
 export function nodeStyle(node) {
   const metadata = node.metadata || {};
+  const changeStyles = {
+    신설: { fill: "#FFF4A3", line: "#B8860B", text: "#5B4600", lineStyle: "solid", bold: true },
+    폐지: { fill: "#FDE2E2", line: "#B4362A", text: "#7F1D1D", lineStyle: "dashed", bold: false },
+    명칭변경: { fill: "#E8E3FF", line: "#6D5BB3", text: "#3E3470", lineStyle: "solid", bold: false },
+    이체: { fill: "#E0F2FE", line: "#2878A8", text: "#174B6B", lineStyle: "dashed", bold: false },
+    상계신설: { fill: "#DCFCE7", line: "#398041", text: "#14532D", lineStyle: "dashed", bold: false },
+  };
+  if (metadata.change && changeStyles[metadata.change]) return changeStyles[metadata.change];
   if (node.kind === "head" || node.kind === "deputy") {
     return { fill: "#AEC6F0", line: "#00004E", text: "#111827", lineStyle: "solid", bold: true };
   }
@@ -356,6 +510,16 @@ export function displayNodeName(node, vertical = false, { showLawCounts = false 
   if (node.metadata?.autonomous) markers.push("자");
   if (node.metadata?.evaluation) markers.push("평");
   if (node.metadata?.temporary) markers.push("한");
+  if (node.metadata?.change) {
+    const changeMarker = {
+      신설: "신설",
+      폐지: "폐지",
+      명칭변경: "명칭변경",
+      이체: "이체",
+      상계신설: "상계신설",
+    }[node.metadata.change];
+    if (changeMarker) markers.push(changeMarker);
+  }
   const marker = markers.length ? ` ${markers.map((value) => `(${value})`).join("")}` : "";
   const count = node.metadata?.count > 1 ? ` ${node.metadata.count}명` : "";
   const expiry =

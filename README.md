@@ -126,6 +126,34 @@ node src/cli.mjs build \
   --out outputs/소관법령-기구도.pptx
 ```
 
+### A4에 맞춘 여러 작도 유형
+
+검토서에서 반복되는 세로 척추형·가로 버스형·반쪽 면 조직도에 맞춰 출력 용지와 작도 방향을 선택할 수 있습니다.
+
+```bash
+# 한 장짜리 A4 세로 조직도
+node src/cli.mjs build --input 직제.txt --paper a4-portrait --layout vertical \
+  --out outputs/기관-a4.pptx --svg outputs/기관-a4.svg
+
+# A4 세로의 한 쪽 폭만 사용하는 조직도(두 개를 2-up 조판할 때 유용)
+node src/cli.mjs build --input 직제.txt --paper a4-half --layout vertical \
+  --focus 산업정책실 \
+  --out outputs/기관-반쪽.pptx --svg outputs/기관-반쪽.svg
+
+# 가로 검토서형
+node src/cli.mjs build --input 직제.txt --paper a4-landscape --layout horizontal \
+  --out outputs/기관-가로.pptx
+```
+
+신설·폐지·명칭변경·이체를 검토서처럼 표시하려면 입력에 다음 지시문을 덧붙입니다.
+
+```text
+@변경: 신설과 = 신설
+@변경: 기존과 = 이체
+```
+
+HWPX 취합본에서 확인한 유형과 대표 표본은 [HWPX 취합본 분석](docs/hwpx-corpus-analysis.md)에 정리했습니다.
+
 ## 근거와 한계
 
 행정안전부·문화체육관광부·공정거래위원회 기구도, 2026년 중앙행정기관 취합본 66개 파일(195면), 정부기구도 범례를 대조했습니다.

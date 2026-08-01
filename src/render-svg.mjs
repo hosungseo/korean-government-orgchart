@@ -1,47 +1,62 @@
 import { displayDate, xmlEscape } from "./utils.mjs";
-import { displayNodeName, layoutPage, nodeStyle, SLIDE_SIZE } from "./layout.mjs";
+import { displayNodeName, layoutPage, nodeStyle, resolvePageSize } from "./layout.mjs";
 
-export function renderSvg(graph, pages, { showLawCounts = false } = {}) {
+export function renderSvg(graph, pages, { showLawCounts = false, paper } = {}) {
   const gap = 24;
-  const totalHeight = pages.length * SLIDE_SIZE.height + Math.max(0, pages.length - 1) * gap;
-  const groups = pages.map((page, index) => renderPage(graph, page, index * (SLIDE_SIZE.height + gap), { showLawCounts }));
+  const pageSize = resolvePageSize(pages[0]?.paper || paper || "slide");
+  const totalHeight = pages.length * pageSize.height + Math.max(0, pages.length - 1) * gap;
+  const groups = pages.map((page, index) => renderPage(
+    graph,
+    page,
+    index * (pageSize.height + gap),
+    { showLawCounts, pageSize },
+  ));
   return [
     `<?xml version="1.0" encoding="UTF-8"?>`,
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${SLIDE_SIZE.width}" height="${totalHeight}" viewBox="0 0 ${SLIDE_SIZE.width} ${totalHeight}">`,
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${pageSize.width}" height="${totalHeight}" viewBox="0 0 ${pageSize.width} ${totalHeight}">`,
     `<rect width="100%" height="100%" fill="#E5E7EB"/>`,
     ...groups,
     `</svg>`,
   ].join("\n");
 }
 
-function renderPage(graph, page, offsetY, { showLawCounts }) {
+function renderPage(graph, page, offsetY, { showLawCounts, pageSize }) {
   const pageGroup = [];
+  const portrait = pageSize.height > pageSize.width;
+  const half = pageSize.width < 400;
+  const margin = portrait ? (half ? 17 : 28) : 42;
+  const titleSize = portrait ? (half ? 15 : 21) : 28;
+  const subtitleSize = portrait ? (half ? 8 : 11) : 15;
+  const headerY = portrait ? (half ? 26 : 34) : 48;
+  const subtitleY = portrait ? (half ? 42 : 57) : 76;
+  const ruleY = portrait ? (half ? 56 : 74) : 92;
+  const footerY = pageSize.height - (portrait ? 14 : 16);
   pageGroup.push(`<g transform="translate(0 ${offsetY})">`);
-  pageGroup.push(`<rect width="${SLIDE_SIZE.width}" height="${SLIDE_SIZE.height}" fill="#FFFFFF"/>`);
-  pageGroup.push(`<text x="42" y="48" font-family="Malgun Gothic, sans-serif" font-size="28" font-weight="700" fill="#111827">${xmlEscape(page.title)}</text>`);
-  pageGroup.push(`<text x="42" y="76" font-family="Malgun Gothic, sans-serif" font-size="15" fill="#4B5563">${xmlEscape(page.subtitle)}</text>`);
+  pageGroup.push(`<rect width="${pageSize.width}" height="${pageSize.height}" fill="#FFFFFF"/>`);
+  pageGroup.push(`<text x="${margin}" y="${headerY}" font-family="Malgun Gothic, sans-serif" font-size="${titleSize}" font-weight="700" fill="#111827">${xmlEscape(page.title)}</text>`);
+  pageGroup.push(`<text x="${margin}" y="${subtitleY}" font-family="Malgun Gothic, sans-serif" font-size="${subtitleSize}" fill="#4B5563">${xmlEscape(page.subtitle)}</text>`);
   if (graph.meta.asOf) {
-    pageGroup.push(`<text x="${SLIDE_SIZE.width - 42}" y="48" text-anchor="end" font-family="Malgun Gothic, sans-serif" font-size="13" fill="#6B7280">&lt; ${xmlEscape(displayDate(graph.meta.asOf))} 기준 &gt;</text>`);
+    pageGroup.push(`<text x="${pageSize.width - margin}" y="${headerY}" text-anchor="end" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? (half ? 6.5 : 9) : 13}" fill="#6B7280">&lt; ${xmlEscape(displayDate(graph.meta.asOf))} 기준 &gt;</text>`);
   }
-  pageGroup.push(`<line x1="42" y1="92" x2="${SLIDE_SIZE.width - 42}" y2="92" stroke="#9CA3AF" stroke-width="1"/>`);
+  pageGroup.push(`<line x1="${margin}" y1="${ruleY}" x2="${pageSize.width - margin}" y2="${ruleY}" stroke="#9CA3AF" stroke-width="1"/>`);
 
   if (page.kind === "law-index") {
-    pageGroup.push(svgLawIndex(page));
-    pageGroup.push(`<text x="${SLIDE_SIZE.width - 38}" y="704" text-anchor="end" font-family="Malgun Gothic, sans-serif" font-size="10" fill="#6B7280">${page.pageNumber} / ${page.pageCount}</text>`);
+    pageGroup.push(svgLawIndex(page, pageSize));
+    pageGroup.push(`<text x="${pageSize.width - margin}" y="${footerY}" text-anchor="end" font-family="Malgun Gothic, sans-serif" font-size="10" fill="#6B7280">${page.pageNumber} / ${page.pageCount}</text>`);
     pageGroup.push(`</g>`);
     return pageGroup.join("\n");
   }
 
-  const layout = layoutPage(graph, page);
+  const layout = layoutPage(graph, page, { pageSize });
 
   for (const edge of layout.edges) {
     pageGroup.push(...svgEdge(edge));
   }
   for (const entry of layout.nodes) {
-    pageGroup.push(svgNode(entry.node, entry.position, { showLawCounts }));
+    pageGroup.push(svgNode(entry.node, entry.position, { showLawCounts, pageSize }));
   }
-  pageGroup.push(svgLegend({ showLawCounts, operational: graph.meta.renderView === "operational" }));
-  pageGroup.push(`<text x="${SLIDE_SIZE.width - 38}" y="704" text-anchor="end" font-family="Malgun Gothic, sans-serif" font-size="10" fill="#6B7280">${page.pageNumber} / ${page.pageCount}</text>`);
+  pageGroup.push(svgLegend({ showLawCounts, operational: graph.meta.renderView === "operational", pageSize }));
+  pageGroup.push(`<text x="${pageSize.width - margin}" y="${footerY}" text-anchor="end" font-family="Malgun Gothic, sans-serif" font-size="10" fill="#6B7280">${page.pageNumber} / ${page.pageCount}</text>`);
   pageGroup.push(`</g>`);
   return pageGroup.join("\n");
 }
@@ -65,7 +80,7 @@ function svgEdge(edge) {
   ].filter(Boolean);
 }
 
-function svgNode(node, position, { showLawCounts }) {
+function svgNode(node, position, { showLawCounts, pageSize }) {
   const style = nodeStyle(node);
   const dash = style.lineStyle === "dashed" ? ` stroke-dasharray="4 3"` : "";
   const fontSize = position.vertical ? 10.8 : node.name.length > 13 ? 10.5 : 12.5;
@@ -82,7 +97,7 @@ function svgNode(node, position, { showLawCounts }) {
     )
     .join("");
   const verticalLawCount = showLawCounts && position.vertical && node.metadata?.lawResponsibility?.lawCount
-    ? svgVerticalLawCount(node.metadata.lawResponsibility.lawCount, position)
+    ? svgVerticalLawCount(node.metadata.lawResponsibility.lawCount, position, pageSize)
     : "";
   return [
     `<g>`,
@@ -93,14 +108,26 @@ function svgNode(node, position, { showLawCounts }) {
   ].join("");
 }
 
-function svgVerticalLawCount(lawCount, position) {
+function svgVerticalLawCount(lawCount, position, pageSize) {
   const width = 26;
   const left = Math.max(0, position.centerX - width / 2);
-  const top = Math.min(676, position.bottom + 2);
+  const top = Math.min(pageSize.height - 42, position.bottom + 2);
   return `<g><rect x="${left}" y="${top}" width="${width}" height="12" rx="2" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><text x="${position.centerX}" y="${top + 8.6}" text-anchor="middle" font-family="Malgun Gothic, sans-serif" font-size="7.5" font-weight="700" fill="#374151">${lawCount}</text></g>`;
 }
 
-function svgLegend({ showLawCounts, operational }) {
+function svgLegend({ showLawCounts, operational, pageSize }) {
+  const portrait = pageSize.height > pageSize.width;
+  if (portrait) {
+    const half = pageSize.width < 400;
+    return [
+      `<g transform="translate(${half ? 17 : 28} ${pageSize.height - 31})" font-family="Malgun Gothic, sans-serif" font-size="${half ? 6.4 : 8.2}" fill="#4B5563">`,
+      `<line x1="0" y1="-3" x2="17" y2="-3" stroke="#6B7280"/><text x="21" y="0">계선</text>`,
+      `<line x1="48" y1="-3" x2="65" y2="-3" stroke="#8B8B8B" stroke-dasharray="4 3"/><text x="69" y="0">보좌</text>`,
+      `<rect x="104" y="-10" width="12" height="9" fill="#55B947"/><text x="121" y="0">소속기관</text>`,
+      `<text x="${half ? 17 : 185}" y="${half ? 15 : 0}">${half ? "(가/나) · (책) · (한) · (임)" : "(가/나) 직무등급 · (책) 책임운영 · (한) 한시 · (임) 임기제"}</text>`,
+      `</g>`,
+    ].join("");
+  }
   const affiliateX = operational ? 257 : 171;
   const affiliateLabelX = affiliateX + 19;
   const markerX = operational ? 346 : 260;
@@ -118,20 +145,23 @@ function svgLegend({ showLawCounts, operational }) {
   ].join("");
 }
 
-function svgLawIndex(page) {
+function svgLawIndex(page, pageSize) {
+  const portrait = pageSize.height > pageSize.width;
+  const margin = portrait ? 28 : 42;
+  const available = pageSize.width - margin * 2;
   const parts = [
-    `<text x="42" y="128" font-family="Malgun Gothic, sans-serif" font-size="15" font-weight="700" fill="#374151">부서별 소관법령 수와 대표 법령</text>`,
+    `<text x="${margin}" y="${portrait ? 102 : 128}" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? 12 : 15}" font-weight="700" fill="#374151">부서별 소관법령 수와 대표 법령</text>`,
   ];
-  const columns = 2;
+  const columns = portrait ? 1 : 2;
   const rows = 5;
-  const columnWidth = 500;
-  const columnGap = 38;
-  const rowHeight = 105;
+  const columnWidth = columns === 1 ? available : 500;
+  const columnGap = columns === 1 ? 0 : 38;
+  const rowHeight = portrait ? 115 : 105;
   for (const [index, entry] of page.lawEntries.entries()) {
     const column = Math.floor(index / rows);
     const row = index % rows;
-    const left = 42 + column * (columnWidth + columnGap);
-    const top = 146 + row * rowHeight;
+    const left = margin + column * (columnWidth + columnGap);
+    const top = (portrait ? 116 : 146) + row * rowHeight;
     parts.push(`<line x1="${left}" y1="${top}" x2="${left + columnWidth}" y2="${top}" stroke="#D1D5DB" stroke-width="0.8"/>`);
     parts.push(`<text x="${left}" y="${top + 26}" font-family="Malgun Gothic, sans-serif" font-size="15" font-weight="700" fill="#111827">${xmlEscape(entry.name)}</text>`);
     parts.push(`<text x="${left + columnWidth}" y="${top + 26}" text-anchor="end" font-family="Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#4B5563">법령 ${entry.lawCount}건</text>`);
@@ -139,7 +169,8 @@ function svgLawIndex(page) {
       parts.push(`<text x="${left}" y="${top + 54 + lawIndex * 20}" font-family="Malgun Gothic, sans-serif" font-size="11.5" fill="#4B5563">· ${xmlEscape(law.법령명)}</text>`);
     });
   }
-  parts.push(`<line x1="42" y1="675" x2="${SLIDE_SIZE.width - 42}" y2="675" stroke="#D1D5DB" stroke-width="0.8"/>`);
-  parts.push(`<text x="42" y="691" font-family="Malgun Gothic, sans-serif" font-size="10" fill="#6B7280">공동소관 법령은 담당 부서별로 중복 표기될 수 있습니다.</text>`);
+  const footer = pageSize.height - (portrait ? 46 : 45);
+  parts.push(`<line x1="${margin}" y1="${footer}" x2="${pageSize.width - margin}" y2="${footer}" stroke="#D1D5DB" stroke-width="0.8"/>`);
+  parts.push(`<text x="${margin}" y="${footer + 16}" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? 8 : 10}" fill="#6B7280">공동소관 법령은 담당 부서별로 중복 표기될 수 있습니다.</text>`);
   return parts.join("\n");
 }

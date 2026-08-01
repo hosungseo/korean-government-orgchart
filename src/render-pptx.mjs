@@ -2,13 +2,19 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { Presentation, PresentationFile } from "@oai/artifact-tool";
 import { displayDate } from "./utils.mjs";
-import { displayNodeName, layoutPage, nodeStyle, SLIDE_SIZE } from "./layout.mjs";
+import { displayNodeName, layoutPage, nodeStyle, resolvePageSize } from "./layout.mjs";
 
 const TYPEFACE = "맑은 고딕";
 
-export async function renderPptx(graph, pages, outputPath, { previewDir, showLawCounts = false } = {}) {
-  const presentation = Presentation.create({ slideSize: SLIDE_SIZE });
-  for (const page of pages) addPage(presentation, graph, page, { showLawCounts });
+export async function renderPptx(
+  graph,
+  pages,
+  outputPath,
+  { previewDir, showLawCounts = false, paper } = {},
+) {
+  const pageSize = resolvePageSize(pages[0]?.paper || paper || "slide");
+  const presentation = Presentation.create({ slideSize: pageSize });
+  for (const page of pages) addPage(presentation, graph, page, { showLawCounts, pageSize });
   const pptx = await PresentationFile.exportPptx(presentation);
   await fs.mkdir(path.dirname(path.resolve(outputPath)), { recursive: true });
   await pptx.save(path.resolve(outputPath));
@@ -38,17 +44,26 @@ export async function renderPptx(graph, pages, outputPath, { previewDir, showLaw
   return presentation;
 }
 
-function addPage(presentation, graph, page, { showLawCounts }) {
+function addPage(presentation, graph, page, { showLawCounts, pageSize }) {
+  const portrait = pageSize.height > pageSize.width;
+  const half = pageSize.width < 400;
+  const margin = portrait ? (half ? 17 : 28) : 42;
+  const titleSize = portrait ? (half ? 15 : 21) : 28;
+  const subtitleSize = portrait ? (half ? 8 : 11) : 15;
+  const headerTop = portrait ? (half ? 11 : 15) : 22;
+  const subtitleTop = portrait ? (half ? 31 : 42) : 62;
+  const ruleY = portrait ? (half ? 56 : 74) : 92;
+  const footerTop = pageSize.height - (portrait ? 24 : 27);
   const slide = presentation.slides.add();
   slide.background.fill = "#FFFFFF";
-  addText(slide, page.title, { left: 42, top: 22, width: 620, height: 40 }, {
-    fontSize: 28,
+  addText(slide, page.title, { left: margin, top: headerTop, width: pageSize.width - margin * 2 - 80, height: portrait ? 30 : 40 }, {
+    fontSize: titleSize,
     bold: true,
     color: "#111827",
     alignment: "left",
   }, "기관명");
-  addText(slide, page.subtitle, { left: 42, top: 62, width: 620, height: 23 }, {
-    fontSize: 15,
+  addText(slide, page.subtitle, { left: margin, top: subtitleTop, width: pageSize.width - margin * 2, height: 23 }, {
+    fontSize: subtitleSize,
     color: "#4B5563",
     alignment: "left",
   }, "페이지 제목");
@@ -56,41 +71,41 @@ function addPage(presentation, graph, page, { showLawCounts }) {
     addText(
       slide,
       `< ${displayDate(graph.meta.asOf)} 기준 >`,
-      { left: SLIDE_SIZE.width - 300, top: 28, width: 258, height: 22 },
-      { fontSize: 13, color: "#6B7280", alignment: "right" },
+      { left: pageSize.width - margin - (portrait ? (half ? 90 : 130) : 300), top: headerTop + 6, width: portrait ? (half ? 90 : 130) : 258, height: 22 },
+      { fontSize: portrait ? (half ? 6.5 : 9) : 13, color: "#6B7280", alignment: "right" },
       "기준일",
     );
   }
-  addLine(slide, 42, 92, SLIDE_SIZE.width - 42, 92, "#9CA3AF", "solid", 1);
+  addLine(slide, margin, ruleY, pageSize.width - margin, ruleY, "#9CA3AF", "solid", 1);
 
   if (page.kind === "law-index") {
-    addLawIndex(slide, page);
+    addLawIndex(slide, page, pageSize);
     addText(
       slide,
       `${page.pageNumber} / ${page.pageCount}`,
-      { left: SLIDE_SIZE.width - 105, top: 693, width: 68, height: 14 },
+      { left: pageSize.width - margin - 68, top: footerTop, width: 68, height: 14 },
       { fontSize: 10, color: "#6B7280", alignment: "right" },
       "쪽번호",
     );
     return;
   }
 
-  const layout = layoutPage(graph, page);
+  const layout = layoutPage(graph, page, { pageSize });
 
   for (const edge of layout.edges) addEdge(slide, edge);
-  for (const entry of layout.nodes) addNode(slide, entry.node, entry.position, { showLawCounts });
+  for (const entry of layout.nodes) addNode(slide, entry.node, entry.position, { showLawCounts, pageSize });
 
-  addLegend(slide, { showLawCounts, operational: graph.meta.renderView === "operational" });
+  addLegend(slide, { showLawCounts, operational: graph.meta.renderView === "operational", pageSize });
   addText(
     slide,
     `${page.pageNumber} / ${page.pageCount}`,
-    { left: SLIDE_SIZE.width - 105, top: 693, width: 68, height: 14 },
+    { left: pageSize.width - margin - 68, top: footerTop, width: 68, height: 14 },
     { fontSize: 10, color: "#6B7280", alignment: "right" },
     "쪽번호",
   );
 }
 
-function addNode(slide, node, position, { showLawCounts }) {
+function addNode(slide, node, position, { showLawCounts, pageSize }) {
   const style = nodeStyle(node);
   const shape = slide.shapes.add({
     geometry: position.vertical ? "rect" : "roundRect",
@@ -120,14 +135,14 @@ function addNode(slide, node, position, { showLawCounts }) {
       : { top: 3, right: 4, bottom: 3, left: 4 },
   };
   if (showLawCounts && position.vertical && node.metadata?.lawResponsibility?.lawCount) {
-    addVerticalLawCount(slide, node.metadata.lawResponsibility.lawCount, position);
+    addVerticalLawCount(slide, node.metadata.lawResponsibility.lawCount, position, pageSize);
   }
 }
 
-function addVerticalLawCount(slide, lawCount, position) {
+function addVerticalLawCount(slide, lawCount, position, pageSize) {
   const width = 26;
   const left = Math.max(0, position.centerX - width / 2);
-  const top = Math.min(676, position.bottom + 2);
+  const top = Math.min(pageSize.height - 42, position.bottom + 2);
   const badge = slide.shapes.add({
     geometry: "roundRect",
     name: "소관법령수",
@@ -196,7 +211,28 @@ function addText(slide, text, position, style, name) {
   return shape;
 }
 
-function addLegend(slide, { showLawCounts, operational }) {
+function addLegend(slide, { showLawCounts, operational, pageSize }) {
+  const portrait = pageSize.height > pageSize.width;
+  if (portrait) {
+    const half = pageSize.width < 400;
+    const margin = half ? 17 : 28;
+    const fontSize = half ? 6.4 : 8.2;
+    addLine(slide, margin, pageSize.height - 31, margin + 17, pageSize.height - 31, "#6B7280", "solid", 1);
+    addText(slide, "계선", { left: margin + 21, top: pageSize.height - 39, width: 25, height: 14 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-계선");
+    addLine(slide, margin + 59, pageSize.height - 31, margin + 76, pageSize.height - 31, "#8B8B8B", "dashed", 1);
+    addText(slide, "보좌", { left: margin + 80, top: pageSize.height - 39, width: 25, height: 14 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-보좌");
+    const affiliate = slide.shapes.add({
+      geometry: "rect",
+      name: "범례-소속기관-색",
+      position: { left: margin + 115, top: pageSize.height - 38, width: 12, height: 9 },
+      fill: "#55B947",
+      line: { style: "solid", fill: "#2D7D2D", width: 0.8 },
+    });
+    affiliate.text = "";
+    addText(slide, "소속기관", { left: margin + 132, top: pageSize.height - 39, width: 42, height: 14 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-소속");
+    addText(slide, half ? "(가/나) · (책) · (한) · (임)" : "(가/나) 직무등급 · (책) 책임운영 · (한) 한시 · (임) 임기제", { left: half ? margin : 198, top: pageSize.height - (half ? 24 : 39), width: half ? pageSize.width - margin * 2 : pageSize.width - 226, height: 14 }, { fontSize, color: "#4B5563", alignment: "left", autoFit: "shrinkText" }, "범례-표식");
+    return;
+  }
   addLine(slide, 42, 697, 62, 697, "#6B7280", "solid", 1);
   addText(slide, "보조·지휘", { left: 67, top: 688, width: 58, height: 16 }, { fontSize: 9.5, color: "#4B5563", alignment: "left" }, "범례-보조");
   addLine(slide, 135, 697, 155, 697, "#8B8B8B", "dashed", 1);
@@ -223,14 +259,19 @@ function addLegend(slide, { showLawCounts, operational }) {
   );
 }
 
-function addLawIndex(slide, page) {
+function addLawIndex(slide, page, pageSize) {
+  const portrait = pageSize.height > pageSize.width;
+  const margin = portrait ? 28 : 42;
+  const footer = pageSize.height - (portrait ? 46 : 45);
   const columns = 2;
   const rows = 5;
   const columnWidth = 500;
   const columnGap = 38;
   const rowHeight = 105;
-  addText(slide, "부서별 소관법령 수와 대표 법령", { left: 42, top: 112, width: 500, height: 22 }, {
-    fontSize: 15,
+  const effectiveColumnWidth = portrait ? pageSize.width - margin * 2 : columnWidth;
+  const effectiveRowHeight = portrait ? 115 : rowHeight;
+  addText(slide, "부서별 소관법령 수와 대표 법령", { left: margin, top: portrait ? 86 : 112, width: effectiveColumnWidth, height: 22 }, {
+    fontSize: portrait ? 12 : 15,
     bold: true,
     color: "#374151",
     alignment: "left",
@@ -238,33 +279,33 @@ function addLawIndex(slide, page) {
   for (const [index, entry] of page.lawEntries.entries()) {
     const column = Math.floor(index / rows);
     const row = index % rows;
-    const left = 42 + column * (columnWidth + columnGap);
-    const top = 146 + row * rowHeight;
-    addLine(slide, left, top, left + columnWidth, top, "#D1D5DB", "solid", 0.8);
-    addText(slide, entry.name, { left, top: top + 10, width: columnWidth - 64, height: 22 }, {
-      fontSize: 15,
+    const left = margin + column * (effectiveColumnWidth + (portrait ? 0 : columnGap));
+    const top = (portrait ? 102 : 146) + row * effectiveRowHeight;
+    addLine(slide, left, top, left + effectiveColumnWidth, top, "#D1D5DB", "solid", 0.8);
+    addText(slide, entry.name, { left, top: top + 10, width: effectiveColumnWidth - 64, height: 22 }, {
+      fontSize: portrait ? 11 : 15,
       bold: true,
       color: "#111827",
       alignment: "left",
     }, "소관법령-부서");
-    addText(slide, `법령 ${entry.lawCount}건`, { left: left + columnWidth - 64, top: top + 10, width: 64, height: 20 }, {
-      fontSize: 12,
+    addText(slide, `법령 ${entry.lawCount}건`, { left: left + effectiveColumnWidth - 64, top: top + 10, width: 64, height: 20 }, {
+      fontSize: portrait ? 9 : 12,
       bold: true,
       color: "#4B5563",
       alignment: "right",
     }, "소관법령-건수");
     const representatives = entry.laws.map((law) => `· ${law.법령명}`).join("\n");
-    addText(slide, representatives || "· 연결된 법령 없음", { left, top: top + 37, width: columnWidth, height: 56 }, {
-      fontSize: 11.5,
+    addText(slide, representatives || "· 연결된 법령 없음", { left, top: top + 37, width: effectiveColumnWidth, height: 56 }, {
+      fontSize: portrait ? 8.5 : 11.5,
       color: "#4B5563",
       alignment: "left",
       autoFit: "shrinkText",
       lineSpacing: 0.95,
     }, "소관법령-대표법령");
   }
-  addLine(slide, 42, 675, SLIDE_SIZE.width - 42, 675, "#D1D5DB", "solid", 0.8);
-  addText(slide, "공동소관 법령은 담당 부서별로 중복 표기될 수 있습니다.", { left: 42, top: 680, width: 600, height: 16 }, {
-    fontSize: 10,
+  addLine(slide, margin, footer, pageSize.width - margin, footer, "#D1D5DB", "solid", 0.8);
+  addText(slide, "공동소관 법령은 담당 부서별로 중복 표기될 수 있습니다.", { left: margin, top: footer + 5, width: effectiveColumnWidth, height: 16 }, {
+    fontSize: portrait ? 8 : 10,
     color: "#6B7280",
     alignment: "left",
   }, "소관법령-주석");

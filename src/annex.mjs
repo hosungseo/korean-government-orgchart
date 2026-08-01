@@ -85,11 +85,16 @@ export function parseBoxTable(text) {
   for (const line of String(text || "").split(/\r?\n/)) {
     if (!/[┃│]/.test(line)) continue;
     if (/[┏┓┗┛┠┨┯┷┼━─]/.test(line)) continue;
-    const normalized = line.replace(/^[^┃]*/, "").replace(/[^┃]*$/, "");
-    if (!normalized.includes("┃")) continue;
+    const firstBorder = line.search(/[┃│]/);
+    const lastHeavy = line.lastIndexOf("┃");
+    const lastLight = line.lastIndexOf("│");
+    const lastBorder = Math.max(lastHeavy, lastLight);
+    if (firstBorder < 0 || lastBorder <= firstBorder) continue;
+    const normalized = line.slice(firstBorder, lastBorder + 1);
+    if (!/[┃│]/.test(normalized)) continue;
     const cells = normalized
-      .replace(/^┃/, "")
-      .replace(/┃$/, "")
+      .replace(/^[┃│]/, "")
+      .replace(/[┃│]$/, "")
       .split(/[│┃]/)
       .map(cleanCell);
     if (!cells.some(Boolean)) continue;
@@ -136,7 +141,7 @@ function cleanCell(value) {
 function stripHeaderRows(rows) {
   if (!rows.length) return rows;
   const first = rows[0].join(" ");
-  if (/(?:명칭|기관|직급|계|위치|관할|소속)/.test(first)) return rows.slice(1);
+  if (/(?:명칭|기관|직급|계|구분|위치|관할|소속)/.test(first)) return rows.slice(1);
   return rows;
 }
 

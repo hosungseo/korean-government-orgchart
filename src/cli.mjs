@@ -10,7 +10,6 @@ import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
 import { planLayoutVariants, planPages } from "./layout.mjs";
 import { projectOperationalView, summarizeStructure } from "./model.mjs";
 import { parseOrganizationTexts } from "./parser.mjs";
-import { renderPptx } from "./render-pptx.mjs";
 import { renderSvg } from "./render-svg.mjs";
 import { ensureParent, jsonReplacer, parseArgs, readInputs, writeText } from "./utils.mjs";
 
@@ -181,6 +180,7 @@ async function emitOutputs(graph, args) {
   }
   if (args.out) {
     await ensureParent(args.out);
+    const { renderPptx } = await import("./render-pptx.mjs");
     await renderPptx(displayGraph, pages, path.resolve(args.out), {
       previewDir: stringArg(args, "preview-dir"),
       showLawCounts,

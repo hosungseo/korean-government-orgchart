@@ -224,8 +224,8 @@ function printHelp() {
   inspect    파싱 결과 요약 출력
 
 주요 옵션
-  --layout auto|compact|split|vertical|horizontal|two-column|matrix|all
-  --layouts vertical,horizontal,matrix,two-column  같은 문언을 여러 작도 유형으로 한 번에 출력
+  --layout auto|compact|split|vertical|horizontal|two-column|matrix|flow|change-lanes|affiliate-strip|catalog|all
+  --layouts vertical,horizontal,two-column,matrix,flow,change-lanes,affiliate-strip,catalog  같은 문언을 여러 유형으로 한 번에 출력
   --paper slide|a4-portrait|a4-landscape|a4-half  출력 용지와 방향
   --focus <조직명>  해당 조직과 하위조직만 한 장으로 출력
   --view legal|operational  법정 설치형(기본) 또는 확인된 정책관·국 소관 묶음형

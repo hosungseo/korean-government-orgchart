@@ -37,6 +37,22 @@ export const LAYOUT_PRESETS = Object.freeze({
     label: "관·국–과 매트릭스형",
     description: "상위 단위를 열로 고정하고 하위 과·팀을 행으로 배열하는 형식",
   },
+  flow: {
+    label: "업무 흐름형",
+    description: "조직 관계를 왼쪽에서 오른쪽으로 읽는 기능·이관 검토형",
+  },
+  "change-lanes": {
+    label: "변경 전후 레인형",
+    description: "기존 조직과 신설·폐지·이체 조직을 좌우 레인으로 분리하는 형식",
+  },
+  "affiliate-strip": {
+    label: "본부·소속기관 띠형",
+    description: "본부 계층 아래 부속기관·책임운영기관을 별도 띠로 두는 형식",
+  },
+  catalog: {
+    label: "부서 카드 목록형",
+    description: "관·국별 하위 과·팀을 카드 묶음으로 나열하는 인쇄용 목록형",
+  },
 });
 
 const VISUAL_LAYOUTS = new Set(Object.keys(LAYOUT_PRESETS));
@@ -78,6 +94,10 @@ export function normalizeLayoutStyle(value) {
   if (value === "horizontal" || value === "horizontal-bus") return "horizontal-bus";
   if (value === "columns" || value === "2-column" || value === "2col") return "two-column";
   if (value === "grid" || value === "department-matrix") return "matrix";
+  if (value === "workflow" || value === "left-right" || value === "흐름") return "flow";
+  if (value === "change" || value === "comparison" || value === "compare" || value === "변경") return "change-lanes";
+  if (value === "affiliates" || value === "institution-strip" || value === "소속기관") return "affiliate-strip";
+  if (value === "cards" || value === "list" || value === "부서목록") return "catalog";
   return String(value || "").trim().toLowerCase();
 }
 
@@ -245,25 +265,39 @@ export function planPages(
     pages.push(...packDetailPages(mainDetails, effectiveMaxNodes, "본부 하부조직", format, visual));
   }
 
-  for (const affiliate of affiliates) {
-    const descendants = graph.descendantsOf(affiliate.id);
-    if (!descendants.length) {
-      affiliateDetails.push({
-        kind: "affiliates",
-        title: graph.meta.title,
-        subtitle: affiliate.name,
-        rootIds: [affiliate.id],
-        nodeIds: [affiliate.id],
-        breadcrumb: ["소속기관", affiliate.name],
-        paper: format,
-        layoutStyle: visual,
-      });
-    } else {
-      affiliateDetails.push(...splitBranchPages(graph, affiliate, effectiveMaxNodes, ["소속기관"], format, visual));
+  if (visual === "affiliate-strip") {
+    // The strip preset keeps the main tree and puts first-level affiliated
+    // institutions into a single bottom band.  Their detailed subtrees stay
+    // available through --focus, so the overview does not become a second
+    // full institution tree.
+    if (pages[0] && affiliates.length) {
+      pages[0] = {
+        ...pages[0],
+        kind: "overview-affiliate-strip",
+        affiliateStrip: true,
+        nodeIds: [...new Set([...pages[0].nodeIds, ...affiliates.map((node) => node.id)])],
+      };
     }
+  } else {
+    for (const affiliate of affiliates) {
+      const descendants = graph.descendantsOf(affiliate.id);
+      if (!descendants.length) {
+        affiliateDetails.push({
+          kind: "affiliates",
+          title: graph.meta.title,
+          subtitle: affiliate.name,
+          rootIds: [affiliate.id],
+          nodeIds: [affiliate.id],
+          breadcrumb: ["소속기관", affiliate.name],
+          paper: format,
+          layoutStyle: visual,
+        });
+      } else {
+        affiliateDetails.push(...splitBranchPages(graph, affiliate, effectiveMaxNodes, ["소속기관"], format, visual));
+      }
+    }
+    pages.push(...packDetailPages(affiliateDetails, effectiveMaxNodes, "소속기관", format, visual));
   }
-
-  pages.push(...packDetailPages(affiliateDetails, effectiveMaxNodes, "소속기관", format, visual));
 
   return pages.map((page, index) => ({ ...page, pageNumber: index + 1, pageCount: pages.length }));
 }
@@ -447,6 +481,18 @@ export function layoutPage(graph, page, options = {}) {
     return Math.max(1, value);
   };
   const totalWeight = Math.max(1, roots.reduce((sum, id) => sum + leafWeight(id), 0));
+  if (layoutStyle === "affiliate-strip") {
+    return layoutAffiliateStripPage({ graph, page, pageSize, frame, parentEdge, children, roots, selected, depth });
+  }
+  if (layoutStyle === "flow") {
+    return layoutFlowPage({ graph, frame, parentEdge, roots, selected, depth });
+  }
+  if (layoutStyle === "change-lanes") {
+    return layoutChangeLanesPage({ graph, frame, parentEdge, roots, selected, depth });
+  }
+  if (layoutStyle === "catalog") {
+    return layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, portrait });
+  }
   if (layoutStyle === "matrix") {
     return layoutMatrixPage({
       graph,
@@ -543,6 +589,235 @@ export function layoutPage(graph, page, options = {}) {
     position,
   }));
   return { frame, nodes, edges, roots, maxDepth, verticalLeaves };
+}
+
+function boxPosition(centerX, top, width, height, { vertical = false, depth = 0, spanLeft, spanWidth } = {}) {
+  return {
+    left: centerX - width / 2,
+    top,
+    width,
+    height,
+    centerX,
+    centerY: top + height / 2,
+    right: centerX + width / 2,
+    bottom: top + height,
+    vertical,
+    depth,
+    spanLeft: spanLeft ?? centerX - width / 2,
+    spanWidth: spanWidth ?? width,
+  };
+}
+
+function positionedEdges(parentEdge, positions, orientation) {
+  return [...parentEdge.values()]
+    .map((edge) => ({
+      ...edge,
+      ...(orientation ? { orientation } : {}),
+      from: positions.get(edge.parent),
+      to: positions.get(edge.child),
+    }))
+    .filter((edge) => edge.from && edge.to);
+}
+
+/** Left-to-right levels used for function-transfer and 업무흐름형 pages. */
+function layoutFlowPage({ graph, frame, parentEdge, roots, selected, depth }) {
+  const positions = new Map();
+  const levels = new Map();
+  for (const id of selected) {
+    const level = depth.get(id) ?? 0;
+    if (!levels.has(level)) levels.set(level, []);
+    levels.get(level).push(id);
+  }
+  const maxLevel = Math.max(0, ...levels.keys());
+  const maxRows = Math.max(1, ...levels.values().map((ids) => ids.length));
+  for (const ids of levels.values()) {
+    ids.sort((a, b) => {
+      const left = graph.nodes.get(a);
+      const right = graph.nodes.get(b);
+      return (left?.rank ?? 9) - (right?.rank ?? 9) || left?.name.localeCompare(right?.name, "ko");
+    });
+  }
+  const columnGap = frame.width / Math.max(1, maxLevel + 1);
+  const rowGap = Math.min(64, Math.max(30, (frame.height - 12) / maxRows));
+  for (const [level, ids] of levels.entries()) {
+    ids.forEach((id, row) => {
+      const node = graph.nodes.get(id);
+      if (!node) return;
+      const width = Math.min(154, Math.max(58, columnGap * 0.72));
+      const vertical = width < 86 && node.name.length > 7;
+      const height = vertical ? Math.min(76, Math.max(52, rowGap * 1.7)) : 31;
+      const centerX = frame.left + columnGap * (level + 0.5);
+      const top = frame.top + rowGap * row + Math.max(0, (rowGap - height) / 2);
+      positions.set(id, boxPosition(centerX, top, vertical ? 34 : width, height, {
+        vertical,
+        depth: level,
+        spanLeft: centerX - columnGap / 2,
+        spanWidth: columnGap,
+      }));
+    });
+  }
+  const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
+  return {
+    frame,
+    nodes,
+    edges: positionedEdges(parentEdge, positions, "horizontal"),
+    roots,
+    maxDepth: maxLevel,
+    verticalLeaves: false,
+    labels: [{ text: "기능·이관 흐름", x: frame.left, y: frame.top - 10, align: "start" }],
+  };
+}
+
+/** Existing/change lane layout used by 검토서의 변경 전·후 도표. */
+function layoutChangeLanesPage({ graph, frame, parentEdge, roots, selected, depth }) {
+  const positions = new Map();
+  const rootIds = roots.filter((id) => selected.has(id));
+  const headerWidth = Math.min(180, Math.max(94, frame.width / Math.max(1, rootIds.length) * 0.56));
+  rootIds.forEach((id, index) => {
+    const centerX = rootIds.length === 1
+      ? frame.left + frame.width / 2
+      : frame.left + frame.width * ((index + 0.5) / rootIds.length);
+    const node = graph.nodes.get(id);
+    if (node) positions.set(id, boxPosition(centerX, frame.top, headerWidth, 34, { depth: 0, spanLeft: centerX - headerWidth / 2, spanWidth: headerWidth }));
+  });
+  const body = [...selected]
+    .filter((id) => !rootIds.includes(id))
+    .sort((a, b) => {
+      const left = graph.nodes.get(a);
+      const right = graph.nodes.get(b);
+      return (depth.get(a) ?? 9) - (depth.get(b) ?? 9) || (left?.rank ?? 9) - (right?.rank ?? 9) || left?.name.localeCompare(right?.name, "ko");
+    });
+  const lanes = [
+    body.filter((id) => !graph.nodes.get(id)?.metadata?.change),
+    body.filter((id) => Boolean(graph.nodes.get(id)?.metadata?.change)),
+  ];
+  const laneGap = 20;
+  const laneWidth = (frame.width - laneGap) / 2;
+  const rowGap = Math.min(49, Math.max(31, (frame.height - 67) / Math.max(1, ...lanes.map((lane) => lane.length))));
+  lanes.forEach((lane, laneIndex) => {
+    const left = laneIndex === 0 ? frame.left : frame.left + laneWidth + laneGap;
+    const centerX = left + laneWidth / 2;
+    lane.forEach((id, index) => {
+      const node = graph.nodes.get(id);
+      if (!node) return;
+      const width = Math.min(174, Math.max(66, laneWidth * 0.78));
+      const vertical = width < 102 && node.name.length > 8;
+      const height = vertical ? 76 : 31;
+      positions.set(id, boxPosition(centerX, frame.top + 62 + index * rowGap, vertical ? 34 : width, height, {
+        vertical,
+        depth: depth.get(id) ?? 1,
+        spanLeft: left,
+        spanWidth: laneWidth,
+      }));
+    });
+  });
+  const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
+  return {
+    frame,
+    nodes,
+    edges: positionedEdges(parentEdge, positions),
+    roots,
+    maxDepth: Math.max(0, ...depth.values()),
+    verticalLeaves: false,
+    labels: [
+      { text: "기존·유지", x: frame.left + laneWidth / 2, y: frame.top + 51, align: "middle" },
+      { text: "신설·폐지·명칭변경·이체", x: frame.left + laneWidth + laneGap + laneWidth / 2, y: frame.top + 51, align: "middle" },
+    ],
+  };
+}
+
+/** Card catalogue for long bureau/department lists where connectors obscure text. */
+function layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, portrait }) {
+  const positions = new Map();
+  const rootIds = roots.filter((id) => selected.has(id));
+  rootIds.forEach((id, index) => {
+    const node = graph.nodes.get(id);
+    if (!node) return;
+    const centerX = rootIds.length === 1
+      ? frame.left + frame.width / 2
+      : frame.left + frame.width * ((index + 0.5) / rootIds.length);
+    positions.set(id, boxPosition(centerX, frame.top, Math.min(170, Math.max(90, frame.width / Math.max(1, rootIds.length) * 0.6)), 34, { depth: 0 }));
+  });
+  const body = [...selected]
+    .filter((id) => !rootIds.includes(id))
+    .sort((a, b) => {
+      const left = graph.nodes.get(a);
+      const right = graph.nodes.get(b);
+      return (depth.get(a) ?? 9) - (depth.get(b) ?? 9) || (left?.rank ?? 9) - (right?.rank ?? 9) || left?.name.localeCompare(right?.name, "ko");
+    });
+  const columns = Math.max(1, Math.min(portrait ? 2 : 4, body.length || 1));
+  const columnWidth = frame.width / columns;
+  const rowGap = Math.min(47, Math.max(31, (frame.height - 66) / Math.max(1, Math.ceil(body.length / columns))));
+  body.forEach((id, index) => {
+    const node = graph.nodes.get(id);
+    if (!node) return;
+    const column = index % columns;
+    const row = Math.floor(index / columns);
+    const centerX = frame.left + columnWidth * (column + 0.5);
+    const width = Math.min(176, Math.max(72, columnWidth * 0.82));
+    const vertical = width < 98 && node.name.length > 8;
+    positions.set(id, boxPosition(centerX, frame.top + 61 + row * rowGap, vertical ? 34 : width, vertical ? 76 : 31, {
+      vertical,
+      depth: depth.get(id) ?? 1,
+      spanLeft: frame.left + column * columnWidth,
+      spanWidth: columnWidth,
+    }));
+  });
+  const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
+  return {
+    frame,
+    nodes,
+    edges: [],
+    roots,
+    maxDepth: Math.max(0, ...depth.values()),
+    verticalLeaves: false,
+    edgeMode: "none",
+    labels: [{ text: "부서 카드 목록", x: frame.left, y: frame.top - 10, align: "start" }],
+  };
+}
+
+/** Main tree plus an explicit bottom strip for affiliated institutions. */
+function layoutAffiliateStripPage({ graph, page, pageSize, frame, parentEdge, children, roots, selected, depth }) {
+  const affiliateIds = [...selected].filter((id) => graph.nodes.get(id)?.kind === "affiliated");
+  if (!affiliateIds.length) {
+    return layoutPage(graph, { ...page, layoutStyle: "horizontal-bus", nodeIds: [...selected] }, { pageSize });
+  }
+  const mainIds = [...selected].filter((id) => !affiliateIds.includes(id));
+  const stripHeight = 70;
+  const main = mainIds.length
+    ? layoutPage(
+        graph,
+        { ...page, nodeIds: mainIds, layoutStyle: "horizontal-bus" },
+        { pageSize, left: frame.left, top: frame.top, width: frame.width, height: Math.max(180, frame.height - stripHeight) },
+      )
+    : { frame: { ...frame, height: 0 }, nodes: [], edges: [], roots: [], maxDepth: 0, verticalLeaves: false };
+  const positions = new Map(main.nodes.map(({ node, position }) => [node.id, position]));
+  const stripTop = frame.top + frame.height - 35;
+  const gap = 10;
+  const boxWidth = Math.min(156, Math.max(82, (frame.width - gap * Math.max(0, affiliateIds.length - 1)) / Math.max(1, affiliateIds.length)));
+  affiliateIds.forEach((id, index) => {
+    const node = graph.nodes.get(id);
+    if (!node) return;
+    const centerX = frame.left + boxWidth / 2 + index * (boxWidth + gap);
+    positions.set(id, boxPosition(centerX, stripTop, boxWidth, 30, { depth: 1 }));
+  });
+  const edges = [...main.edges];
+  for (const edge of parentEdge.values()) {
+    if (!affiliateIds.includes(edge.child)) continue;
+    const from = positions.get(edge.parent);
+    const to = positions.get(edge.child);
+    if (from && to) edges.push({ ...edge, from, to });
+  }
+  const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
+  return {
+    frame,
+    nodes,
+    edges,
+    roots,
+    maxDepth: main.maxDepth,
+    verticalLeaves: main.verticalLeaves,
+    labels: [{ text: "소속기관·책임운영기관", x: frame.left, y: stripTop - 9, align: "start" }],
+  };
 }
 
 /**

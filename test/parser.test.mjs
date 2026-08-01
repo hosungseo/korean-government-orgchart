@@ -88,6 +88,29 @@ test("같은 그래프를 여러 시각 유형으로 한 번에 계획한다", (
   }
 });
 
+test("검토서형 추가 프리셋은 흐름·변경·소속기관·카드 목록을 지원한다", () => {
+  const graph = parseOrganizationTexts([text]);
+  assert.equal(parseLayoutStyles("all").length, 8);
+  const pages = planLayoutVariants(graph, {
+    layouts: "flow,change-lanes,affiliate-strip,catalog",
+    paper: "a4-landscape",
+    maxNodes: 50,
+  });
+  assert.deepEqual([...new Set(pages.map((page) => page.layoutStyle))], [
+    "flow",
+    "change-lanes",
+    "affiliate-strip",
+    "catalog",
+  ]);
+  for (const page of pages) {
+    const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
+    assert.ok(layout.nodes.length > 0, `${page.layoutStyle} 노드가 있어야 함`);
+    assert.ok(layout.edges.every((edge) => edge.from && edge.to), `${page.layoutStyle} 연결선 좌표가 있어야 함`);
+    if (page.layoutStyle === "flow" && layout.edges.length) assert.ok(layout.edges.some((edge) => edge.orientation === "horizontal"));
+    if (page.layoutStyle === "catalog") assert.equal(layout.edgeMode, "none");
+  }
+});
+
 test("focus 옵션은 한 실·국의 한쪽 조직도만 남긴다", () => {
   const graph = parseOrganizationTexts([text]);
   const pages = planPages(graph, { paper: "a4-half", mode: "vertical", focus: "디지털정부실" });

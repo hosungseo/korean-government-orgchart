@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
       - name: Unit tests
         run: npm test
 
@@ -43,7 +46,7 @@ jobs:
         run: |
           node src/cli.mjs batch-build \
             --cases examples/audit-cases.json \
-            --outputs svg,json,audit \
+            --outputs svg,json,audit,pptx \
             --out-dir /tmp/orgchart-batch-build \
             --format json \
             --out /tmp/orgchart-batch-build-manifest.json
@@ -54,7 +57,7 @@ jobs:
             const failed = result.cases.find((item) => item.status !== "built");
             if (failed) throw new Error(`batch build failed: ${failed.case?.id || failed.error}`);
             for (const item of result.cases) {
-              for (const key of ["svg", "json", "audit"]) {
+              for (const key of ["svg", "json", "audit", "pptx"]) {
                 if (!item.outputs[key] || !fs.existsSync(item.outputs[key])) {
                   throw new Error(`missing ${key} output for ${item.summary.id}`);
                 }

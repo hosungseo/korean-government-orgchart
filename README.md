@@ -51,6 +51,7 @@
 ```bash
 git clone https://github.com/hosungseo/korean-government-orgchart.git
 cd korean-government-orgchart
+npm ci
 npm test
 npm run demo
 ```
@@ -254,7 +255,7 @@ node src/cli.mjs batch-audit \
 
 출력 표의 핵심 열은 `높은 확인`, `소관 후보`, `배치 문제`, `별표`입니다. `--strict`를 붙이면 오류 또는 수정 필요 케이스가 있을 때 종료코드 2로 끝나므로, 기관 전체 회귀 테스트나 GitHub Actions 품질 게이트로 사용할 수 있습니다.
 
-감사 후 바로 산출물까지 만들려면 같은 케이스 파일을 `batch-build`에 넘깁니다. 기본 출력은 의존성 없이 만들 수 있는 `svg,json,audit`이고, 편집 가능한 PPTX까지 필요하면 `--outputs svg,json,audit,pptx` 또는 `--outputs all`을 지정합니다.
+감사 후 바로 산출물까지 만들려면 같은 케이스 파일을 `batch-build`에 넘깁니다. 기본 출력은 `svg,json,audit`이고, 편집 가능한 PPTX까지 필요하면 `--outputs svg,json,audit,pptx` 또는 `--outputs all`을 지정합니다. PPTX는 공개 패키지 `pptxgenjs` 기반 fallback으로 생성되며, Codex Artifact Tool 런타임이 있는 환경에서는 기존 고급 렌더러를 우선 사용합니다.
 
 ```bash
 node src/cli.mjs batch-build \

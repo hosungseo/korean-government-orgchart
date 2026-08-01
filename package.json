@@ -10,5 +10,8 @@
   "scripts": {
     "test": "node --test",
     "demo": "node src/cli.mjs build --input examples/sample-law.txt --out outputs/sample-orgchart.pptx --svg outputs/sample-orgchart.svg --json outputs/sample-orgchart.json --preview-dir outputs/sample-preview"
+  },
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
   }
 }

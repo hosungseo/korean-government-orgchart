@@ -18,6 +18,8 @@ export function enrichGraphWithLawMap(graph, departmentMap, { asOf, source } = {
     matchedInstitution: institutionKey || null,
     matchedDepartments: 0,
     unmatchedDepartments: [],
+    ambiguousDepartments: [],
+    excludedScopedNodes: 0,
     lawCount: 0,
   };
   graph.meta.lawMap = mapMeta;
@@ -29,20 +31,39 @@ export function enrichGraphWithLawMap(graph, departmentMap, { asOf, source } = {
 
   const nodeIndex = new Map();
   for (const node of graph.nodes.values()) {
+    if (!isLawMapEligibleNode(node)) {
+      if (node.metadata?.scoped || node.metadata?.parentTaxOffice) mapMeta.excludedScopedNodes += 1;
+      continue;
+    }
     const key = normalizeDepartmentName(node.name);
-    if (key) nodeIndex.set(key, node);
+    if (!key) continue;
+    if (!nodeIndex.has(key)) nodeIndex.set(key, []);
+    nodeIndex.get(key).push(node);
   }
 
   for (const [departmentName, record] of Object.entries(departmentMap[institutionKey] || {})) {
-    const node = nodeIndex.get(normalizeDepartmentName(departmentName));
+    const candidates = nodeIndex.get(normalizeDepartmentName(departmentName)) || [];
     const laws = Array.isArray(record?.laws) ? record.laws : [];
-    if (!node) {
+    if (!candidates.length) {
       mapMeta.unmatchedDepartments.push({
         name: departmentName,
         lawCount: laws.length,
       });
       continue;
     }
+    if (candidates.length > 1) {
+      mapMeta.ambiguousDepartments.push({
+        name: departmentName,
+        lawCount: laws.length,
+        candidates: candidates.map((node) => ({
+          id: node.id,
+          name: node.name,
+          kind: node.kind,
+        })),
+      });
+      continue;
+    }
+    const [node] = candidates;
     node.metadata.lawResponsibility = {
       departmentKey: record?.부서키 || null,
       departmentName,
@@ -94,6 +115,12 @@ export function buildLawAppendixPages(graph, { entriesPerPage = 10, representati
 function findInstitutionKey(map, institution) {
   const target = normalizeDepartmentName(institution);
   return Object.keys(map).find((key) => normalizeDepartmentName(key) === target) || null;
+}
+
+function isLawMapEligibleNode(node) {
+  if (node.metadata?.scoped || node.metadata?.parentTaxOffice) return false;
+  if (node.metadata?.countsTowardStructure === false && node.kind === "assistant") return false;
+  return true;
 }
 
 function normalizeDepartmentName(value) {

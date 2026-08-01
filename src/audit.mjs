@@ -72,6 +72,18 @@ export function formatAuditMarkdown(report) {
     lines.push(`- 매칭 기관: ${report.lawMap.matchedInstitution || "없음"}`);
     lines.push(`- 매칭 부서: ${report.lawMap.matchedDepartments}`);
     lines.push(`- 연결 법령: ${report.lawMap.lawCount}`);
+    if (report.lawMap.excludedScopedNodes) {
+      lines.push(`- scoped 하위기관 내부조직 제외: ${report.lawMap.excludedScopedNodes}`);
+    }
+    if (report.lawMap.ambiguousDepartments?.length) {
+      lines.push("- 중복 후보 부서:");
+      for (const item of report.lawMap.ambiguousDepartments.slice(0, 20)) {
+        lines.push(`  - ${item.name} (${item.lawCount}건, 후보 ${item.candidates.length}개)`);
+      }
+      if (report.lawMap.ambiguousDepartments.length > 20) {
+        lines.push(`  - 외 ${report.lawMap.ambiguousDepartments.length - 20}개`);
+      }
+    }
     if (report.lawMap.unmatchedDepartments?.length) {
       lines.push("- 미매칭 부서:");
       for (const item of report.lawMap.unmatchedDepartments.slice(0, 20)) {
@@ -158,6 +170,13 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates) {
       priority: "medium",
       topic: "law-map",
       message: `소관법령 지도에서 ${graph.meta.lawMap.unmatchedDepartments.length}개 부서가 조직 노드와 매칭되지 않았습니다.`,
+    });
+  }
+  if (graph.meta.lawMap?.ambiguousDepartments?.length) {
+    actions.push({
+      priority: "medium",
+      topic: "law-map",
+      message: `소관법령 지도에서 ${graph.meta.lawMap.ambiguousDepartments.length}개 부서가 같은 이름의 여러 조직 후보와 충돌했습니다.`,
     });
   }
   for (const item of graph.meta.spanDiagnostics || []) {

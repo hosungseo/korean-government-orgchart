@@ -68,3 +68,29 @@ test("복수 보좌기관 후보는 중복 지시문 대신 대조 필요 묶음
   assert.equal(report.jurisdictionCandidates[0].confidence, "multiple-advisors-need-range-crosswalk");
   assert.match(formatAuditMarkdown(report), /직제 호 번호 범위와 시행규칙 과 분장사무/);
 });
+
+test("감사 리포트는 직제 호 번호 범위 대조 결과를 확정과 미확정으로 나눈다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실을 둔다.
+시험실장 밑에 지역정책관 및 산업정책관을 둔다.
+시험실에 지역총괄과ㆍ조정과를 둔다.
+지역정책관은 직제 제10조제3항제1호부터 제4호까지의 사항에 관하여 시험실장을 보좌한다.
+산업정책관은 직제 제10조제3항제5호부터 제9호까지의 사항에 관하여 시험실장을 보좌한다.
+① 지역총괄과장은 직제 제10조제3항제1호부터 제2호까지의 사항을 분장한다.
+② 조정과장은 직제 제10조제3항제4호 및 제5호의 사항을 분장한다.
+`,
+  ]);
+  const report = buildAuditReport(graph, planPages(graph, { paper: "a4-half", layout: "vertical" }));
+  const markdown = formatAuditMarkdown(report);
+
+  assert.equal(report.jurisdictionCrosswalks.confirmed.length, 1);
+  assert.equal(report.jurisdictionCrosswalks.confirmed[0].child, "지역총괄과");
+  assert.equal(report.jurisdictionCrosswalks.unresolved.length, 1);
+  assert.equal(report.jurisdictionCrosswalks.unresolved[0].department, "조정과");
+  assert.equal(report.reviewActions.some((action) => action.topic === "jurisdiction-range"), true);
+  assert.match(markdown, /직제 호 번호 소관 대조/);
+  assert.match(markdown, /자동 확정:[\s\S]*지역정책관 > 지역총괄과/);
+  assert.match(markdown, /확인 필요:[\s\S]*조정과/);
+});

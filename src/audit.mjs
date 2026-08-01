@@ -8,7 +8,8 @@ const DEPARTMENT = /(?:과|팀|담당관)$/;
 export function buildAuditReport(graph, pages = [], options = {}) {
   const pageDiagnostics = options.layout === false ? [] : collectPageDiagnostics(graph, pages);
   const jurisdictionCandidates = suggestJurisdictionCandidates(graph);
-  const reviewActions = collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates);
+  const jurisdictionCrosswalks = collectJurisdictionCrosswalks(graph);
+  const reviewActions = collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates, jurisdictionCrosswalks);
   const annexRequirements = (graph.meta.annexRequirements || []).map((item) => ({
     ...item,
     matchedAnnex: findAnnex(graph, item.annex, { source: item.source }),
@@ -43,6 +44,7 @@ export function buildAuditReport(graph, pages = [], options = {}) {
     temporaryHeadcounts: graph.meta.temporaryHeadcounts || [],
     jurisdictionRelations: graph.meta.jurisdictionRelations || [],
     jurisdictionCandidates,
+    jurisdictionCrosswalks,
     lawMap: graph.meta.lawMap || null,
     spanDiagnostics: graph.meta.spanDiagnostics || [],
     layoutDiagnostics: pageDiagnostics,
@@ -64,6 +66,7 @@ export function formatAuditMarkdown(report) {
   appendSection(lines, "별표 인벤토리", report.annexes, formatAnnexInventory);
   appendSection(lines, "별표 조직 반영", report.annexOrganizations, formatAnnexOrganization);
   appendSection(lines, "한시정원", report.temporaryHeadcounts, (item) => `- ${item.target}: ${item.expires}까지 (${item.source})`);
+  appendJurisdictionCrosswalkSection(lines, report.jurisdictionCrosswalks);
   appendSection(lines, "정책관·관 소관 후보", report.jurisdictionCandidates, formatJurisdictionCandidate);
   appendSection(lines, "관리폭 진단", report.spanDiagnostics, (item) => `- ${item.node}: ${item.directUnits}개 · ${item.message}`);
 
@@ -124,7 +127,7 @@ function collectPageDiagnostics(graph, pages) {
   });
 }
 
-function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates) {
+function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates, jurisdictionCrosswalks = {}) {
   const actions = [];
   for (const message of graph.meta.validation || []) {
     actions.push({ priority: "high", topic: "validation", message });
@@ -172,6 +175,13 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates) {
       message: `${item.parent} 밑 ${item.advisor}의 과 소관을 시행규칙 분장사무로 확인하세요. 후보 ${item.departments.length}개.`,
     });
   }
+  for (const item of jurisdictionCrosswalks.unresolved || []) {
+    actions.push({
+      priority: "medium",
+      topic: "jurisdiction-range",
+      message: `${item.department}의 ${item.reference} 소관이 단일 보좌기관 범위로 확정되지 않았습니다.`,
+    });
+  }
   if (graph.meta.lawMap?.unmatchedDepartments?.length) {
     actions.push({
       priority: "medium",
@@ -197,6 +207,27 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates) {
     actions.push({ priority: "low", topic: "warning", message });
   }
   return actions;
+}
+
+function collectJurisdictionCrosswalks(graph) {
+  const rangeRelations = (graph.meta.jurisdictionRelations || []).filter(
+    (item) => item.evidence === "duty-item-range",
+  );
+  const confirmedKeys = new Set(rangeRelations.map((item) => `${item.child}:${item.reference || ""}`));
+  const unresolved = [];
+  for (const item of graph.meta.jurisdictionRangeCandidates || []) {
+    const key = `${item.department}:${item.reference || ""}`;
+    if (confirmedKeys.has(key)) continue;
+    const node = graph.nodeByName(item.department);
+    const assigned = node?.metadata?.jurisdiction;
+    if (assigned && (!item.advisors?.length || item.advisors.includes(assigned.parent))) continue;
+    unresolved.push(item);
+  }
+  return {
+    hints: graph.meta.jurisdictionRangeHints || [],
+    confirmed: rangeRelations,
+    unresolved,
+  };
 }
 
 function formatLayoutStatus(diagnostics) {
@@ -259,6 +290,26 @@ function appendSection(lines, title, items, formatter) {
   if (!items?.length) return;
   lines.push(`## ${title}`);
   for (const item of items) lines.push(formatter(item));
+  lines.push("");
+}
+
+function appendJurisdictionCrosswalkSection(lines, crosswalks) {
+  if (!crosswalks?.confirmed?.length && !crosswalks?.unresolved?.length) return;
+  lines.push("## 직제 호 번호 소관 대조");
+  if (crosswalks.confirmed?.length) {
+    lines.push("- 자동 확정:");
+    for (const item of crosswalks.confirmed) {
+      const reference = item.reference ? ` · ${item.reference}` : "";
+      lines.push(`  - ${item.parent} > ${item.child}${reference} (${item.source})`);
+    }
+  }
+  if (crosswalks.unresolved?.length) {
+    lines.push("- 확인 필요:");
+    for (const item of crosswalks.unresolved) {
+      const advisors = item.advisors?.length ? item.advisors.join("ㆍ") : "일치 범위 없음";
+      lines.push(`  - ${item.department}: ${item.reference} · ${advisors} (${item.source})`);
+    }
+  }
   lines.push("");
 }
 

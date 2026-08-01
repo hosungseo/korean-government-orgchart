@@ -29,3 +29,21 @@ test("기관명 목록에서 batch-audit 케이스 JSON을 만든다", () => {
     layout: "best",
   });
 });
+
+test("기관명 케이스 생성은 여러 레이아웃 지정도 보존한다", () => {
+  const result = buildAuditCaseSpecs({
+    institutions: "행정안전부",
+    date: "2026-07-24",
+    paper: "a4-landscape",
+    layouts: "horizontal,two-column,catalog",
+  });
+
+  assert.deepEqual(result.cases[0], {
+    id: "행정안전부-2026-07-24",
+    institution: "행정안전부",
+    date: "2026-07-24",
+    view: "operational",
+    paper: "a4-landscape",
+    layouts: "horizontal,two-column,catalog",
+  });
+});

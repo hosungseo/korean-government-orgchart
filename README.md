@@ -270,6 +270,19 @@ node src/cli.mjs batch-build \
 생성 매니페스트도 `선택유형`, 페이지 수, 배치 문제 수, 파일명, 통합 PPTX deck 경로를 함께 기록합니다. 통합 deck은 모든 성공 케이스의 페이지를 순서대로 묶습니다. PowerPoint deck 하나는 슬라이드 크기가 하나라서 `a4-half`와 `a4-landscape`처럼 용지 크기가 섞이면 `review-a4-half.pptx`, `review-a4-landscape.pptx`처럼 자동 분리합니다. 이 흐름은 `make-cases → batch-audit → batch-build`로 이어지므로, 기관 목록만 있으면 검토용 품질표와 실제 조직도 파일을 같은 해석 경로에서 반복 생성할 수 있습니다.
 동일 실행 안에서 같은 법령명·기준일·인증값 조합은 한 번만 조회하도록 캐시하므로, 같은 기관을 여러 레이아웃으로 반복 검사해도 법제처 API 호출이 중복되지 않습니다. `--source-dir`을 지정하면 조회 원문과 함께 `.law-cache/*.json`도 저장하고 다음 실행에서 같은 법령명·기준일을 API 없이 재사용합니다.
 
+검토자가 매번 세 명령을 나누어 실행하지 않게 하려면 `review-pack`을 사용합니다. 기관명 목록이나 기존 `cases.json`을 넣으면 케이스 파일, 감사 리포트, 산출물 매니페스트, 케이스별 SVG/JSON/PPTX, 통합 PPTX deck을 한 폴더에 한 번에 만듭니다.
+
+```bash
+node src/cli.mjs review-pack \
+  --institutions "행정안전부,문화체육관광부,공정거래위원회" \
+  --date 2026-07-24 \
+  --out-dir outputs/review-pack \
+  --source-dir work/law-sources \
+  --outputs svg,json,audit,pptx,deck
+```
+
+`outputs/review-pack/`에는 `cases.json`, `audit.md`, `audit.json`, `manifest.md`, `manifest.json`이 남고, 실제 조직도 파일은 기본적으로 `outputs/review-pack/artifacts/` 아래에 생성됩니다. 법제처 조회 원문을 이미 모아 둔 경우에는 `--cases examples/audit-cases.json`처럼 케이스 파일을 넘기면 같은 검토팩 구조로 재생성할 수 있습니다. `--strict`를 붙이면 감사상 오류·수정 필요 또는 산출물 생성 오류가 있을 때 종료코드 2로 실패합니다.
+
 ### 작도 품질 규칙
 
 - `본부`는 하부조직 계선으로 연한 파란 상자에 `(본부)`를 붙이고, 소속기관은 설치 문형의 유형에 따라 초록 계열로 구분합니다. `책임운영기관`은 기존의 `(책)` 표식을 유지합니다.
@@ -297,13 +310,14 @@ src/audit.mjs         파싱·소관·별표·배치 품질 감사 리포트
 src/batch-audit.mjs   여러 기관·기준일·레이아웃을 반복 감사하는 품질 매트릭스
 src/batch-build.mjs   여러 케이스의 SVG·JSON·PPTX·감사리포트 일괄 산출
 src/case-scaffold.mjs 기관명 목록에서 batch-audit/build 케이스 생성
+src/review-pack.mjs   기관 목록·케이스 파일에서 감사표와 산출물 묶음을 한 번에 생성
 src/parser.mjs        직제·시행규칙 문언 파싱
 src/model.mjs         조직 그래프·법적 관계·운영형 투영
 src/law-map.mjs       과 단위 소관법령 지도 병합
 src/layout.mjs        작도 프리셋·한 장형·분할형 페이지 계획
 src/render-pptx.mjs   편집 가능한 PowerPoint 도형 출력
 src/render-svg.mjs    SVG 검토 출력
-src/cli.mjs           build/from-law/fetch/inspect 명령
+src/cli.mjs           build/from-law/fetch/inspect/audit/batch/review-pack 명령
 docs/index.html       GitHub Pages 인터랙티브 데모
 ```
 

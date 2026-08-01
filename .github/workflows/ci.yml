@@ -79,3 +79,33 @@ jobs:
               }
             }
           '
+
+      - name: Sample review pack gate
+        run: |
+          node src/cli.mjs review-pack \
+            --cases examples/audit-cases.json \
+            --out-dir /tmp/orgchart-review-pack \
+            --outputs svg,json,audit,deck \
+            --strict > /tmp/orgchart-review-pack-summary.json
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const summary = JSON.parse(fs.readFileSync("/tmp/orgchart-review-pack-summary.json", "utf8"));
+            if (summary.cases !== 2) throw new Error(`expected 2 review cases, got ${summary.cases}`);
+            for (const key of ["cases", "audit", "auditJson", "manifest", "manifestJson"]) {
+              const filePath = summary.files?.[key];
+              if (!filePath || !fs.existsSync(filePath)) throw new Error(`missing review-pack file: ${key}`);
+            }
+            const manifest = JSON.parse(fs.readFileSync(summary.files.manifestJson, "utf8"));
+            if (manifest.total !== 2) throw new Error(`expected 2 built cases, got ${manifest.total}`);
+            if (manifest.deckError) throw new Error(`review-pack deck failed: ${manifest.deckError}`);
+            if (!Array.isArray(manifest.decks) || manifest.decks.length !== 2) {
+              throw new Error(`expected 2 split review decks, got ${manifest.decks?.length || 0}`);
+            }
+            for (const deck of manifest.decks) {
+              if (!deck.path || !fs.existsSync(deck.path)) {
+                throw new Error(`missing review deck output for ${deck.paper}`);
+              }
+            }
+            const failed = manifest.cases.find((item) => item.status !== "built");
+            if (failed) throw new Error(`review-pack build failed: ${failed.case?.id || failed.error}`);
+          '

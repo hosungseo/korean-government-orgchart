@@ -14,6 +14,7 @@ import { planBestPages, planLayoutVariants, planPages } from "./layout.mjs";
 import { projectOperationalView, summarizeStructure } from "./model.mjs";
 import { parseOrganizationTexts } from "./parser.mjs";
 import { renderSvg } from "./render-svg.mjs";
+import { runReviewPack } from "./review-pack.mjs";
 import { ensureParent, jsonReplacer, parseArgs, readInputs, writeText } from "./utils.mjs";
 
 const [command = "help", ...rest] = process.argv.slice(2);
@@ -27,6 +28,7 @@ try {
   else if (command === "audit") await auditCommand(args);
   else if (command === "batch-audit") await batchAuditCommand(args);
   else if (command === "batch-build") await batchBuildCommand(args);
+  else if (command === "review-pack") await reviewPackCommand(args);
   else if (command === "make-cases") await makeCasesCommand(args);
   else printHelp();
 } catch (error) {
@@ -207,6 +209,7 @@ async function makeCasesCommand(args) {
     view: stringArg(args, "view") || "operational",
     paper: stringArg(args, "paper") || "a4-half",
     layout: stringArg(args, "layout") || "best",
+    layouts: stringArg(args, "layouts"),
     focus: stringArg(args, "focus"),
     maxNodes: args["max-nodes"] ? Number(args["max-nodes"]) : undefined,
     lawMap: stringArg(args, "law-map"),
@@ -218,6 +221,28 @@ async function makeCasesCommand(args) {
     console.log(`배치 케이스 저장: ${path.resolve(args.out)}`);
   } else {
     console.log(output);
+  }
+}
+
+async function reviewPackCommand(args) {
+  const result = await runReviewPack(args);
+  const summary = {
+    outDir: result.outDir,
+    artifactDir: result.artifactDir,
+    cases: result.caseCount,
+    auditStatusCounts: result.audit.statusCounts,
+    buildStatusCounts: result.build.statusCounts,
+    deck: result.build.deck,
+    decks: result.build.decks,
+    files: result.files,
+  };
+  console.log(JSON.stringify(summary, jsonReplacer, 2));
+  if (args.strict === true) {
+    const auditFailing = result.audit.cases.some((item) =>
+      ["error", "needs-correction"].includes(item.summary.status),
+    );
+    const buildFailing = result.build.deckError || result.build.cases.some((item) => item.status === "error");
+    if (auditFailing || buildFailing) process.exitCode = 2;
   }
 }
 
@@ -365,6 +390,12 @@ function printHelp() {
     --layout best \\
     --svg outputs/산업통상부.svg
 
+  node src/cli.mjs review-pack \\
+    --institutions "행정안전부,문화체육관광부,공정거래위원회" \\
+    --date 2026-07-24 \\
+    --out-dir outputs/review-pack \\
+    --source-dir work/law-sources
+
 명령
   build      로컬 텍스트를 파싱하여 PPTX/SVG/JSON 생성
   from-law   법제처 OPEN API에서 기준일 연혁을 찾아 바로 생성
@@ -373,6 +404,7 @@ function printHelp() {
   audit      파싱·소관·별표·배치 품질 감사 리포트 출력
   batch-audit 여러 기관·기준일·레이아웃을 한 번에 감사하여 품질 매트릭스 출력
   batch-build 여러 기관·기준일·레이아웃의 SVG/JSON/PPTX/감사리포트·통합 deck 일괄 생성
+  review-pack 기관 목록 또는 cases.json에서 감사 리포트·산출물·통합 deck을 한 번에 생성
   make-cases 기관명 목록에서 batch-audit 케이스 JSON 생성
 
 주요 옵션
@@ -393,7 +425,8 @@ function printHelp() {
   --out-dir <dir>           batch-build 산출물 폴더
   --outputs svg,json,audit,pptx,deck|all  batch-build 산출 형식(all은 케이스별 svg/json/audit/pptx)
   --deck <file.pptx>        batch-build 통합 PPTX deck 경로(--outputs deck 없이도 활성화)
-  --institutions "A,B"      make-cases 기관명 목록(쉼표 또는 줄바꿈)
+  --artifact-dir <dir>      review-pack 내부 산출물 폴더(기본: <out-dir>/artifacts)
+  --institutions "A,B"      make-cases/review-pack 기관명 목록(쉼표 또는 줄바꿈)
   --strict                  batch-audit에서 오류·수정 필요가 있으면 종료코드 2
 `);
 }

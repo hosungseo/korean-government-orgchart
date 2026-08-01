@@ -263,6 +263,8 @@ export async function loadBatchContext(args) {
     lawMapDate: stringArg(args, "law-map-date"),
     lawAppendix: args["law-appendix"] === true,
     lawCounts: args["law-counts"] === true,
+    lawFetchCache: args.lawFetchCache || new Map(),
+    fetchLawAtDate: args.fetchLawAtDate || fetchLawAtDate,
   };
 }
 
@@ -348,7 +350,7 @@ export async function graphFromCase(caseSpec, context) {
 async function fetchExplicitLaws(lawNames, date, caseSpec, context) {
   const fetched = [];
   for (const lawName of lawNames) {
-    fetched.push(await fetchLawAtDate(lawName, date, { oc: caseSpec.oc || context.oc }));
+    fetched.push(await fetchLawCached(lawName, date, caseSpec, context));
   }
   return fetched;
 }
@@ -368,12 +370,21 @@ async function fetchFirstLawCandidate(group, date, caseSpec, context) {
   const errors = [];
   for (const lawName of group.candidates) {
     try {
-      return await fetchLawAtDate(lawName, date, { oc: caseSpec.oc || context.oc });
+      return await fetchLawCached(lawName, date, caseSpec, context);
     } catch (error) {
       errors.push(`${lawName}: ${error.message}`);
     }
   }
   throw new Error(`${caseSpec.id}: ${group.label} 후보를 찾지 못했습니다. 시도한 제명: ${errors.join(" / ")}`);
+}
+
+async function fetchLawCached(lawName, date, caseSpec, context) {
+  const oc = caseSpec.oc || context.oc || process.env.LAW_API_OC || "test";
+  const key = `${lawName}\u0000${date}\u0000${oc}`;
+  if (!context.lawFetchCache.has(key)) {
+    context.lawFetchCache.set(key, context.fetchLawAtDate(lawName, date, { oc }));
+  }
+  return context.lawFetchCache.get(key);
 }
 
 async function localTextsFromCase(caseSpec, baseDir) {

@@ -149,3 +149,38 @@ test("배치 감사는 케이스 파일 기준 상대경로 입력을 읽는다"
   assert.deepEqual(result.cases[0].summary.layoutSelection.selected, ["vertical-stack"]);
   assert.notEqual(result.cases[0].summary.status, "error");
 });
+
+test("배치 감사는 같은 실행 안에서 동일 법령 조회를 캐시한다", async () => {
+  const calls = [];
+  const fetchLawAtDate = async (lawName, requestedDate) => {
+    calls.push(`${lawName}:${requestedDate}`);
+    return {
+      lawName,
+      requestedDate,
+      effectiveDate: requestedDate.replaceAll("-", ""),
+      mst: lawName,
+      sourceUrl: "https://example.test/law",
+      annexes: [],
+      text: `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실을 둔다.
+시험실에 정책과 및 지원과를 둔다.
+`,
+    };
+  };
+
+  const result = await runBatchAudit({
+    caseSpecs: [
+      { id: "a", institution: "시험부", date: "2026-07-24", layout: "best" },
+      { id: "b", institution: "시험부", date: "2026-07-24", layout: "best" },
+    ],
+    fetchLawAtDate,
+  });
+
+  assert.equal(result.total, 2);
+  assert.equal(calls.length, 2);
+  assert.deepEqual(calls, [
+    "시험부와 그 소속기관 직제:2026-07-24",
+    "시험부와 그 소속기관 직제 시행규칙:2026-07-24",
+  ]);
+});

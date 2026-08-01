@@ -163,7 +163,7 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates, ju
       actions.push({
         priority: "low",
         topic: "layout-quality",
-        message: `${page.pageNumber}쪽 ${page.subtitle}에서 간격·정렬 다듬기 후보 ${page.diagnostics.qualityIssues.length}건이 있습니다.`,
+        message: `${page.pageNumber}쪽 ${page.subtitle}에서 간격·정렬·교차·균형 다듬기 후보 ${page.diagnostics.qualityIssues.length}건이 있습니다.`,
       });
     }
   }
@@ -276,7 +276,7 @@ function collectLayoutRecommendations(pageDiagnostics) {
         layoutStyle: page.layoutStyle,
         paper: page.paper,
         issue: "layout-polish",
-        message: `${prefix}: 상자 간격·중심축이 어색할 수 있습니다(${reasons.join(", ") || "원인 미상"}). --layout best가 다른 후보를 고르도록 두거나, 같은 페이지 안 노드 수를 줄여 균일한 간격을 확보하세요.`,
+        message: `${prefix}: 상자 간격·중심축·연결선 교차·컬럼 균형이 어색할 수 있습니다(${reasons.join(", ") || "원인 미상"}). --layout best가 다른 후보를 고르도록 두거나, 같은 페이지 안 노드 수를 줄여 균일한 간격을 확보하세요.`,
       });
     }
   }

@@ -213,6 +213,8 @@ export function scoreLayoutPages(graph, pages) {
     edgeIssues: 0,
     spacingIssues: 0,
     alignmentIssues: 0,
+    crossingIssues: 0,
+    balanceIssues: 0,
     qualityIssues: 0,
     totalIssues: 0,
   };
@@ -223,6 +225,8 @@ export function scoreLayoutPages(graph, pages) {
     totals.edgeIssues += layout.diagnostics?.edgeIssues?.length || 0;
     totals.spacingIssues += layout.diagnostics?.spacingIssues?.length || 0;
     totals.alignmentIssues += layout.diagnostics?.alignmentIssues?.length || 0;
+    totals.crossingIssues += layout.diagnostics?.crossingIssues?.length || 0;
+    totals.balanceIssues += layout.diagnostics?.balanceIssues?.length || 0;
     totals.qualityIssues += layout.diagnostics?.qualityIssues?.length || 0;
   }
   totals.totalIssues = totals.overflow + totals.overlaps + totals.edgeIssues;
@@ -794,6 +798,7 @@ export function diagnoseLayout(
     minimumSiblingGap = 4,
     maximumSiblingGapRatio = 3.2,
     maximumAlignmentOffset = 28,
+    maximumColumnImbalance = 86,
   } = {},
 ) {
   const frame = layout?.frame;
@@ -806,6 +811,8 @@ export function diagnoseLayout(
       edgeIssues: [],
       spacingIssues: [],
       alignmentIssues: [],
+      crossingIssues: [],
+      balanceIssues: [],
       qualityIssues: [],
     };
   }
@@ -865,7 +872,15 @@ export function diagnoseLayout(
     nodeNames,
     maximumAlignmentOffset,
   });
-  const qualityIssues = [...spacingIssues, ...alignmentIssues];
+  const crossingIssues = diagnoseEdgeCrossings(layout.edges || [], {
+    nodeNames,
+    tolerance,
+  });
+  const balanceIssues = diagnoseColumnBalance(layout.groupBoxes || [], {
+    frame,
+    maximumColumnImbalance,
+  });
+  const qualityIssues = [...spacingIssues, ...alignmentIssues, ...crossingIssues, ...balanceIssues];
   return {
     ok: overflow.length === 0 && overlaps.length === 0 && edgeIssues.length === 0,
     qualityOk: qualityIssues.length === 0,
@@ -874,6 +889,8 @@ export function diagnoseLayout(
     edgeIssues,
     spacingIssues,
     alignmentIssues,
+    crossingIssues,
+    balanceIssues,
     qualityIssues,
   };
 }
@@ -969,6 +986,165 @@ function diagnoseParentAlignment(edges, { nodeNames, maximumAlignmentOffset }) {
     });
   }
   return issues;
+}
+
+function diagnoseEdgeCrossings(edges, { nodeNames, tolerance }) {
+  const issues = [];
+  const routed = (edges || [])
+    .map((edge) => ({ edge, segments: edgeSegments(edge) }))
+    .filter((item) => item.segments.length);
+  for (let i = 0; i < routed.length; i += 1) {
+    for (let j = i + 1; j < routed.length; j += 1) {
+      const left = routed[i];
+      const right = routed[j];
+      if (shareEndpoint(left.edge, right.edge)) continue;
+      const crossing = firstSegmentCrossing(left.segments, right.segments, tolerance);
+      if (!crossing) continue;
+      issues.push({
+        reason: "crossing-connectors",
+        first: edgeLabel(left.edge, nodeNames),
+        second: edgeLabel(right.edge, nodeNames),
+        x: Number(crossing.x.toFixed(2)),
+        y: Number(crossing.y.toFixed(2)),
+      });
+      break;
+    }
+  }
+  return issues;
+}
+
+function diagnoseColumnBalance(groupBoxes, { frame, maximumColumnImbalance }) {
+  const boxes = (groupBoxes || [])
+    .map((box) => normalizeGroupBox(box))
+    .filter(Boolean);
+  if (boxes.length < 3) return [];
+  const columns = [];
+  for (const box of boxes.sort((a, b) => a.left - b.left || a.top - b.top)) {
+    const column = columns.find((candidate) => Math.abs(candidate.left - box.left) < 8);
+    if (column) {
+      column.boxes.push(box);
+      column.left = (column.left * (column.boxes.length - 1) + box.left) / column.boxes.length;
+    } else {
+      columns.push({ left: box.left, boxes: [box] });
+    }
+  }
+  if (columns.length < 2) return [];
+  const columnStats = columns.map((column, index) => {
+    const top = Math.min(...column.boxes.map((box) => box.top));
+    const bottom = Math.max(...column.boxes.map((box) => box.bottom));
+    return {
+      index: index + 1,
+      groups: column.boxes.length,
+      top,
+      bottom,
+      height: bottom - top,
+    };
+  });
+  const heights = columnStats.map((column) => column.height);
+  const minHeight = Math.min(...heights);
+  const maxHeight = Math.max(...heights);
+  const threshold = Math.max(maximumColumnImbalance, (frame?.height || 0) * 0.18);
+  if (maxHeight - minHeight <= threshold) return [];
+  return [{
+    reason: "unbalanced-columns",
+    minHeight: Number(minHeight.toFixed(2)),
+    maxHeight: Number(maxHeight.toFixed(2)),
+    imbalance: Number((maxHeight - minHeight).toFixed(2)),
+    columns: columnStats.map((column) => ({
+      index: column.index,
+      groups: column.groups,
+      height: Number(column.height.toFixed(2)),
+    })),
+  }];
+}
+
+function edgeSegments(edge) {
+  const from = normalizePosition(edge.from);
+  const to = normalizePosition(edge.to);
+  if (!from || !to) return [];
+  if (edge.orientation === "horizontal") {
+    const start = { x: from.right, y: from.centerY };
+    const end = { x: to.left, y: to.centerY };
+    if (Math.abs(start.y - end.y) < 0.1) return [segment(start.x, start.y, end.x, end.y)];
+    const midX = (start.x + end.x) / 2;
+    return [
+      segment(start.x, start.y, midX, start.y),
+      segment(midX, start.y, midX, end.y),
+      segment(midX, end.y, end.x, end.y),
+    ];
+  }
+  const start = { x: from.centerX, y: from.bottom };
+  const end = { x: to.centerX, y: to.top };
+  if (Math.abs(start.x - end.x) < 0.1) return [segment(start.x, start.y, end.x, end.y)];
+  const midY = (start.y + end.y) / 2;
+  return [
+    segment(start.x, start.y, start.x, midY),
+    segment(start.x, midY, end.x, midY),
+    segment(end.x, midY, end.x, end.y),
+  ];
+}
+
+function segment(x1, y1, x2, y2) {
+  return {
+    x1,
+    y1,
+    x2,
+    y2,
+    orientation: Math.abs(x1 - x2) < 0.1 ? "vertical" : "horizontal",
+  };
+}
+
+function firstSegmentCrossing(leftSegments, rightSegments, tolerance) {
+  for (const left of leftSegments) {
+    for (const right of rightSegments) {
+      const crossing = segmentCrossing(left, right, tolerance);
+      if (crossing) return crossing;
+    }
+  }
+  return null;
+}
+
+function segmentCrossing(a, b, tolerance) {
+  if (a.orientation === b.orientation) return null;
+  const horizontal = a.orientation === "horizontal" ? a : b;
+  const vertical = a.orientation === "vertical" ? a : b;
+  const x = vertical.x1;
+  const y = horizontal.y1;
+  if (!strictlyBetween(x, horizontal.x1, horizontal.x2, tolerance)) return null;
+  if (!strictlyBetween(y, vertical.y1, vertical.y2, tolerance)) return null;
+  return { x, y };
+}
+
+function strictlyBetween(value, a, b, tolerance) {
+  return value > Math.min(a, b) + tolerance && value < Math.max(a, b) - tolerance;
+}
+
+function shareEndpoint(a, b) {
+  return a.parent === b.parent || a.parent === b.child || a.child === b.parent || a.child === b.child;
+}
+
+function edgeLabel(edge, nodeNames) {
+  const parent = nodeNames.get(edge.parent) || edge.parent || "(부모 없음)";
+  const child = nodeNames.get(edge.child) || edge.child || "(자식 없음)";
+  return `${parent}→${child}`;
+}
+
+function normalizeGroupBox(box) {
+  if (!box) return null;
+  const left = Number(box.left);
+  const top = Number(box.top);
+  const width = Number(box.width);
+  const height = Number(box.height);
+  if (![left, top, width, height].every(Number.isFinite)) return null;
+  return {
+    ...box,
+    left,
+    top,
+    width,
+    height,
+    right: left + width,
+    bottom: top + height,
+  };
 }
 
 function groupPositionedEdgesByParent(edges) {

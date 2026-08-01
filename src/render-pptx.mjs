@@ -206,7 +206,7 @@ function formatLayoutWarning(diagnostics) {
   if (diagnostics?.overflow?.length) parts.push(`넘침 ${diagnostics.overflow.length}`);
   if (diagnostics?.overlaps?.length) parts.push(`겹침 ${diagnostics.overlaps.length}`);
   if (diagnostics?.edgeIssues?.length) parts.push(`연결선 ${diagnostics.edgeIssues.length}`);
-  if (diagnostics?.qualityIssues?.length) parts.push(`간격·정렬 ${diagnostics.qualityIssues.length}`);
+  if (diagnostics?.qualityIssues?.length) parts.push(`품질 ${diagnostics.qualityIssues.length}`);
   return parts.length ? parts.join(" · ") : "배치 확인 필요";
 }
 

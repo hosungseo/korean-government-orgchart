@@ -268,6 +268,51 @@ test("배치 진단은 상자 간격과 부모 중심축 품질 문제를 별도
   ]);
 });
 
+test("배치 진단은 연결선 교차와 카드 컬럼 불균형을 품질 문제로 잡는다", () => {
+  const crossing = diagnoseLayout({
+    frame: { left: 0, top: 0, width: 220, height: 190 },
+    nodes: [
+      { node: { id: "p1", name: "부모1" }, position: { left: 30, top: 10, width: 20, height: 30 } },
+      { node: { id: "c1", name: "자식1" }, position: { left: 170, top: 120, width: 20, height: 30 } },
+      { node: { id: "p2", name: "부모2" }, position: { left: 90, top: 0, width: 20, height: 30 } },
+      { node: { id: "c2", name: "자식2" }, position: { left: 90, top: 150, width: 20, height: 30 } },
+    ],
+    edges: [
+      {
+        parent: "p1",
+        child: "c1",
+        from: { left: 30, top: 10, width: 20, height: 30 },
+        to: { left: 170, top: 120, width: 20, height: 30 },
+      },
+      {
+        parent: "p2",
+        child: "c2",
+        from: { left: 90, top: 0, width: 20, height: 30 },
+        to: { left: 90, top: 150, width: 20, height: 30 },
+      },
+    ],
+  });
+
+  assert.equal(crossing.ok, true);
+  assert.equal(crossing.crossingIssues.length, 1);
+  assert.equal(crossing.crossingIssues[0].reason, "crossing-connectors");
+
+  const balance = diagnoseLayout({
+    frame: { left: 0, top: 0, width: 240, height: 300 },
+    nodes: [],
+    edges: [],
+    groupBoxes: [
+      { left: 0, top: 0, width: 100, height: 250 },
+      { left: 120, top: 0, width: 100, height: 40 },
+      { left: 120, top: 50, width: 100, height: 40 },
+    ],
+  });
+
+  assert.equal(balance.ok, true);
+  assert.equal(balance.balanceIssues.length, 1);
+  assert.equal(balance.balanceIssues[0].reason, "unbalanced-columns");
+});
+
 test("카드 목록형은 상위 조직별 묶음으로 법정 계층을 보존한다", () => {
   const graph = parseOrganizationTexts([text]);
   const page = planPages(graph, { paper: "a4-landscape", layoutStyle: "catalog", maxNodes: 50 }).find((candidate) => candidate.nodeIds.length > 2);

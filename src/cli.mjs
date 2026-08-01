@@ -5,6 +5,7 @@ import path from "node:path";
 import { applyAnnexOrganizations, attachAnnexes } from "./annex.mjs";
 import { buildAuditReport, formatAuditMarkdown } from "./audit.mjs";
 import { formatBatchAuditMarkdown, runBatchAudit } from "./batch-audit.mjs";
+import { formatBatchBuildMarkdown, runBatchBuild } from "./batch-build.mjs";
 import { buildAuditCaseSpecs } from "./case-scaffold.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { organizationLawNameCandidateGroups } from "./law-name.mjs";
@@ -25,6 +26,7 @@ try {
   else if (command === "inspect") await inspectCommand(args);
   else if (command === "audit") await auditCommand(args);
   else if (command === "batch-audit") await batchAuditCommand(args);
+  else if (command === "batch-build") await batchBuildCommand(args);
   else if (command === "make-cases") await makeCasesCommand(args);
   else printHelp();
 } catch (error) {
@@ -177,6 +179,22 @@ async function batchAuditCommand(args) {
       ["error", "needs-correction"].includes(item.summary.status),
     );
     if (failing) process.exitCode = 2;
+  }
+}
+
+async function batchBuildCommand(args) {
+  const result = await runBatchBuild(args);
+  const format = String(args.format || "markdown").toLowerCase();
+  const output =
+    format === "json" ? `${JSON.stringify(result, jsonReplacer, 2)}\n` : formatBatchBuildMarkdown(result);
+  if (args.out) {
+    await writeText(path.resolve(args.out), output);
+    console.log(`배치 생성 매니페스트 저장: ${path.resolve(args.out)}`);
+  } else {
+    console.log(output);
+  }
+  if (args.strict === true && result.cases.some((item) => item.status === "error")) {
+    process.exitCode = 2;
   }
 }
 
@@ -354,6 +372,7 @@ function printHelp() {
   inspect    파싱 결과 요약 출력
   audit      파싱·소관·별표·배치 품질 감사 리포트 출력
   batch-audit 여러 기관·기준일·레이아웃을 한 번에 감사하여 품질 매트릭스 출력
+  batch-build 여러 기관·기준일·레이아웃의 SVG/JSON/PPTX/감사리포트 일괄 생성
   make-cases 기관명 목록에서 batch-audit 케이스 JSON 생성
 
 주요 옵션
@@ -371,6 +390,8 @@ function printHelp() {
   --source-dir <dir>        조회한 기준일 법령 문언 보관
   --format markdown|json    audit 리포트 출력 형식
   --cases <cases.json>      batch-audit 케이스 목록
+  --out-dir <dir>           batch-build 산출물 폴더
+  --outputs svg,json,audit,pptx|all  batch-build 산출 형식
   --institutions "A,B"      make-cases 기관명 목록(쉼표 또는 줄바꿈)
   --strict                  batch-audit에서 오류·수정 필요가 있으면 종료코드 2
 `);

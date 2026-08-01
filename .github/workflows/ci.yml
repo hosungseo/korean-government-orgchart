@@ -38,3 +38,26 @@ jobs:
             const issue = result.cases.find((item) => item.summary.layoutDiagnostics.totalIssues > 0);
             if (issue) throw new Error(`layout diagnostics failed: ${issue.summary.id}`);
           '
+
+      - name: Sample batch build gate
+        run: |
+          node src/cli.mjs batch-build \
+            --cases examples/audit-cases.json \
+            --outputs svg,json,audit \
+            --out-dir /tmp/orgchart-batch-build \
+            --format json \
+            --out /tmp/orgchart-batch-build-manifest.json
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const result = JSON.parse(fs.readFileSync("/tmp/orgchart-batch-build-manifest.json", "utf8"));
+            if (result.total !== 2) throw new Error(`expected 2 build cases, got ${result.total}`);
+            const failed = result.cases.find((item) => item.status !== "built");
+            if (failed) throw new Error(`batch build failed: ${failed.case?.id || failed.error}`);
+            for (const item of result.cases) {
+              for (const key of ["svg", "json", "audit"]) {
+                if (!item.outputs[key] || !fs.existsSync(item.outputs[key])) {
+                  throw new Error(`missing ${key} output for ${item.summary.id}`);
+                }
+              }
+            }
+          '

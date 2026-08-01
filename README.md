@@ -254,6 +254,18 @@ node src/cli.mjs batch-audit \
 
 출력 표의 핵심 열은 `높은 확인`, `소관 후보`, `배치 문제`, `별표`입니다. `--strict`를 붙이면 오류 또는 수정 필요 케이스가 있을 때 종료코드 2로 끝나므로, 기관 전체 회귀 테스트나 GitHub Actions 품질 게이트로 사용할 수 있습니다.
 
+감사 후 바로 산출물까지 만들려면 같은 케이스 파일을 `batch-build`에 넘깁니다. 기본 출력은 의존성 없이 만들 수 있는 `svg,json,audit`이고, 편집 가능한 PPTX까지 필요하면 `--outputs svg,json,audit,pptx` 또는 `--outputs all`을 지정합니다.
+
+```bash
+node src/cli.mjs batch-build \
+  --cases work/core-agencies.cases.json \
+  --out-dir outputs/core-agencies \
+  --outputs svg,json,audit \
+  --out outputs/core-agencies-manifest.md
+```
+
+이 흐름은 `make-cases → batch-audit → batch-build`로 이어지므로, 기관 목록만 있으면 검토용 품질표와 실제 조직도 파일을 같은 해석 경로에서 반복 생성할 수 있습니다.
+
 ### 작도 품질 규칙
 
 - `본부`는 하부조직 계선으로 연한 파란 상자에 `(본부)`를 붙이고, 소속기관은 설치 문형의 유형에 따라 초록 계열로 구분합니다. `책임운영기관`은 기존의 `(책)` 표식을 유지합니다.
@@ -279,6 +291,8 @@ src/law-api.mjs       법제처 기준일 연혁 조회
 src/annex.mjs         법제처 별표 인벤토리·선그리기 표 행 추출·확정 명단형 별표의 조직 트리 반영
 src/audit.mjs         파싱·소관·별표·배치 품질 감사 리포트
 src/batch-audit.mjs   여러 기관·기준일·레이아웃을 반복 감사하는 품질 매트릭스
+src/batch-build.mjs   여러 케이스의 SVG·JSON·PPTX·감사리포트 일괄 산출
+src/case-scaffold.mjs 기관명 목록에서 batch-audit/build 케이스 생성
 src/parser.mjs        직제·시행규칙 문언 파싱
 src/model.mjs         조직 그래프·법적 관계·운영형 투영
 src/law-map.mjs       과 단위 소관법령 지도 병합

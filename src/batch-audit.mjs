@@ -205,7 +205,7 @@ export function formatBatchAuditMarkdown(result) {
   return `${lines.join("\n")}\n`;
 }
 
-async function loadBatchContext(args) {
+export async function loadBatchContext(args) {
   const caseSpecs = args.caseSpecs || (await readCasesFile(requiredString(args, "cases")));
   return {
     caseSpecs,
@@ -223,6 +223,7 @@ async function loadBatchContext(args) {
     lawMap: stringArg(args, "law-map"),
     lawMapDate: stringArg(args, "law-map-date"),
     lawAppendix: args["law-appendix"] === true,
+    lawCounts: args["law-counts"] === true,
   };
 }
 
@@ -234,7 +235,7 @@ async function readCasesFile(filePath) {
   return cases;
 }
 
-function normalizeCaseSpec(raw, index) {
+export function normalizeCaseSpec(raw, index) {
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
     throw new Error(`케이스 ${index + 1}은 객체여야 합니다.`);
   }
@@ -244,7 +245,7 @@ function normalizeCaseSpec(raw, index) {
   };
 }
 
-function publicCaseSpec(spec) {
+export function publicCaseSpec(spec) {
   const {
     text,
     texts,
@@ -259,7 +260,7 @@ function publicCaseSpec(spec) {
   };
 }
 
-async function graphFromCase(caseSpec, context) {
+export async function graphFromCase(caseSpec, context) {
   const date = caseSpec.date || context.date;
   if (caseSpec.text || caseSpec.texts || caseSpec.input || caseSpec.inputs) {
     const texts = await localTextsFromCase(caseSpec, context.casesBaseDir);
@@ -398,7 +399,7 @@ async function writeFetchedSourcesIfRequested(fetched, caseSpec, context) {
   }
 }
 
-async function enrichCaseWithLawMap(graph, caseSpec, context, cache) {
+export async function enrichCaseWithLawMap(graph, caseSpec, context, cache) {
   const lawMapPath = caseSpec.lawMap || context.lawMap;
   if (!lawMapPath) return;
   const resolved = caseSpec.lawMap
@@ -414,7 +415,7 @@ async function enrichCaseWithLawMap(graph, caseSpec, context, cache) {
   });
 }
 
-function planCasePages(graph, caseSpec, context) {
+export function planCasePages(graph, caseSpec, context) {
   const layout = caseSpec.layout || context.layout || "auto";
   if (layout === "best") {
     return planBestPages(graph, {

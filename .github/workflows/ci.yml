@@ -91,7 +91,7 @@ jobs:
             import fs from "node:fs";
             const summary = JSON.parse(fs.readFileSync("/tmp/orgchart-review-pack-summary.json", "utf8"));
             if (summary.cases !== 2) throw new Error(`expected 2 review cases, got ${summary.cases}`);
-            for (const key of ["cases", "audit", "auditJson", "manifest", "manifestJson"]) {
+            for (const key of ["readme", "cases", "audit", "auditJson", "manifest", "manifestJson"]) {
               const filePath = summary.files?.[key];
               if (!filePath || !fs.existsSync(filePath)) throw new Error(`missing review-pack file: ${key}`);
             }

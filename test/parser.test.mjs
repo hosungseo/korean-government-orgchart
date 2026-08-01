@@ -226,6 +226,48 @@ test("배치 진단은 너무 짧거나 역방향인 연결선을 잡는다", ()
   assert.equal(reversed.edgeIssues[0].reason, "reversed-horizontal");
 });
 
+test("배치 진단은 상자 간격과 부모 중심축 품질 문제를 별도로 잡는다", () => {
+  const layout = {
+    frame: { left: 0, top: 0, width: 240, height: 180 },
+    nodes: [
+      { node: { id: "p", name: "부모" }, position: { left: 20, top: 10, width: 70, height: 28 } },
+      { node: { id: "a", name: "정책과" }, position: { left: 0, top: 80, width: 30, height: 36 } },
+      { node: { id: "b", name: "지원과" }, position: { left: 40, top: 80, width: 30, height: 36 } },
+      { node: { id: "c", name: "협력과" }, position: { left: 170, top: 80, width: 30, height: 36 } },
+    ],
+    edges: [
+      {
+        parent: "p",
+        child: "a",
+        from: { left: 20, top: 10, width: 70, height: 28 },
+        to: { left: 0, top: 80, width: 30, height: 36 },
+      },
+      {
+        parent: "p",
+        child: "b",
+        from: { left: 20, top: 10, width: 70, height: 28 },
+        to: { left: 40, top: 80, width: 30, height: 36 },
+      },
+      {
+        parent: "p",
+        child: "c",
+        from: { left: 20, top: 10, width: 70, height: 28 },
+        to: { left: 170, top: 80, width: 30, height: 36 },
+      },
+    ],
+  };
+
+  const diagnostics = diagnoseLayout(layout);
+
+  assert.equal(diagnostics.ok, true);
+  assert.equal(diagnostics.qualityOk, false);
+  assert.equal(diagnostics.edgeIssues.length, 0);
+  assert.deepEqual(diagnostics.qualityIssues.map((item) => item.reason), [
+    "uneven-sibling-spacing",
+    "off-center-parent",
+  ]);
+});
+
 test("카드 목록형은 상위 조직별 묶음으로 법정 계층을 보존한다", () => {
   const graph = parseOrganizationTexts([text]);
   const page = planPages(graph, { paper: "a4-landscape", layoutStyle: "catalog", maxNodes: 50 }).find((candidate) => candidate.nodeIds.length > 2);

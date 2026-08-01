@@ -68,7 +68,7 @@ function renderPage(graph, page, offsetY, { showLawCounts, pageSize }) {
   for (const entry of layout.nodes) {
     pageGroup.push(svgNode(entry.node, entry.position, { showLawCounts, pageSize }));
   }
-  if (!layout.diagnostics?.ok) {
+  if (!layout.diagnostics?.ok || !layout.diagnostics?.qualityOk) {
     pageGroup.push(svgLayoutWarning(layout.diagnostics, pageSize));
   }
   pageGroup.push(svgLegend({ showLawCounts, operational: graph.meta.renderView === "operational", pageSize }));
@@ -143,8 +143,12 @@ function svgLayoutWarning(diagnostics, pageSize) {
   if (diagnostics.overflow?.length) parts.push(`넘침 ${diagnostics.overflow.length}`);
   if (diagnostics.overlaps?.length) parts.push(`겹침 ${diagnostics.overlaps.length}`);
   if (diagnostics.edgeIssues?.length) parts.push(`연결선 ${diagnostics.edgeIssues.length}`);
+  if (diagnostics.qualityIssues?.length) parts.push(`간격·정렬 ${diagnostics.qualityIssues.length}`);
   const message = parts.length ? parts.join(" · ") : "배치 확인 필요";
-  return `<text x="${portrait ? 28 : 42}" y="${pageSize.height - (portrait ? 45 : 38)}" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? 7.5 : 8}" fill="#B45309">⚠ ${message}. 분할 또는 다른 작도 유형을 사용하세요.</text>`;
+  const hard = !diagnostics.ok;
+  const prefix = hard ? "⚠" : "△";
+  const suffix = hard ? "분할 또는 다른 작도 유형을 사용하세요." : "best-fit 후보 또는 분할을 확인하세요.";
+  return `<text x="${portrait ? 28 : 42}" y="${pageSize.height - (portrait ? 45 : 38)}" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? 7.5 : 8}" fill="${hard ? "#B45309" : "#6B7280"}">${prefix} ${message}. ${suffix}</text>`;
 }
 
 function svgNode(node, position, { showLawCounts, pageSize }) {

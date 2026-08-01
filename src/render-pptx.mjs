@@ -181,12 +181,12 @@ function addPage(presentation, graph, page, { showLawCounts, pageSize }) {
   for (const edge of layout.edges) addEdge(slide, edge, nodeShapes);
   for (const label of layout.labels || []) addLayoutLabel(slide, label, pageSize);
 
-  if (!layout.diagnostics?.ok) {
+  if (!layout.diagnostics?.ok || !layout.diagnostics?.qualityOk) {
     addText(
       slide,
-      `⚠ ${formatLayoutWarning(layout.diagnostics)}. 분할 또는 다른 작도 유형을 사용하세요.`,
+      `${layout.diagnostics?.ok ? "△" : "⚠"} ${formatLayoutWarning(layout.diagnostics)}. ${layout.diagnostics?.ok ? "best-fit 후보 또는 분할을 확인하세요." : "분할 또는 다른 작도 유형을 사용하세요."}`,
       { left: margin, top: pageSize.height - (portrait ? 44 : 38), width: pageSize.width - margin * 2 - 90, height: 14 },
-      { fontSize: portrait ? 7.5 : 8, color: "#B45309", alignment: "left" },
+      { fontSize: portrait ? 7.5 : 8, color: layout.diagnostics?.ok ? "#6B7280" : "#B45309", alignment: "left" },
       "배치진단",
     );
   }
@@ -206,6 +206,7 @@ function formatLayoutWarning(diagnostics) {
   if (diagnostics?.overflow?.length) parts.push(`넘침 ${diagnostics.overflow.length}`);
   if (diagnostics?.overlaps?.length) parts.push(`겹침 ${diagnostics.overlaps.length}`);
   if (diagnostics?.edgeIssues?.length) parts.push(`연결선 ${diagnostics.edgeIssues.length}`);
+  if (diagnostics?.qualityIssues?.length) parts.push(`간격·정렬 ${diagnostics.qualityIssues.length}`);
   return parts.length ? parts.join(" · ") : "배치 확인 필요";
 }
 
@@ -580,12 +581,12 @@ function addPptxGenPage(pptx, graph, page, { showLawCounts, pageSize }) {
   for (const entry of layout.nodes) addPptxNode(slide, pptx, entry.node, entry.position, { showLawCounts, pageSize });
   for (const label of layout.labels || []) addPptxLayoutLabel(slide, label, pageSize);
 
-  if (!layout.diagnostics?.ok) {
+  if (!layout.diagnostics?.ok || !layout.diagnostics?.qualityOk) {
     addPptxText(
       slide,
-      `⚠ ${formatLayoutWarning(layout.diagnostics)}. 분할 또는 다른 작도 유형을 사용하세요.`,
+      `${layout.diagnostics?.ok ? "△" : "⚠"} ${formatLayoutWarning(layout.diagnostics)}. ${layout.diagnostics?.ok ? "best-fit 후보 또는 분할을 확인하세요." : "분할 또는 다른 작도 유형을 사용하세요."}`,
       { left: margin, top: pageSize.height - (portrait ? 44 : 38), width: pageSize.width - margin * 2 - 90, height: 14 },
-      { fontSize: portrait ? 7.5 : 8, color: "#B45309", alignment: "left" },
+      { fontSize: portrait ? 7.5 : 8, color: layout.diagnostics?.ok ? "#6B7280" : "#B45309", alignment: "left" },
     );
   }
 

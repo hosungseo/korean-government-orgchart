@@ -145,8 +145,8 @@ export function formatBatchBuildMarkdown(result) {
   }
   if (result.deckError) lines.push(`- 통합 PPTX deck 오류: ${result.deckError}`);
   lines.push("");
-  lines.push("| 기관 | 기준일 | 보기 | 대상 | 선택유형 | 상태 | 페이지 | 배치 문제 | 산출물 |");
-  lines.push("| --- | --- | --- | --- | --- | --- | ---: | ---: | --- |");
+  lines.push("| 기관 | 기준일 | 보기 | 대상 | 선택유형 | 상태 | 페이지 | 배치 문제 | 품질 | 산출물 |");
+  lines.push("| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | --- |");
   for (const item of result.cases) {
     const summary = item.summary || {};
     const outputList = Object.entries(item.outputs || {})
@@ -162,6 +162,7 @@ export function formatBatchBuildMarkdown(result) {
         escapeCell(item.statusLabel || item.status),
         summary.pages ?? "",
         summary.layoutDiagnostics?.totalIssues ?? "",
+        summary.layoutDiagnostics?.qualityIssues ?? "",
         outputList || escapeCell(item.error || (result.deck || result.decks?.length ? "deck 포함" : "")),
       ].join(" | ").replace(/^/, "| ").replace(/$/, " |"),
     );

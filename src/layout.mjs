@@ -183,6 +183,7 @@ export function planBestPages(graph, options = {}) {
         diagnostics.overflow * 10000 +
         diagnostics.overlaps * 5000 +
         diagnostics.edgeIssues * 1000 +
+        diagnostics.qualityIssues * 500 +
         diagnostics.pages * 100 +
         preference,
     };
@@ -205,12 +206,24 @@ export function planBestPages(graph, options = {}) {
 }
 
 export function scoreLayoutPages(graph, pages) {
-  const totals = { pages: pages.length, overflow: 0, overlaps: 0, edgeIssues: 0, totalIssues: 0 };
+  const totals = {
+    pages: pages.length,
+    overflow: 0,
+    overlaps: 0,
+    edgeIssues: 0,
+    spacingIssues: 0,
+    alignmentIssues: 0,
+    qualityIssues: 0,
+    totalIssues: 0,
+  };
   for (const page of pages) {
     const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
     totals.overflow += layout.diagnostics?.overflow?.length || 0;
     totals.overlaps += layout.diagnostics?.overlaps?.length || 0;
     totals.edgeIssues += layout.diagnostics?.edgeIssues?.length || 0;
+    totals.spacingIssues += layout.diagnostics?.spacingIssues?.length || 0;
+    totals.alignmentIssues += layout.diagnostics?.alignmentIssues?.length || 0;
+    totals.qualityIssues += layout.diagnostics?.qualityIssues?.length || 0;
   }
   totals.totalIssues = totals.overflow + totals.overlaps + totals.edgeIssues;
   return totals;
@@ -773,9 +786,29 @@ function positionedEdges(parentEdge, positions, orientation) {
  * printable frame.  Renderers may choose how prominently to surface these
  * diagnostics; callers can always inspect them programmatically.
  */
-export function diagnoseLayout(layout, { tolerance = 0.5, minimumConnectorLength = 6 } = {}) {
+export function diagnoseLayout(
+  layout,
+  {
+    tolerance = 0.5,
+    minimumConnectorLength = 6,
+    minimumSiblingGap = 4,
+    maximumSiblingGapRatio = 3.2,
+    maximumAlignmentOffset = 28,
+  } = {},
+) {
   const frame = layout?.frame;
-  if (!frame) return { ok: true, overflow: [], overlaps: [], edgeIssues: [] };
+  if (!frame) {
+    return {
+      ok: true,
+      qualityOk: true,
+      overflow: [],
+      overlaps: [],
+      edgeIssues: [],
+      spacingIssues: [],
+      alignmentIssues: [],
+      qualityIssues: [],
+    };
+  }
   const overflow = [];
   for (const entry of layout.nodes || []) {
     const p = normalizePosition(entry.position);
@@ -823,11 +856,25 @@ export function diagnoseLayout(layout, { tolerance = 0.5, minimumConnectorLength
       ...issue,
     });
   }
+  const spacingIssues = diagnoseSiblingSpacing(layout.edges || [], {
+    nodeNames,
+    minimumSiblingGap,
+    maximumSiblingGapRatio,
+  });
+  const alignmentIssues = diagnoseParentAlignment(layout.edges || [], {
+    nodeNames,
+    maximumAlignmentOffset,
+  });
+  const qualityIssues = [...spacingIssues, ...alignmentIssues];
   return {
     ok: overflow.length === 0 && overlaps.length === 0 && edgeIssues.length === 0,
+    qualityOk: qualityIssues.length === 0,
     overflow,
     overlaps,
     edgeIssues,
+    spacingIssues,
+    alignmentIssues,
+    qualityIssues,
   };
 }
 
@@ -850,6 +897,104 @@ function diagnoseEdge(edge, { tolerance, minimumConnectorLength }) {
   if (gap < -tolerance) return { reason: "reversed-vertical", gap: Number(gap.toFixed(2)) };
   if (gap < minimumConnectorLength) return { reason: "too-short-vertical", gap: Number(gap.toFixed(2)) };
   return null;
+}
+
+function diagnoseSiblingSpacing(edges, { nodeNames, minimumSiblingGap, maximumSiblingGapRatio }) {
+  const issues = [];
+  for (const [parent, group] of groupPositionedEdgesByParent(edges).entries()) {
+    if (group.length < 2) continue;
+    const axis = siblingAxis(group);
+    const sorted = group
+      .map((edge) => ({
+        edge,
+        position: normalizePosition(edge.to),
+      }))
+      .filter((item) => item.position)
+      .sort((a, b) => startOnAxis(a.position, axis) - startOnAxis(b.position, axis));
+    if (sorted.length < 2) continue;
+    const gaps = [];
+    for (let index = 0; index < sorted.length - 1; index += 1) {
+      gaps.push(startOnAxis(sorted[index + 1].position, axis) - endOnAxis(sorted[index].position, axis));
+    }
+    const minGap = Math.min(...gaps);
+    const maxGap = Math.max(...gaps);
+    if (minGap < minimumSiblingGap) {
+      issues.push({
+        reason: "tight-sibling-spacing",
+        parent: nodeNames.get(parent) || parent,
+        axis,
+        minGap: Number(minGap.toFixed(2)),
+        maxGap: Number(maxGap.toFixed(2)),
+        children: sorted.map((item) => nodeNames.get(item.edge.child) || item.edge.child),
+      });
+    }
+    if (sorted.length >= 3 && maxGap > Math.max(24, minGap * maximumSiblingGapRatio + 18)) {
+      issues.push({
+        reason: "uneven-sibling-spacing",
+        parent: nodeNames.get(parent) || parent,
+        axis,
+        minGap: Number(minGap.toFixed(2)),
+        maxGap: Number(maxGap.toFixed(2)),
+        children: sorted.map((item) => nodeNames.get(item.edge.child) || item.edge.child),
+      });
+    }
+  }
+  return issues;
+}
+
+function diagnoseParentAlignment(edges, { nodeNames, maximumAlignmentOffset }) {
+  const issues = [];
+  for (const [parent, group] of groupPositionedEdgesByParent(edges).entries()) {
+    if (group.length < 2) continue;
+    const from = normalizePosition(group[0].from);
+    if (!from) continue;
+    const axis = siblingAxis(group);
+    const childCenters = group
+      .map((edge) => normalizePosition(edge.to))
+      .filter(Boolean)
+      .map((position) => centerOnAxis(position, axis));
+    if (childCenters.length < 2) continue;
+    const expected = (Math.min(...childCenters) + Math.max(...childCenters)) / 2;
+    const actual = centerOnAxis(from, axis);
+    const offset = Math.abs(actual - expected);
+    if (offset <= maximumAlignmentOffset) continue;
+    issues.push({
+      reason: "off-center-parent",
+      parent: nodeNames.get(parent) || parent,
+      axis,
+      offset: Number(offset.toFixed(2)),
+      expected: Number(expected.toFixed(2)),
+      actual: Number(actual.toFixed(2)),
+      children: group.map((edge) => nodeNames.get(edge.child) || edge.child),
+    });
+  }
+  return issues;
+}
+
+function groupPositionedEdgesByParent(edges) {
+  const groups = new Map();
+  for (const edge of edges || []) {
+    if (!edge?.parent || !edge.from || !edge.to) continue;
+    if (!groups.has(edge.parent)) groups.set(edge.parent, []);
+    groups.get(edge.parent).push(edge);
+  }
+  return groups;
+}
+
+function siblingAxis(edges) {
+  return edges.every((edge) => edge.orientation === "horizontal") ? "y" : "x";
+}
+
+function startOnAxis(position, axis) {
+  return axis === "y" ? position.top : position.left;
+}
+
+function endOnAxis(position, axis) {
+  return axis === "y" ? position.bottom : position.right;
+}
+
+function centerOnAxis(position, axis) {
+  return axis === "y" ? position.centerY : position.centerX;
 }
 
 /** Left-to-right levels used for function-transfer and 업무흐름형 pages. */

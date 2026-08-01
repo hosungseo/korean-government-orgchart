@@ -159,6 +159,13 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates, ju
         message: `${page.pageNumber}쪽 ${page.subtitle}에서 연결선 품질 문제 ${page.diagnostics.edgeIssues.length}건이 있습니다.`,
       });
     }
+    if (page.diagnostics?.qualityIssues?.length) {
+      actions.push({
+        priority: "low",
+        topic: "layout-quality",
+        message: `${page.pageNumber}쪽 ${page.subtitle}에서 간격·정렬 다듬기 후보 ${page.diagnostics.qualityIssues.length}건이 있습니다.`,
+      });
+    }
   }
   for (const item of graph.meta.annexRequirements || []) {
     const annex = findAnnex(graph, item.annex, { source: item.source });
@@ -260,6 +267,18 @@ function collectLayoutRecommendations(pageDiagnostics) {
         message: `${prefix}: 연결선 문제가 있습니다(${reasons.join(", ") || "원인 미상"}). --max-nodes를 낮춰 계층 간격을 확보하거나, 기능 검토용이면 --layout flow, 인쇄 첨부용이면 --layout catalog를 쓰세요.`,
       });
     }
+    if (diagnostics.qualityIssues?.length) {
+      const reasons = [...new Set(diagnostics.qualityIssues.map((item) => item.reason).filter(Boolean))];
+      recommendations.push({
+        pageNumber: page.pageNumber,
+        pageCount: page.pageCount,
+        subtitle: page.subtitle,
+        layoutStyle: page.layoutStyle,
+        paper: page.paper,
+        issue: "layout-polish",
+        message: `${prefix}: 상자 간격·중심축이 어색할 수 있습니다(${reasons.join(", ") || "원인 미상"}). --layout best가 다른 후보를 고르도록 두거나, 같은 페이지 안 노드 수를 줄여 균일한 간격을 확보하세요.`,
+      });
+    }
   }
   return recommendations;
 }
@@ -286,8 +305,11 @@ function collectJurisdictionCrosswalks(graph) {
 }
 
 function formatLayoutStatus(diagnostics) {
-  if (diagnostics?.ok) return "정상";
-  return `넘침 ${diagnostics?.overflow?.length || 0} · 겹침 ${diagnostics?.overlaps?.length || 0} · 연결선 ${diagnostics?.edgeIssues?.length || 0}`;
+  const hard = `넘침 ${diagnostics?.overflow?.length || 0} · 겹침 ${diagnostics?.overlaps?.length || 0} · 연결선 ${diagnostics?.edgeIssues?.length || 0}`;
+  const quality = diagnostics?.qualityIssues?.length ? ` · 품질 ${diagnostics.qualityIssues.length}` : "";
+  if (diagnostics?.ok && !diagnostics?.qualityIssues?.length) return "정상";
+  if (diagnostics?.ok) return `정상${quality}`;
+  return `${hard}${quality}`;
 }
 
 export function suggestJurisdictionCandidates(graph) {

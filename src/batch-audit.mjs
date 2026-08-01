@@ -119,9 +119,9 @@ export function formatBatchAuditMarkdown(result) {
   );
   lines.push("");
   lines.push(
-    "| 기관 | 기준일 | 보기 | 대상 | 선택유형 | 상태 | 노드 | 페이지 | 높은 확인 | 중간 확인 | 낮은 확인 | 소관관계 | 소관 후보 | 배치 문제 | 별표 |",
+    "| 기관 | 기준일 | 보기 | 대상 | 선택유형 | 상태 | 노드 | 페이지 | 높은 확인 | 중간 확인 | 낮은 확인 | 소관관계 | 소관 후보 | 배치 문제 | 품질 | 별표 |",
   );
-  lines.push("| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |");
+  lines.push("| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |");
   for (const item of result.cases) {
     const summary = item.summary;
     lines.push(
@@ -140,6 +140,7 @@ export function formatBatchAuditMarkdown(result) {
         summary.jurisdiction?.relations ?? "",
         summary.jurisdiction?.candidateDepartments ?? "",
         summary.layoutDiagnostics?.totalIssues ?? "",
+        summary.layoutDiagnostics?.qualityIssues ?? "",
         `${summary.annex?.missing ?? ""}/${summary.annex?.requirements ?? ""}`,
       ].join(" | ").replace(/^/, "| ").replace(/$/, " |"),
     );
@@ -158,7 +159,8 @@ export function formatBatchAuditMarkdown(result) {
       summary.annex?.missing ||
       summary.jurisdiction?.candidateDepartments ||
       summary.jurisdiction?.rangeUnresolved ||
-      summary.layoutDiagnostics?.totalIssues;
+      summary.layoutDiagnostics?.totalIssues ||
+      summary.layoutDiagnostics?.qualityIssues;
     if (!needsDetail) continue;
     lines.push(`## ${summary.institution || summary.id}`);
     lines.push(`- 상태: ${summary.statusLabel || summary.status}`);
@@ -174,7 +176,7 @@ export function formatBatchAuditMarkdown(result) {
       lines.push("- best-fit 후보 점수:");
       for (const candidate of summary.layoutSelection.bestFit.candidateScores.slice(0, 4)) {
         const d = candidate.diagnostics || {};
-        lines.push(`  - ${candidate.style}: 점수 ${candidate.score}, 문제 ${d.totalIssues || 0}, 페이지 ${d.pages || 0}`);
+        lines.push(`  - ${candidate.style}: 점수 ${candidate.score}, 문제 ${d.totalIssues || 0}, 품질 ${d.qualityIssues || 0}, 페이지 ${d.pages || 0}`);
       }
     }
     if (item.error) {
@@ -195,6 +197,10 @@ export function formatBatchAuditMarkdown(result) {
       lines.push(
         `- 배치 문제: 넘침 ${diag.overflow} · 겹침 ${diag.overlaps} · 연결선 ${diag.edgeIssues}`,
       );
+    }
+    if (summary.layoutDiagnostics?.qualityIssues) {
+      const diag = summary.layoutDiagnostics;
+      lines.push(`- 작도 품질: 간격 ${diag.spacingIssues || 0} · 정렬 ${diag.alignmentIssues || 0}`);
     }
     if (report.layoutRecommendations?.length) {
       lines.push("- 작도 개선:");
@@ -580,17 +586,38 @@ function summarizeCaseError(caseSpec, error) {
       orderedRunDepartments: 0,
     },
     lawMap: null,
-    layoutDiagnostics: { pages: 0, overflow: 0, overlaps: 0, edgeIssues: 0, totalIssues: 0 },
+    layoutDiagnostics: {
+      pages: 0,
+      overflow: 0,
+      overlaps: 0,
+      edgeIssues: 0,
+      spacingIssues: 0,
+      alignmentIssues: 0,
+      qualityIssues: 0,
+      totalIssues: 0,
+    },
     error: error.message,
   };
 }
 
 function countLayoutDiagnostics(layoutDiagnostics) {
-  const totals = { pages: layoutDiagnostics.length, overflow: 0, overlaps: 0, edgeIssues: 0, totalIssues: 0 };
+  const totals = {
+    pages: layoutDiagnostics.length,
+    overflow: 0,
+    overlaps: 0,
+    edgeIssues: 0,
+    spacingIssues: 0,
+    alignmentIssues: 0,
+    qualityIssues: 0,
+    totalIssues: 0,
+  };
   for (const item of layoutDiagnostics) {
     totals.overflow += item.diagnostics?.overflow?.length || 0;
     totals.overlaps += item.diagnostics?.overlaps?.length || 0;
     totals.edgeIssues += item.diagnostics?.edgeIssues?.length || 0;
+    totals.spacingIssues += item.diagnostics?.spacingIssues?.length || 0;
+    totals.alignmentIssues += item.diagnostics?.alignmentIssues?.length || 0;
+    totals.qualityIssues += item.diagnostics?.qualityIssues?.length || 0;
   }
   totals.totalIssues = totals.overflow + totals.overlaps + totals.edgeIssues;
   return totals;

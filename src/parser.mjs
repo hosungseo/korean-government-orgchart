@@ -9,6 +9,10 @@ import { normalizeWhitespace, uniq } from "./utils.mjs";
 
 const STRUCTURAL_SUFFIX =
   /(?:부|처|청|위원회|실|국|본부|단|과|팀|관|원|소|센터|사무국|사무소|학교|박물관|미술관|도서관|극장|전당|세무서|소방서|연구원|기록원|관리원|교육원|개발원|분원|지소)$/;
+const JURISDICTION_ADVISOR_SUFFIX =
+  "(?:정책관|기획관|관리관|심의관|교섭관|법무관|지원관|소통관)";
+const DUTY_PARAGRAPH_MARKER =
+  "(?:[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑]|<\\d+>)";
 const GENERIC_NAMES = new Set([
   "보조기관",
   "보좌기관",
@@ -205,11 +209,13 @@ function parseAdministrativeRulePlacement(graph, body, source, context) {
  * operational chart, but it is not a new "X에 과를 둔다" installation clause.
  */
 function collectJurisdictionRelations(graph, body, source) {
-  const paragraphPattern =
-    /(?:^|\n)\s*[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑]\s*([가-힣A-Za-z0-9]+(?:과|팀))장은[^\n]*(?:\n|$)([\s\S]*?)(?=(?:\n\s*[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑]\s*[가-힣A-Za-z0-9]+(?:과|팀))장은|\n제\d+조|$)/g;
+  const paragraphPattern = new RegExp(
+    `(?:^|\\n)\\s*${DUTY_PARAGRAPH_MARKER}\\s*([가-힣A-Za-z0-9]+(?:과|팀))장은[^\\n]*(?:\\n|$)([\\s\\S]*?)(?=(?:\\n\\s*${DUTY_PARAGRAPH_MARKER}\\s*[가-힣A-Za-z0-9]+(?:과|팀))장은|\\n제\\d+조|$)`,
+    "g",
+  );
   for (const match of body.matchAll(paragraphPattern)) {
     const departmentName = normalizeNodeName(match[1]);
-    const advisorName = match[2].match(/([가-힣A-Za-z0-9]+정책관)\s*내\s*다른\s*(?:과|팀)/)?.[1];
+    const advisorName = extractJurisdictionAdvisorName(match[2]);
     if (!departmentName || !advisorName) continue;
     const department = graph.addNode(departmentName, { kind: "assistant", source });
     const advisor = graph.addNode(advisorName, { kind: "advisor", source });
@@ -217,9 +223,16 @@ function collectJurisdictionRelations(graph, body, source) {
     setJurisdictionRelation(graph, advisor.name, department.name, {
       source,
       evidence: "explicit-duty-clause",
-      legalBasis: "정책관 내 다른 과의 주관·소관",
+      legalBasis: "보좌기관 내 다른 과의 주관·소관",
     });
   }
+}
+
+function extractJurisdictionAdvisorName(text) {
+  const advisorPattern = new RegExp(
+    `([가-힣A-Za-z0-9]+${JURISDICTION_ADVISOR_SUFFIX})(?:\\s*내|\\s*이\\s*보좌하는\\s*사항\\s*중(?:에서)?)\\s*[^.。\\n]{0,100}?(?:다른\\s*(?:과|팀)(?:\\s*(?:및|ㆍ|·)\\s*(?:과|팀))?의\\s*(?:주관|소관)|주관에\\s*속하지|소관에\\s*해당하지)`,
+  );
+  return text.match(advisorPattern)?.[1] || null;
 }
 
 function setJurisdictionRelation(graph, parentName, childName, attrs) {

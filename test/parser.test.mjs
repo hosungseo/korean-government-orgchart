@@ -392,7 +392,7 @@ test("시행규칙의 정책관 소관 과는 법정 설치 계선과 별도로 
   assert.deepEqual(graph.nodeByName("지역총괄과").metadata.jurisdiction, {
     parent: "지역정책관",
     evidence: "explicit-duty-clause",
-    legalBasis: "정책관 내 다른 과의 주관·소관",
+    legalBasis: "보좌기관 내 다른 과의 주관·소관",
     source: "입력 1",
   });
   assert.deepEqual(graph.meta.jurisdictionRelations, [
@@ -401,11 +401,45 @@ test("시행규칙의 정책관 소관 과는 법정 설치 계선과 별도로 
       child: "지역총괄과",
       source: "입력 1",
       evidence: "explicit-duty-clause",
-      legalBasis: "정책관 내 다른 과의 주관·소관",
+      legalBasis: "보좌기관 내 다른 과의 주관·소관",
     },
   ]);
   // 인접한 과는 문언만으로 추정해 붙이지 않는다.
   assert.equal(graph.nodeByName("지역진흥과").metadata.jurisdiction, undefined);
+});
+
+test("시행규칙의 다양한 보좌기관 소관 문형을 과 소관관계로 기록한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(통상교섭실) 통상교섭실장 밑에 자유무역협정교섭관 및 전력정책관을 둔다.
+통상교섭실에 자유무역협정협상총괄과ㆍ자유무역협정무역규범과ㆍ전력산업정책과 및 전력시장과를 둔다.
+⑩ 자유무역협정협상총괄과장은 다음 사항을 분장한다.
+1. 자유무역협정 협상의 총괄ㆍ조정
+2. 그 밖에 자유무역협정교섭관 내 다른 과의 주관에 속하지 아니하는 사항
+<19> 자유무역협정무역규범과장은 다음 사항을 분장한다.
+1. 자유무역협정 무역규범 분야 교섭에 관한 업무
+2. 자유무역협정 무역규범 분야 교섭에 관한 업무 중 자유무역협정교섭관 내 다른 과의 주관에 속하지 않는 사항
+⑫ 전력산업정책과장은 다음 사항을 분장한다.
+1. 전력산업 정책의 수립
+2. 그 밖에 전력정책관이 보좌하는 사항 중에서 다른 과의 주관에 속하지 않는 사항
+⑬ 전력시장과장은 다음 사항을 분장한다.
+1. 전력시장 운영에 관한 사항
+`,
+  ]);
+
+  assert.equal(graph.nodeByName("자유무역협정협상총괄과").metadata.jurisdiction.parent, "자유무역협정교섭관");
+  assert.equal(graph.nodeByName("자유무역협정무역규범과").metadata.jurisdiction.parent, "자유무역협정교섭관");
+  assert.equal(graph.nodeByName("전력산업정책과").metadata.jurisdiction.parent, "전력정책관");
+  assert.equal(graph.nodeByName("전력시장과").metadata.jurisdiction, undefined);
+  assert.deepEqual(
+    graph.meta.jurisdictionRelations.map((item) => [item.parent, item.child]),
+    [
+      ["자유무역협정교섭관", "자유무역협정협상총괄과"],
+      ["자유무역협정교섭관", "자유무역협정무역규범과"],
+      ["전력정책관", "전력산업정책과"],
+    ],
+  );
 });
 
 test("@소관 지시문으로 확인된 운영 소관 묶음을 보강한다", () => {

@@ -1,7 +1,7 @@
 import { layoutPage, resolvePageSize } from "./layout.mjs";
 import { summarizeStructure } from "./model.mjs";
 
-const JURISDICTION_ADVISOR = /(?:정책관|기획관|관리관|심의관)$/;
+const JURISDICTION_ADVISOR = /(?:정책관|기획관|관리관|심의관|교섭관|법무관|지원관|소통관)$/;
 const DEPARTMENT = /(?:과|팀|담당관)$/;
 
 export function buildAuditReport(graph, pages = [], options = {}) {
@@ -178,13 +178,23 @@ export function suggestJurisdictionCandidates(graph) {
     const departments = orderedChildrenOf(graph, parent.id, ["assistant", "temporary"])
       .filter((node) => node && DEPARTMENT.test(node.name) && !assigned.has(node.name));
     if (!departments.length) continue;
+    if (advisors.length > 1) {
+      result.push({
+        parent: parent.name,
+        advisor: advisors.map((advisor) => advisor.name).join("ㆍ"),
+        advisors: advisors.map((advisor) => advisor.name),
+        departments: departments.map((node) => node.name),
+        confidence: "multiple-advisors-need-range-crosswalk",
+        directive: null,
+      });
+      continue;
+    }
     for (const advisor of advisors) {
-      if ((graph.meta.jurisdictionRelations || []).some((item) => item.parent === advisor.name)) continue;
       result.push({
         parent: parent.name,
         advisor: advisor.name,
         departments: departments.map((node) => node.name),
-        confidence: advisors.length === 1 ? "single-advisor-container" : "multiple-advisors-need-split",
+        confidence: "single-advisor-container",
         directive: `@소관: ${advisor.name} > ${departments.map((node) => node.name).join("ㆍ")} [시행규칙 분장사무 확인 필요]`,
       });
     }
@@ -207,11 +217,13 @@ function appendSection(lines, title, items, formatter) {
 }
 
 function formatJurisdictionCandidate(item) {
-  return [
+  const lines = [
     `- ${item.parent} > ${item.advisor}: ${item.departments.join("ㆍ")}`,
     `  - 후보 수준: ${item.confidence}`,
-    `  - 지시문 초안: \`${item.directive}\``,
-  ].join("\n");
+  ];
+  if (item.directive) lines.push(`  - 지시문 초안: \`${item.directive}\``);
+  else lines.push("  - 지시문 초안: 복수 보좌기관이므로 직제 호 번호 범위와 시행규칙 과 분장사무를 먼저 대조해야 합니다.");
+  return lines.join("\n");
 }
 
 function statusLabel(value) {

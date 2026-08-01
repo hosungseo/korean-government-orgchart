@@ -51,3 +51,20 @@ test("감사 리포트는 별표 요구와 소관법령 미매칭을 우선 확�
   assert.equal(report.reviewActions.some((action) => action.topic === "annex" && action.priority === "high"), true);
   assert.equal(report.reviewActions.some((action) => action.topic === "law-map"), true);
 });
+
+test("복수 보좌기관 후보는 중복 지시문 대신 대조 필요 묶음으로 압축한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실을 둔다.
+시험실장 밑에 제도정책관 및 현장지원관을 둔다.
+시험실에 총괄과ㆍ지원과 및 현장팀을 둔다.
+`,
+  ]);
+  const report = buildAuditReport(graph, planPages(graph, { paper: "a4-half", layout: "vertical" }));
+  assert.equal(report.jurisdictionCandidates.length, 1);
+  assert.equal(report.jurisdictionCandidates[0].advisor, "제도정책관ㆍ현장지원관");
+  assert.equal(report.jurisdictionCandidates[0].directive, null);
+  assert.equal(report.jurisdictionCandidates[0].confidence, "multiple-advisors-need-range-crosswalk");
+  assert.match(formatAuditMarkdown(report), /직제 호 번호 범위와 시행규칙 과 분장사무/);
+});

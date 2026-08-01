@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { displayNodeName, planPages, resolvePageSize } from "../src/layout.mjs";
+import { displayNodeName, layoutPage, parseLayoutStyles, planLayoutVariants, planPages, resolvePageSize } from "../src/layout.mjs";
 import { projectOperationalView, summarizeStructure } from "../src/model.mjs";
 import { parseNameList, parseOrganizationTexts } from "../src/parser.mjs";
 
@@ -57,6 +57,35 @@ test("A4 세로 형식은 반쪽 면에 맞는 세로 스택 레이아웃을 선
   assert.equal(pages[0].paper, "a4-portrait");
   assert.equal(pages[0].layoutStyle, "vertical-stack");
   assert.equal(resolvePageSize("a4-portrait").height > resolvePageSize("a4-portrait").width, true);
+});
+
+test("같은 그래프를 여러 시각 유형으로 한 번에 계획한다", () => {
+  const graph = parseOrganizationTexts([text]);
+  assert.deepEqual(parseLayoutStyles("vertical,horizontal,two-column,matrix"), [
+    "vertical-stack",
+    "horizontal-bus",
+    "two-column",
+    "matrix",
+  ]);
+  const pages = planLayoutVariants(graph, {
+    layouts: "vertical,horizontal,two-column,matrix",
+    paper: "a4-landscape",
+    maxNodes: 50,
+  });
+  assert.deepEqual([...new Set(pages.map((page) => page.layoutStyle))].sort(), [
+    "horizontal-bus",
+    "matrix",
+    "two-column",
+    "vertical-stack",
+  ]);
+  assert.equal(pages[0].pageNumber, 1);
+  assert.equal(pages.at(-1).pageCount, pages.length);
+  for (const style of ["horizontal-bus", "vertical-stack", "two-column", "matrix"]) {
+    const page = pages.find((candidate) => candidate.layoutStyle === style);
+    const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
+    assert.ok(layout.nodes.length > 2, `${style} 노드가 있어야 함`);
+    assert.ok(layout.edges.every((edge) => edge.from && edge.to), `${style} 연결선 좌표가 있어야 함`);
+  }
 });
 
 test("focus 옵션은 한 실·국의 한쪽 조직도만 남긴다", () => {

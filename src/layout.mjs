@@ -20,14 +20,27 @@ export const PAGE_FORMATS = {
   "a4-half": A4_HALF,
 };
 
-const VISUAL_LAYOUTS = new Set([
-  "vertical",
-  "vertical-stack",
-  "horizontal",
-  "horizontal-bus",
-  "two-column",
-  "matrix",
-]);
+export const LAYOUT_PRESETS = Object.freeze({
+  "horizontal-bus": {
+    label: "가로 버스형",
+    description: "기관장 척추에서 실·국을 가로 버스로 펼치는 개요형",
+  },
+  "vertical-stack": {
+    label: "세로 척추형",
+    description: "실·국 아래 관·과·팀을 세로로 쌓는 좁은 면형",
+  },
+  "two-column": {
+    label: "좌우 2열형",
+    description: "상위 계선을 두 개의 세로 레인으로 나누는 비교형",
+  },
+  matrix: {
+    label: "관·국–과 매트릭스형",
+    description: "상위 단위를 열로 고정하고 하위 과·팀을 행으로 배열하는 형식",
+  },
+});
+
+const VISUAL_LAYOUTS = new Set(Object.keys(LAYOUT_PRESETS));
+const VISUAL_LAYOUT_ORDER = Object.freeze(Object.keys(LAYOUT_PRESETS));
 
 export function resolvePageSize(value = "slide") {
   if (value && typeof value === "object" && Number.isFinite(value.width) && Number.isFinite(value.height)) {
@@ -60,10 +73,66 @@ export function inferLayoutStyle(graph, { paper = "slide", mode } = {}) {
   return ordinary.length > 18 ? "matrix" : "horizontal-bus";
 }
 
-function normalizeLayoutStyle(value) {
+export function normalizeLayoutStyle(value) {
   if (value === "vertical" || value === "vertical-stack") return "vertical-stack";
   if (value === "horizontal" || value === "horizontal-bus") return "horizontal-bus";
-  return value;
+  if (value === "columns" || value === "2-column" || value === "2col") return "two-column";
+  if (value === "grid" || value === "department-matrix") return "matrix";
+  return String(value || "").trim().toLowerCase();
+}
+
+/**
+ * Normalize a comma-separated list of visual presets.  `all` is intentionally
+ * deterministic so that SVG/PPTX page order is stable in CI and in review
+ * documents.
+ */
+export function parseLayoutStyles(value) {
+  const values = Array.isArray(value) ? value : String(value || "").split(",");
+  const styles = [];
+  for (const raw of values) {
+    const token = String(raw || "").trim().toLowerCase();
+    if (!token) continue;
+    if (token === "all" || token === "*" || token === "모음") {
+      for (const preset of VISUAL_LAYOUT_ORDER) if (!styles.includes(preset)) styles.push(preset);
+      continue;
+    }
+    const style = normalizeLayoutStyle(token);
+    if (VISUAL_LAYOUTS.has(style) && !styles.includes(style)) styles.push(style);
+  }
+  return styles;
+}
+
+/**
+ * Plan the same graph repeatedly with different visual grammars.  The graph
+ * and legal page planning are shared; only the page layout style and the
+ * explanatory subtitle vary.  This keeps a multi-style deck comparable and
+ * avoids requiring the caller to parse the law text more than once.
+ */
+export function planLayoutVariants(
+  graph,
+  { layouts, ...options } = {},
+) {
+  const requested = parseLayoutStyles(layouts);
+  if (!requested.length) return planPages(graph, options);
+  const pages = [];
+  for (const style of requested) {
+    const variantPages = planPages(graph, { ...options, layoutStyle: style });
+    const preset = LAYOUT_PRESETS[style];
+    for (const page of variantPages) {
+      pages.push({
+        ...page,
+        variant: style,
+        variantLabel: preset.label,
+        variantDescription: preset.description,
+        subtitle: `${preset.label} · ${page.subtitle}`,
+      });
+    }
+  }
+  return pages.map((page, index) => ({
+    ...page,
+    pageNumber: index + 1,
+    pageCount: pages.length,
+  }));
 }
 
 export function planPages(
@@ -378,11 +447,34 @@ export function layoutPage(graph, page, options = {}) {
     return Math.max(1, value);
   };
   const totalWeight = Math.max(1, roots.reduce((sum, id) => sum + leafWeight(id), 0));
+  if (layoutStyle === "matrix") {
+    return layoutMatrixPage({
+      graph,
+      pageSize,
+      frame,
+      parentEdge,
+      children,
+      roots,
+      selected,
+      depth,
+    });
+  }
+  if (layoutStyle === "two-column") {
+    return layoutTwoColumnPage({
+      graph,
+      pageSize,
+      frame,
+      parentEdge,
+      children,
+      roots,
+      selected,
+      depth,
+      leafWeight,
+    });
+  }
   const verticalLeaves =
     layoutStyle === "vertical-stack" ||
-    layoutStyle === "matrix" ||
-    totalWeight > 11 ||
-    selected.size > 18;
+    (layoutStyle !== "horizontal-bus" && (totalWeight > 11 || selected.size > 18));
   const leafHeight = verticalLeaves
     ? layoutStyle === "vertical-stack" && portrait
       ? 112
@@ -451,6 +543,218 @@ export function layoutPage(graph, page, options = {}) {
     position,
   }));
   return { frame, nodes, edges, roots, maxDepth, verticalLeaves };
+}
+
+/**
+ * Matrix layout: each top-level unit receives a stable column and its
+ * descendants are listed in rows beneath it.  This mirrors the narrow
+ * 관·국–과 tables in government review books and is deliberately different
+ * from the weighted tree used by the horizontal bus preset.
+ */
+function layoutMatrixPage({ graph, pageSize, frame, parentEdge, children, roots, selected, depth }) {
+  const rootHeaders = roots.filter((id) => selected.has(id));
+  const columns = [];
+  const seen = new Set();
+  const collect = (id, list) => {
+    if (!selected.has(id) || seen.has(id)) return;
+    seen.add(id);
+    list.push(id);
+    for (const childId of children.get(id) || []) collect(childId, list);
+  };
+  for (const rootId of rootHeaders) {
+    const direct = (children.get(rootId) || []).filter((id) => selected.has(id));
+    if (!direct.length) {
+      if (!seen.has(rootId)) columns.push({ rootId, ids: [rootId] });
+      seen.add(rootId);
+      continue;
+    }
+    for (const childId of direct) {
+      const ids = [];
+      collect(childId, ids);
+      if (ids.length) columns.push({ rootId, ids });
+    }
+  }
+  if (!columns.length) {
+    for (const rootId of rootHeaders) {
+      const ids = [];
+      collect(rootId, ids);
+      if (ids.length) columns.push({ rootId, ids });
+    }
+  }
+  const columnCount = Math.max(1, columns.length);
+  const columnWidth = frame.width / columnCount;
+  const maxRows = Math.max(1, ...columns.map(({ ids }) => ids.length));
+  const headerHeight = 34;
+  const rowGap = Math.min(46, Math.max(28, (frame.height - headerHeight - 22) / Math.max(1, maxRows)));
+  const rowHeight = Math.max(22, Math.min(34, rowGap - 5));
+  const positions = new Map();
+
+  const put = (id, centerX, top, width, height, vertical = false, depthValue = 0) => {
+    positions.set(id, {
+      left: centerX - width / 2,
+      top,
+      width,
+      height,
+      centerX,
+      bottom: top + height,
+      vertical,
+      depth: depthValue,
+      spanLeft: centerX - columnWidth / 2,
+      spanWidth: columnWidth,
+    });
+  };
+
+  if (rootHeaders.length === 1) {
+    const root = graph.nodes.get(rootHeaders[0]);
+    if (root) put(root.id, frame.left + frame.width / 2, frame.top, Math.min(176, Math.max(96, root.name.length * 5.2 + 50)), headerHeight, false, 0);
+  } else {
+    const headerWidth = Math.min(150, Math.max(70, columnWidth * 0.82));
+    rootHeaders.forEach((rootId, index) => {
+      const centerX = frame.left + columnWidth * (index + 0.5);
+      const root = graph.nodes.get(rootId);
+      if (root) put(rootId, centerX, frame.top, headerWidth, headerHeight, false, 0);
+    });
+  }
+
+  columns.forEach(({ ids }, columnIndex) => {
+    const centerX = frame.left + columnWidth * (columnIndex + 0.5);
+    ids.forEach((id, rowIndex) => {
+      const node = graph.nodes.get(id);
+      if (!node || positions.has(id)) return;
+      const narrow = columnWidth < 108;
+      const vertical = narrow || rowIndex > 0 && node.name.length > 11;
+      const width = vertical
+        ? Math.min(34, Math.max(26, columnWidth * 0.48))
+        : Math.min(172, Math.max(60, columnWidth * 0.82));
+      const height = vertical ? Math.min(82, Math.max(58, rowGap * 1.75)) : rowHeight;
+      put(id, centerX, frame.top + headerHeight + 15 + rowIndex * rowGap, width, height, vertical, depth.get(id) || 1);
+    });
+  });
+
+  // Selected orphans can occur in a packed detail page.  Place them in a
+  // final column instead of silently dropping them from the rendered page.
+  for (const id of selected) {
+    if (positions.has(id)) continue;
+    const node = graph.nodes.get(id);
+    if (!node) continue;
+    const centerX = frame.left + frame.width / 2;
+    put(id, centerX, frame.top + headerHeight + 15 + maxRows * rowGap, Math.min(150, Math.max(64, columnWidth * 0.75)), rowHeight, false, depth.get(id) || 1);
+  }
+  const edges = [...parentEdge.values()]
+    .map((edge) => ({ ...edge, from: positions.get(edge.parent), to: positions.get(edge.child) }))
+    .filter((edge) => edge.from && edge.to);
+  const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
+  return { frame, nodes, edges, roots, maxDepth: maxRows, verticalLeaves: true };
+}
+
+/**
+ * Two-column layout: the root remains a shared header, while its first-level
+ * branches are balanced into two independent vertical lanes.  Children keep
+ * their normal depth, so the result reads as a left/right comparison sheet
+ * rather than a single long bus.
+ */
+function layoutTwoColumnPage({ graph, pageSize, frame, parentEdge, children, roots, selected, depth, leafWeight }) {
+  const positions = new Map();
+  const topGap = Math.min(92, Math.max(50, frame.height / 4));
+  const laneGap = 18;
+  const laneWidth = Math.max(80, (frame.width - laneGap) / 2);
+  const levelGap = Math.min(112, Math.max(45, (frame.height - 48) / Math.max(2, Math.max(...depth.values(), 1) + 1)));
+  const put = (id, centerX, top, width, height, vertical = false, depthValue = 0, spanLeft = centerX - width / 2, spanWidth = width) => {
+    positions.set(id, {
+      left: centerX - width / 2,
+      top,
+      width,
+      height,
+      centerX,
+      bottom: top + height,
+      vertical,
+      depth: depthValue,
+      spanLeft,
+      spanWidth,
+    });
+  };
+
+  const headerIds = roots.filter((id) => selected.has(id));
+  const primary = headerIds[0];
+  if (primary && headerIds.length === 1) {
+    const root = graph.nodes.get(primary);
+    if (root) put(primary, frame.left + frame.width / 2, frame.top, Math.min(180, Math.max(100, root.name.length * 5.4 + 54)), 34, false, 0, frame.left, frame.width);
+  } else {
+    const headerWidth = Math.min(170, Math.max(72, frame.width / Math.max(1, headerIds.length) * 0.72));
+    headerIds.forEach((id, index) => {
+      const root = graph.nodes.get(id);
+      if (!root) return;
+      const centerX = frame.left + frame.width * ((index + 0.5) / headerIds.length);
+      put(id, centerX, frame.top, headerWidth, 34, false, 0, centerX - headerWidth / 2, headerWidth);
+    });
+  }
+
+  const laneBranches = [[], []];
+  const laneWeights = [0, 0];
+  const branchRoots = [];
+  for (const rootId of headerIds) {
+    const direct = (children.get(rootId) || []).filter((id) => selected.has(id));
+    if (direct.length) {
+      for (const id of direct) branchRoots.push({ id, parent: rootId });
+    } else if (!positions.has(rootId)) {
+      branchRoots.push({ id: rootId, parent: null });
+    }
+  }
+  for (const branch of branchRoots) {
+    const weight = Math.max(1, leafWeight(branch.id));
+    const lane = laneWeights[0] <= laneWeights[1] ? 0 : 1;
+    laneBranches[lane].push(branch);
+    laneWeights[lane] += weight;
+  }
+
+  const assign = (id, spanLeft, spanWidth, lane, parentLevel = 1) => {
+    if (positions.has(id)) return;
+    const node = graph.nodes.get(id);
+    if (!node) return;
+    const childIds = (children.get(id) || []).filter((childId) => selected.has(childId));
+    const level = depth.get(id) || parentLevel;
+    const leaf = childIds.length === 0;
+    const vertical = leaf && spanWidth < 102;
+    const width = vertical
+      ? Math.min(34, Math.max(27, spanWidth * 0.46))
+      : Math.min(172, Math.max(56, Math.min(spanWidth * 0.82, 96 + node.name.length * 4.2)));
+    const height = vertical ? 76 : 31;
+    const centerX = spanLeft + spanWidth / 2;
+    put(id, centerX, frame.top + level * levelGap, width, height, vertical, level, spanLeft, spanWidth);
+    const total = Math.max(1, childIds.reduce((sum, childId) => sum + Math.max(1, leafWeight(childId)), 0));
+    let cursor = spanLeft;
+    for (const childId of childIds) {
+      const childWidth = spanWidth * Math.max(1, leafWeight(childId)) / total;
+      assign(childId, cursor, childWidth, lane, level + 1);
+      cursor += childWidth;
+    }
+  };
+
+  for (let lane = 0; lane < 2; lane += 1) {
+    const left = lane === 0 ? frame.left : frame.left + laneWidth + laneGap;
+    const total = Math.max(1, laneBranches[lane].reduce((sum, branch) => sum + Math.max(1, leafWeight(branch.id)), 0));
+    let cursor = left;
+    for (const branch of laneBranches[lane]) {
+      const width = laneWidth * Math.max(1, leafWeight(branch.id)) / total;
+      if (branch.parent && positions.has(branch.parent)) {
+        assign(branch.id, cursor, width, lane, 1);
+      } else {
+        assign(branch.id, cursor, width, lane, 0);
+      }
+      cursor += width;
+    }
+  }
+  for (const id of selected) {
+    if (positions.has(id)) continue;
+    const node = graph.nodes.get(id);
+    if (!node) continue;
+    put(id, frame.left + frame.width / 2, frame.top + topGap, 100, 30, false, depth.get(id) || 1);
+  }
+  const edges = [...parentEdge.values()]
+    .map((edge) => ({ ...edge, from: positions.get(edge.parent), to: positions.get(edge.child) }))
+    .filter((edge) => edge.from && edge.to);
+  const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
+  return { frame, nodes, edges, roots, maxDepth: Math.max(0, ...depth.values()), verticalLeaves: false };
 }
 
 export function nodeStyle(node) {

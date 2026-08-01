@@ -67,6 +67,19 @@ outputs/sample-orgchart.json  # 노드·관계·법적 메타데이터
 
 ```bash
 node src/cli.mjs from-law \
+  --institution "행정안전부" \
+  --date 2025-11-25 \
+  --layout best \
+  --source-dir work/legal-snapshots/mois \
+  --out outputs/행정안전부.pptx \
+  --svg outputs/행정안전부.svg \
+  --json outputs/행정안전부.json
+```
+
+`--institution`만 주면 `○○부와 그 소속기관 직제` → `○○부 직제`, `○○부와 그 소속기관 직제 시행규칙` → `○○부 직제 시행규칙` 순서로 기준일 연혁을 찾습니다. 법령 제명이 특수하거나 일부만 읽고 싶으면 아래처럼 직접 지정할 수 있습니다.
+
+```bash
+node src/cli.mjs from-law \
   --decree "행정안전부와 그 소속기관 직제" \
   --rule "행정안전부와 그 소속기관 직제 시행규칙" \
   --date 2025-11-25 \
@@ -214,6 +227,7 @@ node src/cli.mjs batch-audit \
 ```
 
 케이스 파일은 로컬 문언 입력과 법제처 기준일 조회를 모두 지원합니다.
+`institution`과 `date`만 쓰면 `from-law`와 같은 제명 후보 규칙으로 직제와 시행규칙을 자동 조회합니다. 특수 제명이나 일부 법령만 쓰려면 `decree`, `rule`, `law`를 직접 지정합니다.
 
 ```json
 {
@@ -222,11 +236,9 @@ node src/cli.mjs batch-audit \
       "id": "industry-policy-a4-half",
       "institution": "산업통상부",
       "date": "2026-07-24",
-      "decree": "산업통상부와 그 소속기관 직제",
-      "rule": "산업통상부와 그 소속기관 직제 시행규칙",
       "view": "operational",
       "paper": "a4-half",
-      "layout": "vertical",
+      "layout": "best",
       "focus": "산업정책실"
     }
   ]

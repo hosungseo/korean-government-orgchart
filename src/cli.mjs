@@ -6,6 +6,7 @@ import { applyAnnexOrganizations, attachAnnexes } from "./annex.mjs";
 import { buildAuditReport, formatAuditMarkdown } from "./audit.mjs";
 import { formatBatchAuditMarkdown, runBatchAudit } from "./batch-audit.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
+import { organizationLawNameCandidateGroups } from "./law-name.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
 import { planBestPages, planLayoutVariants, planPages } from "./layout.mjs";
 import { projectOperationalView, summarizeStructure } from "./model.mjs";
@@ -41,16 +42,18 @@ async function fromLawCommand(args) {
 
 async function graphFromLawArgs(args) {
   const date = required(args, "date");
+  const institution = stringArg(args, "institution");
   const names = [
     stringArg(args, "decree"),
     stringArg(args, "rule"),
     ...args.law.filter((value) => typeof value === "string"),
   ].filter(Boolean);
-  if (!names.length) throw new Error("--decree 또는 --law로 법령명을 지정해야 합니다.");
-  const fetched = [];
-  for (const name of names) {
-    fetched.push(await fetchLawAtDate(name, date, { oc: stringArg(args, "oc") }));
+  if (!names.length && !institution) {
+    throw new Error("--institution, --decree 또는 --law로 법령명을 지정해야 합니다.");
   }
+  const fetched = names.length
+    ? await fetchExplicitLaws(names, date, args)
+    : await fetchInferredOrganizationLaws(institution, date, args);
   if (args["source-dir"]) {
     await fs.mkdir(path.resolve(args["source-dir"]), { recursive: true });
     for (const item of fetched) {
@@ -85,6 +88,35 @@ async function graphFromLawArgs(args) {
   applyAnnexOrganizations(graph);
   graph.validateLegalStructure();
   return graph;
+}
+
+async function fetchExplicitLaws(names, date, args) {
+  const fetched = [];
+  for (const name of names) {
+    fetched.push(await fetchLawAtDate(name, date, { oc: stringArg(args, "oc") }));
+  }
+  return fetched;
+}
+
+async function fetchInferredOrganizationLaws(institution, date, args) {
+  const groups = organizationLawNameCandidateGroups(institution);
+  const fetched = [];
+  for (const group of groups) {
+    fetched.push(await fetchFirstLawCandidate(group, date, args));
+  }
+  return fetched;
+}
+
+async function fetchFirstLawCandidate(group, date, args) {
+  const errors = [];
+  for (const name of group.candidates) {
+    try {
+      return await fetchLawAtDate(name, date, { oc: stringArg(args, "oc") });
+    } catch (error) {
+      errors.push(`${name}: ${error.message}`);
+    }
+  }
+  throw new Error(`${group.label} 후보를 찾지 못했습니다. 시도한 제명: ${errors.join(" / ")}`);
 }
 
 async function fetchCommand(args) {
@@ -283,6 +315,12 @@ function printHelp() {
     --rule "행정안전부와 그 소속기관 직제 시행규칙" \\
     --date 2025-11-25 \\
     --out outputs/행정안전부.pptx
+
+  node src/cli.mjs from-law \\
+    --institution "산업통상부" \\
+    --date 2026-07-24 \\
+    --layout best \\
+    --svg outputs/산업통상부.svg
 
 명령
   build      로컬 텍스트를 파싱하여 PPTX/SVG/JSON 생성

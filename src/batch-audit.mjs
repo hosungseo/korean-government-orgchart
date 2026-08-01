@@ -3,6 +3,7 @@ import path from "node:path";
 import { applyAnnexOrganizations, attachAnnexes } from "./annex.mjs";
 import { buildAuditReport } from "./audit.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
+import { organizationLawNameCandidateGroups } from "./law-name.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
 import { planBestPages, planLayoutVariants, planPages } from "./layout.mjs";
 import { projectOperationalView } from "./model.mjs";
@@ -276,13 +277,9 @@ async function graphFromCase(caseSpec, context) {
 
   if (!date) throw new Error(`${caseSpec.id}: date가 필요합니다.`);
   const lawNames = lawNamesFromCase(caseSpec);
-  if (!lawNames.length) {
-    throw new Error(`${caseSpec.id}: inputs/texts 또는 decree/rule/law/laws 중 하나가 필요합니다.`);
-  }
-  const fetched = [];
-  for (const lawName of lawNames) {
-    fetched.push(await fetchLawAtDate(lawName, date, { oc: caseSpec.oc || context.oc }));
-  }
+  const fetched = lawNames.length
+    ? await fetchExplicitLaws(lawNames, date, caseSpec, context)
+    : await fetchInferredOrganizationLaws(caseSpec, date, context);
   await writeFetchedSourcesIfRequested(fetched, caseSpec, context);
   const graph = parseOrganizationTexts(
     fetched.map((item) => item.text),
@@ -306,6 +303,37 @@ async function graphFromCase(caseSpec, context) {
   attachAnnexes(graph, fetched.flatMap((item) => item.annexes || []));
   await applyCaseAnnexes(graph, caseSpec, context);
   return graph;
+}
+
+async function fetchExplicitLaws(lawNames, date, caseSpec, context) {
+  const fetched = [];
+  for (const lawName of lawNames) {
+    fetched.push(await fetchLawAtDate(lawName, date, { oc: caseSpec.oc || context.oc }));
+  }
+  return fetched;
+}
+
+async function fetchInferredOrganizationLaws(caseSpec, date, context) {
+  if (!caseSpec.institution) {
+    throw new Error(`${caseSpec.id}: inputs/texts, decree/rule/law/laws 또는 institution 중 하나가 필요합니다.`);
+  }
+  const fetched = [];
+  for (const group of organizationLawNameCandidateGroups(caseSpec.institution)) {
+    fetched.push(await fetchFirstLawCandidate(group, date, caseSpec, context));
+  }
+  return fetched;
+}
+
+async function fetchFirstLawCandidate(group, date, caseSpec, context) {
+  const errors = [];
+  for (const lawName of group.candidates) {
+    try {
+      return await fetchLawAtDate(lawName, date, { oc: caseSpec.oc || context.oc });
+    } catch (error) {
+      errors.push(`${lawName}: ${error.message}`);
+    }
+  }
+  throw new Error(`${caseSpec.id}: ${group.label} 후보를 찾지 못했습니다. 시도한 제명: ${errors.join(" / ")}`);
 }
 
 async function localTextsFromCase(caseSpec, baseDir) {

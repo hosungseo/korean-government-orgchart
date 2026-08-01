@@ -6,7 +6,12 @@ import { jsonReplacer, readInputs, writeText } from "./utils.mjs";
 
 export async function runReviewPack(args = {}) {
   const outDir = path.resolve(stringArg(args, "out-dir") || "outputs/review-pack");
-  const caseSpecs = await resolveReviewCases(args);
+  const reviewContext = await resolveReviewContext(args);
+  const caseSpecs = reviewContext.caseSpecs;
+  const exportedCases = exportCaseSpecs(caseSpecs, {
+    fromDir: reviewContext.casesBaseDir,
+    outDir,
+  });
   const sharedLawFetchCache = args.lawFetchCache || new Map();
   const common = {
     ...args,
@@ -31,13 +36,14 @@ export async function runReviewPack(args = {}) {
     readme: path.join(outDir, stringArg(args, "readme-out") || "README.md"),
     worklist: path.join(outDir, stringArg(args, "worklist-out") || "worklist.md"),
     cases: path.join(outDir, stringArg(args, "cases-out") || "cases.json"),
+    suggestedCases: path.join(outDir, stringArg(args, "suggested-cases-out") || "suggested-cases.json"),
     audit: path.join(outDir, stringArg(args, "audit-out") || "audit.md"),
     auditJson: path.join(outDir, stringArg(args, "audit-json-out") || "audit.json"),
     manifest: path.join(outDir, stringArg(args, "manifest-out") || "manifest.md"),
     manifestJson: path.join(outDir, stringArg(args, "manifest-json-out") || "manifest.json"),
   };
 
-  await writeText(files.cases, `${JSON.stringify({ cases: caseSpecs }, jsonReplacer, 2)}\n`);
+  await writeText(files.cases, `${JSON.stringify({ cases: exportedCases }, jsonReplacer, 2)}\n`);
   await writeText(files.audit, formatBatchAuditMarkdown(audit));
   await writeText(files.auditJson, `${JSON.stringify(audit, jsonReplacer, 2)}\n`);
   await writeText(files.manifest, formatBatchBuildMarkdown(build));
@@ -49,9 +55,11 @@ export async function runReviewPack(args = {}) {
     artifactDir,
     files,
     caseCount: caseSpecs.length,
+    exportedCases,
     audit,
     build,
   };
+  await writeText(files.suggestedCases, `${JSON.stringify(buildSuggestedCasesDocument(result), jsonReplacer, 2)}\n`);
   await writeText(files.worklist, formatReviewWorklistMarkdown(result));
   await writeText(files.readme, formatReviewPackMarkdown(result));
   return result;
@@ -85,6 +93,7 @@ export function formatReviewPackMarkdown(result) {
   lines.push(`- 감사 요약: ${linkPath(result.outDir, result.files.audit)}`);
   lines.push(`- 산출물 매니페스트: ${linkPath(result.outDir, result.files.manifest)}`);
   lines.push(`- 케이스 정의: ${linkPath(result.outDir, result.files.cases)}`);
+  lines.push(`- 자동 보강 케이스 후보: ${linkPath(result.outDir, result.files.suggestedCases)}`);
   lines.push(`- 기계 판독용 감사 JSON: ${linkPath(result.outDir, result.files.auditJson)}`);
   lines.push(`- 기계 판독용 매니페스트 JSON: ${linkPath(result.outDir, result.files.manifestJson)}`);
   lines.push("");
@@ -134,10 +143,14 @@ export function formatReviewPackMarkdown(result) {
 
 export function formatReviewWorklistMarkdown(result) {
   const lines = [];
+  const suggested = buildSuggestedCasesDocument(result);
   lines.push("# 조직도 검토 작업목록");
   lines.push("");
   lines.push(`- 생성시각: ${result.generatedAt}`);
   lines.push(`- 케이스: ${result.caseCount}`);
+  if (result.files?.suggestedCases) {
+    lines.push(`- 자동 보강 케이스 후보: ${linkPath(result.outDir, result.files.suggestedCases)} (${suggested.changedCases}/${suggested.cases.length}건 보강)`);
+  }
   lines.push("");
 
   const directiveDrafts = collectDirectiveDrafts(result.audit?.cases || []);
@@ -213,26 +226,137 @@ export function formatReviewWorklistMarkdown(result) {
   return `${lines.join("\n")}\n`;
 }
 
-async function resolveReviewCases(args) {
-  if (args.caseSpecs) return args.caseSpecs;
+export function buildSuggestedCasesDocument(result) {
+  const baseCases = result.exportedCases || (result.audit?.cases || []).map((item) => item.case || {});
+  const cases = [];
+  let changedCases = 0;
+  for (let index = 0; index < baseCases.length; index += 1) {
+    const auditCase = result.audit?.cases?.[index] || {};
+    const { caseSpec, changes } = suggestCaseSpec(baseCases[index], auditCase);
+    if (changes.length) changedCases += 1;
+    cases.push(caseSpec);
+  }
+  return {
+    generatedAt: result.generatedAt,
+    source: "review-pack",
+    changedCases,
+    notes: [
+      "이 파일은 원본 cases.json을 보존한 채 자동 적용 가능한 보강안만 반영한 후보입니다.",
+      "단일 보좌기관의 @소관 후보와 hard layout 문제의 보수적 레이아웃 재시도만 자동 반영합니다.",
+      "별표 확보, 복수 보좌기관 소관 대조, 소관법령 지도 충돌은 worklist.md에서 별도 확인하세요.",
+    ],
+    cases,
+  };
+}
+
+function suggestCaseSpec(baseCase = {}, auditCase = {}) {
+  const next = clonePlain(baseCase);
+  const changes = [];
+  const directives = suggestedDirectives(auditCase);
+  if (directives.length) {
+    next.directives = uniqueStrings([...asArray(next.directives).map(String), ...directives]);
+    changes.push({ type: "directives", count: directives.length });
+  }
+
+  const layoutPatch = suggestedLayoutPatchObject(auditCase.summary || {});
+  if (Object.keys(layoutPatch).length) {
+    if (layoutPatch.layout) delete next.layouts;
+    Object.assign(next, layoutPatch);
+    changes.push({ type: "layout", patch: layoutPatch });
+  }
+
+  if (changes.length) {
+    next.suggested = {
+      source: "review-pack",
+      sourceCaseId: baseCase.id || auditCase.summary?.id || null,
+      changes,
+    };
+  }
+  return { caseSpec: next, changes };
+}
+
+function suggestedDirectives(auditCase = {}) {
+  return uniqueStrings(
+    (auditCase.report?.jurisdictionCandidates || [])
+      .filter((candidate) => candidate.confidence === "single-advisor-container")
+      .map((candidate) => candidate.directive)
+      .filter(Boolean),
+  );
+}
+
+async function resolveReviewContext(args) {
+  if (args.caseSpecs) {
+    return {
+      caseSpecs: args.caseSpecs,
+      casesBaseDir: stringArg(args, "cases") ? path.dirname(path.resolve(stringArg(args, "cases"))) : process.cwd(),
+    };
+  }
   if (stringArg(args, "cases")) {
     const context = await loadBatchContext(args);
-    return context.caseSpecs;
+    return {
+      caseSpecs: context.caseSpecs,
+      casesBaseDir: context.casesBaseDir,
+    };
   }
   const inputInstitutions = args.input?.length ? await readInputs(args.input) : [];
   const institutions = [stringArg(args, "institutions"), stringArg(args, "institution"), ...inputInstitutions];
-  return buildAuditCaseSpecs({
-    institutions,
-    date: stringArg(args, "date"),
-    view: stringArg(args, "view") || "operational",
-    paper: stringArg(args, "paper") || "a4-half",
-    layout: stringArg(args, "layout") || "best",
-    layouts: stringArg(args, "layouts"),
-    focus: stringArg(args, "focus"),
-    maxNodes: args["max-nodes"] ? Number(args["max-nodes"]) : undefined,
-    lawMap: stringArg(args, "law-map"),
-    lawMapDate: stringArg(args, "law-map-date"),
-  }).cases;
+  return {
+    caseSpecs: buildAuditCaseSpecs({
+      institutions,
+      date: stringArg(args, "date"),
+      view: stringArg(args, "view") || "operational",
+      paper: stringArg(args, "paper") || "a4-half",
+      layout: stringArg(args, "layout") || "best",
+      layouts: stringArg(args, "layouts"),
+      focus: stringArg(args, "focus"),
+      maxNodes: args["max-nodes"] ? Number(args["max-nodes"]) : undefined,
+      lawMap: stringArg(args, "law-map"),
+      lawMapDate: stringArg(args, "law-map-date"),
+    }).cases,
+    casesBaseDir: process.cwd(),
+  };
+}
+
+function exportCaseSpecs(caseSpecs, { fromDir, outDir }) {
+  return (caseSpecs || []).map((caseSpec) => rebaseCaseSpecPaths(caseSpec, fromDir || process.cwd(), outDir));
+}
+
+function rebaseCaseSpecPaths(caseSpec, fromDir, outDir) {
+  const next = clonePlain(caseSpec);
+  rebasePathField(next, "input", fromDir, outDir);
+  rebasePathField(next, "inputs", fromDir, outDir);
+  rebasePathField(next, "annexFile", fromDir, outDir);
+  rebasePathField(next, "annexFiles", fromDir, outDir);
+  rebasePathField(next, "lawMap", fromDir, outDir);
+  rebasePathField(next, "sourceDir", fromDir, outDir);
+  return next;
+}
+
+function rebasePathField(object, key, fromDir, outDir) {
+  if (object[key] == null) return;
+  object[key] = Array.isArray(object[key])
+    ? object[key].map((value) => rebasePathValue(value, fromDir, outDir))
+    : rebasePathValue(object[key], fromDir, outDir);
+}
+
+function rebasePathValue(value, fromDir, outDir) {
+  if (typeof value !== "string" || !value.trim() || value === "-") return value;
+  if (/^[a-z][a-z0-9+.-]*:/i.test(value)) return value;
+  const absolute = path.isAbsolute(value) ? value : path.resolve(fromDir, value);
+  return path.relative(outDir, absolute).split(path.sep).join("/") || ".";
+}
+
+function clonePlain(value) {
+  return JSON.parse(JSON.stringify(value || {}));
+}
+
+function asArray(value) {
+  if (value == null) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+function uniqueStrings(values) {
+  return [...new Set(values.map((value) => String(value).trim()).filter(Boolean))];
 }
 
 function stringArg(args, key) {
@@ -355,6 +479,11 @@ function caseLabel(item) {
 }
 
 function suggestedLayoutPatch(summary = {}) {
+  const patch = suggestedLayoutPatchObject(summary);
+  return Object.keys(patch).length ? JSON.stringify(patch) : "";
+}
+
+function suggestedLayoutPatchObject(summary = {}) {
   const patch = {};
   if ((summary.layoutDiagnostics?.totalIssues || 0) > 0) {
     patch.layout = "catalog";
@@ -364,7 +493,7 @@ function suggestedLayoutPatch(summary = {}) {
     patch.maxNodes = summary.paper === "a4-half" ? 16 : 28;
   }
   if (summary.paper === "a4-half" && (summary.layoutDiagnostics?.totalIssues || 0) > 0) patch.paper = "a4-portrait";
-  return Object.keys(patch).length ? JSON.stringify(patch) : "";
+  return patch;
 }
 
 function layoutRetryMessage(summary = {}, diagnostics = {}) {

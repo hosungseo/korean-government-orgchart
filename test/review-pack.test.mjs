@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { mkdtemp, readFile, stat, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { formatReviewWorklistMarkdown, runReviewPack } from "../src/review-pack.mjs";
+import { runBatchAudit } from "../src/batch-audit.mjs";
+import { buildSuggestedCasesDocument, formatReviewWorklistMarkdown, runReviewPack } from "../src/review-pack.mjs";
 
 test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든다", async () => {
   const dir = await mkdtemp(path.join(os.tmpdir(), "orgchart-review-pack-"));
@@ -52,6 +53,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(await readFile(result.files.worklist, "utf8"), /조직도 검토 작업목록/);
   assert.match(await readFile(result.files.worklist, "utf8"), /입력에 붙여넣을 보강 지시문 후보/);
   assert.ok((await stat(result.files.cases)).size > 0);
+  assert.ok((await stat(result.files.suggestedCases)).size > 0);
   assert.match(await readFile(result.files.audit, "utf8"), /조직도 batch audit/);
   assert.match(await readFile(result.files.manifest, "utf8"), /조직도 batch build/);
   assert.ok((await stat(result.files.auditJson)).size > 0);
@@ -59,12 +61,30 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.ok((await stat(result.build.deck)).size > 0);
   assert.match(await readFile(result.build.cases[0].outputs.svg, "utf8"), /<svg/);
   assert.match(await readFile(result.build.cases[0].outputs.trace, "utf8"), /산업정책관/);
+
+  const suggested = JSON.parse(await readFile(result.files.suggestedCases, "utf8"));
+  assert.equal(suggested.changedCases, 1);
+  assert.equal(suggested.cases[0].inputs[0], "../law.txt");
+  assert.match(suggested.cases[0].directives.join("\n"), /@소관: 산업정책관 > 정책과ㆍ지원과/);
+
+  const suggestedAudit = await runBatchAudit({ cases: result.files.suggestedCases });
+  assert.equal(suggestedAudit.cases[0].summary.jurisdiction.relations, 2);
+  assert.equal(suggestedAudit.cases[0].summary.jurisdiction.candidateDepartments, 0);
 });
 
 test("review-pack 작업목록은 지시문·별표·레이아웃·소관법령 문제를 요약한다", () => {
   const markdown = formatReviewWorklistMarkdown({
     generatedAt: "2026-08-02T00:00:00.000Z",
     caseCount: 1,
+    exportedCases: [
+      {
+        id: "case-a",
+        institution: "시험부",
+        layout: "vertical",
+        layouts: "vertical,catalog",
+        paper: "a4-half",
+      },
+    ],
     audit: {
       cases: [
         {
@@ -128,4 +148,58 @@ test("review-pack 작업목록은 지시문·별표·레이아웃·소관법령 
   assert.match(markdown, /cases\.json 보정 예/);
   assert.match(markdown, /미매칭/);
   assert.match(markdown, /중복 후보/);
+});
+
+test("review-pack 자동 보강 케이스는 단일 @소관 후보와 hard layout 패치를 반영한다", () => {
+  const suggested = buildSuggestedCasesDocument({
+    generatedAt: "2026-08-02T00:00:00.000Z",
+    exportedCases: [
+      {
+        id: "case-a",
+        institution: "시험부",
+        layout: "vertical",
+        layouts: "vertical,catalog",
+        paper: "a4-half",
+        directives: ["@유형: 시험부 = 기관장"],
+      },
+    ],
+    audit: {
+      cases: [
+        {
+          summary: {
+            id: "case-a",
+            institution: "시험부",
+            paper: "a4-half",
+            layoutDiagnostics: {
+              totalIssues: 2,
+              qualityIssues: 1,
+            },
+          },
+          report: {
+            jurisdictionCandidates: [
+              {
+                confidence: "single-advisor-container",
+                directive: "@소관: 산업정책관 > 정책과ㆍ지원과 [시행규칙 분장사무 확인 필요]",
+              },
+              {
+                confidence: "multiple-advisors-need-range-crosswalk",
+                directive: null,
+              },
+            ],
+          },
+        },
+      ],
+    },
+  });
+
+  assert.equal(suggested.changedCases, 1);
+  assert.equal(suggested.cases[0].layout, "catalog");
+  assert.equal(suggested.cases[0].paper, "a4-portrait");
+  assert.equal(suggested.cases[0].maxNodes, 14);
+  assert.equal("layouts" in suggested.cases[0], false);
+  assert.deepEqual(suggested.cases[0].directives, [
+    "@유형: 시험부 = 기관장",
+    "@소관: 산업정책관 > 정책과ㆍ지원과 [시행규칙 분장사무 확인 필요]",
+  ]);
+  assert.equal(suggested.cases[0].suggested.changes.length, 2);
 });

@@ -426,7 +426,11 @@ function printHelp() {
   --outputs svg,json,audit,trace,pptx,deck|all  batch-build 산출 형식(all은 케이스별 svg/json/audit/trace/pptx)
   --deck <file.pptx>        batch-build 통합 PPTX deck 경로(--outputs deck 없이도 활성화)
   --artifact-dir <dir>      review-pack 내부 산출물 폴더(기본: <out-dir>/artifacts)
+  --suggested-cases-out <file> review-pack 자동 보강 케이스 파일명(기본: suggested-cases.json)
   --institutions "A,B"      make-cases/review-pack 기관명 목록(쉼표 또는 줄바꿈)
   --strict                  batch-audit에서 오류·수정 필요가 있으면 종료코드 2
+
+cases.json 추가 필드
+  "directives": ["@소관: 정책관 > 정책과ㆍ지원과"]  원문과 별도로 적용할 보강 지시문
 `);
 }

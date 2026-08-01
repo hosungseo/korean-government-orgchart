@@ -329,8 +329,9 @@ export async function graphFromCase(caseSpec, context) {
     ? await fetchExplicitLaws(lawNames, date, caseSpec, context)
     : await fetchInferredOrganizationLaws(caseSpec, date, context);
   await writeFetchedSourcesIfRequested(fetched, caseSpec, context);
+  const directiveText = directiveTextFromCase(caseSpec);
   const graph = parseOrganizationTexts(
-    fetched.map((item) => item.text),
+    [...fetched.map((item) => item.text), directiveText].filter(Boolean),
     {
       institution: caseSpec.institution,
       title: caseSpec.title || caseSpec.institution,
@@ -469,6 +470,8 @@ async function localTextsFromCase(caseSpec, baseDir) {
   for (const inputPath of asArray(caseSpec.inputs || caseSpec.input)) {
     texts.push(await fs.readFile(resolveCasePath(inputPath, baseDir), "utf8"));
   }
+  const directives = directiveTextFromCase(caseSpec);
+  if (directives) texts.push(directives);
   return texts;
 }
 
@@ -477,7 +480,15 @@ function localSourceNames(caseSpec) {
   if (caseSpec.text) names.push(`${caseSpec.id}: inline text`);
   for (const _text of asArray(caseSpec.texts)) names.push(`${caseSpec.id}: inline texts`);
   for (const inputPath of asArray(caseSpec.inputs || caseSpec.input)) names.push(String(inputPath));
+  if (directiveTextFromCase(caseSpec)) names.push(`${caseSpec.id}: directives`);
   return names;
+}
+
+function directiveTextFromCase(caseSpec) {
+  const chunks = [];
+  for (const directive of asArray(caseSpec.directives)) chunks.push(String(directive));
+  if (caseSpec.directiveText) chunks.push(String(caseSpec.directiveText));
+  return chunks.map((item) => item.trim()).filter(Boolean).join("\n");
 }
 
 function lawNamesFromCase(caseSpec) {

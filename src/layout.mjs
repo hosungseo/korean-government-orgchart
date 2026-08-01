@@ -196,6 +196,15 @@ export function planPages(
     const focused = graph.nodeByName(focus);
     if (focused) {
       const nodeIds = [focused.id, ...graph.descendantsOf(focused.id).map((node) => node.id)];
+      const focusedLayoutStyle =
+        focused.kind === "affiliated"
+          ? affiliateDetailLayoutStyle({
+              visual,
+              requestedVisual,
+              descendantCount: nodeIds.length - 1,
+              paper: format,
+            })
+          : visual;
       const focusedPage = {
         kind: focused.kind === "affiliated" ? "affiliate-detail" : "compact",
         title: graph.meta.title,
@@ -204,7 +213,7 @@ export function planPages(
         nodeIds: [...new Set(nodeIds)],
         breadcrumb: [focused.name],
         paper: format,
-        layoutStyle: visual,
+        layoutStyle: focusedLayoutStyle,
       };
       return [{ ...focusedPage, pageNumber: 1, pageCount: 1 }];
     }
@@ -293,7 +302,15 @@ export function planPages(
           layoutStyle: visual,
         });
       } else {
-        affiliateDetails.push(...splitBranchPages(graph, affiliate, effectiveMaxNodes, ["소속기관"], format, visual));
+        const layoutStyleForAffiliate = affiliateDetailLayoutStyle({
+          visual,
+          requestedVisual,
+          descendantCount: descendants.length,
+          paper: format,
+        });
+        affiliateDetails.push(
+          ...splitBranchPages(graph, affiliate, effectiveMaxNodes, ["소속기관"], format, layoutStyleForAffiliate),
+        );
       }
     }
     pages.push(...packDetailPages(affiliateDetails, effectiveMaxNodes, "소속기관", format, visual));
@@ -323,7 +340,8 @@ function packDetailPages(specs, maxNodes, label, paper, layoutStyle) {
     const rootConflict =
       spec.rootIds.some((id) => current.nodeIds.includes(id)) ||
       current.rootIds.some((id) => ids.has(id));
-    if (mergedIds.size <= maxNodes && !intersects && !rootConflict) {
+    const layoutConflict = (spec.layoutStyle || layoutStyle) !== (current.layoutStyle || layoutStyle);
+    if (mergedIds.size <= maxNodes && !intersects && !rootConflict && !layoutConflict) {
       current.rootIds = [...new Set([...current.rootIds, ...spec.rootIds])];
       current.nodeIds = [...mergedIds];
       continue;
@@ -347,6 +365,12 @@ function packDetailPages(specs, maxNodes, label, paper, layoutStyle) {
     paper: page.paper || paper,
     layoutStyle: page.layoutStyle || layoutStyle,
   }));
+}
+
+function affiliateDetailLayoutStyle({ visual, requestedVisual, descendantCount, paper }) {
+  if (requestedVisual) return visual;
+  const denseThreshold = paper === "a4-half" ? 6 : 8;
+  return descendantCount >= denseThreshold ? "catalog" : visual;
 }
 
 function splitBranchPages(graph, branch, maxNodes, breadcrumb, paper = "slide", layoutStyle) {
@@ -914,10 +938,18 @@ function layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, p
     const groupWidth = Math.max(80, columnWidth - 12);
     const captionHeight = 17;
     const headerHeight = spec.id ? 31 : 0;
-    const childColumns = spec.children.length > 4 && groupWidth >= 170 ? 2 : 1;
+    const childColumns =
+      spec.children.length > 18 && groupWidth >= 520
+        ? 4
+        : spec.children.length > 10 && groupWidth >= 340
+          ? 3
+          : spec.children.length > 4 && groupWidth >= 170
+            ? 2
+            : 1;
     const childColumnWidth = groupWidth / childColumns;
     const childRows = Math.max(1, Math.ceil(spec.children.length / childColumns));
     const rowGap = Math.min(31, Math.max(23, (frame.height - 100) / Math.max(1, childRows)));
+    const childHeight = Math.min(27, Math.max(18, rowGap - 5));
     const groupHeight = Math.max(50, captionHeight + headerHeight + childRows * rowGap + 8);
     const top = columnTops[column];
     groupBoxes.push({ left, top, width: groupWidth, height: groupHeight, caption: spec.caption });
@@ -942,7 +974,7 @@ function layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, p
       const childLeft = left + childColumn * childColumnWidth;
       const width = Math.min(176, Math.max(62, childColumnWidth * 0.82));
       const vertical = width < 98 && node.name.length > 8;
-      positions.set(id, boxPosition(childLeft + childColumnWidth / 2, cursorTop + row * rowGap, vertical ? 34 : width, vertical ? 70 : 27, {
+      positions.set(id, boxPosition(childLeft + childColumnWidth / 2, cursorTop + row * rowGap, vertical ? 34 : width, vertical ? Math.max(42, childHeight) : childHeight, {
         vertical,
         depth: depth.get(id) ?? 1,
         spanLeft: childLeft,

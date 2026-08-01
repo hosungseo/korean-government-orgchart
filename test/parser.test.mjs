@@ -145,6 +145,37 @@ test("카드 목록형은 상위 조직별 묶음으로 법정 계층을 보존�
   assert.equal(layout.edges.length, 0);
 });
 
+test("대량 소속기관 상세는 자동 모드에서 카드형으로 전환한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험청
+제2조(소속기관) 시험청장 소속으로 서울지방시험청을 둔다.
+`,
+  ]);
+  const regional = graph.nodeByName("서울지방시험청");
+  for (let index = 1; index <= 30; index += 1) {
+    const child = graph.addNode(`제${index}시험세무서`, {
+      kind: "affiliated",
+      forceKind: true,
+      metadata: { unitRole: "affiliated-institution", affiliationType: "special-local" },
+    });
+    graph.addEdge(regional.id, child.id, { type: "affiliated" });
+  }
+
+  const autoPage = planPages(graph, { paper: "a4-landscape", mode: "auto", maxNodes: 50 }).find((page) =>
+    page.nodeIds.includes(regional.id) && page.kind === "affiliate-detail"
+  );
+  assert.equal(autoPage.layoutStyle, "catalog");
+  const autoLayout = layoutPage(graph, autoPage, { pageSize: resolvePageSize(autoPage.paper) });
+  assert.equal(autoLayout.edges.length, 0);
+  assert.equal(autoLayout.diagnostics.ok, true);
+
+  const explicitPage = planPages(graph, { paper: "a4-landscape", layoutStyle: "horizontal-bus", maxNodes: 50 }).find((page) =>
+    page.nodeIds.includes(regional.id) && page.kind === "affiliate-detail"
+  );
+  assert.equal(explicitPage.layoutStyle, "horizontal-bus");
+});
+
 test("본부와 소속기관은 작도 색·표식으로 구분한다", () => {
   const graph = parseOrganizationTexts([
     `

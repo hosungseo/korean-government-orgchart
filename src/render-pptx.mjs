@@ -670,26 +670,44 @@ function addPptxEdge(slide, pptx, edge) {
   const from = edge.from;
   const to = edge.to;
   if (!from || !to) return;
+  const overlap = 0.65;
   if (edge.orientation === "horizontal") {
-    const x1 = from.right;
-    const x2 = to.left;
+    const tipX = to.left;
+    const x1 = from.right - overlap;
+    const x2 = to.left + overlap;
     const y1 = from.centerY;
     const y2 = to.centerY;
     const mid = (x1 + x2) / 2;
-    addPptxLine(slide, pptx, x1, y1, mid, y1, color, style, 1.1);
-    addPptxLine(slide, pptx, mid, y1, mid, y2, color, style, 1.1);
-    addPptxLine(slide, pptx, mid, y2, x2, y2, color, style, 1.1);
-    addPptxArrowHead(slide, pptx, x2, y2, "right", color);
+    if (Math.abs(y2 - y1) < 0.1) {
+      addPptxLine(slide, pptx, x1, y1, x2, y2, color, style, 1.1);
+    } else {
+      const sx = signOrOne(x2 - x1);
+      const sy = signOrOne(y2 - y1);
+      addPptxLine(slide, pptx, x1, y1, mid + sx * overlap, y1, color, style, 1.1);
+      addPptxLine(slide, pptx, mid, y1 - sy * overlap, mid, y2 + sy * overlap, color, style, 1.1);
+      addPptxLine(slide, pptx, mid - sx * overlap, y2, x2, y2, color, style, 1.1);
+    }
+    addPptxArrowHead(slide, pptx, tipX, y2, "right", color);
     return;
   }
   const x1 = from.centerX;
   const x2 = to.centerX;
-  const y1 = from.bottom;
-  const y2 = to.top;
+  const y1 = from.bottom - overlap;
+  const y2 = to.top + overlap;
   const mid = (y1 + y2) / 2;
-  addPptxLine(slide, pptx, x1, y1, x1, mid, color, style, 1.1);
-  addPptxLine(slide, pptx, x1, mid, x2, mid, color, style, 1.1);
-  addPptxLine(slide, pptx, x2, mid, x2, y2, color, style, 1.1);
+  if (Math.abs(x2 - x1) < 0.1) {
+    addPptxLine(slide, pptx, x1, y1, x2, y2, color, style, 1.1);
+  } else {
+    const sx = signOrOne(x2 - x1);
+    const sy = signOrOne(y2 - y1);
+    addPptxLine(slide, pptx, x1, y1, x1, mid + sy * overlap, color, style, 1.1);
+    addPptxLine(slide, pptx, x1 - sx * overlap, mid, x2 + sx * overlap, mid, color, style, 1.1);
+    addPptxLine(slide, pptx, x2, mid - sy * overlap, x2, y2, color, style, 1.1);
+  }
+}
+
+function signOrOne(value) {
+  return value < 0 ? -1 : 1;
 }
 
 function addPptxLayoutLabel(slide, label, pageSize) {
@@ -825,10 +843,10 @@ function addPptxText(slide, text, position, style = {}) {
 
 function addPptxLine(slide, pptx, x1, y1, x2, y2, color, style = "solid", width = 1) {
   slide.addShape(pptx.ShapeType.line, {
-    x: pt(x1),
-    y: pt(y1),
-    w: pt(x2 - x1),
-    h: pt(y2 - y1),
+    x: pt(Math.min(x1, x2)),
+    y: pt(Math.min(y1, y2)),
+    w: pt(Math.abs(x2 - x1)),
+    h: pt(Math.abs(y2 - y1)),
     line: {
       color: stripHex(color),
       width,

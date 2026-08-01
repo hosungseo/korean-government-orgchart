@@ -76,6 +76,26 @@ test("A4 반쪽 세로형은 단계 간격을 검토서형으로 압축한다", 
   assert.ok(topByDepth.get(2) - topByDepth.get(1) <= 100);
 });
 
+test("A4 반쪽 세로형은 조밀한 세로 과 상자를 겹치지 않게 압축한다", () => {
+  const departments = Array.from({ length: 16 }, (_, index) => `제${index + 1}정책과`).join("ㆍ");
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실을 둔다.
+시험실에 ${departments}를 둔다.
+`,
+  ]);
+  const page = planPages(graph, { paper: "a4-half", layoutStyle: "vertical-stack", focus: "시험실" })[0];
+  const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
+  const leafWidths = layout.nodes
+    .filter(({ position }) => position.vertical)
+    .map(({ position }) => position.width);
+
+  assert.equal(layout.diagnostics.overlaps.length, 0);
+  assert.equal(layout.diagnostics.overflow.length, 0);
+  assert.ok(Math.min(...leafWidths) <= 14);
+});
+
 test("같은 그래프를 여러 시각 유형으로 한 번에 계획한다", () => {
   const graph = parseOrganizationTexts([text]);
   assert.deepEqual(parseLayoutStyles("vertical,horizontal,two-column,matrix"), [

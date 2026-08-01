@@ -582,15 +582,18 @@ export function layoutPage(graph, page, options = {}) {
     let width;
     let height;
     let vertical = false;
-    const availableWidth = Math.max(18, spanWidth - siblingGutter);
     if (isLeaf && verticalLeaves && level > 0) {
+      const minLeafWidth = narrowHalf ? 12 : 18;
+      const leafWidthFloor = narrowHalf ? 18 : 24;
+      const availableWidth = Math.max(minLeafWidth, spanWidth - siblingGutter);
       width = Math.min(
         portrait ? 34 : 32,
-        Math.max(Math.min(24, availableWidth), availableWidth * 0.7),
+        Math.max(Math.min(leafWidthFloor, availableWidth), availableWidth * 0.82),
       );
       height = leafHeight;
       vertical = true;
     } else {
+      const availableWidth = Math.max(18, spanWidth - siblingGutter);
       width = Math.min(
         168,
         Math.max(

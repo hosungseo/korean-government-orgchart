@@ -110,8 +110,8 @@ export function formatBatchBuildMarkdown(result) {
   lines.push(`- 출력 형식: ${result.outputs.join(", ")}`);
   lines.push(`- 케이스: ${result.total} · 생성 ${result.statusCounts.built || 0} · 오류 ${result.statusCounts.error || 0}`);
   lines.push("");
-  lines.push("| 기관 | 기준일 | 보기 | 대상 | 상태 | 페이지 | 배치 문제 | 산출물 |");
-  lines.push("| --- | --- | --- | --- | --- | ---: | ---: | --- |");
+  lines.push("| 기관 | 기준일 | 보기 | 대상 | 선택유형 | 상태 | 페이지 | 배치 문제 | 산출물 |");
+  lines.push("| --- | --- | --- | --- | --- | --- | ---: | ---: | --- |");
   for (const item of result.cases) {
     const summary = item.summary || {};
     const outputList = Object.entries(item.outputs || {})
@@ -123,6 +123,7 @@ export function formatBatchBuildMarkdown(result) {
         escapeCell(summary.asOf || ""),
         escapeCell(summary.view || ""),
         escapeCell(summary.focus || summary.layout || ""),
+        escapeCell(formatSelectedLayouts(summary.layoutSelection)),
         escapeCell(item.statusLabel || item.status),
         summary.pages ?? "",
         summary.layoutDiagnostics?.totalIssues ?? "",
@@ -192,4 +193,8 @@ function stringArg(args, key) {
 
 function escapeCell(value) {
   return String(value ?? "").replaceAll("|", "\\|").replace(/\n+/g, " ");
+}
+
+function formatSelectedLayouts(layoutSelection) {
+  return (layoutSelection?.selected || []).join(",");
 }

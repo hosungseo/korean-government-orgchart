@@ -57,5 +57,8 @@ test("batch-build는 로컬 케이스에서 SVG·JSON·감사리포트를 일괄
   assert.match(await readFile(result.cases[0].outputs.svg, "utf8"), /<svg/);
   assert.match(await readFile(result.cases[0].outputs.json, "utf8"), /"institution": "시험부"/);
   assert.match(await readFile(result.cases[0].outputs.audit, "utf8"), /조직도 감사 리포트/);
-  assert.match(formatBatchBuildMarkdown(result), /조직도 batch build/);
+  assert.deepEqual(result.cases[0].summary.layoutSelection.selected, ["vertical-stack"]);
+  const markdown = formatBatchBuildMarkdown(result);
+  assert.match(markdown, /조직도 batch build/);
+  assert.match(markdown, /vertical-stack/);
 });

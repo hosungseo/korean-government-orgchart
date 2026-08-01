@@ -51,6 +51,7 @@ export async function runBatchAudit(args = {}) {
 export function summarizeAuditCase({ caseSpec = {}, report, view = "legal", pages = [] }) {
   const reviewCounts = countBy(report.reviewActions || [], (item) => item.priority || "low");
   const layout = countLayoutDiagnostics(report.layoutDiagnostics || []);
+  const layoutSelection = summarizeLayoutSelection(caseSpec, pages);
   const jurisdictionRunInferences = report.jurisdictionRunInferences || [];
   const jurisdictionCandidates = report.jurisdictionCandidates || [];
   const jurisdictionCrosswalks = report.jurisdictionCrosswalks || {};
@@ -64,6 +65,7 @@ export function summarizeAuditCase({ caseSpec = {}, report, view = "legal", page
     view,
     paper: caseSpec.paper || null,
     layout: caseSpec.layouts || caseSpec.layout || null,
+    layoutSelection,
     focus: caseSpec.focus || null,
     status: report.meta.status,
     statusLabel: STATUS_LABELS[report.meta.status] || report.meta.status,
@@ -117,9 +119,9 @@ export function formatBatchAuditMarkdown(result) {
   );
   lines.push("");
   lines.push(
-    "| 기관 | 기준일 | 보기 | 대상 | 상태 | 노드 | 페이지 | 높은 확인 | 중간 확인 | 낮은 확인 | 소관관계 | 소관 후보 | 배치 문제 | 별표 |",
+    "| 기관 | 기준일 | 보기 | 대상 | 선택유형 | 상태 | 노드 | 페이지 | 높은 확인 | 중간 확인 | 낮은 확인 | 소관관계 | 소관 후보 | 배치 문제 | 별표 |",
   );
-  lines.push("| --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |");
+  lines.push("| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |");
   for (const item of result.cases) {
     const summary = item.summary;
     lines.push(
@@ -128,6 +130,7 @@ export function formatBatchAuditMarkdown(result) {
         escapeCell(summary.asOf || ""),
         escapeCell(summary.view || ""),
         escapeCell(summary.focus || summary.layout || ""),
+        escapeCell(formatSelectedLayouts(summary.layoutSelection)),
         escapeCell(summary.statusLabel || summary.status),
         summary.nodes ?? "",
         summary.pages ?? "",
@@ -163,6 +166,16 @@ export function formatBatchAuditMarkdown(result) {
     if (summary.focus) lines.push(`- 대상: ${summary.focus}`);
     if (summary.layout || summary.paper) {
       lines.push(`- 작도: ${[summary.paper, summary.layout].filter(Boolean).join(" / ")}`);
+    }
+    if (summary.layoutSelection?.selected?.length) {
+      lines.push(`- 선택 유형: ${formatSelectedLayouts(summary.layoutSelection)}`);
+    }
+    if (summary.layoutSelection?.bestFit?.candidateScores?.length) {
+      lines.push("- best-fit 후보 점수:");
+      for (const candidate of summary.layoutSelection.bestFit.candidateScores.slice(0, 4)) {
+        const d = candidate.diagnostics || {};
+        lines.push(`  - ${candidate.style}: 점수 ${candidate.score}, 문제 ${d.totalIssues || 0}, 페이지 ${d.pages || 0}`);
+      }
     }
     if (item.error) {
       lines.push(`- 오류: ${item.error}`);
@@ -203,6 +216,32 @@ export function formatBatchAuditMarkdown(result) {
     lines.push("");
   }
   return `${lines.join("\n")}\n`;
+}
+
+export function summarizeLayoutSelection(caseSpec = {}, pages = []) {
+  const selected = unique(pages.map((page) => page.layoutStyle).filter(Boolean));
+  const selectedBy = unique(pages.map((page) => page.selectedBy).filter(Boolean));
+  const bestFit = pages.find((page) => page.bestFit)?.bestFit || null;
+  return {
+    requested: caseSpec.layouts || caseSpec.layout || null,
+    selected,
+    selectedBy,
+    pageStyles: pages.map((page) => ({
+      pageNumber: page.pageNumber,
+      pageCount: page.pageCount,
+      subtitle: page.subtitle,
+      layoutStyle: page.layoutStyle,
+      selectedBy: page.selectedBy || null,
+    })),
+    ...(bestFit
+      ? {
+          bestFit: {
+            selectedLayoutStyle: bestFit.selectedLayoutStyle,
+            candidateScores: bestFit.candidateScores,
+          },
+        }
+      : {}),
+  };
 }
 
 export async function loadBatchContext(args) {
@@ -496,6 +535,10 @@ function countBy(items, keyFn) {
   return counts;
 }
 
+function unique(values) {
+  return [...new Set(values.filter(Boolean))];
+}
+
 function sum(items, valueFn) {
   return items.reduce((total, item) => total + valueFn(item), 0);
 }
@@ -544,6 +587,12 @@ function numberValue(...values) {
 
 function escapeCell(value) {
   return String(value ?? "").replaceAll("|", "\\|").replace(/\n+/g, " ");
+}
+
+function formatSelectedLayouts(layoutSelection) {
+  const selected = layoutSelection?.selected || [];
+  if (!selected.length) return "";
+  return selected.join(",");
 }
 
 function priorityLabel(value) {

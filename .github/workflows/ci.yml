@@ -40,6 +40,8 @@ jobs:
             if (result.total !== 2) throw new Error(`expected 2 sample cases, got ${result.total}`);
             const issue = result.cases.find((item) => item.summary.layoutDiagnostics.totalIssues > 0);
             if (issue) throw new Error(`layout diagnostics failed: ${issue.summary.id}`);
+            const missingSelection = result.cases.find((item) => !item.summary.layoutSelection?.selected?.length);
+            if (missingSelection) throw new Error(`missing layout selection: ${missingSelection.summary.id}`);
           '
 
       - name: Sample batch build gate
@@ -57,6 +59,9 @@ jobs:
             const failed = result.cases.find((item) => item.status !== "built");
             if (failed) throw new Error(`batch build failed: ${failed.case?.id || failed.error}`);
             for (const item of result.cases) {
+              if (!item.summary.layoutSelection?.selected?.length) {
+                throw new Error(`missing layout selection: ${item.summary.id}`);
+              }
               for (const key of ["svg", "json", "audit", "pptx"]) {
                 if (!item.outputs[key] || !fs.existsSync(item.outputs[key])) {
                   throw new Error(`missing ${key} output for ${item.summary.id}`);

@@ -37,7 +37,29 @@ test("배치 감사 요약은 검토·별표·소관·배치 문제를 집계한
     caseSpec: { id: "case-1", paper: "a4-half", layout: "vertical", focus: "시험실" },
     report,
     view: "operational",
-    pages: [{}, {}],
+    pages: [
+      {
+        pageNumber: 1,
+        pageCount: 2,
+        subtitle: "시험실",
+        layoutStyle: "vertical-stack",
+        selectedBy: "best-fit",
+        bestFit: {
+          selectedLayoutStyle: "vertical-stack",
+          candidateScores: [
+            { style: "vertical-stack", score: 100, diagnostics: { totalIssues: 0, pages: 1 } },
+            { style: "catalog", score: 101, diagnostics: { totalIssues: 0, pages: 1 } },
+          ],
+        },
+      },
+      {
+        pageNumber: 2,
+        pageCount: 2,
+        subtitle: "시험실 부록",
+        layoutStyle: "vertical-stack",
+        selectedBy: "best-fit",
+      },
+    ],
   });
 
   assert.equal(summary.status, "needs-correction");
@@ -49,6 +71,9 @@ test("배치 감사 요약은 검토·별표·소관·배치 문제를 집계한
   assert.equal(summary.layoutDiagnostics.totalIssues, 4);
   assert.equal(summary.layoutRecommendations, 1);
   assert.equal(summary.lawMap.unmatchedDepartments, 1);
+  assert.deepEqual(summary.layoutSelection.selected, ["vertical-stack"]);
+  assert.equal(summary.layoutSelection.bestFit.selectedLayoutStyle, "vertical-stack");
+  assert.equal(summary.layoutSelection.bestFit.candidateScores.length, 2);
 });
 
 test("배치 감사 마크다운은 기관별 품질 매트릭스를 만든다", () => {
@@ -72,6 +97,7 @@ test("배치 감사 마크다운은 기관별 품질 매트릭스를 만든다",
           annex: { requirements: 1, missing: 0 },
           jurisdiction: { relations: 2, candidateDepartments: 3, orderedRunDepartments: 0 },
           layoutDiagnostics: { totalIssues: 0 },
+          layoutSelection: { selected: ["vertical-stack"] },
         },
         report: {
           reviewActions: [{ priority: "medium", message: "정책관 소관 확인" }],
@@ -81,7 +107,7 @@ test("배치 감사 마크다운은 기관별 품질 매트릭스를 만든다",
   });
 
   assert.match(markdown, /# 조직도 batch audit/);
-  assert.match(markdown, /\| 시험부 \| 2026-07-24 \| operational \| 시험실 \| 검토 필요/);
+  assert.match(markdown, /\| 시험부 \| 2026-07-24 \| operational \| 시험실 \| vertical-stack \| 검토 필요/);
   assert.match(markdown, /정책관 소관 확인/);
 });
 
@@ -120,5 +146,6 @@ test("배치 감사는 케이스 파일 기준 상대경로 입력을 읽는다"
   assert.equal(result.total, 1);
   assert.equal(result.cases[0].summary.institution, "시험부");
   assert.equal(result.cases[0].summary.pages, 1);
+  assert.deepEqual(result.cases[0].summary.layoutSelection.selected, ["vertical-stack"]);
   assert.notEqual(result.cases[0].summary.status, "error");
 });

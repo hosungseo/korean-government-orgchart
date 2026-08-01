@@ -220,8 +220,15 @@ node src/cli.mjs audit \
 직제 검토 업무에서는 한 기관 그림 한 장보다 “어느 기관·어느 실국에서 아직 사람이 확인해야 하는가”가 더 중요합니다. `batch-audit`은 케이스 목록을 받아 파싱, 별표 반영, 정책관·관 소관 확정 여부, 소관법령 매칭, A4 배치 품질을 표로 묶어 줍니다.
 
 ```bash
+node src/cli.mjs make-cases \
+  --institutions "행정안전부,산업통상부,공정거래위원회" \
+  --date 2026-07-24 \
+  --paper a4-half \
+  --layout best \
+  --out work/core-agencies.cases.json
+
 node src/cli.mjs batch-audit \
-  --cases examples/audit-cases.json \
+  --cases work/core-agencies.cases.json \
   --format markdown \
   --out outputs/batch-audit.md
 ```

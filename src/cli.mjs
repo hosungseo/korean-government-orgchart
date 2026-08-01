@@ -5,6 +5,7 @@ import path from "node:path";
 import { applyAnnexOrganizations, attachAnnexes } from "./annex.mjs";
 import { buildAuditReport, formatAuditMarkdown } from "./audit.mjs";
 import { formatBatchAuditMarkdown, runBatchAudit } from "./batch-audit.mjs";
+import { buildAuditCaseSpecs } from "./case-scaffold.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { organizationLawNameCandidateGroups } from "./law-name.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
@@ -24,6 +25,7 @@ try {
   else if (command === "inspect") await inspectCommand(args);
   else if (command === "audit") await auditCommand(args);
   else if (command === "batch-audit") await batchAuditCommand(args);
+  else if (command === "make-cases") await makeCasesCommand(args);
   else printHelp();
 } catch (error) {
   console.error(process.env.DEBUG ? error.stack : `오류: ${error.message}`);
@@ -178,6 +180,29 @@ async function batchAuditCommand(args) {
   }
 }
 
+async function makeCasesCommand(args) {
+  const inputInstitutions = args.input?.length ? await readInputs(args.input) : [];
+  const institutions = [stringArg(args, "institutions"), stringArg(args, "institution"), ...inputInstitutions];
+  const result = buildAuditCaseSpecs({
+    institutions,
+    date: stringArg(args, "date"),
+    view: stringArg(args, "view") || "operational",
+    paper: stringArg(args, "paper") || "a4-half",
+    layout: stringArg(args, "layout") || "best",
+    focus: stringArg(args, "focus"),
+    maxNodes: args["max-nodes"] ? Number(args["max-nodes"]) : undefined,
+    lawMap: stringArg(args, "law-map"),
+    lawMapDate: stringArg(args, "law-map-date"),
+  });
+  const output = `${JSON.stringify(result, jsonReplacer, 2)}\n`;
+  if (args.out) {
+    await writeText(path.resolve(args.out), output);
+    console.log(`배치 케이스 저장: ${path.resolve(args.out)}`);
+  } else {
+    console.log(output);
+  }
+}
+
 async function graphFromInputs(args) {
   const texts = await readInputs(args.input);
   return parseOrganizationTexts(texts, {
@@ -329,6 +354,7 @@ function printHelp() {
   inspect    파싱 결과 요약 출력
   audit      파싱·소관·별표·배치 품질 감사 리포트 출력
   batch-audit 여러 기관·기준일·레이아웃을 한 번에 감사하여 품질 매트릭스 출력
+  make-cases 기관명 목록에서 batch-audit 케이스 JSON 생성
 
 주요 옵션
   --layout auto|best|compact|split|vertical|horizontal|two-column|matrix|flow|change-lanes|affiliate-strip|catalog|all
@@ -345,6 +371,7 @@ function printHelp() {
   --source-dir <dir>        조회한 기준일 법령 문언 보관
   --format markdown|json    audit 리포트 출력 형식
   --cases <cases.json>      batch-audit 케이스 목록
+  --institutions "A,B"      make-cases 기관명 목록(쉼표 또는 줄바꿈)
   --strict                  batch-audit에서 오류·수정 필요가 있으면 종료코드 2
 `);
 }

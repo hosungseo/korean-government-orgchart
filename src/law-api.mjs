@@ -1,3 +1,4 @@
+import { extractAnnexesFromLawJson } from "./annex.mjs";
 import { compactDate, normalizeWhitespace } from "./utils.mjs";
 
 const SEARCH_ENDPOINT = "https://www.law.go.kr/DRF/lawSearch.do";
@@ -48,6 +49,9 @@ export async function fetchLawAtDate(lawName, asOf, options = {}) {
     mst: selected.mst,
     metadata: selected,
     json,
+    annexes: extractAnnexesFromLawJson(json, {
+      source: `${lawName} [시행 ${selected.effectiveDate}]`,
+    }),
     text: flattenLawJson(json),
     sourceUrl: serviceUrl.toString(),
   };

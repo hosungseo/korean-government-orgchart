@@ -1,3 +1,4 @@
+import { findAnnex } from "./annex.mjs";
 import { layoutPage, resolvePageSize } from "./layout.mjs";
 import { summarizeStructure } from "./model.mjs";
 
@@ -8,6 +9,10 @@ export function buildAuditReport(graph, pages = [], options = {}) {
   const pageDiagnostics = options.layout === false ? [] : collectPageDiagnostics(graph, pages);
   const jurisdictionCandidates = suggestJurisdictionCandidates(graph);
   const reviewActions = collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates);
+  const annexRequirements = (graph.meta.annexRequirements || []).map((item) => ({
+    ...item,
+    matchedAnnex: findAnnex(graph, item.annex),
+  }));
   const kindCounts = {};
   for (const node of graph.nodes.values()) kindCounts[node.kind] = (kindCounts[node.kind] || 0) + 1;
 
@@ -32,7 +37,8 @@ export function buildAuditReport(graph, pages = [], options = {}) {
     reviewActions,
     warnings: graph.meta.warnings || [],
     validation: graph.meta.validation || [],
-    annexRequirements: graph.meta.annexRequirements || [],
+    annexRequirements,
+    annexes: graph.meta.annexes || [],
     temporaryHeadcounts: graph.meta.temporaryHeadcounts || [],
     jurisdictionRelations: graph.meta.jurisdictionRelations || [],
     jurisdictionCandidates,
@@ -53,7 +59,8 @@ export function formatAuditMarkdown(report) {
 
   appendSection(lines, "우선 확인", report.reviewActions, (item) => `- [${priorityLabel(item.priority)}] ${item.message}`);
   appendSection(lines, "통칙·구조 검증", report.validation, (item) => `- ${item}`);
-  appendSection(lines, "별표 필요", report.annexRequirements, (item) => `- ${item.annex} · ${item.description} (${item.source})`);
+  appendSection(lines, "별표 필요", report.annexRequirements, formatAnnexRequirement);
+  appendSection(lines, "별표 인벤토리", report.annexes, formatAnnexInventory);
   appendSection(lines, "한시정원", report.temporaryHeadcounts, (item) => `- ${item.target}: ${item.expires}까지 (${item.source})`);
   appendSection(lines, "정책관·관 소관 후보", report.jurisdictionCandidates, formatJurisdictionCandidate);
   appendSection(lines, "관리폭 진단", report.spanDiagnostics, (item) => `- ${item.node}: ${item.directUnits}개 · ${item.message}`);
@@ -125,10 +132,13 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates) {
     }
   }
   for (const item of graph.meta.annexRequirements || []) {
+    const annex = findAnnex(graph, item.annex);
     actions.push({
       priority: item.type === "organization-matrix" ? "high" : "medium",
       topic: "annex",
-      message: `${item.annex} 확인 필요: ${item.description}`,
+      message: annex
+        ? `${item.annex} 확보됨(${annex.rowCount}행): ${item.description}`
+        : `${item.annex} 확인 필요: ${item.description}`,
     });
   }
   for (const item of jurisdictionCandidates) {
@@ -224,6 +234,17 @@ function formatJurisdictionCandidate(item) {
   if (item.directive) lines.push(`  - 지시문 초안: \`${item.directive}\``);
   else lines.push("  - 지시문 초안: 복수 보좌기관이므로 직제 호 번호 범위와 시행규칙 과 분장사무를 먼저 대조해야 합니다.");
   return lines.join("\n");
+}
+
+function formatAnnexRequirement(item) {
+  const annex = item.matchedAnnex;
+  if (annex) return `- ${item.annex} · 확보됨 ${annex.rowCount}행 · ${item.description} (${item.source})`;
+  return `- ${item.annex} · ${item.description} (${item.source})`;
+}
+
+function formatAnnexInventory(item) {
+  const suffix = item.rowCount ? ` · 표 ${item.rowCount}행` : "";
+  return `- ${item.annex} · ${item.type} · ${item.title}${suffix}`;
 }
 
 function statusLabel(value) {

@@ -2,6 +2,7 @@
 
 import fs from "node:fs/promises";
 import path from "node:path";
+import { attachAnnexes } from "./annex.mjs";
 import { buildAuditReport, formatAuditMarkdown } from "./audit.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
@@ -54,6 +55,12 @@ async function graphFromLawArgs(args) {
     for (const item of fetched) {
       const safeName = item.lawName.replace(/[\\/:*?"<>|]/g, "-");
       await writeText(path.join(path.resolve(args["source-dir"]), `${safeName}-${item.effectiveDate}.txt`), item.text);
+      if (item.annexes?.length) {
+        await writeText(
+          path.join(path.resolve(args["source-dir"]), `${safeName}-${item.effectiveDate}.annexes.json`),
+          `${JSON.stringify(item.annexes, jsonReplacer, 2)}\n`,
+        );
+      }
     }
   }
   const graph = parseOrganizationTexts(
@@ -71,7 +78,9 @@ async function graphFromLawArgs(args) {
     effectiveDate: item.effectiveDate,
     mst: item.mst,
     sourceUrl: item.sourceUrl,
+    annexCount: item.annexes?.length || 0,
   }));
+  attachAnnexes(graph, fetched.flatMap((item) => item.annexes || []));
   return graph;
 }
 
@@ -192,6 +201,7 @@ function summarize(graph, pages) {
     validation: graph.meta.validation,
     temporaryHeadcounts: graph.meta.temporaryHeadcounts?.length || 0,
     jurisdictionRelations: graph.meta.jurisdictionRelations?.length || 0,
+    annexes: graph.meta.annexes?.length || 0,
     structure: summarizeStructure(graph),
     spanDiagnostics: graph.meta.spanDiagnostics || [],
     lawMappedDepartments: graph.meta.lawMap?.matchedDepartments || 0,

@@ -10,6 +10,7 @@ export function buildAuditReport(graph, pages = [], options = {}) {
   const jurisdictionCandidates = suggestJurisdictionCandidates(graph);
   const jurisdictionCrosswalks = collectJurisdictionCrosswalks(graph);
   const reviewActions = collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates, jurisdictionCrosswalks);
+  const layoutRecommendations = collectLayoutRecommendations(pageDiagnostics);
   const annexRequirements = (graph.meta.annexRequirements || []).map((item) => ({
     ...item,
     matchedAnnex: findAnnex(graph, item.annex, { source: item.source }),
@@ -49,6 +50,7 @@ export function buildAuditReport(graph, pages = [], options = {}) {
     lawMap: graph.meta.lawMap || null,
     spanDiagnostics: graph.meta.spanDiagnostics || [],
     layoutDiagnostics: pageDiagnostics,
+    layoutRecommendations,
   };
 }
 
@@ -107,6 +109,7 @@ export function formatAuditMarkdown(report) {
     report.layoutDiagnostics,
     (item) => `- ${item.pageNumber}/${item.pageCount} ${item.layoutStyle} · ${item.subtitle}: 노드 ${item.nodes}, 관계 ${item.edges}, ${formatLayoutStatus(item.diagnostics)}`,
   );
+  appendSection(lines, "작도 개선 제안", report.layoutRecommendations, formatLayoutRecommendation);
   appendSection(lines, "파서 경고", report.warnings, (item) => `- ${item}`);
   return `${lines.join("\n")}\n`;
 }
@@ -212,6 +215,53 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates, ju
     actions.push({ priority: "low", topic: "warning", message });
   }
   return actions;
+}
+
+function collectLayoutRecommendations(pageDiagnostics) {
+  const recommendations = [];
+  for (const page of pageDiagnostics || []) {
+    const diagnostics = page.diagnostics || {};
+    if (diagnostics.ok) continue;
+    const prefix = `${page.pageNumber}/${page.pageCount} ${page.subtitle}`;
+    if (diagnostics.overflow?.length || diagnostics.overlaps?.length) {
+      recommendations.push({
+        pageNumber: page.pageNumber,
+        pageCount: page.pageCount,
+        subtitle: page.subtitle,
+        layoutStyle: page.layoutStyle,
+        paper: page.paper,
+        issue: "box-fit",
+        message:
+          page.paper === "a4-half"
+            ? `${prefix}: A4 반쪽 면에서 상자 밀도가 높습니다. --max-nodes를 12~16으로 낮추거나 --focus로 실·국 단위 면을 더 나누세요.`
+            : `${prefix}: 상자가 인쇄 프레임을 넘거나 겹칩니다. --max-nodes를 낮춰 분할하거나 --paper a4-landscape --layout two-column을 우선 시도하세요.`,
+      });
+      if (page.layoutStyle !== "catalog") {
+        recommendations.push({
+          pageNumber: page.pageNumber,
+          pageCount: page.pageCount,
+          subtitle: page.subtitle,
+          layoutStyle: page.layoutStyle,
+          paper: page.paper,
+          issue: "print-safe-fallback",
+          message: `${prefix}: 검토서 첨부용으로는 연결선을 줄인 --layout catalog가 가장 안전한 대체안입니다.`,
+        });
+      }
+    }
+    if (diagnostics.edgeIssues?.length) {
+      const reasons = [...new Set(diagnostics.edgeIssues.map((item) => item.reason).filter(Boolean))];
+      recommendations.push({
+        pageNumber: page.pageNumber,
+        pageCount: page.pageCount,
+        subtitle: page.subtitle,
+        layoutStyle: page.layoutStyle,
+        paper: page.paper,
+        issue: "connector-routing",
+        message: `${prefix}: 연결선 문제가 있습니다(${reasons.join(", ") || "원인 미상"}). --max-nodes를 낮춰 계층 간격을 확보하거나, 기능 검토용이면 --layout flow, 인쇄 첨부용이면 --layout catalog를 쓰세요.`,
+      });
+    }
+  }
+  return recommendations;
 }
 
 function collectJurisdictionCrosswalks(graph) {
@@ -370,6 +420,10 @@ function formatAnnexOrganization(item) {
     return `- ${item.annex} · ${item.title}: 세무서 ${item.officeCount}개에 과 ${item.departmentCount}개를 scoped 하부조직으로 반영${skipped}`;
   }
   return `- ${item.annex} · ${item.title}: ${item.type}`;
+}
+
+function formatLayoutRecommendation(item) {
+  return `- ${item.message}`;
 }
 
 function compactSourceLabel(source) {

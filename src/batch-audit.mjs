@@ -102,6 +102,7 @@ export function summarizeAuditCase({ caseSpec = {}, report, view = "legal", page
         }
       : null,
     layoutDiagnostics: layout,
+    layoutRecommendations: report.layoutRecommendations?.length || 0,
   };
 }
 
@@ -180,6 +181,15 @@ export function formatBatchAuditMarkdown(result) {
       lines.push(
         `- 배치 문제: 넘침 ${diag.overflow} · 겹침 ${diag.overlaps} · 연결선 ${diag.edgeIssues}`,
       );
+    }
+    if (report.layoutRecommendations?.length) {
+      lines.push("- 작도 개선:");
+      for (const recommendation of report.layoutRecommendations.slice(0, 4)) {
+        lines.push(`  - ${recommendation.message}`);
+      }
+      if (report.layoutRecommendations.length > 4) {
+        lines.push(`  - 외 ${report.layoutRecommendations.length - 4}건`);
+      }
     }
     if (summary.jurisdiction?.orderedRunDepartments) {
       lines.push(`- 순서 기반 소관 보강: ${summary.jurisdiction.orderedRunDepartments}개 과·팀`);

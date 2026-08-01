@@ -123,3 +123,32 @@ test("감사 리포트는 순서 기반 보좌기관 소관 보강을 표시한�
   assert.match(markdown, /제도정책관: 제도개선과/);
   assert.match(markdown, /산업협력관: 협력지원과/);
 });
+
+test("감사 리포트는 배치 문제가 있으면 작도 개선 제안을 덧붙인다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실을 둔다.
+시험실에 제1과ㆍ제2과ㆍ제3과ㆍ제4과ㆍ제5과ㆍ제6과ㆍ제7과ㆍ제8과를 둔다.
+`,
+  ]);
+  const root = graph.nodeByName("장관") || graph.findHead();
+  const page = {
+    kind: "compact",
+    title: "시험부",
+    subtitle: "초소형 면",
+    rootIds: [root.id],
+    nodeIds: [root.id, ...graph.descendantsOf(root.id).map((node) => node.id)],
+    paper: { width: 160, height: 180, name: "tiny" },
+    layoutStyle: "horizontal-bus",
+    pageNumber: 1,
+    pageCount: 1,
+  };
+
+  const report = buildAuditReport(graph, [page]);
+  const markdown = formatAuditMarkdown(report);
+
+  assert.equal(report.layoutRecommendations.length > 0, true);
+  assert.match(markdown, /작도 개선 제안/);
+  assert.match(markdown, /--max-nodes/);
+});

@@ -39,7 +39,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   const result = await runReviewPack({
     cases: path.join(dir, "cases.json"),
     "out-dir": path.join(dir, "pack"),
-    outputs: "svg,json,audit,deck",
+    outputs: "svg,json,audit,trace,deck",
   });
 
   assert.equal(result.caseCount, 1);
@@ -55,4 +55,5 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.ok((await stat(result.files.manifestJson)).size > 0);
   assert.ok((await stat(result.build.deck)).size > 0);
   assert.match(await readFile(result.build.cases[0].outputs.svg, "utf8"), /<svg/);
+  assert.match(await readFile(result.build.cases[0].outputs.trace, "utf8"), /산업정책관/);
 });

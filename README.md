@@ -256,13 +256,13 @@ node src/cli.mjs batch-audit \
 출력 표의 핵심 열은 `높은 확인`, `소관 후보`, `배치 문제`, `별표`입니다. `--strict`를 붙이면 오류 또는 수정 필요 케이스가 있을 때 종료코드 2로 끝나므로, 기관 전체 회귀 테스트나 GitHub Actions 품질 게이트로 사용할 수 있습니다.
 `선택유형` 열에는 `--layout best`가 실제로 고른 레이아웃이 표시되고, 상세에는 후보별 점수·문제 수·페이지 수가 남습니다.
 
-감사 후 바로 산출물까지 만들려면 같은 케이스 파일을 `batch-build`에 넘깁니다. 기본 출력은 `svg,json,audit`이고, 케이스별 편집 가능한 PPTX까지 필요하면 `--outputs svg,json,audit,pptx` 또는 `--outputs all`을 지정합니다. 여러 기관·여러 레이아웃을 한 검토 파일로 넘겨야 할 때는 `--outputs deck` 또는 `--deck review.pptx`를 사용합니다. PPTX는 공개 패키지 `pptxgenjs` 기반 fallback으로 생성되며, Codex Artifact Tool 런타임이 있는 환경에서는 기존 고급 렌더러를 우선 사용합니다.
+감사 후 바로 산출물까지 만들려면 같은 케이스 파일을 `batch-build`에 넘깁니다. 기본 출력은 `svg,json,audit`이고, 관계별 근거 추적표까지 필요하면 `trace`, 케이스별 편집 가능한 PPTX까지 필요하면 `--outputs svg,json,audit,trace,pptx` 또는 `--outputs all`을 지정합니다. 여러 기관·여러 레이아웃을 한 검토 파일로 넘겨야 할 때는 `--outputs deck` 또는 `--deck review.pptx`를 사용합니다. PPTX는 공개 패키지 `pptxgenjs` 기반 fallback으로 생성되며, Codex Artifact Tool 런타임이 있는 환경에서는 기존 고급 렌더러를 우선 사용합니다.
 
 ```bash
 node src/cli.mjs batch-build \
   --cases work/core-agencies.cases.json \
   --out-dir outputs/core-agencies \
-  --outputs svg,json,audit,deck \
+  --outputs svg,json,audit,trace,deck \
   --deck outputs/core-agencies/review-deck.pptx \
   --out outputs/core-agencies-manifest.md
 ```
@@ -270,7 +270,7 @@ node src/cli.mjs batch-build \
 생성 매니페스트도 `선택유형`, 페이지 수, 배치 문제 수, 파일명, 통합 PPTX deck 경로를 함께 기록합니다. 통합 deck은 모든 성공 케이스의 페이지를 순서대로 묶습니다. PowerPoint deck 하나는 슬라이드 크기가 하나라서 `a4-half`와 `a4-landscape`처럼 용지 크기가 섞이면 `review-a4-half.pptx`, `review-a4-landscape.pptx`처럼 자동 분리합니다. 이 흐름은 `make-cases → batch-audit → batch-build`로 이어지므로, 기관 목록만 있으면 검토용 품질표와 실제 조직도 파일을 같은 해석 경로에서 반복 생성할 수 있습니다.
 동일 실행 안에서 같은 법령명·기준일·인증값 조합은 한 번만 조회하도록 캐시하므로, 같은 기관을 여러 레이아웃으로 반복 검사해도 법제처 API 호출이 중복되지 않습니다. `--source-dir`을 지정하면 조회 원문과 함께 `.law-cache/*.json`도 저장하고 다음 실행에서 같은 법령명·기준일을 API 없이 재사용합니다.
 
-검토자가 매번 세 명령을 나누어 실행하지 않게 하려면 `review-pack`을 사용합니다. 기관명 목록이나 기존 `cases.json`을 넣으면 케이스 파일, 감사 리포트, 산출물 매니페스트, 케이스별 SVG/JSON/PPTX, 통합 PPTX deck을 한 폴더에 한 번에 만듭니다.
+검토자가 매번 세 명령을 나누어 실행하지 않게 하려면 `review-pack`을 사용합니다. 기관명 목록이나 기존 `cases.json`을 넣으면 케이스 파일, 감사 리포트, 산출물 매니페스트, 케이스별 SVG/JSON/trace CSV/PPTX, 통합 PPTX deck을 한 폴더에 한 번에 만듭니다.
 
 ```bash
 node src/cli.mjs review-pack \
@@ -278,10 +278,10 @@ node src/cli.mjs review-pack \
   --date 2026-07-24 \
   --out-dir outputs/review-pack \
   --source-dir work/law-sources \
-  --outputs svg,json,audit,pptx,deck
+  --outputs svg,json,audit,trace,pptx,deck
 ```
 
-`outputs/review-pack/`에는 `README.md`, `cases.json`, `audit.md`, `audit.json`, `manifest.md`, `manifest.json`이 남고, 실제 조직도 파일은 기본적으로 `outputs/review-pack/artifacts/` 아래에 생성됩니다. `README.md`는 먼저 열 파일, 우선 확인 항목, 케이스별 산출물 링크를 묶은 검토용 첫 화면입니다. 법제처 조회 원문을 이미 모아 둔 경우에는 `--cases examples/audit-cases.json`처럼 케이스 파일을 넘기면 같은 검토팩 구조로 재생성할 수 있습니다. `--strict`를 붙이면 감사상 오류·수정 필요 또는 산출물 생성 오류가 있을 때 종료코드 2로 실패합니다.
+`outputs/review-pack/`에는 `README.md`, `cases.json`, `audit.md`, `audit.json`, `manifest.md`, `manifest.json`이 남고, 실제 조직도 파일은 기본적으로 `outputs/review-pack/artifacts/` 아래에 생성됩니다. `README.md`는 먼저 열 파일, 우선 확인 항목, 케이스별 산출물 링크를 묶은 검토용 첫 화면입니다. 각 `*.trace.csv`는 부모 조직, 자식 조직, 보조·보좌·소속기관 관계, 근거 문형, 출처, 한시·책임운영·본부 같은 표식을 행 단위로 펼칩니다. 법제처 조회 원문을 이미 모아 둔 경우에는 `--cases examples/audit-cases.json`처럼 케이스 파일을 넘기면 같은 검토팩 구조로 재생성할 수 있습니다. `--strict`를 붙이면 감사상 오류·수정 필요 또는 산출물 생성 오류가 있을 때 종료코드 2로 실패합니다.
 
 ### 작도 품질 규칙
 
@@ -317,6 +317,7 @@ src/law-map.mjs       과 단위 소관법령 지도 병합
 src/layout.mjs        작도 프리셋·한 장형·분할형 페이지 계획
 src/render-pptx.mjs   편집 가능한 PowerPoint 도형 출력
 src/render-svg.mjs    SVG 검토 출력
+src/trace.mjs         관계별 근거 추적 CSV 출력
 src/cli.mjs           build/from-law/fetch/inspect/audit/batch/review-pack 명령
 docs/index.html       GitHub Pages 인터랙티브 데모
 ```

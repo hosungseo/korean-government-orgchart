@@ -12,6 +12,7 @@ import {
 import { normalizePaper } from "./layout.mjs";
 import { projectOperationalView } from "./model.mjs";
 import { renderSvg } from "./render-svg.mjs";
+import { buildTraceRows, formatTraceCsv } from "./trace.mjs";
 import { jsonReplacer, writeText } from "./utils.mjs";
 
 const BUILD_STATUS_LABELS = {
@@ -57,6 +58,9 @@ export async function runBatchBuild(args = {}) {
       }
       if (outputs.includes("audit")) {
         written.audit = await writeCaseOutput(outDir, `${stem}.audit.md`, formatAuditMarkdown(report));
+      }
+      if (outputs.includes("trace")) {
+        written.trace = await writeCaseOutput(outDir, `${stem}.trace.csv`, formatTraceCsv(buildTraceRows(graph)));
       }
       if (outputs.includes("pptx")) {
         const pptxPath = path.join(outDir, `${stem}.pptx`);
@@ -181,7 +185,7 @@ export function parseOutputFormats(value) {
     "pptx-deck": "deck",
     pptxdeck: "deck",
   };
-  const perCaseOutputs = ["svg", "json", "audit", "pptx"];
+  const perCaseOutputs = ["svg", "json", "audit", "trace", "pptx"];
   const allowed = new Set([...perCaseOutputs, "deck"]);
   const result = [];
   for (const raw of String(value || "").split(",")) {

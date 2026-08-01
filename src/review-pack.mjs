@@ -17,7 +17,7 @@ export async function runReviewPack(args = {}) {
   const deckPath = stringArg(args, "deck")
     ? path.resolve(stringArg(args, "deck"))
     : path.join(artifactDir, "review-deck.pptx");
-  const outputs = stringArg(args, "outputs") || "svg,json,audit,pptx,deck";
+  const outputs = stringArg(args, "outputs") || "svg,json,audit,trace,pptx,deck";
 
   const audit = await runBatchAudit(common);
   const build = await runBatchBuild({

@@ -11,7 +11,7 @@ import {
 
 test("batch-build 출력 형식 별칭을 해석한다", () => {
   assert.deepEqual(parseOutputFormats("svg,json,md"), ["svg", "json", "audit"]);
-  assert.deepEqual(parseOutputFormats("all"), ["svg", "json", "audit", "pptx"]);
+  assert.deepEqual(parseOutputFormats("all"), ["svg", "json", "audit", "trace", "pptx"]);
   assert.deepEqual(parseOutputFormats("pptx-deck"), ["deck"]);
   assert.throws(() => parseOutputFormats("docx"), /지원하지 않는/);
 });
@@ -50,7 +50,7 @@ test("batch-build는 로컬 케이스에서 SVG·JSON·감사리포트를 일괄
   const result = await runBatchBuild({
     cases: path.join(dir, "cases.json"),
     "out-dir": path.join(dir, "out"),
-    outputs: "svg,json,audit",
+    outputs: "svg,json,audit,trace",
   });
 
   assert.equal(result.total, 1);
@@ -58,6 +58,8 @@ test("batch-build는 로컬 케이스에서 SVG·JSON·감사리포트를 일괄
   assert.match(await readFile(result.cases[0].outputs.svg, "utf8"), /<svg/);
   assert.match(await readFile(result.cases[0].outputs.json, "utf8"), /"institution": "시험부"/);
   assert.match(await readFile(result.cases[0].outputs.audit, "utf8"), /조직도 감사 리포트/);
+  assert.match(await readFile(result.cases[0].outputs.trace, "utf8"), /상위조직,상위유형,관계,하위조직/);
+  assert.match(await readFile(result.cases[0].outputs.trace, "utf8"), /시험실,보조기관,보좌기관,산업정책관/);
   assert.deepEqual(result.cases[0].summary.layoutSelection.selected, ["vertical-stack"]);
   const markdown = formatBatchBuildMarkdown(result);
   assert.match(markdown, /조직도 batch build/);

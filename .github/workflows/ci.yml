@@ -48,7 +48,7 @@ jobs:
         run: |
           node src/cli.mjs batch-build \
             --cases examples/audit-cases.json \
-            --outputs svg,json,audit,pptx,deck \
+            --outputs svg,json,audit,trace,pptx,deck \
             --out-dir /tmp/orgchart-batch-build \
             --format json \
             --strict \
@@ -72,7 +72,7 @@ jobs:
               if (!item.summary.layoutSelection?.selected?.length) {
                 throw new Error(`missing layout selection: ${item.summary.id}`);
               }
-              for (const key of ["svg", "json", "audit", "pptx"]) {
+              for (const key of ["svg", "json", "audit", "trace", "pptx"]) {
                 if (!item.outputs[key] || !fs.existsSync(item.outputs[key])) {
                   throw new Error(`missing ${key} output for ${item.summary.id}`);
                 }
@@ -85,7 +85,7 @@ jobs:
           node src/cli.mjs review-pack \
             --cases examples/audit-cases.json \
             --out-dir /tmp/orgchart-review-pack \
-            --outputs svg,json,audit,deck \
+            --outputs svg,json,audit,trace,deck \
             --strict > /tmp/orgchart-review-pack-summary.json
           node --input-type=module -e '
             import fs from "node:fs";

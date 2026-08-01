@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Sample batch audit gate
+        run: |
+          node src/cli.mjs batch-audit \
+            --cases examples/audit-cases.json \
+            --format json \
+            --strict \
+            --out /tmp/orgchart-batch-audit.json
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const result = JSON.parse(fs.readFileSync("/tmp/orgchart-batch-audit.json", "utf8"));
+            if (result.total !== 2) throw new Error(`expected 2 sample cases, got ${result.total}`);
+            const issue = result.cases.find((item) => item.summary.layoutDiagnostics.totalIssues > 0);
+            if (issue) throw new Error(`layout diagnostics failed: ${issue.summary.id}`);
+          '

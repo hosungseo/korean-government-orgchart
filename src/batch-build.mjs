@@ -9,6 +9,7 @@ import {
   publicCaseSpec,
   summarizeAuditCase,
 } from "./batch-audit.mjs";
+import { normalizePaper } from "./layout.mjs";
 import { projectOperationalView } from "./model.mjs";
 import { renderSvg } from "./render-svg.mjs";
 import { jsonReplacer, writeText } from "./utils.mjs";
@@ -22,11 +23,13 @@ export async function runBatchBuild(args = {}) {
   const context = await loadBatchContext(args);
   const outDir = path.resolve(stringArg(args, "out-dir") || "outputs/batch");
   const outputs = parseOutputFormats(stringArg(args, "outputs") || "svg,json,audit");
+  if (stringArg(args, "deck") && !outputs.includes("deck")) outputs.push("deck");
   const cases = [];
+  const deckItems = [];
   const lawMapCache = new Map();
-  let renderPptx = null;
-  if (outputs.includes("pptx")) {
-    ({ renderPptx } = await import("./render-pptx.mjs"));
+  let pptxRenderer = null;
+  if (outputs.includes("pptx") || outputs.includes("deck")) {
+    pptxRenderer = await import("./render-pptx.mjs");
   }
 
   for (let index = 0; index < context.caseSpecs.length; index += 1) {
@@ -44,24 +47,31 @@ export async function runBatchBuild(args = {}) {
       const summary = summarizeAuditCase({ caseSpec, report, view, pages });
       const stem = outputStem(caseSpec, summary);
       const written = {};
+      const showLawCounts = caseSpec.lawCounts === true || context.lawCounts === true || caseSpec.lawAppendix === true || context.lawAppendix === true;
 
       if (outputs.includes("json")) {
         written.json = await writeCaseOutput(outDir, `${stem}.json`, `${JSON.stringify(graph.toJSON(), jsonReplacer, 2)}\n`);
       }
       if (outputs.includes("svg")) {
-        written.svg = await writeCaseOutput(outDir, `${stem}.svg`, renderSvg(displayGraph, pages, {
-          showLawCounts: caseSpec.lawCounts === true || context.lawCounts === true || caseSpec.lawAppendix === true || context.lawAppendix === true,
-        }));
+        written.svg = await writeCaseOutput(outDir, `${stem}.svg`, renderSvg(displayGraph, pages, { showLawCounts }));
       }
       if (outputs.includes("audit")) {
         written.audit = await writeCaseOutput(outDir, `${stem}.audit.md`, formatAuditMarkdown(report));
       }
       if (outputs.includes("pptx")) {
         const pptxPath = path.join(outDir, `${stem}.pptx`);
-        await renderPptx(displayGraph, pages, pptxPath, {
-          showLawCounts: caseSpec.lawCounts === true || context.lawCounts === true || caseSpec.lawAppendix === true || context.lawAppendix === true,
-        });
+        await pptxRenderer.renderPptx(displayGraph, pages, pptxPath, { showLawCounts });
         written.pptx = pptxPath;
+      }
+      if (outputs.includes("deck")) {
+        deckItems.push({
+          caseId: summary.id,
+          institution: summary.institution,
+          paper: deckItemPaper(pages, caseSpec, context),
+          graph: displayGraph,
+          pages,
+          showLawCounts,
+        });
       }
 
       cases.push({
@@ -92,10 +102,27 @@ export async function runBatchBuild(args = {}) {
     }
   }
 
+  let deck = null;
+  let decks = [];
+  let deckError = null;
+  if (outputs.includes("deck")) {
+    if (deckItems.length) {
+      const deckResult = await writeDeckOutputs(deckItems, args, outDir, pptxRenderer);
+      deck = deckResult.deck;
+      decks = deckResult.decks;
+      deckError = deckResult.deckError;
+    } else {
+      deckError = "생성 가능한 케이스가 없어 통합 PPTX deck을 만들지 않았습니다.";
+    }
+  }
+
   return {
     generatedAt: new Date().toISOString(),
     outDir,
     outputs,
+    deck,
+    decks,
+    deckError,
     total: cases.length,
     statusCounts: countBy(cases, (item) => item.status),
     cases,
@@ -109,6 +136,14 @@ export function formatBatchBuildMarkdown(result) {
   lines.push(`- 출력 폴더: ${result.outDir}`);
   lines.push(`- 출력 형식: ${result.outputs.join(", ")}`);
   lines.push(`- 케이스: ${result.total} · 생성 ${result.statusCounts.built || 0} · 오류 ${result.statusCounts.error || 0}`);
+  if (result.decks?.length) {
+    for (const deck of result.decks) {
+      lines.push(`- 통합 PPTX deck(${deck.paper}): ${deck.path}`);
+    }
+  } else if (result.deck) {
+    lines.push(`- 통합 PPTX deck: ${result.deck}`);
+  }
+  if (result.deckError) lines.push(`- 통합 PPTX deck 오류: ${result.deckError}`);
   lines.push("");
   lines.push("| 기관 | 기준일 | 보기 | 대상 | 선택유형 | 상태 | 페이지 | 배치 문제 | 산출물 |");
   lines.push("| --- | --- | --- | --- | --- | --- | ---: | ---: | --- |");
@@ -127,7 +162,7 @@ export function formatBatchBuildMarkdown(result) {
         escapeCell(item.statusLabel || item.status),
         summary.pages ?? "",
         summary.layoutDiagnostics?.totalIssues ?? "",
-        outputList || escapeCell(item.error || ""),
+        outputList || escapeCell(item.error || (result.deck || result.decks?.length ? "deck 포함" : "")),
       ].join(" | ").replace(/^/, "| ").replace(/$/, " |"),
     );
   }
@@ -141,14 +176,18 @@ export function parseOutputFormats(value) {
     md: "audit",
     report: "audit",
     ppt: "pptx",
+    combined: "deck",
+    "pptx-deck": "deck",
+    pptxdeck: "deck",
   };
-  const allowed = new Set(["svg", "json", "audit", "pptx"]);
+  const perCaseOutputs = ["svg", "json", "audit", "pptx"];
+  const allowed = new Set([...perCaseOutputs, "deck"]);
   const result = [];
   for (const raw of String(value || "").split(",")) {
     const token = raw.trim().toLowerCase();
     if (!token) continue;
     if (token === "all" || token === "*") {
-      for (const item of allowed) if (!result.includes(item)) result.push(item);
+      for (const item of perCaseOutputs) if (!result.includes(item)) result.push(item);
       continue;
     }
     const normalized = aliases[token] || token;
@@ -156,6 +195,64 @@ export function parseOutputFormats(value) {
     if (!result.includes(normalized)) result.push(normalized);
   }
   return result.length ? result : ["svg", "json", "audit"];
+}
+
+function deckOutputPath(args, outDir) {
+  const explicit = stringArg(args, "deck");
+  if (explicit) return path.resolve(explicit);
+  return path.join(outDir, "batch-orgcharts.pptx");
+}
+
+async function writeDeckOutputs(deckItems, args, outDir, pptxRenderer) {
+  const groups = groupBy(deckItems, (item) => item.paper);
+  const basePath = deckOutputPath(args, outDir);
+  const singleGroup = groups.size === 1;
+  const decks = [];
+  const errors = [];
+  for (const [paper, items] of groups) {
+    const outputPath = singleGroup ? basePath : suffixedDeckPath(basePath, paper);
+    try {
+      await pptxRenderer.renderPptxDeck(items, outputPath);
+      decks.push({
+        paper,
+        path: outputPath,
+        cases: items.map((item) => item.caseId).filter(Boolean),
+        pages: items.reduce((sum, item) => sum + item.pages.length, 0),
+      });
+    } catch (error) {
+      errors.push(`${paper}: ${error.message}`);
+    }
+  }
+  return {
+    deck: decks.length === 1 ? decks[0].path : null,
+    decks,
+    deckError: errors.length ? errors.join(" / ") : null,
+  };
+}
+
+function deckItemPaper(pages, caseSpec, context) {
+  const papers = new Set((pages || []).map((page) => normalizePaper(page.paper || caseSpec.paper || context.paper || "slide")));
+  if (!papers.size) return normalizePaper(caseSpec.paper || context.paper || "slide");
+  if (papers.size > 1) {
+    throw new Error(`한 케이스 안에 서로 다른 용지 크기가 섞여 있습니다: ${[...papers].join(", ")}`);
+  }
+  return [...papers][0];
+}
+
+function suffixedDeckPath(filePath, suffix) {
+  const parsed = path.parse(filePath);
+  const ext = parsed.ext || ".pptx";
+  return path.join(parsed.dir, `${parsed.name}-${safeFilePart(suffix)}${ext}`);
+}
+
+function groupBy(items, keyFn) {
+  const groups = new Map();
+  for (const item of items) {
+    const key = keyFn(item);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(item);
+  }
+  return groups;
 }
 
 async function writeCaseOutput(outDir, fileName, contents) {

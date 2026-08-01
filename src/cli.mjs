@@ -193,7 +193,7 @@ async function batchBuildCommand(args) {
   } else {
     console.log(output);
   }
-  if (args.strict === true && result.cases.some((item) => item.status === "error")) {
+  if (args.strict === true && (result.deckError || result.cases.some((item) => item.status === "error"))) {
     process.exitCode = 2;
   }
 }
@@ -372,7 +372,7 @@ function printHelp() {
   inspect    파싱 결과 요약 출력
   audit      파싱·소관·별표·배치 품질 감사 리포트 출력
   batch-audit 여러 기관·기준일·레이아웃을 한 번에 감사하여 품질 매트릭스 출력
-  batch-build 여러 기관·기준일·레이아웃의 SVG/JSON/PPTX/감사리포트 일괄 생성
+  batch-build 여러 기관·기준일·레이아웃의 SVG/JSON/PPTX/감사리포트·통합 deck 일괄 생성
   make-cases 기관명 목록에서 batch-audit 케이스 JSON 생성
 
 주요 옵션
@@ -391,7 +391,8 @@ function printHelp() {
   --format markdown|json    audit 리포트 출력 형식
   --cases <cases.json>      batch-audit 케이스 목록
   --out-dir <dir>           batch-build 산출물 폴더
-  --outputs svg,json,audit,pptx|all  batch-build 산출 형식
+  --outputs svg,json,audit,pptx,deck|all  batch-build 산출 형식(all은 케이스별 svg/json/audit/pptx)
+  --deck <file.pptx>        batch-build 통합 PPTX deck 경로(--outputs deck 없이도 활성화)
   --institutions "A,B"      make-cases 기관명 목록(쉼표 또는 줄바꿈)
   --strict                  batch-audit에서 오류·수정 필요가 있으면 종료코드 2
 `);

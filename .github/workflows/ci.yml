@@ -48,14 +48,24 @@ jobs:
         run: |
           node src/cli.mjs batch-build \
             --cases examples/audit-cases.json \
-            --outputs svg,json,audit,pptx \
+            --outputs svg,json,audit,pptx,deck \
             --out-dir /tmp/orgchart-batch-build \
             --format json \
+            --strict \
             --out /tmp/orgchart-batch-build-manifest.json
           node --input-type=module -e '
             import fs from "node:fs";
             const result = JSON.parse(fs.readFileSync("/tmp/orgchart-batch-build-manifest.json", "utf8"));
             if (result.total !== 2) throw new Error(`expected 2 build cases, got ${result.total}`);
+            if (result.deckError) throw new Error(`deck build failed: ${result.deckError}`);
+            if (!Array.isArray(result.decks) || result.decks.length !== 2) {
+              throw new Error(`expected 2 split decks, got ${result.decks?.length || 0}`);
+            }
+            for (const deck of result.decks) {
+              if (!deck.path || !fs.existsSync(deck.path)) {
+                throw new Error(`missing deck output for ${deck.paper}`);
+              }
+            }
             const failed = result.cases.find((item) => item.status !== "built");
             if (failed) throw new Error(`batch build failed: ${failed.case?.id || failed.error}`);
             for (const item of result.cases) {

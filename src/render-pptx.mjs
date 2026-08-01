@@ -13,18 +13,26 @@ export async function renderPptx(
   outputPath,
   { previewDir, showLawCounts = false, paper } = {},
 ) {
+  return renderPptxDeck([{ graph, pages, showLawCounts }], outputPath, { previewDir, showLawCounts, paper });
+}
+
+export async function renderPptxDeck(
+  items,
+  outputPath,
+  { previewDir, showLawCounts = false, paper } = {},
+) {
+  const deckItems = normalizeDeckItems(items, showLawCounts);
   try {
     const artifactTool = await import("@oai/artifact-tool");
-    return await renderArtifactPptx(graph, pages, outputPath, {
+    return await renderArtifactPptxDeck(deckItems, outputPath, {
       previewDir,
-      showLawCounts,
       paper,
       Presentation: artifactTool.Presentation,
       PresentationFile: artifactTool.PresentationFile,
     });
   } catch (error) {
     if (error?.code && error.code !== "ERR_MODULE_NOT_FOUND") throw error;
-    return renderPptxGen(graph, pages, outputPath, { previewDir, showLawCounts, paper });
+    return renderPptxGenDeck(deckItems, outputPath, { previewDir, paper });
   }
 }
 
@@ -34,9 +42,26 @@ async function renderArtifactPptx(
   outputPath,
   { previewDir, showLawCounts = false, paper, Presentation, PresentationFile } = {},
 ) {
-  const pageSize = resolvePageSize(pages[0]?.paper || paper || "slide");
+  return renderArtifactPptxDeck([{ graph, pages, showLawCounts }], outputPath, {
+    previewDir,
+    paper,
+    Presentation,
+    PresentationFile,
+  });
+}
+
+async function renderArtifactPptxDeck(
+  items,
+  outputPath,
+  { previewDir, paper, Presentation, PresentationFile } = {},
+) {
+  const pageSize = commonDeckPageSize(items, paper);
   const presentation = Presentation.create({ slideSize: pageSize });
-  for (const page of pages) addPage(presentation, graph, page, { showLawCounts, pageSize });
+  for (const item of items) {
+    for (const page of item.pages) {
+      addPage(presentation, item.graph, page, { showLawCounts: item.showLawCounts, pageSize });
+    }
+  }
   const pptx = await PresentationFile.exportPptx(presentation);
   await fs.mkdir(path.dirname(path.resolve(outputPath)), { recursive: true });
   await pptx.save(path.resolve(outputPath));
@@ -64,6 +89,37 @@ async function renderArtifactPptx(
     );
   }
   return presentation;
+}
+
+function normalizeDeckItems(items, defaultShowLawCounts) {
+  if (!Array.isArray(items) || !items.length) {
+    throw new Error("PPTX deck을 만들려면 하나 이상의 graph/pages 항목이 필요합니다.");
+  }
+  return items.map((item, index) => {
+    if (!item?.graph) throw new Error(`PPTX deck 항목 ${index + 1}에 graph가 없습니다.`);
+    if (!Array.isArray(item.pages) || !item.pages.length) {
+      throw new Error(`PPTX deck 항목 ${index + 1}에 pages가 없습니다.`);
+    }
+    return {
+      graph: item.graph,
+      pages: item.pages,
+      showLawCounts: item.showLawCounts ?? defaultShowLawCounts,
+    };
+  });
+}
+
+function commonDeckPageSize(items, paper) {
+  const firstPage = items.find((item) => item.pages?.length)?.pages[0];
+  const base = resolvePageSize(firstPage?.paper || paper || "slide");
+  for (const item of items) {
+    for (const page of item.pages) {
+      const size = resolvePageSize(page.paper || paper || base.name);
+      if (Math.abs(size.width - base.width) > 0.01 || Math.abs(size.height - base.height) > 0.01) {
+        throw new Error("하나의 PPTX deck에는 같은 용지 크기의 페이지 계획만 묶을 수 있습니다. --paper 값을 통일하거나 케이스를 나누세요.");
+      }
+    }
+  }
+  return base;
 }
 
 function addPage(presentation, graph, page, { showLawCounts, pageSize }) {
@@ -414,12 +470,24 @@ async function renderPptxGen(
   outputPath,
   { previewDir, showLawCounts = false, paper } = {},
 ) {
+  return renderPptxGenDeck([{ graph, pages, showLawCounts }], outputPath, { previewDir, paper });
+}
+
+async function renderPptxGenDeck(
+  items,
+  outputPath,
+  { previewDir, paper } = {},
+) {
   const { default: PptxGenJS } = await import("pptxgenjs");
-  const pageSize = resolvePageSize(pages[0]?.paper || paper || "slide");
+  const pageSize = commonDeckPageSize(items, paper);
   const pptx = new PptxGenJS();
   pptx.author = "korean-government-orgchart";
-  pptx.subject = graph.meta.title || graph.meta.institution;
-  pptx.title = graph.meta.title || graph.meta.institution;
+  pptx.subject = items.length === 1
+    ? items[0].graph.meta.title || items[0].graph.meta.institution
+    : "batch orgcharts";
+  pptx.title = items.length === 1
+    ? items[0].graph.meta.title || items[0].graph.meta.institution
+    : "batch orgcharts";
   pptx.company = "";
   pptx.lang = "ko-KR";
   pptx.defineLayout({
@@ -429,7 +497,11 @@ async function renderPptxGen(
   });
   pptx.layout = "ORGCHART_CUSTOM";
 
-  for (const page of pages) addPptxGenPage(pptx, graph, page, { showLawCounts, pageSize });
+  for (const item of items) {
+    for (const page of item.pages) {
+      addPptxGenPage(pptx, item.graph, page, { showLawCounts: item.showLawCounts, pageSize });
+    }
+  }
 
   await fs.mkdir(path.dirname(path.resolve(outputPath)), { recursive: true });
   await pptx.writeFile({ fileName: path.resolve(outputPath) });
@@ -437,12 +509,16 @@ async function renderPptxGen(
   if (previewDir) {
     const resolvedPreviewDir = path.resolve(previewDir);
     await fs.mkdir(resolvedPreviewDir, { recursive: true });
-    for (const [index, page] of pages.entries()) {
-      const stem = `slide-${String(index + 1).padStart(2, "0")}`;
-      const layout = page.kind === "law-index"
-        ? { page, renderer: "pptxgenjs", note: "law-index page" }
-        : layoutPage(graph, page, { pageSize });
-      await fs.writeFile(path.join(resolvedPreviewDir, `${stem}.layout.json`), JSON.stringify(layout, null, 2), "utf8");
+    let slideIndex = 0;
+    for (const item of items) {
+      for (const page of item.pages) {
+        slideIndex += 1;
+        const stem = `slide-${String(slideIndex).padStart(2, "0")}`;
+        const layout = page.kind === "law-index"
+          ? { page, renderer: "pptxgenjs", note: "law-index page", institution: item.graph.meta.institution }
+          : layoutPage(item.graph, page, { pageSize });
+        await fs.writeFile(path.join(resolvedPreviewDir, `${stem}.layout.json`), JSON.stringify(layout, null, 2), "utf8");
+      }
     }
     await fs.writeFile(
       path.join(resolvedPreviewDir, "README.txt"),

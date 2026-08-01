@@ -256,17 +256,18 @@ node src/cli.mjs batch-audit \
 출력 표의 핵심 열은 `높은 확인`, `소관 후보`, `배치 문제`, `별표`입니다. `--strict`를 붙이면 오류 또는 수정 필요 케이스가 있을 때 종료코드 2로 끝나므로, 기관 전체 회귀 테스트나 GitHub Actions 품질 게이트로 사용할 수 있습니다.
 `선택유형` 열에는 `--layout best`가 실제로 고른 레이아웃이 표시되고, 상세에는 후보별 점수·문제 수·페이지 수가 남습니다.
 
-감사 후 바로 산출물까지 만들려면 같은 케이스 파일을 `batch-build`에 넘깁니다. 기본 출력은 `svg,json,audit`이고, 편집 가능한 PPTX까지 필요하면 `--outputs svg,json,audit,pptx` 또는 `--outputs all`을 지정합니다. PPTX는 공개 패키지 `pptxgenjs` 기반 fallback으로 생성되며, Codex Artifact Tool 런타임이 있는 환경에서는 기존 고급 렌더러를 우선 사용합니다.
+감사 후 바로 산출물까지 만들려면 같은 케이스 파일을 `batch-build`에 넘깁니다. 기본 출력은 `svg,json,audit`이고, 케이스별 편집 가능한 PPTX까지 필요하면 `--outputs svg,json,audit,pptx` 또는 `--outputs all`을 지정합니다. 여러 기관·여러 레이아웃을 한 검토 파일로 넘겨야 할 때는 `--outputs deck` 또는 `--deck review.pptx`를 사용합니다. PPTX는 공개 패키지 `pptxgenjs` 기반 fallback으로 생성되며, Codex Artifact Tool 런타임이 있는 환경에서는 기존 고급 렌더러를 우선 사용합니다.
 
 ```bash
 node src/cli.mjs batch-build \
   --cases work/core-agencies.cases.json \
   --out-dir outputs/core-agencies \
-  --outputs svg,json,audit \
+  --outputs svg,json,audit,deck \
+  --deck outputs/core-agencies/review-deck.pptx \
   --out outputs/core-agencies-manifest.md
 ```
 
-생성 매니페스트도 `선택유형`, 페이지 수, 배치 문제 수, 파일명을 함께 기록합니다. 이 흐름은 `make-cases → batch-audit → batch-build`로 이어지므로, 기관 목록만 있으면 검토용 품질표와 실제 조직도 파일을 같은 해석 경로에서 반복 생성할 수 있습니다.
+생성 매니페스트도 `선택유형`, 페이지 수, 배치 문제 수, 파일명, 통합 PPTX deck 경로를 함께 기록합니다. 통합 deck은 모든 성공 케이스의 페이지를 순서대로 묶습니다. PowerPoint deck 하나는 슬라이드 크기가 하나라서 `a4-half`와 `a4-landscape`처럼 용지 크기가 섞이면 `review-a4-half.pptx`, `review-a4-landscape.pptx`처럼 자동 분리합니다. 이 흐름은 `make-cases → batch-audit → batch-build`로 이어지므로, 기관 목록만 있으면 검토용 품질표와 실제 조직도 파일을 같은 해석 경로에서 반복 생성할 수 있습니다.
 동일 실행 안에서 같은 법령명·기준일·인증값 조합은 한 번만 조회하도록 캐시하므로, 같은 기관을 여러 레이아웃으로 반복 검사해도 법제처 API 호출이 중복되지 않습니다.
 
 ### 작도 품질 규칙

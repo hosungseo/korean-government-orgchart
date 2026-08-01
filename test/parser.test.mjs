@@ -625,6 +625,8 @@ test("시행규칙의 정책관 소관 과는 법정 설치 계선과 별도로 
     evidence: "explicit-duty-clause",
     legalBasis: "보좌기관 내 다른 과의 주관·소관",
     source: "입력 1",
+    article: "제2조(시험실)",
+    evidenceText: "지역총괄과장은 다음 사항을 분장한다.\n1. 지역 산업 정책 총괄\n2. 그 밖에 지역정책관 내 다른 과의 주관에 속하지 않는 사항",
   });
   assert.deepEqual(graph.meta.jurisdictionRelations, [
     {
@@ -633,6 +635,8 @@ test("시행규칙의 정책관 소관 과는 법정 설치 계선과 별도로 
       source: "입력 1",
       evidence: "explicit-duty-clause",
       legalBasis: "보좌기관 내 다른 과의 주관·소관",
+      article: "제2조(시험실)",
+      evidenceText: "지역총괄과장은 다음 사항을 분장한다.\n1. 지역 산업 정책 총괄\n2. 그 밖에 지역정책관 내 다른 과의 주관에 속하지 않는 사항",
     },
   ]);
   // 인접한 과는 문언만으로 추정해 붙이지 않는다.

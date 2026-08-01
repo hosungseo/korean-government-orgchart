@@ -114,10 +114,15 @@ export function splitArticles(text) {
     const lead = lineEnd >= 0 ? chunk.slice(0, lineEnd) : chunk;
     return {
       heading: match[2]?.trim() || "",
+      articleRef: articleRefFromLead(match[1]),
       lead,
       body: chunk,
     };
   });
+}
+
+function articleRefFromLead(value) {
+  return String(value || "").match(/^제\d+조(?:의\d+)?\s*\([^)]+\)/)?.[0]?.trim() || "";
 }
 
 function parseDocumentIntoGraph(graph, text, source) {
@@ -139,7 +144,7 @@ function parseDocumentIntoGraph(graph, text, source) {
     const body = stripAmendmentNotes(article.body);
     const articleIsAffiliated = /소속기관/.test(article.heading);
     const previousArticleRef = graph._currentArticleRef;
-    graph._currentArticleRef = article.lead || article.heading || null;
+    graph._currentArticleRef = article.articleRef || article.lead || article.heading || null;
     try {
       parseTemporaryRelations(graph, body, source, context);
       parseAffiliatedRelations(graph, body, source, context);
@@ -166,37 +171,39 @@ function parseAdministrativeRulePlacement(graph, body, source, context) {
   const pattern =
     /([가-힣A-Za-z0-9]+(?:과|팀|담당관|단|실|국|관))(?:은|는)\s+((?:[가-힣A-Za-z0-9]+(?:실|국|본부|단|관)\s+)?[가-힣A-Za-z0-9]+(?:국|실|본부|단|관|과|팀))에\s*둔다/g;
   for (const match of body.matchAll(pattern)) {
-    const childName = normalizeNodeName(match[1]);
-    const holders = match[2].trim().split(/\s+/).map(normalizeNodeName).filter(Boolean);
-    const parentName = holders.at(-1) || context?.name || graph.meta.institution;
-    const child = graph.addNode(childName, {
-      kind: /(?:과|팀|담당관)$/.test(childName) ? "assistant" : "temporary",
-      source,
-      forceKind: true,
-      metadata: {
-        autonomous: true,
-        countsTowardStructure: false,
-        sourceKind: "administrative-rule",
-        placementBasis: "훈령 제2조제2항",
-      },
-    });
-    const parent = graph.addNode(parentName, { source });
-    if (!child || !parent) continue;
-    graph.addEdge(parent.id, child.id, {
-      type: "structural",
-      source,
-      metadata: { autonomous: true, legalBasis: "행정규칙 소속 위치 지정" },
-    });
-    if (holders.length > 1) {
-      const ancestor = graph.addNode(holders.at(-2), { source });
-      if (ancestor) {
-        graph.addEdge(ancestor.id, parent.id, {
-          type: "structural",
-          source,
-          metadata: { autonomous: true, legalBasis: "행정규칙 소속 위치 지정" },
-        });
+    withMatchEvidence(graph, body, match, () => {
+      const childName = normalizeNodeName(match[1]);
+      const holders = match[2].trim().split(/\s+/).map(normalizeNodeName).filter(Boolean);
+      const parentName = holders.at(-1) || context?.name || graph.meta.institution;
+      const child = graph.addNode(childName, {
+        kind: /(?:과|팀|담당관)$/.test(childName) ? "assistant" : "temporary",
+        source,
+        forceKind: true,
+        metadata: {
+          autonomous: true,
+          countsTowardStructure: false,
+          sourceKind: "administrative-rule",
+          placementBasis: "훈령 제2조제2항",
+        },
+      });
+      const parent = graph.addNode(parentName, { source });
+      if (!child || !parent) return;
+      graph.addEdge(parent.id, child.id, {
+        type: "structural",
+        source,
+        metadata: { autonomous: true, legalBasis: "행정규칙 소속 위치 지정" },
+      });
+      if (holders.length > 1) {
+        const ancestor = graph.addNode(holders.at(-2), { source });
+        if (ancestor) {
+          graph.addEdge(ancestor.id, parent.id, {
+            type: "structural",
+            source,
+            metadata: { autonomous: true, legalBasis: "행정규칙 소속 위치 지정" },
+          });
+        }
       }
-    }
+    });
   }
   const expiry = body.match(/제\s*6\s*조[^\n]*?(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일까지/);
   if (expiry) {
@@ -230,6 +237,7 @@ function collectJurisdictionRelations(graph, body, source) {
       source,
       evidence: "explicit-duty-clause",
       legalBasis: "보좌기관 내 다른 과의 주관·소관",
+      evidenceText: compactEvidenceText(`${paragraph.departmentName}장은${paragraph.text}`),
     });
   }
   collectJurisdictionRangeRelations(graph, body, source, paragraphs);
@@ -279,6 +287,7 @@ function collectJurisdictionRangeRelations(graph, body, source, paragraphs) {
       evidence: "duty-item-range",
       legalBasis: "직제 호 번호 범위 대조",
       reference: candidate.reference,
+      evidenceText: compactEvidenceText(`${paragraph.departmentName}장은${paragraph.text}`),
     });
   }
 }
@@ -404,6 +413,8 @@ function setJurisdictionRelation(graph, parentName, childName, attrs) {
     evidence: attrs.evidence,
     legalBasis: attrs.legalBasis,
     ...(attrs.reference ? { reference: attrs.reference } : {}),
+    ...(attrs.article || graph._currentArticleRef ? { article: attrs.article || graph._currentArticleRef } : {}),
+    ...(attrs.evidenceText || graph._currentEvidenceText ? { evidenceText: attrs.evidenceText || graph._currentEvidenceText } : {}),
   };
   child.metadata.jurisdiction = {
     parent: parent.name,
@@ -411,6 +422,8 @@ function setJurisdictionRelation(graph, parentName, childName, attrs) {
     legalBasis: attrs.legalBasis,
     source: attrs.source,
     ...(attrs.reference ? { reference: attrs.reference } : {}),
+    ...(attrs.article || graph._currentArticleRef ? { article: attrs.article || graph._currentArticleRef } : {}),
+    ...(attrs.evidenceText || graph._currentEvidenceText ? { evidenceText: attrs.evidenceText || graph._currentEvidenceText } : {}),
   };
   graph.meta.jurisdictionRelations ||= [];
   const existing = graph.meta.jurisdictionRelations.find(
@@ -541,29 +554,31 @@ function parseBelowRelations(graph, body, source, context) {
   for (const pattern of patterns) {
     for (const match of body.matchAll(pattern)) {
       if (/「|에\s*따른|보좌기관\s*중/.test(match[2])) continue;
-      const parentName = resolveHolderName(match[1], context?.name);
-      const parent = graph.addNode(parentName, { source });
-      if (!parent) continue;
-      for (const childName of parseNameList(match[2])) {
-        const existing = graph.nodeByName(childName);
-        const isAffiliated = existing?.metadata?.unitRole === "affiliated-institution";
-        const inferredKind = inferKind(childName);
-        const isSpine = inferredKind === "head" || inferredKind === "deputy";
-        const child = graph.addNode(childName, {
-          kind: isSpine ? inferredKind : isAffiliated ? "affiliated" : "advisor",
-          source,
-          forceKind: true,
-          metadata: isAffiliated
-            ? { unitRole: "affiliated-institution" }
-            : undefined,
-        });
-        if (!child) continue;
-        graph.addEdge(parent.id, child.id, {
-          type: isSpine ? "structural" : isAffiliated ? "affiliated" : "advisor",
-          source,
-          metadata: { legalBasis: "밑에 둔다" },
-        });
-      }
+      withMatchEvidence(graph, body, match, () => {
+        const parentName = resolveHolderName(match[1], context?.name);
+        const parent = graph.addNode(parentName, { source });
+        if (!parent) return;
+        for (const childName of parseNameList(match[2])) {
+          const existing = graph.nodeByName(childName);
+          const isAffiliated = existing?.metadata?.unitRole === "affiliated-institution";
+          const inferredKind = inferKind(childName);
+          const isSpine = inferredKind === "head" || inferredKind === "deputy";
+          const child = graph.addNode(childName, {
+            kind: isSpine ? inferredKind : isAffiliated ? "affiliated" : "advisor",
+            source,
+            forceKind: true,
+            metadata: isAffiliated
+              ? { unitRole: "affiliated-institution" }
+              : undefined,
+          });
+          if (!child) continue;
+          graph.addEdge(parent.id, child.id, {
+            type: isSpine ? "structural" : isAffiliated ? "affiliated" : "advisor",
+            source,
+            metadata: { legalBasis: "밑에 둔다" },
+          });
+        }
+      });
     }
   }
 }
@@ -572,21 +587,23 @@ function parseDeputyJurisdictions(graph, body, source) {
   const pattern =
     /((?:제\d+)?차관|차장|부위원장)(?:은|는)\s+([^.。\n]{1,420}?)의\s+소관업무에\s+관하여\s+(?:장관|청장|처장|위원장)(?:을|를)\s+보조한다/g;
   for (const match of body.matchAll(pattern)) {
-    const deputy = graph.addNode(match[1], { kind: "deputy", source });
-    if (!deputy) continue;
-    for (const childName of parseNameList(match[2])) {
-      const child = graph.addNode(childName, {
-        kind: "assistant",
-        source,
-        forceKind: true,
-      });
-      if (!child) continue;
-      graph.addEdge(deputy.id, child.id, {
-        type: "assistant",
-        source,
-        metadata: { jurisdiction: true, legalBasis: "소관업무에 관하여 보조한다" },
-      });
-    }
+    withMatchEvidence(graph, body, match, () => {
+      const deputy = graph.addNode(match[1], { kind: "deputy", source });
+      if (!deputy) return;
+      for (const childName of parseNameList(match[2])) {
+        const child = graph.addNode(childName, {
+          kind: "assistant",
+          source,
+          forceKind: true,
+        });
+        if (!child) continue;
+        graph.addEdge(deputy.id, child.id, {
+          type: "assistant",
+          source,
+          metadata: { jurisdiction: true, legalBasis: "소관업무에 관하여 보조한다" },
+        });
+      }
+    });
   }
 }
 
@@ -594,91 +611,95 @@ function parseInRelations(graph, body, source, context, { articleIsAffiliated = 
   const pattern =
     /([가-힣A-Za-z0-9ㆍ·]+(?:부|처|청|위원회|실|국|본부|단|관|원|소|센터|사무국|사무소|학교|박물관|미술관|도서관|극장|전당|세무서|소방서|연구원|기록원|관리원|교육원|개발원|분원|지소))에\s+([^.。\n]{1,280}?)\s*(?:을|를)\s*(?:둔다|두고|두며|두되|둔다고 한다)/g;
   for (const match of body.matchAll(pattern)) {
-    const parentName = normalizeNodeName(match[1]);
-    if (!isPlausibleNode(parentName) && parentName !== graph.meta.institution) continue;
-    const parent =
-      parentName === graph.meta.institution
-        ? graph.nodes.get(graph.rootId)
-        : graph.addNode(parentName, { source });
-    if (!parent) continue;
-    const sentence = sentenceAt(body, match.index);
-    const isAdvisoryPurpose = /보좌하기\s+위하여/.test(sentence);
-    const affiliationType = articleIsAffiliated
-      ? /책임운영기관/.test(sentence)
-        ? "responsible"
-        : /소관\s*사무를\s*분장하기\s+위하여/.test(sentence)
-          ? "special-local"
-          : /관장\s*사무를\s+지원하기\s+위하여/.test(sentence)
-            ? "subsidiary"
-            : "affiliated"
-      : null;
-    for (const childName of parseNameList(match[2])) {
-      const existing = graph.nodeByName(childName);
-      const isAlreadyAffiliated = existing?.metadata?.unitRole === "affiliated-institution";
-      const isAffiliated = articleIsAffiliated || isAlreadyAffiliated;
-      const inferredKind = inferKind(childName);
-      const child = graph.addNode(childName, {
-        kind:
-          inferredKind === "head" || inferredKind === "deputy"
-            ? inferredKind
-            : isAffiliated
-              ? "affiliated"
-              : isAdvisoryPurpose
-                ? "advisor"
-                : "assistant",
-        source,
-        forceKind: true,
-        metadata: affiliationType || isAlreadyAffiliated
-          ? {
-              ...(affiliationType
-                ? { affiliationType, responsible: affiliationType === "responsible" }
-                : {}),
-              unitRole: "affiliated-institution",
-            }
-          : /본부$/.test(childName)
-            ? { unitRole: "headquarters" }
-            : undefined,
-      });
-      if (!child) continue;
-      graph.addEdge(parent.id, child.id, {
-        type:
-          inferredKind === "head" || inferredKind === "deputy"
-            ? "structural"
-            : isAffiliated
-              ? "affiliated"
-              : isAdvisoryPurpose
-                ? "advisor"
-                : "assistant",
-        source,
-        metadata: {
-          legalBasis: isAdvisoryPurpose ? "보좌하기 위하여 에 둔다" : "에 둔다",
-          ...(affiliationType || isAlreadyAffiliated
+    withMatchEvidence(graph, body, match, () => {
+      const parentName = normalizeNodeName(match[1]);
+      if (!isPlausibleNode(parentName) && parentName !== graph.meta.institution) return;
+      const parent =
+        parentName === graph.meta.institution
+          ? graph.nodes.get(graph.rootId)
+          : graph.addNode(parentName, { source });
+      if (!parent) return;
+      const sentence = sentenceAt(body, match.index);
+      const isAdvisoryPurpose = /보좌하기\s+위하여/.test(sentence);
+      const affiliationType = articleIsAffiliated
+        ? /책임운영기관/.test(sentence)
+          ? "responsible"
+          : /소관\s*사무를\s*분장하기\s+위하여/.test(sentence)
+            ? "special-local"
+            : /관장\s*사무를\s+지원하기\s+위하여/.test(sentence)
+              ? "subsidiary"
+              : "affiliated"
+        : null;
+      for (const childName of parseNameList(match[2])) {
+        const existing = graph.nodeByName(childName);
+        const isAlreadyAffiliated = existing?.metadata?.unitRole === "affiliated-institution";
+        const isAffiliated = articleIsAffiliated || isAlreadyAffiliated;
+        const inferredKind = inferKind(childName);
+        const child = graph.addNode(childName, {
+          kind:
+            inferredKind === "head" || inferredKind === "deputy"
+              ? inferredKind
+              : isAffiliated
+                ? "affiliated"
+                : isAdvisoryPurpose
+                  ? "advisor"
+                  : "assistant",
+          source,
+          forceKind: true,
+          metadata: affiliationType || isAlreadyAffiliated
             ? {
-                ...(affiliationType ? { affiliationType } : {}),
+                ...(affiliationType
+                  ? { affiliationType, responsible: affiliationType === "responsible" }
+                  : {}),
                 unitRole: "affiliated-institution",
               }
             : /본부$/.test(childName)
               ? { unitRole: "headquarters" }
-              : {}),
-        },
-      });
-    }
+              : undefined,
+        });
+        if (!child) continue;
+        graph.addEdge(parent.id, child.id, {
+          type:
+            inferredKind === "head" || inferredKind === "deputy"
+              ? "structural"
+              : isAffiliated
+                ? "affiliated"
+                : isAdvisoryPurpose
+                  ? "advisor"
+                  : "assistant",
+          source,
+          metadata: {
+            legalBasis: isAdvisoryPurpose ? "보좌하기 위하여 에 둔다" : "에 둔다",
+            ...(affiliationType || isAlreadyAffiliated
+              ? {
+                  ...(affiliationType ? { affiliationType } : {}),
+                  unitRole: "affiliated-institution",
+                }
+              : /본부$/.test(childName)
+                ? { unitRole: "headquarters" }
+                : {}),
+          },
+        });
+      }
+    });
   }
 
   if (context) {
     const genericPattern =
       /(?:해당\s+)?(?:기관|본부|실|국|원|소)에\s+([^.。\n]{1,220}?)\s*(?:을|를)\s*(?:둔다|두고|두며|두되)/g;
     for (const match of body.matchAll(genericPattern)) {
-      for (const childName of parseNameList(match[1])) {
-        const child = graph.addNode(childName, { kind: "assistant", source });
-        if (child) {
-          graph.addEdge(context.id, child.id, {
-            type: "assistant",
-            source,
-            metadata: { legalBasis: "에 둔다" },
-          });
+      withMatchEvidence(graph, body, match, () => {
+        for (const childName of parseNameList(match[1])) {
+          const child = graph.addNode(childName, { kind: "assistant", source });
+          if (child) {
+            graph.addEdge(context.id, child.id, {
+              type: "assistant",
+              source,
+              metadata: { legalBasis: "에 둔다" },
+            });
+          }
         }
-      }
+      });
     }
   }
 }
@@ -691,43 +712,45 @@ function parseAffiliatedRelations(graph, body, source, context) {
   ];
   for (const pattern of patterns) {
     for (const match of body.matchAll(pattern)) {
-      const hasNamedParent = match.length >= 3;
-      const parentToken = hasNamedParent ? match[1] : null;
-      const listText = hasNamedParent ? match[2] : match[1];
-      let parent = graph.nodes.get(graph.rootId);
-      if (parentToken) {
-        const resolved = resolveHolderName(parentToken, context?.name);
-        if (resolved && resolved !== graph.meta.institution) {
-          parent = graph.addNode(resolved, { source }) || parent;
+      withMatchEvidence(graph, body, match, () => {
+        const hasNamedParent = match.length >= 3;
+        const parentToken = hasNamedParent ? match[1] : null;
+        const listText = hasNamedParent ? match[2] : match[1];
+        let parent = graph.nodes.get(graph.rootId);
+        if (parentToken) {
+          const resolved = resolveHolderName(parentToken, context?.name);
+          if (resolved && resolved !== graph.meta.institution) {
+            parent = graph.addNode(resolved, { source }) || parent;
+          }
         }
-      }
-      const sentence = sentenceAt(body, match.index);
-      const affiliationType = /책임운영기관/.test(sentence)
-        ? "responsible"
-        : /소관\s+사무를\s+분장하기\s+위하여/.test(sentence)
-          ? "special-local"
-          : /관장\s*사무를\s+지원하기\s+위하여/.test(sentence)
-            ? "subsidiary"
-            : "affiliated";
-      for (const childName of parseNameList(listText)) {
-        const child = graph.addNode(childName, {
-          kind: "affiliated",
-          source,
-          forceKind: true,
-          metadata: {
-            affiliationType,
-            responsible: affiliationType === "responsible",
-            unitRole: "affiliated-institution",
-          },
-        });
-        if (child) {
-          graph.addEdge(parent.id, child.id, {
-            type: "affiliated",
+        const sentence = sentenceAt(body, match.index);
+        const affiliationType = /책임운영기관/.test(sentence)
+          ? "responsible"
+          : /소관\s+사무를\s+분장하기\s+위하여/.test(sentence)
+            ? "special-local"
+            : /관장\s*사무를\s+지원하기\s+위하여/.test(sentence)
+              ? "subsidiary"
+              : "affiliated";
+        for (const childName of parseNameList(listText)) {
+          const child = graph.addNode(childName, {
+            kind: "affiliated",
             source,
-            metadata: { affiliationType },
+            forceKind: true,
+            metadata: {
+              affiliationType,
+              responsible: affiliationType === "responsible",
+              unitRole: "affiliated-institution",
+            },
           });
+          if (child) {
+            graph.addEdge(parent.id, child.id, {
+              type: "affiliated",
+              source,
+              metadata: { affiliationType },
+            });
+          }
         }
-      }
+      });
     }
   }
 }
@@ -736,16 +759,18 @@ function parseAdvisorDefinitions(graph, body, source, context) {
   const pattern =
     /([가-힣A-Za-z0-9]+)\s*밑에\s+두는\s+보좌기관은\s+([^.。\n]{1,220}?)\s*(?:으로|로)\s*(?:하며|한다)/g;
   for (const match of body.matchAll(pattern)) {
-    const parentName = resolveHolderName(match[1], context?.name);
-    const parent = graph.addNode(parentName, { source });
-    for (const childName of parseNameList(match[2])) {
-      const child = graph.addNode(childName, {
-        kind: "advisor",
-        source,
-        forceKind: true,
-      });
-      if (parent && child) graph.addEdge(parent.id, child.id, { type: "advisor", source });
-    }
+    withMatchEvidence(graph, body, match, () => {
+      const parentName = resolveHolderName(match[1], context?.name);
+      const parent = graph.addNode(parentName, { source });
+      for (const childName of parseNameList(match[2])) {
+        const child = graph.addNode(childName, {
+          kind: "advisor",
+          source,
+          forceKind: true,
+        });
+        if (parent && child) graph.addEdge(parent.id, child.id, { type: "advisor", source });
+      }
+    });
   }
 }
 
@@ -753,39 +778,43 @@ function parseAdvisorySentences(graph, body, source, context) {
   const multiTargetPattern =
     /([가-힣A-Za-z0-9]+)(?:은|는)\s+[^.。\n]{0,260}?\s+((?:(?:장관|청장|처장|위원장|부위원장|차장|(?:제\d+)?차관|[가-힣A-Za-z0-9]+(?:실장|국장|본부장|단장|처장|청장))(?:\s*(?:과|와|및|ㆍ|·|,)\s*)?)+)(?:을|를)\s+(?:직접\s+)?보좌한다/g;
   for (const match of body.matchAll(multiTargetPattern)) {
-    const childName = normalizeNodeName(match[1]) || context?.name;
-    if (!childName) continue;
-    const child = graph.addNode(childName, {
-      kind: "advisor",
-      source,
-      forceKind: true,
-    });
-    for (const parentName of parseHolderList(match[2], context?.name)) {
-      const parent = graph.addNode(parentName, { source });
-      if (parent && child) {
-        graph.addEdge(parent.id, child.id, {
-          type: "advisor",
-          source,
-          metadata: { legalBasis: "보좌한다", explicitTarget: true },
-        });
+    withMatchEvidence(graph, body, match, () => {
+      const childName = normalizeNodeName(match[1]) || context?.name;
+      if (!childName) return;
+      const child = graph.addNode(childName, {
+        kind: "advisor",
+        source,
+        forceKind: true,
+      });
+      for (const parentName of parseHolderList(match[2], context?.name)) {
+        const parent = graph.addNode(parentName, { source });
+        if (parent && child) {
+          graph.addEdge(parent.id, child.id, {
+            type: "advisor",
+            source,
+            metadata: { legalBasis: "보좌한다", explicitTarget: true },
+          });
+        }
       }
-    }
+    });
   }
 
   const pattern =
     /([가-힣A-Za-z0-9]+)(?:은|는)\s+[^.。\n]{0,220}?\s+([가-힣A-Za-z0-9]+)(?:을|를)\s+(?:직접\s+)?보좌한다/g;
   for (const match of body.matchAll(pattern)) {
-    const parsedChildName = normalizeNodeName(match[1]);
-    const childName = isPlausibleNode(parsedChildName) ? parsedChildName : context?.name;
-    const parentName = resolveHolderName(match[2], context?.name);
-    if (!childName || !parentName) continue;
-    const child = graph.addNode(childName, {
-      kind: "advisor",
-      source,
-      forceKind: true,
+    withMatchEvidence(graph, body, match, () => {
+      const parsedChildName = normalizeNodeName(match[1]);
+      const childName = isPlausibleNode(parsedChildName) ? parsedChildName : context?.name;
+      const parentName = resolveHolderName(match[2], context?.name);
+      if (!childName || !parentName) return;
+      const child = graph.addNode(childName, {
+        kind: "advisor",
+        source,
+        forceKind: true,
+      });
+      const parent = graph.addNode(parentName, { source });
+      if (parent && child) graph.addEdge(parent.id, child.id, { type: "advisor", source });
     });
-    const parent = graph.addNode(parentName, { source });
-    if (parent && child) graph.addEdge(parent.id, child.id, { type: "advisor", source });
   }
 }
 
@@ -803,24 +832,26 @@ function parseTemporaryRelations(graph, body, source, context) {
   const pattern =
     /(?:(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일까지\s+존속하는\s+)?한시조직으로\s+([^.。\n]{1,160}?)\s*(?:을|를)\s*둔다/g;
   for (const match of body.matchAll(pattern)) {
-    const expiry = match[1]
-      ? `${match[1]}-${String(match[2]).padStart(2, "0")}-${String(match[3]).padStart(2, "0")}`
-      : null;
-    const parentMatch = body.slice(Math.max(0, match.index - 120), match.index).match(
-      /([가-힣A-Za-z0-9]+(?:부|처|청|위원회|실|국|본부|단|관|원|소|센터))에[^.]*$/,
-    );
-    const parent =
-      graph.addNode(parentMatch?.[1] || context?.name || graph.meta.institution, { source }) ||
-      graph.nodes.get(graph.rootId);
-    for (const childName of parseNameList(match[4])) {
-      const child = graph.addNode(childName, {
-        kind: "temporary",
-        source,
-        forceKind: true,
-        metadata: { temporary: true, expires: expiry },
-      });
-      if (child) graph.addEdge(parent.id, child.id, { type: "temporary", source });
-    }
+    withMatchEvidence(graph, body, match, () => {
+      const expiry = match[1]
+        ? `${match[1]}-${String(match[2]).padStart(2, "0")}-${String(match[3]).padStart(2, "0")}`
+        : null;
+      const parentMatch = body.slice(Math.max(0, match.index - 120), match.index).match(
+        /([가-힣A-Za-z0-9]+(?:부|처|청|위원회|실|국|본부|단|관|원|소|센터))에[^.]*$/,
+      );
+      const parent =
+        graph.addNode(parentMatch?.[1] || context?.name || graph.meta.institution, { source }) ||
+        graph.nodes.get(graph.rootId);
+      for (const childName of parseNameList(match[4])) {
+        const child = graph.addNode(childName, {
+          kind: "temporary",
+          source,
+          forceKind: true,
+          metadata: { temporary: true, expires: expiry },
+        });
+        if (child) graph.addEdge(parent.id, child.id, { type: "temporary", source });
+      }
+    });
   }
 }
 
@@ -1204,6 +1235,22 @@ function sentenceAt(text, index) {
   const ends = [dot, fullStop, newline].filter((value) => value >= 0);
   const end = ends.length ? Math.min(...ends) : text.length;
   return text.slice(start + 1, end);
+}
+
+function withMatchEvidence(graph, body, match, callback) {
+  const previousEvidence = graph._currentEvidenceText;
+  graph._currentEvidenceText = compactEvidenceText(sentenceAt(body, match.index));
+  try {
+    return callback();
+  } finally {
+    graph._currentEvidenceText = previousEvidence;
+  }
+}
+
+function compactEvidenceText(value, maxLength = 260) {
+  const text = normalizeWhitespace(value);
+  if (!text) return "";
+  return text.length <= maxLength ? text : `${text.slice(0, maxLength - 1)}…`;
 }
 
 function escapeRegExp(value) {

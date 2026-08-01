@@ -35,9 +35,32 @@ export function buildTraceRows(graph) {
       childKind: KIND_LABELS[child.kind] || child.kind,
       article: edge.metadata?.article || "",
       legalBasis: edge.metadata?.legalBasis || "",
+      evidenceText: edge.metadata?.evidenceText || "",
       edgeSource: (edge.sources || []).join(" / "),
       childSource: (child.sources || []).join(" / "),
       flags: traceFlags(edge, child).join("; "),
+    });
+  }
+  for (const relation of graph.meta.jurisdictionRelations || []) {
+    const parent = graph.nodeByName(relation.parent);
+    const child = graph.nodeByName(relation.child);
+    rows.push({
+      institution: graph.meta.institution,
+      asOf: graph.meta.asOf || "",
+      parent: relation.parent,
+      parentKind: parent ? KIND_LABELS[parent.kind] || parent.kind : "보좌기관",
+      relation: RELATION_LABELS.jurisdiction,
+      child: relation.child,
+      childKind: child ? KIND_LABELS[child.kind] || child.kind : "보조기관",
+      article: relation.article || child?.metadata?.jurisdiction?.article || "",
+      legalBasis: relation.legalBasis || "",
+      evidenceText: relation.evidenceText || child?.metadata?.jurisdiction?.evidenceText || "",
+      edgeSource: relation.source || "",
+      childSource: (child?.sources || []).join(" / "),
+      flags: [
+        relation.evidence ? `증거:${relation.evidence}` : "",
+        relation.reference || "",
+      ].filter(Boolean).join("; "),
     });
   }
   return rows.sort(
@@ -59,6 +82,7 @@ export function formatTraceCsv(rows) {
     "하위유형",
     "조문",
     "근거문형",
+    "근거문장",
     "관계출처",
     "조직출처",
     "표식",
@@ -77,6 +101,7 @@ function rowToColumns(row) {
     row.childKind,
     row.article,
     row.legalBasis,
+    row.evidenceText,
     row.edgeSource,
     row.childSource,
     row.flags,

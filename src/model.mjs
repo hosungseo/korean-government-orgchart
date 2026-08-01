@@ -105,6 +105,7 @@ export class OrgGraph {
     const type = attrs.type || "structural";
     const metadata = {
       ...(attrs.article || this._currentArticleRef ? { article: attrs.article || this._currentArticleRef } : {}),
+      ...(attrs.evidenceText || this._currentEvidenceText ? { evidenceText: attrs.evidenceText || this._currentEvidenceText } : {}),
       ...(attrs.metadata || {}),
     };
     const existing = this.edges.get(key);

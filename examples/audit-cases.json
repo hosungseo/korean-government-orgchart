@@ -7,7 +7,7 @@
       "inputs": ["sample-law.txt"],
       "view": "operational",
       "paper": "a4-half",
-      "layout": "vertical",
+      "layout": "best",
       "focus": "디지털정부실"
     },
     {

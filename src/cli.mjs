@@ -7,7 +7,7 @@ import { buildAuditReport, formatAuditMarkdown } from "./audit.mjs";
 import { formatBatchAuditMarkdown, runBatchAudit } from "./batch-audit.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
-import { planLayoutVariants, planPages } from "./layout.mjs";
+import { planBestPages, planLayoutVariants, planPages } from "./layout.mjs";
 import { projectOperationalView, summarizeStructure } from "./model.mjs";
 import { parseOrganizationTexts } from "./parser.mjs";
 import { renderSvg } from "./render-svg.mjs";
@@ -194,6 +194,13 @@ async function emitOutputs(graph, args) {
 
 function planRequestedPages(graph, args) {
   const layout = stringArg(args, "layout") || "auto";
+  if (layout === "best") {
+    return planBestPages(graph, {
+      maxNodes: args["max-nodes"] ? Number(args["max-nodes"]) : 38,
+      paper: stringArg(args, "paper") || "slide",
+      focus: stringArg(args, "focus"),
+    });
+  }
   const layouts = stringArg(args, "layouts") || (layout === "all" ? "all" : undefined);
   const options = {
     mode: layout === "all" ? "auto" : layout,
@@ -286,7 +293,7 @@ function printHelp() {
   batch-audit 여러 기관·기준일·레이아웃을 한 번에 감사하여 품질 매트릭스 출력
 
 주요 옵션
-  --layout auto|compact|split|vertical|horizontal|two-column|matrix|flow|change-lanes|affiliate-strip|catalog|all
+  --layout auto|best|compact|split|vertical|horizontal|two-column|matrix|flow|change-lanes|affiliate-strip|catalog|all
   --layouts vertical,horizontal,two-column,matrix,flow,change-lanes,affiliate-strip,catalog  같은 문언을 여러 유형으로 한 번에 출력
   --paper slide|a4-portrait|a4-landscape|a4-half  출력 용지와 방향
   --focus <조직명>  해당 조직과 하위조직만 한 장으로 출력

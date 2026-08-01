@@ -145,6 +145,7 @@ node src/cli.mjs build \
 | `catalog` | 관·국별 하위 과·팀을 연결선 없이 카드 목록으로 인쇄 |
 
 `--layouts`에 쉼표로 여러 프리셋을 지정하면 순서대로 한 파일에 들어가고, `--layout all`은 여덟 유형을 모두 생성합니다. `change-lanes`는 `@변경` 지시문이 있을 때 변경 조직이 오른쪽 레인으로 이동합니다.
+`--layout best`는 일반 조직도 후보(`horizontal`, `vertical`, `two-column`, `matrix`, `affiliate-strip`, `catalog`)를 실제로 배치해 보고 넘침·겹침·연결선 문제가 가장 적은 유형을 고릅니다. 최종 검토서처럼 “깨끗한 한 장”이 우선인 경우에 사용합니다.
 
 ```bash
 # 여러 유형을 A4 가로 비교 묶음으로 출력
@@ -163,6 +164,10 @@ node src/cli.mjs build --input 직제.txt --paper a4-half --layout vertical \
 
 # 여덟 유형을 모두 한 번에 생성하는 별칭
 node src/cli.mjs build --input 직제.txt --layout all --out outputs/기관-유형모음.pptx
+
+# 후보 레이아웃을 실제 채점해 가장 깨끗한 출력 선택
+node src/cli.mjs build --input 직제.txt --paper a4-half --layout best \
+  --focus 산업정책실 --out outputs/기관-best.pptx --svg outputs/기관-best.svg
 ```
 
 신설·폐지·명칭변경·이체를 검토서처럼 표시하려면 입력에 다음 지시문을 덧붙입니다.

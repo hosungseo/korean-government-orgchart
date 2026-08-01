@@ -155,6 +155,73 @@ export function planLayoutVariants(
   }));
 }
 
+/**
+ * Try several ordinary organization-chart grammars and keep the one with the
+ * cleanest geometry.  This is intentionally separate from `auto`: auto keeps a
+ * fast convention-based default, while best-fit is a quality pass for final
+ * review sheets where line breaks, overlaps, and connector quality matter more
+ * than preserving a single preferred visual grammar.
+ */
+export function planBestPages(graph, options = {}) {
+  const paper = normalizePaper(options.paper || "slide");
+  const candidates = bestFitCandidateStyles(paper);
+  const scored = candidates.map((style, preference) => {
+    const pages = planPages(graph, {
+      ...options,
+      mode: "auto",
+      paper,
+      layoutStyle: style,
+    });
+    const diagnostics = scoreLayoutPages(graph, pages);
+    return {
+      style,
+      preference,
+      pages,
+      diagnostics,
+      score:
+        diagnostics.totalIssues * 100000 +
+        diagnostics.overflow * 10000 +
+        diagnostics.overlaps * 5000 +
+        diagnostics.edgeIssues * 1000 +
+        diagnostics.pages * 100 +
+        preference,
+    };
+  });
+  scored.sort((a, b) => a.score - b.score || a.preference - b.preference);
+  const best = scored[0];
+  const candidateScores = scored.map(({ style, score, diagnostics }) => ({
+    style,
+    score,
+    diagnostics,
+  }));
+  return best.pages.map((page) => ({
+    ...page,
+    selectedBy: "best-fit",
+    bestFit: {
+      selectedLayoutStyle: best.style,
+      candidateScores,
+    },
+  }));
+}
+
+export function scoreLayoutPages(graph, pages) {
+  const totals = { pages: pages.length, overflow: 0, overlaps: 0, edgeIssues: 0, totalIssues: 0 };
+  for (const page of pages) {
+    const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
+    totals.overflow += layout.diagnostics?.overflow?.length || 0;
+    totals.overlaps += layout.diagnostics?.overlaps?.length || 0;
+    totals.edgeIssues += layout.diagnostics?.edgeIssues?.length || 0;
+  }
+  totals.totalIssues = totals.overflow + totals.overlaps + totals.edgeIssues;
+  return totals;
+}
+
+function bestFitCandidateStyles(paper) {
+  if (paper === "a4-half") return ["vertical-stack", "catalog", "two-column", "matrix"];
+  if (paper === "a4-portrait") return ["vertical-stack", "two-column", "catalog", "matrix"];
+  return ["horizontal-bus", "two-column", "matrix", "affiliate-strip", "vertical-stack", "catalog"];
+}
+
 export function planPages(
   graph,
   { mode = "auto", maxNodes = 38, paper = "slide", layoutStyle, focus } = {},

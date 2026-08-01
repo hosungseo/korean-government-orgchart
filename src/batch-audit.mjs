@@ -4,7 +4,7 @@ import { applyAnnexOrganizations, attachAnnexes } from "./annex.mjs";
 import { buildAuditReport } from "./audit.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
-import { planLayoutVariants, planPages } from "./layout.mjs";
+import { planBestPages, planLayoutVariants, planPages } from "./layout.mjs";
 import { projectOperationalView } from "./model.mjs";
 import { parseOrganizationTexts } from "./parser.mjs";
 import { jsonReplacer, writeText } from "./utils.mjs";
@@ -388,6 +388,13 @@ async function enrichCaseWithLawMap(graph, caseSpec, context, cache) {
 
 function planCasePages(graph, caseSpec, context) {
   const layout = caseSpec.layout || context.layout || "auto";
+  if (layout === "best") {
+    return planBestPages(graph, {
+      maxNodes: numberValue(caseSpec.maxNodes, context.maxNodes, 38),
+      paper: caseSpec.paper || context.paper || "slide",
+      focus: caseSpec.focus || context.focus,
+    });
+  }
   const layouts = caseSpec.layouts || context.layouts || (layout === "all" ? "all" : undefined);
   const options = {
     mode: layout === "all" ? "auto" : layout,

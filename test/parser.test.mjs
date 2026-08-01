@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { diagnoseLayout, displayNodeName, layoutPage, nodeStyle, parseLayoutStyles, planLayoutVariants, planPages, resolvePageSize } from "../src/layout.mjs";
+import { diagnoseLayout, displayNodeName, layoutPage, nodeStyle, parseLayoutStyles, planBestPages, planLayoutVariants, planPages, resolvePageSize, scoreLayoutPages } from "../src/layout.mjs";
 import { projectOperationalView, summarizeStructure } from "../src/model.mjs";
 import { parseNameList, parseOrganizationTexts } from "../src/parser.mjs";
 import { renderSvg } from "../src/render-svg.mjs";
@@ -123,6 +123,22 @@ test("같은 그래프를 여러 시각 유형으로 한 번에 계획한다", (
     assert.ok(layout.nodes.length > 2, `${style} 노드가 있어야 함`);
     assert.ok(layout.edges.every((edge) => edge.from && edge.to), `${style} 연결선 좌표가 있어야 함`);
   }
+});
+
+test("best-fit 레이아웃은 후보를 실제 배치해 가장 깨끗한 계획을 선택한다", () => {
+  const graph = parseOrganizationTexts([text]);
+  const pages = planBestPages(graph, {
+    paper: "a4-half",
+    focus: "디지털정부실",
+    maxNodes: 50,
+  });
+  const score = scoreLayoutPages(graph, pages);
+
+  assert.equal(pages.length, 1);
+  assert.equal(pages[0].selectedBy, "best-fit");
+  assert.ok(pages[0].bestFit.candidateScores.length > 1);
+  assert.equal(score.totalIssues, pages[0].bestFit.candidateScores[0].diagnostics.totalIssues);
+  assert.equal(score.totalIssues, 0);
 });
 
 test("검토서형 추가 프리셋은 흐름·변경·소속기관·카드 목록을 지원한다", () => {

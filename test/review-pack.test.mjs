@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { mkdtemp, readFile, stat, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { runReviewPack } from "../src/review-pack.mjs";
+import { formatReviewWorklistMarkdown, runReviewPack } from "../src/review-pack.mjs";
 
 test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든다", async () => {
   const dir = await mkdtemp(path.join(os.tmpdir(), "orgchart-review-pack-"));
@@ -48,6 +48,9 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.equal(result.build.deckError, null);
   assert.match(await readFile(result.files.readme, "utf8"), /조직도 검토팩/);
   assert.match(await readFile(result.files.readme, "utf8"), /케이스별 산출물/);
+  assert.match(await readFile(result.files.readme, "utf8"), /검토 작업목록/);
+  assert.match(await readFile(result.files.worklist, "utf8"), /조직도 검토 작업목록/);
+  assert.match(await readFile(result.files.worklist, "utf8"), /입력에 붙여넣을 보강 지시문 후보/);
   assert.ok((await stat(result.files.cases)).size > 0);
   assert.match(await readFile(result.files.audit, "utf8"), /조직도 batch audit/);
   assert.match(await readFile(result.files.manifest, "utf8"), /조직도 batch build/);
@@ -56,4 +59,73 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.ok((await stat(result.build.deck)).size > 0);
   assert.match(await readFile(result.build.cases[0].outputs.svg, "utf8"), /<svg/);
   assert.match(await readFile(result.build.cases[0].outputs.trace, "utf8"), /산업정책관/);
+});
+
+test("review-pack 작업목록은 지시문·별표·레이아웃·소관법령 문제를 요약한다", () => {
+  const markdown = formatReviewWorklistMarkdown({
+    generatedAt: "2026-08-02T00:00:00.000Z",
+    caseCount: 1,
+    audit: {
+      cases: [
+        {
+          summary: {
+            id: "case-a",
+            institution: "시험부",
+            asOf: "2026-07-24",
+            focus: "정책실",
+            paper: "a4-half",
+            layoutDiagnostics: {
+              totalIssues: 1,
+              qualityIssues: 3,
+            },
+            lawMap: {
+              unmatchedDepartments: 2,
+              ambiguousDepartments: 1,
+            },
+          },
+          report: {
+            jurisdictionCandidates: [
+              {
+                parent: "정책실",
+                advisor: "산업정책관",
+                departments: ["정책과", "지원과"],
+                directive: "@소관: 산업정책관 > 정책과ㆍ지원과 [시행규칙 분장사무 확인 필요]",
+              },
+              {
+                parent: "정책실",
+                advisor: "제도정책관ㆍ현장지원관",
+                departments: ["제도과"],
+                directive: null,
+              },
+            ],
+            jurisdictionCrosswalks: {
+              unresolved: [
+                {
+                  department: "제도과",
+                  reference: "제10조제3항 제4호",
+                  advisors: ["제도정책관", "현장지원관"],
+                },
+              ],
+            },
+            annexRequirements: [
+              {
+                annex: "별표 5",
+                description: "세부 기관 확인",
+                source: "직제 시행규칙",
+              },
+            ],
+          },
+        },
+      ],
+    },
+    build: { cases: [] },
+    files: {},
+  });
+
+  assert.match(markdown, /@소관: 산업정책관 > 정책과ㆍ지원과/);
+  assert.match(markdown, /복수 보좌기관/);
+  assert.match(markdown, /별표 5/);
+  assert.match(markdown, /cases\.json 보정 예/);
+  assert.match(markdown, /미매칭/);
+  assert.match(markdown, /중복 후보/);
 });

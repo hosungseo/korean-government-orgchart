@@ -29,6 +29,7 @@ export async function runReviewPack(args = {}) {
 
   const files = {
     readme: path.join(outDir, stringArg(args, "readme-out") || "README.md"),
+    worklist: path.join(outDir, stringArg(args, "worklist-out") || "worklist.md"),
     cases: path.join(outDir, stringArg(args, "cases-out") || "cases.json"),
     audit: path.join(outDir, stringArg(args, "audit-out") || "audit.md"),
     auditJson: path.join(outDir, stringArg(args, "audit-json-out") || "audit.json"),
@@ -51,6 +52,7 @@ export async function runReviewPack(args = {}) {
     audit,
     build,
   };
+  await writeText(files.worklist, formatReviewWorklistMarkdown(result));
   await writeText(files.readme, formatReviewPackMarkdown(result));
   return result;
 }
@@ -79,6 +81,7 @@ export function formatReviewPackMarkdown(result) {
 
   lines.push("## 먼저 열 파일");
   lines.push("");
+  lines.push(`- 검토 작업목록: ${linkPath(result.outDir, result.files.worklist)}`);
   lines.push(`- 감사 요약: ${linkPath(result.outDir, result.files.audit)}`);
   lines.push(`- 산출물 매니페스트: ${linkPath(result.outDir, result.files.manifest)}`);
   lines.push(`- 케이스 정의: ${linkPath(result.outDir, result.files.cases)}`);
@@ -129,6 +132,87 @@ export function formatReviewPackMarkdown(result) {
   return `${lines.join("\n")}\n`;
 }
 
+export function formatReviewWorklistMarkdown(result) {
+  const lines = [];
+  lines.push("# 조직도 검토 작업목록");
+  lines.push("");
+  lines.push(`- 생성시각: ${result.generatedAt}`);
+  lines.push(`- 케이스: ${result.caseCount}`);
+  lines.push("");
+
+  const directiveDrafts = collectDirectiveDrafts(result.audit?.cases || []);
+  lines.push("## 입력에 붙여넣을 보강 지시문 후보");
+  lines.push("");
+  if (directiveDrafts.length) {
+    for (const group of directiveDrafts) {
+      lines.push(`### ${group.caseLabel}`);
+      lines.push("");
+      lines.push("```text");
+      for (const directive of group.directives) lines.push(directive);
+      lines.push("```");
+      lines.push("");
+      lines.push("- 적용 전 시행규칙 분장사무 또는 공식 조직표로 확인하세요. 이 지시문은 법정 설치관계를 바꾸지 않고 운영상 소관 묶음만 보강합니다.");
+      lines.push("");
+    }
+  } else {
+    lines.push("- 자동 제안 가능한 `@소관` 지시문 후보가 없습니다.");
+    lines.push("");
+  }
+
+  const unresolved = collectUnresolvedJurisdictions(result.audit?.cases || []);
+  lines.push("## 소관 대조 필요");
+  lines.push("");
+  if (unresolved.length) {
+    for (const item of unresolved) {
+      lines.push(`- ${item.caseLabel}: ${item.message}`);
+    }
+  } else {
+    lines.push("- 단일 보좌기관 범위로 확정되지 않은 소관 대조 항목이 없습니다.");
+  }
+  lines.push("");
+
+  const annexes = collectMissingAnnexes(result.audit?.cases || []);
+  lines.push("## 별표 확보·반영 확인");
+  lines.push("");
+  if (annexes.length) {
+    for (const item of annexes) {
+      lines.push(`- ${item.caseLabel}: ${item.annex} — ${item.description} (${item.source || "출처 미상"})`);
+    }
+  } else {
+    lines.push("- 미확보 별표 요구가 없습니다.");
+  }
+  lines.push("");
+
+  const layoutRetries = collectLayoutRetries(result.audit?.cases || []);
+  lines.push("## 레이아웃 재시도");
+  lines.push("");
+  if (layoutRetries.length) {
+    for (const item of layoutRetries) {
+      lines.push(`- ${item.caseLabel}: ${item.message}`);
+      if (item.casePatch) {
+        lines.push("  - cases.json 보정 예:");
+        lines.push(`    \`${item.casePatch}\``);
+      }
+    }
+  } else {
+    lines.push("- hard 배치 문제 또는 주요 polish 문제가 없습니다.");
+  }
+  lines.push("");
+
+  const lawMapItems = collectLawMapIssues(result.audit?.cases || []);
+  lines.push("## 소관법령 지도 매칭");
+  lines.push("");
+  if (lawMapItems.length) {
+    for (const item of lawMapItems) {
+      lines.push(`- ${item.caseLabel}: ${item.message}`);
+    }
+  } else {
+    lines.push("- 소관법령 지도 미매칭·중복 후보 문제가 없습니다.");
+  }
+  lines.push("");
+  return `${lines.join("\n")}\n`;
+}
+
 async function resolveReviewCases(args) {
   if (args.caseSpecs) return args.caseSpecs;
   if (stringArg(args, "cases")) {
@@ -167,6 +251,128 @@ function topReviewActions(cases) {
     .filter((item) => item.priority === "high" || item.priority === "medium")
     .sort((a, b) => (weight[a.priority] ?? 9) - (weight[b.priority] ?? 9))
     .slice(0, 12);
+}
+
+function collectDirectiveDrafts(cases) {
+  const groups = [];
+  for (const item of cases) {
+    const directives = (item.report?.jurisdictionCandidates || [])
+      .map((candidate) => candidate.directive)
+      .filter(Boolean);
+    if (!directives.length) continue;
+    groups.push({
+      caseLabel: caseLabel(item),
+      directives,
+    });
+  }
+  return groups;
+}
+
+function collectUnresolvedJurisdictions(cases) {
+  const items = [];
+  for (const item of cases) {
+    const label = caseLabel(item);
+    for (const candidate of item.report?.jurisdictionCandidates || []) {
+      if (candidate.directive) continue;
+      items.push({
+        caseLabel: label,
+        message: `${candidate.parent} > ${candidate.advisor}: ${candidate.departments?.length || 0}개 과·팀. 복수 보좌기관이므로 직제 호 번호 범위와 과 분장사무를 대조해야 합니다.`,
+      });
+    }
+    for (const unresolved of item.report?.jurisdictionCrosswalks?.unresolved || []) {
+      const advisors = unresolved.advisors?.length ? unresolved.advisors.join("ㆍ") : "일치 범위 없음";
+      items.push({
+        caseLabel: label,
+        message: `${unresolved.department}: ${unresolved.reference || "참조 없음"} · ${advisors}`,
+      });
+    }
+  }
+  return items;
+}
+
+function collectMissingAnnexes(cases) {
+  const items = [];
+  for (const item of cases) {
+    const label = caseLabel(item);
+    for (const annex of item.report?.annexRequirements || []) {
+      if (annex.matchedAnnex) continue;
+      items.push({
+        caseLabel: label,
+        annex: annex.annex,
+        description: annex.description,
+        source: annex.source,
+      });
+    }
+  }
+  return items;
+}
+
+function collectLayoutRetries(cases) {
+  const items = [];
+  for (const item of cases) {
+    const summary = item.summary || {};
+    const diagnostics = summary.layoutDiagnostics || {};
+    if (!(diagnostics.totalIssues || diagnostics.qualityIssues)) continue;
+    const hard = diagnostics.totalIssues || 0;
+    const quality = diagnostics.qualityIssues || 0;
+    const patch = suggestedLayoutPatch(summary);
+    const severity = hard ? `배치 문제 ${hard}건` : `polish ${quality}건`;
+    items.push({
+      caseLabel: caseLabel(item),
+      message: `${severity}. ${layoutRetryMessage(summary, diagnostics)}`,
+      casePatch: patch,
+    });
+  }
+  return items;
+}
+
+function collectLawMapIssues(cases) {
+  const items = [];
+  for (const item of cases) {
+    const lawMap = item.summary?.lawMap;
+    if (!lawMap) continue;
+    if (lawMap.unmatchedDepartments) {
+      items.push({
+        caseLabel: caseLabel(item),
+        message: `소관법령 부서 미매칭 ${lawMap.unmatchedDepartments}개. 부서명 변경·약칭·하위기관 scoped 노드 여부를 확인하세요.`,
+      });
+    }
+    if (lawMap.ambiguousDepartments) {
+      items.push({
+        caseLabel: caseLabel(item),
+        message: `소관법령 부서 중복 후보 ${lawMap.ambiguousDepartments}개. 같은 이름의 여러 조직 후보와 충돌했습니다. cases 입력에 @유형 또는 정확한 소관 지시문을 보강하세요.`,
+      });
+    }
+  }
+  return items;
+}
+
+function caseLabel(item) {
+  const summary = item.summary || {};
+  return [summary.institution || summary.id || item.case?.id || "케이스", summary.asOf, summary.focus || summary.layout]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function suggestedLayoutPatch(summary = {}) {
+  const patch = {};
+  if ((summary.layoutDiagnostics?.totalIssues || 0) > 0) {
+    patch.layout = "catalog";
+    patch.maxNodes = summary.paper === "a4-half" ? 14 : 24;
+  } else if ((summary.layoutDiagnostics?.qualityIssues || 0) > 0) {
+    patch.layout = "best";
+    patch.maxNodes = summary.paper === "a4-half" ? 16 : 28;
+  }
+  if (summary.paper === "a4-half" && (summary.layoutDiagnostics?.totalIssues || 0) > 0) patch.paper = "a4-portrait";
+  return Object.keys(patch).length ? JSON.stringify(patch) : "";
+}
+
+function layoutRetryMessage(summary = {}, diagnostics = {}) {
+  if (diagnostics.totalIssues) {
+    if (summary.paper === "a4-half") return "`a4-half` 면이 빽빽합니다. `catalog` 또는 `a4-portrait`로 재시도하고, 실·국별 `focus` 분할을 우선 검토하세요.";
+    return "`catalog` 또는 더 작은 `maxNodes`로 재시도하세요.";
+  }
+  return "현재 산출물은 사용 가능하지만 간격·정렬·교차·균형을 줄이려면 `layout=best`와 더 작은 `maxNodes`로 재시도하세요.";
 }
 
 function findBuildCase(cases, id) {

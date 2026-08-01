@@ -1,0 +1,122 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { mkdtemp, writeFile } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import {
+  formatBatchAuditMarkdown,
+  runBatchAudit,
+  summarizeAuditCase,
+} from "../src/batch-audit.mjs";
+
+test("배치 감사 요약은 검토·별표·소관·배치 문제를 집계한다", () => {
+  const report = {
+    meta: { institution: "시험부", title: "시험부", asOf: "2026-07-24", status: "needs-correction" },
+    summary: { nodes: 12, edges: 11 },
+    reviewActions: [
+      { priority: "high", message: "상자 겹침" },
+      { priority: "medium", message: "소관 확인" },
+      { priority: "low", message: "관리폭 확인" },
+    ],
+    validation: ["차관보 하부조직 확인"],
+    warnings: ["경고"],
+    annexRequirements: [{ annex: "별표 1", matchedAnnex: null }],
+    annexOrganizations: [{ annex: "별표 1" }],
+    jurisdictionRelations: [{ parent: "정책관", child: "정책과" }],
+    jurisdictionCandidates: [{ parent: "시험실", advisor: "산업정책관", departments: ["정책과", "지원과"] }],
+    jurisdictionCrosswalks: { confirmed: [{ child: "정책과" }], unresolved: [{ department: "지원과" }] },
+    jurisdictionRunInferences: [{ parent: "시험실", advisor: "산업정책관", departments: ["지원과"] }],
+    lawMap: { matchedInstitution: "시험부", matchedDepartments: 3, lawCount: 10, unmatchedDepartments: [{}] },
+    layoutDiagnostics: [
+      { diagnostics: { overflow: [{}], overlaps: [{}, {}], edgeIssues: [{}] } },
+    ],
+  };
+
+  const summary = summarizeAuditCase({
+    caseSpec: { id: "case-1", paper: "a4-half", layout: "vertical", focus: "시험실" },
+    report,
+    view: "operational",
+    pages: [{}, {}],
+  });
+
+  assert.equal(summary.status, "needs-correction");
+  assert.equal(summary.reviewActions.high, 1);
+  assert.equal(summary.annex.missing, 1);
+  assert.equal(summary.jurisdiction.candidateDepartments, 2);
+  assert.equal(summary.jurisdiction.rangeUnresolved, 1);
+  assert.equal(summary.jurisdiction.orderedRunDepartments, 1);
+  assert.equal(summary.layoutDiagnostics.totalIssues, 4);
+  assert.equal(summary.lawMap.unmatchedDepartments, 1);
+});
+
+test("배치 감사 마크다운은 기관별 품질 매트릭스를 만든다", () => {
+  const markdown = formatBatchAuditMarkdown({
+    generatedAt: "2026-08-02T00:00:00.000Z",
+    total: 1,
+    statusCounts: { "needs-review": 1 },
+    cases: [
+      {
+        summary: {
+          id: "시험부",
+          institution: "시험부",
+          asOf: "2026-07-24",
+          view: "operational",
+          focus: "시험실",
+          status: "needs-review",
+          statusLabel: "검토 필요",
+          nodes: 10,
+          pages: 1,
+          reviewActions: { high: 0, medium: 1, low: 0, total: 1 },
+          annex: { requirements: 1, missing: 0 },
+          jurisdiction: { relations: 2, candidateDepartments: 3, orderedRunDepartments: 0 },
+          layoutDiagnostics: { totalIssues: 0 },
+        },
+        report: {
+          reviewActions: [{ priority: "medium", message: "정책관 소관 확인" }],
+        },
+      },
+    ],
+  });
+
+  assert.match(markdown, /# 조직도 batch audit/);
+  assert.match(markdown, /\| 시험부 \| 2026-07-24 \| operational \| 시험실 \| 검토 필요/);
+  assert.match(markdown, /정책관 소관 확인/);
+});
+
+test("배치 감사는 케이스 파일 기준 상대경로 입력을 읽는다", async () => {
+  const dir = await mkdtemp(path.join(os.tmpdir(), "orgchart-batch-"));
+  await writeFile(
+    path.join(dir, "law.txt"),
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실을 둔다.
+시험실장 밑에 산업정책관을 둔다.
+시험실에 정책과 및 지원과를 둔다.
+`,
+    "utf8",
+  );
+  await writeFile(
+    path.join(dir, "cases.json"),
+    JSON.stringify({
+      cases: [
+        {
+          id: "local-case",
+          institution: "시험부",
+          date: "2026-07-24",
+          inputs: ["law.txt"],
+          paper: "a4-half",
+          layout: "vertical",
+          focus: "시험실",
+        },
+      ],
+    }),
+    "utf8",
+  );
+
+  const result = await runBatchAudit({ cases: path.join(dir, "cases.json") });
+
+  assert.equal(result.total, 1);
+  assert.equal(result.cases[0].summary.institution, "시험부");
+  assert.equal(result.cases[0].summary.pages, 1);
+  assert.notEqual(result.cases[0].summary.status, "error");
+});

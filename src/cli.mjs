@@ -4,6 +4,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { applyAnnexOrganizations, attachAnnexes } from "./annex.mjs";
 import { buildAuditReport, formatAuditMarkdown } from "./audit.mjs";
+import { formatBatchAuditMarkdown, runBatchAudit } from "./batch-audit.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
 import { planLayoutVariants, planPages } from "./layout.mjs";
@@ -22,6 +23,7 @@ try {
   else if (command === "fetch") await fetchCommand(args);
   else if (command === "inspect") await inspectCommand(args);
   else if (command === "audit") await auditCommand(args);
+  else if (command === "batch-audit") await batchAuditCommand(args);
   else printHelp();
 } catch (error) {
   console.error(process.env.DEBUG ? error.stack : `오류: ${error.message}`);
@@ -123,6 +125,25 @@ async function auditCommand(args) {
     console.log(`감사 리포트 저장: ${path.resolve(args.out)}`);
   } else {
     console.log(output);
+  }
+}
+
+async function batchAuditCommand(args) {
+  const result = await runBatchAudit(args);
+  const format = String(args.format || "markdown").toLowerCase();
+  const output =
+    format === "json" ? `${JSON.stringify(result, jsonReplacer, 2)}\n` : formatBatchAuditMarkdown(result);
+  if (args.out) {
+    await writeText(path.resolve(args.out), output);
+    console.log(`배치 감사 리포트 저장: ${path.resolve(args.out)}`);
+  } else {
+    console.log(output);
+  }
+  if (args.strict === true) {
+    const failing = result.cases.some((item) =>
+      ["error", "needs-correction"].includes(item.summary.status),
+    );
+    if (failing) process.exitCode = 2;
   }
 }
 
@@ -262,6 +283,7 @@ function printHelp() {
   fetch      법령 문언만 로컬 텍스트로 저장
   inspect    파싱 결과 요약 출력
   audit      파싱·소관·별표·배치 품질 감사 리포트 출력
+  batch-audit 여러 기관·기준일·레이아웃을 한 번에 감사하여 품질 매트릭스 출력
 
 주요 옵션
   --layout auto|compact|split|vertical|horizontal|two-column|matrix|flow|change-lanes|affiliate-strip|catalog|all
@@ -277,5 +299,7 @@ function printHelp() {
   --oc <인증값>             LAW_API_OC 환경변수로도 지정 가능
   --source-dir <dir>        조회한 기준일 법령 문언 보관
   --format markdown|json    audit 리포트 출력 형식
+  --cases <cases.json>      batch-audit 케이스 목록
+  --strict                  batch-audit에서 오류·수정 필요가 있으면 종료코드 2
 `);
 }

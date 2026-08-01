@@ -1,0 +1,23 @@
+{
+  "cases": [
+    {
+      "id": "sample-a4-half",
+      "institution": "행정혁신부",
+      "date": "2025-11-25",
+      "inputs": ["sample-law.txt"],
+      "view": "operational",
+      "paper": "a4-half",
+      "layout": "vertical",
+      "focus": "디지털정부실"
+    },
+    {
+      "id": "sample-overview",
+      "institution": "행정혁신부",
+      "date": "2025-11-25",
+      "inputs": ["sample-law.txt"],
+      "view": "legal",
+      "paper": "a4-landscape",
+      "layouts": "horizontal,two-column,affiliate-strip"
+    }
+  ]
+}

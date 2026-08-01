@@ -160,14 +160,17 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates, ju
   for (const item of graph.meta.annexRequirements || []) {
     const annex = findAnnex(graph, item.annex, { source: item.source });
     const applied = findAppliedAnnexOrganization(graph, annex);
+    const sourceLabel = item.source ? compactSourceLabel(item.source) : "";
+    const sourcePrefix = sourceLabel ? `${sourceLabel}, ` : "";
+    const sourceParen = sourceLabel ? `(${sourceLabel})` : "";
     actions.push({
       priority: applied ? "low" : item.type === "organization-matrix" ? "high" : "medium",
       topic: "annex",
       message: applied
-        ? `${item.annex} 조직 반영됨: ${item.description}`
+        ? `${item.annex} 조직 반영됨(${sourcePrefix}${annex?.rowCount ?? 0}행): ${item.description}`
         : annex
-          ? `${item.annex} 확보됨(${annex.rowCount}행): ${item.description}`
-          : `${item.annex} 확인 필요: ${item.description}`,
+          ? `${item.annex} 확보됨(${sourcePrefix}${annex.rowCount}행): ${item.description}`
+          : `${item.annex} 확인 필요${sourceParen}: ${item.description}`,
     });
   }
   for (const item of jurisdictionCandidates) {
@@ -367,6 +370,12 @@ function formatAnnexOrganization(item) {
     return `- ${item.annex} · ${item.title}: 세무서 ${item.officeCount}개에 과 ${item.departmentCount}개를 scoped 하부조직으로 반영${skipped}`;
   }
   return `- ${item.annex} · ${item.title}: ${item.type}`;
+}
+
+function compactSourceLabel(source) {
+  return String(source || "")
+    .replace(/\s*\[시행\s*\d+\]\s*$/, "")
+    .trim();
 }
 
 function statusLabel(value) {

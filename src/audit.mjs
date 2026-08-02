@@ -68,7 +68,7 @@ export function formatAuditMarkdown(report) {
   lines.push(`- 기구 수: 보조 ${report.summary.structure.unitCounts.line}, 보좌 ${report.summary.structure.unitCounts.staff}, 소속 ${report.summary.structure.unitCounts.affiliated}`);
   const affiliationLevels = report.summary.structure.unitCounts.affiliatedByLevel || {};
   if (Object.keys(affiliationLevels).length) {
-    lines.push(`- 소속기관 단계: ${Object.entries(affiliationLevels).map(([level, count]) => `${level}차 ${count}`).join(" · ")}`);
+    lines.push(`- 소속기관 단계: ${Object.entries(affiliationLevels).map(([level, count]) => `${level === "4+" ? "4차 이상" : `${level}차`} ${count}`).join(" · ")}`);
   }
   lines.push("");
 

@@ -250,7 +250,7 @@ function summarySection(graph, sourceGraph, pages) {
   const structure = sourceGraph.meta?.structure || summarizeStructure(sourceGraph);
   const affiliationLevels = structure.unitCounts?.affiliatedByLevel || {};
   const affiliationLevelLabel = Object.entries(affiliationLevels)
-    .map(([level, count]) => `${level}차 ${count}`)
+    .map(([level, count]) => `${level === "4+" ? "4차 이상" : `${level}차`} ${count}`)
     .join(" · ");
   return `<section>
   <h2>구조 요약</h2>

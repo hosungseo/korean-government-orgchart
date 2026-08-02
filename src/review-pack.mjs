@@ -22,7 +22,7 @@ export async function runReviewPack(args = {}) {
   const deckPath = stringArg(args, "deck")
     ? path.resolve(stringArg(args, "deck"))
     : path.join(artifactDir, "review-deck.pptx");
-  const outputs = stringArg(args, "outputs") || "svg,json,audit,trace,pptx,deck";
+  const outputs = stringArg(args, "outputs") || "svg,html,json,audit,trace,pptx,deck";
 
   const audit = await runBatchAudit(common);
   const build = await runBatchBuild({
@@ -299,7 +299,7 @@ async function runAcceptedBuild(result, args, sharedLawFetchCache) {
   }
   const acceptedOutDir = path.resolve(stringArg(args, "accepted-out-dir") || path.join(result.outDir, "accepted"));
   const acceptedDeck = path.resolve(stringArg(args, "accepted-deck") || path.join(acceptedOutDir, "accepted-deck.pptx"));
-  const acceptedOutputs = stringArg(args, "accepted-outputs") || stringArg(args, "outputs") || "svg,json,audit,trace,pptx,deck";
+  const acceptedOutputs = stringArg(args, "accepted-outputs") || stringArg(args, "outputs") || "svg,html,json,audit,trace,pptx,deck";
   const build = await runBatchBuild({
     ...args,
     caseSpecs: accepted.cases,

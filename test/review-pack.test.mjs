@@ -45,7 +45,6 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   const result = await runReviewPack({
     cases: path.join(dir, "cases.json"),
     "out-dir": path.join(dir, "pack"),
-    outputs: "svg,json,audit,trace,deck",
     "rerun-suggested": true,
     "build-accepted": true,
   });
@@ -71,6 +70,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.ok((await stat(result.files.manifestJson)).size > 0);
   assert.ok((await stat(result.build.deck)).size > 0);
   assert.match(await readFile(result.build.cases[0].outputs.svg, "utf8"), /<svg/);
+  assert.match(await readFile(result.build.cases[0].outputs.html, "utf8"), /시험부 검토시트/);
   assert.match(await readFile(result.build.cases[0].outputs.trace, "utf8"), /산업정책관/);
 
   const suggested = JSON.parse(await readFile(result.files.suggestedCases, "utf8"));
@@ -102,6 +102,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.ok((await stat(result.acceptedBuild.files.manifestJson)).size > 0);
   assert.equal(result.acceptedBuild.build.statusCounts.built, 1);
   assert.ok((await stat(result.acceptedBuild.build.deck)).size > 0);
+  assert.match(await readFile(result.acceptedBuild.build.cases[0].outputs.html, "utf8"), /시험부 검토시트/);
 });
 
 test("review-pack 작업목록은 지시문·별표·레이아웃·소관법령 문제를 요약한다", () => {

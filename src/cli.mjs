@@ -648,7 +648,7 @@ function printHelp() {
   --format markdown|json    audit 리포트 출력 형식
   --cases <cases.json>      batch-audit 케이스 목록
   --out-dir <dir>           batch-build 산출물 폴더
-  --outputs svg,json,audit,trace,pptx,deck|all  batch-build 산출 형식(all은 케이스별 svg/json/audit/trace/pptx)
+  --outputs svg,html,json,audit,trace,pptx,deck|all  batch-build/review-pack 산출 형식(all은 케이스별 svg/html/json/audit/trace/pptx)
   --deck <file.pptx>        batch-build 통합 PPTX deck 경로(--outputs deck 없이도 활성화)
   --artifact-dir <dir>      review-pack 내부 산출물 폴더(기본: <out-dir>/artifacts)
   --suggested-cases-out <file> review-pack 자동 보강 케이스 파일명(기본: suggested-cases.json)

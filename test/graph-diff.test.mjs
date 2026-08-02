@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { compareOrgGraphs } from "../src/graph-diff.mjs";
+import { compareOrgGraphs, formatComparisonCsv, formatComparisonMarkdown } from "../src/graph-diff.mjs";
 import { displayNodeName, planPages, layoutPage, resolvePageSize } from "../src/layout.mjs";
 import { parseOrganizationTexts } from "../src/parser.mjs";
 
@@ -53,4 +53,26 @@ test("비교 그래프는 변경 전후 레인형으로 배치할 수 있다", (
   assert.equal(layout.diagnostics.ok, true);
   assert.equal(layout.diagnostics.qualityOk, true);
   assert.ok(layout.nodes.some(({ node }) => node.name === "안전과" && node.metadata.change === "폐지"));
+});
+
+test("비교 결과는 검토서용 Markdown과 CSV 변경목록으로 출력할 수 있다", () => {
+  const compared = compareOrgGraphs(parseOrganizationTexts([beforeText]), parseOrganizationTexts([afterText]));
+  const markdown = formatComparisonMarkdown(compared);
+  const csv = formatComparisonCsv(compared);
+
+  assert.match(markdown, /# 시험부 변경목록/);
+  assert.match(markdown, /## 신설/);
+  assert.match(markdown, /신설과/);
+  assert.match(markdown, /## 폐지/);
+  assert.match(markdown, /안전과/);
+  assert.match(markdown, /## 명칭변경/);
+  assert.match(markdown, /산업정책과/);
+  assert.match(markdown, /산업전략과/);
+  assert.match(markdown, /## 이체/);
+  assert.match(markdown, /시험실/);
+  assert.match(csv, /^변경유형,조직,변경전조직,변경후조직,변경전상위,변경후상위,종류,유사도/m);
+  assert.match(csv, /신설,신설과,,신설과,,시험실,보조기관,/);
+  assert.match(csv, /폐지,안전과,안전과,,시험실,,보조기관,/);
+  assert.match(csv, /명칭변경,산업전략과,산업정책과,산업전략과,시험실,시험실,,/);
+  assert.match(csv, /이체,이체과,이체과,이체과,시험실,다른실,보조기관,/);
 });

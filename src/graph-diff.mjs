@@ -90,6 +90,63 @@ export function compareOrgGraphs(beforeGraph, afterGraph, options = {}) {
   return result;
 }
 
+export function formatComparisonMarkdown(graphOrComparison) {
+  const comparison = extractComparison(graphOrComparison);
+  if (!comparison) return "# 조직 변경 비교\n\n비교 메타데이터가 없습니다.\n";
+  const title = comparisonTitle(graphOrComparison, comparison);
+  const lines = [
+    `# ${title}`,
+    "",
+    `- 개정 전: ${sourceLabel(comparison.before)}`,
+    `- 개정 후: ${sourceLabel(comparison.after)}`,
+    `- 변경 요약: 신설 ${comparison.added.length} · 폐지 ${comparison.removed.length} · 명칭변경 ${comparison.renamed.length} · 이체 ${comparison.moved.length} · 유지 ${comparison.unchanged}`,
+    "",
+  ];
+  appendSimpleSection(lines, "신설", ["조직", "종류", "상위"], comparison.added, (item) => [
+    item.name,
+    kindLabel(item.kind),
+    formatParents(item.parents),
+  ]);
+  appendSimpleSection(lines, "폐지", ["조직", "종류", "상위"], comparison.removed, (item) => [
+    item.name,
+    kindLabel(item.kind),
+    formatParents(item.parents),
+  ]);
+  appendSimpleSection(lines, "명칭변경", ["변경 전", "변경 후", "상위", "유사도"], comparison.renamed, (item) => [
+    item.from,
+    item.to,
+    item.parent,
+    formatScore(item.score),
+  ]);
+  appendSimpleSection(lines, "이체", ["조직", "변경 전 상위", "변경 후 상위", "종류"], comparison.moved, (item) => [
+    item.name,
+    formatParents(item.from),
+    formatParents(item.to),
+    kindLabel(item.kind),
+  ]);
+  return `${lines.join("\n").replace(/\n{3,}/g, "\n\n")}\n`;
+}
+
+export function formatComparisonCsv(graphOrComparison) {
+  const comparison = extractComparison(graphOrComparison);
+  const header = ["변경유형", "조직", "변경전조직", "변경후조직", "변경전상위", "변경후상위", "종류", "유사도"];
+  if (!comparison) return `${header.map(csvCell).join(",")}\n`;
+  const rows = [header];
+  for (const item of comparison.added) {
+    rows.push(["신설", item.name, "", item.name, "", formatParents(item.parents), kindLabel(item.kind), ""]);
+  }
+  for (const item of comparison.removed) {
+    rows.push(["폐지", item.name, item.name, "", formatParents(item.parents), "", kindLabel(item.kind), ""]);
+  }
+  for (const item of comparison.renamed) {
+    rows.push(["명칭변경", item.to, item.from, item.to, item.parent || "", item.parent || "", "", formatScore(item.score)]);
+  }
+  for (const item of comparison.moved) {
+    rows.push(["이체", item.name, item.name, item.name, formatParents(item.from), formatParents(item.to), kindLabel(item.kind), ""]);
+  }
+  return `${rows.map((row) => row.map(csvCell).join(",")).join("\n")}\n`;
+}
+
 function comparisonSource(graph) {
   return {
     institution: graph.meta.institution,
@@ -255,4 +312,77 @@ function sortComparison(comparison) {
   for (const key of ["added", "removed", "moved", "renamed"]) {
     comparison[key].sort((a, b) => (a.name || a.to || "").localeCompare(b.name || b.to || "", "ko"));
   }
+}
+
+function extractComparison(graphOrComparison) {
+  if (!graphOrComparison) return null;
+  if (graphOrComparison.meta?.comparison) return graphOrComparison.meta.comparison;
+  if (graphOrComparison.before && graphOrComparison.after) return graphOrComparison;
+  return null;
+}
+
+function comparisonTitle(graphOrComparison, comparison) {
+  const graphTitle = graphOrComparison?.meta?.title;
+  if (graphTitle) return `${graphTitle.replace(/\s*변경\s*비교$/, "")} 변경목록`;
+  const institution = comparison.after?.institution || comparison.before?.institution || "조직";
+  return `${institution} 변경목록`;
+}
+
+function sourceLabel(source) {
+  if (!source) return "-";
+  const label = source.title || source.institution || "조직도";
+  return source.asOf ? `${label} (${source.asOf})` : label;
+}
+
+function appendSimpleSection(lines, title, headers, items, toCells) {
+  lines.push(`## ${title}`, "");
+  if (!items.length) {
+    lines.push("- 해당 없음", "");
+    return;
+  }
+  lines.push(`| ${headers.map(markdownCell).join(" | ")} |`);
+  lines.push(`| ${headers.map(() => "---").join(" | ")} |`);
+  for (const item of items) {
+    lines.push(`| ${toCells(item).map(markdownCell).join(" | ")} |`);
+  }
+  lines.push("");
+}
+
+function formatParents(value) {
+  if (Array.isArray(value)) return value.map(parentLabel).join(" / ");
+  return String(value || "");
+}
+
+function parentLabel(value) {
+  return String(value || "").replace(/^(assistant|advisor|affiliation|jurisdiction|spine):/, "");
+}
+
+function kindLabel(kind) {
+  return (
+    {
+      institution: "기관",
+      head: "기관장",
+      deputy: "부기관장",
+      assistant: "보조기관",
+      advisor: "보좌기관",
+      affiliated: "소속기관",
+      temporary: "한시조직",
+      office: "사무처",
+    }[kind] || String(kind || "")
+  );
+}
+
+function formatScore(value) {
+  return typeof value === "number" ? value.toFixed(3) : String(value || "");
+}
+
+function markdownCell(value) {
+  const text = String(value ?? "");
+  return text.replaceAll("|", "\\|").replace(/\s+/g, " ").trim() || "-";
+}
+
+function csvCell(value) {
+  const text = String(value ?? "");
+  if (!/[",\n\r]/.test(text)) return text;
+  return `"${text.replaceAll('"', '""')}"`;
 }

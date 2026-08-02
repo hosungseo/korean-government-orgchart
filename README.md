@@ -217,10 +217,13 @@ node src/cli.mjs compare-json \
   --layout change-lanes \
   --svg outputs/기관-변경비교.svg \
   --out outputs/기관-변경비교.pptx \
-  --json outputs/기관-변경비교.json
+  --json outputs/기관-변경비교.json \
+  --change-report outputs/기관-변경목록.md \
+  --change-csv outputs/기관-변경목록.csv
 ```
 
 `compare-json`은 개정 후 조직도를 기준으로 신설 노드를 `(신설)`로 표시하고, 개정 전에만 있던 노드는 `(폐지)`로 되살려 비교 도표에 포함합니다. 같은 이름인데 상위 조직이 달라진 노드는 `(이체)`로 표시합니다. 같은 상위 조직·같은 종류에서 이름만 유사하게 바뀐 노드는 보수적으로 `(명칭변경)`으로 묶고 `previousName` 메타데이터를 남깁니다. 자동 추정이 애매하면 신설/폐지로 남겨 사람이 확인하게 합니다.
+`--change-report`는 검토서에 바로 붙일 수 있는 Markdown 표를 만들고, `--change-csv`는 엑셀·한글 표 가공용 CSV를 만듭니다.
 
 개정 전/후 문언 파일을 바로 비교할 수도 있습니다.
 
@@ -232,7 +235,8 @@ node src/cli.mjs compare-law \
   --after-input new-시행규칙.txt \
   --paper a4-landscape \
   --svg outputs/기관-변경비교.svg \
-  --out outputs/기관-변경비교.pptx
+  --out outputs/기관-변경비교.pptx \
+  --change-report outputs/기관-변경목록.md
 ```
 
 법제처 기준일 두 개를 직접 비교할 때는 원문 파일 대신 기관명과 날짜를 지정합니다.
@@ -243,7 +247,9 @@ node src/cli.mjs compare-law \
   --before-date 2025-11-25 \
   --after-date 2026-07-21 \
   --source-dir work/law-sources \
-  --svg outputs/행정안전부-변경비교.svg
+  --svg outputs/행정안전부-변경비교.svg \
+  --change-report outputs/행정안전부-변경목록.md \
+  --change-csv outputs/행정안전부-변경목록.csv
 ```
 
 HWPX 취합본에서 확인한 유형과 대표 표본은 [HWPX 취합본 분석](docs/hwpx-corpus-analysis.md)에 정리했습니다.

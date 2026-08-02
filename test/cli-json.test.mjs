@@ -86,6 +86,8 @@ test("compare-json은 기존·개정 조직도 JSON에서 변경 표식을 생�
   const afterPath = path.join(dir, "after.json");
   const svgPath = path.join(dir, "compare.svg");
   const jsonPath = path.join(dir, "compare.json");
+  const reportPath = path.join(dir, "changes.md");
+  const csvPath = path.join(dir, "changes.csv");
   await writeFile(beforePath, JSON.stringify(before.toJSON(), null, 2), "utf8");
   await writeFile(afterPath, JSON.stringify(after.toJSON(), null, 2), "utf8");
 
@@ -100,10 +102,16 @@ test("compare-json은 기존·개정 조직도 JSON에서 변경 표식을 생�
     svgPath,
     "--json",
     jsonPath,
+    "--change-report",
+    reportPath,
+    "--change-csv",
+    csvPath,
   ]);
   const summary = JSON.parse(stdout);
   const outputJson = JSON.parse(await readFile(jsonPath, "utf8"));
   const changeByName = new Map(outputJson.nodes.map((node) => [node.name, node.metadata?.change]));
+  const report = await readFile(reportPath, "utf8");
+  const csv = await readFile(csvPath, "utf8");
 
   assert.equal(summary.comparison.added.length, 1);
   assert.equal(summary.comparison.removed.length, 1);
@@ -114,6 +122,13 @@ test("compare-json은 기존·개정 조직도 JSON에서 변경 표식을 생�
   assert.equal(changeByName.get("산업전략과"), "명칭변경");
   assert.equal(changeByName.get("이체과"), "이체");
   assert.match(await readFile(svgPath, "utf8"), /신설|폐지|명칭변경|이체/);
+  assert.match(report, /## 신설/);
+  assert.match(report, /신설과/);
+  assert.match(report, /## 폐지/);
+  assert.match(report, /폐지과/);
+  assert.match(report, /## 명칭변경/);
+  assert.match(csv, /^변경유형,조직,변경전조직,변경후조직,변경전상위,변경후상위,종류,유사도/m);
+  assert.match(csv, /신설,신설과,,신설과,,시험실,보조기관,/);
 });
 
 test("compare-law는 개정 전후 문언을 직접 비교해 변경 도표를 생성한다", async () => {
@@ -122,6 +137,7 @@ test("compare-law는 개정 전후 문언을 직접 비교해 변경 도표를 �
   const afterPath = path.join(dir, "after.txt");
   const svgPath = path.join(dir, "compare-law.svg");
   const jsonPath = path.join(dir, "compare-law.json");
+  const reportPath = path.join(dir, "compare-law-changes.md");
   await writeFile(
     beforePath,
     `
@@ -158,6 +174,8 @@ test("compare-law는 개정 전후 문언을 직접 비교해 변경 도표를 �
     svgPath,
     "--json",
     jsonPath,
+    "--change-report",
+    reportPath,
   ]);
   const summary = JSON.parse(stdout);
   const outputJson = JSON.parse(await readFile(jsonPath, "utf8"));
@@ -171,4 +189,5 @@ test("compare-law는 개정 전후 문언을 직접 비교해 변경 도표를 �
   assert.equal(changeByName.get("산업전략과"), "명칭변경");
   assert.equal(changeByName.get("이체과"), "이체");
   assert.match(await readFile(svgPath, "utf8"), /변경 전후 레인형|신설|폐지|명칭변경|이체/);
+  assert.match(await readFile(reportPath, "utf8"), /변경 요약: 신설 1 · 폐지 1 · 명칭변경 1 · 이체 1/);
 });

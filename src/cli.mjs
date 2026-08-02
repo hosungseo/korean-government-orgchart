@@ -7,7 +7,7 @@ import { buildAuditReport, formatAuditMarkdown } from "./audit.mjs";
 import { formatBatchAuditMarkdown, runBatchAudit } from "./batch-audit.mjs";
 import { formatBatchBuildMarkdown, runBatchBuild } from "./batch-build.mjs";
 import { buildAuditCaseSpecs } from "./case-scaffold.mjs";
-import { compareOrgGraphs } from "./graph-diff.mjs";
+import { compareOrgGraphs, formatComparisonCsv, formatComparisonMarkdown } from "./graph-diff.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { organizationLawNameCandidateGroups } from "./law-name.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
@@ -64,6 +64,7 @@ async function compareJsonCommand(args) {
     layout: stringArg(args, "layout") || "change-lanes",
     paper: stringArg(args, "paper") || "a4-landscape",
   };
+  await emitComparisonReportsIfRequested(graph, args);
   await emitOutputs(graph, outputArgs);
 }
 
@@ -76,6 +77,7 @@ async function compareLawCommand(args) {
     layout: stringArg(args, "layout") || "change-lanes",
     paper: stringArg(args, "paper") || "a4-landscape",
   };
+  await emitComparisonReportsIfRequested(graph, args);
   await emitOutputs(graph, outputArgs);
 }
 
@@ -450,6 +452,17 @@ async function emitOutputs(graph, args) {
   console.log(JSON.stringify({ ...summarize(graph, pages), view }, null, 2));
 }
 
+async function emitComparisonReportsIfRequested(graph, args) {
+  const reportPath = stringArg(args, "change-report") || stringArg(args, "changes");
+  const csvPath = stringArg(args, "change-csv");
+  if (reportPath) {
+    await writeText(path.resolve(reportPath), formatComparisonMarkdown(graph));
+  }
+  if (csvPath) {
+    await writeText(path.resolve(csvPath), formatComparisonCsv(graph));
+  }
+}
+
 function planRequestedPages(graph, args) {
   const layout = stringArg(args, "layout") || "auto";
   if (layout === "best") {
@@ -559,12 +572,14 @@ function printHelp() {
     --before outputs/기관-개정전.json \\
     --after outputs/기관-개정후.json \\
     --svg outputs/기관-변경비교.svg \\
-    --out outputs/기관-변경비교.pptx
+    --out outputs/기관-변경비교.pptx \\
+    --change-report outputs/기관-변경목록.md
 
   node src/cli.mjs compare-law \\
     --before-input old-직제.txt --before-input old-시행규칙.txt \\
     --after-input new-직제.txt --after-input new-시행규칙.txt \\
-    --svg outputs/기관-변경비교.svg
+    --svg outputs/기관-변경비교.svg \\
+    --change-csv outputs/기관-변경목록.csv
 
   node src/cli.mjs review-pack \\
     --institutions "행정안전부,문화체육관광부,공정거래위원회" \\
@@ -603,6 +618,8 @@ function printHelp() {
   --after-input <file>      compare-law의 개정 후 직제/시행규칙 문언(반복 가능)
   --before-date <YYYY-MM-DD> compare-law 법제처 조회 또는 개정 전 문언 기준일
   --after-date <YYYY-MM-DD> compare-law 법제처 조회 또는 개정 후 문언 기준일
+  --change-report <file.md> compare-json/compare-law 변경목록 Markdown 표 저장
+  --change-csv <file.csv>   compare-json/compare-law 변경목록 CSV 저장
   --graph <graph.json>      render-json의 기존 조직도 JSON
   --oc <인증값>             LAW_API_OC 환경변수로도 지정 가능
   --source-dir <dir>        조회한 기준일 법령 문언 보관 및 다음 실행 재사용 캐시

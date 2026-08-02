@@ -219,11 +219,19 @@ function addPage(presentation, graph, page, { showLawCounts, pageSize, routedCon
     addText(
       slide,
       `${layout.diagnostics?.ok ? "△" : "⚠"} ${formatLayoutWarning(layout.diagnostics)}. ${layout.diagnostics?.ok ? "best-fit 후보 또는 분할을 확인하세요." : "분할 또는 다른 작도 유형을 사용하세요."}`,
-      { left: margin, top: pageSize.height - (portrait ? 44 : 38), width: pageSize.width - margin * 2 - 90, height: 14 },
+      { left: margin, top: pageSize.height - (portrait ? (half ? 74 : 67) : 50), width: pageSize.width - margin * 2 - 90, height: 14 },
       { fontSize: portrait ? 7.5 : 8, color: layout.diagnostics?.ok ? "#6B7280" : "#B45309", alignment: "left" },
       "배치진단",
     );
   }
+
+  addText(
+    slide,
+    formatLayoutReview(page, layout),
+    { left: margin, top: pageSize.height - (portrait ? (half ? 57 : 58) : 52), width: pageSize.width - margin * 2, height: 11 },
+    { fontSize: portrait ? (half ? 6.1 : 7.2) : 8.2, color: "#94A3B8", alignment: "left", autoFit: "shrinkText" },
+    "작도검토-요약",
+  );
 
   addLegend(slide, { showLawCounts, operational: graph.meta.renderView === "operational", pageSize });
   addText(
@@ -242,6 +250,20 @@ function formatLayoutWarning(diagnostics) {
   if (diagnostics?.edgeIssues?.length) parts.push(`연결선 ${diagnostics.edgeIssues.length}`);
   if (diagnostics?.qualityIssues?.length) parts.push(`품질 ${diagnostics.qualityIssues.length}`);
   return parts.length ? parts.join(" · ") : "배치 확인 필요";
+}
+
+function formatLayoutReview(page, layout) {
+  const diagnostics = layout?.diagnostics || {};
+  const hard = (diagnostics.overflow?.length || 0) +
+    (diagnostics.overlaps?.length || 0) +
+    (diagnostics.edgeIssues?.length || 0);
+  const quality = diagnostics.qualityIssues?.length || 0;
+  const style = page?.layoutStyle || page?.variant || "auto";
+  const selector = page?.selectedBy === "best-fit" ? `best-fit/${style}` : style;
+  const status = hard || quality
+    ? `hard ${hard} · polish ${quality}`
+    : "배치 정상";
+  return `작도 ${selector} · 노드 ${layout?.nodes?.length || 0} · 관계선 ${layout?.edges?.length || 0} · ${status}`;
 }
 
 function addNode(slide, node, position, { showLawCounts, pageSize }) {
@@ -732,10 +754,17 @@ function addPptxGenPage(pptx, graph, page, { showLawCounts, pageSize }) {
     addPptxText(
       slide,
       `${layout.diagnostics?.ok ? "△" : "⚠"} ${formatLayoutWarning(layout.diagnostics)}. ${layout.diagnostics?.ok ? "best-fit 후보 또는 분할을 확인하세요." : "분할 또는 다른 작도 유형을 사용하세요."}`,
-      { left: margin, top: pageSize.height - (portrait ? 44 : 38), width: pageSize.width - margin * 2 - 90, height: 14 },
+      { left: margin, top: pageSize.height - (portrait ? (half ? 74 : 67) : 50), width: pageSize.width - margin * 2 - 90, height: 14 },
       { fontSize: portrait ? 7.5 : 8, color: layout.diagnostics?.ok ? "#6B7280" : "#B45309", alignment: "left" },
     );
   }
+
+  addPptxText(
+    slide,
+    formatLayoutReview(page, layout),
+    { left: margin, top: pageSize.height - (portrait ? (half ? 57 : 58) : 52), width: pageSize.width - margin * 2, height: 11 },
+    { fontSize: portrait ? (half ? 6.1 : 7.2) : 8.2, color: "#94A3B8", alignment: "left" },
+  );
 
   addPptxLegend(slide, pptx, { showLawCounts, operational: graph.meta.renderView === "operational", pageSize });
   addPptxText(slide, `${page.pageNumber} / ${page.pageCount}`, { left: pageSize.width - margin - 68, top: footerTop, width: 68, height: 14 }, {

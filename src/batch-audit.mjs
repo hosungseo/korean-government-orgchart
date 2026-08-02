@@ -200,7 +200,7 @@ export function formatBatchAuditMarkdown(result) {
     }
     if (summary.layoutDiagnostics?.qualityIssues) {
       const diag = summary.layoutDiagnostics;
-      lines.push(`- 작도 품질: 간격 ${diag.spacingIssues || 0} · 정렬 ${diag.alignmentIssues || 0} · 교차 ${diag.crossingIssues || 0} · 균형 ${diag.balanceIssues || 0}`);
+      lines.push(`- 작도 품질: 간격 ${diag.spacingIssues || 0} · 정렬 ${diag.alignmentIssues || 0} · 선교차 ${diag.crossingIssues || 0} · 선-상자 관통 ${diag.occlusionIssues || 0} · 균형 ${diag.balanceIssues || 0}`);
     }
     if (report.layoutRecommendations?.length) {
       lines.push("- 작도 개선:");
@@ -609,6 +609,7 @@ function summarizeCaseError(caseSpec, error) {
       spacingIssues: 0,
       alignmentIssues: 0,
       crossingIssues: 0,
+      occlusionIssues: 0,
       balanceIssues: 0,
       qualityIssues: 0,
       totalIssues: 0,
@@ -626,6 +627,7 @@ function countLayoutDiagnostics(layoutDiagnostics) {
     spacingIssues: 0,
     alignmentIssues: 0,
     crossingIssues: 0,
+    occlusionIssues: 0,
     balanceIssues: 0,
     qualityIssues: 0,
     totalIssues: 0,
@@ -637,6 +639,7 @@ function countLayoutDiagnostics(layoutDiagnostics) {
     totals.spacingIssues += item.diagnostics?.spacingIssues?.length || 0;
     totals.alignmentIssues += item.diagnostics?.alignmentIssues?.length || 0;
     totals.crossingIssues += item.diagnostics?.crossingIssues?.length || 0;
+    totals.occlusionIssues += item.diagnostics?.occlusionIssues?.length || 0;
     totals.balanceIssues += item.diagnostics?.balanceIssues?.length || 0;
     totals.qualityIssues += item.diagnostics?.qualityIssues?.length || 0;
   }

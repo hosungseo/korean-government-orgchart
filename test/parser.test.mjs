@@ -268,7 +268,7 @@ test("배치 진단은 상자 간격과 부모 중심축 품질 문제를 별도
   ]);
 });
 
-test("배치 진단은 연결선 교차와 카드 컬럼 불균형을 품질 문제로 잡는다", () => {
+test("배치 진단은 연결선 교차·선-상자 관통·카드 컬럼 불균형을 품질 문제로 잡는다", () => {
   const crossing = diagnoseLayout({
     frame: { left: 0, top: 0, width: 220, height: 190 },
     nodes: [
@@ -296,6 +296,29 @@ test("배치 진단은 연결선 교차와 카드 컬럼 불균형을 품질 문
   assert.equal(crossing.ok, true);
   assert.equal(crossing.crossingIssues.length, 1);
   assert.equal(crossing.crossingIssues[0].reason, "crossing-connectors");
+
+  const occlusion = diagnoseLayout({
+    frame: { left: 0, top: 0, width: 220, height: 220 },
+    nodes: [
+      { node: { id: "p", name: "부모" }, position: { left: 90, top: 10, width: 30, height: 28 } },
+      { node: { id: "c", name: "자식" }, position: { left: 90, top: 170, width: 30, height: 28 } },
+      { node: { id: "x", name: "가리는상자" }, position: { left: 78, top: 86, width: 54, height: 28 } },
+    ],
+    edges: [
+      {
+        parent: "p",
+        child: "c",
+        from: { left: 90, top: 10, width: 30, height: 28 },
+        to: { left: 90, top: 170, width: 30, height: 28 },
+      },
+    ],
+  });
+
+  assert.equal(occlusion.ok, true);
+  assert.equal(occlusion.qualityOk, false);
+  assert.equal(occlusion.occlusionIssues.length, 1);
+  assert.equal(occlusion.occlusionIssues[0].reason, "connector-through-node");
+  assert.equal(occlusion.occlusionIssues[0].node, "가리는상자");
 
   const balance = diagnoseLayout({
     frame: { left: 0, top: 0, width: 240, height: 300 },

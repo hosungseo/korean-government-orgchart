@@ -214,6 +214,7 @@ export function scoreLayoutPages(graph, pages) {
     spacingIssues: 0,
     alignmentIssues: 0,
     crossingIssues: 0,
+    occlusionIssues: 0,
     balanceIssues: 0,
     qualityIssues: 0,
     totalIssues: 0,
@@ -226,6 +227,7 @@ export function scoreLayoutPages(graph, pages) {
     totals.spacingIssues += layout.diagnostics?.spacingIssues?.length || 0;
     totals.alignmentIssues += layout.diagnostics?.alignmentIssues?.length || 0;
     totals.crossingIssues += layout.diagnostics?.crossingIssues?.length || 0;
+    totals.occlusionIssues += layout.diagnostics?.occlusionIssues?.length || 0;
     totals.balanceIssues += layout.diagnostics?.balanceIssues?.length || 0;
     totals.qualityIssues += layout.diagnostics?.qualityIssues?.length || 0;
   }
@@ -812,6 +814,7 @@ export function diagnoseLayout(
       spacingIssues: [],
       alignmentIssues: [],
       crossingIssues: [],
+      occlusionIssues: [],
       balanceIssues: [],
       qualityIssues: [],
     };
@@ -876,11 +879,15 @@ export function diagnoseLayout(
     nodeNames,
     tolerance,
   });
+  const occlusionIssues = diagnoseEdgeNodeOcclusions(layout.edges || [], layout.nodes || [], {
+    nodeNames,
+    tolerance,
+  });
   const balanceIssues = diagnoseColumnBalance(layout.groupBoxes || [], {
     frame,
     maximumColumnImbalance,
   });
-  const qualityIssues = [...spacingIssues, ...alignmentIssues, ...crossingIssues, ...balanceIssues];
+  const qualityIssues = [...spacingIssues, ...alignmentIssues, ...crossingIssues, ...occlusionIssues, ...balanceIssues];
   return {
     ok: overflow.length === 0 && overlaps.length === 0 && edgeIssues.length === 0,
     qualityOk: qualityIssues.length === 0,
@@ -890,6 +897,7 @@ export function diagnoseLayout(
     spacingIssues,
     alignmentIssues,
     crossingIssues,
+    occlusionIssues,
     balanceIssues,
     qualityIssues,
   };
@@ -1013,6 +1021,35 @@ function diagnoseEdgeCrossings(edges, { nodeNames, tolerance }) {
   return issues;
 }
 
+function diagnoseEdgeNodeOcclusions(edges, nodes, { nodeNames, tolerance }) {
+  const issues = [];
+  const boxes = (nodes || [])
+    .map((entry) => ({
+      id: entry.node?.id,
+      name: entry.node?.name || entry.node?.id || "(이름 없음)",
+      box: normalizePosition(entry.position),
+    }))
+    .filter((entry) => entry.id && entry.box);
+  if (!boxes.length) return issues;
+  for (const edge of edges || []) {
+    const segments = edgeSegments(edge);
+    if (!segments.length) continue;
+    for (const entry of boxes) {
+      if (entry.id === edge.parent || entry.id === edge.child) continue;
+      const hit = segments.find((segmentItem) => segmentIntersectsBoxInterior(segmentItem, entry.box, tolerance));
+      if (!hit) continue;
+      issues.push({
+        reason: "connector-through-node",
+        edge: edgeLabel(edge, nodeNames),
+        node: entry.name,
+        orientation: hit.orientation,
+      });
+      break;
+    }
+  }
+  return issues;
+}
+
 function diagnoseColumnBalance(groupBoxes, { frame, maximumColumnImbalance }) {
   const boxes = (groupBoxes || [])
     .map((box) => normalizeGroupBox(box))
@@ -1113,6 +1150,38 @@ function segmentCrossing(a, b, tolerance) {
   if (!strictlyBetween(x, horizontal.x1, horizontal.x2, tolerance)) return null;
   if (!strictlyBetween(y, vertical.y1, vertical.y2, tolerance)) return null;
   return { x, y };
+}
+
+function segmentIntersectsBoxInterior(segmentItem, box, tolerance) {
+  const innerLeft = box.left + tolerance;
+  const innerRight = box.right - tolerance;
+  const innerTop = box.top + tolerance;
+  const innerBottom = box.bottom - tolerance;
+  if (innerLeft >= innerRight || innerTop >= innerBottom) return false;
+  if (segmentItem.orientation === "horizontal") {
+    const y = segmentItem.y1;
+    if (y <= innerTop || y >= innerBottom) return false;
+    return rangesOverlap(
+      Math.min(segmentItem.x1, segmentItem.x2),
+      Math.max(segmentItem.x1, segmentItem.x2),
+      innerLeft,
+      innerRight,
+      tolerance,
+    );
+  }
+  const x = segmentItem.x1;
+  if (x <= innerLeft || x >= innerRight) return false;
+  return rangesOverlap(
+    Math.min(segmentItem.y1, segmentItem.y2),
+    Math.max(segmentItem.y1, segmentItem.y2),
+    innerTop,
+    innerBottom,
+    tolerance,
+  );
+}
+
+function rangesOverlap(a1, a2, b1, b2, tolerance) {
+  return Math.max(a1, b1) < Math.min(a2, b2) - tolerance;
 }
 
 function strictlyBetween(value, a, b, tolerance) {

@@ -488,7 +488,7 @@
         parts.push("현재 데모 규모에서는 배치 위험이 낮습니다.");
       }
       if (quality.total) {
-        parts.push(`△ 간격·정렬 다듬기 후보 ${quality.total}건(간격 ${quality.spacing}, 중심축 ${quality.alignment}). CLI는 여기에 선 교차와 카드 컬럼 균형까지 추가 점검합니다.`);
+        parts.push(`△ 간격·정렬 다듬기 후보 ${quality.total}건(간격 ${quality.spacing}, 중심축 ${quality.alignment}). CLI는 여기에 선 교차, 선-상자 관통, 카드 컬럼 균형까지 추가 점검합니다.`);
       }
       return { warning, polish: quality.total > 0, text: parts.join(" ") };
     }

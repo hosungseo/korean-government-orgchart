@@ -252,8 +252,15 @@ function bestFitCandidates(paper, requestedMaxNodes = 38) {
   const styles = bestFitCandidateStyles(paper);
   const maxNodesValues = bestFitMaxNodeCandidates(paper, requestedMaxNodes);
   const candidates = [];
+  const seen = new Set();
   for (const maxNodes of maxNodesValues) {
-    for (const style of styles) candidates.push({ style, maxNodes });
+    for (const style of styles) {
+      const adjustedMaxNodes = readabilityAwareMaxNodes({ paper, layoutStyle: style, maxNodes });
+      const key = `${style}:${adjustedMaxNodes}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      candidates.push({ style, maxNodes: adjustedMaxNodes });
+    }
   }
   return candidates;
 }
@@ -271,6 +278,21 @@ function uniqueNumbers(values) {
   return [...new Set(values.map((value) => Math.max(1, Math.floor(value))).filter(Number.isFinite))];
 }
 
+function readabilityAwareMaxNodes({ paper, layoutStyle, maxNodes }) {
+  if (paper !== "a4-half" || layoutStyle !== "vertical-stack") return maxNodes;
+  return Math.min(maxNodes, a4HalfVerticalStackMaxNodes());
+}
+
+function a4HalfVerticalStackMaxNodes() {
+  const pageSize = resolvePageSize("a4-half");
+  const pageMargin = 17;
+  const frameWidth = pageSize.width - pageMargin * 2;
+  const minimumVerticalLabelWidth = 18;
+  const siblingGutter = 6;
+  const leafCapacity = Math.max(4, Math.floor(frameWidth / (minimumVerticalLabelWidth + siblingGutter)));
+  return leafCapacity + 1;
+}
+
 export function planPages(
   graph,
   { mode = "auto", maxNodes = 38, paper = "slide", layoutStyle, focus } = {},
@@ -279,14 +301,20 @@ export function planPages(
   const requestedVisual = layoutStyle || (VISUAL_LAYOUTS.has(mode) ? mode : undefined);
   const visual = inferLayoutStyle(graph, { paper: format, mode: requestedVisual });
   // A portrait A4 page has less horizontal room.  Splitting earlier avoids
-  // unreadable one-character-wide leaf boxes while still allowing callers to
-  // override the limit explicitly through --max-nodes.
+  // unreadable one-character-wide leaf boxes; A4 half vertical-stack applies
+  // an additional readability clamp derived from the minimum vertical label
+  // width, not just the caller's requested node count.
   const effectiveMaxNodes =
     maxNodes === 38 && format === "a4-half"
       ? 20
       : maxNodes === 38 && format === "a4-portrait"
         ? 28
         : maxNodes;
+  const layoutMaxNodes = readabilityAwareMaxNodes({
+    paper: format,
+    layoutStyle: visual,
+    maxNodes: effectiveMaxNodes,
+  });
   const planningMode = requestedVisual ? "auto" : mode;
   const head = graph.findHead() || graph.nodes.get(graph.rootId);
   const deputy = graph.findDeputy();
@@ -297,7 +325,7 @@ export function planPages(
   const ordinaryCount = [...graph.nodes.values()].filter(
     (node) => node.kind !== "institution" && node.kind !== "affiliated",
   ).length;
-  const compactLimit = Math.min(effectiveMaxNodes, 32);
+  const compactLimit = Math.min(layoutMaxNodes, 32);
   const selectedMode =
     planningMode === "auto"
       ? ordinaryCount <= compactLimit
@@ -321,11 +349,11 @@ export function planPages(
               paper: format,
             })
           : visual;
-      if (nodeIds.length > effectiveMaxNodes) {
+      if (nodeIds.length > layoutMaxNodes) {
         const focusedPages = splitBranchPages(
           graph,
           focused,
-          effectiveMaxNodes,
+          layoutMaxNodes,
           [],
           format,
           focusedLayoutStyle,
@@ -400,9 +428,9 @@ export function planPages(
       .map(({ node }) => node);
     const branchMap = new Map([...branchCandidates, ...headBranches].map((node) => [node.id, node]));
     for (const branch of branchMap.values()) {
-      mainDetails.push(...splitBranchPages(graph, branch, effectiveMaxNodes, [graph.meta.institution], format, visual));
+      mainDetails.push(...splitBranchPages(graph, branch, layoutMaxNodes, [graph.meta.institution], format, visual));
     }
-    pages.push(...packDetailPages(mainDetails, effectiveMaxNodes, "본부 하부조직", format, visual));
+    pages.push(...packDetailPages(mainDetails, layoutMaxNodes, "본부 하부조직", format, visual));
   }
 
   if (visual === "affiliate-strip") {
@@ -439,12 +467,17 @@ export function planPages(
           descendantCount: descendants.length,
           paper: format,
         });
+        const affiliateMaxNodes = readabilityAwareMaxNodes({
+          paper: format,
+          layoutStyle: layoutStyleForAffiliate,
+          maxNodes: effectiveMaxNodes,
+        });
         affiliateDetails.push(
-          ...splitBranchPages(graph, affiliate, effectiveMaxNodes, ["소속기관"], format, layoutStyleForAffiliate),
+          ...splitBranchPages(graph, affiliate, affiliateMaxNodes, ["소속기관"], format, layoutStyleForAffiliate),
         );
       }
     }
-    pages.push(...packDetailPages(affiliateDetails, effectiveMaxNodes, "소속기관", format, visual));
+    pages.push(...packDetailPages(affiliateDetails, layoutMaxNodes, "소속기관", format, visual));
   }
 
   return pages.map((page, index) => ({ ...page, pageNumber: index + 1, pageCount: pages.length }));

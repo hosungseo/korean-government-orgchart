@@ -76,7 +76,7 @@ test("A4 반쪽 세로형은 단계 간격을 검토서형으로 압축한다", 
   assert.ok(topByDepth.get(2) - topByDepth.get(1) <= 100);
 });
 
-test("A4 반쪽 세로형은 조밀한 세로 과 상자를 겹치지 않게 압축한다", () => {
+test("A4 반쪽 세로형은 과 상자가 너무 좁아지기 전에 자동 분할한다", () => {
   const departments = Array.from({ length: 16 }, (_, index) => `제${index + 1}정책과`).join("ㆍ");
   const graph = parseOrganizationTexts([
     `
@@ -85,17 +85,19 @@ test("A4 반쪽 세로형은 조밀한 세로 과 상자를 겹치지 않게 압
 시험실에 ${departments}를 둔다.
 `,
   ]);
-  const page = planPages(graph, { paper: "a4-half", layoutStyle: "vertical-stack", focus: "시험실" })[0];
-  const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
-  const leafWidths = layout.nodes
-    .filter(({ position }) => position.vertical)
-    .map(({ position }) => position.width);
+  const pages = planPages(graph, { paper: "a4-half", layoutStyle: "vertical-stack", focus: "시험실", maxNodes: 50 });
+  assert.equal(pages.length, 2);
+  for (const page of pages) {
+    const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
+    const leafWidths = layout.nodes
+      .filter(({ position }) => position.vertical)
+      .map(({ position }) => position.width);
 
-  assert.equal(layout.diagnostics.overlaps.length, 0);
-  assert.equal(layout.diagnostics.overflow.length, 0);
-  assert.equal(layout.diagnostics.qualityOk, false);
-  assert.equal(layout.diagnostics.readabilityIssues[0].reason, "narrow-vertical-labels");
-  assert.ok(Math.min(...leafWidths) <= 14);
+    assert.equal(layout.diagnostics.overlaps.length, 0);
+    assert.equal(layout.diagnostics.overflow.length, 0);
+    assert.equal(layout.diagnostics.readabilityIssues.length, 0);
+    assert.ok(Math.min(...leafWidths) >= 18);
+  }
 });
 
 test("A4 반쪽 best-fit은 지나치게 좁은 세로 과 목록 대신 카드형을 고른다", () => {
@@ -113,11 +115,13 @@ test("A4 반쪽 best-fit은 지나치게 좁은 세로 과 목록 대신 카드�
     maxNodes: 50,
   });
   const selected = pages[0].bestFit;
-  const vertical = selected.candidateScores.find((candidate) => candidate.style === "vertical-stack" && candidate.maxNodes === 50);
+  const vertical = selected.candidateScores.find((candidate) => candidate.style === "vertical-stack");
 
   assert.equal(selected.selectedLayoutStyle, "catalog");
   assert.equal(pages[0].layoutStyle, "catalog");
-  assert.equal(vertical.diagnostics.readabilityIssues, 1);
+  assert.equal(vertical.maxNodes <= 11, true);
+  assert.equal(vertical.diagnostics.readabilityIssues || 0, 0);
+  assert.equal(vertical.diagnostics.pages, 2);
 });
 
 test("같은 그래프를 여러 시각 유형으로 한 번에 계획한다", () => {

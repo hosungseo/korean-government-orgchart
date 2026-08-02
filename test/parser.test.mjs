@@ -795,6 +795,48 @@ test("본부 명칭과 부속기관은 설치 문형으로 구분한다", () => 
   assert.equal(graph.parentsOf(subsidiary).some(({ edge }) => edge.type === "affiliated"), true);
 });
 
+test("기존 JSON도 본부·소속기관 표식을 복원하고 모순 관계를 검증한다", () => {
+  const built = new OrgGraph({ institution: "시험부" });
+  const legacyBranch = built.addNode("춘천지소", { kind: "assistant" });
+  built.addEdge(built.rootId, legacyBranch.id, {
+    type: "affiliated",
+    metadata: { affiliationType: "special-local" },
+  });
+  assert.equal(legacyBranch.kind, "affiliated");
+  assert.equal(legacyBranch.metadata.unitRole, "affiliated-institution");
+
+  const graph = OrgGraph.fromJSON({
+    meta: { institution: "시험부", title: "시험부" },
+    rootId: "root",
+    nodes: [
+      { id: "root", name: "시험부", kind: "institution", metadata: {} },
+      { id: "unit", name: "정부청사관리본부", kind: "affiliated", metadata: { affiliationType: "subsidiary" } },
+      { id: "hq", name: "재난안전관리본부", kind: "assistant", metadata: { unitRole: "headquarters" } },
+    ],
+    edges: [
+      { id: "e1", parent: "root", child: "unit", type: "affiliated", metadata: { affiliationType: "subsidiary" } },
+      { id: "e2", parent: "root", child: "hq", type: "assistant" },
+    ],
+  });
+
+  assert.equal(graph.nodes.get("unit").metadata.unitRole, "affiliated-institution");
+  assert.equal(graph.nodes.get("unit").metadata.affiliationType, "subsidiary");
+  assert.equal(graph.meta.validation.length, 0);
+
+  const broken = OrgGraph.fromJSON({
+    meta: { institution: "시험부", title: "시험부" },
+    rootId: "root",
+    nodes: [
+      { id: "root", name: "시험부", kind: "institution", metadata: {} },
+      { id: "bad", name: "본부", kind: "assistant", metadata: { unitRole: "headquarters" } },
+    ],
+    edges: [{ id: "e1", parent: "root", child: "bad", type: "affiliated" }],
+  });
+  broken.validateLegalStructure();
+  assert.equal(broken.nodes.get("bad").kind, "affiliated");
+  assert.ok(broken.meta.validation.some((message) => /본부와 소속기관|소속기관 표식/.test(message)));
+});
+
 test("직무등급·특정직 보직·겸직·합의제 구성을 메타데이터로 보존한다", () => {
   const graph = parseOrganizationTexts([
     `

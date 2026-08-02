@@ -75,7 +75,7 @@ export class OrgGraph {
       name: cleanName,
       kind: incomingKind,
       rank: attrs.rank ?? inferRank(cleanName, incomingKind),
-      metadata: { ...(attrs.metadata || {}) },
+      metadata: normalizeNodeMetadata(incomingKind, attrs.metadata),
       sources: attrs.source ? [attrs.source] : [],
     };
     if (!existing) {
@@ -107,6 +107,16 @@ export class OrgGraph {
     if (!parent || !child || parent.id === child.id) return null;
     const key = `${parent.id}>${child.id}`;
     const type = attrs.type || "structural";
+    // An explicit affiliation relation is stronger than an older/inferred
+    // assistant kind.  Annex parsers and legacy JSON may know the relation
+    // before they have a reliable node classification (for example, a
+    // district branch whose name ends in "지소").  Normalize the node here so
+    // every newly-built graph observes the same headquarters/subordinate
+    // institution invariant as graphs loaded from JSON.
+    if (type === "affiliated" && !["institution", "head", "deputy"].includes(child.kind)) {
+      child.kind = "affiliated";
+      child.metadata = normalizeNodeMetadata("affiliated", child.metadata);
+    }
     const metadata = {
       ...(attrs.article || this._currentArticleRef ? { article: attrs.article || this._currentArticleRef } : {}),
       ...(attrs.evidenceText || this._currentEvidenceText ? { evidenceText: attrs.evidenceText || this._currentEvidenceText } : {}),
@@ -242,12 +252,28 @@ export class OrgGraph {
       if (/차관보$/.test(node.name) && children.length) {
         this.addValidationIssue(`차관보 밑에는 하부조직을 둘 수 없습니다: ${node.name}`);
       }
+      if (node.kind === "affiliated" && node.metadata?.unitRole !== "affiliated-institution") {
+        this.addValidationIssue(`소속기관 노드에 소속기관 표식이 없습니다: ${node.name}`);
+      }
+      if (node.kind === "affiliated" && node.metadata?.unitRole === "headquarters") {
+        this.addValidationIssue(`본부와 소속기관 표식이 동시에 있습니다: ${node.name}`);
+      }
+      if (node.kind !== "affiliated" && node.metadata?.affiliationType) {
+        this.addValidationIssue(`소속기관 유형이 보조·보좌 노드에 붙어 있습니다: ${node.name}`);
+      }
     }
 
     for (const edge of this.edges.values()) {
       const parent = this.nodes.get(edge.parent);
       const child = this.nodes.get(edge.child);
-      if (!parent || !child || edge.type !== "assistant") continue;
+      if (!parent || !child) continue;
+      if (edge.type === "affiliated" && child.kind !== "affiliated") {
+        this.addValidationIssue(`소속기관 연결선의 하위 노드가 소속기관이 아닙니다: ${parent.name} → ${child.name}`);
+      }
+      if (child.kind === "affiliated" && !["affiliated", "temporary"].includes(edge.type)) {
+        this.addValidationIssue(`소속기관이 본부 계선·보좌 관계에 섞였습니다: ${parent.name} → ${child.name}`);
+      }
+      if (edge.type !== "assistant") continue;
       if (/실$/.test(parent.name) && /실$/.test(child.name)) {
         this.addValidationIssue(`실 밑에 실을 둔 관계를 확인해야 합니다: ${parent.name} → ${child.name}`);
       }
@@ -371,7 +397,7 @@ export function orgGraphFromJSON(value) {
       name: rawNode.name,
       kind,
       rank: rawNode.rank ?? inferRank(rawNode.name, kind),
-      metadata: structuredClone(rawNode.metadata || {}),
+      metadata: normalizeNodeMetadata(kind, rawNode.metadata),
       sources: Array.isArray(rawNode.sources) ? [...rawNode.sources] : [],
     });
   }
@@ -401,6 +427,8 @@ export function orgGraphFromJSON(value) {
       metadata: structuredClone(rawEdge.metadata || {}),
     });
   }
+
+  normalizeLoadedAffiliationEdges(graph);
 
   return graph;
 }
@@ -487,6 +515,33 @@ export function inferKind(name) {
   if (/(?:연구원|박물관|미술관|도서관|극장|전당|세무서|소방서|학교|교육원|개발원|기록원|관리원|사무소|위원회|청|처)$/.test(name)) return "affiliated";
   if (/(?:실|국|본부|단|부|과|팀|관|센터|사무국|원|소)$/.test(name)) return "assistant";
   return "unknown";
+}
+
+function normalizeNodeMetadata(kind, metadata = {}) {
+  const normalized = { ...metadata };
+  // Older saved graphs recorded the affiliation type but not the explicit
+  // unit role. Keep those files semantically equivalent to newly parsed
+  // graphs so renderers and audits can reliably separate the headquarters
+  // tree from subordinate institutions.
+  if (kind === "affiliated" && !normalized.unitRole) {
+    normalized.unitRole = "affiliated-institution";
+  }
+  return normalized;
+}
+
+function normalizeLoadedAffiliationEdges(graph) {
+  for (const edge of graph.edges.values()) {
+    const child = graph.nodes.get(edge.child);
+    if (!child) continue;
+    if (edge.type === "affiliated" && !["institution", "head", "deputy"].includes(child.kind)) {
+      child.kind = "affiliated";
+      child.metadata = normalizeNodeMetadata("affiliated", child.metadata);
+    }
+    if (edge.type === "affiliated" && edge.metadata?.affiliationType && !child.metadata.affiliationType) {
+      child.metadata.affiliationType = edge.metadata.affiliationType;
+      child.metadata.responsible ||= edge.metadata.affiliationType === "responsible";
+    }
+  }
 }
 
 export function inferRank(name, kind = inferKind(name)) {

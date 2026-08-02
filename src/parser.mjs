@@ -680,6 +680,19 @@ function parseInRelations(graph, body, source, context, { articleIsAffiliated = 
                 : {}),
           },
         });
+        if (
+          !isAffiliated &&
+          !isAdvisoryPurpose &&
+          JURISDICTION_ADVISOR_NAME.test(parent.name) &&
+          DEPARTMENT_SUFFIX.test(child.name)
+        ) {
+          setJurisdictionRelation(graph, parent.name, child.name, {
+            source,
+            evidence: "direct-installation",
+            legalBasis: "보좌기관 직접 설치 문형",
+            evidenceText: compactEvidenceText(sentence),
+          });
+        }
       }
     });
   }

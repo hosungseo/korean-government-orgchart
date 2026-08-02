@@ -726,6 +726,33 @@ test("시행규칙의 정책관 소관 과는 법정 설치 계선과 별도로 
   assert.equal(graph.nodeByName("지역진흥과").metadata.jurisdiction, undefined);
 });
 
+test("정책관에 과를 직접 두는 문형은 법정 설치와 운영상 소관을 함께 보존한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(시험실) 시험부에 시험실을 둔다.
+시험실장 밑에 지역정책관을 둔다.
+지역정책관에 지역총괄과ㆍ지역진흥과를 둔다.
+`,
+  ]);
+  const advisor = graph.nodeByName("지역정책관");
+  const department = graph.nodeByName("지역총괄과");
+
+  assert.equal(
+    graph.parentsOf(department).some(({ edge, node }) => node.id === advisor.id && edge.type === "assistant"),
+    true,
+  );
+  assert.equal(department.metadata.jurisdiction.parent, "지역정책관");
+  assert.equal(department.metadata.jurisdiction.evidence, "direct-installation");
+  assert.deepEqual(
+    graph.meta.jurisdictionRelations.map((item) => [item.parent, item.child, item.evidence]),
+    [
+      ["지역정책관", "지역총괄과", "direct-installation"],
+      ["지역정책관", "지역진흥과", "direct-installation"],
+    ],
+  );
+});
+
 test("시행규칙의 다양한 보좌기관 소관 문형을 과 소관관계로 기록한다", () => {
   const graph = parseOrganizationTexts([
     `

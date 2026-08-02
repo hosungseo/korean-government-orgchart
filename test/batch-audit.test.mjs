@@ -27,6 +27,14 @@ test("배치 감사 요약은 검토·별표·소관·배치 문제를 집계한
     jurisdictionCrosswalks: { confirmed: [{ child: "정책과" }], unresolved: [{ department: "지원과" }] },
     jurisdictionRunInferences: [{ parent: "시험실", advisor: "산업정책관", departments: ["지원과"] }],
     lawMap: { matchedInstitution: "시험부", matchedDepartments: 3, lawCount: 10, unmatchedDepartments: [{}] },
+    evidence: {
+      sourceInventory: [{ source: "시험부 직제", role: "decree" }],
+      sourceRoles: { decree: 1, rule: 0 },
+      traceRows: 11,
+      citedRows: 8,
+      citationCoverage: 8 / 11,
+      sourceRows: 11,
+    },
     layoutRecommendations: [{ message: "분할 권장" }],
     layoutDiagnostics: [
       { diagnostics: { overflow: [{}], overlaps: [{}, {}], edgeIssues: [{}] } },
@@ -72,6 +80,9 @@ test("배치 감사 요약은 검토·별표·소관·배치 문제를 집계한
   assert.equal(summary.layoutDiagnostics.totalIssues, 4);
   assert.equal(summary.layoutRecommendations, 1);
   assert.equal(summary.lawMap.unmatchedDepartments, 1);
+  assert.equal(summary.evidence.sourceCount, 1);
+  assert.equal(summary.evidence.citationPercent, 73);
+  assert.equal(summary.evidence.sourceCompletenessIssues, 0);
   assert.deepEqual(summary.layoutSelection.selected, ["vertical-stack"]);
   assert.equal(summary.layoutSelection.bestFit.selectedLayoutStyle, "vertical-stack");
   assert.match(summary.layoutSelection.bestFit.selectionReason, /품질 issue/);

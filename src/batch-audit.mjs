@@ -58,6 +58,7 @@ export function summarizeAuditCase({ caseSpec = {}, report, view = "legal", page
   const jurisdictionCrosswalks = report.jurisdictionCrosswalks || {};
   const annexRequirements = report.annexRequirements || [];
   const lawMap = report.lawMap || null;
+  const evidence = report.evidence || null;
   return {
     id: caseSpec.id || report.meta.institution,
     institution: report.meta.institution,
@@ -105,6 +106,19 @@ export function summarizeAuditCase({ caseSpec = {}, report, view = "legal", page
           excludedScopedNodes: lawMap.excludedScopedNodes || 0,
         }
       : null,
+    evidence: evidence
+      ? {
+          sourceCount: evidence.sourceInventory?.length || 0,
+          decreeSources: evidence.sourceRoles?.decree || 0,
+          ruleSources: evidence.sourceRoles?.rule || 0,
+          unknownSources: evidence.sourceRoles?.unknown || 0,
+          traceRows: evidence.traceRows || 0,
+          citedRows: evidence.citedRows || 0,
+          citationPercent: Math.round((evidence.citationCoverage || 0) * 100),
+          sourceRows: evidence.sourceRows || 0,
+          sourceCompletenessIssues: (report.reviewActions || []).filter((item) => item.topic === "source-completeness").length,
+        }
+      : null,
     layoutDiagnostics: layout,
     layoutRecommendations: report.layoutRecommendations?.length || 0,
   };
@@ -120,9 +134,9 @@ export function formatBatchAuditMarkdown(result) {
   );
   lines.push("");
   lines.push(
-    "| 기관 | 기준일 | 보기 | 대상 | 선택유형 | 상태 | 노드 | 페이지 | 높은 확인 | 중간 확인 | 낮은 확인 | 소관관계 | 소관 후보 | 배치 문제 | 품질 | 별표 |",
+    "| 기관 | 기준일 | 보기 | 대상 | 선택유형 | 상태 | 노드 | 페이지 | 높은 확인 | 중간 확인 | 낮은 확인 | 소관관계 | 소관 후보 | 배치 문제 | 품질 | 입력 소스 | 근거 표시 | 별표 |",
   );
-  lines.push("| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |");
+  lines.push("| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |");
   for (const item of result.cases) {
     const summary = item.summary;
     lines.push(
@@ -142,6 +156,8 @@ export function formatBatchAuditMarkdown(result) {
         summary.jurisdiction?.candidateDepartments ?? "",
         summary.layoutDiagnostics?.totalIssues ?? "",
         summary.layoutDiagnostics?.qualityIssues ?? "",
+        summary.evidence?.sourceCount ?? "",
+        summary.evidence ? `${summary.evidence.citedRows}/${summary.evidence.traceRows}` : "",
         `${summary.annex?.missing ?? ""}/${summary.annex?.requirements ?? ""}`,
       ].join(" | ").replace(/^/, "| ").replace(/$/, " |"),
     );
@@ -223,6 +239,11 @@ export function formatBatchAuditMarkdown(result) {
       lines.push(
         `- 소관법령 지도: 매칭 부서 ${summary.lawMap.matchedDepartments}, 미매칭 ${summary.lawMap.unmatchedDepartments}, 중복 후보 ${summary.lawMap.ambiguousDepartments}`,
       );
+    }
+    if (summary.evidence) {
+      const sourceLabel = `${summary.evidence.sourceCount}건 (직제 ${summary.evidence.decreeSources}, 시행규칙 ${summary.evidence.ruleSources})`;
+      const citationLabel = `${summary.evidence.citedRows}/${summary.evidence.traceRows} (${summary.evidence.citationPercent}%)`;
+      lines.push(`- 근거 점검: 입력 ${sourceLabel}, 관계 근거 표시 ${citationLabel}`);
     }
     lines.push("");
   }

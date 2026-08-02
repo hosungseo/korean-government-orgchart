@@ -1,4 +1,5 @@
 import { findAnnex } from "./annex.mjs";
+import { summarizeEvidence } from "./evidence.mjs";
 import { jurisdictionEvidenceLabel } from "./jurisdiction-evidence.mjs";
 import { layoutPage, resolvePageSize } from "./layout.mjs";
 import { summarizeStructure } from "./model.mjs";
@@ -18,6 +19,7 @@ export function buildAuditReport(graph, pages = [], options = {}) {
   }));
   const kindCounts = {};
   for (const node of graph.nodes.values()) kindCounts[node.kind] = (kindCounts[node.kind] || 0) + 1;
+  const evidence = summarizeEvidence(graph);
 
   return {
     meta: {
@@ -50,6 +52,7 @@ export function buildAuditReport(graph, pages = [], options = {}) {
     jurisdictionCrosswalks,
     jurisdictionRunInferences: graph.meta.jurisdictionRunInferences || [],
     lawMap: graph.meta.lawMap || null,
+    evidence,
     spanDiagnostics: graph.meta.spanDiagnostics || [],
     layoutDiagnostics: pageDiagnostics,
     layoutRecommendations,
@@ -66,6 +69,19 @@ export function formatAuditMarkdown(report) {
   lines.push("");
 
   appendSection(lines, "입력 소스", report.meta.sourceInventory, formatSourceInventory);
+  if (report.evidence) {
+    lines.push("## 근거 점검");
+    lines.push(`- 관계 근거 표시: ${report.evidence.citedRows}/${report.evidence.traceRows} (${Math.round(report.evidence.citationCoverage * 100)}%)`);
+    lines.push(`- 관계 출처 표시: ${report.evidence.sourceRows}/${report.evidence.traceRows}`);
+    lines.push(`- 입력 자료: ${report.evidence.sourceInventory.length}건 (직제 ${report.evidence.sourceRoles.decree || 0}, 시행규칙 ${report.evidence.sourceRoles.rule || 0})`);
+    if (report.evidence.lawMap) {
+      lines.push(`- 소관법령 지도: 매칭 부서 ${report.evidence.lawMap.matchedDepartments}, 연결 법령 ${report.evidence.lawMap.lawCount}, 미매칭 ${report.evidence.lawMap.unmatchedDepartments}, 중복 후보 ${report.evidence.lawMap.ambiguousDepartments}`);
+    } else {
+      lines.push("- 소관법령 지도: 연결되지 않음");
+    }
+    lines.push(`- 별표: 확보 ${report.evidence.annex.secured}/${report.evidence.annex.requirements || 0}, 반영 조직 ${report.evidence.annex.appliedOrganizations}`);
+    lines.push("");
+  }
   appendSection(lines, "우선 확인", report.reviewActions, (item) => `- [${priorityLabel(item.priority)}] ${item.message}`);
   appendSection(lines, "통칙·구조 검증", report.validation, (item) => `- ${item}`);
   appendSection(lines, "별표 필요", report.annexRequirements, formatAnnexRequirement);

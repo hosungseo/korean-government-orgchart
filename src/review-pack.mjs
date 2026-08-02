@@ -139,8 +139,8 @@ export function formatReviewPackMarkdown(result) {
 
   lines.push("## 케이스별 산출물");
   lines.push("");
-  lines.push("| 기관 | 기준일 | 대상 | 상태 | 선택유형 | 확인 | 배치 | 품질 | 산출물 |");
-  lines.push("| --- | --- | --- | --- | --- | --- | ---: | ---: | --- |");
+  lines.push("| 기관 | 기준일 | 대상 | 상태 | 선택유형 | 확인 | 배치 | 품질 | 근거 | 산출물 |");
+  lines.push("| --- | --- | --- | --- | --- | --- | ---: | ---: | --- | --- |");
   for (const item of result.audit?.cases || []) {
     const summary = item.summary || {};
     const built = findBuildCase(result.build?.cases || [], summary.id);
@@ -158,12 +158,13 @@ export function formatReviewPackMarkdown(result) {
         `${review.high || 0}/${review.medium || 0}/${review.low || 0}`,
         summary.layoutDiagnostics?.totalIssues ?? "",
         summary.layoutDiagnostics?.qualityIssues ?? "",
+        summary.evidence ? `${summary.evidence.citedRows}/${summary.evidence.traceRows}` : "",
         outputs || escapeCell(built?.error || item.error || ""),
       ].join(" | ").replace(/^/, "| ").replace(/$/, " |"),
     );
   }
   lines.push("");
-  lines.push("> 확인 열은 `높음/중간/낮음` 우선순위 개수입니다. 배치 문제는 넘침·겹침·연결선 같은 hard issue, 품질은 간격·정렬·선교차·선-상자 관통·과도한 선 우회·컬럼 균형·세로글자 폭 같은 polish issue입니다.");
+  lines.push("> 확인 열은 `높음/중간/낮음` 우선순위 개수입니다. 배치 문제는 넘침·겹침·연결선 같은 hard issue, 품질은 간격·정렬·선교차·선-상자 관통·과도한 선 우회·컬럼 균형·세로글자 폭 같은 polish issue입니다. 근거 열은 trace 행 가운데 조문·근거문형·근거문장이 표시된 행 수입니다.");
   lines.push("");
   return `${lines.join("\n")}\n`;
 }
@@ -564,13 +565,14 @@ function htmlCasesSection(result) {
       <td>${review.high || 0}/${review.medium || 0}/${review.low || 0}</td>
       <td class="num">${summary.layoutDiagnostics?.totalIssues ?? ""}</td>
       <td class="num">${summary.layoutDiagnostics?.qualityIssues ?? ""}</td>
+      <td>${summary.evidence ? `${summary.evidence.citedRows}/${summary.evidence.traceRows} (${summary.evidence.citationPercent}%)` : "-"}</td>
       <td class="outputs">${outputLinksHtml(result.outDir, built?.outputs || {}) || htmlEscape(built?.error || item.error || "")}</td>
     </tr>`;
   });
   return `<section>
   <h2>케이스별 산출물</h2>
   <table>
-    <thead><tr><th>기관</th><th>기준일</th><th>대상</th><th>상태</th><th>선택유형</th><th>확인</th><th>배치</th><th>품질</th><th>산출물</th></tr></thead>
+    <thead><tr><th>기관</th><th>기준일</th><th>대상</th><th>상태</th><th>선택유형</th><th>확인</th><th>배치</th><th>품질</th><th>근거 표시</th><th>산출물</th></tr></thead>
     <tbody>${rows.join("")}</tbody>
   </table>
   <p class="muted">` + "html" + ` 링크는 한글/HWPX 붙여넣기용 검토시트입니다.</p>
@@ -680,6 +682,16 @@ export function formatReviewWorklistMarkdown(result) {
     lines.push("- 소관법령 지도 미매칭·중복 후보 문제가 없습니다.");
   }
   lines.push("");
+
+  const evidenceItems = collectEvidenceIssues(result.audit?.cases || []);
+  lines.push("## 입력 자료·근거 점검");
+  lines.push("");
+  if (evidenceItems.length) {
+    for (const item of evidenceItems) lines.push(`- ${item.caseLabel}: ${item.message}`);
+  } else {
+    lines.push("- 시행규칙 누락 또는 낮은 근거 표시율로 자동 분류된 케이스가 없습니다. trace CSV의 행 단위 근거를 최종 확인하세요.");
+  }
+  lines.push("");
   return `${lines.join("\n")}\n`;
 }
 
@@ -698,6 +710,9 @@ export function formatReviewTriageCsv(result) {
     "확인_낮음",
     "배치문제",
     "품질문제",
+    "입력소스",
+    "근거표시율",
+    "시행규칙_확인",
     "별표누락",
     "소관후보",
     "소관법령_미매칭",
@@ -722,6 +737,9 @@ export function formatReviewTriageCsv(result) {
     row.low,
     row.layoutIssues,
     row.qualityIssues,
+    row.sourceCount,
+    row.citationLabel,
+    row.sourceCompletenessIssues,
     row.missingAnnexes,
     row.jurisdictionCandidates,
     row.lawMapUnmatched,
@@ -756,6 +774,9 @@ function reviewTriageRows(result) {
       low: metrics.low,
       layoutIssues: metrics.layoutIssues,
       qualityIssues: metrics.qualityIssues,
+      sourceCount: metrics.sourceCount,
+      citationLabel: metrics.citationLabel,
+      sourceCompletenessIssues: metrics.sourceCompletenessIssues,
       missingAnnexes: metrics.missingAnnexes,
       jurisdictionCandidates: metrics.jurisdictionCandidates,
       lawMapUnmatched: metrics.lawMapUnmatched,
@@ -933,6 +954,7 @@ function auditMetrics(audit = {}) {
     missingAnnexes: 0,
     lawMapUnmatched: 0,
     lawMapAmbiguous: 0,
+    sourceCompletenessIssues: 0,
   };
   for (const item of audit.cases || []) {
     const summary = item.summary || {};
@@ -945,6 +967,7 @@ function auditMetrics(audit = {}) {
     totals.missingAnnexes += summary.annex?.missing || 0;
     totals.lawMapUnmatched += summary.lawMap?.unmatchedDepartments || 0;
     totals.lawMapAmbiguous += summary.lawMap?.ambiguousDepartments || 0;
+    totals.sourceCompletenessIssues += summary.evidence?.sourceCompletenessIssues || 0;
   }
   return totals;
 }
@@ -959,6 +982,7 @@ function comparisonRows(comparison = {}) {
     ["missingAnnexes", "미확보 별표"],
     ["lawMapUnmatched", "소관법령 미매칭"],
     ["lawMapAmbiguous", "소관법령 중복 후보"],
+    ["sourceCompletenessIssues", "시행규칙 입력 확인"],
   ];
   return labels.map(([key, label]) => ({
     label,
@@ -1138,6 +1162,9 @@ function caseMetrics(summary = {}) {
     missingAnnexes: summary.annex?.missing || 0,
     lawMapUnmatched: summary.lawMap?.unmatchedDepartments || 0,
     lawMapAmbiguous: summary.lawMap?.ambiguousDepartments || 0,
+    sourceCount: summary.evidence?.sourceCount || 0,
+    citationLabel: summary.evidence ? `${summary.evidence.citedRows}/${summary.evidence.traceRows} (${summary.evidence.citationPercent}%)` : "",
+    sourceCompletenessIssues: summary.evidence?.sourceCompletenessIssues || 0,
   };
 }
 
@@ -1149,6 +1176,7 @@ function scoreMetrics(metrics = {}) {
     (metrics.medium || 0) * 300 +
     (metrics.lawMapUnmatched || 0) * 180 +
     (metrics.lawMapAmbiguous || 0) * 180 +
+    (metrics.sourceCompletenessIssues || 0) * 250 +
     (metrics.jurisdictionCandidates || 0) * 60 +
     (metrics.qualityIssues || 0) * 5 +
     (metrics.low || 0)
@@ -1163,6 +1191,7 @@ function criticalRegressions(before = {}, after = {}) {
     "missingAnnexes",
     "lawMapUnmatched",
     "lawMapAmbiguous",
+    "sourceCompletenessIssues",
   ]
     .filter((key) => (after[key] || 0) > (before[key] || 0))
     .map((key) => ({ key, before: before[key] || 0, after: after[key] || 0 }));
@@ -1419,6 +1448,29 @@ function collectLawMapIssues(cases) {
       items.push({
         caseLabel: caseLabel(item),
         message: `소관법령 부서 중복 후보 ${lawMap.ambiguousDepartments}개. 같은 이름의 여러 조직 후보와 충돌했습니다. cases 입력에 @유형 또는 정확한 소관 지시문을 보강하세요.`,
+      });
+    }
+  }
+  return items;
+}
+
+function collectEvidenceIssues(cases) {
+  const items = [];
+  for (const item of cases) {
+    const summary = item.summary || {};
+    const evidence = summary.evidence;
+    if (!evidence) continue;
+    const label = caseLabel(item);
+    if (evidence.sourceCompletenessIssues) {
+      items.push({
+        caseLabel: label,
+        message: `직제 ${evidence.decreeSources}건에 시행규칙 ${evidence.ruleSources}건. 과·담당관·팀 누락 가능성 확인이 필요합니다.`,
+      });
+    }
+    if (evidence.traceRows >= 5 && evidence.citationPercent < 50) {
+      items.push({
+        caseLabel: label,
+        message: `관계 근거 표시 ${evidence.citedRows}/${evidence.traceRows} (${evidence.citationPercent}%). 원문 조문·근거문장을 trace CSV에서 보강하세요.`,
       });
     }
   }

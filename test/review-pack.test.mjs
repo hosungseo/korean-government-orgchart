@@ -79,6 +79,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(indexHtml, /한글\/HWPX/);
   assert.match(await readFile(result.files.worklist, "utf8"), /조직도 검토 작업목록/);
   assert.match(await readFile(result.files.worklist, "utf8"), /입력에 붙여넣을 보강 지시문 후보/);
+  assert.match(await readFile(result.files.worklist, "utf8"), /입력 자료·근거 점검/);
   assert.ok((await stat(result.files.indexHtml)).size > 0);
   assert.ok((await stat(result.files.galleryHtml)).size > 0);
   const galleryHtml = await readFile(result.files.galleryHtml, "utf8");
@@ -108,6 +109,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(await readFile(result.build.cases[0].outputs.trace, "utf8"), /산업정책관/);
   const triage = await readFile(result.files.triageCsv, "utf8");
   assert.match(triage, /순위,위험점수,위험수준,기관/);
+  assert.match(triage, /입력소스,근거표시율,시행규칙_확인/);
   assert.match(triage, /시험부/);
   assert.match(triage, /artifacts\/시험부-2026-07-24-operational-시험실\.html/);
 

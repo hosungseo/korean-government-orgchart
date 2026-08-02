@@ -174,6 +174,9 @@ export function formatBatchAuditMarkdown(result) {
       lines.push(`- 선택 유형: ${formatSelectedLayouts(summary.layoutSelection)}`);
     }
     if (summary.layoutSelection?.bestFit?.candidateScores?.length) {
+      if (summary.layoutSelection.bestFit.selectionReason) {
+        lines.push(`- best-fit 선택 사유: ${summary.layoutSelection.bestFit.selectionReason}`);
+      }
       lines.push("- best-fit 후보 점수:");
       for (const candidate of summary.layoutSelection.bestFit.candidateScores.slice(0, 4)) {
         const d = candidate.diagnostics || {};
@@ -246,6 +249,7 @@ export function summarizeLayoutSelection(caseSpec = {}, pages = []) {
           bestFit: {
             selectedLayoutStyle: bestFit.selectedLayoutStyle,
             selectedMaxNodes: bestFit.selectedMaxNodes,
+            selectionReason: bestFit.selectionReason || "",
             candidateScores: bestFit.candidateScores,
           },
         }

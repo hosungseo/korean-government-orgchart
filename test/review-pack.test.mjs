@@ -309,6 +309,7 @@ test("review-pack 시각 갤러리는 SVG 미리보기와 품질지표를 카드
             layoutSelection: {
               selected: ["catalog"],
               bestFit: {
+                selectionReason: "catalog/16은 hard issue가 같고 품질 issue 0건으로 다음 후보보다 적어 선택했습니다.",
                 candidateScores: [
                   { style: "catalog", maxNodes: 16, score: 102, diagnostics: { totalIssues: 0, qualityIssues: 0 } },
                   { style: "vertical-stack", maxNodes: 16, score: 502, diagnostics: { totalIssues: 0, qualityIssues: 1 } },
@@ -337,6 +338,7 @@ test("review-pack 시각 갤러리는 SVG 미리보기와 품질지표를 카드
   assert.match(html, /조직도 시각 갤러리/);
   assert.match(html, /SVG 미리보기 1\/1/);
   assert.match(html, /case-a\.svg/);
+  assert.match(html, /선택 사유/);
   assert.match(html, /best-fit 후보/);
   assert.match(html, /catalog\/16 점수 102/);
   assert.match(html, /작도 polish/);

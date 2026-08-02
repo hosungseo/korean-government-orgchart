@@ -46,6 +46,7 @@ test("배치 감사 요약은 검토·별표·소관·배치 문제를 집계한
         selectedBy: "best-fit",
         bestFit: {
           selectedLayoutStyle: "vertical-stack",
+          selectionReason: "vertical-stack은 hard issue가 같고 품질 issue 0건으로 선택했습니다.",
           candidateScores: [
             { style: "vertical-stack", score: 100, diagnostics: { totalIssues: 0, pages: 1 } },
             { style: "catalog", score: 101, diagnostics: { totalIssues: 0, pages: 1 } },
@@ -73,6 +74,7 @@ test("배치 감사 요약은 검토·별표·소관·배치 문제를 집계한
   assert.equal(summary.lawMap.unmatchedDepartments, 1);
   assert.deepEqual(summary.layoutSelection.selected, ["vertical-stack"]);
   assert.equal(summary.layoutSelection.bestFit.selectedLayoutStyle, "vertical-stack");
+  assert.match(summary.layoutSelection.bestFit.selectionReason, /품질 issue/);
   assert.equal(summary.layoutSelection.bestFit.candidateScores.length, 2);
 });
 

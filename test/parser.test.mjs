@@ -165,6 +165,7 @@ test("best-fit 레이아웃은 후보를 실제 배치해 가장 깨끗한 계�
   assert.equal(pages.length, 1);
   assert.equal(pages[0].selectedBy, "best-fit");
   assert.ok(pages[0].bestFit.candidateScores.length > 1);
+  assert.match(pages[0].bestFit.selectionReason, /선택/);
   assert.ok(new Set(pages[0].bestFit.candidateScores.map((candidate) => candidate.maxNodes)).size > 1);
   assert.equal(score.totalIssues, pages[0].bestFit.candidateScores[0].diagnostics.totalIssues);
   assert.equal(score.totalIssues, 0);

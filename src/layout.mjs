@@ -191,6 +191,8 @@ export function planBestPages(graph, options = {}) {
   });
   scored.sort((a, b) => a.score - b.score || a.preference - b.preference);
   const best = scored[0];
+  const runnerUp = scored[1] || null;
+  const selectionReason = describeBestFitSelection(best, runnerUp);
   const candidateScores = scored.map(({ style, maxNodes, score, diagnostics }) => ({
     style,
     maxNodes,
@@ -203,9 +205,37 @@ export function planBestPages(graph, options = {}) {
     bestFit: {
       selectedLayoutStyle: best.style,
       selectedMaxNodes: best.maxNodes,
+      selectionReason,
       candidateScores,
     },
   }));
+}
+
+function describeBestFitSelection(best, runnerUp) {
+  if (!best) return "";
+  const selected = formatCandidateLabel(best);
+  if (!runnerUp) return `${selected}이 유일한 best-fit 후보입니다.`;
+  const next = formatCandidateLabel(runnerUp);
+  const left = best.diagnostics || {};
+  const right = runnerUp.diagnostics || {};
+  if ((left.totalIssues || 0) !== (right.totalIssues || 0)) {
+    return `${selected}은 hard issue ${left.totalIssues || 0}건으로 다음 후보 ${next}의 ${right.totalIssues || 0}건보다 적어 선택했습니다.`;
+  }
+  if ((left.qualityIssues || 0) !== (right.qualityIssues || 0)) {
+    return `${selected}은 hard issue가 같고 품질 issue ${left.qualityIssues || 0}건으로 다음 후보 ${next}의 ${right.qualityIssues || 0}건보다 적어 선택했습니다.`;
+  }
+  if ((left.pages || 0) !== (right.pages || 0)) {
+    return `${selected}은 hard·품질 issue가 같고 ${left.pages || 0}쪽으로 다음 후보 ${next}의 ${right.pages || 0}쪽보다 적어 선택했습니다.`;
+  }
+  if (best.score !== runnerUp.score) {
+    return `${selected}은 hard·품질·페이지 조건이 같고 최종 점수 ${best.score}로 다음 후보 ${next}의 ${runnerUp.score}보다 낮아 선택했습니다.`;
+  }
+  return `${selected}은 동점 후보 중 기본 우선순위가 가장 앞서 선택했습니다.`;
+}
+
+function formatCandidateLabel(candidate) {
+  if (!candidate) return "(후보 없음)";
+  return `${candidate.style}${candidate.maxNodes ? `/${candidate.maxNodes}` : ""}`;
 }
 
 export function scoreLayoutPages(graph, pages) {

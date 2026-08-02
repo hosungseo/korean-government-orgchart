@@ -450,6 +450,7 @@ function galleryCardHtml(baseDir, card) {
   const summary = card.summary || {};
   const diagnostics = summary.layoutDiagnostics || {};
   const bestCandidates = summary.layoutSelection?.bestFit?.candidateScores?.slice(0, 3) || [];
+  const selectionReason = summary.layoutSelection?.bestFit?.selectionReason || "";
   return `<article class="case">
     <div class="case-head">
       <h2>${htmlEscape(summary.institution || summary.id || "케이스")}</h2>
@@ -465,6 +466,7 @@ function galleryCardHtml(baseDir, card) {
       ${card.outputs.svg ? `<a href="${htmlAttr(hrefPath(baseDir, card.outputs.svg))}"><img src="${htmlAttr(hrefPath(baseDir, card.outputs.svg))}" alt="${htmlAttr(summary.institution || summary.id || "조직도 SVG")}" loading="lazy" /></a>` : `<div class="placeholder">${htmlEscape(card.error || "SVG 산출물이 없습니다.")}</div>`}
     </div>
     <div class="links">${outputLinksHtml(baseDir, card.outputs)}</div>
+    ${selectionReason ? `<div class="best reason">선택 사유: ${htmlEscape(selectionReason)}</div>` : ""}
     ${bestCandidates.length ? `<div class="best">best-fit 후보: ${bestCandidates.map((candidate) => {
       const diag = candidate.diagnostics || {};
       const maxNodes = candidate.maxNodes ? `/${candidate.maxNodes}` : "";

@@ -18,7 +18,7 @@
 
 | 입력 | 해석 | 결과 |
 | --- | --- | --- |
-| 직제·시행규칙 원문 또는 법제처 기준일 연혁 | 설치 문형, 기관 유형, 소관관계, 보직·한시 표식 | **PPTX**(편집) · **SVG**(검토·웹) · **JSON**(재사용) |
+| 직제·시행규칙 원문 또는 법제처 기준일 연혁 | 설치 문형, 기관 유형, 소관관계, 보직·한시 표식 | **PPTX**(편집) · **SVG**(검토·웹) · **HTML**(한글/HWPX 붙여넣기) · **JSON**(재사용) |
 
 ```text
 “장관 소속으로 A를 둔다”        → 소속기관
@@ -61,6 +61,7 @@ npm run demo
 ```text
 outputs/sample-orgchart.pptx  # 편집 가능한 PowerPoint
 outputs/sample-orgchart.svg   # 검토·웹 삽입용 SVG
+outputs/sample-orgchart.html  # 한글/HWPX 붙여넣기·인쇄용 검토시트
 outputs/sample-orgchart.json  # 노드·관계·법적 메타데이터
 ```
 
@@ -74,6 +75,7 @@ node src/cli.mjs from-law \
   --source-dir work/legal-snapshots/mois \
   --out outputs/행정안전부.pptx \
   --svg outputs/행정안전부.svg \
+  --html outputs/행정안전부-검토시트.html \
   --json outputs/행정안전부.json
 ```
 
@@ -320,13 +322,13 @@ node src/cli.mjs batch-audit \
 출력 표의 핵심 열은 `높은 확인`, `소관 후보`, `배치 문제`, `별표`입니다. `--strict`를 붙이면 오류 또는 수정 필요 케이스가 있을 때 종료코드 2로 끝나므로, 기관 전체 회귀 테스트나 GitHub Actions 품질 게이트로 사용할 수 있습니다.
 `선택유형` 열에는 `--layout best`가 실제로 고른 레이아웃이 표시되고, 상세에는 후보별 점수·문제 수·페이지 수가 남습니다.
 
-감사 후 바로 산출물까지 만들려면 같은 케이스 파일을 `batch-build`에 넘깁니다. 기본 출력은 `svg,json,audit`이고, 관계별 근거 추적표까지 필요하면 `trace`, 케이스별 편집 가능한 PPTX까지 필요하면 `--outputs svg,json,audit,trace,pptx` 또는 `--outputs all`을 지정합니다. 여러 기관·여러 레이아웃을 한 검토 파일로 넘겨야 할 때는 `--outputs deck` 또는 `--deck review.pptx`를 사용합니다. PPTX는 공개 패키지 `pptxgenjs` 기반 fallback으로 생성되며, Codex Artifact Tool 런타임이 있는 환경에서는 기존 고급 렌더러를 우선 사용합니다.
+감사 후 바로 산출물까지 만들려면 같은 케이스 파일을 `batch-build`에 넘깁니다. 기본 출력은 `svg,json,audit`이고, 한글/HWPX에 붙일 검토시트가 필요하면 `html`, 관계별 근거 추적표까지 필요하면 `trace`, 케이스별 편집 가능한 PPTX까지 필요하면 `--outputs svg,html,json,audit,trace,pptx` 또는 `--outputs all`을 지정합니다. 여러 기관·여러 레이아웃을 한 검토 파일로 넘겨야 할 때는 `--outputs deck` 또는 `--deck review.pptx`를 사용합니다. PPTX는 공개 패키지 `pptxgenjs` 기반 fallback으로 생성되며, Codex Artifact Tool 런타임이 있는 환경에서는 기존 고급 렌더러를 우선 사용합니다.
 
 ```bash
 node src/cli.mjs batch-build \
   --cases work/core-agencies.cases.json \
   --out-dir outputs/core-agencies \
-  --outputs svg,json,audit,trace,deck \
+  --outputs svg,html,json,audit,trace,deck \
   --deck outputs/core-agencies/review-deck.pptx \
   --out outputs/core-agencies-manifest.md
 ```

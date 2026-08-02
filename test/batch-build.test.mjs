@@ -11,7 +11,7 @@ import {
 
 test("batch-build 출력 형식 별칭을 해석한다", () => {
   assert.deepEqual(parseOutputFormats("svg,json,md"), ["svg", "json", "audit"]);
-  assert.deepEqual(parseOutputFormats("all"), ["svg", "json", "audit", "trace", "pptx"]);
+  assert.deepEqual(parseOutputFormats("all"), ["svg", "html", "json", "audit", "trace", "pptx"]);
   assert.deepEqual(parseOutputFormats("pptx-deck"), ["deck"]);
   assert.throws(() => parseOutputFormats("docx"), /지원하지 않는/);
 });
@@ -51,12 +51,14 @@ test("batch-build는 로컬 케이스에서 SVG·JSON·감사리포트를 일괄
   const result = await runBatchBuild({
     cases: path.join(dir, "cases.json"),
     "out-dir": path.join(dir, "out"),
-    outputs: "svg,json,audit,trace",
+    outputs: "svg,html,json,audit,trace",
   });
 
   assert.equal(result.total, 1);
   assert.equal(result.cases[0].status, "built");
   assert.match(await readFile(result.cases[0].outputs.svg, "utf8"), /<svg/);
+  assert.match(await readFile(result.cases[0].outputs.html, "utf8"), /시험부 검토시트/);
+  assert.match(await readFile(result.cases[0].outputs.html, "utf8"), /한글\/HWPX 검토서/);
   assert.match(await readFile(result.cases[0].outputs.json, "utf8"), /"institution": "시험부"/);
   assert.match(await readFile(result.cases[0].outputs.audit, "utf8"), /조직도 감사 리포트/);
   const trace = await readFile(result.cases[0].outputs.trace, "utf8");

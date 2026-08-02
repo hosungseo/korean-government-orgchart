@@ -11,6 +11,7 @@ import {
 } from "./batch-audit.mjs";
 import { normalizePaper } from "./layout.mjs";
 import { projectOperationalView } from "./model.mjs";
+import { renderReviewHtml } from "./render-html.mjs";
 import { renderSvg } from "./render-svg.mjs";
 import { buildTraceRows, formatTraceCsv } from "./trace.mjs";
 import { jsonReplacer, writeText } from "./utils.mjs";
@@ -55,6 +56,13 @@ export async function runBatchBuild(args = {}) {
       }
       if (outputs.includes("svg")) {
         written.svg = await writeCaseOutput(outDir, `${stem}.svg`, renderSvg(displayGraph, pages, { showLawCounts }));
+      }
+      if (outputs.includes("html")) {
+        written.html = await writeCaseOutput(
+          outDir,
+          `${stem}.html`,
+          renderReviewHtml(displayGraph, pages, { showLawCounts, sourceGraph: graph }),
+        );
       }
       if (outputs.includes("audit")) {
         written.audit = await writeCaseOutput(outDir, `${stem}.audit.md`, formatAuditMarkdown(report));
@@ -185,7 +193,7 @@ export function parseOutputFormats(value) {
     "pptx-deck": "deck",
     pptxdeck: "deck",
   };
-  const perCaseOutputs = ["svg", "json", "audit", "trace", "pptx"];
+  const perCaseOutputs = ["svg", "html", "json", "audit", "trace", "pptx"];
   const allowed = new Set([...perCaseOutputs, "deck"]);
   const result = [];
   for (const raw of String(value || "").split(",")) {

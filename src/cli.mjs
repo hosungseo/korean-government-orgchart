@@ -19,6 +19,7 @@ import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
 import { planBestPages, planLayoutVariants, planPages } from "./layout.mjs";
 import { OrgGraph, projectOperationalView, summarizeStructure } from "./model.mjs";
 import { parseOrganizationTexts } from "./parser.mjs";
+import { renderReviewHtml } from "./render-html.mjs";
 import { renderSvg } from "./render-svg.mjs";
 import { runReviewPack } from "./review-pack.mjs";
 import { ensureParent, jsonReplacer, parseArgs, readInputs, writeText } from "./utils.mjs";
@@ -451,6 +452,9 @@ async function emitOutputs(graph, args) {
   if (args.svg) {
     await writeText(path.resolve(args.svg), renderSvg(displayGraph, pages, { showLawCounts }));
   }
+  if (args.html) {
+    await writeText(path.resolve(args.html), renderReviewHtml(displayGraph, pages, { showLawCounts, sourceGraph: graph }));
+  }
   if (args.out) {
     await ensureParent(args.out);
     const { renderPptx } = await import("./render-pptx.mjs");
@@ -459,7 +463,7 @@ async function emitOutputs(graph, args) {
       showLawCounts,
     });
   }
-  if (!args.out && !args.svg && !args.json) {
+  if (!args.out && !args.svg && !args.json && !args.html) {
     console.log(JSON.stringify(graph.toJSON(), jsonReplacer, 2));
   }
   console.log(JSON.stringify({ ...summarize(graph, pages), view }, null, 2));
@@ -561,6 +565,7 @@ function printHelp() {
     --date 2025-11-25 \\
     --out outputs/조직도.pptx \\
     --svg outputs/조직도.svg \\
+    --html outputs/조직도.html \\
     --json outputs/조직도.json
 
   node src/cli.mjs from-law \\
@@ -620,6 +625,7 @@ function printHelp() {
   --layout auto|best|compact|split|vertical|horizontal|two-column|matrix|flow|change-lanes|affiliate-strip|catalog|all
   --layouts vertical,horizontal,two-column,matrix,flow,change-lanes,affiliate-strip,catalog  같은 문언을 여러 유형으로 한 번에 출력
   --paper slide|a4-portrait|a4-landscape|a4-half  출력 용지와 방향
+  --html <file.html>       한글/HWPX 붙여넣기·인쇄용 A4 HTML 검토시트 저장
   --focus <조직명>  해당 조직과 하위조직만 한 장으로 출력
   --view legal|operational  법정 설치형(기본) 또는 확인된 정책관·국 소관 묶음형
   --preview-dir <dir>       슬라이드 PNG·layout JSON·montage 생성

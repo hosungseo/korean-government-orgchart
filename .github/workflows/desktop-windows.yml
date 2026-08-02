@@ -2,6 +2,12 @@ name: Build Windows desktop app
 
 on:
   workflow_dispatch:
+    inputs:
+      offline:
+        description: "WebView2 오프라인 설치파일을 포함할까요? (약 127MB 증가)"
+        required: true
+        type: boolean
+        default: true
   push:
     tags:
       - "desktop-v*"
@@ -37,7 +43,13 @@ jobs:
         run: npm ci --prefix desktop --ignore-scripts
 
       - name: Build NSIS and MSI packages
-        run: npm run --prefix desktop tauri build
+        shell: pwsh
+        run: |
+          if ("${{ inputs.offline }}" -eq "true") {
+            npm run --prefix desktop build:offline
+          } else {
+            npm run --prefix desktop build
+          }
 
       - name: Upload Windows packages
         uses: actions/upload-artifact@v4

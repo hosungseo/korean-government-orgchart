@@ -30,6 +30,8 @@ struct GenerateRequest {
     view: String,
     #[serde(default)]
     focus: String,
+    #[serde(default)]
+    oc: String,
     #[serde(default = "default_true")]
     pptx: bool,
     #[serde(default)]
@@ -106,6 +108,14 @@ fn add_common_args(args: &mut Vec<String>, request: &GenerateRequest, output_dir
 fn build_args(request: &GenerateRequest, run_dir: &Path) -> Result<Vec<String>, String> {
     let mut args = Vec::new();
     match request.mode.as_str() {
+        "api" => {
+            let institution = non_empty(&request.institution)
+                .ok_or_else(|| "법제처 API 모드에는 기관명이 필요합니다.".to_string())?;
+            let date = non_empty(&request.date)
+                .ok_or_else(|| "법제처 API 모드에는 기준일이 필요합니다.".to_string())?;
+            args.extend(["from-law".to_string(), "--institution".to_string(), institution.to_string()]);
+            args.extend(["--date".to_string(), date.to_string()]);
+        }
         "json" => {
             if non_empty(&request.json_text).is_none() {
                 return Err("조직도 JSON 입력이 비어 있습니다.".to_string());
@@ -168,6 +178,11 @@ async fn generate_orgchart(
             let _ = fs::remove_dir_all(&run_dir);
             return Err(format!("orgchart-core 실행 파일을 찾지 못했습니다. Windows 패키지를 다시 설치하세요: {error}"));
         }
+    };
+    let command = if let Some(oc) = non_empty(&request.oc) {
+        command.env("LAW_API_OC", oc)
+    } else {
+        command
     };
     let output = match command.output().await {
         Ok(output) => output,

@@ -28,7 +28,7 @@
     .controls { padding:18px; overflow:auto; max-height:calc(100vh - 98px); }
     .section-title { display:flex; align-items:center; justify-content:space-between; margin:0 0 10px; font-weight:800; letter-spacing:-.2px; }
     .section-title small { color:var(--muted); font-weight:500; font-size:11px; }
-    .mode { display:grid; grid-template-columns:1fr 1fr; gap:5px; padding:4px; background:#f0f3f6; border-radius:9px; margin-bottom:15px; }
+    .mode { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; padding:4px; background:#f0f3f6; border-radius:9px; margin-bottom:15px; }
     .mode button { border:0; background:transparent; color:var(--muted); border-radius:6px; padding:8px 6px; font-size:12px; }
     .mode button.active { color:var(--ink); background:#fff; box-shadow:0 1px 4px rgba(20,38,56,.10); font-weight:800; }
     label { display:block; margin:13px 0 5px; color:var(--muted); font-size:11px; font-weight:700; }
@@ -88,6 +88,7 @@
       <div class="mode">
         <button id="lawMode" class="active" type="button">직제 문언</button>
         <button id="jsonMode" type="button">조직도 JSON</button>
+        <button id="apiMode" type="button">법제처 API</button>
       </div>
 
       <div id="lawInputs">
@@ -97,6 +98,8 @@
           <div><label for="date">기준일 (선택)</label><input id="date" type="text" placeholder="2026-07-24"></div>
           <div><label for="focus">초점 (선택)</label><input id="focus" type="text" placeholder="예: 산업정책실"></div>
         </div>
+        <label for="oc">법제처 API 인증값 OC (API 모드에서만 선택)</label>
+        <input id="oc" type="text" placeholder="환경변수 LAW_API_OC를 쓰면 비워두세요">
         <label for="decree">직제 (대통령령)</label>
         <div class="drop"><input id="decreeFile" type="file" accept=".txt,.md,.text"></div>
         <textarea id="decree" placeholder="직제 조문을 붙여넣으세요.&#10;&#10;예: 산업통상부에 운영지원과ㆍ산업정책실ㆍ통상정책실을 둔다."></textarea>
@@ -149,8 +152,9 @@
     function setStatus(message, ok = false) { $("status").textContent = message || ""; $("status").className = `status${ok ? " ok" : ""}`; }
     function setMode(next) {
       mode = next;
-      $("lawMode").classList.toggle("active", next === "law"); $("jsonMode").classList.toggle("active", next === "json");
+      $("lawMode").classList.toggle("active", next === "law"); $("jsonMode").classList.toggle("active", next === "json"); $("apiMode").classList.toggle("active", next === "api");
       $("lawInputs").classList.toggle("hidden", next !== "law"); $("jsonInputs").classList.toggle("hidden", next !== "json");
+      if (next === "api") { $("lawInputs").classList.remove("hidden"); setStatus("API 모드: 기관명·기준일을 입력하면 sidecar가 법제처 API를 호출합니다. 폐쇄망에서는 직제 문언 모드를 사용하세요."); }
     }
     function readFileInto(fileInput, targetId) {
       const file = fileInput.files?.[0]; if (!file) return;
@@ -164,7 +168,7 @@
       setStatus("샘플을 채웠습니다. 내용을 바꾼 뒤 생성하세요.", true);
     }
     function requestPayload() {
-      return { mode, decree: $("decree").value, rule: $("rule").value, jsonText: $("jsonText").value, institution: $("institution").value, date: $("date").value, paper: $("paper").value, layout: $("layout").value, view: $("view").value, focus: $("focus").value, pptx: $("pptx").checked, routedPptx: $("routedPptx").checked };
+      return { mode, decree: $("decree").value, rule: $("rule").value, jsonText: $("jsonText").value, institution: $("institution").value, date: $("date").value, oc: $("oc").value, paper: $("paper").value, layout: $("layout").value, view: $("view").value, focus: $("focus").value, pptx: $("pptx").checked, routedPptx: $("routedPptx").checked };
     }
     function showTab(tab) {
       for (const name of ["svg", "html", "json"]) $(`${name}Tab`).classList.toggle("active", name === tab);
@@ -187,7 +191,7 @@
       const button = $("generate"); button.disabled = true; setStatus("법령 문언을 분석하고 레이아웃을 계산하는 중입니다…");
       try { const result = await invoke("generate_orgchart", {request: requestPayload()}); displayArtifact(result); setStatus("생성이 완료되었습니다. SVG·HTML·JSON·PPTX를 저장할 수 있습니다.", true); } catch (error) { setStatus(String(error)); } finally { button.disabled = false; }
     }
-    $("lawMode").onclick = () => setMode("law"); $("jsonMode").onclick = () => setMode("json"); $("sample").onclick = sample; $("generate").onclick = generate;
+    $("lawMode").onclick = () => setMode("law"); $("jsonMode").onclick = () => setMode("json"); $("apiMode").onclick = () => setMode("api"); $("sample").onclick = sample; $("generate").onclick = generate;
     $("decreeFile").onchange = (event) => readFileInto(event.target, "decree"); $("ruleFile").onchange = (event) => readFileInto(event.target, "rule");
     $("svgTab").onclick = () => showTab("svg"); $("htmlTab").onclick = () => showTab("html"); $("jsonTab").onclick = () => showTab("json");
     $("downloadSvg").onclick = () => artifact && download("기구도.svg", artifact.svg, "image/svg+xml;charset=utf-8"); $("downloadHtml").onclick = () => artifact && download("기구도.html", artifact.html, "text/html;charset=utf-8"); $("downloadJson").onclick = () => artifact && download("기구도.json", artifact.json, "application/json;charset=utf-8"); $("downloadPptx").onclick = downloadPptx;

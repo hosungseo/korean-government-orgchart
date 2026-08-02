@@ -63,11 +63,13 @@ test("batch-build는 로컬 케이스에서 SVG·JSON·감사리포트를 일괄
   assert.match(await readFile(result.cases[0].outputs.audit, "utf8"), /조직도 감사 리포트/);
   const trace = await readFile(result.cases[0].outputs.trace, "utf8");
   assert.match(trace, /상위조직,상위유형,관계,하위조직/);
+  assert.match(trace, /증거유형/);
   assert.match(trace, /근거문장/);
   assert.match(trace, /시험실,보조기관,보좌기관,산업정책관/);
   assert.match(trace, /제2조\(하부조직\)/);
   assert.match(trace, /시험실장 밑에 산업정책관을 둔다/);
   assert.match(trace, /산업정책관,보좌기관,운영상 소관,정책과/);
+  assert.match(trace, /분장사무 명시/);
   assert.match(trace, /정책과장은 산업정책관 내 다른 과의 주관/);
   assert.deepEqual(result.cases[0].summary.layoutSelection.selected, ["vertical-stack"]);
   const markdown = formatBatchBuildMarkdown(result);

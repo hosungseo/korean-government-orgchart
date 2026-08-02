@@ -1,3 +1,5 @@
+import { jurisdictionEvidenceLabel } from "./jurisdiction-evidence.mjs";
+
 const RELATION_LABELS = {
   structural: "상부구조",
   assistant: "보조기관",
@@ -53,12 +55,13 @@ export function buildTraceRows(graph) {
       child: relation.child,
       childKind: child ? KIND_LABELS[child.kind] || child.kind : "보조기관",
       article: relation.article || child?.metadata?.jurisdiction?.article || "",
+      evidenceLabel: jurisdictionEvidenceLabel(relation.evidence || child?.metadata?.jurisdiction?.evidence),
       legalBasis: relation.legalBasis || "",
       evidenceText: relation.evidenceText || child?.metadata?.jurisdiction?.evidenceText || "",
       edgeSource: relation.source || "",
       childSource: (child?.sources || []).join(" / "),
       flags: [
-        relation.evidence ? `증거:${relation.evidence}` : "",
+        relation.evidence ? `증거:${jurisdictionEvidenceLabel(relation.evidence)}` : "",
         relation.reference || "",
       ].filter(Boolean).join("; "),
     });
@@ -81,6 +84,7 @@ export function formatTraceCsv(rows) {
     "하위조직",
     "하위유형",
     "조문",
+    "증거유형",
     "근거문형",
     "근거문장",
     "관계출처",
@@ -100,6 +104,7 @@ function rowToColumns(row) {
     row.child,
     row.childKind,
     row.article,
+    row.evidenceLabel || "",
     row.legalBasis,
     row.evidenceText,
     row.edgeSource,

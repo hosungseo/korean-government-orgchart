@@ -445,6 +445,21 @@ test("배치 진단은 연결선 교차·선-상자 관통·과도한 우회·�
   assert.equal(balance.ok, true);
   assert.equal(balance.balanceIssues.length, 1);
   assert.equal(balance.balanceIssues[0].reason, "unbalanced-columns");
+
+  const badGroups = diagnoseLayout({
+    frame: { left: 0, top: 0, width: 220, height: 160 },
+    nodes: [],
+    edges: [],
+    groupBoxes: [
+      { left: 10, top: 10, width: 120, height: 70, caption: "첫 그룹" },
+      { left: 80, top: 50, width: 120, height: 70, caption: "겹친 그룹" },
+      { left: 10, top: 130, width: 120, height: 60, caption: "넘친 그룹" },
+    ],
+  });
+
+  assert.equal(badGroups.ok, false);
+  assert.equal(badGroups.overflow[0].reason, "group-box-overflow");
+  assert.equal(badGroups.overlaps[0].reason, "group-box-overlap");
 });
 
 test("카드 목록형은 상위 조직별 묶음으로 법정 계층을 보존한다", () => {

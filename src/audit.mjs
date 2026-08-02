@@ -146,7 +146,7 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates, ju
       actions.push({
         priority: "high",
         topic: "layout",
-        message: `${page.pageNumber}쪽 ${page.subtitle}에서 ${page.diagnostics.overflow.length}개 조직이 인쇄 프레임을 벗어났습니다.`,
+        message: `${page.pageNumber}쪽 ${page.subtitle}에서 ${page.diagnostics.overflow.length}개 요소가 인쇄 프레임을 벗어났습니다.`,
       });
     }
     if (page.diagnostics?.overlaps?.length) {

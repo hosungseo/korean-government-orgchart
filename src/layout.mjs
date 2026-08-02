@@ -937,6 +937,7 @@ export function diagnoseLayout(
       overflow.push(entry.node?.name || entry.node?.id || "(이름 없음)");
     }
   }
+  overflow.push(...diagnoseGroupBoxOverflow(layout.groupBoxes || [], { frame, tolerance }));
   const overlaps = [];
   const entries = layout.nodes || [];
   for (let i = 0; i < entries.length; i += 1) {
@@ -958,6 +959,7 @@ export function diagnoseLayout(
       }
     }
   }
+  overlaps.push(...diagnoseGroupBoxOverlaps(layout.groupBoxes || [], { tolerance }));
   const nodeNames = new Map(
     (layout.nodes || []).map((entry) => [entry.node?.id, entry.node?.name || entry.node?.id || "(이름 없음)"]),
   );
@@ -1429,6 +1431,54 @@ function diagnoseColumnBalance(groupBoxes, { frame, maximumColumnImbalance }) {
       height: Number(column.height.toFixed(2)),
     })),
   }];
+}
+
+function diagnoseGroupBoxOverflow(groupBoxes, { frame, tolerance }) {
+  const issues = [];
+  const boxes = (groupBoxes || [])
+    .map((box) => normalizeGroupBox(box))
+    .filter(Boolean);
+  for (const box of boxes) {
+    if (
+      box.left < frame.left - tolerance ||
+      box.top < frame.top - tolerance ||
+      box.right > frame.left + frame.width + tolerance ||
+      box.bottom > frame.top + frame.height + tolerance
+    ) {
+      issues.push({
+        reason: "group-box-overflow",
+        group: box.caption || "(그룹)",
+        right: Number(box.right.toFixed(2)),
+        bottom: Number(box.bottom.toFixed(2)),
+      });
+    }
+  }
+  return issues;
+}
+
+function diagnoseGroupBoxOverlaps(groupBoxes, { tolerance }) {
+  const issues = [];
+  const boxes = (groupBoxes || [])
+    .map((box) => normalizeGroupBox(box))
+    .filter(Boolean);
+  for (let i = 0; i < boxes.length; i += 1) {
+    const a = boxes[i];
+    for (let j = i + 1; j < boxes.length; j += 1) {
+      const b = boxes[j];
+      const separated =
+        a.right <= b.left + tolerance ||
+        b.right <= a.left + tolerance ||
+        a.bottom <= b.top + tolerance ||
+        b.bottom <= a.top + tolerance;
+      if (separated) continue;
+      issues.push({
+        reason: "group-box-overlap",
+        a: a.caption || `(그룹 ${i + 1})`,
+        b: b.caption || `(그룹 ${j + 1})`,
+      });
+    }
+  }
+  return issues;
 }
 
 function diagnoseReadability(nodes, { minimumVerticalLabelWidth }) {

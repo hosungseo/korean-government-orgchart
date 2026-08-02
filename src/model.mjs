@@ -586,6 +586,15 @@ export function summarizeStructure(graph) {
   const line = countBy((node) => ["assistant", "temporary"].includes(node.kind));
   const staff = countBy((node) => node.kind === "advisor");
   const affiliated = countBy((node) => node.kind === "affiliated");
+  const affiliatedByLevel = {};
+  let affiliatedDepthMax = 0;
+  for (const node of nodes.filter((candidate) => candidate.kind === "affiliated")) {
+    const level = affiliationLevel(graph, node);
+    if (!level) continue;
+    const bucket = level > 3 ? "4+" : String(level);
+    affiliatedByLevel[bucket] = (affiliatedByLevel[bucket] || 0) + 1;
+    affiliatedDepthMax = Math.max(affiliatedDepthMax, level);
+  }
   const grade = (value) => countBy((node) => node.metadata?.grade === value);
   const rank = (value) => countBy((node) => node.metadata?.gradeRange === value);
   const staffing = {
@@ -603,7 +612,14 @@ export function summarizeStructure(graph) {
     ),
   };
   return {
-    unitCounts: { line, staff, affiliated, total: line + staff + affiliated },
+    unitCounts: {
+      line,
+      staff,
+      affiliated,
+      affiliatedByLevel,
+      affiliatedDepthMax,
+      total: line + staff + affiliated,
+    },
     staffing,
     countingRules: {
       temporaryIncluded: true,
@@ -615,4 +631,27 @@ export function summarizeStructure(graph) {
       note: "단위기관 수이며 운영정원·직급별 정원은 별표 또는 운영정원표를 별도로 읽어야 합니다.",
     },
   };
+}
+
+/**
+ * Returns the legal affiliation depth used by the government organization
+ * tables (1차·2차·3차 소속기관).  The graph can contain operational or
+ * legacy edges in addition to explicit affiliation edges, so the node kind is
+ * the primary signal and any affiliated ancestor increments the level.
+ */
+function affiliationLevel(graph, node) {
+  if (node.kind !== "affiliated") return 0;
+  let level = 1;
+  let current = node;
+  const seen = new Set([node.id]);
+  while (true) {
+    const parent = graph
+      .parentsOf(current.id)
+      .map(({ node: candidate }) => candidate)
+      .find((candidate) => candidate?.kind === "affiliated");
+    if (!parent || seen.has(parent.id)) return level;
+    seen.add(parent.id);
+    level += 1;
+    current = parent;
+  }
 }

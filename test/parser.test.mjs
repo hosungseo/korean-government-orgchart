@@ -823,6 +823,23 @@ test("기존 JSON도 본부·소속기관 표식을 복원하고 모순 관계�
   assert.equal(graph.nodes.get("unit").metadata.affiliationType, "subsidiary");
   assert.equal(graph.meta.validation.length, 0);
 
+  const first = graph.addNode("서울지방시험청", {
+    kind: "affiliated",
+    metadata: { affiliationType: "special-local" },
+  });
+  const second = graph.addNode("강남시험서", {
+    kind: "affiliated",
+    metadata: { affiliationType: "special-local" },
+  });
+  const third = graph.addNode("역삼지서", {
+    kind: "affiliated",
+    metadata: { affiliationType: "special-local" },
+  });
+  graph.addEdge(graph.rootId, first.id, { type: "affiliated" });
+  graph.addEdge(first.id, second.id, { type: "affiliated" });
+  graph.addEdge(second.id, third.id, { type: "affiliated" });
+  assert.deepEqual(summarizeStructure(graph).unitCounts.affiliatedByLevel, { "1": 2, "2": 1, "3": 1 });
+
   const broken = OrgGraph.fromJSON({
     meta: { institution: "시험부", title: "시험부" },
     rootId: "root",

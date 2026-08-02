@@ -1,6 +1,7 @@
 import { buildComparisonReportPages } from "./graph-diff.mjs";
 import { summarizeEvidence } from "./evidence.mjs";
 import { layoutPage, resolvePageSize } from "./layout.mjs";
+import { summarizeStructure } from "./model.mjs";
 import { renderSvg } from "./render-svg.mjs";
 import { displayDate } from "./utils.mjs";
 
@@ -246,7 +247,11 @@ function emptyDiagnostics() {
 function summarySection(graph, sourceGraph, pages) {
   const kindCounts = {};
   for (const node of graph.nodes.values()) kindCounts[node.kind] = (kindCounts[node.kind] || 0) + 1;
-  const structure = sourceGraph.meta?.structure || {};
+  const structure = sourceGraph.meta?.structure || summarizeStructure(sourceGraph);
+  const affiliationLevels = structure.unitCounts?.affiliatedByLevel || {};
+  const affiliationLevelLabel = Object.entries(affiliationLevels)
+    .map(([level, count]) => `${level}차 ${count}`)
+    .join(" · ");
   return `<section>
   <h2>구조 요약</h2>
   <table>
@@ -254,6 +259,7 @@ function summarySection(graph, sourceGraph, pages) {
       <tr><th>출력 용지</th><td>${htmlEscape(pages[0]?.paper || "-")}</td><th>페이지 수</th><td class="num">${pages.length}</td></tr>
       <tr><th>보조기관</th><td class="num">${kindCounts.assistant || 0}</td><th>보좌기관</th><td class="num">${kindCounts.advisor || 0}</td></tr>
       <tr><th>소속기관</th><td class="num">${kindCounts.affiliated || 0}</td><th>한시조직</th><td class="num">${kindCounts.temporary || 0}</td></tr>
+      ${affiliationLevelLabel ? `<tr><th>소속기관 단계</th><td colspan="3">${htmlEscape(affiliationLevelLabel)}</td></tr>` : ""}
       <tr><th>소관법령 매칭</th><td class="num">${sourceGraph.meta?.lawMap?.matchedDepartments || 0}</td><th>별표 조직</th><td class="num">${sourceGraph.meta?.annexOrganizations?.length || 0}</td></tr>
     </tbody>
   </table>

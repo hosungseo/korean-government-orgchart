@@ -164,17 +164,18 @@ export function planLayoutVariants(
  */
 export function planBestPages(graph, options = {}) {
   const paper = normalizePaper(options.paper || "slide");
-  const candidates = bestFitCandidateStyles(paper);
-  const scored = candidates.map((style, preference) => {
+  const candidates = bestFitCandidates(paper, options.maxNodes);
+  const scored = candidates.map((candidate, preference) => {
     const pages = planPages(graph, {
       ...options,
       mode: "auto",
       paper,
-      layoutStyle: style,
+      layoutStyle: candidate.style,
+      maxNodes: candidate.maxNodes,
     });
     const diagnostics = scoreLayoutPages(graph, pages);
     return {
-      style,
+      ...candidate,
       preference,
       pages,
       diagnostics,
@@ -190,8 +191,9 @@ export function planBestPages(graph, options = {}) {
   });
   scored.sort((a, b) => a.score - b.score || a.preference - b.preference);
   const best = scored[0];
-  const candidateScores = scored.map(({ style, score, diagnostics }) => ({
+  const candidateScores = scored.map(({ style, maxNodes, score, diagnostics }) => ({
     style,
+    maxNodes,
     score,
     diagnostics,
   }));
@@ -200,6 +202,7 @@ export function planBestPages(graph, options = {}) {
     selectedBy: "best-fit",
     bestFit: {
       selectedLayoutStyle: best.style,
+      selectedMaxNodes: best.maxNodes,
       candidateScores,
     },
   }));
@@ -239,6 +242,29 @@ function bestFitCandidateStyles(paper) {
   if (paper === "a4-half") return ["vertical-stack", "catalog", "two-column", "matrix"];
   if (paper === "a4-portrait") return ["vertical-stack", "two-column", "catalog", "matrix"];
   return ["horizontal-bus", "two-column", "matrix", "affiliate-strip", "vertical-stack", "catalog"];
+}
+
+function bestFitCandidates(paper, requestedMaxNodes = 38) {
+  const styles = bestFitCandidateStyles(paper);
+  const maxNodesValues = bestFitMaxNodeCandidates(paper, requestedMaxNodes);
+  const candidates = [];
+  for (const maxNodes of maxNodesValues) {
+    for (const style of styles) candidates.push({ style, maxNodes });
+  }
+  return candidates;
+}
+
+function bestFitMaxNodeCandidates(paper, requestedMaxNodes = 38) {
+  const base = Number.isFinite(Number(requestedMaxNodes)) && Number(requestedMaxNodes) > 0
+    ? Number(requestedMaxNodes)
+    : 38;
+  if (paper === "a4-half") return uniqueNumbers([base, Math.min(base, 20), Math.min(base, 16), Math.min(base, 12)]);
+  if (paper === "a4-portrait") return uniqueNumbers([base, Math.min(base, 28), Math.min(base, 22), Math.min(base, 16)]);
+  return [base];
+}
+
+function uniqueNumbers(values) {
+  return [...new Set(values.map((value) => Math.max(1, Math.floor(value))).filter(Number.isFinite))];
 }
 
 export function planPages(
@@ -291,6 +317,21 @@ export function planPages(
               paper: format,
             })
           : visual;
+      if (nodeIds.length > effectiveMaxNodes) {
+        const focusedPages = splitBranchPages(
+          graph,
+          focused,
+          effectiveMaxNodes,
+          [],
+          format,
+          focusedLayoutStyle,
+        );
+        return focusedPages.map((page, index) => ({
+          ...page,
+          pageNumber: index + 1,
+          pageCount: focusedPages.length,
+        }));
+      }
       const focusedPage = {
         kind: focused.kind === "affiliated" ? "affiliate-detail" : "compact",
         title: graph.meta.title,

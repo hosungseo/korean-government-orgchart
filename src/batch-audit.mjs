@@ -176,7 +176,8 @@ export function formatBatchAuditMarkdown(result) {
       lines.push("- best-fit 후보 점수:");
       for (const candidate of summary.layoutSelection.bestFit.candidateScores.slice(0, 4)) {
         const d = candidate.diagnostics || {};
-        lines.push(`  - ${candidate.style}: 점수 ${candidate.score}, 문제 ${d.totalIssues || 0}, 품질 ${d.qualityIssues || 0}, 페이지 ${d.pages || 0}`);
+        const maxNodes = candidate.maxNodes ? `, maxNodes ${candidate.maxNodes}` : "";
+        lines.push(`  - ${candidate.style}${maxNodes}: 점수 ${candidate.score}, 문제 ${d.totalIssues || 0}, 품질 ${d.qualityIssues || 0}, 페이지 ${d.pages || 0}`);
       }
     }
     if (item.error) {
@@ -243,6 +244,7 @@ export function summarizeLayoutSelection(caseSpec = {}, pages = []) {
       ? {
           bestFit: {
             selectedLayoutStyle: bestFit.selectedLayoutStyle,
+            selectedMaxNodes: bestFit.selectedMaxNodes,
             candidateScores: bestFit.candidateScores,
           },
         }

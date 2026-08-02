@@ -137,6 +137,7 @@ test("best-fit 레이아웃은 후보를 실제 배치해 가장 깨끗한 계�
   assert.equal(pages.length, 1);
   assert.equal(pages[0].selectedBy, "best-fit");
   assert.ok(pages[0].bestFit.candidateScores.length > 1);
+  assert.ok(new Set(pages[0].bestFit.candidateScores.map((candidate) => candidate.maxNodes)).size > 1);
   assert.equal(score.totalIssues, pages[0].bestFit.candidateScores[0].diagnostics.totalIssues);
   assert.equal(score.totalIssues, 0);
 });
@@ -422,6 +423,28 @@ test("focus 옵션은 한 실·국의 한쪽 조직도만 남긴다", () => {
   assert.equal(pages[0].paper, "a4-half");
   assert.ok(pages[0].nodeIds.includes(graph.nodeByName("인공지능정책국").id));
   assert.equal(pages[0].nodeIds.includes(graph.nodeByName("자치행정국").id), false);
+});
+
+test("focus 옵션도 maxNodes를 넘으면 A4 검토면으로 자동 분할한다", () => {
+  const departments = Array.from({ length: 30 }, (_, index) => `제${index + 1}정책과`).join("ㆍ");
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실을 둔다.
+시험실에 ${departments}를 둔다.
+`,
+  ]);
+
+  const pages = planPages(graph, {
+    paper: "a4-half",
+    layoutStyle: "vertical-stack",
+    focus: "시험실",
+    maxNodes: 12,
+  });
+
+  assert.equal(pages.length > 1, true);
+  assert.ok(pages.every((page) => page.nodeIds.length <= 12));
+  assert.ok(pages.every((page) => page.subtitle.startsWith("시험실")));
 });
 
 test("검토서의 신설·이체 표식을 지시문으로 보존한다", () => {

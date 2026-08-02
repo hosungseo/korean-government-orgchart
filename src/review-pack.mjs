@@ -36,6 +36,7 @@ export async function runReviewPack(args = {}) {
     indexHtml: path.join(outDir, stringArg(args, "index-html-out") || "index.html"),
     readme: path.join(outDir, stringArg(args, "readme-out") || "README.md"),
     worklist: path.join(outDir, stringArg(args, "worklist-out") || "worklist.md"),
+    triageCsv: path.join(outDir, stringArg(args, "triage-out") || "triage.csv"),
     cases: path.join(outDir, stringArg(args, "cases-out") || "cases.json"),
     suggestedCases: path.join(outDir, stringArg(args, "suggested-cases-out") || "suggested-cases.json"),
     acceptedCases: path.join(outDir, stringArg(args, "accepted-cases-out") || "accepted-cases.json"),
@@ -71,6 +72,7 @@ export async function runReviewPack(args = {}) {
   if (args["build-accepted"] === true) {
     result.acceptedBuild = await runAcceptedBuild(result, args, sharedLawFetchCache);
   }
+  await writeText(files.triageCsv, formatReviewTriageCsv(result));
   await writeText(files.worklist, formatReviewWorklistMarkdown(result));
   await writeText(files.readme, formatReviewPackMarkdown(result));
   await writeText(files.indexHtml, formatReviewPackHtml(result));
@@ -102,6 +104,7 @@ export function formatReviewPackMarkdown(result) {
   lines.push("## 먼저 열 파일");
   lines.push("");
   lines.push(`- HTML 첫 화면: ${linkPath(result.outDir, result.files.indexHtml)}`);
+  lines.push(`- 우선순위 CSV: ${linkPath(result.outDir, result.files.triageCsv)}`);
   lines.push(`- 검토 작업목록: ${linkPath(result.outDir, result.files.worklist)}`);
   lines.push(`- 감사 요약: ${linkPath(result.outDir, result.files.audit)}`);
   lines.push(`- 산출물 매니페스트: ${linkPath(result.outDir, result.files.manifest)}`);
@@ -213,6 +216,7 @@ export function formatReviewPackHtml(result) {
     <h2>먼저 열 파일</h2>
     <div class="quick">
       ${quickLink(result, "검토 작업목록", result.files?.worklist, "보강 지시문 후보와 재시도 항목")}
+      ${quickLink(result, "우선순위 CSV", result.files?.triageCsv, "엑셀·시트에서 여는 케이스별 점검 순서")}
       ${quickLink(result, "감사 요약", result.files?.audit, "파싱·소관·별표·배치 품질")}
       ${quickLink(result, "산출물 매니페스트", result.files?.manifest, "케이스별 산출물 링크")}
       ${quickLink(result, "케이스 정의", result.files?.cases, "재실행 가능한 입력 목록")}
@@ -428,6 +432,111 @@ export function formatReviewWorklistMarkdown(result) {
   }
   lines.push("");
   return `${lines.join("\n")}\n`;
+}
+
+export function formatReviewTriageCsv(result) {
+  const header = [
+    "순위",
+    "위험점수",
+    "위험수준",
+    "기관",
+    "기준일",
+    "대상",
+    "상태",
+    "산출상태",
+    "확인_높음",
+    "확인_중간",
+    "확인_낮음",
+    "배치문제",
+    "품질문제",
+    "별표누락",
+    "소관후보",
+    "소관법령_미매칭",
+    "소관법령_중복후보",
+    "첫확인사항",
+    "HTML",
+    "PPTX",
+    "감사MD",
+    "TraceCSV",
+  ];
+  const rows = reviewTriageRows(result).map((row, index) => [
+    index + 1,
+    row.riskScore,
+    row.riskLevel,
+    row.institution,
+    row.asOf,
+    row.target,
+    row.auditStatus,
+    row.buildStatus,
+    row.high,
+    row.medium,
+    row.low,
+    row.layoutIssues,
+    row.qualityIssues,
+    row.missingAnnexes,
+    row.jurisdictionCandidates,
+    row.lawMapUnmatched,
+    row.lawMapAmbiguous,
+    row.firstAction,
+    row.html,
+    row.pptx,
+    row.audit,
+    row.trace,
+  ]);
+  return `${[header, ...rows].map((columns) => columns.map(csvEscape).join(",")).join("\n")}\n`;
+}
+
+function reviewTriageRows(result) {
+  return (result.audit?.cases || []).map((item) => {
+    const summary = item.summary || {};
+    const built = findBuildCase(result.build?.cases || [], summary.id);
+    const metrics = caseMetrics(summary);
+    const buildPenalty = built?.status === "error" ? 1000 : 0;
+    const riskScore = scoreMetrics(metrics) + buildPenalty;
+    const firstAction = firstReviewAction(item.report?.reviewActions || []);
+    return {
+      riskScore,
+      riskLevel: riskLevel(riskScore, summary.status, built?.status),
+      institution: summary.institution || summary.id || "",
+      asOf: summary.asOf || "",
+      target: summary.focus || summary.layout || "",
+      auditStatus: summary.statusLabel || summary.status || "",
+      buildStatus: built?.statusLabel || built?.status || "",
+      high: metrics.high,
+      medium: metrics.medium,
+      low: metrics.low,
+      layoutIssues: metrics.layoutIssues,
+      qualityIssues: metrics.qualityIssues,
+      missingAnnexes: metrics.missingAnnexes,
+      jurisdictionCandidates: metrics.jurisdictionCandidates,
+      lawMapUnmatched: metrics.lawMapUnmatched,
+      lawMapAmbiguous: metrics.lawMapAmbiguous,
+      firstAction,
+      html: relativeFilePath(result.outDir, built?.outputs?.html),
+      pptx: relativeFilePath(result.outDir, built?.outputs?.pptx),
+      audit: relativeFilePath(result.outDir, built?.outputs?.audit),
+      trace: relativeFilePath(result.outDir, built?.outputs?.trace),
+    };
+  }).sort((a, b) =>
+    b.riskScore - a.riskScore ||
+    a.institution.localeCompare(b.institution, "ko") ||
+    a.target.localeCompare(b.target, "ko"),
+  );
+}
+
+function firstReviewAction(actions) {
+  const weight = { high: 0, medium: 1, low: 2 };
+  return [...actions]
+    .sort((a, b) => (weight[a.priority] ?? 9) - (weight[b.priority] ?? 9))
+    .map((action) => `[${priorityLabel(action.priority)}] ${action.message}`)
+    .find(Boolean) || "";
+}
+
+function riskLevel(score, auditStatus, buildStatus) {
+  if (buildStatus === "error" || auditStatus === "error" || auditStatus === "needs-correction" || score >= 1000) return "높음";
+  if (auditStatus === "needs-review" || score >= 300) return "중간";
+  if (score > 0) return "낮음";
+  return "정상";
 }
 
 async function runSuggestedReviewPack(result, args, sharedLawFetchCache) {
@@ -1112,6 +1221,11 @@ function linkPath(baseDir, filePath) {
   return `[${relative || path.basename(filePath)}](${encodeURI(relative || path.basename(filePath))})`;
 }
 
+function relativeFilePath(baseDir, filePath) {
+  if (!filePath) return "";
+  return path.relative(baseDir, filePath).split(path.sep).join("/") || path.basename(filePath);
+}
+
 function hrefPath(baseDir, filePath) {
   const relative = path.relative(baseDir, filePath).split(path.sep).join("/");
   return encodeURI(relative || path.basename(filePath));
@@ -1130,4 +1244,10 @@ function htmlEscape(value) {
 
 function escapeCell(value) {
   return String(value ?? "").replaceAll("|", "\\|").replaceAll("\n", "<br>");
+}
+
+function csvEscape(value) {
+  const text = String(value ?? "");
+  if (!/[",\r\n]/.test(text)) return text;
+  return `"${text.replaceAll('"', '""')}"`;
 }

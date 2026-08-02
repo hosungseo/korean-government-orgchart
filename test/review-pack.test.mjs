@@ -6,6 +6,7 @@ import path from "node:path";
 import { runBatchAudit } from "../src/batch-audit.mjs";
 import {
   buildAcceptedCasesDocument,
+  formatReviewTriageCsv,
   buildSuggestedCasesDocument,
   formatReviewWorklistMarkdown,
   runReviewPack,
@@ -55,6 +56,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.equal(result.build.deckError, null);
   assert.match(await readFile(result.files.readme, "utf8"), /조직도 검토팩/);
   assert.match(await readFile(result.files.readme, "utf8"), /HTML 첫 화면/);
+  assert.match(await readFile(result.files.readme, "utf8"), /우선순위 CSV/);
   assert.match(await readFile(result.files.readme, "utf8"), /케이스별 산출물/);
   assert.match(await readFile(result.files.readme, "utf8"), /검토 작업목록/);
   assert.match(await readFile(result.files.readme, "utf8"), /자동 보강 재실행/);
@@ -62,6 +64,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(await readFile(result.files.readme, "utf8"), /최종 채택 산출물/);
   const indexHtml = await readFile(result.files.indexHtml, "utf8");
   assert.match(indexHtml, /조직도 검토팩/);
+  assert.match(indexHtml, /우선순위 CSV/);
   assert.match(indexHtml, /검토 작업목록/);
   assert.match(indexHtml, /케이스별 산출물/);
   assert.match(indexHtml, /시험부/);
@@ -69,6 +72,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(await readFile(result.files.worklist, "utf8"), /조직도 검토 작업목록/);
   assert.match(await readFile(result.files.worklist, "utf8"), /입력에 붙여넣을 보강 지시문 후보/);
   assert.ok((await stat(result.files.indexHtml)).size > 0);
+  assert.ok((await stat(result.files.triageCsv)).size > 0);
   assert.ok((await stat(result.files.cases)).size > 0);
   assert.ok((await stat(result.files.suggestedCases)).size > 0);
   assert.ok((await stat(result.files.acceptedCases)).size > 0);
@@ -80,6 +84,10 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(await readFile(result.build.cases[0].outputs.svg, "utf8"), /<svg/);
   assert.match(await readFile(result.build.cases[0].outputs.html, "utf8"), /시험부 검토시트/);
   assert.match(await readFile(result.build.cases[0].outputs.trace, "utf8"), /산업정책관/);
+  const triage = await readFile(result.files.triageCsv, "utf8");
+  assert.match(triage, /순위,위험점수,위험수준,기관/);
+  assert.match(triage, /시험부/);
+  assert.match(triage, /artifacts\/시험부-2026-07-24-operational-시험실\.html/);
 
   const suggested = JSON.parse(await readFile(result.files.suggestedCases, "utf8"));
   assert.equal(suggested.changedCases, 1);
@@ -113,6 +121,85 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.equal(result.acceptedBuild.build.statusCounts.built, 1);
   assert.ok((await stat(result.acceptedBuild.build.deck)).size > 0);
   assert.match(await readFile(result.acceptedBuild.build.cases[0].outputs.html, "utf8"), /시험부 검토시트/);
+});
+
+test("review-pack triage CSV는 위험점수 순으로 케이스를 정렬한다", () => {
+  const csv = formatReviewTriageCsv({
+    outDir: "/tmp/review-pack",
+    audit: {
+      cases: [
+        {
+          summary: {
+            id: "ready",
+            institution: "정상부",
+            asOf: "2026-07-24",
+            status: "ready",
+            statusLabel: "사용 가능",
+            reviewActions: { high: 0, medium: 0, low: 0 },
+            layoutDiagnostics: { totalIssues: 0, qualityIssues: 0 },
+            annex: { missing: 0 },
+            jurisdiction: { candidateDepartments: 0 },
+            lawMap: { unmatchedDepartments: 0, ambiguousDepartments: 0 },
+          },
+          report: { reviewActions: [] },
+        },
+        {
+          summary: {
+            id: "needs",
+            institution: "검토부",
+            asOf: "2026-07-24",
+            status: "needs-review",
+            statusLabel: "검토 필요",
+            reviewActions: { high: 0, medium: 1, low: 0 },
+            layoutDiagnostics: { totalIssues: 0, qualityIssues: 2 },
+            annex: { missing: 0 },
+            jurisdiction: { candidateDepartments: 3 },
+            lawMap: { unmatchedDepartments: 0, ambiguousDepartments: 0 },
+          },
+          report: {
+            reviewActions: [
+              { priority: "medium", message: "정책관 소관 확인" },
+            ],
+          },
+        },
+        {
+          summary: {
+            id: "hard",
+            institution: "수정부",
+            asOf: "2026-07-24",
+            status: "needs-correction",
+            statusLabel: "수정 필요",
+            reviewActions: { high: 1, medium: 0, low: 0 },
+            layoutDiagnostics: { totalIssues: 1, qualityIssues: 0 },
+            annex: { missing: 1 },
+            jurisdiction: { candidateDepartments: 0 },
+            lawMap: { unmatchedDepartments: 0, ambiguousDepartments: 0 },
+          },
+          report: {
+            reviewActions: [
+              { priority: "high", message: "별표 확인 필요" },
+            ],
+          },
+        },
+      ],
+    },
+    build: {
+      cases: [
+        { summary: { id: "ready" }, status: "built", statusLabel: "생성", outputs: { html: "/tmp/review-pack/artifacts/ready.html" } },
+        { summary: { id: "needs" }, status: "built", statusLabel: "생성", outputs: { html: "/tmp/review-pack/artifacts/needs.html" } },
+        { summary: { id: "hard" }, status: "built", statusLabel: "생성", outputs: { html: "/tmp/review-pack/artifacts/hard.html" } },
+      ],
+    },
+  });
+
+  const lines = csv.trim().split("\n");
+
+  assert.match(lines[0], /순위,위험점수,위험수준,기관/);
+  assert.match(lines[1], /수정부/);
+  assert.match(lines[1], /높음/);
+  assert.match(lines[1], /별표 확인 필요/);
+  assert.match(lines[2], /검토부/);
+  assert.match(lines[3], /정상부/);
 });
 
 test("review-pack 작업목록은 지시문·별표·레이아웃·소관법령 문제를 요약한다", () => {

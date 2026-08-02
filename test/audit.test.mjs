@@ -58,7 +58,7 @@ test("감사 리포트는 직제만 있고 시행규칙이 없으면 과 단위 
       `
 시험부와 그 소속기관 직제
 제1조(목적) 이 영은 시험부와 그 소속기관의 조직과 직무범위를 규정한다.
-제2조(하부조직) 시험부에 정책실 및 산업국을 둔다.
+제2조(하부조직) 시험부에 정책실ㆍ산업국 및 장관정책보좌관을 둔다.
 `,
     ],
     { sources: ["시험부와 그 소속기관 직제"] },
@@ -72,6 +72,7 @@ test("감사 리포트는 직제만 있고 시행규칙이 없으면 과 단위 
   assert.equal(action?.priority, "medium");
   assert.match(action.message, /직제 시행규칙 입력이 확인되지 않아/);
   assert.match(action.message, /산업국/);
+  assert.doesNotMatch(action.message, /장관정책보좌관/);
   assert.match(markdown, /입력 소스/);
   assert.match(markdown, /시험부와 그 소속기관 직제: 직제/);
 });

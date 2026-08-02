@@ -257,6 +257,7 @@ function collectSourceCompletenessWarnings(graph) {
 function isPotentialRuleExpandedUnit(node) {
   if (!node || ["institution", "head", "deputy", "affiliated"].includes(node.kind)) return false;
   if (DEPARTMENT.test(node.name)) return false;
+  if (/보좌관$/.test(node.name)) return false;
   if (/(?:박물관|미술관|도서관|극장|전당|연구원|관리원|교육원|개발원|사무소)$/.test(node.name)) return false;
   return /(?:실|국|본부|관|단)$/.test(node.name);
 }

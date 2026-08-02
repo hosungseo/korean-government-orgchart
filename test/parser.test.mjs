@@ -293,7 +293,7 @@ test("배치 진단은 상자 간격과 부모 중심축 품질 문제를 별도
   ]);
 });
 
-test("배치 진단은 연결선 교차·선-상자 관통·카드 컬럼 불균형을 품질 문제로 잡는다", () => {
+test("배치 진단은 연결선 교차·선-상자 관통·과도한 우회·카드 컬럼 불균형을 품질 문제로 잡는다", () => {
   const crossingLayout = {
     frame: { left: 0, top: 0, width: 220, height: 190 },
     nodes: [
@@ -357,6 +357,33 @@ test("배치 진단은 연결선 교차·선-상자 관통·카드 컬럼 불균
   assert.equal(routed.edges[0].routePoints.length > 2, true);
   assert.equal(routedDiagnostics.occlusionIssues.length, 0);
   assert.equal(routedDiagnostics.qualityOk, true);
+
+  const detour = diagnoseLayout({
+    frame: { left: 0, top: 0, width: 260, height: 180 },
+    nodes: [
+      { node: { id: "p", name: "부모" }, position: { left: 40, top: 0, width: 20, height: 20 } },
+      { node: { id: "c", name: "자식" }, position: { left: 40, top: 120, width: 20, height: 20 } },
+    ],
+    edges: [
+      {
+        parent: "p",
+        child: "c",
+        from: { left: 40, top: 0, width: 20, height: 20 },
+        to: { left: 40, top: 120, width: 20, height: 20 },
+        routePoints: [
+          { x: 50, y: 20 },
+          { x: 220, y: 20 },
+          { x: 220, y: 120 },
+          { x: 50, y: 120 },
+        ],
+      },
+    ],
+  });
+
+  assert.equal(detour.ok, true);
+  assert.equal(detour.qualityOk, false);
+  assert.equal(detour.detourIssues.length, 1);
+  assert.equal(detour.detourIssues[0].reason, "long-detour-connectors");
 
   const balance = diagnoseLayout({
     frame: { left: 0, top: 0, width: 240, height: 300 },

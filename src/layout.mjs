@@ -218,6 +218,7 @@ export function scoreLayoutPages(graph, pages) {
     alignmentIssues: 0,
     crossingIssues: 0,
     occlusionIssues: 0,
+    detourIssues: 0,
     balanceIssues: 0,
     readabilityIssues: 0,
     qualityIssues: 0,
@@ -232,6 +233,7 @@ export function scoreLayoutPages(graph, pages) {
     totals.alignmentIssues += layout.diagnostics?.alignmentIssues?.length || 0;
     totals.crossingIssues += layout.diagnostics?.crossingIssues?.length || 0;
     totals.occlusionIssues += layout.diagnostics?.occlusionIssues?.length || 0;
+    totals.detourIssues += layout.diagnostics?.detourIssues?.length || 0;
     totals.balanceIssues += layout.diagnostics?.balanceIssues?.length || 0;
     totals.readabilityIssues += layout.diagnostics?.readabilityIssues?.length || 0;
     totals.qualityIssues += layout.diagnostics?.qualityIssues?.length || 0;
@@ -867,6 +869,8 @@ export function diagnoseLayout(
     maximumAlignmentOffset = 28,
     maximumColumnImbalance = 86,
     minimumVerticalLabelWidth = 18,
+    maximumRouteDetourRatio = 2.4,
+    minimumRouteDetourExtra = 60,
   } = {},
 ) {
   const frame = layout?.frame;
@@ -881,6 +885,7 @@ export function diagnoseLayout(
       alignmentIssues: [],
       crossingIssues: [],
       occlusionIssues: [],
+      detourIssues: [],
       balanceIssues: [],
       readabilityIssues: [],
       qualityIssues: [],
@@ -950,6 +955,11 @@ export function diagnoseLayout(
     nodeNames,
     tolerance,
   });
+  const detourIssues = diagnoseConnectorDetours(layout.edges || [], {
+    nodeNames,
+    maximumRouteDetourRatio,
+    minimumRouteDetourExtra,
+  });
   const balanceIssues = diagnoseColumnBalance(layout.groupBoxes || [], {
     frame,
     maximumColumnImbalance,
@@ -962,6 +972,7 @@ export function diagnoseLayout(
     ...alignmentIssues,
     ...crossingIssues,
     ...occlusionIssues,
+    ...detourIssues,
     ...balanceIssues,
     ...readabilityIssues,
   ];
@@ -975,6 +986,7 @@ export function diagnoseLayout(
     alignmentIssues,
     crossingIssues,
     occlusionIssues,
+    detourIssues,
     balanceIssues,
     readabilityIssues,
     qualityIssues,
@@ -1266,6 +1278,31 @@ function diagnoseEdgeNodeOcclusions(edges, nodes, { nodeNames, tolerance }) {
     }
   }
   return issues;
+}
+
+function diagnoseConnectorDetours(edges, { nodeNames, maximumRouteDetourRatio, minimumRouteDetourExtra }) {
+  const detours = [];
+  for (const edge of edges || []) {
+    if (!edge.routePoints?.length || edge.routePoints.length < 2) continue;
+    const first = edge.routePoints[0];
+    const last = edge.routePoints.at(-1);
+    if (!first || !last) continue;
+    const direct = Math.abs(last.x - first.x) + Math.abs(last.y - first.y);
+    if (direct <= 0.1) continue;
+    const length = routeLength(edge.routePoints);
+    const extra = length - direct;
+    const ratio = length / direct;
+    if (extra <= minimumRouteDetourExtra || ratio <= maximumRouteDetourRatio) continue;
+    detours.push({
+      reason: "long-detour-connectors",
+      edge: edgeLabel(edge, nodeNames),
+      ratio: Number(ratio.toFixed(2)),
+      extra: Number(extra.toFixed(2)),
+      length: Number(length.toFixed(2)),
+      direct: Number(direct.toFixed(2)),
+    });
+  }
+  return detours;
 }
 
 function diagnoseColumnBalance(groupBoxes, { frame, maximumColumnImbalance }) {

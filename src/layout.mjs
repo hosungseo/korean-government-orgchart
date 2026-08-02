@@ -282,6 +282,9 @@ function layoutFitAwareMaxNodes({ paper, layoutStyle, maxNodes }) {
   if (paper === "a4-half" && layoutStyle === "vertical-stack") {
     return Math.min(maxNodes, a4HalfVerticalStackMaxNodes());
   }
+  if (paper === "a4-half" && layoutStyle === "two-column") {
+    return Math.min(maxNodes, twoColumnListMaxNodes(paper));
+  }
   if (layoutStyle === "catalog") {
     return Math.min(maxNodes, catalogMaxNodes(paper));
   }
@@ -329,6 +332,23 @@ function catalogMaxNodes(paper) {
     maxChildren = childCount;
   }
   return maxChildren + 1;
+}
+
+function twoColumnListMaxNodes(paper) {
+  const frame = matrixFrameForPaper(paper);
+  // A legal subtree rarely splits into perfectly equal left/right lanes.
+  // Keep a small buffer below the theoretical row capacity so that one
+  // heavier branch does not push the right or left lane past the A4 frame.
+  return Math.max(3, twoColumnListRowsPerLane(frame) * 2 - 3);
+}
+
+function twoColumnListRowsPerLane(frame) {
+  const headerHeight = 34;
+  const rowStart = frame.top + headerHeight + 20;
+  const frameBottom = frame.top + frame.height;
+  const rowGap = 31;
+  const rowHeight = 27;
+  return Math.max(1, Math.floor((frameBottom - rowStart - rowHeight) / rowGap) + 1);
 }
 
 function matrixFrameForPaper(paper) {
@@ -2233,6 +2253,9 @@ function layoutMatrixPage({ graph, pageSize, frame, parentEdge, children, roots,
  * rather than a single long bus.
  */
 function layoutTwoColumnPage({ graph, pageSize, frame, parentEdge, children, roots, selected, depth, leafWeight }) {
+  if (pageSize.width < 420) {
+    return layoutNarrowTwoColumnPage({ graph, frame, parentEdge, children, roots, selected, depth });
+  }
   const positions = new Map();
   const topGap = Math.min(92, Math.max(50, frame.height / 4));
   const laneGap = 18;
@@ -2334,6 +2357,111 @@ function layoutTwoColumnPage({ graph, pageSize, frame, parentEdge, children, roo
     .filter((edge) => edge.from && edge.to);
   const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
   return { frame, nodes, edges, roots, maxDepth: Math.max(0, ...depth.values()), verticalLeaves: false };
+}
+
+function layoutNarrowTwoColumnPage({ graph, frame, children, roots, selected, depth }) {
+  const positions = new Map();
+  const headerHeight = 34;
+  const rowHeight = 27;
+  const rowGap = 31;
+  const laneGap = 14;
+  const laneWidth = Math.max(72, (frame.width - laneGap) / 2);
+  const rowStart = frame.top + headerHeight + 20;
+  const laneTops = [rowStart, rowStart];
+  const laneLefts = [frame.left, frame.left + laneWidth + laneGap];
+  const laneRows = [0, 0];
+  const rowsPerLane = twoColumnListRowsPerLane(frame);
+  const put = (id, centerX, top, width, height, vertical = false, depthValue = 0, spanLeft = centerX - width / 2, spanWidth = width) => {
+    positions.set(id, {
+      left: centerX - width / 2,
+      top,
+      width,
+      height,
+      centerX,
+      bottom: top + height,
+      vertical,
+      depth: depthValue,
+      spanLeft,
+      spanWidth,
+    });
+  };
+
+  const headerIds = roots.filter((id) => selected.has(id));
+  const primary = headerIds[0];
+  if (primary && headerIds.length === 1) {
+    const root = graph.nodes.get(primary);
+    if (root) put(primary, frame.left + frame.width / 2, frame.top, Math.min(164, Math.max(96, root.name.length * 5.1 + 48)), headerHeight, false, 0, frame.left, frame.width);
+  } else {
+    const headerWidth = Math.min(120, Math.max(54, frame.width / Math.max(1, headerIds.length) * 0.7));
+    headerIds.forEach((id, index) => {
+      const root = graph.nodes.get(id);
+      if (!root) return;
+      const centerX = frame.left + frame.width * ((index + 0.5) / headerIds.length);
+      put(id, centerX, frame.top, headerWidth, headerHeight, false, 0, centerX - headerWidth / 2, headerWidth);
+    });
+  }
+
+  const countRows = (id, seen = new Set()) => {
+    if (!selected.has(id) || seen.has(id)) return 0;
+    seen.add(id);
+    return 1 + (children.get(id) || []).reduce((sum, childId) => sum + countRows(childId, seen), 0);
+  };
+  const branchRoots = [];
+  for (const rootId of headerIds) {
+    const direct = (children.get(rootId) || []).filter((id) => selected.has(id));
+    if (direct.length) {
+      for (const id of direct) branchRoots.push({ id, parent: rootId });
+    } else if (!positions.has(rootId)) {
+      branchRoots.push({ id: rootId, parent: null });
+    }
+  }
+  const laneBranches = [[], []];
+  const laneWeights = [0, 0];
+  for (const branch of branchRoots) {
+    const weight = Math.max(1, countRows(branch.id));
+    const lane = laneWeights[0] <= laneWeights[1] ? 0 : 1;
+    laneBranches[lane].push({ ...branch, weight });
+    laneWeights[lane] += weight;
+  }
+
+  const emit = (id, lane, relativeDepth = 0) => {
+    if (!selected.has(id) || positions.has(id)) return;
+    const node = graph.nodes.get(id);
+    if (!node) return;
+    const childIds = (children.get(id) || []).filter((childId) => selected.has(childId));
+    const left = laneLefts[lane];
+    const indent = Math.min(20, relativeDepth * 8);
+    const spanLeft = left + indent;
+    const spanWidth = Math.max(54, laneWidth - indent);
+    const centerX = spanLeft + spanWidth / 2;
+    const width = Math.min(112, Math.max(58, Math.min(spanWidth * 0.88, 68 + node.name.length * 3.7)));
+    const top = laneTops[lane];
+    const level = depth.get(id) || relativeDepth + 1;
+    put(id, centerX, top, width, rowHeight, false, level, spanLeft, spanWidth);
+    laneTops[lane] += rowGap;
+    laneRows[lane] += 1;
+    for (const childId of childIds) emit(childId, lane, relativeDepth + 1);
+  };
+
+  for (let lane = 0; lane < 2; lane += 1) {
+    for (const branch of laneBranches[lane]) emit(branch.id, lane, 0);
+  }
+  for (const id of selected) {
+    if (positions.has(id)) continue;
+    const lane = laneRows[0] <= laneRows[1] ? 0 : 1;
+    emit(id, lane, 0);
+  }
+  const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
+  return {
+    frame,
+    nodes,
+    edges: [],
+    roots,
+    maxDepth: Math.max(rowsPerLane, ...laneRows),
+    verticalLeaves: false,
+    edgeMode: "implicit-lane",
+    labels: [{ text: "좌우 2열형 · 좁은 면에서는 레인 내부 위→아래 순서로 하위조직 표시", x: frame.left, y: frame.top - 10, align: "start" }],
+  };
 }
 
 export function nodeStyle(node) {

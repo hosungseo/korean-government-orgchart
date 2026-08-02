@@ -521,6 +521,31 @@ test("매트릭스형은 행이 프레임을 넘치기 전에 자동 분할한�
   }
 });
 
+test("A4 반쪽 2열형은 좁은 면에서 레인 목록으로 분할해 겹침을 피한다", () => {
+  const graph = new OrgGraph({ institution: "시험부" });
+  const bureau = graph.addNode("시험실", { kind: "assistant" });
+  graph.addEdge(graph.rootId, bureau.id, { type: "assistant" });
+  for (let index = 1; index <= 70; index += 1) {
+    const child = graph.addNode(`제${index}정책과`, { kind: "assistant" });
+    graph.addEdge(bureau.id, child.id, { type: "assistant" });
+  }
+  const pages = planPages(graph, {
+    paper: "a4-half",
+    layoutStyle: "two-column",
+    focus: "시험실",
+    maxNodes: 100,
+  });
+
+  assert.equal(pages.length > 1, true);
+  for (const page of pages) {
+    const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
+    assert.equal(layout.diagnostics.ok, true);
+    assert.equal(layout.diagnostics.overflow.length, 0);
+    assert.equal(layout.diagnostics.overlaps.length, 0);
+    assert.equal(layout.edgeMode, "implicit-lane");
+  }
+});
+
 test("대량 소속기관 상세는 자동 모드에서 카드형으로 전환한다", () => {
   const graph = parseOrganizationTexts([
     `

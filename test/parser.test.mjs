@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { diagnoseLayout, displayNodeName, layoutPage, nodeStyle, parseLayoutStyles, planBestPages, planLayoutVariants, planPages, resolvePageSize, routeLayoutEdges, scoreLayoutPages } from "../src/layout.mjs";
-import { projectOperationalView, summarizeStructure } from "../src/model.mjs";
+import { OrgGraph, projectOperationalView, summarizeStructure } from "../src/model.mjs";
 import { parseNameList, parseOrganizationTexts } from "../src/parser.mjs";
 import { edgeRoute, renderSvg } from "../src/render-svg.mjs";
 
@@ -470,6 +470,30 @@ test("카드 목록형은 상위 조직별 묶음으로 법정 계층을 보존�
   assert.ok(layout.groupBoxes.some((group) => group.caption?.startsWith("상위:") || group.caption === "직속 하부조직"));
   assert.equal(new Set(layout.nodes.map(({ node }) => node.id)).size, layout.nodes.length);
   assert.equal(layout.edges.length, 0);
+});
+
+test("카드 목록형은 큰 그룹 박스가 넘치기 전에 자동 분할한다", () => {
+  const graph = new OrgGraph({ institution: "시험부" });
+  const bureau = graph.addNode("시험실", { kind: "assistant" });
+  graph.addEdge(graph.rootId, bureau.id, { type: "assistant" });
+  for (let index = 1; index <= 70; index += 1) {
+    const child = graph.addNode(`제${index}정책과`, { kind: "assistant" });
+    graph.addEdge(bureau.id, child.id, { type: "assistant" });
+  }
+  const pages = planPages(graph, {
+    paper: "a4-half",
+    layoutStyle: "catalog",
+    focus: "시험실",
+    maxNodes: 100,
+  });
+
+  assert.equal(pages.length > 1, true);
+  for (const page of pages) {
+    const layout = layoutPage(graph, page, { pageSize: resolvePageSize(page.paper) });
+    assert.equal(layout.diagnostics.ok, true);
+    assert.equal(layout.diagnostics.overflow.some((item) => item.reason === "group-box-overflow"), false);
+    assert.equal(layout.diagnostics.overlaps.some((item) => item.reason === "group-box-overlap"), false);
+  }
 });
 
 test("대량 소속기관 상세는 자동 모드에서 카드형으로 전환한다", () => {

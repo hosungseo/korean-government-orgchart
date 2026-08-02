@@ -255,7 +255,7 @@ function bestFitCandidates(paper, requestedMaxNodes = 38) {
   const seen = new Set();
   for (const maxNodes of maxNodesValues) {
     for (const style of styles) {
-      const adjustedMaxNodes = readabilityAwareMaxNodes({ paper, layoutStyle: style, maxNodes });
+      const adjustedMaxNodes = layoutFitAwareMaxNodes({ paper, layoutStyle: style, maxNodes });
       const key = `${style}:${adjustedMaxNodes}`;
       if (seen.has(key)) continue;
       seen.add(key);
@@ -278,9 +278,14 @@ function uniqueNumbers(values) {
   return [...new Set(values.map((value) => Math.max(1, Math.floor(value))).filter(Number.isFinite))];
 }
 
-function readabilityAwareMaxNodes({ paper, layoutStyle, maxNodes }) {
-  if (paper !== "a4-half" || layoutStyle !== "vertical-stack") return maxNodes;
-  return Math.min(maxNodes, a4HalfVerticalStackMaxNodes());
+function layoutFitAwareMaxNodes({ paper, layoutStyle, maxNodes }) {
+  if (paper === "a4-half" && layoutStyle === "vertical-stack") {
+    return Math.min(maxNodes, a4HalfVerticalStackMaxNodes());
+  }
+  if (layoutStyle === "catalog") {
+    return Math.min(maxNodes, catalogMaxNodes(paper));
+  }
+  return maxNodes;
 }
 
 function a4HalfVerticalStackMaxNodes() {
@@ -291,6 +296,39 @@ function a4HalfVerticalStackMaxNodes() {
   const siblingGutter = 6;
   const leafCapacity = Math.max(4, Math.floor(frameWidth / (minimumVerticalLabelWidth + siblingGutter)));
   return leafCapacity + 1;
+}
+
+function catalogMaxNodes(paper) {
+  const pageSize = resolvePageSize(paper);
+  const portrait = pageSize.height > pageSize.width;
+  const pageMargin = portrait ? (pageSize.width < 400 ? 17 : 28) : 38;
+  const frame = {
+    top: portrait ? 104 : 118,
+    width: pageSize.width - pageMargin * 2,
+    height: pageSize.height - (portrait ? 132 : 150),
+  };
+  const groupWidth = Math.max(80, frame.width - 12);
+  const availableGroupHeight = Math.max(80, frame.height - 57);
+  const captionHeight = 17;
+  const headerHeight = 31;
+  const padding = 8;
+  let maxChildren = 1;
+  for (let childCount = 1; childCount <= 220; childCount += 1) {
+    const childColumns =
+      childCount > 18 && groupWidth >= 520
+        ? 4
+        : childCount > 10 && groupWidth >= 340
+          ? 3
+          : childCount > 4 && groupWidth >= 170
+            ? 2
+            : 1;
+    const childRows = Math.max(1, Math.ceil(childCount / childColumns));
+    const rowGap = Math.min(31, Math.max(23, (frame.height - 100) / Math.max(1, childRows)));
+    const groupHeight = captionHeight + headerHeight + childRows * rowGap + padding;
+    if (groupHeight > availableGroupHeight) break;
+    maxChildren = childCount;
+  }
+  return maxChildren + 1;
 }
 
 export function planPages(
@@ -310,7 +348,7 @@ export function planPages(
       : maxNodes === 38 && format === "a4-portrait"
         ? 28
         : maxNodes;
-  const layoutMaxNodes = readabilityAwareMaxNodes({
+  const layoutMaxNodes = layoutFitAwareMaxNodes({
     paper: format,
     layoutStyle: visual,
     maxNodes: effectiveMaxNodes,
@@ -467,7 +505,7 @@ export function planPages(
           descendantCount: descendants.length,
           paper: format,
         });
-        const affiliateMaxNodes = readabilityAwareMaxNodes({
+        const affiliateMaxNodes = layoutFitAwareMaxNodes({
           paper: format,
           layoutStyle: layoutStyleForAffiliate,
           maxNodes: effectiveMaxNodes,

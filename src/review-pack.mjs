@@ -153,7 +153,7 @@ export function formatReviewPackMarkdown(result) {
     );
   }
   lines.push("");
-  lines.push("> 확인 열은 `높음/중간/낮음` 우선순위 개수입니다. 배치 문제는 넘침·겹침·연결선 같은 hard issue, 품질은 간격·정렬·선교차·선-상자 관통·컬럼 균형 같은 polish issue입니다.");
+  lines.push("> 확인 열은 `높음/중간/낮음` 우선순위 개수입니다. 배치 문제는 넘침·겹침·연결선 같은 hard issue, 품질은 간격·정렬·선교차·선-상자 관통·컬럼 균형·세로글자 폭 같은 polish issue입니다.");
   lines.push("");
   return `${lines.join("\n")}\n`;
 }

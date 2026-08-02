@@ -25,6 +25,7 @@ export function buildAuditReport(graph, pages = [], options = {}) {
       title: graph.meta.title,
       asOf: graph.meta.asOf,
       sources: graph.meta.sources || [],
+      sourceInventory: graph.meta.sourceInventory || [],
       status: reviewActions.some((action) => action.priority === "high")
         ? "needs-correction"
         : reviewActions.length
@@ -64,6 +65,7 @@ export function formatAuditMarkdown(report) {
   lines.push(`- 기구 수: 보조 ${report.summary.structure.unitCounts.line}, 보좌 ${report.summary.structure.unitCounts.staff}, 소속 ${report.summary.structure.unitCounts.affiliated}`);
   lines.push("");
 
+  appendSection(lines, "입력 소스", report.meta.sourceInventory, formatSourceInventory);
   appendSection(lines, "우선 확인", report.reviewActions, (item) => `- [${priorityLabel(item.priority)}] ${item.message}`);
   appendSection(lines, "통칙·구조 검증", report.validation, (item) => `- ${item}`);
   appendSection(lines, "별표 필요", report.annexRequirements, formatAnnexRequirement);
@@ -450,6 +452,16 @@ function formatJurisdictionRelation(item) {
 
 function formatJurisdictionRunInference(item) {
   return `- ${item.parent} > ${item.advisor}: ${item.departments.join("ㆍ")} (${item.source})`;
+}
+
+function formatSourceInventory(item) {
+  return `- ${item.source}: ${sourceRoleLabel(item.role)}`;
+}
+
+function sourceRoleLabel(role) {
+  if (role === "decree") return "직제";
+  if (role === "rule") return "직제 시행규칙";
+  return "역할 불명";
 }
 
 function formatAnnexRequirement(item) {

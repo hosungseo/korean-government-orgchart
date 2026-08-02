@@ -66,11 +66,14 @@ test("감사 리포트는 직제만 있고 시행규칙이 없으면 과 단위 
 
   const report = buildAuditReport(graph, planPages(graph, { paper: "a4-half", layout: "vertical" }));
   const action = report.reviewActions.find((item) => item.topic === "source-completeness");
+  const markdown = formatAuditMarkdown(report);
 
   assert.equal(graph.meta.sourceInventory[0].role, "decree");
   assert.equal(action?.priority, "medium");
   assert.match(action.message, /직제 시행규칙 입력이 확인되지 않아/);
   assert.match(action.message, /산업국/);
+  assert.match(markdown, /입력 소스/);
+  assert.match(markdown, /시험부와 그 소속기관 직제: 직제/);
 });
 
 test("감사 리포트는 시행규칙 입력이 있으면 과 단위 누락 경고를 억제한다", () => {

@@ -174,7 +174,7 @@ node src/cli.mjs build \
 | `affiliate-strip` | 본부 계층 아래 부속기관·책임운영기관을 별도 띠로 표시 |
 | `catalog` | 관·국별 하위 과·팀을 연결선 없이 카드 목록으로 인쇄 |
 
-`--layouts`에 쉼표로 여러 프리셋을 지정하면 순서대로 한 파일에 들어가고, `--layout all`은 여덟 유형을 모두 생성합니다. `change-lanes`는 `@변경` 지시문이 있을 때 변경 조직이 오른쪽 레인으로 이동합니다.
+`--layouts`에 쉼표로 여러 프리셋을 지정하면 순서대로 한 파일에 들어가고, `--layout all`은 여덟 유형을 모두 생성합니다. `change-lanes`는 `@변경` 지시문이 있을 때 변경 조직이 오른쪽 레인으로 이동합니다. 개정 전/후 JSON이 모두 있으면 `compare-json`이 이 표식을 자동 생성합니다.
 `--layout best`는 일반 조직도 후보(`horizontal`, `vertical`, `two-column`, `matrix`, `affiliate-strip`, `catalog`)를 실제로 배치해 보고 넘침·겹침·연결선 문제가 가장 적은 유형을 고릅니다. 최종 검토서처럼 “깨끗한 한 장”이 우선인 경우에 사용합니다.
 
 ```bash
@@ -206,6 +206,21 @@ node src/cli.mjs build --input 직제.txt --paper a4-half --layout best \
 @변경: 신설과 = 신설
 @변경: 기존과 = 이체
 ```
+
+이미 만든 개정 전/후 JSON이 있으면 수동 지시문 없이 비교 도표를 만들 수 있습니다.
+
+```bash
+node src/cli.mjs compare-json \
+  --before outputs/기관-개정전.json \
+  --after outputs/기관-개정후.json \
+  --paper a4-landscape \
+  --layout change-lanes \
+  --svg outputs/기관-변경비교.svg \
+  --out outputs/기관-변경비교.pptx \
+  --json outputs/기관-변경비교.json
+```
+
+`compare-json`은 개정 후 조직도를 기준으로 신설 노드를 `(신설)`로 표시하고, 개정 전에만 있던 노드는 `(폐지)`로 되살려 비교 도표에 포함합니다. 같은 이름인데 상위 조직이 달라진 노드는 `(이체)`로 표시합니다. 같은 상위 조직·같은 종류에서 이름만 유사하게 바뀐 노드는 보수적으로 `(명칭변경)`으로 묶고 `previousName` 메타데이터를 남깁니다. 자동 추정이 애매하면 신설/폐지로 남겨 사람이 확인하게 합니다.
 
 HWPX 취합본에서 확인한 유형과 대표 표본은 [HWPX 취합본 분석](docs/hwpx-corpus-analysis.md)에 정리했습니다.
 

@@ -1831,6 +1831,10 @@ export function displayNodeName(node, vertical = false, { showLawCounts = false 
     showLawCounts && !vertical && node.metadata?.lawResponsibility?.lawCount
       ? ` (법 ${node.metadata.lawResponsibility.lawCount})`
       : "";
-  const label = `${node.name}${count}${marker}${lawCount}${expiry}${concurrent}${specificRank}`;
+  const previousName =
+    !vertical && node.metadata?.change === "명칭변경" && node.metadata?.previousName
+      ? ` ← ${node.metadata.previousName}`
+      : "";
+  const label = `${node.name}${previousName}${count}${marker}${lawCount}${expiry}${concurrent}${specificRank}`;
   return vertical ? [...label].join("\n") : label;
 }

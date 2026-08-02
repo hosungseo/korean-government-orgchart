@@ -7,6 +7,7 @@ import { buildAuditReport, formatAuditMarkdown } from "./audit.mjs";
 import { formatBatchAuditMarkdown, runBatchAudit } from "./batch-audit.mjs";
 import { formatBatchBuildMarkdown, runBatchBuild } from "./batch-build.mjs";
 import { buildAuditCaseSpecs } from "./case-scaffold.mjs";
+import { compareOrgGraphs } from "./graph-diff.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { organizationLawNameCandidateGroups } from "./law-name.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
@@ -23,6 +24,7 @@ const args = parseArgs(rest);
 try {
   if (command === "build") await buildCommand(args);
   else if (command === "render-json") await renderJsonCommand(args);
+  else if (command === "compare-json") await compareJsonCommand(args);
   else if (command === "from-law") await fromLawCommand(args);
   else if (command === "fetch") await fetchCommand(args);
   else if (command === "inspect") await inspectCommand(args);
@@ -45,6 +47,23 @@ async function buildCommand(args) {
 async function renderJsonCommand(args) {
   const graph = await graphFromJsonArgs(args);
   await emitOutputs(graph, args);
+}
+
+async function compareJsonCommand(args) {
+  const beforePath = stringArg(args, "before") || stringArg(args, "old");
+  const afterPath = stringArg(args, "after") || stringArg(args, "new");
+  if (!beforePath || !afterPath) {
+    throw new Error("--before <기존.json> 및 --after <개정.json> 값이 필요합니다.");
+  }
+  const before = await readGraphFromJsonPath(beforePath);
+  const after = await readGraphFromJsonPath(afterPath);
+  const graph = compareOrgGraphs(before, after, { title: stringArg(args, "title") });
+  const outputArgs = {
+    ...args,
+    layout: stringArg(args, "layout") || "change-lanes",
+    paper: stringArg(args, "paper") || "a4-landscape",
+  };
+  await emitOutputs(graph, outputArgs);
 }
 
 async function fromLawCommand(args) {
@@ -336,6 +355,15 @@ async function graphFromInputs(args) {
 async function graphFromJsonArgs(args) {
   const graphPath = stringArg(args, "graph") || args.input?.[0];
   if (!graphPath) throw new Error("--graph 또는 --input으로 조직도 JSON 경로를 지정해야 합니다.");
+  const graph = await readGraphFromJsonPath(graphPath);
+  const title = stringArg(args, "title");
+  const date = stringArg(args, "date");
+  if (title) graph.meta.title = title;
+  if (date) graph.meta.asOf = date;
+  return graph;
+}
+
+async function readGraphFromJsonPath(graphPath) {
   const raw = graphPath === "-" ? (await readInputs(["-"]))[0] : await fs.readFile(path.resolve(graphPath), "utf8");
   let json;
   try {
@@ -343,12 +371,7 @@ async function graphFromJsonArgs(args) {
   } catch {
     throw new Error(`조직도 JSON을 읽을 수 없습니다: ${graphPath}`);
   }
-  const graph = OrgGraph.fromJSON(json);
-  const title = stringArg(args, "title");
-  const date = stringArg(args, "date");
-  if (title) graph.meta.title = title;
-  if (date) graph.meta.asOf = date;
-  return graph;
+  return OrgGraph.fromJSON(json);
 }
 
 async function emitOutputs(graph, args) {
@@ -430,6 +453,7 @@ function summarize(graph, pages) {
     spanDiagnostics: graph.meta.spanDiagnostics || [],
     lawMappedDepartments: graph.meta.lawMap?.matchedDepartments || 0,
     lawMappedLaws: graph.meta.lawMap?.lawCount || 0,
+    comparison: graph.meta.comparison || undefined,
   };
 }
 
@@ -489,6 +513,12 @@ function printHelp() {
     --svg outputs/행정안전부-재난본부.svg \\
     --out outputs/행정안전부-재난본부.pptx
 
+  node src/cli.mjs compare-json \\
+    --before outputs/기관-개정전.json \\
+    --after outputs/기관-개정후.json \\
+    --svg outputs/기관-변경비교.svg \\
+    --out outputs/기관-변경비교.pptx
+
   node src/cli.mjs review-pack \\
     --institutions "행정안전부,문화체육관광부,공정거래위원회" \\
     --date 2026-07-24 \\
@@ -498,6 +528,7 @@ function printHelp() {
 명령
   build      로컬 텍스트를 파싱하여 PPTX/SVG/JSON 생성
   render-json 기존 조직도 JSON을 다시 배치하여 PPTX/SVG/JSON 생성
+  compare-json 기존·개정 조직도 JSON을 비교해 신설·폐지·명칭변경·이체 표식 생성
   from-law   법제처 OPEN API에서 기준일 연혁을 찾아 바로 생성
   fetch      법령 문언만 로컬 텍스트로 저장
   inspect    파싱 결과 요약 출력
@@ -518,6 +549,9 @@ function printHelp() {
   --law-map-date <YYYY-MM-DD>  소관법령 지도 기준일(기구도 기준일 불일치 경고용)
   --law-counts              소관법령이 연결된 조직 상자에 법령 수 배지 표시
   --law-appendix            PPTX·SVG 뒤에 부서별 소관법령 색인 부록 추가(--law-map 필요)
+  --before <graph.json>     compare-json의 개정 전 조직도 JSON
+  --after <graph.json>      compare-json의 개정 후 조직도 JSON
+  --graph <graph.json>      render-json의 기존 조직도 JSON
   --oc <인증값>             LAW_API_OC 환경변수로도 지정 가능
   --source-dir <dir>        조회한 기준일 법령 문언 보관 및 다음 실행 재사용 캐시
   --format markdown|json    audit 리포트 출력 형식

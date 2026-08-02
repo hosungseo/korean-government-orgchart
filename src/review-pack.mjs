@@ -67,6 +67,9 @@ export async function runReviewPack(args = {}) {
   }
   result.acceptedCases = buildAcceptedCasesDocument(result);
   await writeText(files.acceptedCases, `${JSON.stringify(result.acceptedCases, jsonReplacer, 2)}\n`);
+  if (args["build-accepted"] === true) {
+    result.acceptedBuild = await runAcceptedBuild(result, args, sharedLawFetchCache);
+  }
   await writeText(files.worklist, formatReviewWorklistMarkdown(result));
   await writeText(files.readme, formatReviewPackMarkdown(result));
   return result;
@@ -107,6 +110,7 @@ export function formatReviewPackMarkdown(result) {
   lines.push("");
 
   appendRerunSection(lines, result);
+  appendAcceptedBuildSection(lines, result);
 
   const topActions = topReviewActions(result.audit?.cases || []);
   lines.push("## 우선 확인");
@@ -168,6 +172,11 @@ export function formatReviewWorklistMarkdown(result) {
     lines.push(`- 자동 보강 재실행: ${linkPath(result.outDir, result.rerun.outDir)}`);
   } else if (result.rerun?.skipped) {
     lines.push(`- 자동 보강 재실행: 생략(${result.rerun.reason})`);
+  }
+  if (result.acceptedBuild?.outDir) {
+    lines.push(`- 최종 채택 산출물: ${linkPath(result.outDir, result.acceptedBuild.outDir)}`);
+  } else if (result.acceptedBuild?.skipped) {
+    lines.push(`- 최종 채택 산출물: 생략(${result.acceptedBuild.reason})`);
   }
   lines.push("");
 
@@ -279,6 +288,45 @@ async function runSuggestedReviewPack(result, args, sharedLawFetchCache) {
   };
 }
 
+async function runAcceptedBuild(result, args, sharedLawFetchCache) {
+  const accepted = result.acceptedCases || buildAcceptedCasesDocument(result);
+  if (!accepted.evaluated) {
+    return {
+      skipped: true,
+      reason: "2차 자동 보강 평가가 없어 최종 채택 산출물을 만들지 않았습니다. --rerun-suggested를 함께 사용하세요.",
+      acceptedCases: accepted.acceptedCases || 0,
+    };
+  }
+  const acceptedOutDir = path.resolve(stringArg(args, "accepted-out-dir") || path.join(result.outDir, "accepted"));
+  const acceptedDeck = path.resolve(stringArg(args, "accepted-deck") || path.join(acceptedOutDir, "accepted-deck.pptx"));
+  const acceptedOutputs = stringArg(args, "accepted-outputs") || stringArg(args, "outputs") || "svg,json,audit,trace,pptx,deck";
+  const build = await runBatchBuild({
+    ...args,
+    caseSpecs: accepted.cases,
+    casesBaseDir: result.outDir,
+    cases: undefined,
+    "out-dir": acceptedOutDir,
+    outputs: acceptedOutputs,
+    deck: acceptedDeck,
+    "rerun-suggested": false,
+    lawFetchCache: sharedLawFetchCache,
+  });
+  const files = {
+    manifest: path.join(acceptedOutDir, "manifest.md"),
+    manifestJson: path.join(acceptedOutDir, "manifest.json"),
+  };
+  await writeText(files.manifest, formatBatchBuildMarkdown(build));
+  await writeText(files.manifestJson, `${JSON.stringify(build, jsonReplacer, 2)}\n`);
+  return {
+    outDir: acceptedOutDir,
+    files,
+    acceptedCases: accepted.acceptedCases || 0,
+    rejectedCases: accepted.rejectedCases || 0,
+    unchangedCases: accepted.unchangedCases || 0,
+    build,
+  };
+}
+
 function appendRerunSection(lines, result) {
   if (!result.rerun) return;
   lines.push("## 자동 보강 재실행");
@@ -302,6 +350,29 @@ function appendRerunSection(lines, result) {
   for (const row of comparisonRows(result.rerun.comparison)) {
     lines.push(`| ${row.label} | ${row.before} | ${row.after} | ${formatDelta(row.delta)} |`);
   }
+  lines.push("");
+}
+
+function appendAcceptedBuildSection(lines, result) {
+  if (!result.acceptedBuild) return;
+  lines.push("## 최종 채택 산출물");
+  lines.push("");
+  if (result.acceptedBuild.skipped) {
+    lines.push(`- 생략: ${result.acceptedBuild.reason}`);
+    lines.push("");
+    return;
+  }
+  lines.push(`- 폴더: ${linkPath(result.outDir, result.acceptedBuild.outDir)}`);
+  if (result.acceptedBuild.files?.manifest) lines.push(`- 매니페스트: ${linkPath(result.outDir, result.acceptedBuild.files.manifest)}`);
+  if (result.acceptedBuild.files?.manifestJson) lines.push(`- 매니페스트 JSON: ${linkPath(result.outDir, result.acceptedBuild.files.manifestJson)}`);
+  if (result.acceptedBuild.build?.decks?.length) {
+    for (const deck of result.acceptedBuild.build.decks) {
+      lines.push(`- 최종 PPTX deck(${deck.paper}): ${linkPath(result.outDir, deck.path)}`);
+    }
+  } else if (result.acceptedBuild.build?.deck) {
+    lines.push(`- 최종 PPTX deck: ${linkPath(result.outDir, result.acceptedBuild.build.deck)}`);
+  }
+  lines.push(`- 케이스: 채택 ${result.acceptedBuild.acceptedCases || 0} · 거절 ${result.acceptedBuild.rejectedCases || 0} · 유지 ${result.acceptedBuild.unchangedCases || 0}`);
   lines.push("");
 }
 

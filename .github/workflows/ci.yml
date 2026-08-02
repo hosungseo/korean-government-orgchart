@@ -87,6 +87,7 @@ jobs:
             --out-dir /tmp/orgchart-review-pack \
             --outputs svg,json,audit,trace,deck \
             --rerun-suggested \
+            --build-accepted \
             --strict > /tmp/orgchart-review-pack-summary.json
           node --input-type=module -e '
             import fs from "node:fs";
@@ -102,6 +103,17 @@ jobs:
             if (!summary.rerun || summary.rerun.skipped) throw new Error("expected suggested rerun");
             if (!summary.rerun.files?.readme || !fs.existsSync(summary.rerun.files.readme)) {
               throw new Error("missing rerun README");
+            }
+            if (!summary.acceptedBuild || summary.acceptedBuild.skipped) {
+              throw new Error("expected accepted build");
+            }
+            if (!summary.acceptedBuild.files?.manifestJson || !fs.existsSync(summary.acceptedBuild.files.manifestJson)) {
+              throw new Error("missing accepted build manifest");
+            }
+            const acceptedManifest = JSON.parse(fs.readFileSync(summary.acceptedBuild.files.manifestJson, "utf8"));
+            if (acceptedManifest.total !== 2) throw new Error(`expected 2 accepted built cases, got ${acceptedManifest.total}`);
+            if (!Array.isArray(summary.acceptedBuild.decks) || summary.acceptedBuild.decks.length !== 2) {
+              throw new Error(`expected 2 accepted split decks, got ${summary.acceptedBuild.decks?.length || 0}`);
             }
             const manifest = JSON.parse(fs.readFileSync(summary.files.manifestJson, "utf8"));
             if (manifest.total !== 2) throw new Error(`expected 2 built cases, got ${manifest.total}`);

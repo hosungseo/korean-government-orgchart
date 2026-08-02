@@ -252,6 +252,7 @@ async function reviewPackCommand(args) {
         }
       : undefined,
     rerun: summarizeReviewPackRerun(result.rerun),
+    acceptedBuild: summarizeAcceptedBuild(result.acceptedBuild),
   };
   console.log(JSON.stringify(summary, jsonReplacer, 2));
   if (args.strict === true) {
@@ -263,7 +264,11 @@ async function reviewPackCommand(args) {
       ["error", "needs-correction"].includes(item.summary.status),
     );
     const rerunBuildFailing = result.rerun?.build?.deckError || result.rerun?.build?.cases?.some((item) => item.status === "error");
-    if (auditFailing || buildFailing || rerunAuditFailing || rerunBuildFailing) process.exitCode = 2;
+    const acceptedBuildFailing =
+      (args["build-accepted"] === true && result.acceptedBuild?.skipped) ||
+      result.acceptedBuild?.build?.deckError ||
+      result.acceptedBuild?.build?.cases?.some((item) => item.status === "error");
+    if (auditFailing || buildFailing || rerunAuditFailing || rerunBuildFailing || acceptedBuildFailing) process.exitCode = 2;
   }
 }
 
@@ -286,6 +291,27 @@ function summarizeReviewPackRerun(rerun) {
     decks: rerun.build?.decks,
     files: rerun.files,
     comparison: rerun.comparison,
+  };
+}
+
+function summarizeAcceptedBuild(acceptedBuild) {
+  if (!acceptedBuild) return undefined;
+  if (acceptedBuild.skipped) {
+    return {
+      skipped: true,
+      reason: acceptedBuild.reason,
+      acceptedCases: acceptedBuild.acceptedCases || 0,
+    };
+  }
+  return {
+    outDir: acceptedBuild.outDir,
+    files: acceptedBuild.files,
+    acceptedCases: acceptedBuild.acceptedCases,
+    rejectedCases: acceptedBuild.rejectedCases,
+    unchangedCases: acceptedBuild.unchangedCases,
+    buildStatusCounts: acceptedBuild.build?.statusCounts,
+    deck: acceptedBuild.build?.deck,
+    decks: acceptedBuild.build?.decks,
   };
 }
 
@@ -473,6 +499,9 @@ function printHelp() {
   --accepted-cases-out <file>  review-pack 점수 게이트 통과 케이스 파일명(기본: accepted-cases.json)
   --rerun-suggested         review-pack에서 suggested-cases.json을 바로 2차 실행
   --rerun-out-dir <dir>     2차 리뷰팩 폴더(기본: <out-dir>/rerun)
+  --build-accepted          review-pack에서 accepted-cases.json 기반 최종 산출물을 바로 생성
+  --accepted-out-dir <dir>  최종 채택 산출물 폴더(기본: <out-dir>/accepted)
+  --accepted-outputs <list> 최종 채택 산출물 형식(기본: --outputs 값)
   --institutions "A,B"      make-cases/review-pack 기관명 목록(쉼표 또는 줄바꿈)
   --strict                  batch-audit에서 오류·수정 필요가 있으면 종료코드 2
 

@@ -47,6 +47,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
     "out-dir": path.join(dir, "pack"),
     outputs: "svg,json,audit,trace,deck",
     "rerun-suggested": true,
+    "build-accepted": true,
   });
 
   assert.equal(result.caseCount, 1);
@@ -58,6 +59,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(await readFile(result.files.readme, "utf8"), /검토 작업목록/);
   assert.match(await readFile(result.files.readme, "utf8"), /자동 보강 재실행/);
   assert.match(await readFile(result.files.readme, "utf8"), /채택 케이스/);
+  assert.match(await readFile(result.files.readme, "utf8"), /최종 채택 산출물/);
   assert.match(await readFile(result.files.worklist, "utf8"), /조직도 검토 작업목록/);
   assert.match(await readFile(result.files.worklist, "utf8"), /입력에 붙여넣을 보강 지시문 후보/);
   assert.ok((await stat(result.files.cases)).size > 0);
@@ -93,6 +95,13 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.equal(accepted.rejectedCases, 0);
   assert.equal(accepted.cases[0].accepted.decision, "accepted");
   assert.match(accepted.cases[0].directives.join("\n"), /@소관: 산업정책관 > 정책과ㆍ지원과/);
+
+  assert.equal(result.acceptedBuild.skipped, undefined);
+  assert.equal(result.acceptedBuild.acceptedCases, 1);
+  assert.ok((await stat(result.acceptedBuild.files.manifest)).size > 0);
+  assert.ok((await stat(result.acceptedBuild.files.manifestJson)).size > 0);
+  assert.equal(result.acceptedBuild.build.statusCounts.built, 1);
+  assert.ok((await stat(result.acceptedBuild.build.deck)).size > 0);
 });
 
 test("review-pack 작업목록은 지시문·별표·레이아웃·소관법령 문제를 요약한다", () => {

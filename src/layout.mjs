@@ -823,13 +823,17 @@ export function routeLayoutEdges(layout) {
       box: normalizePosition(entry.position),
     }))
     .filter((entry) => entry.id && entry.box);
-  const edges = (layout.edges || []).map((edge) => {
-    const points = routePointsForEdge(edge, boxes, layout.frame);
-    return {
+  const edges = new Array((layout.edges || []).length);
+  const routedEdges = [];
+  (layout.edges || []).forEach((edge, index) => {
+    const points = routePointsForEdge(edge, boxes, layout.frame, routedEdges);
+    const routed = {
       ...edge,
       routePoints: points,
       routeSegments: pointsToSegments(points),
     };
+    edges[index] = routed;
+    routedEdges.push(routed);
   });
   return { ...layout, edges };
 }
@@ -1081,7 +1085,7 @@ function diagnoseEdgeCrossings(edges, { nodeNames, tolerance }) {
   return issues;
 }
 
-function routePointsForEdge(edge, boxes, frame) {
+function routePointsForEdge(edge, boxes, frame, routedEdges = []) {
   const from = normalizePosition(edge.from);
   const to = normalizePosition(edge.to);
   if (!from || !to) return [];
@@ -1091,7 +1095,7 @@ function routePointsForEdge(edge, boxes, frame) {
     : verticalRouteCandidates(from, to, blockers, frame);
   let best = null;
   for (const points of candidates) {
-    const score = scoreRoute(points, blockers, frame);
+    const score = scoreRoute(points, blockers, frame, edge, routedEdges);
     if (!best || compareRouteScore(score, best.score) < 0) best = { points, score };
   }
   return best?.points || [];
@@ -1172,13 +1176,18 @@ function cleanRoutePoints(points) {
   return cleaned;
 }
 
-function scoreRoute(points, blockers, frame) {
+function scoreRoute(points, blockers, frame, edge, routedEdges = []) {
   const segments = pointsToSegments(points);
   let occlusions = 0;
   for (const segmentItem of segments) {
     for (const { box } of blockers || []) {
       if (box && segmentIntersectsBoxInterior(segmentItem, box, 0.5)) occlusions += 1;
     }
+  }
+  let crossings = 0;
+  for (const routed of routedEdges || []) {
+    if (!routed?.routeSegments?.length || shareEndpoint(edge, routed)) continue;
+    if (firstSegmentCrossing(segments, routed.routeSegments, 0.5)) crossings += 1;
   }
   const outsideFrame = frame
     ? points.filter((point) =>
@@ -1190,6 +1199,7 @@ function scoreRoute(points, blockers, frame) {
     : 0;
   return {
     occlusions,
+    crossings,
     outsideFrame,
     length: routeLength(points),
     bends: Math.max(0, points.length - 2),
@@ -1200,6 +1210,7 @@ function compareRouteScore(a, b) {
   return (
     a.occlusions - b.occlusions ||
     a.outsideFrame - b.outsideFrame ||
+    a.crossings - b.crossings ||
     a.bends - b.bends ||
     a.length - b.length
   );

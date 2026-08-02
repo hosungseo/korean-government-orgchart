@@ -270,7 +270,7 @@ test("배치 진단은 상자 간격과 부모 중심축 품질 문제를 별도
 });
 
 test("배치 진단은 연결선 교차·선-상자 관통·카드 컬럼 불균형을 품질 문제로 잡는다", () => {
-  const crossing = diagnoseLayout({
+  const crossingLayout = {
     frame: { left: 0, top: 0, width: 220, height: 190 },
     nodes: [
       { node: { id: "p1", name: "부모1" }, position: { left: 30, top: 10, width: 20, height: 30 } },
@@ -292,11 +292,17 @@ test("배치 진단은 연결선 교차·선-상자 관통·카드 컬럼 불균
         to: { left: 90, top: 150, width: 20, height: 30 },
       },
     ],
-  });
+  };
+  const crossing = diagnoseLayout(crossingLayout);
 
   assert.equal(crossing.ok, true);
   assert.equal(crossing.crossingIssues.length, 1);
   assert.equal(crossing.crossingIssues[0].reason, "crossing-connectors");
+
+  const crossingRouted = routeLayoutEdges(crossingLayout);
+  const crossingRoutedDiagnostics = diagnoseLayout(crossingRouted);
+  assert.equal(crossingRoutedDiagnostics.crossingIssues.length, 0);
+  assert.equal(crossingRouted.edges.some((edge) => edge.routePoints.length > 2), true);
 
   const occlusionLayout = {
     frame: { left: 0, top: 0, width: 220, height: 220 },

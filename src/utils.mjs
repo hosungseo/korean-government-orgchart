@@ -46,7 +46,16 @@ export async function writeText(filePath, text) {
 }
 
 export function parseArgs(argv) {
-  const args = { _: [], input: [], law: [] };
+  const repeatedKeys = new Set(["input", "law", "before-input", "after-input", "before-law", "after-law"]);
+  const args = {
+    _: [],
+    input: [],
+    law: [],
+    "before-input": [],
+    "after-input": [],
+    "before-law": [],
+    "after-law": [],
+  };
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index];
     if (!token.startsWith("--")) {
@@ -57,7 +66,7 @@ export function parseArgs(argv) {
     const next = argv[index + 1];
     const value = next && !next.startsWith("--") ? next : true;
     if (value !== true) index += 1;
-    if (key === "input" || key === "law") {
+    if (repeatedKeys.has(key)) {
       args[key].push(value);
     } else {
       args[key] = value;

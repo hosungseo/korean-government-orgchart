@@ -115,3 +115,60 @@ test("compare-json은 기존·개정 조직도 JSON에서 변경 표식을 생�
   assert.equal(changeByName.get("이체과"), "이체");
   assert.match(await readFile(svgPath, "utf8"), /신설|폐지|명칭변경|이체/);
 });
+
+test("compare-law는 개정 전후 문언을 직접 비교해 변경 도표를 생성한다", async () => {
+  const dir = await mkdtemp(path.join(os.tmpdir(), "orgchart-compare-law-"));
+  const beforePath = path.join(dir, "before.txt");
+  const afterPath = path.join(dir, "after.txt");
+  const svgPath = path.join(dir, "compare-law.svg");
+  const jsonPath = path.join(dir, "compare-law.json");
+  await writeFile(
+    beforePath,
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실 및 다른실을 둔다.
+시험실에 산업정책과ㆍ폐지과ㆍ이체과를 둔다.
+다른실에 기존과를 둔다.
+`,
+    "utf8",
+  );
+  await writeFile(
+    afterPath,
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실 및 다른실을 둔다.
+시험실에 산업전략과ㆍ신설과를 둔다.
+다른실에 기존과ㆍ이체과를 둔다.
+`,
+    "utf8",
+  );
+
+  const { stdout } = await run(process.execPath, [
+    CLI,
+    "compare-law",
+    "--before-input",
+    beforePath,
+    "--after-input",
+    afterPath,
+    "--before-date",
+    "2026-01-01",
+    "--after-date",
+    "2026-02-01",
+    "--svg",
+    svgPath,
+    "--json",
+    jsonPath,
+  ]);
+  const summary = JSON.parse(stdout);
+  const outputJson = JSON.parse(await readFile(jsonPath, "utf8"));
+  const changeByName = new Map(outputJson.nodes.map((node) => [node.name, node.metadata?.change]));
+
+  assert.equal(summary.asOf, "2026-02-01");
+  assert.equal(summary.comparison.before.asOf, "2026-01-01");
+  assert.equal(summary.comparison.after.asOf, "2026-02-01");
+  assert.equal(changeByName.get("신설과"), "신설");
+  assert.equal(changeByName.get("폐지과"), "폐지");
+  assert.equal(changeByName.get("산업전략과"), "명칭변경");
+  assert.equal(changeByName.get("이체과"), "이체");
+  assert.match(await readFile(svgPath, "utf8"), /변경 전후 레인형|신설|폐지|명칭변경|이체/);
+});

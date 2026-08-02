@@ -25,6 +25,7 @@ try {
   if (command === "build") await buildCommand(args);
   else if (command === "render-json") await renderJsonCommand(args);
   else if (command === "compare-json") await compareJsonCommand(args);
+  else if (command === "compare-law") await compareLawCommand(args);
   else if (command === "from-law") await fromLawCommand(args);
   else if (command === "fetch") await fetchCommand(args);
   else if (command === "inspect") await inspectCommand(args);
@@ -57,6 +58,18 @@ async function compareJsonCommand(args) {
   }
   const before = await readGraphFromJsonPath(beforePath);
   const after = await readGraphFromJsonPath(afterPath);
+  const graph = compareOrgGraphs(before, after, { title: stringArg(args, "title") });
+  const outputArgs = {
+    ...args,
+    layout: stringArg(args, "layout") || "change-lanes",
+    paper: stringArg(args, "paper") || "a4-landscape",
+  };
+  await emitOutputs(graph, outputArgs);
+}
+
+async function compareLawCommand(args) {
+  const before = await graphFromCompareLawSide(args, "before");
+  const after = await graphFromCompareLawSide(args, "after");
   const graph = compareOrgGraphs(before, after, { title: stringArg(args, "title") });
   const outputArgs = {
     ...args,
@@ -119,6 +132,35 @@ async function graphFromLawArgs(args) {
   applyAnnexOrganizations(graph);
   graph.validateLegalStructure();
   return graph;
+}
+
+async function graphFromCompareLawSide(args, side) {
+  const inputKey = `${side}-input`;
+  const dateKey = `${side}-date`;
+  const sideInputs = args[inputKey] || [];
+  const sideDate = stringArg(args, dateKey) || stringArg(args, "date");
+  if (sideInputs.length) {
+    const texts = await readInputs(sideInputs);
+    return parseOrganizationTexts(texts, {
+      institution: stringArg(args, "institution"),
+      title: stringArg(args, side === "before" ? "before-title" : "after-title") || stringArg(args, "title"),
+      asOf: sideDate,
+      headName: stringArg(args, "head"),
+      deputyName: stringArg(args, "deputy"),
+      sources: sideInputs,
+    });
+  }
+
+  if (!sideDate) throw new Error(`--${dateKey} 값 또는 --${inputKey} 경로가 필요합니다.`);
+  const sideArgs = {
+    ...args,
+    date: sideDate,
+    decree: stringArg(args, `${side}-decree`) || stringArg(args, "decree"),
+    rule: stringArg(args, `${side}-rule`) || stringArg(args, "rule"),
+    law: (args[`${side}-law`] || []).length ? args[`${side}-law`] : args.law,
+    title: stringArg(args, side === "before" ? "before-title" : "after-title") || stringArg(args, "title"),
+  };
+  return graphFromLawArgs(sideArgs);
 }
 
 async function fetchExplicitLaws(names, date, args) {
@@ -519,6 +561,11 @@ function printHelp() {
     --svg outputs/기관-변경비교.svg \\
     --out outputs/기관-변경비교.pptx
 
+  node src/cli.mjs compare-law \\
+    --before-input old-직제.txt --before-input old-시행규칙.txt \\
+    --after-input new-직제.txt --after-input new-시행규칙.txt \\
+    --svg outputs/기관-변경비교.svg
+
   node src/cli.mjs review-pack \\
     --institutions "행정안전부,문화체육관광부,공정거래위원회" \\
     --date 2026-07-24 \\
@@ -529,6 +576,7 @@ function printHelp() {
   build      로컬 텍스트를 파싱하여 PPTX/SVG/JSON 생성
   render-json 기존 조직도 JSON을 다시 배치하여 PPTX/SVG/JSON 생성
   compare-json 기존·개정 조직도 JSON을 비교해 신설·폐지·명칭변경·이체 표식 생성
+  compare-law 개정 전·후 직제 문언 또는 법제처 기준일을 바로 비교해 변경 도표 생성
   from-law   법제처 OPEN API에서 기준일 연혁을 찾아 바로 생성
   fetch      법령 문언만 로컬 텍스트로 저장
   inspect    파싱 결과 요약 출력
@@ -551,6 +599,10 @@ function printHelp() {
   --law-appendix            PPTX·SVG 뒤에 부서별 소관법령 색인 부록 추가(--law-map 필요)
   --before <graph.json>     compare-json의 개정 전 조직도 JSON
   --after <graph.json>      compare-json의 개정 후 조직도 JSON
+  --before-input <file>     compare-law의 개정 전 직제/시행규칙 문언(반복 가능)
+  --after-input <file>      compare-law의 개정 후 직제/시행규칙 문언(반복 가능)
+  --before-date <YYYY-MM-DD> compare-law 법제처 조회 또는 개정 전 문언 기준일
+  --after-date <YYYY-MM-DD> compare-law 법제처 조회 또는 개정 후 문언 기준일
   --graph <graph.json>      render-json의 기존 조직도 JSON
   --oc <인증값>             LAW_API_OC 환경변수로도 지정 가능
   --source-dir <dir>        조회한 기준일 법령 문언 보관 및 다음 실행 재사용 캐시

@@ -222,6 +222,30 @@ node src/cli.mjs compare-json \
 
 `compare-json`은 개정 후 조직도를 기준으로 신설 노드를 `(신설)`로 표시하고, 개정 전에만 있던 노드는 `(폐지)`로 되살려 비교 도표에 포함합니다. 같은 이름인데 상위 조직이 달라진 노드는 `(이체)`로 표시합니다. 같은 상위 조직·같은 종류에서 이름만 유사하게 바뀐 노드는 보수적으로 `(명칭변경)`으로 묶고 `previousName` 메타데이터를 남깁니다. 자동 추정이 애매하면 신설/폐지로 남겨 사람이 확인하게 합니다.
 
+개정 전/후 문언 파일을 바로 비교할 수도 있습니다.
+
+```bash
+node src/cli.mjs compare-law \
+  --before-input old-직제.txt \
+  --before-input old-시행규칙.txt \
+  --after-input new-직제.txt \
+  --after-input new-시행규칙.txt \
+  --paper a4-landscape \
+  --svg outputs/기관-변경비교.svg \
+  --out outputs/기관-변경비교.pptx
+```
+
+법제처 기준일 두 개를 직접 비교할 때는 원문 파일 대신 기관명과 날짜를 지정합니다.
+
+```bash
+node src/cli.mjs compare-law \
+  --institution "행정안전부" \
+  --before-date 2025-11-25 \
+  --after-date 2026-07-21 \
+  --source-dir work/law-sources \
+  --svg outputs/행정안전부-변경비교.svg
+```
+
 HWPX 취합본에서 확인한 유형과 대표 표본은 [HWPX 취합본 분석](docs/hwpx-corpus-analysis.md)에 정리했습니다.
 
 ### 검토 전 감사 리포트 만들기

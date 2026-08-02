@@ -1,4 +1,5 @@
 import { buildComparisonReportPages } from "./graph-diff.mjs";
+import { summarizeEvidence } from "./evidence.mjs";
 import { layoutPage, resolvePageSize } from "./layout.mjs";
 import { renderSvg } from "./render-svg.mjs";
 import { displayDate } from "./utils.mjs";
@@ -73,6 +74,7 @@ export function renderReviewHtml(graph, pages, { showLawCounts = false, sourceGr
     </section>
 
     ${layoutReviewSection(graph, pages, artifactLinks)}
+    ${evidenceSection(sourceGraph)}
     ${summarySection(graph, sourceGraph, pages)}
     ${warningsSection(sourceGraph)}
     ${comparisonSection(comparisonRows)}
@@ -80,6 +82,59 @@ export function renderReviewHtml(graph, pages, { showLawCounts = false, sourceGr
 </body>
 </html>
 `;
+}
+
+function evidenceSection(sourceGraph) {
+  const evidence = summarizeEvidence(sourceGraph);
+  const citationLabel = evidence.traceRows
+    ? `${evidence.citedRows}/${evidence.traceRows} (${Math.round(evidence.citationCoverage * 100)}%)`
+    : "0/0";
+  const lawMap = evidence.lawMap;
+  const annexLabel = evidence.annex.requirements
+    ? `${evidence.annex.secured}/${evidence.annex.requirements}`
+    : evidence.annex.inventory
+      ? `확보 ${evidence.annex.inventory}`
+      : "없음";
+  const reviewCount =
+    (lawMap?.unmatchedDepartments || 0) +
+    (lawMap?.ambiguousDepartments || 0) +
+    evidence.annex.missing +
+    evidence.jurisdiction.unresolvedRanges;
+  const sourceRows = evidence.sourceInventory.length
+    ? evidence.sourceInventory.map((item) => `<tr><td>${htmlEscape(item.source || "-")}</td><td>${htmlEscape(sourceRoleLabel(item.role))}</td></tr>`).join("")
+    : `<tr><td colspan="2" class="muted">입력 소스 메타데이터가 없습니다.</td></tr>`;
+  const relationRows = evidence.relationStats.length
+    ? evidence.relationStats.map((item) => `<tr><td>${htmlEscape(item.relation)}</td><td class="num">${item.count}</td><td class="num">${item.cited}</td></tr>`).join("")
+    : `<tr><td colspan="3" class="muted">관계가 없습니다.</td></tr>`;
+  return `<section>
+  <h2>근거 점검</h2>
+  <div class="review-grid">
+    <div class="review-card"><span class="label">입력 소스</span><strong>${evidence.sourceInventory.length}</strong></div>
+    <div class="review-card"><span class="label">근거 표시 관계</span><strong>${htmlEscape(citationLabel)}</strong></div>
+    <div class="review-card"><span class="label">소관법령</span><strong>${lawMap ? `${lawMap.matchedDepartments}부서 · ${lawMap.lawCount}건` : "미연결"}</strong></div>
+    <div class="review-card"><span class="label">별표 확보</span><strong>${htmlEscape(annexLabel)}</strong></div>
+    <div class="review-card"><span class="label">추가 확인</span><strong>${reviewCount}</strong></div>
+  </div>
+  <p class="hint">조직도 상자는 읽기용 요약입니다. 아래 관계별 표시 현황과 함께 <strong>근거 trace</strong>에서 부모·자식·조문·근거문장·출처를 행 단위로 확인하세요.</p>
+  <table>
+    <thead><tr><th>입력 자료</th><th>역할</th></tr></thead>
+    <tbody>${sourceRows}</tbody>
+  </table>
+  <table>
+    <thead><tr><th>관계 유형</th><th>관계 수</th><th>근거 표시</th></tr></thead>
+    <tbody>${relationRows}</tbody>
+  </table>
+  ${lawMap ? `<table>
+    <thead><tr><th colspan="2">소관법령 지도</th></tr></thead>
+    <tbody>
+      <tr><th>매칭 기관</th><td>${htmlEscape(lawMap.matchedInstitution || "없음")}</td></tr>
+      <tr><th>지도 기준일</th><td>${htmlEscape(lawMap.asOf || "미기재")}</td></tr>
+      <tr><th>매칭 부서 / 연결 법령</th><td>${lawMap.matchedDepartments} / ${lawMap.lawCount}</td></tr>
+      <tr><th>미매칭 / 중복 후보</th><td>${lawMap.unmatchedDepartments} / ${lawMap.ambiguousDepartments}</td></tr>
+      ${lawMap.excludedScopedNodes ? `<tr><th>scoped 내부조직 제외</th><td>${lawMap.excludedScopedNodes}</td></tr>` : ""}
+    </tbody>
+  </table>` : `<p class="hint">소관법령 지도를 연결하지 않았습니다. 부처→부서→법령 JSON을 연결하면 과 단위 법령 수와 미매칭·중복 후보가 함께 표시됩니다.</p>`}
+  </section>`;
 }
 
 function layoutReviewSection(graph, pages, artifactLinks = {}) {
@@ -204,6 +259,13 @@ function summarySection(graph, sourceGraph, pages) {
   </table>
   ${structure.countingRules?.note ? `<p class="muted">${htmlEscape(structure.countingRules.note)}</p>` : ""}
 </section>`;
+}
+
+function sourceRoleLabel(role) {
+  if (role === "decree") return "직제(대통령령)";
+  if (role === "rule") return "직제 시행규칙";
+  if (role === "annex") return "별표·부속자료";
+  return "역할 불명";
 }
 
 function warningsSection(graph) {

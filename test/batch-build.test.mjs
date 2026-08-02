@@ -61,6 +61,9 @@ test("batch-build는 로컬 케이스에서 SVG·JSON·감사리포트를 일괄
   assert.match(html, /시험부 검토시트/);
   assert.match(html, /한글\/HWPX 검토서/);
   assert.match(html, /작도 검토/);
+  assert.match(html, /근거 점검/);
+  assert.match(html, /입력 자료/);
+  assert.match(html, /근거 표시 관계/);
   assert.match(html, /best-fit 선택 사유/);
   assert.match(html, /근거 trace/);
   assert.match(await readFile(result.cases[0].outputs.json, "utf8"), /"institution": "시험부"/);

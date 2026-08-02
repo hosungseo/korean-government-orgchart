@@ -72,7 +72,10 @@ export async function runBatchBuild(args = {}) {
       }
       if (outputs.includes("pptx")) {
         const pptxPath = path.join(outDir, `${stem}.pptx`);
-        await pptxRenderer.renderPptx(displayGraph, pages, pptxPath, { showLawCounts });
+        await pptxRenderer.renderPptx(displayGraph, pages, pptxPath, {
+          showLawCounts,
+          routedConnectors: routedPptxEnabled(args, caseSpec, context),
+        });
         written.pptx = pptxPath;
       }
       if (outputs.includes("deck")) {
@@ -83,6 +86,7 @@ export async function runBatchBuild(args = {}) {
           graph: displayGraph,
           pages,
           showLawCounts,
+          routedConnectors: routedPptxEnabled(args, caseSpec, context),
         });
       }
 
@@ -225,7 +229,9 @@ async function writeDeckOutputs(deckItems, args, outDir, pptxRenderer) {
   for (const [paper, items] of groups) {
     const outputPath = singleGroup ? basePath : suffixedDeckPath(basePath, paper);
     try {
-      await pptxRenderer.renderPptxDeck(items, outputPath);
+      await pptxRenderer.renderPptxDeck(items, outputPath, {
+        routedConnectors: routedPptxEnabled(args) || items.some((item) => item.routedConnectors),
+      });
       decks.push({
         paper,
         path: outputPath,
@@ -299,6 +305,17 @@ function countBy(items, keyFn) {
 
 function stringArg(args, key) {
   return typeof args[key] === "string" ? args[key] : undefined;
+}
+
+function routedPptxEnabled(args, caseSpec = {}, context = {}) {
+  return booleanArg(args?.["routed-pptx"]) ||
+    booleanArg(args?.["pptx-route"]) ||
+    booleanArg(caseSpec?.routedPptx) ||
+    booleanArg(context?.routedPptx);
+}
+
+function booleanArg(value) {
+  return value === true || value === "true" || value === "1" || value === "yes";
 }
 
 function escapeCell(value) {

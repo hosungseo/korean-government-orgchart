@@ -11,15 +11,20 @@ export async function renderPptx(
   graph,
   pages,
   outputPath,
-  { previewDir, showLawCounts = false, paper } = {},
+  { previewDir, showLawCounts = false, paper, routedConnectors = false } = {},
 ) {
-  return renderPptxDeck([{ graph, pages, showLawCounts }], outputPath, { previewDir, showLawCounts, paper });
+  return renderPptxDeck([{ graph, pages, showLawCounts }], outputPath, {
+    previewDir,
+    showLawCounts,
+    paper,
+    routedConnectors,
+  });
 }
 
 export async function renderPptxDeck(
   items,
   outputPath,
-  { previewDir, showLawCounts = false, paper } = {},
+  { previewDir, showLawCounts = false, paper, routedConnectors = false } = {},
 ) {
   const deckItems = normalizeDeckItems(items, showLawCounts);
   try {
@@ -27,6 +32,7 @@ export async function renderPptxDeck(
     return await renderArtifactPptxDeck(deckItems, outputPath, {
       previewDir,
       paper,
+      routedConnectors,
       Presentation: artifactTool.Presentation,
       PresentationFile: artifactTool.PresentationFile,
     });
@@ -40,11 +46,12 @@ async function renderArtifactPptx(
   graph,
   pages,
   outputPath,
-  { previewDir, showLawCounts = false, paper, Presentation, PresentationFile } = {},
+  { previewDir, showLawCounts = false, paper, routedConnectors = false, Presentation, PresentationFile } = {},
 ) {
   return renderArtifactPptxDeck([{ graph, pages, showLawCounts }], outputPath, {
     previewDir,
     paper,
+    routedConnectors,
     Presentation,
     PresentationFile,
   });
@@ -53,13 +60,17 @@ async function renderArtifactPptx(
 async function renderArtifactPptxDeck(
   items,
   outputPath,
-  { previewDir, paper, Presentation, PresentationFile } = {},
+  { previewDir, paper, routedConnectors = false, Presentation, PresentationFile } = {},
 ) {
   const pageSize = commonDeckPageSize(items, paper);
   const presentation = Presentation.create({ slideSize: pageSize });
   for (const item of items) {
     for (const page of item.pages) {
-      addPage(presentation, item.graph, page, { showLawCounts: item.showLawCounts, pageSize });
+      addPage(presentation, item.graph, page, {
+        showLawCounts: item.showLawCounts,
+        pageSize,
+        routedConnectors,
+      });
     }
   }
   const pptx = await PresentationFile.exportPptx(presentation);
@@ -122,7 +133,7 @@ function commonDeckPageSize(items, paper) {
   return base;
 }
 
-function addPage(presentation, graph, page, { showLawCounts, pageSize }) {
+function addPage(presentation, graph, page, { showLawCounts, pageSize, routedConnectors = false }) {
   const portrait = pageSize.height > pageSize.width;
   const half = pageSize.width < 400;
   const margin = portrait ? (half ? 17 : 28) : 42;
@@ -183,14 +194,25 @@ function addPage(presentation, graph, page, { showLawCounts, pageSize }) {
   const layout = layoutPage(graph, page, { pageSize });
 
   for (const group of layout.groupBoxes || []) addGroupBox(slide, group);
-  // Use shape-attached connectors rather than independently positioned line
-  // fragments. PowerPoint then keeps every elbow joined to its two boxes
-  // when it is opened, resized, or edited by the user.
+  const routedArrowheads = [];
+  if (routedConnectors) {
+    for (const edge of layout.edges) {
+      const arrowhead = addRoutedEdge(slide, edge);
+      if (arrowhead) routedArrowheads.push(arrowhead);
+    }
+  }
   const nodeShapes = new Map();
   for (const entry of layout.nodes) {
     nodeShapes.set(entry.node.id, addNode(slide, entry.node, entry.position, { showLawCounts, pageSize }));
   }
-  for (const edge of layout.edges) addEdge(slide, edge, nodeShapes);
+  if (routedConnectors) {
+    for (const arrowhead of routedArrowheads) addRoutedArrowHead(slide, arrowhead);
+  } else {
+    // Use shape-attached connectors rather than independently positioned line
+    // fragments. PowerPoint then keeps every elbow joined to its two boxes
+    // when it is opened, resized, or edited by the user.
+    for (const edge of layout.edges) addEdge(slide, edge, nodeShapes);
+  }
   for (const label of layout.labels || []) addLayoutLabel(slide, label, pageSize);
 
   if (!layout.diagnostics?.ok || !layout.diagnostics?.qualityOk) {
@@ -305,10 +327,45 @@ function addVerticalLawCount(slide, lawCount, position, pageSize) {
   };
 }
 
+function edgePaint(edge) {
+  return {
+    color:
+      edge.type === "affiliated" || edge.type === "temporary" ? "#3D8B3D" : edge.type === "jurisdiction" ? "#4F7EA8" : edge.type === "advisor" ? "#8B8B8B" : "#6B7280",
+    style: edge.type === "advisor" || edge.type === "temporary" || edge.type === "jurisdiction" ? "dashed" : "solid",
+  };
+}
+
+function addRoutedEdge(slide, edge) {
+  if (!edge.routePoints?.length || edge.routePoints.length < 2) return null;
+  const { color, style } = edgePaint(edge);
+  for (let index = 0; index < edge.routePoints.length - 1; index += 1) {
+    const start = edge.routePoints[index];
+    const end = edge.routePoints[index + 1];
+    if (!start || !end) continue;
+    addLine(slide, start.x, start.y, end.x, end.y, color, style, 1.1);
+  }
+  if (edge.orientation !== "horizontal") return null;
+  const end = edge.routePoints.at(-1);
+  const before = edge.routePoints.at(-2);
+  if (!end || !before) return null;
+  return {
+    x: end.x,
+    y: end.y,
+    direction: before.x > end.x ? "left" : "right",
+    color,
+    style,
+  };
+}
+
+function addRoutedArrowHead(slide, { x, y, direction, color, style }) {
+  const size = 4.2;
+  const xBack = direction === "left" ? x + size : x - size;
+  addLine(slide, xBack, y - size / 2, x, y, color, style, 1.1);
+  addLine(slide, xBack, y + size / 2, x, y, color, style, 1.1);
+}
+
 function addEdge(slide, edge, nodeShapes) {
-  const color =
-    edge.type === "affiliated" || edge.type === "temporary" ? "#3D8B3D" : edge.type === "jurisdiction" ? "#4F7EA8" : edge.type === "advisor" ? "#8B8B8B" : "#6B7280";
-  const style = edge.type === "advisor" || edge.type === "temporary" || edge.type === "jurisdiction" ? "dashed" : "solid";
+  const { color, style } = edgePaint(edge);
   const fromShape = nodeShapes.get(edge.parent);
   const toShape = nodeShapes.get(edge.child);
   if (!fromShape || !toShape) return;

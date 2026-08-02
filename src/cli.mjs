@@ -461,6 +461,7 @@ async function emitOutputs(graph, args) {
     await renderPptx(displayGraph, pages, path.resolve(args.out), {
       previewDir: stringArg(args, "preview-dir"),
       showLawCounts,
+      routedConnectors: routedPptxEnabled(args),
     });
   }
   if (!args.out && !args.svg && !args.json && !args.html) {
@@ -555,6 +556,10 @@ function stringArg(args, key) {
   return typeof args[key] === "string" ? args[key] : undefined;
 }
 
+function routedPptxEnabled(args) {
+  return args["routed-pptx"] === true || args["pptx-route"] === true;
+}
+
 function printHelp() {
   console.log(`
 대한민국 행정기관 직제 문언 → 조직도
@@ -629,6 +634,7 @@ function printHelp() {
   --focus <조직명>  해당 조직과 하위조직만 한 장으로 출력
   --view legal|operational  법정 설치형(기본) 또는 확인된 정책관·국 소관 묶음형
   --preview-dir <dir>       슬라이드 PNG·layout JSON·montage 생성
+  --routed-pptx             PPTX도 SVG와 같은 route 조각선으로 그림(편집 안정형 커넥터 대신 최종본 품질 우선)
   --law-map <dept_map.json> 부서별 소관법령을 정확히 일치하는 조직 노드에 연결
   --law-map-date <YYYY-MM-DD>  소관법령 지도 기준일(기구도 기준일 불일치 경고용)
   --law-counts              소관법령이 연결된 조직 상자에 법령 수 배지 표시

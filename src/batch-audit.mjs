@@ -275,6 +275,7 @@ export async function loadBatchContext(args) {
     lawMapDate: stringArg(args, "law-map-date"),
     lawAppendix: args["law-appendix"] === true,
     lawCounts: args["law-counts"] === true,
+    routedPptx: args["routed-pptx"] === true || args["pptx-route"] === true,
     lawFetchCache: args.lawFetchCache || new Map(),
     fetchLawAtDate: args.fetchLawAtDate || fetchLawAtDate,
   };

@@ -12,6 +12,7 @@ export function compareOrgGraphs(beforeGraph, afterGraph, options = {}) {
     removed: [],
     moved: [],
     renamed: [],
+    review: [],
     unchanged: 0,
   };
 
@@ -42,6 +43,13 @@ export function compareOrgGraphs(beforeGraph, afterGraph, options = {}) {
       score: Number(item.score.toFixed(3)),
     });
   }
+
+  result.meta.comparison.review = findReviewCandidates({
+    beforeGraph,
+    afterGraph,
+    removed: [...removedKeys].map((key) => beforeByKey.get(key)),
+    added: [...addedKeys].map((key) => afterByKey.get(key)),
+  });
 
   for (const key of addedKeys) {
     const afterNode = afterByKey.get(key);
@@ -99,7 +107,7 @@ export function formatComparisonMarkdown(graphOrComparison) {
     "",
     `- 개정 전: ${sourceLabel(comparison.before)}`,
     `- 개정 후: ${sourceLabel(comparison.after)}`,
-    `- 변경 요약: 신설 ${comparison.added.length} · 폐지 ${comparison.removed.length} · 명칭변경 ${comparison.renamed.length} · 이체 ${comparison.moved.length} · 유지 ${comparison.unchanged}`,
+    `- 변경 요약: 신설 ${comparison.added.length} · 폐지 ${comparison.removed.length} · 명칭변경 ${comparison.renamed.length} · 이체 ${comparison.moved.length} · 검토필요 ${(comparison.review || []).length} · 유지 ${comparison.unchanged}`,
     "",
   ];
   appendSimpleSection(lines, "신설", ["조직", "종류", "상위"], comparison.added, (item) => [
@@ -124,25 +132,54 @@ export function formatComparisonMarkdown(graphOrComparison) {
     formatParents(item.to),
     kindLabel(item.kind),
   ]);
+  appendSimpleSection(
+    lines,
+    "검토 필요 후보",
+    ["유형", "변경 전 후보", "변경 후 후보", "변경 전 상위", "변경 후 상위", "종류", "점수", "사유"],
+    comparison.review || [],
+    (item) => [
+      item.type,
+      item.before,
+      item.after,
+      formatParents(item.beforeParents),
+      formatParents(item.afterParents),
+      kindLabel(item.kind),
+      formatScore(item.score),
+      item.reason,
+    ],
+  );
   return `${lines.join("\n").replace(/\n{3,}/g, "\n\n")}\n`;
 }
 
 export function formatComparisonCsv(graphOrComparison) {
   const comparison = extractComparison(graphOrComparison);
-  const header = ["변경유형", "조직", "변경전조직", "변경후조직", "변경전상위", "변경후상위", "종류", "유사도"];
+  const header = ["변경유형", "조직", "변경전조직", "변경후조직", "변경전상위", "변경후상위", "종류", "유사도", "사유"];
   if (!comparison) return `${header.map(csvCell).join(",")}\n`;
   const rows = [header];
   for (const item of comparison.added) {
-    rows.push(["신설", item.name, "", item.name, "", formatParents(item.parents), kindLabel(item.kind), ""]);
+    rows.push(["신설", item.name, "", item.name, "", formatParents(item.parents), kindLabel(item.kind), "", ""]);
   }
   for (const item of comparison.removed) {
-    rows.push(["폐지", item.name, item.name, "", formatParents(item.parents), "", kindLabel(item.kind), ""]);
+    rows.push(["폐지", item.name, item.name, "", formatParents(item.parents), "", kindLabel(item.kind), "", ""]);
   }
   for (const item of comparison.renamed) {
-    rows.push(["명칭변경", item.to, item.from, item.to, item.parent || "", item.parent || "", "", formatScore(item.score)]);
+    rows.push(["명칭변경", item.to, item.from, item.to, item.parent || "", item.parent || "", "", formatScore(item.score), ""]);
   }
   for (const item of comparison.moved) {
-    rows.push(["이체", item.name, item.name, item.name, formatParents(item.from), formatParents(item.to), kindLabel(item.kind), ""]);
+    rows.push(["이체", item.name, item.name, item.name, formatParents(item.from), formatParents(item.to), kindLabel(item.kind), "", ""]);
+  }
+  for (const item of comparison.review || []) {
+    rows.push([
+      item.type,
+      `${item.before} → ${item.after}`,
+      item.before,
+      item.after,
+      formatParents(item.beforeParents),
+      formatParents(item.afterParents),
+      kindLabel(item.kind),
+      formatScore(item.score),
+      item.reason,
+    ]);
   }
   return `${rows.map((row) => row.map(csvCell).join(",")).join("\n")}\n`;
 }
@@ -202,6 +239,37 @@ function matchRenames({ beforeGraph, afterGraph, removed, added }) {
     usedAdded.add(candidate.after.id);
   }
   return pairs;
+}
+
+function findReviewCandidates({ beforeGraph, afterGraph, removed, added, limit = 20 }) {
+  const candidates = [];
+  for (const beforeNode of removed) {
+    for (const afterNode of added) {
+      if (!beforeNode || !afterNode) continue;
+      if (beforeNode.kind !== afterNode.kind) continue;
+      const beforeParents = primaryParentNames(beforeGraph, beforeNode);
+      const afterParents = primaryParentNames(afterGraph, afterNode);
+      const sameParent = intersects(beforeParents, afterParents);
+      const similarity = nameSimilarity(beforeNode.name, afterNode.name);
+      const score = similarity + (sameParent ? 0.18 : 0);
+      const automaticThreshold = sameParent ? 0.66 : 0.86;
+      const reviewThreshold = sameParent ? 0.5 : 0.45;
+      if (score >= automaticThreshold || score < reviewThreshold) continue;
+      candidates.push({
+        type: sameParent ? "명칭변경 후보" : "명칭변경·이체 후보",
+        before: beforeNode.name,
+        after: afterNode.name,
+        beforeParents,
+        afterParents,
+        kind: beforeNode.kind,
+        score: Number(score.toFixed(3)),
+        reason: sameParent
+          ? "같은 상위 조직의 유사 명칭이나 자동 명칭변경 기준 미달"
+          : "명칭과 상위 조직이 함께 바뀐 가능성",
+      });
+    }
+  }
+  return candidates.sort((a, b) => b.score - a.score || a.before.localeCompare(b.before, "ko")).slice(0, limit);
 }
 
 function nameSimilarity(left, right) {
@@ -312,6 +380,7 @@ function sortComparison(comparison) {
   for (const key of ["added", "removed", "moved", "renamed"]) {
     comparison[key].sort((a, b) => (a.name || a.to || "").localeCompare(b.name || b.to || "", "ko"));
   }
+  comparison.review?.sort((a, b) => b.score - a.score || a.before.localeCompare(b.before, "ko"));
 }
 
 function extractComparison(graphOrComparison) {

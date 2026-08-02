@@ -127,7 +127,7 @@ test("compare-json은 기존·개정 조직도 JSON에서 변경 표식을 생�
   assert.match(report, /## 폐지/);
   assert.match(report, /폐지과/);
   assert.match(report, /## 명칭변경/);
-  assert.match(csv, /^변경유형,조직,변경전조직,변경후조직,변경전상위,변경후상위,종류,유사도/m);
+  assert.match(csv, /^변경유형,조직,변경전조직,변경후조직,변경전상위,변경후상위,종류,유사도,사유/m);
   assert.match(csv, /신설,신설과,,신설과,,시험실,보조기관,/);
 });
 

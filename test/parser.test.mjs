@@ -93,7 +93,31 @@ test("A4 반쪽 세로형은 조밀한 세로 과 상자를 겹치지 않게 압
 
   assert.equal(layout.diagnostics.overlaps.length, 0);
   assert.equal(layout.diagnostics.overflow.length, 0);
+  assert.equal(layout.diagnostics.qualityOk, false);
+  assert.equal(layout.diagnostics.readabilityIssues[0].reason, "narrow-vertical-labels");
   assert.ok(Math.min(...leafWidths) <= 14);
+});
+
+test("A4 반쪽 best-fit은 지나치게 좁은 세로 과 목록 대신 카드형을 고른다", () => {
+  const departments = Array.from({ length: 16 }, (_, index) => `제${index + 1}정책과`).join("ㆍ");
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실을 둔다.
+시험실에 ${departments}를 둔다.
+`,
+  ]);
+  const pages = planBestPages(graph, {
+    paper: "a4-half",
+    focus: "시험실",
+    maxNodes: 50,
+  });
+  const selected = pages[0].bestFit;
+  const vertical = selected.candidateScores.find((candidate) => candidate.style === "vertical-stack" && candidate.maxNodes === 50);
+
+  assert.equal(selected.selectedLayoutStyle, "catalog");
+  assert.equal(pages[0].layoutStyle, "catalog");
+  assert.equal(vertical.diagnostics.readabilityIssues, 1);
 });
 
 test("같은 그래프를 여러 시각 유형으로 한 번에 계획한다", () => {

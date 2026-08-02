@@ -1088,7 +1088,7 @@ function layoutRetryMessage(summary = {}, diagnostics = {}) {
     if (summary.paper === "a4-half") return "`a4-half` 면이 빽빽합니다. `catalog` 또는 `a4-portrait`로 재시도하고, 실·국별 `focus` 분할을 우선 검토하세요.";
     return "`catalog` 또는 더 작은 `maxNodes`로 재시도하세요.";
   }
-  return "현재 산출물은 사용 가능하지만 간격·정렬·선교차·선-상자 관통·균형을 줄이려면 `layout=best`와 더 작은 `maxNodes`로 재시도하세요.";
+  return "현재 산출물은 사용 가능하지만 간격·정렬·선교차·선-상자 관통·균형·세로글자 폭을 줄이려면 `layout=best`와 더 작은 `maxNodes`로 재시도하세요.";
 }
 
 function findBuildCase(cases, id) {

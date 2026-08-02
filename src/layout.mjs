@@ -219,6 +219,7 @@ export function scoreLayoutPages(graph, pages) {
     crossingIssues: 0,
     occlusionIssues: 0,
     balanceIssues: 0,
+    readabilityIssues: 0,
     qualityIssues: 0,
     totalIssues: 0,
   };
@@ -232,6 +233,7 @@ export function scoreLayoutPages(graph, pages) {
     totals.crossingIssues += layout.diagnostics?.crossingIssues?.length || 0;
     totals.occlusionIssues += layout.diagnostics?.occlusionIssues?.length || 0;
     totals.balanceIssues += layout.diagnostics?.balanceIssues?.length || 0;
+    totals.readabilityIssues += layout.diagnostics?.readabilityIssues?.length || 0;
     totals.qualityIssues += layout.diagnostics?.qualityIssues?.length || 0;
   }
   totals.totalIssues = totals.overflow + totals.overlaps + totals.edgeIssues;
@@ -864,6 +866,7 @@ export function diagnoseLayout(
     maximumSiblingGapRatio = 3.2,
     maximumAlignmentOffset = 28,
     maximumColumnImbalance = 86,
+    minimumVerticalLabelWidth = 18,
   } = {},
 ) {
   const frame = layout?.frame;
@@ -879,6 +882,7 @@ export function diagnoseLayout(
       crossingIssues: [],
       occlusionIssues: [],
       balanceIssues: [],
+      readabilityIssues: [],
       qualityIssues: [],
     };
   }
@@ -950,7 +954,17 @@ export function diagnoseLayout(
     frame,
     maximumColumnImbalance,
   });
-  const qualityIssues = [...spacingIssues, ...alignmentIssues, ...crossingIssues, ...occlusionIssues, ...balanceIssues];
+  const readabilityIssues = diagnoseReadability(layout.nodes || [], {
+    minimumVerticalLabelWidth,
+  });
+  const qualityIssues = [
+    ...spacingIssues,
+    ...alignmentIssues,
+    ...crossingIssues,
+    ...occlusionIssues,
+    ...balanceIssues,
+    ...readabilityIssues,
+  ];
   return {
     ok: overflow.length === 0 && overlaps.length === 0 && edgeIssues.length === 0,
     qualityOk: qualityIssues.length === 0,
@@ -962,6 +976,7 @@ export function diagnoseLayout(
     crossingIssues,
     occlusionIssues,
     balanceIssues,
+    readabilityIssues,
     qualityIssues,
   };
 }
@@ -1295,6 +1310,24 @@ function diagnoseColumnBalance(groupBoxes, { frame, maximumColumnImbalance }) {
       groups: column.groups,
       height: Number(column.height.toFixed(2)),
     })),
+  }];
+}
+
+function diagnoseReadability(nodes, { minimumVerticalLabelWidth }) {
+  const narrow = (nodes || [])
+    .map((entry) => ({
+      name: entry.node?.name || entry.node?.id || "(이름 없음)",
+      position: normalizePosition(entry.position),
+    }))
+    .filter((entry) => entry.position?.vertical && entry.position.width < minimumVerticalLabelWidth);
+  if (!narrow.length) return [];
+  const minWidth = Math.min(...narrow.map((entry) => entry.position.width));
+  return [{
+    reason: "narrow-vertical-labels",
+    count: narrow.length,
+    minWidth: Number(minWidth.toFixed(2)),
+    threshold: minimumVerticalLabelWidth,
+    nodes: narrow.slice(0, 10).map((entry) => entry.name),
   }];
 }
 

@@ -194,6 +194,9 @@ function addPage(presentation, graph, page, { showLawCounts, pageSize, routedCon
   const layout = layoutPage(graph, page, { pageSize });
 
   for (const group of layout.groupBoxes || []) addGroupBox(slide, group);
+  for (const connector of layout.implicitConnectors || []) {
+    addLine(slide, connector.x1, connector.y1, connector.x2, connector.y2, "#94A3B8", "solid", 0.9);
+  }
   const routedArrowheads = [];
   if (routedConnectors) {
     for (const edge of layout.edges) {
@@ -263,7 +266,11 @@ function formatLayoutReview(page, layout) {
   const status = hard || quality
     ? `hard ${hard} · polish ${quality}`
     : "배치 정상";
-  return `작도 ${selector} · 노드 ${layout?.nodes?.length || 0} · 관계선 ${layout?.edges?.length || 0} · ${status}`;
+  const implicit = layout?.implicitConnectors?.length || 0;
+  const lines = implicit
+    ? `관계선 ${layout?.edges?.length || 0} · 레인선 ${implicit}`
+    : `관계선 ${layout?.edges?.length || 0}`;
+  return `작도 ${selector} · 노드 ${layout?.nodes?.length || 0} · ${lines} · ${status}`;
 }
 
 function addNode(slide, node, position, { showLawCounts, pageSize }) {
@@ -746,6 +753,9 @@ function addPptxGenPage(pptx, graph, page, { showLawCounts, pageSize }) {
 
   const layout = layoutPage(graph, page, { pageSize });
   for (const group of layout.groupBoxes || []) addPptxGroupBox(slide, pptx, group);
+  for (const connector of layout.implicitConnectors || []) {
+    addPptxLine(slide, pptx, connector.x1, connector.y1, connector.x2, connector.y2, "#94A3B8", "solid", 0.9);
+  }
   for (const edge of layout.edges) addPptxEdge(slide, pptx, edge);
   for (const entry of layout.nodes) addPptxNode(slide, pptx, entry.node, entry.position, { showLawCounts, pageSize });
   for (const label of layout.labels || []) addPptxLayoutLabel(slide, label, pageSize);

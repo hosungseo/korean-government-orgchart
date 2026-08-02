@@ -544,6 +544,13 @@ test("A4 반쪽 2열형은 좁은 면에서 레인 목록으로 분할해 겹침
     assert.equal(layout.diagnostics.overflow.length, 0);
     assert.equal(layout.diagnostics.overlaps.length, 0);
     assert.equal(layout.edgeMode, "implicit-lane");
+    assert.ok(layout.implicitConnectors.length > 0);
+    assert.equal(
+      layout.implicitConnectors.every((segment) =>
+        [segment.x1, segment.y1, segment.x2, segment.y2].every(Number.isFinite),
+      ),
+      true,
+    );
   }
 });
 

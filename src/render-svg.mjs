@@ -66,6 +66,9 @@ function renderPage(graph, page, offsetY, { showLawCounts, pageSize }) {
   for (const group of layout.groupBoxes || []) {
     pageGroup.push(svgGroupBox(group));
   }
+  for (const connector of layout.implicitConnectors || []) {
+    pageGroup.push(svgImplicitConnector(connector));
+  }
   for (const edge of layout.edges) {
     pageGroup.push(...svgEdge(edge));
   }
@@ -92,6 +95,10 @@ function svgEdge(edge) {
   const common = `stroke="${color}" stroke-width="1.15" fill="none" stroke-linecap="round" stroke-linejoin="round"${dash}`;
   const marker = edge.orientation === "horizontal" ? ` marker-end="url(#${markerIdForEdge(edge)})"` : "";
   return [`<path d="${route}" ${common}${marker}/>`];
+}
+
+function svgImplicitConnector(connector) {
+  return `<line x1="${coordinate(connector.x1)}" y1="${coordinate(connector.y1)}" x2="${coordinate(connector.x2)}" y2="${coordinate(connector.y2)}" stroke="#94A3B8" stroke-width="0.9" stroke-linecap="round"/>`;
 }
 
 /**

@@ -2391,6 +2391,7 @@ function layoutTwoColumnPage({ graph, pageSize, frame, parentEdge, children, roo
 
 function layoutNarrowTwoColumnPage({ graph, frame, children, roots, selected, depth }) {
   const positions = new Map();
+  const laneEntries = [[], []];
   const headerHeight = 34;
   const rowHeight = 27;
   const rowGap = 31;
@@ -2408,6 +2409,7 @@ function layoutNarrowTwoColumnPage({ graph, frame, children, roots, selected, de
       width,
       height,
       centerX,
+      centerY: top + height / 2,
       bottom: top + height,
       vertical,
       depth: depthValue,
@@ -2468,6 +2470,7 @@ function layoutNarrowTwoColumnPage({ graph, frame, children, roots, selected, de
     const top = laneTops[lane];
     const level = depth.get(id) || relativeDepth + 1;
     put(id, centerX, top, width, rowHeight, false, level, spanLeft, spanWidth);
+    laneEntries[lane].push(id);
     laneTops[lane] += rowGap;
     laneRows[lane] += 1;
     for (const childId of childIds) emit(childId, lane, relativeDepth + 1);
@@ -2481,6 +2484,13 @@ function layoutNarrowTwoColumnPage({ graph, frame, children, roots, selected, de
     const lane = laneRows[0] <= laneRows[1] ? 0 : 1;
     emit(id, lane, 0);
   }
+  const implicitConnectors = buildNarrowLaneConnectors({
+    frame,
+    laneLefts,
+    laneEntries,
+    positions,
+    headerIds,
+  });
   const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
   return {
     frame,
@@ -2490,8 +2500,61 @@ function layoutNarrowTwoColumnPage({ graph, frame, children, roots, selected, de
     maxDepth: Math.max(rowsPerLane, ...laneRows),
     verticalLeaves: false,
     edgeMode: "implicit-lane",
+    implicitConnectors,
     labels: [{ text: "좌우 2열형 · 좁은 면에서는 레인 내부 위→아래 순서로 하위조직 표시", x: frame.left, y: frame.top - 10, align: "start" }],
   };
+}
+
+/**
+ * Narrow two-column pages deliberately do not draw every legal parent-child
+ * edge: a depth-first list would send long elbows through intervening rows.
+ * Instead, draw a quiet rail beside each lane and a short tick into every
+ * box.  The rail preserves the visual reading order while JSON/trace keeps
+ * the exact legal relationship.  When a single common head exists, a small
+ * header bus joins the two rails.
+ */
+function buildNarrowLaneConnectors({ frame, laneLefts, laneEntries, positions, headerIds }) {
+  const segments = [];
+  const active = [];
+  for (let lane = 0; lane < laneEntries.length; lane += 1) {
+    const entries = laneEntries[lane]
+      .map((id) => positions.get(id))
+      .filter(Boolean)
+      .sort((a, b) => a.top - b.top || a.left - b.left);
+    if (!entries.length) continue;
+    const firstBoxLeft = Math.min(...entries.map((position) => position.left));
+    const railX = Math.max(frame.left + 1, Math.min(laneLefts[lane] + 4, firstBoxLeft - 5));
+    active.push({ lane, entries, railX });
+  }
+  if (!active.length) return segments;
+
+  const header = headerIds.length === 1 ? positions.get(headerIds[0]) : null;
+  const busY = header ? header.bottom + 9 : null;
+  if (header && active.length > 1) {
+    segments.push({ x1: header.centerX, y1: header.bottom, x2: header.centerX, y2: busY });
+    segments.push({
+      x1: Math.min(...active.map(({ railX }) => railX)),
+      y1: busY,
+      x2: Math.max(...active.map(({ railX }) => railX)),
+      y2: busY,
+    });
+  }
+  for (const { entries, railX } of active) {
+    const firstY = busY !== null ? busY : entries[0].centerY;
+    segments.push({ x1: railX, y1: firstY, x2: railX, y2: entries.at(-1).centerY });
+    for (const position of entries) {
+      const tickEnd = position.left - 2;
+      if (tickEnd > railX + 0.5) {
+        segments.push({ x1: railX, y1: position.centerY, x2: tickEnd, y2: position.centerY });
+      }
+    }
+  }
+  if (header && active.length === 1) {
+    const railX = active[0].railX;
+    segments.push({ x1: header.centerX, y1: header.bottom, x2: header.centerX, y2: busY });
+    segments.push({ x1: header.centerX, y1: busY, x2: railX, y2: busY });
+  }
+  return segments;
 }
 
 export function nodeStyle(node) {

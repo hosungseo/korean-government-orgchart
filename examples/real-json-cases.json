@@ -1,0 +1,37 @@
+{
+  "cases": [
+    {
+      "id": "mois-disaster-json",
+      "institution": "행정안전부",
+      "date": "2025-11-25",
+      "graph": "../outputs/행정안전부-20251125.json",
+      "view": "legal",
+      "paper": "a4-half",
+      "layout": "best",
+      "focus": "재난안전관리본부",
+      "maxNodes": 80
+    },
+    {
+      "id": "mcst-arts-json",
+      "institution": "문화체육관광부",
+      "date": "2025-07-01",
+      "graph": "../outputs/문화체육관광부-20250701.json",
+      "view": "legal",
+      "paper": "a4-half",
+      "layout": "best",
+      "focus": "문화예술정책실",
+      "maxNodes": 80
+    },
+    {
+      "id": "ftc-secretariat-json",
+      "institution": "공정거래위원회",
+      "date": "2025-10-13",
+      "graph": "../outputs/공정거래위원회-20251013.json",
+      "view": "legal",
+      "paper": "a4-half",
+      "layout": "best",
+      "focus": "사무처",
+      "maxNodes": 80
+    }
+  ]
+}

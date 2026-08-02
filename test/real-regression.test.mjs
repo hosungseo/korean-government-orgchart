@@ -1,11 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import { mkdtemp, readFile, stat } from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildAuditReport } from "../src/audit.mjs";
 import { planBestPages, scoreLayoutPages } from "../src/layout.mjs";
 import { OrgGraph } from "../src/model.mjs";
+import { runReviewPack } from "../src/review-pack.mjs";
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -150,5 +153,34 @@ test("실제 기관 핵심 분기는 A4 반쪽면 best-fit에서 깨끗하게 �
     assert.equal(score.qualityIssues, 0, `${item.label} quality layout issues`);
     assert.equal(report.layoutDiagnostics[0].diagnostics.ok, true, `${item.label} hard diagnostics`);
     assert.equal(report.layoutDiagnostics[0].diagnostics.qualityOk, true, `${item.label} quality diagnostics`);
+  }
+});
+
+test("실제 기관 JSON 케이스는 review-pack 산출물 묶음으로 재생성된다", async () => {
+  const dir = await mkdtemp(path.join(os.tmpdir(), "orgchart-real-json-pack-"));
+  const result = await runReviewPack({
+    cases: path.join(REPO_ROOT, "examples/real-json-cases.json"),
+    "out-dir": path.join(dir, "pack"),
+    outputs: "svg,html,json,audit,trace,pptx,deck",
+  });
+
+  assert.equal(result.caseCount, CASES.length);
+  assert.equal(result.audit.statusCounts.error || 0, 0);
+  assert.equal(result.build.statusCounts.error || 0, 0);
+  assert.equal(result.build.deckError, null);
+  assert.equal(result.build.cases.length, CASES.length);
+  assert.equal(result.build.decks.length, 1);
+  assert.equal(result.build.decks[0].paper, "a4-half");
+  assert.ok((await stat(result.files.triageCsv)).size > 0);
+  assert.match(await readFile(result.files.triageCsv, "utf8"), /행정안전부/);
+
+  for (const item of result.build.cases) {
+    assert.equal(item.status, "built", item.case.id);
+    assert.equal(item.summary.layoutDiagnostics.totalIssues, 0, item.case.id);
+    assert.equal(item.summary.layoutDiagnostics.qualityIssues, 0, item.case.id);
+    for (const key of ["svg", "html", "json", "audit", "trace", "pptx"]) {
+      assert.ok(item.outputs[key], `${item.case.id} ${key} output path`);
+      assert.ok((await stat(item.outputs[key])).size > 0, `${item.case.id} ${key} output file`);
+    }
   }
 });

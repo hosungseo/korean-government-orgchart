@@ -145,3 +145,42 @@ jobs:
               }
             }
           '
+
+      - name: Real JSON review pack gate
+        run: |
+          node src/cli.mjs review-pack \
+            --cases examples/real-json-cases.json \
+            --out-dir /tmp/orgchart-real-json-pack \
+            --outputs svg,html,json,audit,trace,pptx,deck \
+            --strict > /tmp/orgchart-real-json-pack-summary.json
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const summary = JSON.parse(fs.readFileSync("/tmp/orgchart-real-json-pack-summary.json", "utf8"));
+            if (summary.cases !== 3) throw new Error(`expected 3 real JSON cases, got ${summary.cases}`);
+            if ((summary.buildStatusCounts?.error || 0) !== 0) {
+              throw new Error(`real JSON build errors: ${summary.buildStatusCounts?.error}`);
+            }
+            if (!summary.files?.triageCsv || !fs.existsSync(summary.files.triageCsv)) {
+              throw new Error("missing real JSON triage CSV");
+            }
+            if (!Array.isArray(summary.decks) || summary.decks.length !== 1) {
+              throw new Error(`expected one real JSON deck, got ${summary.decks?.length || 0}`);
+            }
+            const manifest = JSON.parse(fs.readFileSync(summary.files.manifestJson, "utf8"));
+            if (manifest.total !== 3) throw new Error(`expected 3 real JSON built cases, got ${manifest.total}`);
+            if (manifest.deckError) throw new Error(`real JSON deck failed: ${manifest.deckError}`);
+            for (const item of manifest.cases) {
+              if (item.status !== "built") throw new Error(`real JSON case failed: ${item.case?.id || item.error}`);
+              if (item.summary?.layoutDiagnostics?.totalIssues) {
+                throw new Error(`hard layout issue in ${item.summary.id}`);
+              }
+              if (item.summary?.layoutDiagnostics?.qualityIssues) {
+                throw new Error(`quality layout issue in ${item.summary.id}`);
+              }
+              for (const key of ["svg", "html", "json", "audit", "trace", "pptx"]) {
+                if (!item.outputs?.[key] || !fs.existsSync(item.outputs[key])) {
+                  throw new Error(`missing ${key} output for ${item.summary.id}`);
+                }
+              }
+            }
+          '

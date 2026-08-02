@@ -652,7 +652,8 @@ function printHelp() {
   --oc <인증값>             LAW_API_OC 환경변수로도 지정 가능
   --source-dir <dir>        조회한 기준일 법령 문언 보관 및 다음 실행 재사용 캐시
   --format markdown|json    audit 리포트 출력 형식
-  --cases <cases.json>      batch-audit 케이스 목록
+  --cases <cases.json>      batch-audit/build/review-pack 케이스 목록
+  cases.json graph/jsonFile 저장된 조직도 JSON을 법령 재조회 없이 케이스 입력으로 사용
   --out-dir <dir>           batch-build 산출물 폴더
   --outputs svg,html,json,audit,trace,pptx,deck|all  batch-build/review-pack 산출 형식(all은 케이스별 svg/html/json/audit/trace/pptx)
   --deck <file.pptx>        batch-build 통합 PPTX deck 경로(--outputs deck 없이도 활성화)

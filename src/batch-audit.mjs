@@ -6,7 +6,7 @@ import { fetchLawAtDate } from "./law-api.mjs";
 import { organizationLawNameCandidateGroups } from "./law-name.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
 import { planBestPages, planLayoutVariants, planPages } from "./layout.mjs";
-import { projectOperationalView } from "./model.mjs";
+import { OrgGraph, projectOperationalView } from "./model.mjs";
 import { parseOrganizationTexts } from "./parser.mjs";
 import { compactDate, jsonReplacer, writeText } from "./utils.mjs";
 
@@ -316,6 +316,11 @@ export function publicCaseSpec(spec) {
 
 export async function graphFromCase(caseSpec, context) {
   const date = caseSpec.date || context.date;
+  if (caseSpec.graph || caseSpec.graphFile || caseSpec.jsonFile) {
+    const graph = await graphFromJsonCase(caseSpec, context);
+    await applyCaseAnnexes(graph, caseSpec, context);
+    return graph;
+  }
   if (caseSpec.text || caseSpec.texts || caseSpec.input || caseSpec.inputs) {
     const texts = await localTextsFromCase(caseSpec, context.casesBaseDir);
     const graph = parseOrganizationTexts(texts, {
@@ -358,6 +363,18 @@ export async function graphFromCase(caseSpec, context) {
   }));
   attachAnnexes(graph, fetched.flatMap((item) => item.annexes || []));
   await applyCaseAnnexes(graph, caseSpec, context);
+  return graph;
+}
+
+async function graphFromJsonCase(caseSpec, context) {
+  const filePath = caseSpec.graph || caseSpec.graphFile || caseSpec.jsonFile;
+  const raw = await fs.readFile(resolveCasePath(filePath, context.casesBaseDir), "utf8");
+  const graph = OrgGraph.fromJSON(JSON.parse(raw.replace(/^\uFEFF/, "")));
+  if (caseSpec.institution) graph.meta.institution = caseSpec.institution;
+  if (caseSpec.title) graph.meta.title = caseSpec.title;
+  if (caseSpec.date) graph.meta.asOf = caseSpec.date;
+  graph.addSource(String(filePath));
+  graph.validateLegalStructure();
   return graph;
 }
 

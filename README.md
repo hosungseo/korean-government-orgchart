@@ -304,6 +304,7 @@ node src/cli.mjs batch-audit \
 
 케이스 파일은 로컬 문언 입력과 법제처 기준일 조회를 모두 지원합니다.
 `institution`과 `date`만 쓰면 `from-law`와 같은 제명 후보 규칙으로 직제와 시행규칙을 자동 조회합니다. 특수 제명이나 일부 법령만 쓰려면 `decree`, `rule`, `law`를 직접 지정합니다.
+이미 생성한 조직도 JSON을 다시 쓰려면 케이스에 `graph`, `graphFile` 또는 `jsonFile`을 지정합니다. 이 경로는 법제처를 다시 조회하지 않고 저장된 구조를 A4 반쪽면, 가로형, PPTX deck, HTML 검토시트로 반복 산출할 때 사용합니다.
 
 ```json
 {
@@ -318,6 +319,18 @@ node src/cli.mjs batch-audit \
       "focus": "산업정책실"
     }
   ]
+}
+```
+
+```json
+{
+  "id": "mois-disaster-json",
+  "institution": "행정안전부",
+  "date": "2025-11-25",
+  "graph": "../outputs/행정안전부-20251125.json",
+  "paper": "a4-half",
+  "layout": "best",
+  "focus": "재난안전관리본부"
 }
 ```
 

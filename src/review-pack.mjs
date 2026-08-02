@@ -1021,6 +1021,9 @@ function rebaseCaseSpecPaths(caseSpec, fromDir, outDir) {
   const next = clonePlain(caseSpec);
   rebasePathField(next, "input", fromDir, outDir);
   rebasePathField(next, "inputs", fromDir, outDir);
+  rebasePathField(next, "graph", fromDir, outDir);
+  rebasePathField(next, "graphFile", fromDir, outDir);
+  rebasePathField(next, "jsonFile", fromDir, outDir);
   rebasePathField(next, "annexFile", fromDir, outDir);
   rebasePathField(next, "annexFiles", fromDir, outDir);
   rebasePathField(next, "lawMap", fromDir, outDir);

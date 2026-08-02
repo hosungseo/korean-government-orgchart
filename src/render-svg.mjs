@@ -101,6 +101,7 @@ function svgEdge(edge) {
  * attached to the box rather than stopping one pixel short of it.
  */
 function edgeRoute(edge) {
+  if (edge.routePoints?.length >= 2) return routePointsPath(edge.routePoints);
   const overlap = 0.65;
   const f = edge.from;
   const t = edge.to;
@@ -118,6 +119,19 @@ function edgeRoute(edge) {
   const endY = (t.top ?? t.centerY) + overlap;
   const midY = (startY + endY) / 2;
   return `M ${coordinate(startX)} ${coordinate(startY)} V ${coordinate(midY)} H ${coordinate(endX)} V ${coordinate(endY)}`;
+}
+
+function routePointsPath(points) {
+  const [first, ...rest] = points;
+  const parts = [`M ${coordinate(first.x)} ${coordinate(first.y)}`];
+  let previous = first;
+  for (const point of rest) {
+    if (Math.abs(point.y - previous.y) < 0.1) parts.push(`H ${coordinate(point.x)}`);
+    else if (Math.abs(point.x - previous.x) < 0.1) parts.push(`V ${coordinate(point.y)}`);
+    else parts.push(`L ${coordinate(point.x)} ${coordinate(point.y)}`);
+    previous = point;
+  }
+  return parts.join(" ");
 }
 
 function coordinate(value) {

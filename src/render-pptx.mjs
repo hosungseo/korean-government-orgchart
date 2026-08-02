@@ -761,6 +761,10 @@ function addPptxEdge(slide, pptx, edge) {
   const from = edge.from;
   const to = edge.to;
   if (!from || !to) return;
+  if (edge.routePoints?.length >= 2) {
+    addPptxRoute(slide, pptx, edge.routePoints, color, style, edge.orientation);
+    return;
+  }
   const overlap = 0.65;
   if (edge.orientation === "horizontal") {
     const tipX = to.left;
@@ -794,6 +798,21 @@ function addPptxEdge(slide, pptx, edge) {
     addPptxLine(slide, pptx, x1, y1, x1, mid + sy * overlap, color, style, 1.1);
     addPptxLine(slide, pptx, x1 - sx * overlap, mid, x2 + sx * overlap, mid, color, style, 1.1);
     addPptxLine(slide, pptx, x2, mid - sy * overlap, x2, y2, color, style, 1.1);
+  }
+}
+
+function addPptxRoute(slide, pptx, points, color, style, orientation) {
+  for (let index = 0; index < points.length - 1; index += 1) {
+    const start = points[index];
+    const end = points[index + 1];
+    if (!start || !end) continue;
+    addPptxLine(slide, pptx, start.x, start.y, end.x, end.y, color, style, 1.1);
+  }
+  if (orientation === "horizontal") {
+    const end = points.at(-1);
+    const before = points.at(-2);
+    const direction = before && end && before.x > end.x ? "left" : "right";
+    if (end) addPptxArrowHead(slide, pptx, end.x, end.y, direction, color);
   }
 }
 

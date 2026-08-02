@@ -816,6 +816,24 @@ function normalizeLayoutGeometry(layout) {
   return { ...layout, nodes, edges };
 }
 
+export function routeLayoutEdges(layout) {
+  const boxes = (layout.nodes || [])
+    .map((entry) => ({
+      id: entry.node?.id,
+      box: normalizePosition(entry.position),
+    }))
+    .filter((entry) => entry.id && entry.box);
+  const edges = (layout.edges || []).map((edge) => {
+    const points = routePointsForEdge(edge, boxes, layout.frame);
+    return {
+      ...edge,
+      routePoints: points,
+      routeSegments: pointsToSegments(points),
+    };
+  });
+  return { ...layout, edges };
+}
+
 function positionedEdges(parentEdge, positions, orientation) {
   return [...parentEdge.values()]
     .map((edge) => ({
@@ -946,7 +964,8 @@ export function diagnoseLayout(
 
 function decorateLayout(layout) {
   const normalized = normalizeLayoutGeometry(layout);
-  return { ...normalized, diagnostics: diagnoseLayout(normalized) };
+  const routed = routeLayoutEdges(normalized);
+  return { ...routed, diagnostics: diagnoseLayout(routed) };
 }
 
 function diagnoseEdge(edge, { tolerance, minimumConnectorLength }) {
@@ -1062,6 +1081,138 @@ function diagnoseEdgeCrossings(edges, { nodeNames, tolerance }) {
   return issues;
 }
 
+function routePointsForEdge(edge, boxes, frame) {
+  const from = normalizePosition(edge.from);
+  const to = normalizePosition(edge.to);
+  if (!from || !to) return [];
+  const blockers = boxes.filter((entry) => entry.id !== edge.parent && entry.id !== edge.child);
+  const candidates = edge.orientation === "horizontal"
+    ? horizontalRouteCandidates(from, to, blockers, frame)
+    : verticalRouteCandidates(from, to, blockers, frame);
+  let best = null;
+  for (const points of candidates) {
+    const score = scoreRoute(points, blockers, frame);
+    if (!best || compareRouteScore(score, best.score) < 0) best = { points, score };
+  }
+  return best?.points || [];
+}
+
+function horizontalRouteCandidates(from, to, blockers, frame) {
+  const start = { x: from.right, y: from.centerY };
+  const end = { x: to.left, y: to.centerY };
+  const midX = (start.x + end.x) / 2;
+  const candidates = [
+    Math.abs(start.y - end.y) < 0.1
+      ? [start, end]
+      : [start, { x: midX, y: start.y }, { x: midX, y: end.y }, end],
+  ];
+  for (const x of orthogonalCandidates(blockers, frame, "x")) {
+    candidates.push([start, { x, y: start.y }, { x, y: end.y }, end]);
+  }
+  for (const y of orthogonalCandidates(blockers, frame, "y")) {
+    candidates.push([start, { x: start.x, y }, { x: end.x, y }, end]);
+  }
+  return candidates.map(cleanRoutePoints);
+}
+
+function verticalRouteCandidates(from, to, blockers, frame) {
+  const start = { x: from.centerX, y: from.bottom };
+  const end = { x: to.centerX, y: to.top };
+  const midY = (start.y + end.y) / 2;
+  const candidates = [
+    Math.abs(start.x - end.x) < 0.1
+      ? [start, end]
+      : [start, { x: start.x, y: midY }, { x: end.x, y: midY }, end],
+  ];
+  for (const y of orthogonalCandidates(blockers, frame, "y")) {
+    candidates.push([start, { x: start.x, y }, { x: end.x, y }, end]);
+  }
+  for (const x of orthogonalCandidates(blockers, frame, "x")) {
+    candidates.push([start, { x, y: start.y }, { x, y: end.y }, end]);
+  }
+  return candidates.map(cleanRoutePoints);
+}
+
+function orthogonalCandidates(blockers, frame, axis) {
+  const margin = 6;
+  const values = [];
+  if (frame) {
+    values.push(axis === "x" ? frame.left + margin : frame.top + margin);
+    values.push(axis === "x" ? frame.left + frame.width - margin : frame.top + frame.height - margin);
+  }
+  for (const { box } of blockers || []) {
+    if (!box) continue;
+    values.push(axis === "x" ? box.left - margin : box.top - margin);
+    values.push(axis === "x" ? box.right + margin : box.bottom + margin);
+  }
+  return uniqueCoordinates(values);
+}
+
+function uniqueCoordinates(values) {
+  const seen = new Set();
+  const result = [];
+  for (const value of values) {
+    if (!Number.isFinite(value)) continue;
+    const key = value.toFixed(2);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    result.push(value);
+  }
+  return result;
+}
+
+function cleanRoutePoints(points) {
+  const cleaned = [];
+  for (const point of points || []) {
+    if (!point || !Number.isFinite(point.x) || !Number.isFinite(point.y)) continue;
+    const previous = cleaned.at(-1);
+    if (previous && Math.abs(previous.x - point.x) < 0.1 && Math.abs(previous.y - point.y) < 0.1) continue;
+    cleaned.push({ x: point.x, y: point.y });
+  }
+  return cleaned;
+}
+
+function scoreRoute(points, blockers, frame) {
+  const segments = pointsToSegments(points);
+  let occlusions = 0;
+  for (const segmentItem of segments) {
+    for (const { box } of blockers || []) {
+      if (box && segmentIntersectsBoxInterior(segmentItem, box, 0.5)) occlusions += 1;
+    }
+  }
+  const outsideFrame = frame
+    ? points.filter((point) =>
+        point.x < frame.left ||
+        point.x > frame.left + frame.width ||
+        point.y < frame.top ||
+        point.y > frame.top + frame.height,
+      ).length
+    : 0;
+  return {
+    occlusions,
+    outsideFrame,
+    length: routeLength(points),
+    bends: Math.max(0, points.length - 2),
+  };
+}
+
+function compareRouteScore(a, b) {
+  return (
+    a.occlusions - b.occlusions ||
+    a.outsideFrame - b.outsideFrame ||
+    a.bends - b.bends ||
+    a.length - b.length
+  );
+}
+
+function routeLength(points) {
+  let total = 0;
+  for (let index = 0; index < points.length - 1; index += 1) {
+    total += Math.abs(points[index + 1].x - points[index].x) + Math.abs(points[index + 1].y - points[index].y);
+  }
+  return total;
+}
+
 function diagnoseEdgeNodeOcclusions(edges, nodes, { nodeNames, tolerance }) {
   const issues = [];
   const boxes = (nodes || [])
@@ -1137,6 +1288,7 @@ function diagnoseColumnBalance(groupBoxes, { frame, maximumColumnImbalance }) {
 }
 
 function edgeSegments(edge) {
+  if (edge.routeSegments?.length) return edge.routeSegments;
   const from = normalizePosition(edge.from);
   const to = normalizePosition(edge.to);
   if (!from || !to) return [];
@@ -1160,6 +1312,18 @@ function edgeSegments(edge) {
     segment(start.x, midY, end.x, midY),
     segment(end.x, midY, end.x, end.y),
   ];
+}
+
+function pointsToSegments(points) {
+  const segments = [];
+  for (let index = 0; index < (points || []).length - 1; index += 1) {
+    const start = points[index];
+    const end = points[index + 1];
+    if (!start || !end) continue;
+    if (Math.abs(start.x - end.x) < 0.1 && Math.abs(start.y - end.y) < 0.1) continue;
+    segments.push(segment(start.x, start.y, end.x, end.y));
+  }
+  return segments;
 }
 
 function segment(x1, y1, x2, y2) {

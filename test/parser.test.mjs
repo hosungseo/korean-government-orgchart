@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { diagnoseLayout, displayNodeName, layoutPage, nodeStyle, parseLayoutStyles, planBestPages, planLayoutVariants, planPages, resolvePageSize, scoreLayoutPages } from "../src/layout.mjs";
+import { diagnoseLayout, displayNodeName, layoutPage, nodeStyle, parseLayoutStyles, planBestPages, planLayoutVariants, planPages, resolvePageSize, routeLayoutEdges, scoreLayoutPages } from "../src/layout.mjs";
 import { projectOperationalView, summarizeStructure } from "../src/model.mjs";
 import { parseNameList, parseOrganizationTexts } from "../src/parser.mjs";
 import { renderSvg } from "../src/render-svg.mjs";
@@ -298,7 +298,7 @@ test("배치 진단은 연결선 교차·선-상자 관통·카드 컬럼 불균
   assert.equal(crossing.crossingIssues.length, 1);
   assert.equal(crossing.crossingIssues[0].reason, "crossing-connectors");
 
-  const occlusion = diagnoseLayout({
+  const occlusionLayout = {
     frame: { left: 0, top: 0, width: 220, height: 220 },
     nodes: [
       { node: { id: "p", name: "부모" }, position: { left: 90, top: 10, width: 30, height: 28 } },
@@ -313,13 +313,20 @@ test("배치 진단은 연결선 교차·선-상자 관통·카드 컬럼 불균
         to: { left: 90, top: 170, width: 30, height: 28 },
       },
     ],
-  });
+  };
+  const occlusion = diagnoseLayout(occlusionLayout);
 
   assert.equal(occlusion.ok, true);
   assert.equal(occlusion.qualityOk, false);
   assert.equal(occlusion.occlusionIssues.length, 1);
   assert.equal(occlusion.occlusionIssues[0].reason, "connector-through-node");
   assert.equal(occlusion.occlusionIssues[0].node, "가리는상자");
+
+  const routed = routeLayoutEdges(occlusionLayout);
+  const routedDiagnostics = diagnoseLayout(routed);
+  assert.equal(routed.edges[0].routePoints.length > 2, true);
+  assert.equal(routedDiagnostics.occlusionIssues.length, 0);
+  assert.equal(routedDiagnostics.qualityOk, true);
 
   const balance = diagnoseLayout({
     frame: { left: 0, top: 0, width: 240, height: 300 },

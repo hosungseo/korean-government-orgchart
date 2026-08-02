@@ -202,6 +202,8 @@ test("compare-law는 개정 전후 문언을 직접 비교해 변경 도표를 �
   assert.match(svg, /변경목록|검토 필요 후보/);
   assert.match(html, /시험부 변경 비교 검토시트/);
   assert.match(html, /<svg/);
+  assert.match(html, /작도 검토/);
+  assert.match(html, /JSON 구조/);
   assert.match(html, /변경목록/);
   assert.match(html, /한글\/HWPX 검토서/);
   assert.match(await readFile(reportPath, "utf8"), /변경 요약: 신설 1 · 폐지 1 · 명칭변경 1 · 이체 1/);

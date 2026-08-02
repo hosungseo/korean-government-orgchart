@@ -57,8 +57,12 @@ test("batch-build는 로컬 케이스에서 SVG·JSON·감사리포트를 일괄
   assert.equal(result.total, 1);
   assert.equal(result.cases[0].status, "built");
   assert.match(await readFile(result.cases[0].outputs.svg, "utf8"), /<svg/);
-  assert.match(await readFile(result.cases[0].outputs.html, "utf8"), /시험부 검토시트/);
-  assert.match(await readFile(result.cases[0].outputs.html, "utf8"), /한글\/HWPX 검토서/);
+  const html = await readFile(result.cases[0].outputs.html, "utf8");
+  assert.match(html, /시험부 검토시트/);
+  assert.match(html, /한글\/HWPX 검토서/);
+  assert.match(html, /작도 검토/);
+  assert.match(html, /best-fit 선택 사유/);
+  assert.match(html, /근거 trace/);
   assert.match(await readFile(result.cases[0].outputs.json, "utf8"), /"institution": "시험부"/);
   assert.match(await readFile(result.cases[0].outputs.audit, "utf8"), /조직도 감사 리포트/);
   const trace = await readFile(result.cases[0].outputs.trace, "utf8");

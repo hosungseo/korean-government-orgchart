@@ -454,7 +454,11 @@ async function emitOutputs(graph, args) {
     await writeText(path.resolve(args.svg), renderSvg(displayGraph, pages, { showLawCounts }));
   }
   if (args.html) {
-    await writeText(path.resolve(args.html), renderReviewHtml(displayGraph, pages, { showLawCounts, sourceGraph: graph }));
+    await writeText(path.resolve(args.html), renderReviewHtml(displayGraph, pages, {
+      showLawCounts,
+      sourceGraph: graph,
+      artifactLinks: cliArtifactLinks(args),
+    }));
   }
   if (args.out) {
     await ensureParent(args.out);
@@ -469,6 +473,14 @@ async function emitOutputs(graph, args) {
     console.log(JSON.stringify(graph.toJSON(), jsonReplacer, 2));
   }
   console.log(JSON.stringify({ ...summarize(graph, pages), view }, null, 2));
+}
+
+function cliArtifactLinks(args) {
+  const links = {};
+  if (args.svg) links.svg = path.basename(path.resolve(args.svg));
+  if (args.json) links.json = path.basename(path.resolve(args.json));
+  if (args.out) links.pptx = path.basename(path.resolve(args.out));
+  return links;
 }
 
 async function emitComparisonReportsIfRequested(graph, args) {

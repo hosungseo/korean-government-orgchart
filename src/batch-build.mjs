@@ -49,6 +49,7 @@ export async function runBatchBuild(args = {}) {
       const summary = summarizeAuditCase({ caseSpec, report, view, pages });
       const stem = outputStem(caseSpec, summary);
       const written = {};
+      const plannedLinks = plannedArtifactLinks(outputs, stem);
       const showLawCounts = caseSpec.lawCounts === true || context.lawCounts === true || caseSpec.lawAppendix === true || context.lawAppendix === true;
 
       if (outputs.includes("json")) {
@@ -61,7 +62,7 @@ export async function runBatchBuild(args = {}) {
         written.html = await writeCaseOutput(
           outDir,
           `${stem}.html`,
-          renderReviewHtml(displayGraph, pages, { showLawCounts, sourceGraph: graph }),
+          renderReviewHtml(displayGraph, pages, { showLawCounts, sourceGraph: graph, artifactLinks: plannedLinks }),
         );
       }
       if (outputs.includes("audit")) {
@@ -212,6 +213,22 @@ export function parseOutputFormats(value) {
     if (!result.includes(normalized)) result.push(normalized);
   }
   return result.length ? result : ["svg", "json", "audit"];
+}
+
+function plannedArtifactLinks(outputs, stem) {
+  const links = {};
+  for (const kind of ["svg", "json", "audit", "trace", "pptx"]) {
+    if (!outputs.includes(kind)) continue;
+    const ext = {
+      svg: ".svg",
+      json: ".json",
+      audit: ".audit.md",
+      trace: ".trace.csv",
+      pptx: ".pptx",
+    }[kind];
+    links[kind] = `${stem}${ext}`;
+  }
+  return links;
 }
 
 function deckOutputPath(args, outDir) {

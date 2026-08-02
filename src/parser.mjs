@@ -63,6 +63,10 @@ export function parseOrganizationTexts(texts, options = {}) {
     asOf: options.asOf || directives.asOf,
     title: options.title || institution,
   });
+  graph.meta.sourceInventory = documents.map((document) => ({
+    source: document.source,
+    role: inferDocumentRole(document.text, document.source),
+  }));
   const aliasTargets = new Map();
   for (const document of documents) {
     for (const [alias, fullName] of extractAliases(document.text)) {
@@ -1285,6 +1289,13 @@ function inferInstitution(text) {
   if (title) return title;
   const purpose = text.match(/이\s+(?:영|규칙)은\s+([가-힣A-Za-z0-9]+?)(?:와|과)\s+그\s+소속기관/);
   return purpose?.[1] || null;
+}
+
+function inferDocumentRole(text, source) {
+  const haystack = `${source || ""}\n${String(text || "").slice(0, 1200)}`;
+  if (/(?:직제\s*)?시행규칙|(?:총리령|부령)|이\s*규칙은/.test(haystack)) return "rule";
+  if (/직제|대통령령|이\s*영은/.test(haystack)) return "decree";
+  return "unknown";
 }
 
 function parseDirectives(text) {

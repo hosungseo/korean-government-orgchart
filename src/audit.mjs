@@ -213,6 +213,13 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates, ju
       message: `소관법령 지도에서 ${graph.meta.lawMap.ambiguousDepartments.length}개 부서가 같은 이름의 여러 조직 후보와 충돌했습니다.`,
     });
   }
+  for (const item of collectSourceCompletenessWarnings(graph)) {
+    actions.push({
+      priority: "medium",
+      topic: "source-completeness",
+      message: item.message,
+    });
+  }
   for (const item of graph.meta.spanDiagnostics || []) {
     actions.push({
       priority: "low",
@@ -224,6 +231,38 @@ function collectReviewActions(graph, pageDiagnostics, jurisdictionCandidates, ju
     actions.push({ priority: "low", topic: "warning", message });
   }
   return actions;
+}
+
+function collectSourceCompletenessWarnings(graph) {
+  const inventory = graph.meta.sourceInventory || [];
+  const hasDecree = inventory.some((item) => item.role === "decree");
+  const hasRule = inventory.some((item) => item.role === "rule");
+  if (!hasDecree || hasRule) return [];
+  const leafUpperUnits = [...graph.nodes.values()]
+    .filter((node) => isPotentialRuleExpandedUnit(node))
+    .filter((node) => !hasDepartmentChildren(graph, node))
+    .map((node) => node.name)
+    .sort((a, b) => a.localeCompare(b, "ko"));
+  if (!leafUpperUnits.length) return [];
+  const sample = leafUpperUnits.slice(0, 6).join("ㆍ");
+  const extra = leafUpperUnits.length > 6 ? ` 외 ${leafUpperUnits.length - 6}개` : "";
+  return [{
+    message: `직제 시행규칙 입력이 확인되지 않아 ${sample}${extra} 밑 과·담당관·팀이 누락됐을 수 있습니다. 과 단위 조직도에는 시행규칙 원문과 필요한 별표를 함께 넣으세요.`,
+    units: leafUpperUnits,
+  }];
+}
+
+function isPotentialRuleExpandedUnit(node) {
+  if (!node || ["institution", "head", "deputy", "affiliated"].includes(node.kind)) return false;
+  if (DEPARTMENT.test(node.name)) return false;
+  if (/(?:박물관|미술관|도서관|극장|전당|연구원|관리원|교육원|개발원|사무소)$/.test(node.name)) return false;
+  return /(?:실|국|본부|관|단)$/.test(node.name);
+}
+
+function hasDepartmentChildren(graph, node) {
+  return graph.childrenOf(node.id).some(({ edge, node: child }) =>
+    edge.type !== "jurisdiction" && DEPARTMENT.test(child.name),
+  );
 }
 
 function collectLayoutRecommendations(pageDiagnostics) {

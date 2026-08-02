@@ -52,6 +52,49 @@ test("감사 리포트는 별표 요구와 소관법령 미매칭을 우선 확�
   assert.equal(report.reviewActions.some((action) => action.topic === "law-map"), true);
 });
 
+test("감사 리포트는 직제만 있고 시행규칙이 없으면 과 단위 누락 가능성을 경고한다", () => {
+  const graph = parseOrganizationTexts(
+    [
+      `
+시험부와 그 소속기관 직제
+제1조(목적) 이 영은 시험부와 그 소속기관의 조직과 직무범위를 규정한다.
+제2조(하부조직) 시험부에 정책실 및 산업국을 둔다.
+`,
+    ],
+    { sources: ["시험부와 그 소속기관 직제"] },
+  );
+
+  const report = buildAuditReport(graph, planPages(graph, { paper: "a4-half", layout: "vertical" }));
+  const action = report.reviewActions.find((item) => item.topic === "source-completeness");
+
+  assert.equal(graph.meta.sourceInventory[0].role, "decree");
+  assert.equal(action?.priority, "medium");
+  assert.match(action.message, /직제 시행규칙 입력이 확인되지 않아/);
+  assert.match(action.message, /산업국/);
+});
+
+test("감사 리포트는 시행규칙 입력이 있으면 과 단위 누락 경고를 억제한다", () => {
+  const graph = parseOrganizationTexts(
+    [
+      `
+시험부와 그 소속기관 직제
+제1조(목적) 이 영은 시험부와 그 소속기관의 조직과 직무범위를 규정한다.
+제2조(하부조직) 시험부에 정책실 및 산업국을 둔다.
+`,
+      `
+시험부와 그 소속기관 직제 시행규칙
+제3조(정책실) 정책실에 정책과를 둔다.
+`,
+    ],
+    { sources: ["시험부와 그 소속기관 직제", "시험부와 그 소속기관 직제 시행규칙"] },
+  );
+
+  const report = buildAuditReport(graph, planPages(graph, { paper: "a4-half", layout: "vertical" }));
+
+  assert.deepEqual(graph.meta.sourceInventory.map((item) => item.role), ["decree", "rule"]);
+  assert.equal(report.reviewActions.some((item) => item.topic === "source-completeness"), false);
+});
+
 test("복수 보좌기관 후보는 중복 지시문 대신 대조 필요 묶음으로 압축한다", () => {
   const graph = parseOrganizationTexts([
     `

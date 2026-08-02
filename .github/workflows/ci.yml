@@ -92,13 +92,17 @@ jobs:
             import fs from "node:fs";
             const summary = JSON.parse(fs.readFileSync("/tmp/orgchart-review-pack-summary.json", "utf8"));
             if (summary.cases !== 2) throw new Error(`expected 2 review cases, got ${summary.cases}`);
-            for (const key of ["indexHtml", "readme", "worklist", "triageCsv", "cases", "suggestedCases", "acceptedCases", "audit", "auditJson", "manifest", "manifestJson"]) {
+            for (const key of ["indexHtml", "galleryHtml", "readme", "worklist", "triageCsv", "cases", "suggestedCases", "acceptedCases", "audit", "auditJson", "manifest", "manifestJson"]) {
               const filePath = summary.files?.[key];
               if (!filePath || !fs.existsSync(filePath)) throw new Error(`missing review-pack file: ${key}`);
             }
             const indexHtml = fs.readFileSync(summary.files.indexHtml, "utf8");
             if (!indexHtml.includes("조직도 검토팩") || !indexHtml.includes("케이스별 산출물")) {
               throw new Error("review-pack index.html does not look like a review index");
+            }
+            const galleryHtml = fs.readFileSync(summary.files.galleryHtml, "utf8");
+            if (!galleryHtml.includes("조직도 시각 갤러리") || !galleryHtml.includes("SVG 미리보기")) {
+              throw new Error("review-pack gallery.html does not look like a visual gallery");
             }
             if (!summary.acceptedCases?.evaluated || !summary.acceptedCases.acceptedCases) {
               throw new Error("expected evaluated accepted cases");
@@ -162,6 +166,13 @@ jobs:
             }
             if (!summary.files?.triageCsv || !fs.existsSync(summary.files.triageCsv)) {
               throw new Error("missing real JSON triage CSV");
+            }
+            if (!summary.files?.galleryHtml || !fs.existsSync(summary.files.galleryHtml)) {
+              throw new Error("missing real JSON gallery HTML");
+            }
+            const galleryHtml = fs.readFileSync(summary.files.galleryHtml, "utf8");
+            if (!galleryHtml.includes("조직도 시각 갤러리") || !galleryHtml.includes("행정안전부")) {
+              throw new Error("real JSON gallery.html does not include expected preview content");
             }
             if (!Array.isArray(summary.decks) || summary.decks.length !== 1) {
               throw new Error(`expected one real JSON deck, got ${summary.decks?.length || 0}`);

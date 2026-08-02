@@ -173,6 +173,9 @@ test("실제 기관 JSON 케이스는 review-pack 산출물 묶음으로 재생�
   assert.equal(result.build.decks[0].paper, "a4-half");
   assert.ok((await stat(result.files.triageCsv)).size > 0);
   assert.match(await readFile(result.files.triageCsv, "utf8"), /행정안전부/);
+  assert.ok((await stat(result.files.galleryHtml)).size > 0);
+  assert.match(await readFile(result.files.galleryHtml, "utf8"), /조직도 시각 갤러리/);
+  assert.match(await readFile(result.files.galleryHtml, "utf8"), /행정안전부/);
 
   for (const item of result.build.cases) {
     assert.equal(item.status, "built", item.case.id);

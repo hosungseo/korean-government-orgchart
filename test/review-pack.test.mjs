@@ -6,6 +6,7 @@ import path from "node:path";
 import { runBatchAudit } from "../src/batch-audit.mjs";
 import {
   buildAcceptedCasesDocument,
+  formatReviewGalleryHtml,
   formatReviewTriageCsv,
   buildSuggestedCasesDocument,
   formatReviewWorklistMarkdown,
@@ -56,6 +57,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.equal(result.build.deckError, null);
   assert.match(await readFile(result.files.readme, "utf8"), /조직도 검토팩/);
   assert.match(await readFile(result.files.readme, "utf8"), /HTML 첫 화면/);
+  assert.match(await readFile(result.files.readme, "utf8"), /시각 갤러리/);
   assert.match(await readFile(result.files.readme, "utf8"), /우선순위 CSV/);
   assert.match(await readFile(result.files.readme, "utf8"), /케이스별 산출물/);
   assert.match(await readFile(result.files.readme, "utf8"), /검토 작업목록/);
@@ -64,6 +66,8 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(await readFile(result.files.readme, "utf8"), /최종 채택 산출물/);
   const indexHtml = await readFile(result.files.indexHtml, "utf8");
   assert.match(indexHtml, /조직도 검토팩/);
+  assert.match(indexHtml, /gallery\.html/);
+  assert.match(indexHtml, /시각 갤러리/);
   assert.match(indexHtml, /우선순위 CSV/);
   assert.match(indexHtml, /검토 작업목록/);
   assert.match(indexHtml, /케이스별 산출물/);
@@ -72,6 +76,15 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(await readFile(result.files.worklist, "utf8"), /조직도 검토 작업목록/);
   assert.match(await readFile(result.files.worklist, "utf8"), /입력에 붙여넣을 보강 지시문 후보/);
   assert.ok((await stat(result.files.indexHtml)).size > 0);
+  assert.ok((await stat(result.files.galleryHtml)).size > 0);
+  const galleryHtml = await readFile(result.files.galleryHtml, "utf8");
+  assert.match(galleryHtml, /조직도 시각 갤러리/);
+  assert.match(galleryHtml, /SVG 미리보기 1\/1/);
+  assert.match(galleryHtml, /시험부/);
+  assert.match(galleryHtml, /배치 hard/);
+  assert.match(galleryHtml, /작도 polish/);
+  assert.match(galleryHtml, /artifacts\/%EC%8B%9C%ED%97%98%EB%B6%80-2026-07-24-operational-/);
+  assert.match(galleryHtml, /\.svg/);
   assert.ok((await stat(result.files.triageCsv)).size > 0);
   assert.ok((await stat(result.files.cases)).size > 0);
   assert.ok((await stat(result.files.suggestedCases)).size > 0);
@@ -200,6 +213,63 @@ test("review-pack triage CSV는 위험점수 순으로 케이스를 정렬한다
   assert.match(lines[1], /별표 확인 필요/);
   assert.match(lines[2], /검토부/);
   assert.match(lines[3], /정상부/);
+});
+
+test("review-pack 시각 갤러리는 SVG 미리보기와 품질지표를 카드로 보여준다", () => {
+  const html = formatReviewGalleryHtml({
+    generatedAt: "2026-08-02T00:00:00.000Z",
+    outDir: "/tmp/review-pack",
+    caseCount: 1,
+    files: {
+      indexHtml: "/tmp/review-pack/index.html",
+      triageCsv: "/tmp/review-pack/triage.csv",
+      worklist: "/tmp/review-pack/worklist.md",
+      manifest: "/tmp/review-pack/manifest.md",
+    },
+    audit: {
+      cases: [
+        {
+          summary: {
+            id: "case-a",
+            institution: "시험부",
+            asOf: "2026-07-24",
+            focus: "정책실",
+            pages: 2,
+            statusLabel: "검토 필요",
+            layoutSelection: {
+              selected: ["catalog"],
+              bestFit: {
+                candidateScores: [
+                  { style: "catalog", maxNodes: 16, score: 102, diagnostics: { totalIssues: 0, qualityIssues: 0 } },
+                  { style: "vertical-stack", maxNodes: 16, score: 502, diagnostics: { totalIssues: 0, qualityIssues: 1 } },
+                ],
+              },
+            },
+            layoutDiagnostics: { totalIssues: 0, qualityIssues: 1 },
+          },
+        },
+      ],
+    },
+    build: {
+      cases: [
+        {
+          summary: { id: "case-a" },
+          outputs: {
+            svg: "/tmp/review-pack/artifacts/case-a.svg",
+            html: "/tmp/review-pack/artifacts/case-a.html",
+            pptx: "/tmp/review-pack/artifacts/case-a.pptx",
+          },
+        },
+      ],
+    },
+  });
+
+  assert.match(html, /조직도 시각 갤러리/);
+  assert.match(html, /SVG 미리보기 1\/1/);
+  assert.match(html, /case-a\.svg/);
+  assert.match(html, /best-fit 후보/);
+  assert.match(html, /catalog\/16 점수 102/);
+  assert.match(html, /작도 polish/);
 });
 
 test("review-pack 작업목록은 지시문·별표·레이아웃·소관법령 문제를 요약한다", () => {

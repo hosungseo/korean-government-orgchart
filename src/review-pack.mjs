@@ -34,6 +34,7 @@ export async function runReviewPack(args = {}) {
 
   const files = {
     indexHtml: path.join(outDir, stringArg(args, "index-html-out") || "index.html"),
+    galleryHtml: path.join(outDir, stringArg(args, "gallery-html-out") || "gallery.html"),
     readme: path.join(outDir, stringArg(args, "readme-out") || "README.md"),
     worklist: path.join(outDir, stringArg(args, "worklist-out") || "worklist.md"),
     triageCsv: path.join(outDir, stringArg(args, "triage-out") || "triage.csv"),
@@ -75,6 +76,7 @@ export async function runReviewPack(args = {}) {
   await writeText(files.triageCsv, formatReviewTriageCsv(result));
   await writeText(files.worklist, formatReviewWorklistMarkdown(result));
   await writeText(files.readme, formatReviewPackMarkdown(result));
+  await writeText(files.galleryHtml, formatReviewGalleryHtml(result));
   await writeText(files.indexHtml, formatReviewPackHtml(result));
   return result;
 }
@@ -104,6 +106,7 @@ export function formatReviewPackMarkdown(result) {
   lines.push("## 먼저 열 파일");
   lines.push("");
   lines.push(`- HTML 첫 화면: ${linkPath(result.outDir, result.files.indexHtml)}`);
+  lines.push(`- 시각 갤러리: ${linkPath(result.outDir, result.files.galleryHtml)}`);
   lines.push(`- 우선순위 CSV: ${linkPath(result.outDir, result.files.triageCsv)}`);
   lines.push(`- 검토 작업목록: ${linkPath(result.outDir, result.files.worklist)}`);
   lines.push(`- 감사 요약: ${linkPath(result.outDir, result.files.audit)}`);
@@ -216,6 +219,7 @@ export function formatReviewPackHtml(result) {
     <h2>먼저 열 파일</h2>
     <div class="quick">
       ${quickLink(result, "검토 작업목록", result.files?.worklist, "보강 지시문 후보와 재시도 항목")}
+      ${quickLink(result, "시각 갤러리", result.files?.galleryHtml, "SVG 미리보기와 품질지표를 한 화면에서 비교")}
       ${quickLink(result, "우선순위 CSV", result.files?.triageCsv, "엑셀·시트에서 여는 케이스별 점검 순서")}
       ${quickLink(result, "감사 요약", result.files?.audit, "파싱·소관·별표·배치 품질")}
       ${quickLink(result, "산출물 매니페스트", result.files?.manifest, "케이스별 산출물 링크")}
@@ -234,6 +238,133 @@ export function formatReviewPackHtml(result) {
 </body>
 </html>
 `;
+}
+
+export function formatReviewGalleryHtml(result) {
+  const title = "조직도 시각 갤러리";
+  const cards = reviewGalleryCards(result);
+  return `<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${htmlEscape(title)}</title>
+  <style>
+    :root { --ink:#111827; --muted:#6B7280; --rule:#D1D5DB; --soft:#F3F4F6; --paper:#FFFFFF; --accent:#315A8A; --bad:#B91C1C; --warn:#92400E; --ok:#166534; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#E5E7EB; color:var(--ink); font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif; line-height:1.45; }
+    main { max-width:1440px; margin:18px auto; padding:22px; background:var(--paper); box-shadow:0 4px 18px rgba(15,23,42,.12); }
+    header { display:flex; gap:12px; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; border-bottom:2px solid var(--ink); padding-bottom:12px; }
+    h1 { margin:0; font-size:27px; letter-spacing:-.02em; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; color:var(--muted); font-size:13px; }
+    .pill { display:inline-block; border:1px solid var(--rule); border-radius:999px; padding:3px 9px; background:#fff; white-space:nowrap; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:8px; font-size:13px; }
+    .toolbar a { border:1px solid var(--rule); border-radius:6px; padding:5px 9px; background:#FAFAFA; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:16px; margin-top:18px; }
+    .case { border:1px solid var(--rule); border-radius:10px; overflow:hidden; background:#FAFAFA; break-inside:avoid; }
+    .case-head { padding:12px 13px 10px; background:#fff; border-bottom:1px solid var(--rule); }
+    .case h2 { margin:0; font-size:17px; }
+    .subtitle { margin-top:4px; color:var(--muted); font-size:12.5px; }
+    .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; padding:10px 13px; background:#F9FAFB; border-bottom:1px solid var(--rule); font-size:12px; }
+    .metric { border:1px solid var(--rule); border-radius:6px; background:#fff; padding:6px; min-height:45px; }
+    .metric strong { display:block; font-size:15px; }
+    .metric .label { color:var(--muted); font-size:11px; }
+    .metric.bad strong { color:var(--bad); }
+    .metric.warn strong { color:var(--warn); }
+    .metric.ok strong { color:var(--ok); }
+    .preview { height:520px; background:white; display:flex; align-items:flex-start; justify-content:center; padding:10px; overflow:auto; border-bottom:1px solid var(--rule); }
+    .preview img { max-width:100%; height:auto; border:1px solid #EEF0F3; background:white; }
+    .placeholder { color:var(--muted); padding:40px 12px; text-align:center; }
+    .links { padding:10px 13px 12px; font-size:12.5px; }
+    .links a { display:inline-block; margin:0 8px 6px 0; }
+    .best { padding:0 13px 12px; color:var(--muted); font-size:12px; }
+    .best code { color:var(--ink); background:#EEF2F7; border-radius:4px; padding:1px 4px; }
+    @media print {
+      body { background:white; }
+      main { margin:0; max-width:none; box-shadow:none; padding:0; }
+      .grid { grid-template-columns:repeat(2,1fr); gap:10px; }
+      .preview { height:360px; }
+      .toolbar { display:none; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>${htmlEscape(title)}</h1>
+      <div class="meta">
+        <span class="pill">생성시각 ${htmlEscape(result.generatedAt || "")}</span>
+        <span class="pill">케이스 ${result.caseCount || 0}</span>
+        <span class="pill">SVG 미리보기 ${cards.filter((card) => card.outputs.svg).length}/${cards.length}</span>
+      </div>
+    </div>
+    <nav class="toolbar">
+      ${result.files?.indexHtml ? `<a href="${htmlAttr(hrefPath(result.outDir, result.files.indexHtml))}">검토팩 첫 화면</a>` : ""}
+      ${result.files?.triageCsv ? `<a href="${htmlAttr(hrefPath(result.outDir, result.files.triageCsv))}">우선순위 CSV</a>` : ""}
+      ${result.files?.worklist ? `<a href="${htmlAttr(hrefPath(result.outDir, result.files.worklist))}">작업목록</a>` : ""}
+      ${result.files?.manifest ? `<a href="${htmlAttr(hrefPath(result.outDir, result.files.manifest))}">매니페스트</a>` : ""}
+    </nav>
+  </header>
+  <section class="grid">
+    ${cards.map((card) => galleryCardHtml(result.outDir, card)).join("") || `<p class="placeholder">표시할 산출물이 없습니다.</p>`}
+  </section>
+</main>
+</body>
+</html>
+`;
+}
+
+function reviewGalleryCards(result) {
+  return (result.audit?.cases || []).map((item) => {
+    const summary = item.summary || {};
+    const built = findBuildCase(result.build?.cases || [], summary.id) || {};
+    return {
+      summary,
+      outputs: built.outputs || {},
+      buildStatus: built.statusLabel || built.status || "",
+      error: built.error || item.error || "",
+    };
+  });
+}
+
+function galleryCardHtml(baseDir, card) {
+  const summary = card.summary || {};
+  const diagnostics = summary.layoutDiagnostics || {};
+  const bestCandidates = summary.layoutSelection?.bestFit?.candidateScores?.slice(0, 3) || [];
+  return `<article class="case">
+    <div class="case-head">
+      <h2>${htmlEscape(summary.institution || summary.id || "케이스")}</h2>
+      <div class="subtitle">${htmlEscape([summary.asOf, summary.focus || summary.layout, selectedLayouts(summary)].filter(Boolean).join(" · "))}</div>
+    </div>
+    <div class="metrics">
+      ${galleryMetric("상태", summary.statusLabel || summary.status || card.buildStatus || "", metricClass(diagnostics.totalIssues || 0, diagnostics.qualityIssues || 0))}
+      ${galleryMetric("페이지", summary.pages ?? "", "")}
+      ${galleryMetric("배치 hard", diagnostics.totalIssues ?? 0, diagnostics.totalIssues ? "bad" : "ok")}
+      ${galleryMetric("작도 polish", diagnostics.qualityIssues ?? 0, diagnostics.qualityIssues ? "warn" : "ok")}
+    </div>
+    <div class="preview">
+      ${card.outputs.svg ? `<a href="${htmlAttr(hrefPath(baseDir, card.outputs.svg))}"><img src="${htmlAttr(hrefPath(baseDir, card.outputs.svg))}" alt="${htmlAttr(summary.institution || summary.id || "조직도 SVG")}" loading="lazy" /></a>` : `<div class="placeholder">${htmlEscape(card.error || "SVG 산출물이 없습니다.")}</div>`}
+    </div>
+    <div class="links">${outputLinksHtml(baseDir, card.outputs)}</div>
+    ${bestCandidates.length ? `<div class="best">best-fit 후보: ${bestCandidates.map((candidate) => {
+      const diag = candidate.diagnostics || {};
+      const maxNodes = candidate.maxNodes ? `/${candidate.maxNodes}` : "";
+      return `<code>${htmlEscape(candidate.style)}${htmlEscape(maxNodes)} 점수 ${htmlEscape(candidate.score)} 문제 ${htmlEscape(diag.totalIssues || 0)} 품질 ${htmlEscape(diag.qualityIssues || 0)}</code>`;
+    }).join(" ")}</div>` : ""}
+  </article>`;
+}
+
+function galleryMetric(label, value, className) {
+  return `<div class="metric ${htmlAttr(className || "")}"><span class="label">${htmlEscape(label)}</span><strong>${htmlEscape(value)}</strong></div>`;
+}
+
+function metricClass(hard, quality) {
+  if (hard) return "bad";
+  if (quality) return "warn";
+  return "ok";
 }
 
 function quickLink(result, label, filePath, description) {

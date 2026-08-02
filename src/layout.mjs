@@ -331,6 +331,39 @@ function catalogMaxNodes(paper) {
   return maxChildren + 1;
 }
 
+function matrixFrameForPaper(paper) {
+  const pageSize = resolvePageSize(paper);
+  const portrait = pageSize.height > pageSize.width;
+  const pageMargin = portrait ? (pageSize.width < 400 ? 17 : 28) : 38;
+  return {
+    left: pageMargin,
+    top: portrait ? 104 : 118,
+    width: pageSize.width - pageMargin * 2,
+    height: pageSize.height - (portrait ? 132 : 150),
+  };
+}
+
+function matrixRowsPerColumn(frame) {
+  const headerHeight = 34;
+  const rowStart = frame.top + headerHeight + 15;
+  const frameBottom = frame.top + frame.height;
+  const rowGap = 28;
+  const minimumRowHeight = 40;
+  return Math.max(1, Math.floor((frameBottom - rowStart - minimumRowHeight) / rowGap) + 1);
+}
+
+function matrixLeafColumns(frame) {
+  if (frame.width < 240) return 1;
+  if (frame.width < 360) return 2;
+  if (frame.width < 560) return 3;
+  return 4;
+}
+
+function matrixLeafPageCapacity(paper) {
+  const frame = matrixFrameForPaper(paper);
+  return matrixRowsPerColumn(frame) * matrixLeafColumns(frame) + 1;
+}
+
 export function planPages(
   graph,
   { mode = "auto", maxNodes = 38, paper = "slide", layoutStyle, focus } = {},
@@ -387,6 +420,20 @@ export function planPages(
               paper: format,
             })
           : visual;
+      const matrixLeafPages = splitMatrixLeafBranchPages(
+        graph,
+        focused,
+        [],
+        format,
+        focusedLayoutStyle,
+      );
+      if (matrixLeafPages) {
+        return matrixLeafPages.map((page, index) => ({
+          ...page,
+          pageNumber: index + 1,
+          pageCount: matrixLeafPages.length,
+        }));
+      }
       if (nodeIds.length > layoutMaxNodes) {
         const focusedPages = splitBranchPages(
           graph,
@@ -577,6 +624,8 @@ function affiliateDetailLayoutStyle({ visual, requestedVisual, descendantCount, 
 
 function splitBranchPages(graph, branch, maxNodes, breadcrumb, paper = "slide", layoutStyle) {
   const all = [branch, ...graph.descendantsOf(branch.id)];
+  const matrixLeafPages = splitMatrixLeafBranchPages(graph, branch, breadcrumb, paper, layoutStyle);
+  if (matrixLeafPages) return matrixLeafPages;
   if (all.length <= maxNodes) {
     return [
       {
@@ -636,6 +685,31 @@ function splitBranchPages(graph, branch, maxNodes, breadcrumb, paper = "slide", 
   }
   if (smallGroups.length) {
     pages.push(branchChunkPage(graph, branch, smallGroups, breadcrumb, pages.length, paper, layoutStyle));
+  }
+  return pages;
+}
+
+function splitMatrixLeafBranchPages(graph, branch, breadcrumb, paper, layoutStyle) {
+  if (layoutStyle !== "matrix") return null;
+  const directChildren = graph.childrenOf(branch.id).map(({ node }) => node);
+  if (!directChildren.length) return null;
+  if (directChildren.some((node) => graph.childrenOf(node.id).length > 0)) return null;
+  const leafCapacity = Math.max(1, matrixLeafPageCapacity(paper) - 1);
+  if (directChildren.length <= leafCapacity) return null;
+  const pages = [];
+  for (let index = 0; index < directChildren.length; index += leafCapacity) {
+    const chunk = directChildren.slice(index, index + leafCapacity);
+    pages.push(
+      branchChunkPage(
+        graph,
+        branch,
+        chunk,
+        breadcrumb,
+        pages.length,
+        paper,
+        layoutStyle,
+      ),
+    );
   }
   return pages;
 }
@@ -2050,6 +2124,16 @@ function layoutMatrixPage({ graph, pageSize, frame, parentEdge, children, roots,
     if (!direct.length) {
       if (!seen.has(rootId)) columns.push({ rootId, ids: [rootId] });
       seen.add(rootId);
+      continue;
+    }
+    if (direct.every((id) => !(children.get(id) || []).some((childId) => selected.has(childId)))) {
+      const ids = direct.filter((id) => !seen.has(id));
+      const rowsPerColumn = matrixRowsPerColumn(frame);
+      for (let index = 0; index < ids.length; index += rowsPerColumn) {
+        const chunk = ids.slice(index, index + rowsPerColumn);
+        chunk.forEach((id) => seen.add(id));
+        if (chunk.length) columns.push({ rootId, ids: chunk });
+      }
       continue;
     }
     for (const childId of direct) {

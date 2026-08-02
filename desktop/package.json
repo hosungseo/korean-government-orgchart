@@ -1,0 +1,15 @@
+{
+  "name": "korean-government-orgchart-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Windows desktop wrapper for the Korean government organization-chart generator",
+  "scripts": {
+    "tauri": "tauri",
+    "dev": "tauri dev",
+    "build": "tauri build"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}

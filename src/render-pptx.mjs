@@ -168,6 +168,18 @@ function addPage(presentation, graph, page, { showLawCounts, pageSize }) {
     return;
   }
 
+  if (page.kind === "comparison-report") {
+    addComparisonReport(slide, page, pageSize);
+    addText(
+      slide,
+      `${page.pageNumber} / ${page.pageCount}`,
+      { left: pageSize.width - margin - 68, top: footerTop, width: 68, height: 14 },
+      { fontSize: 10, color: "#6B7280", alignment: "right" },
+      "쪽번호",
+    );
+    return;
+  }
+
   const layout = layoutPage(graph, page, { pageSize });
 
   for (const group of layout.groupBoxes || []) addGroupBox(slide, group);
@@ -465,6 +477,74 @@ function addLawIndex(slide, page, pageSize) {
   }, "소관법령-주석");
 }
 
+function addComparisonReport(slide, page, pageSize) {
+  const portrait = pageSize.height > pageSize.width;
+  const half = pageSize.width < 400;
+  const margin = portrait ? (half ? 17 : 28) : 42;
+  const available = pageSize.width - margin * 2;
+  const top = portrait ? (half ? 76 : 104) : 124;
+  const summary = page.comparisonSummary || {};
+  addText(
+    slide,
+    `변경 요약: 신설 ${summary.added || 0} · 폐지 ${summary.removed || 0} · 명칭변경 ${summary.renamed || 0} · 이체 ${summary.moved || 0} · 검토필요 ${summary.review || 0}`,
+    { left: margin, top: top - 36, width: available, height: 22 },
+    { fontSize: portrait ? (half ? 7.8 : 10.5) : 13, bold: true, color: "#374151", alignment: "left" },
+    "변경목록-요약",
+  );
+  const columns = comparisonColumns(available, portrait, half);
+  const headerHeight = half ? 18 : 22;
+  const rowHeight = half ? 45 : portrait ? 48 : 36;
+  addLine(slide, margin, top, margin + available, top, "#D1D5DB", "solid", 0.8);
+  let x = margin;
+  for (const column of columns) {
+    addText(slide, column.label, { left: x + 4, top: top + 3, width: column.width - 8, height: headerHeight - 4 }, {
+      fontSize: half ? 6.4 : 8.5,
+      bold: true,
+      color: "#374151",
+      alignment: "left",
+    }, "변경목록-머리글");
+    x += column.width;
+  }
+  addLine(slide, margin, top + headerHeight, margin + available, top + headerHeight, "#D1D5DB", "solid", 0.8);
+  const rows = page.comparisonRows || [];
+  if (!rows.length) {
+    addText(slide, "변경 항목이 없습니다.", { left: margin, top: top + headerHeight + 12, width: available, height: 18 }, {
+      fontSize: half ? 7 : 10,
+      color: "#6B7280",
+      alignment: "left",
+    }, "변경목록-없음");
+  }
+  for (const [rowIndex, row] of rows.entries()) {
+    const rowTop = top + headerHeight + rowIndex * rowHeight;
+    addLine(slide, margin, rowTop + rowHeight, margin + available, rowTop + rowHeight, "#E5E7EB", "solid", 0.6);
+    x = margin;
+    for (const column of columns) {
+      const fontSize = half ? 5.8 : portrait ? 7.2 : 8;
+      addText(
+        slide,
+        cellText(comparisonCell(row, column.key), column.width, fontSize, 3),
+        { left: x + 4, top: rowTop + 5, width: column.width - 8, height: rowHeight - 8 },
+        {
+          fontSize,
+          bold: column.key === "type",
+          color: column.key === "type" ? "#111827" : "#4B5563",
+          alignment: "left",
+          autoFit: "shrinkText",
+        },
+        "변경목록-행",
+      );
+      x += column.width;
+    }
+  }
+  const footer = pageSize.height - (portrait ? 46 : 45);
+  addLine(slide, margin, footer, pageSize.width - margin, footer, "#D1D5DB", "solid", 0.8);
+  addText(slide, "검토 필요 후보는 자동 확정이 아니라 사람이 확인할 후보입니다.", { left: margin, top: footer + 5, width: available, height: 16 }, {
+    fontSize: half ? 6.2 : portrait ? 8 : 10,
+    color: "#6B7280",
+    alignment: "left",
+  }, "변경목록-주석");
+}
+
 async function renderPptxGen(
   graph,
   pages,
@@ -515,8 +595,8 @@ async function renderPptxGenDeck(
       for (const page of item.pages) {
         slideIndex += 1;
         const stem = `slide-${String(slideIndex).padStart(2, "0")}`;
-        const layout = page.kind === "law-index"
-          ? { page, renderer: "pptxgenjs", note: "law-index page", institution: item.graph.meta.institution }
+        const layout = ["law-index", "comparison-report"].includes(page.kind)
+          ? { page, renderer: "pptxgenjs", note: `${page.kind} page`, institution: item.graph.meta.institution }
           : layoutPage(item.graph, page, { pageSize });
         await fs.writeFile(path.join(resolvedPreviewDir, `${stem}.layout.json`), JSON.stringify(layout, null, 2), "utf8");
       }
@@ -567,6 +647,16 @@ function addPptxGenPage(pptx, graph, page, { showLawCounts, pageSize }) {
 
   if (page.kind === "law-index") {
     addPptxLawIndex(slide, pptx, page, pageSize);
+    addPptxText(slide, `${page.pageNumber} / ${page.pageCount}`, { left: pageSize.width - margin - 68, top: footerTop, width: 68, height: 14 }, {
+      fontSize: 10,
+      color: "#6B7280",
+      alignment: "right",
+    });
+    return;
+  }
+
+  if (page.kind === "comparison-report") {
+    addPptxComparisonReport(slide, pptx, page, pageSize);
     addPptxText(slide, `${page.pageNumber} / ${page.pageCount}`, { left: pageSize.width - margin - 68, top: footerTop, width: 68, height: 14 }, {
       fontSize: 10,
       color: "#6B7280",
@@ -820,6 +910,127 @@ function addPptxLawIndex(slide, pptx, page, pageSize) {
     color: "#6B7280",
     alignment: "left",
   });
+}
+
+function addPptxComparisonReport(slide, pptx, page, pageSize) {
+  const portrait = pageSize.height > pageSize.width;
+  const half = pageSize.width < 400;
+  const margin = portrait ? (half ? 17 : 28) : 42;
+  const available = pageSize.width - margin * 2;
+  const top = portrait ? (half ? 76 : 104) : 124;
+  const summary = page.comparisonSummary || {};
+  addPptxText(
+    slide,
+    `변경 요약: 신설 ${summary.added || 0} · 폐지 ${summary.removed || 0} · 명칭변경 ${summary.renamed || 0} · 이체 ${summary.moved || 0} · 검토필요 ${summary.review || 0}`,
+    { left: margin, top: top - 36, width: available, height: 22 },
+    { fontSize: portrait ? (half ? 7.8 : 10.5) : 13, bold: true, color: "#374151", alignment: "left" },
+  );
+  const columns = comparisonColumns(available, portrait, half);
+  const headerHeight = half ? 18 : 22;
+  const rowHeight = half ? 45 : portrait ? 48 : 36;
+  addPptxLine(slide, pptx, margin, top, margin + available, top, "#D1D5DB", "solid", 0.8);
+  let x = margin;
+  for (const column of columns) {
+    addPptxText(slide, column.label, { left: x + 4, top: top + 3, width: column.width - 8, height: headerHeight - 4 }, {
+      fontSize: half ? 6.4 : 8.5,
+      bold: true,
+      color: "#374151",
+      alignment: "left",
+    });
+    x += column.width;
+  }
+  addPptxLine(slide, pptx, margin, top + headerHeight, margin + available, top + headerHeight, "#D1D5DB", "solid", 0.8);
+  const rows = page.comparisonRows || [];
+  if (!rows.length) {
+    addPptxText(slide, "변경 항목이 없습니다.", { left: margin, top: top + headerHeight + 12, width: available, height: 18 }, {
+      fontSize: half ? 7 : 10,
+      color: "#6B7280",
+      alignment: "left",
+    });
+  }
+  for (const [rowIndex, row] of rows.entries()) {
+    const rowTop = top + headerHeight + rowIndex * rowHeight;
+    addPptxLine(slide, pptx, margin, rowTop + rowHeight, margin + available, rowTop + rowHeight, "#E5E7EB", "solid", 0.6);
+    x = margin;
+    for (const column of columns) {
+      const fontSize = half ? 5.8 : portrait ? 7.2 : 8;
+      addPptxText(
+        slide,
+        cellText(comparisonCell(row, column.key), column.width, fontSize, 3),
+        { left: x + 4, top: rowTop + 5, width: column.width - 8, height: rowHeight - 8 },
+        {
+          fontSize,
+          bold: column.key === "type",
+          color: column.key === "type" ? "#111827" : "#4B5563",
+          alignment: "left",
+        },
+      );
+      x += column.width;
+    }
+  }
+  const footer = pageSize.height - (portrait ? 46 : 45);
+  addPptxLine(slide, pptx, margin, footer, pageSize.width - margin, footer, "#D1D5DB", "solid", 0.8);
+  addPptxText(slide, "검토 필요 후보는 자동 확정이 아니라 사람이 확인할 후보입니다.", { left: margin, top: footer + 5, width: available, height: 16 }, {
+    fontSize: half ? 6.2 : portrait ? 8 : 10,
+    color: "#6B7280",
+    alignment: "left",
+  });
+}
+
+function comparisonColumns(available, portrait, half) {
+  if (half) {
+    return [
+      { key: "type", label: "유형", width: available * 0.2 },
+      { key: "beforeAfter", label: "전/후", width: available * 0.34 },
+      { key: "parents", label: "상위", width: available * 0.24 },
+      { key: "note", label: "사유", width: available * 0.22 },
+    ];
+  }
+  if (portrait) {
+    return [
+      { key: "type", label: "유형", width: available * 0.16 },
+      { key: "beforeAfter", label: "변경 전/후", width: available * 0.28 },
+      { key: "parents", label: "상위 조직", width: available * 0.28 },
+      { key: "note", label: "종류·점수·사유", width: available * 0.28 },
+    ];
+  }
+  const fixed = [115, 145, 145, 128, 128];
+  return [
+    { key: "type", label: "유형", width: fixed[0] },
+    { key: "before", label: "변경 전", width: fixed[1] },
+    { key: "after", label: "변경 후", width: fixed[2] },
+    { key: "beforeParent", label: "전 상위", width: fixed[3] },
+    { key: "afterParent", label: "후 상위", width: fixed[4] },
+    { key: "note", label: "종류·점수·사유", width: Math.max(120, available - fixed.reduce((sum, value) => sum + value, 0)) },
+  ];
+}
+
+function comparisonCell(row, key) {
+  if (key === "beforeAfter") return `${row.before || "-"} → ${row.after || "-"}`;
+  if (key === "parents") return `${row.beforeParent || "-"} → ${row.afterParent || "-"}`;
+  if (key === "note") return [row.kind, row.score ? `점수 ${row.score}` : "", row.reason].filter(Boolean).join(" · ") || "-";
+  return row[key] || "-";
+}
+
+function cellText(value, width, fontSize, maxLines) {
+  const maxChars = Math.max(3, Math.floor(width / (fontSize * 0.86)));
+  return wrapCellText(value, maxChars, maxLines).join("\n");
+}
+
+function wrapCellText(value, maxChars, maxLines) {
+  const text = String(value || "-").replace(/\s+/g, " ").trim();
+  if (text.length <= maxChars) return [text];
+  const lines = [];
+  let rest = text;
+  while (rest.length && lines.length < maxLines) {
+    if (lines.length === maxLines - 1 && rest.length > maxChars) {
+      lines.push(`${rest.slice(0, Math.max(1, maxChars - 1))}…`);
+      break;
+    }
+    lines.push(rest.slice(0, maxChars));
+    rest = rest.slice(maxChars);
+  }
+  return lines;
 }
 
 function addPptxText(slide, text, position, style = {}) {

@@ -184,6 +184,36 @@ export function formatComparisonCsv(graphOrComparison) {
   return `${rows.map((row) => row.map(csvCell).join(",")).join("\n")}\n`;
 }
 
+export function buildComparisonReportPages(graphOrComparison, { rowsPerPage, paper } = {}) {
+  const comparison = extractComparison(graphOrComparison);
+  if (!comparison) return [];
+  const rows = comparisonReportRows(comparison);
+  const size = rowsPerPage || rowsPerPageForPaper(paper);
+  const pages = [];
+  for (let index = 0; index < Math.max(rows.length, 1); index += size) {
+    const chunk = rows.slice(index, index + size);
+    pages.push({
+      kind: "comparison-report",
+      title: comparisonTitle(graphOrComparison, comparison),
+      subtitle: `신설·폐지·명칭변경·이체 변경목록 (${pages.length + 1})`,
+      rootIds: [],
+      nodeIds: [],
+      breadcrumb: ["변경목록"],
+      paper,
+      comparisonSummary: {
+        added: comparison.added.length,
+        removed: comparison.removed.length,
+        renamed: comparison.renamed.length,
+        moved: comparison.moved.length,
+        review: (comparison.review || []).length,
+        unchanged: comparison.unchanged,
+      },
+      comparisonRows: chunk,
+    });
+  }
+  return pages;
+}
+
 function comparisonSource(graph) {
   return {
     institution: graph.meta.institution,
@@ -401,6 +431,78 @@ function sourceLabel(source) {
   if (!source) return "-";
   const label = source.title || source.institution || "조직도";
   return source.asOf ? `${label} (${source.asOf})` : label;
+}
+
+function comparisonReportRows(comparison) {
+  const rows = [];
+  for (const item of comparison.added) {
+    rows.push({
+      type: "신설",
+      before: "",
+      after: item.name,
+      beforeParent: "",
+      afterParent: formatParents(item.parents),
+      kind: kindLabel(item.kind),
+      score: "",
+      reason: "",
+    });
+  }
+  for (const item of comparison.removed) {
+    rows.push({
+      type: "폐지",
+      before: item.name,
+      after: "",
+      beforeParent: formatParents(item.parents),
+      afterParent: "",
+      kind: kindLabel(item.kind),
+      score: "",
+      reason: "",
+    });
+  }
+  for (const item of comparison.renamed) {
+    rows.push({
+      type: "명칭변경",
+      before: item.from,
+      after: item.to,
+      beforeParent: item.parent || "",
+      afterParent: item.parent || "",
+      kind: "",
+      score: formatScore(item.score),
+      reason: "",
+    });
+  }
+  for (const item of comparison.moved) {
+    rows.push({
+      type: "이체",
+      before: item.name,
+      after: item.name,
+      beforeParent: formatParents(item.from),
+      afterParent: formatParents(item.to),
+      kind: kindLabel(item.kind),
+      score: "",
+      reason: "",
+    });
+  }
+  for (const item of comparison.review || []) {
+    rows.push({
+      type: item.type,
+      before: item.before,
+      after: item.after,
+      beforeParent: formatParents(item.beforeParents),
+      afterParent: formatParents(item.afterParents),
+      kind: kindLabel(item.kind),
+      score: formatScore(item.score),
+      reason: item.reason,
+    });
+  }
+  return rows;
+}
+
+function rowsPerPageForPaper(paper) {
+  const value = String(paper || "");
+  if (value.includes("half")) return 8;
+  if (value.includes("portrait")) return 11;
+  return 12;
 }
 
 function appendSimpleSection(lines, title, headers, items, toCells) {

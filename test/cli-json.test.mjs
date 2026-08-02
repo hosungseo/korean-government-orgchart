@@ -137,6 +137,7 @@ test("compare-law는 개정 전후 문언을 직접 비교해 변경 도표를 �
   const afterPath = path.join(dir, "after.txt");
   const svgPath = path.join(dir, "compare-law.svg");
   const jsonPath = path.join(dir, "compare-law.json");
+  const pptxPath = path.join(dir, "compare-law.pptx");
   const reportPath = path.join(dir, "compare-law-changes.md");
   await writeFile(
     beforePath,
@@ -172,22 +173,29 @@ test("compare-law는 개정 전후 문언을 직접 비교해 변경 도표를 �
     "2026-02-01",
     "--svg",
     svgPath,
+    "--out",
+    pptxPath,
     "--json",
     jsonPath,
     "--change-report",
     reportPath,
+    "--change-appendix",
   ]);
   const summary = JSON.parse(stdout);
   const outputJson = JSON.parse(await readFile(jsonPath, "utf8"));
   const changeByName = new Map(outputJson.nodes.map((node) => [node.name, node.metadata?.change]));
+  const svg = await readFile(svgPath, "utf8");
 
   assert.equal(summary.asOf, "2026-02-01");
+  assert.equal(summary.pages, 2);
   assert.equal(summary.comparison.before.asOf, "2026-01-01");
   assert.equal(summary.comparison.after.asOf, "2026-02-01");
   assert.equal(changeByName.get("신설과"), "신설");
   assert.equal(changeByName.get("폐지과"), "폐지");
   assert.equal(changeByName.get("산업전략과"), "명칭변경");
   assert.equal(changeByName.get("이체과"), "이체");
-  assert.match(await readFile(svgPath, "utf8"), /변경 전후 레인형|신설|폐지|명칭변경|이체/);
+  assert.match(svg, /변경 전후 레인형|신설|폐지|명칭변경|이체/);
+  assert.match(svg, /변경목록|검토 필요 후보/);
   assert.match(await readFile(reportPath, "utf8"), /변경 요약: 신설 1 · 폐지 1 · 명칭변경 1 · 이체 1/);
+  assert.ok((await stat(pptxPath)).size > 0);
 });

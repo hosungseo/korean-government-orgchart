@@ -7,7 +7,12 @@ import { buildAuditReport, formatAuditMarkdown } from "./audit.mjs";
 import { formatBatchAuditMarkdown, runBatchAudit } from "./batch-audit.mjs";
 import { formatBatchBuildMarkdown, runBatchBuild } from "./batch-build.mjs";
 import { buildAuditCaseSpecs } from "./case-scaffold.mjs";
-import { compareOrgGraphs, formatComparisonCsv, formatComparisonMarkdown } from "./graph-diff.mjs";
+import {
+  buildComparisonReportPages,
+  compareOrgGraphs,
+  formatComparisonCsv,
+  formatComparisonMarkdown,
+} from "./graph-diff.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { organizationLawNameCandidateGroups } from "./law-name.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
@@ -427,10 +432,18 @@ async function emitOutputs(graph, args) {
   const displayGraph = view === "operational" ? projectOperationalView(graph) : graph;
   let pages = planRequestedPages(displayGraph, args);
   const lawAppendix = args["law-appendix"] === true;
+  const changeAppendix = args["change-appendix"] === true;
   const showLawCounts = args["law-counts"] === true || lawAppendix;
   if (lawAppendix) {
     if (!graph.meta.lawMap) throw new Error("--law-appendix에는 --law-map <dept_map.json>이 필요합니다.");
     pages = renumberPages([...pages, ...buildLawAppendixPages(graph)]);
+  }
+  if (changeAppendix) {
+    if (!graph.meta.comparison) throw new Error("--change-appendix는 compare-json/compare-law 결과에만 사용할 수 있습니다.");
+    pages = renumberPages([
+      ...pages,
+      ...buildComparisonReportPages(graph, { paper: pages[0]?.paper || stringArg(args, "paper") || "slide" }),
+    ]);
   }
   if (args.json) {
     await writeText(path.resolve(args.json), `${JSON.stringify(graph.toJSON(), jsonReplacer, 2)}\n`);
@@ -573,13 +586,15 @@ function printHelp() {
     --after outputs/기관-개정후.json \\
     --svg outputs/기관-변경비교.svg \\
     --out outputs/기관-변경비교.pptx \\
-    --change-report outputs/기관-변경목록.md
+    --change-report outputs/기관-변경목록.md \\
+    --change-appendix
 
   node src/cli.mjs compare-law \\
     --before-input old-직제.txt --before-input old-시행규칙.txt \\
     --after-input new-직제.txt --after-input new-시행규칙.txt \\
     --svg outputs/기관-변경비교.svg \\
-    --change-csv outputs/기관-변경목록.csv
+    --change-csv outputs/기관-변경목록.csv \\
+    --change-appendix
 
   node src/cli.mjs review-pack \\
     --institutions "행정안전부,문화체육관광부,공정거래위원회" \\
@@ -620,6 +635,7 @@ function printHelp() {
   --after-date <YYYY-MM-DD> compare-law 법제처 조회 또는 개정 후 문언 기준일
   --change-report <file.md> compare-json/compare-law 변경목록 Markdown 표 저장
   --change-csv <file.csv>   compare-json/compare-law 변경목록 CSV 저장
+  --change-appendix         compare-json/compare-law SVG·PPTX 뒤에 변경목록 표 페이지 추가
   --graph <graph.json>      render-json의 기존 조직도 JSON
   --oc <인증값>             LAW_API_OC 환경변수로도 지정 가능
   --source-dir <dir>        조회한 기준일 법령 문언 보관 및 다음 실행 재사용 캐시

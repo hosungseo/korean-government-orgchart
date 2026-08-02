@@ -54,6 +54,13 @@ function renderPage(graph, page, offsetY, { showLawCounts, pageSize }) {
     return pageGroup.join("\n");
   }
 
+  if (page.kind === "comparison-report") {
+    pageGroup.push(svgComparisonReport(page, pageSize));
+    pageGroup.push(`<text x="${pageSize.width - margin}" y="${footerY}" text-anchor="end" font-family="Malgun Gothic, sans-serif" font-size="10" fill="#6B7280">${page.pageNumber} / ${page.pageCount}</text>`);
+    pageGroup.push(`</g>`);
+    return pageGroup.join("\n");
+  }
+
   const layout = layoutPage(graph, page, { pageSize });
 
   for (const group of layout.groupBoxes || []) {
@@ -242,4 +249,102 @@ function svgLawIndex(page, pageSize) {
   parts.push(`<line x1="${margin}" y1="${footer}" x2="${pageSize.width - margin}" y2="${footer}" stroke="#D1D5DB" stroke-width="0.8"/>`);
   parts.push(`<text x="${margin}" y="${footer + 16}" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? 8 : 10}" fill="#6B7280">공동소관 법령은 담당 부서별로 중복 표기될 수 있습니다.</text>`);
   return parts.join("\n");
+}
+
+function svgComparisonReport(page, pageSize) {
+  const portrait = pageSize.height > pageSize.width;
+  const half = pageSize.width < 400;
+  const margin = portrait ? (half ? 17 : 28) : 42;
+  const available = pageSize.width - margin * 2;
+  const top = portrait ? (half ? 76 : 104) : 124;
+  const summary = page.comparisonSummary || {};
+  const parts = [
+    `<text x="${margin}" y="${top - 20}" font-family="Malgun Gothic, sans-serif" font-size="${portrait ? (half ? 7.8 : 10.5) : 13}" font-weight="700" fill="#374151">변경 요약: 신설 ${summary.added || 0} · 폐지 ${summary.removed || 0} · 명칭변경 ${summary.renamed || 0} · 이체 ${summary.moved || 0} · 검토필요 ${summary.review || 0}</text>`,
+  ];
+  const columns = comparisonColumns(available, portrait, half);
+  const headerHeight = half ? 18 : 22;
+  const rowHeight = half ? 45 : portrait ? 48 : 36;
+  let x = margin;
+  parts.push(`<rect x="${margin}" y="${top}" width="${available}" height="${headerHeight}" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="0.8"/>`);
+  for (const column of columns) {
+    parts.push(`<text x="${x + 5}" y="${top + headerHeight * 0.68}" font-family="Malgun Gothic, sans-serif" font-size="${half ? 6.4 : 8.5}" font-weight="700" fill="#374151">${xmlEscape(column.label)}</text>`);
+    x += column.width;
+  }
+  const rows = page.comparisonRows || [];
+  if (!rows.length) {
+    parts.push(`<text x="${margin}" y="${top + headerHeight + 28}" font-family="Malgun Gothic, sans-serif" font-size="${half ? 7 : 10}" fill="#6B7280">변경 항목이 없습니다.</text>`);
+  }
+  for (const [rowIndex, row] of rows.entries()) {
+    const rowTop = top + headerHeight + rowIndex * rowHeight;
+    parts.push(`<rect x="${margin}" y="${rowTop}" width="${available}" height="${rowHeight}" fill="${rowIndex % 2 ? "#FFFFFF" : "#FAFAFA"}" stroke="#E5E7EB" stroke-width="0.7"/>`);
+    x = margin;
+    for (const column of columns) {
+      const value = comparisonCell(row, column.key, { portrait, half });
+      parts.push(`<text x="${x + 5}" y="${rowTop + (half ? 12 : 14)}" font-family="Malgun Gothic, sans-serif" font-size="${half ? 5.8 : portrait ? 7.2 : 8}" fill="${column.key === "type" ? "#111827" : "#4B5563"}" font-weight="${column.key === "type" ? 700 : 400}">${svgMultiline(value, x + 5, rowTop + (half ? 12 : 14), column.width - 8, half ? 5.8 : portrait ? 7.2 : 8, half ? 10 : 12)}</text>`);
+      x += column.width;
+    }
+  }
+  const footer = pageSize.height - (portrait ? 46 : 45);
+  parts.push(`<line x1="${margin}" y1="${footer}" x2="${pageSize.width - margin}" y2="${footer}" stroke="#D1D5DB" stroke-width="0.8"/>`);
+  parts.push(`<text x="${margin}" y="${footer + 16}" font-family="Malgun Gothic, sans-serif" font-size="${half ? 6.2 : portrait ? 8 : 10}" fill="#6B7280">검토 필요 후보는 자동 확정이 아니라 사람이 확인할 후보입니다.</text>`);
+  return parts.join("\n");
+}
+
+function comparisonColumns(available, portrait, half) {
+  if (half) {
+    return [
+      { key: "type", label: "유형", width: available * 0.2 },
+      { key: "beforeAfter", label: "전/후", width: available * 0.34 },
+      { key: "parents", label: "상위", width: available * 0.24 },
+      { key: "note", label: "사유", width: available * 0.22 },
+    ];
+  }
+  if (portrait) {
+    return [
+      { key: "type", label: "유형", width: available * 0.16 },
+      { key: "beforeAfter", label: "변경 전/후", width: available * 0.28 },
+      { key: "parents", label: "상위 조직", width: available * 0.28 },
+      { key: "note", label: "종류·점수·사유", width: available * 0.28 },
+    ];
+  }
+  const fixed = [115, 145, 145, 128, 128];
+  return [
+    { key: "type", label: "유형", width: fixed[0] },
+    { key: "before", label: "변경 전", width: fixed[1] },
+    { key: "after", label: "변경 후", width: fixed[2] },
+    { key: "beforeParent", label: "전 상위", width: fixed[3] },
+    { key: "afterParent", label: "후 상위", width: fixed[4] },
+    { key: "note", label: "종류·점수·사유", width: Math.max(120, available - fixed.reduce((sum, value) => sum + value, 0)) },
+  ];
+}
+
+function comparisonCell(row, key) {
+  if (key === "beforeAfter") return `${row.before || "-"} → ${row.after || "-"}`;
+  if (key === "parents") return `${row.beforeParent || "-"} → ${row.afterParent || "-"}`;
+  if (key === "note") return [row.kind, row.score ? `점수 ${row.score}` : "", row.reason].filter(Boolean).join(" · ") || "-";
+  return row[key] || "-";
+}
+
+function svgMultiline(value, x, y, width, fontSize, lineHeight) {
+  const maxChars = Math.max(3, Math.floor(width / (fontSize * 0.86)));
+  const lines = wrapCellText(value, maxChars, 3);
+  return lines
+    .map((line, index) => `<tspan x="${x}" y="${y + index * lineHeight}">${xmlEscape(line)}</tspan>`)
+    .join("");
+}
+
+function wrapCellText(value, maxChars, maxLines) {
+  const text = String(value || "-").replace(/\s+/g, " ").trim();
+  if (text.length <= maxChars) return [text];
+  const lines = [];
+  let rest = text;
+  while (rest.length && lines.length < maxLines) {
+    if (lines.length === maxLines - 1 && rest.length > maxChars) {
+      lines.push(`${rest.slice(0, Math.max(1, maxChars - 1))}…`);
+      break;
+    }
+    lines.push(rest.slice(0, maxChars));
+    rest = rest.slice(maxChars);
+  }
+  return lines;
 }

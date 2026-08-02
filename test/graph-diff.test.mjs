@@ -1,6 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { compareOrgGraphs, formatComparisonCsv, formatComparisonMarkdown } from "../src/graph-diff.mjs";
+import {
+  buildComparisonReportPages,
+  compareOrgGraphs,
+  formatComparisonCsv,
+  formatComparisonMarkdown,
+} from "../src/graph-diff.mjs";
 import { displayNodeName, planPages, layoutPage, resolvePageSize } from "../src/layout.mjs";
 import { parseOrganizationTexts } from "../src/parser.mjs";
 
@@ -108,4 +113,26 @@ test("자동 판정하지 않은 유사 명칭·이체 조합은 검토 필요 �
   assert.match(markdown, /## 검토 필요 후보/);
   assert.match(markdown, /명칭변경·이체 후보/);
   assert.match(csv, /명칭변경·이체 후보,국제정책과 → 국제전략과,국제정책과,국제전략과,가실,나실,보조기관,/);
+});
+
+test("비교 결과는 PPTX/SVG 부록용 변경목록 페이지로 변환할 수 있다", () => {
+  const compared = compareOrgGraphs(parseOrganizationTexts([beforeText]), parseOrganizationTexts([afterText]));
+  const pages = buildComparisonReportPages(compared, { paper: "a4-landscape", rowsPerPage: 2 });
+
+  assert.equal(pages.length, 2);
+  assert.equal(pages[0].kind, "comparison-report");
+  assert.equal(pages[0].paper, "a4-landscape");
+  assert.equal(pages[0].comparisonSummary.added, 1);
+  assert.equal(pages[0].comparisonSummary.removed, 1);
+  assert.equal(pages[0].comparisonRows.length, 2);
+  assert.deepEqual(Object.keys(pages[0].comparisonRows[0]), [
+    "type",
+    "before",
+    "after",
+    "beforeParent",
+    "afterParent",
+    "kind",
+    "score",
+    "reason",
+  ]);
 });

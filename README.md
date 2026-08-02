@@ -56,6 +56,14 @@ npm test
 npm run demo
 ```
 
+### Windows에서 가볍게 실행하기
+
+웹 브라우저 데모와 별개로 `desktop/`에는 Tauri 2 + WebView2 데스크톱 포장이 있습니다. 화면은 정적 HTML로 열리고, 법령 파싱·레이아웃·PPTX 생성은 Node.js 런타임을 포함한 `orgchart-core` sidecar가 수행합니다. 따라서 최종 Windows 설치본에서는 Node.js나 Python을 따로 설치하지 않아도 됩니다.
+
+GitHub Actions의 **Build Windows desktop app**을 수동 실행하거나 `desktop-v*` 태그를 push하면 NSIS 설치파일과 MSI가 artifact로 생성됩니다. 입력은 직제·시행규칙 텍스트 또는 기존 조직도 JSON이며, A4 반쪽·세로·가로·2열·매트릭스·카드 등 출력 유형과 SVG·HTML·JSON·PPTX 저장을 제공합니다. 자세한 개발·패키징 절차는 [`desktop/README.md`](desktop/README.md)에 있습니다.
+
+폐쇄망 배포는 Actions의 `offline=true` 옵션 또는 `npm run --prefix desktop build:offline`을 사용합니다. WebView2 오프라인 설치파일을 함께 넣어 설치 시 인터넷 의존성을 없애며, 법령은 인터넷 PC에서 법제처 기준일 원문·별표를 미리 받아 승인된 스냅샷으로 반입하면 됩니다. API 모드는 내부 프록시/API 미러가 허용된 경우에만 선택합니다.
+
 샘플은 `examples/sample-law.txt`를 읽어 아래 파일을 만듭니다.
 
 ```text

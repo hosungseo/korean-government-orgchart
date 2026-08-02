@@ -1003,6 +1003,8 @@ function diagnoseEdge(edge, { tolerance, minimumConnectorLength }) {
   const from = normalizePosition(edge.from);
   const to = normalizePosition(edge.to);
   if (!from || !to) return { reason: "missing-endpoint" };
+  const attachmentIssue = diagnoseRouteAttachment(edge, { from, to, tolerance });
+  if (attachmentIssue) return attachmentIssue;
   if (edge.orientation === "horizontal") {
     const gap = to.left - from.right;
     if (gap < -tolerance) return { reason: "reversed-horizontal", gap: Number(gap.toFixed(2)) };
@@ -1013,6 +1015,52 @@ function diagnoseEdge(edge, { tolerance, minimumConnectorLength }) {
   if (gap < -tolerance) return { reason: "reversed-vertical", gap: Number(gap.toFixed(2)) };
   if (gap < minimumConnectorLength) return { reason: "too-short-vertical", gap: Number(gap.toFixed(2)) };
   return null;
+}
+
+function diagnoseRouteAttachment(edge, { from, to, tolerance }) {
+  if (!edge.routePoints?.length) return null;
+  const first = edge.routePoints[0];
+  const last = edge.routePoints.at(-1);
+  if (!first || !last) return { reason: "missing-route-endpoint" };
+  const horizontal = edge.orientation === "horizontal";
+  const start = horizontal
+    ? { x: from.right, y: from.centerY }
+    : { x: from.centerX, y: from.bottom };
+  const end = horizontal
+    ? { x: to.left, y: to.centerY }
+    : { x: to.centerX, y: to.top };
+  const startDelta = pointDelta(first, start);
+  if (startDelta > tolerance) {
+    return {
+      reason: "detached-route-endpoint",
+      endpoint: "start",
+      delta: Number(startDelta.toFixed(2)),
+      expected: roundedPoint(start),
+      actual: roundedPoint(first),
+    };
+  }
+  const endDelta = pointDelta(last, end);
+  if (endDelta > tolerance) {
+    return {
+      reason: "detached-route-endpoint",
+      endpoint: "end",
+      delta: Number(endDelta.toFixed(2)),
+      expected: roundedPoint(end),
+      actual: roundedPoint(last),
+    };
+  }
+  return null;
+}
+
+function pointDelta(a, b) {
+  return Math.max(Math.abs((a?.x ?? 0) - (b?.x ?? 0)), Math.abs((a?.y ?? 0) - (b?.y ?? 0)));
+}
+
+function roundedPoint(point) {
+  return {
+    x: Number(point.x.toFixed(2)),
+    y: Number(point.y.toFixed(2)),
+  };
 }
 
 function diagnoseSiblingSpacing(edges, { nodeNames, minimumSiblingGap, maximumSiblingGapRatio }) {

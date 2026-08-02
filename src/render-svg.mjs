@@ -100,8 +100,8 @@ function svgEdge(edge) {
  * by the node, which is rendered after the connector, so the line reads as
  * attached to the box rather than stopping one pixel short of it.
  */
-function edgeRoute(edge) {
-  if (edge.routePoints?.length >= 2) return routePointsPath(edge.routePoints);
+export function edgeRoute(edge) {
+  if (edge.routePoints?.length >= 2) return routePointsPath(routePointsWithEndpointOverlap(edge));
   const overlap = 0.65;
   const f = edge.from;
   const t = edge.to;
@@ -119,6 +119,25 @@ function edgeRoute(edge) {
   const endY = (t.top ?? t.centerY) + overlap;
   const midY = (startY + endY) / 2;
   return `M ${coordinate(startX)} ${coordinate(startY)} V ${coordinate(midY)} H ${coordinate(endX)} V ${coordinate(endY)}`;
+}
+
+function routePointsWithEndpointOverlap(edge, overlap = 0.65) {
+  const points = (edge.routePoints || []).map((point) => ({ x: point.x, y: point.y }));
+  if (points.length < 2) return points;
+  const first = points[0];
+  const last = points.at(-1);
+  if (edge.orientation === "horizontal") {
+    return [
+      { x: first.x - overlap, y: first.y },
+      ...points,
+      { x: last.x + overlap, y: last.y },
+    ];
+  }
+  return [
+    { x: first.x, y: first.y - overlap },
+    ...points,
+    { x: last.x, y: last.y + overlap },
+  ];
 }
 
 function routePointsPath(points) {

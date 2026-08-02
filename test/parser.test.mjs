@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { diagnoseLayout, displayNodeName, layoutPage, nodeStyle, parseLayoutStyles, planBestPages, planLayoutVariants, planPages, resolvePageSize, routeLayoutEdges, scoreLayoutPages } from "../src/layout.mjs";
 import { projectOperationalView, summarizeStructure } from "../src/model.mjs";
 import { parseNameList, parseOrganizationTexts } from "../src/parser.mjs";
-import { renderSvg } from "../src/render-svg.mjs";
+import { edgeRoute, renderSvg } from "../src/render-svg.mjs";
 
 const text = `
 시험행정부와 그 소속기관 직제
@@ -213,6 +213,28 @@ test("작도 연결선은 상자 좌표에 붙고 SVG에서는 연속 경로로 
   const svg = renderSvg(graph, [page]);
   assert.equal((svg.match(/stroke-linecap="round"/g) || []).length, layout.edges.length);
   assert.match(svg, /<path d="M [^"]+" stroke="#(?:6B7280|8B8B8B|3D8B3D|4F7EA8)"/);
+  assert.equal(
+    edgeRoute({
+      orientation: "horizontal",
+      routePoints: [
+        { x: 100, y: 50 },
+        { x: 150, y: 50 },
+      ],
+    }),
+    "M 99.35 50 H 100 H 150 H 150.65",
+  );
+  assert.equal(
+    edgeRoute({
+      orientation: "vertical",
+      routePoints: [
+        { x: 50, y: 40 },
+        { x: 120, y: 40 },
+        { x: 120, y: 80 },
+        { x: 50, y: 80 },
+      ],
+    }),
+    "M 50 39.35 V 40 H 120 V 80 H 50 V 80.65",
+  );
 });
 
 test("배치 진단은 너무 짧거나 역방향인 연결선을 잡는다", () => {
@@ -249,6 +271,26 @@ test("배치 진단은 너무 짧거나 역방향인 연결선을 잡는다", ()
   });
   assert.equal(reversed.ok, false);
   assert.equal(reversed.edgeIssues[0].reason, "reversed-horizontal");
+
+  const detached = diagnoseLayout({
+    frame: { left: 0, top: 0, width: 220, height: 180 },
+    nodes: [],
+    edges: [
+      {
+        parent: "a",
+        child: "b",
+        from: { left: 30, top: 20, width: 40, height: 30 },
+        to: { left: 30, top: 120, width: 40, height: 30 },
+        routePoints: [
+          { x: 56, y: 50 },
+          { x: 56, y: 120 },
+        ],
+      },
+    ],
+  });
+  assert.equal(detached.ok, false);
+  assert.equal(detached.edgeIssues[0].reason, "detached-route-endpoint");
+  assert.equal(detached.edgeIssues[0].endpoint, "start");
 });
 
 test("배치 진단은 상자 간격과 부모 중심축 품질 문제를 별도로 잡는다", () => {

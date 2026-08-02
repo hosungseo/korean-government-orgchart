@@ -33,6 +33,7 @@ export async function runReviewPack(args = {}) {
   });
 
   const files = {
+    indexHtml: path.join(outDir, stringArg(args, "index-html-out") || "index.html"),
     readme: path.join(outDir, stringArg(args, "readme-out") || "README.md"),
     worklist: path.join(outDir, stringArg(args, "worklist-out") || "worklist.md"),
     cases: path.join(outDir, stringArg(args, "cases-out") || "cases.json"),
@@ -72,6 +73,7 @@ export async function runReviewPack(args = {}) {
   }
   await writeText(files.worklist, formatReviewWorklistMarkdown(result));
   await writeText(files.readme, formatReviewPackMarkdown(result));
+  await writeText(files.indexHtml, formatReviewPackHtml(result));
   return result;
 }
 
@@ -99,6 +101,7 @@ export function formatReviewPackMarkdown(result) {
 
   lines.push("## 먼저 열 파일");
   lines.push("");
+  lines.push(`- HTML 첫 화면: ${linkPath(result.outDir, result.files.indexHtml)}`);
   lines.push(`- 검토 작업목록: ${linkPath(result.outDir, result.files.worklist)}`);
   lines.push(`- 감사 요약: ${linkPath(result.outDir, result.files.audit)}`);
   lines.push(`- 산출물 매니페스트: ${linkPath(result.outDir, result.files.manifest)}`);
@@ -153,6 +156,180 @@ export function formatReviewPackMarkdown(result) {
   lines.push("> 확인 열은 `높음/중간/낮음` 우선순위 개수입니다. 배치 문제는 넘침·겹침·연결선 같은 hard issue, 품질은 간격·정렬·선교차·컬럼 균형 같은 polish issue입니다.");
   lines.push("");
   return `${lines.join("\n")}\n`;
+}
+
+export function formatReviewPackHtml(result) {
+  const auditCounts = result.audit?.statusCounts || {};
+  const buildCounts = result.build?.statusCounts || {};
+  const title = "조직도 검토팩";
+  return `<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${htmlEscape(title)}</title>
+  <style>
+    :root { --ink:#111827; --muted:#6B7280; --rule:#D1D5DB; --soft:#F3F4F6; --paper:#FFFFFF; --accent:#315A8A; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:#E5E7EB; color:var(--ink); font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif; line-height:1.48; }
+    main { max-width:1180px; margin:18px auto; padding:24px; background:var(--paper); box-shadow:0 4px 18px rgba(15,23,42,.12); }
+    h1 { margin:0; font-size:28px; letter-spacing:-.02em; }
+    h2 { margin:28px 0 10px; font-size:18px; border-bottom:1px solid var(--rule); padding-bottom:7px; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; color:var(--muted); font-size:13px; }
+    .pill { display:inline-block; border:1px solid var(--rule); border-radius:999px; padding:3px 9px; background:#fff; }
+    .quick { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:10px; margin-top:12px; }
+    .card { border:1px solid var(--rule); border-radius:8px; padding:12px; background:#FAFAFA; }
+    .card strong { display:block; margin-bottom:4px; }
+    table { width:100%; border-collapse:collapse; margin-top:8px; font-size:13px; }
+    th,td { border:1px solid var(--rule); padding:7px 8px; vertical-align:top; text-align:left; }
+    th { background:var(--soft); font-weight:700; }
+    .num { text-align:right; white-space:nowrap; }
+    .outputs a { display:inline-block; margin:0 6px 4px 0; }
+    .primary { font-weight:700; }
+    .muted { color:var(--muted); }
+    .warn { color:#92400E; }
+    @media print {
+      body { background:white; }
+      main { margin:0; max-width:none; box-shadow:none; padding:0; }
+      .quick,.card,table { break-inside:avoid; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>${htmlEscape(title)}</h1>
+    <div class="meta">
+      <span class="pill">생성시각 ${htmlEscape(result.generatedAt || "")}</span>
+      <span class="pill">케이스 ${result.caseCount || 0}</span>
+      <span class="pill">감사: 사용 가능 ${auditCounts.ready || 0} · 검토 필요 ${auditCounts["needs-review"] || 0} · 수정 필요 ${auditCounts["needs-correction"] || 0} · 오류 ${auditCounts.error || 0}</span>
+      <span class="pill">산출: 생성 ${buildCounts.built || 0} · 오류 ${buildCounts.error || 0}</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>먼저 열 파일</h2>
+    <div class="quick">
+      ${quickLink(result, "검토 작업목록", result.files?.worklist, "보강 지시문 후보와 재시도 항목")}
+      ${quickLink(result, "감사 요약", result.files?.audit, "파싱·소관·별표·배치 품질")}
+      ${quickLink(result, "산출물 매니페스트", result.files?.manifest, "케이스별 산출물 링크")}
+      ${quickLink(result, "케이스 정의", result.files?.cases, "재실행 가능한 입력 목록")}
+      ${quickLink(result, "자동 보강 후보", result.files?.suggestedCases, "suggested-cases.json")}
+      ${quickLink(result, "채택 케이스", result.files?.acceptedCases, "accepted-cases.json")}
+    </div>
+  </section>
+
+  ${htmlDeckSection(result)}
+  ${htmlRerunSection(result)}
+  ${htmlAcceptedSection(result)}
+  ${htmlTopActionsSection(result)}
+  ${htmlCasesSection(result)}
+</main>
+</body>
+</html>
+`;
+}
+
+function quickLink(result, label, filePath, description) {
+  if (!filePath) return "";
+  return `<div class="card"><strong><a href="${htmlAttr(hrefPath(result.outDir, filePath))}">${htmlEscape(label)}</a></strong><span class="muted">${htmlEscape(description)}</span></div>`;
+}
+
+function htmlDeckSection(result) {
+  const decks = result.build?.decks || [];
+  if (!decks.length && !result.build?.deck && !result.build?.deckError) return "";
+  const rows = [];
+  for (const deck of decks) {
+    rows.push(`<tr><td>${htmlEscape(deck.paper)}</td><td><a href="${htmlAttr(hrefPath(result.outDir, deck.path))}">${htmlEscape(path.basename(deck.path))}</a></td><td class="num">${deck.pages || 0}</td></tr>`);
+  }
+  if (result.build?.deck) {
+    rows.push(`<tr><td>deck</td><td><a href="${htmlAttr(hrefPath(result.outDir, result.build.deck))}">${htmlEscape(path.basename(result.build.deck))}</a></td><td class="num">-</td></tr>`);
+  }
+  return `<section>
+  <h2>통합 PPTX deck</h2>
+  ${result.build?.deckError ? `<p class="warn">통합 deck 오류: ${htmlEscape(result.build.deckError)}</p>` : ""}
+  <table><thead><tr><th>용지</th><th>파일</th><th>페이지</th></tr></thead><tbody>${rows.join("")}</tbody></table>
+</section>`;
+}
+
+function htmlRerunSection(result) {
+  if (!result.rerun) return "";
+  if (result.rerun.skipped) {
+    return `<section><h2>자동 보강 재실행</h2><p class="muted">생략: ${htmlEscape(result.rerun.reason)}</p></section>`;
+  }
+  const rerunEntry = result.rerun.files?.indexHtml || result.rerun.files?.readme || result.rerun.outDir;
+  const rows = comparisonRows(result.rerun.comparison)
+    .map((row) => `<tr><td>${htmlEscape(row.label)}</td><td class="num">${row.before}</td><td class="num">${row.after}</td><td class="num">${htmlEscape(formatDelta(row.delta))}</td></tr>`)
+    .join("");
+  return `<section>
+  <h2>자동 보강 재실행</h2>
+  <p>2차 리뷰팩: <a href="${htmlAttr(hrefPath(result.outDir, rerunEntry))}">${htmlEscape(hrefPath(result.outDir, rerunEntry))}</a> · 적용 ${result.rerun.changedCases || 0}/${result.caseCount || 0}건</p>
+  <table><thead><tr><th>지표</th><th>1차</th><th>2차</th><th>변화</th></tr></thead><tbody>${rows}</tbody></table>
+</section>`;
+}
+
+function htmlAcceptedSection(result) {
+  if (!result.acceptedBuild) return "";
+  if (result.acceptedBuild.skipped) {
+    return `<section><h2>최종 채택 산출물</h2><p class="muted">생략: ${htmlEscape(result.acceptedBuild.reason)}</p></section>`;
+  }
+  const deckLinks = (result.acceptedBuild.build?.decks || [])
+    .map((deck) => `<a href="${htmlAttr(hrefPath(result.outDir, deck.path))}">${htmlEscape(path.basename(deck.path))}</a>`)
+    .join(" · ");
+  return `<section>
+  <h2>최종 채택 산출물</h2>
+  <p>폴더: <a href="${htmlAttr(hrefPath(result.outDir, result.acceptedBuild.outDir))}">${htmlEscape(hrefPath(result.outDir, result.acceptedBuild.outDir))}</a></p>
+  <p>케이스: 채택 ${result.acceptedBuild.acceptedCases || 0} · 거절 ${result.acceptedBuild.rejectedCases || 0} · 유지 ${result.acceptedBuild.unchangedCases || 0}</p>
+  ${deckLinks ? `<p>최종 deck: ${deckLinks}</p>` : ""}
+</section>`;
+}
+
+function htmlTopActionsSection(result) {
+  const actions = topReviewActions(result.audit?.cases || []);
+  if (!actions.length) {
+    return `<section><h2>우선 확인</h2><p class="muted">높은·중간 우선순위 확인 항목이 없습니다. 산출물 deck과 HTML 검토시트를 열어 작도 품질만 육안 확인하세요.</p></section>`;
+  }
+  return `<section>
+  <h2>우선 확인</h2>
+  <ul>${actions.map((item) => `<li><strong>[${htmlEscape(priorityLabel(item.priority))}] ${htmlEscape(item.institution)}</strong>: ${htmlEscape(item.message)}</li>`).join("")}</ul>
+</section>`;
+}
+
+function htmlCasesSection(result) {
+  const rows = (result.audit?.cases || []).map((item) => {
+    const summary = item.summary || {};
+    const built = findBuildCase(result.build?.cases || [], summary.id);
+    const review = summary.reviewActions || {};
+    return `<tr>
+      <td>${htmlEscape(summary.institution || summary.id || "")}</td>
+      <td>${htmlEscape(summary.asOf || "")}</td>
+      <td>${htmlEscape(summary.focus || summary.layout || "")}</td>
+      <td>${htmlEscape(summary.statusLabel || summary.status || built?.statusLabel || built?.status || "")}</td>
+      <td>${htmlEscape(selectedLayouts(summary))}</td>
+      <td>${review.high || 0}/${review.medium || 0}/${review.low || 0}</td>
+      <td class="num">${summary.layoutDiagnostics?.totalIssues ?? ""}</td>
+      <td class="num">${summary.layoutDiagnostics?.qualityIssues ?? ""}</td>
+      <td class="outputs">${outputLinksHtml(result.outDir, built?.outputs || {}) || htmlEscape(built?.error || item.error || "")}</td>
+    </tr>`;
+  });
+  return `<section>
+  <h2>케이스별 산출물</h2>
+  <table>
+    <thead><tr><th>기관</th><th>기준일</th><th>대상</th><th>상태</th><th>선택유형</th><th>확인</th><th>배치</th><th>품질</th><th>산출물</th></tr></thead>
+    <tbody>${rows.join("")}</tbody>
+  </table>
+  <p class="muted">` + "html" + ` 링크는 한글/HWPX 붙여넣기용 검토시트입니다.</p>
+</section>`;
+}
+
+function outputLinksHtml(baseDir, outputs) {
+  const order = ["html", "pptx", "svg", "json", "audit", "trace"];
+  return order
+    .filter((kind) => outputs[kind])
+    .map((kind) => `<a class="${kind === "html" ? "primary" : ""}" href="${htmlAttr(hrefPath(baseDir, outputs[kind]))}">${htmlEscape(kind)}</a>`)
+    .join(" ");
 }
 
 export function formatReviewWorklistMarkdown(result) {
@@ -342,6 +519,7 @@ function appendRerunSection(lines, result) {
     lines.push(`- 채택 케이스: ${linkPath(result.outDir, result.files.acceptedCases)} (채택 ${result.acceptedCases.acceptedCases || 0} · 거절 ${result.acceptedCases.rejectedCases || 0} · 유지 ${result.acceptedCases.unchangedCases || 0})`);
   }
   if (result.rerun.files?.readme) lines.push(`- 2차 README: ${linkPath(result.outDir, result.rerun.files.readme)}`);
+  if (result.rerun.files?.indexHtml) lines.push(`- 2차 HTML 첫 화면: ${linkPath(result.outDir, result.rerun.files.indexHtml)}`);
   if (result.rerun.files?.audit) lines.push(`- 2차 감사 요약: ${linkPath(result.outDir, result.rerun.files.audit)}`);
   if (result.rerun.files?.manifest) lines.push(`- 2차 산출물 매니페스트: ${linkPath(result.outDir, result.rerun.files.manifest)}`);
   lines.push("");
@@ -932,6 +1110,22 @@ function priorityLabel(priority) {
 function linkPath(baseDir, filePath) {
   const relative = path.relative(baseDir, filePath).split(path.sep).join("/");
   return `[${relative || path.basename(filePath)}](${encodeURI(relative || path.basename(filePath))})`;
+}
+
+function hrefPath(baseDir, filePath) {
+  const relative = path.relative(baseDir, filePath).split(path.sep).join("/");
+  return encodeURI(relative || path.basename(filePath));
+}
+
+function htmlAttr(value) {
+  return htmlEscape(value).replaceAll('"', "&quot;");
+}
+
+function htmlEscape(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 }
 
 function escapeCell(value) {

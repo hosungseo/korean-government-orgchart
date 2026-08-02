@@ -651,6 +651,7 @@ function printHelp() {
   --outputs svg,html,json,audit,trace,pptx,deck|all  batch-build/review-pack 산출 형식(all은 케이스별 svg/html/json/audit/trace/pptx)
   --deck <file.pptx>        batch-build 통합 PPTX deck 경로(--outputs deck 없이도 활성화)
   --artifact-dir <dir>      review-pack 내부 산출물 폴더(기본: <out-dir>/artifacts)
+  --index-html-out <file>   review-pack HTML 첫 화면 파일명(기본: index.html)
   --suggested-cases-out <file> review-pack 자동 보강 케이스 파일명(기본: suggested-cases.json)
   --accepted-cases-out <file>  review-pack 점수 게이트 통과 케이스 파일명(기본: accepted-cases.json)
   --rerun-suggested         review-pack에서 suggested-cases.json을 바로 2차 실행

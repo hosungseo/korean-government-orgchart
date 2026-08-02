@@ -54,13 +54,21 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.equal(result.build.total, 1);
   assert.equal(result.build.deckError, null);
   assert.match(await readFile(result.files.readme, "utf8"), /조직도 검토팩/);
+  assert.match(await readFile(result.files.readme, "utf8"), /HTML 첫 화면/);
   assert.match(await readFile(result.files.readme, "utf8"), /케이스별 산출물/);
   assert.match(await readFile(result.files.readme, "utf8"), /검토 작업목록/);
   assert.match(await readFile(result.files.readme, "utf8"), /자동 보강 재실행/);
   assert.match(await readFile(result.files.readme, "utf8"), /채택 케이스/);
   assert.match(await readFile(result.files.readme, "utf8"), /최종 채택 산출물/);
+  const indexHtml = await readFile(result.files.indexHtml, "utf8");
+  assert.match(indexHtml, /조직도 검토팩/);
+  assert.match(indexHtml, /검토 작업목록/);
+  assert.match(indexHtml, /케이스별 산출물/);
+  assert.match(indexHtml, /시험부/);
+  assert.match(indexHtml, /한글\/HWPX/);
   assert.match(await readFile(result.files.worklist, "utf8"), /조직도 검토 작업목록/);
   assert.match(await readFile(result.files.worklist, "utf8"), /입력에 붙여넣을 보강 지시문 후보/);
+  assert.ok((await stat(result.files.indexHtml)).size > 0);
   assert.ok((await stat(result.files.cases)).size > 0);
   assert.ok((await stat(result.files.suggestedCases)).size > 0);
   assert.ok((await stat(result.files.acceptedCases)).size > 0);
@@ -84,7 +92,9 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
 
   assert.equal(result.rerun.skipped, undefined);
   assert.equal(result.rerun.changedCases, 1);
+  assert.ok((await stat(result.rerun.files.indexHtml)).size > 0);
   assert.ok((await stat(result.rerun.files.readme)).size > 0);
+  assert.match(await readFile(result.files.indexHtml, "utf8"), /rerun\/index\.html/);
   assert.equal(result.rerun.comparison.before.jurisdictionCandidates, 2);
   assert.equal(result.rerun.comparison.after.jurisdictionCandidates, 0);
   assert.equal(result.rerun.comparison.delta.jurisdictionCandidates, -2);

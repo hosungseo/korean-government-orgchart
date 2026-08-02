@@ -22,6 +22,10 @@ const EDGE_PRIORITY = {
 };
 
 export class OrgGraph {
+  static fromJSON(value) {
+    return orgGraphFromJSON(value);
+  }
+
   constructor({ institution = "행정기관", asOf, title } = {}) {
     this.meta = {
       institution,
@@ -333,6 +337,72 @@ export class OrgGraph {
       edges: [...this.edges.values()],
     };
   }
+}
+
+export function orgGraphFromJSON(value) {
+  if (!value || typeof value !== "object") {
+    throw new TypeError("OrgGraph JSON object is required.");
+  }
+  const meta = structuredClone(value.meta || {});
+  const institution = meta.institution || meta.title || "행정기관";
+  const graph = new OrgGraph({
+    institution,
+    asOf: meta.asOf,
+    title: meta.title || institution,
+  });
+  graph.meta = {
+    ...meta,
+    institution,
+    title: meta.title || institution,
+    asOf: meta.asOf || null,
+    warnings: Array.isArray(meta.warnings) ? meta.warnings : [],
+    validation: Array.isArray(meta.validation) ? meta.validation : [],
+    sources: Array.isArray(meta.sources) ? meta.sources : [],
+  };
+  graph.nodes = new Map();
+  graph.edges = new Map();
+  graph.aliases = new Map(Array.isArray(value.aliases) ? value.aliases : []);
+
+  for (const rawNode of value.nodes || []) {
+    if (!rawNode?.id || !rawNode?.name) continue;
+    const kind = rawNode.kind || inferKind(rawNode.name);
+    graph.nodes.set(rawNode.id, {
+      id: rawNode.id,
+      name: rawNode.name,
+      kind,
+      rank: rawNode.rank ?? inferRank(rawNode.name, kind),
+      metadata: structuredClone(rawNode.metadata || {}),
+      sources: Array.isArray(rawNode.sources) ? [...rawNode.sources] : [],
+    });
+  }
+
+  let rootId = value.rootId && graph.nodes.has(value.rootId) ? value.rootId : null;
+  if (!rootId) {
+    rootId =
+      [...graph.nodes.values()].find((node) => node.kind === "institution")?.id ||
+      [...graph.nodes.values()].find((node) => node.name === institution)?.id ||
+      null;
+  }
+  if (!rootId) {
+    rootId = graph.addNode(institution, { kind: "institution", rank: 0, source: "inferred" }).id;
+  }
+  graph.rootId = rootId;
+
+  for (const rawEdge of value.edges || []) {
+    if (!rawEdge?.parent || !rawEdge?.child) continue;
+    if (!graph.nodes.has(rawEdge.parent) || !graph.nodes.has(rawEdge.child)) continue;
+    const key = `${rawEdge.parent}>${rawEdge.child}`;
+    graph.edges.set(key, {
+      id: rawEdge.id || `e-${stableId(key).slice(2)}`,
+      parent: rawEdge.parent,
+      child: rawEdge.child,
+      type: rawEdge.type || "structural",
+      sources: Array.isArray(rawEdge.sources) ? [...rawEdge.sources] : [],
+      metadata: structuredClone(rawEdge.metadata || {}),
+    });
+  }
+
+  return graph;
 }
 
 /**

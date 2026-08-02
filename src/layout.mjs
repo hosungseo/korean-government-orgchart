@@ -1600,11 +1600,22 @@ function layoutMatrixPage({ graph, pageSize, frame, parentEdge, children, roots,
     const centerX = frame.left + frame.width / 2;
     put(id, centerX, frame.top + headerHeight + 15 + maxRows * rowGap, Math.min(150, Math.max(64, columnWidth * 0.75)), rowHeight, false, depth.get(id) || 1);
   }
-  const edges = [...parentEdge.values()]
-    .map((edge) => ({ ...edge, from: positions.get(edge.parent), to: positions.get(edge.child) }))
-    .filter((edge) => edge.from && edge.to);
   const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
-  return { frame, nodes, edges, roots, maxDepth: maxRows, verticalLeaves: true };
+  return {
+    frame,
+    nodes,
+    // Matrix pages are compact review tables.  The parent-child relation is
+    // encoded by column order and vertical sequence; dense connector lines in
+    // a 297pt A4 half page create false "broken line" artifacts and obscure
+    // labels.  Keep the legal edges in JSON/audit and render this preset as
+    // an implicit hierarchy.
+    edges: [],
+    roots,
+    maxDepth: maxRows,
+    verticalLeaves: true,
+    edgeMode: "implicit-column",
+    labels: [{ text: "매트릭스형 · 열 내부 위→아래 순서로 하위조직 표시", x: frame.left, y: frame.top - 10, align: "start" }],
+  };
 }
 
 /**

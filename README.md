@@ -178,7 +178,7 @@ node src/cli.mjs build \
 | `affiliate-strip` | 본부 계층 아래 부속기관·책임운영기관을 별도 띠로 표시 |
 | `catalog` | 관·국별 하위 과·팀을 연결선 없이 카드 목록으로 인쇄 |
 
-`--layouts`에 쉼표로 여러 프리셋을 지정하면 순서대로 한 파일에 들어가고, `--layout all`은 여덟 유형을 모두 생성합니다. `change-lanes`는 `@변경` 지시문이 있을 때 변경 조직이 오른쪽 레인으로 이동합니다. 개정 전/후 JSON이 모두 있으면 `compare-json`이 이 표식을 자동 생성합니다.
+`--layouts`에 쉼표로 여러 프리셋을 지정하면 순서대로 한 파일에 들어가고, `--layout all`은 여덟 유형을 모두 생성합니다. `batch-audit`, `batch-build`, `review-pack`에서 `--expand-layouts vertical,catalog,two-column`을 쓰면 같은 입력 케이스를 레이아웃별 별도 케이스로 확장해 각 유형의 SVG/HTML/PPTX를 따로 만들고 `gallery.html`에서 나란히 비교할 수 있습니다. `change-lanes`는 `@변경` 지시문이 있을 때 변경 조직이 오른쪽 레인으로 이동합니다. 개정 전/후 JSON이 모두 있으면 `compare-json`이 이 표식을 자동 생성합니다.
 `--layout best`는 일반 조직도 후보(`horizontal`, `vertical`, `two-column`, `matrix`, `affiliate-strip`, `catalog`)를 실제로 배치해 보고 넘침·겹침·연결선 문제가 가장 적은 유형을 고릅니다. 최종 검토서처럼 “깨끗한 한 장”이 우선인 경우에 사용합니다.
 
 ```bash
@@ -295,6 +295,12 @@ node src/cli.mjs make-cases \
   --paper a4-half \
   --layout best \
   --out work/core-agencies.cases.json
+
+node src/cli.mjs review-pack \
+  --cases work/core-agencies.cases.json \
+  --expand-layouts vertical,catalog,two-column \
+  --out-dir outputs/core-agencies-layout-review \
+  --outputs svg,html,json,audit,trace,pptx,deck
 
 node src/cli.mjs batch-audit \
   --cases work/core-agencies.cases.json \

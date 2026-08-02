@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { applyAnnexOrganizations, attachAnnexes } from "./annex.mjs";
 import { buildAuditReport } from "./audit.mjs";
+import { expandCaseSpecsByLayouts } from "./case-scaffold.mjs";
 import { fetchLawAtDate } from "./law-api.mjs";
 import { organizationLawNameCandidateGroups } from "./law-name.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
@@ -253,9 +254,13 @@ export function summarizeLayoutSelection(caseSpec = {}, pages = []) {
 }
 
 export async function loadBatchContext(args) {
-  const caseSpecs = args.caseSpecs || (await readCasesFile(requiredString(args, "cases")));
+  const rawCaseSpecs = args.caseSpecs || (await readCasesFile(requiredString(args, "cases")));
+  const expansion = args.caseSpecsExpanded
+    ? { cases: rawCaseSpecs, expanded: false, expandedCases: 0, sourceCases: rawCaseSpecs.length }
+    : expandCaseSpecsByLayouts(rawCaseSpecs, args["expand-layouts"]);
   return {
-    caseSpecs,
+    caseSpecs: expansion.cases,
+    caseSpecExpansion: expansion,
     casesPath: args.cases ? path.resolve(String(args.cases)) : null,
     casesBaseDir: args.casesBaseDir
       ? path.resolve(String(args.casesBaseDir))

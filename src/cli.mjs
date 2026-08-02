@@ -289,6 +289,7 @@ async function makeCasesCommand(args) {
     maxNodes: args["max-nodes"] ? Number(args["max-nodes"]) : undefined,
     lawMap: stringArg(args, "law-map"),
     lawMapDate: stringArg(args, "law-map-date"),
+    expandLayouts: args["expand-layouts"],
   });
   const output = `${JSON.stringify(result, jsonReplacer, 2)}\n`;
   if (args.out) {
@@ -629,6 +630,7 @@ function printHelp() {
 주요 옵션
   --layout auto|best|compact|split|vertical|horizontal|two-column|matrix|flow|change-lanes|affiliate-strip|catalog|all
   --layouts vertical,horizontal,two-column,matrix,flow,change-lanes,affiliate-strip,catalog  같은 문언을 여러 유형으로 한 번에 출력
+  --expand-layouts <list>|all  batch/review-pack 케이스를 레이아웃별 별도 산출물로 자동 확장
   --paper slide|a4-portrait|a4-landscape|a4-half  출력 용지와 방향
   --html <file.html>       한글/HWPX 붙여넣기·인쇄용 A4 HTML 검토시트 저장
   --focus <조직명>  해당 조직과 하위조직만 한 장으로 출력

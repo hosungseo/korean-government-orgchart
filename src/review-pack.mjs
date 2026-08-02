@@ -1,7 +1,7 @@
 import path from "node:path";
 import { formatBatchAuditMarkdown, loadBatchContext, runBatchAudit } from "./batch-audit.mjs";
 import { formatBatchBuildMarkdown, runBatchBuild } from "./batch-build.mjs";
-import { buildAuditCaseSpecs } from "./case-scaffold.mjs";
+import { buildAuditCaseSpecs, expandCaseSpecsByLayouts } from "./case-scaffold.mjs";
 import { jsonReplacer, readInputs, writeText } from "./utils.mjs";
 
 export async function runReviewPack(args = {}) {
@@ -16,6 +16,7 @@ export async function runReviewPack(args = {}) {
   const common = {
     ...args,
     caseSpecs,
+    caseSpecsExpanded: true,
     lawFetchCache: sharedLawFetchCache,
   };
   const artifactDir = path.resolve(stringArg(args, "artifact-dir") || path.join(outDir, "artifacts"));
@@ -685,6 +686,7 @@ async function runSuggestedReviewPack(result, args, sharedLawFetchCache) {
   const rerunResult = await runReviewPack({
     ...args,
     caseSpecs: suggested.cases,
+    caseSpecsExpanded: true,
     casesBaseDir: result.outDir,
     cases: undefined,
     "out-dir": rerunOutDir,
@@ -720,6 +722,7 @@ async function runAcceptedBuild(result, args, sharedLawFetchCache) {
   const build = await runBatchBuild({
     ...args,
     caseSpecs: accepted.cases,
+    caseSpecsExpanded: true,
     casesBaseDir: result.outDir,
     cases: undefined,
     "out-dir": acceptedOutDir,
@@ -1109,8 +1112,11 @@ function suggestedDirectives(auditCase = {}) {
 
 async function resolveReviewContext(args) {
   if (args.caseSpecs) {
+    const expansion = args.caseSpecsExpanded
+      ? { cases: args.caseSpecs }
+      : expandCaseSpecsByLayouts(args.caseSpecs, args["expand-layouts"]);
     return {
-      caseSpecs: args.caseSpecs,
+      caseSpecs: expansion.cases,
       casesBaseDir: args.casesBaseDir
         ? path.resolve(String(args.casesBaseDir))
         : stringArg(args, "cases")
@@ -1139,6 +1145,7 @@ async function resolveReviewContext(args) {
       maxNodes: args["max-nodes"] ? Number(args["max-nodes"]) : undefined,
       lawMap: stringArg(args, "law-map"),
       lawMapDate: stringArg(args, "law-map-date"),
+      expandLayouts: args["expand-layouts"],
     }).cases,
     casesBaseDir: process.cwd(),
   };

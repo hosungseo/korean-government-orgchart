@@ -215,6 +215,62 @@ test("review-pack triage CSV는 위험점수 순으로 케이스를 정렬한다
   assert.match(lines[3], /정상부/);
 });
 
+test("review-pack은 expand-layouts로 같은 입력을 레이아웃별 산출물로 확장한다", async () => {
+  const dir = await mkdtemp(path.join(os.tmpdir(), "orgchart-review-pack-layouts-"));
+  await writeFile(
+    path.join(dir, "law.txt"),
+    `
+@기관: 시험부
+제2조(하부조직) 시험부에 시험실을 둔다.
+시험실에 정책과 및 지원과를 둔다.
+`,
+    "utf8",
+  );
+  await writeFile(
+    path.join(dir, "cases.json"),
+    JSON.stringify({
+      cases: [
+        {
+          id: "layout-source",
+          institution: "시험부",
+          date: "2026-07-24",
+          inputs: ["law.txt"],
+          view: "legal",
+          paper: "a4-half",
+          focus: "시험실",
+          layout: "best",
+        },
+      ],
+    }),
+    "utf8",
+  );
+
+  const result = await runReviewPack({
+    cases: path.join(dir, "cases.json"),
+    "out-dir": path.join(dir, "pack"),
+    "expand-layouts": "vertical,catalog",
+    outputs: "svg,html,json,audit,trace",
+  });
+
+  assert.equal(result.caseCount, 2);
+  assert.deepEqual(result.exportedCases.map((item) => item.id), [
+    "layout-source-vertical-stack",
+    "layout-source-catalog",
+  ]);
+  assert.deepEqual(result.exportedCases.map((item) => item.layout), ["vertical-stack", "catalog"]);
+  assert.deepEqual(result.build.cases.map((item) => item.status), ["built", "built"]);
+  assert.ok((await stat(result.build.cases[0].outputs.svg)).size > 0);
+  assert.ok((await stat(result.build.cases[1].outputs.svg)).size > 0);
+  assert.notEqual(result.build.cases[0].outputs.svg, result.build.cases[1].outputs.svg);
+  const galleryHtml = await readFile(result.files.galleryHtml, "utf8");
+  assert.match(galleryHtml, /SVG 미리보기 2\/2/);
+  assert.match(galleryHtml, /layout-source-vertical-stack\.svg/);
+  assert.match(galleryHtml, /layout-source-catalog\.svg/);
+  const casesJson = JSON.parse(await readFile(result.files.cases, "utf8"));
+  assert.equal(casesJson.cases.length, 2);
+  assert.equal(casesJson.cases[0].layoutVariantOf, "layout-source");
+});
+
 test("review-pack 시각 갤러리는 SVG 미리보기와 품질지표를 카드로 보여준다", () => {
   const html = formatReviewGalleryHtml({
     generatedAt: "2026-08-02T00:00:00.000Z",

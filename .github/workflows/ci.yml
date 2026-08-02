@@ -195,3 +195,41 @@ jobs:
               }
             }
           '
+
+      - name: Layout expansion review pack gate
+        run: |
+          node src/cli.mjs review-pack \
+            --cases examples/audit-cases.json \
+            --out-dir /tmp/orgchart-layout-expansion-pack \
+            --expand-layouts vertical,catalog \
+            --outputs svg,html,json,audit,trace \
+            --strict > /tmp/orgchart-layout-expansion-pack-summary.json
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const summary = JSON.parse(fs.readFileSync("/tmp/orgchart-layout-expansion-pack-summary.json", "utf8"));
+            if (summary.cases !== 4) throw new Error(`expected 4 expanded layout cases, got ${summary.cases}`);
+            if ((summary.buildStatusCounts?.error || 0) !== 0) {
+              throw new Error(`layout expansion build errors: ${summary.buildStatusCounts?.error}`);
+            }
+            if (!summary.files?.galleryHtml || !fs.existsSync(summary.files.galleryHtml)) {
+              throw new Error("missing layout expansion gallery HTML");
+            }
+            const galleryHtml = fs.readFileSync(summary.files.galleryHtml, "utf8");
+            if (!galleryHtml.includes("SVG 미리보기 4/4") || !galleryHtml.includes("vertical-stack") || !galleryHtml.includes("catalog")) {
+              throw new Error("layout expansion gallery does not show both expanded layouts");
+            }
+            const casesDoc = JSON.parse(fs.readFileSync(summary.files.cases, "utf8"));
+            if (casesDoc.cases.length !== 4) throw new Error(`expected 4 exported expanded cases, got ${casesDoc.cases.length}`);
+            for (const item of casesDoc.cases) {
+              if (!item.layoutVariantOf || !item.layoutVariant) throw new Error(`missing layout variant metadata for ${item.id}`);
+            }
+            const manifest = JSON.parse(fs.readFileSync(summary.files.manifestJson, "utf8"));
+            for (const item of manifest.cases) {
+              if (item.status !== "built") throw new Error(`expanded layout case failed: ${item.case?.id || item.error}`);
+              for (const key of ["svg", "html", "json", "audit", "trace"]) {
+                if (!item.outputs?.[key] || !fs.existsSync(item.outputs[key])) {
+                  throw new Error(`missing ${key} output for ${item.summary.id}`);
+                }
+              }
+            }
+          '

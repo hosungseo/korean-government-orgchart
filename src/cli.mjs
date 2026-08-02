@@ -662,6 +662,7 @@ function printHelp() {
   --artifact-dir <dir>      review-pack 내부 산출물 폴더(기본: <out-dir>/artifacts)
   --index-html-out <file>   review-pack HTML 첫 화면 파일명(기본: index.html)
   --gallery-html-out <file> review-pack SVG 미리보기 갤러리 파일명(기본: gallery.html)
+  --sheets-html-out <file>  review-pack A4 2-up 인쇄 시트 파일명(기본: sheets.html)
   --triage-out <file>       review-pack 우선순위 CSV 파일명(기본: triage.csv)
   --suggested-cases-out <file> review-pack 자동 보강 케이스 파일명(기본: suggested-cases.json)
   --accepted-cases-out <file>  review-pack 점수 게이트 통과 케이스 파일명(기본: accepted-cases.json)

@@ -36,6 +36,7 @@ export async function runReviewPack(args = {}) {
   const files = {
     indexHtml: path.join(outDir, stringArg(args, "index-html-out") || "index.html"),
     galleryHtml: path.join(outDir, stringArg(args, "gallery-html-out") || "gallery.html"),
+    sheetsHtml: path.join(outDir, stringArg(args, "sheets-html-out") || "sheets.html"),
     readme: path.join(outDir, stringArg(args, "readme-out") || "README.md"),
     worklist: path.join(outDir, stringArg(args, "worklist-out") || "worklist.md"),
     triageCsv: path.join(outDir, stringArg(args, "triage-out") || "triage.csv"),
@@ -78,6 +79,7 @@ export async function runReviewPack(args = {}) {
   await writeText(files.worklist, formatReviewWorklistMarkdown(result));
   await writeText(files.readme, formatReviewPackMarkdown(result));
   await writeText(files.galleryHtml, formatReviewGalleryHtml(result));
+  await writeText(files.sheetsHtml, formatReviewSheetsHtml(result));
   await writeText(files.indexHtml, formatReviewPackHtml(result));
   return result;
 }
@@ -108,6 +110,7 @@ export function formatReviewPackMarkdown(result) {
   lines.push("");
   lines.push(`- HTML 첫 화면: ${linkPath(result.outDir, result.files.indexHtml)}`);
   lines.push(`- 시각 갤러리: ${linkPath(result.outDir, result.files.galleryHtml)}`);
+  lines.push(`- A4 2-up 인쇄 시트: ${linkPath(result.outDir, result.files.sheetsHtml)}`);
   lines.push(`- 우선순위 CSV: ${linkPath(result.outDir, result.files.triageCsv)}`);
   lines.push(`- 검토 작업목록: ${linkPath(result.outDir, result.files.worklist)}`);
   lines.push(`- 감사 요약: ${linkPath(result.outDir, result.files.audit)}`);
@@ -221,6 +224,7 @@ export function formatReviewPackHtml(result) {
     <div class="quick">
       ${quickLink(result, "검토 작업목록", result.files?.worklist, "보강 지시문 후보와 재시도 항목")}
       ${quickLink(result, "시각 갤러리", result.files?.galleryHtml, "SVG 미리보기와 품질지표를 한 화면에서 비교")}
+      ${quickLink(result, "A4 2-up 인쇄 시트", result.files?.sheetsHtml, "a4-half SVG를 좌우 두 칸으로 배치한 검토서 붙여넣기용 시트")}
       ${quickLink(result, "우선순위 CSV", result.files?.triageCsv, "엑셀·시트에서 여는 케이스별 점검 순서")}
       ${quickLink(result, "감사 요약", result.files?.audit, "파싱·소관·별표·배치 품질")}
       ${quickLink(result, "산출물 매니페스트", result.files?.manifest, "케이스별 산출물 링크")}
@@ -316,6 +320,117 @@ export function formatReviewGalleryHtml(result) {
 </body>
 </html>
 `;
+}
+
+export function formatReviewSheetsHtml(result) {
+  const title = "A4 조직도 2-up 인쇄 시트";
+  const sheets = reviewPrintSheets(result);
+  const itemCount = sheets.reduce((sum, sheet) => sum + sheet.items.filter(Boolean).length, 0);
+  const halfSheets = sheets.filter((sheet) => sheet.kind === "two-up").length;
+  return `<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${htmlEscape(title)}</title>
+  <style>
+    :root { --ink:#111827; --muted:#6B7280; --rule:#D1D5DB; --paper:#FFFFFF; --soft:#F9FAFB; --accent:#315A8A; }
+    * { box-sizing:border-box; }
+    @page { size:A4 portrait; margin:0; }
+    body { margin:0; background:#E5E7EB; color:var(--ink); font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif; line-height:1.35; }
+    header { max-width:210mm; margin:14px auto 10px; padding:12px 14px; background:var(--paper); border:1px solid var(--rule); }
+    h1 { margin:0; font-size:22px; letter-spacing:-.02em; }
+    a { color:var(--accent); text-decoration:none; }
+    .meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; color:var(--muted); font-size:12px; }
+    .pill { border:1px solid var(--rule); border-radius:999px; padding:3px 8px; background:#fff; }
+    .sheet { width:210mm; min-height:297mm; margin:12px auto; padding:7mm; background:var(--paper); box-shadow:0 4px 18px rgba(15,23,42,.13); page-break-after:always; break-after:page; display:grid; gap:4mm; }
+    .sheet.two-up { grid-template-columns:1fr 1fr; }
+    .sheet.full { grid-template-columns:1fr; }
+    .slot { border:1px solid var(--rule); background:#fff; min-width:0; min-height:0; padding:2.5mm; display:flex; flex-direction:column; overflow:hidden; }
+    .slot.empty { border-style:dashed; background:var(--soft); color:var(--muted); align-items:center; justify-content:center; text-align:center; font-size:12px; }
+    .slot-title { font-size:10.5px; font-weight:700; margin-bottom:1.8mm; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .slot-meta { font-size:9.2px; color:var(--muted); margin-bottom:2mm; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .figure { flex:1; min-height:0; display:flex; align-items:flex-start; justify-content:center; overflow:hidden; }
+    .figure img { max-width:100%; max-height:100%; object-fit:contain; border:1px solid #EEF0F3; background:white; }
+    .links { margin-top:1.7mm; font-size:9.4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .links a { margin-right:5px; }
+    @media print {
+      body { background:white; }
+      header { display:none; }
+      .sheet { margin:0; box-shadow:none; border:0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>${htmlEscape(title)}</h1>
+    <div class="meta">
+      <span class="pill">생성시각 ${htmlEscape(result.generatedAt || "")}</span>
+      <span class="pill">SVG ${itemCount}건</span>
+      <span class="pill">A4 2-up ${halfSheets}쪽</span>
+      ${result.files?.indexHtml ? `<span class="pill"><a href="${htmlAttr(hrefPath(result.outDir, result.files.indexHtml))}">검토팩 첫 화면</a></span>` : ""}
+      ${result.files?.galleryHtml ? `<span class="pill"><a href="${htmlAttr(hrefPath(result.outDir, result.files.galleryHtml))}">시각 갤러리</a></span>` : ""}
+    </div>
+  </header>
+  ${sheets.map((sheet, index) => reviewPrintSheetHtml(result.outDir, sheet, index)).join("") || `<section class="sheet full"><div class="slot empty">SVG 산출물이 없습니다.<br>review-pack outputs에 svg를 포함하세요.</div></section>`}
+</body>
+</html>
+`;
+}
+
+function reviewPrintSheets(result) {
+  const items = reviewSheetItems(result);
+  const sheets = [];
+  let half = [];
+  const flushHalf = () => {
+    if (!half.length) return;
+    sheets.push({ kind: "two-up", items: half.length === 1 ? [half[0], null] : half });
+    half = [];
+  };
+  for (const item of items) {
+    if (item.paper === "a4-half") {
+      half.push(item);
+      if (half.length === 2) flushHalf();
+    } else {
+      flushHalf();
+      sheets.push({ kind: "full", items: [item] });
+    }
+  }
+  flushHalf();
+  return sheets;
+}
+
+function reviewSheetItems(result) {
+  return (result.audit?.cases || [])
+    .map((item) => {
+      const summary = item.summary || {};
+      const built = findBuildCase(result.build?.cases || [], summary.id) || {};
+      if (!built.outputs?.svg) return null;
+      return {
+        summary,
+        outputs: built.outputs || {},
+        paper: summary.paper || "slide",
+      };
+    })
+    .filter(Boolean);
+}
+
+function reviewPrintSheetHtml(baseDir, sheet, index) {
+  return `<section class="sheet ${sheet.kind}" aria-label="A4 sheet ${index + 1}">
+    ${sheet.items.map((item) => item ? reviewPrintSlotHtml(baseDir, item) : `<div class="slot empty">빈 반쪽면<br>다음 조직도를 추가해 2-up으로 배치할 수 있습니다.</div>`).join("")}
+  </section>`;
+}
+
+function reviewPrintSlotHtml(baseDir, item) {
+  const summary = item.summary || {};
+  const label = [summary.institution || summary.id || "조직도", summary.asOf].filter(Boolean).join(" · ");
+  const target = [summary.focus || summary.layout, selectedLayouts(summary)].filter(Boolean).join(" · ");
+  return `<div class="slot">
+    <div class="slot-title">${htmlEscape(label)}</div>
+    <div class="slot-meta">${htmlEscape(target || item.paper || "")}</div>
+    <div class="figure"><img src="${htmlAttr(hrefPath(baseDir, item.outputs.svg))}" alt="${htmlAttr(label)}" loading="lazy" /></div>
+    <div class="links">${outputLinksHtml(baseDir, item.outputs)}</div>
+  </div>`;
 }
 
 function reviewGalleryCards(result) {

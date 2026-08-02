@@ -92,7 +92,7 @@ jobs:
             import fs from "node:fs";
             const summary = JSON.parse(fs.readFileSync("/tmp/orgchart-review-pack-summary.json", "utf8"));
             if (summary.cases !== 2) throw new Error(`expected 2 review cases, got ${summary.cases}`);
-            for (const key of ["indexHtml", "galleryHtml", "readme", "worklist", "triageCsv", "cases", "suggestedCases", "acceptedCases", "audit", "auditJson", "manifest", "manifestJson"]) {
+            for (const key of ["indexHtml", "galleryHtml", "sheetsHtml", "readme", "worklist", "triageCsv", "cases", "suggestedCases", "acceptedCases", "audit", "auditJson", "manifest", "manifestJson"]) {
               const filePath = summary.files?.[key];
               if (!filePath || !fs.existsSync(filePath)) throw new Error(`missing review-pack file: ${key}`);
             }
@@ -103,6 +103,10 @@ jobs:
             const galleryHtml = fs.readFileSync(summary.files.galleryHtml, "utf8");
             if (!galleryHtml.includes("조직도 시각 갤러리") || !galleryHtml.includes("SVG 미리보기")) {
               throw new Error("review-pack gallery.html does not look like a visual gallery");
+            }
+            const sheetsHtml = fs.readFileSync(summary.files.sheetsHtml, "utf8");
+            if (!sheetsHtml.includes("A4 조직도 2-up 인쇄 시트") || !sheetsHtml.includes("A4 2-up")) {
+              throw new Error("review-pack sheets.html does not look like an A4 print sheet");
             }
             if (!summary.acceptedCases?.evaluated || !summary.acceptedCases.acceptedCases) {
               throw new Error("expected evaluated accepted cases");
@@ -174,6 +178,13 @@ jobs:
             if (!galleryHtml.includes("조직도 시각 갤러리") || !galleryHtml.includes("행정안전부")) {
               throw new Error("real JSON gallery.html does not include expected preview content");
             }
+            if (!summary.files?.sheetsHtml || !fs.existsSync(summary.files.sheetsHtml)) {
+              throw new Error("missing real JSON sheets HTML");
+            }
+            const sheetsHtml = fs.readFileSync(summary.files.sheetsHtml, "utf8");
+            if (!sheetsHtml.includes("A4 조직도 2-up 인쇄 시트") || !sheetsHtml.includes("행정안전부")) {
+              throw new Error("real JSON sheets.html does not include expected preview content");
+            }
             if (!Array.isArray(summary.decks) || summary.decks.length !== 1) {
               throw new Error(`expected one real JSON deck, got ${summary.decks?.length || 0}`);
             }
@@ -217,6 +228,13 @@ jobs:
             const galleryHtml = fs.readFileSync(summary.files.galleryHtml, "utf8");
             if (!galleryHtml.includes("SVG 미리보기 4/4") || !galleryHtml.includes("vertical-stack") || !galleryHtml.includes("catalog")) {
               throw new Error("layout expansion gallery does not show both expanded layouts");
+            }
+            if (!summary.files?.sheetsHtml || !fs.existsSync(summary.files.sheetsHtml)) {
+              throw new Error("missing layout expansion sheets HTML");
+            }
+            const sheetsHtml = fs.readFileSync(summary.files.sheetsHtml, "utf8");
+            if (!sheetsHtml.includes("A4 조직도 2-up 인쇄 시트") || !sheetsHtml.includes("class=\"sheet two-up\"") || !sheetsHtml.includes("class=\"sheet full\"")) {
+              throw new Error("layout expansion sheets do not show both A4 half and full sheets");
             }
             const casesDoc = JSON.parse(fs.readFileSync(summary.files.cases, "utf8"));
             if (casesDoc.cases.length !== 4) throw new Error(`expected 4 exported expanded cases, got ${casesDoc.cases.length}`);

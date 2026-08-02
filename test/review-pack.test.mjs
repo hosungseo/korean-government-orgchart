@@ -7,6 +7,7 @@ import { runBatchAudit } from "../src/batch-audit.mjs";
 import {
   buildAcceptedCasesDocument,
   formatReviewGalleryHtml,
+  formatReviewSheetsHtml,
   formatReviewTriageCsv,
   buildSuggestedCasesDocument,
   formatReviewWorklistMarkdown,
@@ -58,6 +59,7 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(await readFile(result.files.readme, "utf8"), /조직도 검토팩/);
   assert.match(await readFile(result.files.readme, "utf8"), /HTML 첫 화면/);
   assert.match(await readFile(result.files.readme, "utf8"), /시각 갤러리/);
+  assert.match(await readFile(result.files.readme, "utf8"), /A4 2-up 인쇄 시트/);
   assert.match(await readFile(result.files.readme, "utf8"), /우선순위 CSV/);
   assert.match(await readFile(result.files.readme, "utf8"), /케이스별 산출물/);
   assert.match(await readFile(result.files.readme, "utf8"), /검토 작업목록/);
@@ -67,7 +69,9 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   const indexHtml = await readFile(result.files.indexHtml, "utf8");
   assert.match(indexHtml, /조직도 검토팩/);
   assert.match(indexHtml, /gallery\.html/);
+  assert.match(indexHtml, /sheets\.html/);
   assert.match(indexHtml, /시각 갤러리/);
+  assert.match(indexHtml, /A4 2-up 인쇄 시트/);
   assert.match(indexHtml, /우선순위 CSV/);
   assert.match(indexHtml, /검토 작업목록/);
   assert.match(indexHtml, /케이스별 산출물/);
@@ -85,6 +89,11 @@ test("review-pack은 cases 파일에서 감사와 산출물을 한 번에 만든
   assert.match(galleryHtml, /작도 polish/);
   assert.match(galleryHtml, /artifacts\/%EC%8B%9C%ED%97%98%EB%B6%80-2026-07-24-operational-/);
   assert.match(galleryHtml, /\.svg/);
+  assert.ok((await stat(result.files.sheetsHtml)).size > 0);
+  const sheetsHtml = await readFile(result.files.sheetsHtml, "utf8");
+  assert.match(sheetsHtml, /A4 조직도 2-up 인쇄 시트/);
+  assert.match(sheetsHtml, /A4 2-up 1쪽/);
+  assert.match(sheetsHtml, /빈 반쪽면/);
   assert.ok((await stat(result.files.triageCsv)).size > 0);
   assert.ok((await stat(result.files.cases)).size > 0);
   assert.ok((await stat(result.files.suggestedCases)).size > 0);
@@ -266,6 +275,11 @@ test("review-pack은 expand-layouts로 같은 입력을 레이아웃별 산출�
   assert.match(galleryHtml, /SVG 미리보기 2\/2/);
   assert.match(galleryHtml, /layout-source-vertical-stack\.svg/);
   assert.match(galleryHtml, /layout-source-catalog\.svg/);
+  const sheetsHtml = await readFile(result.files.sheetsHtml, "utf8");
+  assert.match(sheetsHtml, /A4 조직도 2-up 인쇄 시트/);
+  assert.match(sheetsHtml, /A4 2-up 1쪽/);
+  assert.match(sheetsHtml, /layout-source-vertical-stack\.svg/);
+  assert.match(sheetsHtml, /layout-source-catalog\.svg/);
   const casesJson = JSON.parse(await readFile(result.files.cases, "utf8"));
   assert.equal(casesJson.cases.length, 2);
   assert.equal(casesJson.cases[0].layoutVariantOf, "layout-source");
@@ -326,6 +340,69 @@ test("review-pack 시각 갤러리는 SVG 미리보기와 품질지표를 카드
   assert.match(html, /best-fit 후보/);
   assert.match(html, /catalog\/16 점수 102/);
   assert.match(html, /작도 polish/);
+});
+
+test("review-pack A4 시트는 a4-half SVG를 두 칸씩 배치한다", () => {
+  const html = formatReviewSheetsHtml({
+    generatedAt: "2026-08-02T00:00:00.000Z",
+    outDir: "/tmp/review-pack",
+    caseCount: 3,
+    files: {
+      indexHtml: "/tmp/review-pack/index.html",
+      galleryHtml: "/tmp/review-pack/gallery.html",
+    },
+    audit: {
+      cases: [
+        {
+          summary: {
+            id: "half-a",
+            institution: "시험부",
+            asOf: "2026-07-24",
+            paper: "a4-half",
+            focus: "정책실",
+            layoutSelection: { selected: ["vertical-stack"] },
+          },
+        },
+        {
+          summary: {
+            id: "half-b",
+            institution: "시험청",
+            asOf: "2026-07-24",
+            paper: "a4-half",
+            focus: "운영국",
+            layoutSelection: { selected: ["catalog"] },
+          },
+        },
+        {
+          summary: {
+            id: "full-a",
+            institution: "가로부",
+            asOf: "2026-07-24",
+            paper: "a4-landscape",
+            focus: "전체",
+            layoutSelection: { selected: ["horizontal-bus"] },
+          },
+        },
+      ],
+    },
+    build: {
+      cases: [
+        { summary: { id: "half-a" }, outputs: { svg: "/tmp/review-pack/artifacts/half-a.svg", html: "/tmp/review-pack/artifacts/half-a.html" } },
+        { summary: { id: "half-b" }, outputs: { svg: "/tmp/review-pack/artifacts/half-b.svg", html: "/tmp/review-pack/artifacts/half-b.html" } },
+        { summary: { id: "full-a" }, outputs: { svg: "/tmp/review-pack/artifacts/full-a.svg", html: "/tmp/review-pack/artifacts/full-a.html" } },
+      ],
+    },
+  });
+
+  assert.match(html, /A4 조직도 2-up 인쇄 시트/);
+  assert.match(html, /SVG 3건/);
+  assert.match(html, /A4 2-up 1쪽/);
+  assert.match(html, /class="sheet two-up"/);
+  assert.match(html, /class="sheet full"/);
+  assert.match(html, /half-a\.svg/);
+  assert.match(html, /half-b\.svg/);
+  assert.match(html, /full-a\.svg/);
+  assert.match(html, /시각 갤러리/);
 });
 
 test("review-pack 작업목록은 지시문·별표·레이아웃·소관법령 문제를 요약한다", () => {

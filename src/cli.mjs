@@ -11,7 +11,7 @@ import { fetchLawAtDate } from "./law-api.mjs";
 import { organizationLawNameCandidateGroups } from "./law-name.mjs";
 import { buildLawAppendixPages, enrichGraphWithLawMap } from "./law-map.mjs";
 import { planBestPages, planLayoutVariants, planPages } from "./layout.mjs";
-import { projectOperationalView, summarizeStructure } from "./model.mjs";
+import { OrgGraph, projectOperationalView, summarizeStructure } from "./model.mjs";
 import { parseOrganizationTexts } from "./parser.mjs";
 import { renderSvg } from "./render-svg.mjs";
 import { runReviewPack } from "./review-pack.mjs";
@@ -22,6 +22,7 @@ const args = parseArgs(rest);
 
 try {
   if (command === "build") await buildCommand(args);
+  else if (command === "render-json") await renderJsonCommand(args);
   else if (command === "from-law") await fromLawCommand(args);
   else if (command === "fetch") await fetchCommand(args);
   else if (command === "inspect") await inspectCommand(args);
@@ -38,6 +39,11 @@ try {
 
 async function buildCommand(args) {
   const graph = await graphFromInputs(args);
+  await emitOutputs(graph, args);
+}
+
+async function renderJsonCommand(args) {
+  const graph = await graphFromJsonArgs(args);
   await emitOutputs(graph, args);
 }
 
@@ -327,6 +333,24 @@ async function graphFromInputs(args) {
   });
 }
 
+async function graphFromJsonArgs(args) {
+  const graphPath = stringArg(args, "graph") || args.input?.[0];
+  if (!graphPath) throw new Error("--graph 또는 --input으로 조직도 JSON 경로를 지정해야 합니다.");
+  const raw = graphPath === "-" ? (await readInputs(["-"]))[0] : await fs.readFile(path.resolve(graphPath), "utf8");
+  let json;
+  try {
+    json = JSON.parse(raw.replace(/^\uFEFF/, ""));
+  } catch {
+    throw new Error(`조직도 JSON을 읽을 수 없습니다: ${graphPath}`);
+  }
+  const graph = OrgGraph.fromJSON(json);
+  const title = stringArg(args, "title");
+  const date = stringArg(args, "date");
+  if (title) graph.meta.title = title;
+  if (date) graph.meta.asOf = date;
+  return graph;
+}
+
 async function emitOutputs(graph, args) {
   await enrichWithLawMapIfRequested(graph, args);
   const view = stringArg(args, "view") || "legal";
@@ -459,6 +483,12 @@ function printHelp() {
     --layout best \\
     --svg outputs/산업통상부.svg
 
+  node src/cli.mjs render-json \\
+    --graph outputs/행정안전부.json \\
+    --paper a4-half --layout best --focus 재난안전관리본부 \\
+    --svg outputs/행정안전부-재난본부.svg \\
+    --out outputs/행정안전부-재난본부.pptx
+
   node src/cli.mjs review-pack \\
     --institutions "행정안전부,문화체육관광부,공정거래위원회" \\
     --date 2026-07-24 \\
@@ -467,6 +497,7 @@ function printHelp() {
 
 명령
   build      로컬 텍스트를 파싱하여 PPTX/SVG/JSON 생성
+  render-json 기존 조직도 JSON을 다시 배치하여 PPTX/SVG/JSON 생성
   from-law   법제처 OPEN API에서 기준일 연혁을 찾아 바로 생성
   fetch      법령 문언만 로컬 텍스트로 저장
   inspect    파싱 결과 요약 출력

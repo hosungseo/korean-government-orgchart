@@ -27,6 +27,7 @@
 | --- | --- |
 | GitHub | https://github.com/hosungseo/korean-government-orgchart |
 | GitLab.com | https://gitlab.com/hosung.seo2026/korean-government-orgchart |
+| 공공 GitLab (온AI) | https://gitlab.aigov.go.kr/hosung.seo/korean-government-orgchart |
 | 데모 | https://hosungseo.github.io/korean-government-orgchart/ |
 
 ## 이 도구가 만드는 것

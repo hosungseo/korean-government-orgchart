@@ -14,6 +14,21 @@
 >
 > 조직도는 직함의 목록이 아니라, 행정의 의사결정이 어디서 보좌되고 어떤 계선을 통해 집행되는지를 읽는 지도입니다.
 
+
+
+## 온AI 실험실 · 공공 GitLab
+
+이 레포는 **개인 GitHub / GitLab.com 공개본**입니다.  
+행정 **온AI(AI 정부 실험실)** 과 **공공 개발산출물 저장소(공공 GitLab)** 은 별도 체계이며, 자동 연동이 아니라 **등록·import 단계**로 연결합니다.
+
+→ 연결 구조와 등록 절차: [`docs/ONAI-LAB-GITLAB.md`](docs/ONAI-LAB-GITLAB.md)
+
+| 위치 | URL |
+| --- | --- |
+| GitHub | https://github.com/hosungseo/korean-government-orgchart |
+| GitLab.com | https://gitlab.com/hosung.seo2026/korean-government-orgchart |
+| 데모 | https://hosungseo.github.io/korean-government-orgchart/ |
+
 ## 이 도구가 만드는 것
 
 | 입력 | 해석 | 결과 |

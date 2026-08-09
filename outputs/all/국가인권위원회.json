@@ -1,0 +1,1224 @@
+{
+  "meta": {
+    "institution": "국가인권위원회",
+    "title": "국가인권위원회",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "국가인권위원회와 그 소속기관 직제 [시행 20260721]",
+        "role": "decree"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "jurisdiction",
+        "annex": "별표 1",
+        "description": "관할·등급은 별표를 읽어야 확정됩니다",
+        "source": "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      }
+    ],
+    "spanDiagnostics": [],
+    "laws": [
+      {
+        "name": "국가인권위원회와 그 소속기관 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288255",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288255&efYd=20260721&BD=on",
+        "annexCount": 9
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "인권사무소 및 인권팀의 명칭ㆍ위치 및 관할구역(제12조 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "jurisdiction",
+        "source": "국가인권위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039559",
+          "pdf": "/LSW/flDownload.do?flSeq=167039561",
+          "image": "/LSW/flDownload.do?flSeq=167039563"
+        },
+        "files": {
+          "hwp": "law0092962026072136514KC_000100E_20260721.hwp",
+          "pdf": "law0092962026072136514KC_000100E_20260721.pdf"
+        },
+        "rowCount": 6,
+        "rows": [
+          [
+            "1. 부산인권사무소",
+            "부산광역시",
+            "부산광역시ㆍ울산광역시ㆍ경상남도"
+          ],
+          [
+            "2. 광주인권사무소",
+            "전남광주통합특별시",
+            "전남광주통합특별시ㆍ전북특별자치도"
+          ],
+          [
+            "3. 대구인권사무소",
+            "대구광역시",
+            "대구광역시ㆍ경상북도"
+          ],
+          [
+            "4. 대전인권사무소",
+            "대전광역시",
+            "대전광역시ㆍ세종특별자치시ㆍ 충청남도ㆍ충청북도"
+          ],
+          [
+            "5. 강원인권사무소",
+            "강원특별자치도",
+            "강원특별자치도"
+          ],
+          [
+            "6. 광주인권사무소 제주인권팀",
+            "제주특별자치도",
+            "제주특별자치도"
+          ]
+        ],
+        "textPreview": "■ 국가인권위원회와 그 소속기관 직제 [별표 1] <개정 2026. 6. 23.>           \n                                                                              \n  인권사무소 및 인권팀의 명칭ㆍ위치 및 관할구역(제12조 관련)                  \n┌─────────┬─────────┬─────────────────┐\n│명칭              │위치              │관할구역                          │\n├─────────┼─────────┼─────────────────┤\n│ 1. 부산인권사무소│부산광역시        │부산광역시ㆍ울산광역시ㆍ경상남도  │\n├─────────┼─────────┼─────────────────┤\n│ 2. 광주인권사무소│전남광주통합특별시│전남광주통합특별시ㆍ전북특별자치도│\n├─────────┼─────────┼─────────────────┤\n│ 3. 대구인권사무소│대구광역시        │대구광역시ㆍ경상북도              │\n├─────────┼─────────┼─────────────────┤\n│ 4. 대전인권사무소│대전광역시        │대전광역시ㆍ세종특별자치시ㆍ      │\n│                  │                  │충청남도ㆍ충청북도                │\n├─────────┼─────────┼─────────────────┤\n│ 5. 강원인권사무소│강원특별자치도    │강원특별자치도                    │\n├─────────┼─────────┼─────────────────┤\n│ 6. 광주인권사무소│제주특별자치도    │제주특별자치도                    │\n│   제주인권팀     │                  │                                  │\n└─────────┴─────────┴─────────────────┘"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "국가인권위원회 공무원 정원표(제13조제1항 본문 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "국가인권위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039565",
+          "pdf": "/LSW/flDownload.do?flSeq=167039567",
+          "image": "/LSW/flDownload.do?flSeq=167039569"
+        },
+        "files": {
+          "hwp": "law0092962026072136514KC_000200E_20260721.hwp",
+          "pdf": "law0092962026072136514KC_000200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국가인권위원회와 그 소속기관 직제 [별표 2] <개정 2026. 7. 21.>   \n                                                                      \n  국가인권위원회 공무원 정원표(제13조제1항 본문 관련)                 \n                                                                      \n  총계                    221                                         \n                                                                      \n    정무직 계             4                                           \n                                                                      \n      위원장(장관급)      1                                           \n                                                                      \n      상임위원(차관급)    3                                           \n                                                                      \n    일반직 계             216                                         \n                                                                      \n      고위공무원단        7                                           \n                                                                      \n      3급 또는 4급 이하   209                                         \n                                                                      \n"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "삭제 &lt;2024. 2. 27.&gt;",
+        "key": "000202E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "국가인권위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039571",
+          "pdf": "/LSW/flDownload.do?flSeq=167039573",
+          "image": "/LSW/flDownload.do?flSeq=167039575"
+        },
+        "files": {
+          "hwp": "law0092962026072136514KC_000202E_20260721.hwp",
+          "pdf": "law0092962026072136514KC_000202E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국가인권위원회와 그 소속기관 직제 [별표 2의2] 삭제 <2024. 2. 27.>"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "삭제 &lt;2023. 2. 28.&gt;",
+        "key": "000204E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "국가인권위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039583",
+          "pdf": "/LSW/flDownload.do?flSeq=167039585",
+          "image": "/LSW/flDownload.do?flSeq=167039587"
+        },
+        "files": {
+          "hwp": "law0092962026072136514KC_000204E_20260721.hwp",
+          "pdf": "law0092962026072136514KC_000204E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국가인권위원회와 그 소속기관 직제 [별표 2의4] 삭제 <2023. 2. 28.>"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "인권사무소 공무원 정원표(제14조제1항 본문 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "국가인권위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039589",
+          "pdf": "/LSW/flDownload.do?flSeq=167039591",
+          "image": "/LSW/flDownload.do?flSeq=167039593"
+        },
+        "files": {
+          "hwp": "law0092962026072136514KC_000300E_20260721.hwp",
+          "pdf": "law0092962026072136514KC_000300E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국가인권위원회와 그 소속기관 직제 [별표 3] <개정 2023. 4. 11.>\n                                                    \n  인권사무소 공무원 정원표(제14조제1항 본문 관련)   \n                                                    \n  총계          43                                  \n                                                    \n    일반직 계   43                                  \n                                                    \n      4급 이하  43"
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "삭제 &lt;2023. 4. 11.&gt;",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "국가인권위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039595",
+          "pdf": "/LSW/flDownload.do?flSeq=167039597",
+          "image": "/LSW/flDownload.do?flSeq=167039599"
+        },
+        "files": {
+          "hwp": "law0092962026072136514KC_000400E_20260721.hwp",
+          "pdf": "law0092962026072136514KC_000400E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국가인권위원회와 그 소속기관 직제 [별표 4] 삭제 <2023. 4. 11.>"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "국가인권위원회에 두는 평가대상 조직(제17조 관련)",
+        "key": "000500E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "국가인권위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039601",
+          "pdf": "/LSW/flDownload.do?flSeq=167039603",
+          "image": "/LSW/flDownload.do?flSeq=167039605"
+        },
+        "files": {
+          "hwp": "law0092962026072136514KC_000500E_20260721.hwp",
+          "pdf": "law0092962026072136514KC_000500E_20260721.pdf"
+        },
+        "rowCount": 5,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "1. 차별시정국 성차별시정과",
+            "1명 (4급 1명)",
+            "2026년 12월 31일까지"
+          ],
+          [
+            "2. 군인권보호국",
+            "1명 (고위공무원단)",
+            "2027년 6월 30일까지"
+          ],
+          [
+            "3. 군인권보호국 군인권보호총괄과",
+            "4명 (4급 1명, 5급 2명, 6급 1명)",
+            "2027년 6월 30일까지"
+          ],
+          [
+            "4. 군인권보호국 군인권협력지원과",
+            "7명 (4급 1명, 5급 3명, 6급 3명)",
+            "2027년 6월 30일까지"
+          ]
+        ],
+        "textPreview": "■ 국가인권위원회와 그 소속기관 직제 [별표 5] <개정 2025. 9. 23.>             \n  국가인권위원회에 두는 평가대상 조직(제17조 관련)                              \n                                                                                \n┌────────────────┬──────────┬──────────┐\n│조직                            │정원                │평가기간            │\n├────────────────┼──────────┼──────────┤\n│1. 차별시정국 성차별시정과      │1명                 │2026년 12월 31일까지│\n│                                │(4급 1명)           │                    │\n├────────────────┼──────────┼──────────┤\n│2. 군인권보호국                 │1명                 │2027년 6월 30일까지 │\n│                                │(고위공무원단)      │                    │\n├────────────────┼──────────┼──────────┤\n│3. 군인권보호국 군인권보호총괄과│4명                 │2027년 6월 30일까지 │\n│                                │(4급 1명, 5급 2명,  │                    │\n│                                │6급 1명)            │                    │\n├────────────────┼──────────┼──────────┤\n│4. 군인권보호국 군인권협력지원과│7명                 │2027년 6월 30일까지 │\n│                                │(4급 1명, 5급 3명,  │                    │\n│                                │6급 3명)            │                    │\n└────────────────┴──────────┴──────────┘"
+      },
+      {
+        "annex": "별표 6",
+        "number": "6",
+        "title": "삭제 &lt;2026. 2. 19.&gt;",
+        "key": "000600E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "국가인권위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039607",
+          "pdf": "/LSW/flDownload.do?flSeq=167039609",
+          "image": "/LSW/flDownload.do?flSeq=167039611"
+        },
+        "files": {
+          "hwp": "law0092962026072136514KC_000600E_20260721.hwp",
+          "pdf": "law0092962026072136514KC_000600E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국가인권위원회와 그 소속기관 직제 [별표 6] 삭제 <2026. 2. 19.>"
+      }
+    ]
+  },
+  "rootId": "n-5892c2e4",
+  "nodes": [
+    {
+      "id": "n-5892c2e4",
+      "name": "국가인권위원회",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "inferred",
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4af98d5f",
+      "name": "인권사무소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e9f8e82f",
+      "name": "사무처",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6dacd92f",
+      "name": "사무총장",
+      "kind": "unknown",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-618c7eaf",
+      "name": "기획조정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-76f39e17",
+      "name": "인권상담조정센터",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-941fa080",
+      "name": "정책협력국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-21f6e2d8",
+      "name": "침해조사국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-57f6ac99",
+      "name": "차별시정국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f5f80ed6",
+      "name": "군인권보호국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0eca0f73",
+      "name": "국가인권교육센터",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c41c0eb3",
+      "name": "행정법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e26f6c14",
+      "name": "정보화관리팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-476c1235",
+      "name": "인권정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-53fcadd7",
+      "name": "사회인권과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-aa190444",
+      "name": "국제인권과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c243b746",
+      "name": "홍보협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-59951f0c",
+      "name": "조사총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e68fe8e7",
+      "name": "인권침해조사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c74fe96b",
+      "name": "아동청소년인권과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b86f5c9e",
+      "name": "기획조사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a59e855b",
+      "name": "이주인권팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c3705eb1",
+      "name": "차별시정총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-284f0ded",
+      "name": "장애차별조사1과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-2678a45e",
+      "name": "장애차별조사2과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-2aedc415",
+      "name": "성차별시정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-3cc82a6e",
+      "name": "군인권보호총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-7ed83c21",
+      "name": "군인권조사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-cdac1fff",
+      "name": "군인권협력지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-830f3043",
+      "name": "인권교육기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b4e7355b",
+      "name": "인권교육운영과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-40e970de",
+      "name": "인권교육콘텐츠팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a3f3a383",
+      "name": "인권팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5e260ef0",
+      "name": "광주인권사무소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-cec30963",
+      "name": "제주인권팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8df81214",
+      "name": "위원장",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": []
+    },
+    {
+      "id": "n-d02ea452",
+      "name": "부위원장",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-f8a9d7f0",
+      "parent": "n-5892c2e4",
+      "child": "n-4af98d5f",
+      "type": "affiliated",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "제2조(소속기관) 국가인권위원회(이하 \"위원회\"라 한다)의 관장사무를 지원하기 위하여 위원회 소속으로 인권사무소를 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-3255c597",
+      "parent": "n-6dacd92f",
+      "child": "n-618c7eaf",
+      "type": "advisor",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "제6조(하부조직) 사무처에 운영지원과, 인권상담조정센터, 정책협력국, 침해조사국, 차별시정국, 군인권보호국 및 국가인권교육센터를 두고, 사무총장 밑에 기획조정관 1명을 둔다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-09ba5bde",
+      "parent": "n-e9f8e82f",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "제6조(하부조직) 사무처에 운영지원과, 인권상담조정센터, 정책협력국, 침해조사국, 차별시정국, 군인권보호국 및 국가인권교육센터를 두고, 사무총장 밑에 기획조정관 1명을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f965df34",
+      "parent": "n-e9f8e82f",
+      "child": "n-76f39e17",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "제6조(하부조직) 사무처에 운영지원과, 인권상담조정센터, 정책협력국, 침해조사국, 차별시정국, 군인권보호국 및 국가인권교육센터를 두고, 사무총장 밑에 기획조정관 1명을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cd90da93",
+      "parent": "n-e9f8e82f",
+      "child": "n-941fa080",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "제6조(하부조직) 사무처에 운영지원과, 인권상담조정센터, 정책협력국, 침해조사국, 차별시정국, 군인권보호국 및 국가인권교육센터를 두고, 사무총장 밑에 기획조정관 1명을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2a7aabf6",
+      "parent": "n-e9f8e82f",
+      "child": "n-21f6e2d8",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "제6조(하부조직) 사무처에 운영지원과, 인권상담조정센터, 정책협력국, 침해조사국, 차별시정국, 군인권보호국 및 국가인권교육센터를 두고, 사무총장 밑에 기획조정관 1명을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3db7179e",
+      "parent": "n-e9f8e82f",
+      "child": "n-57f6ac99",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "제6조(하부조직) 사무처에 운영지원과, 인권상담조정센터, 정책협력국, 침해조사국, 차별시정국, 군인권보호국 및 국가인권교육센터를 두고, 사무총장 밑에 기획조정관 1명을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-42358376",
+      "parent": "n-e9f8e82f",
+      "child": "n-f5f80ed6",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "제6조(하부조직) 사무처에 운영지원과, 인권상담조정센터, 정책협력국, 침해조사국, 차별시정국, 군인권보호국 및 국가인권교육센터를 두고, 사무총장 밑에 기획조정관 1명을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1e5f9fdf",
+      "parent": "n-e9f8e82f",
+      "child": "n-0eca0f73",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "제6조(하부조직) 사무처에 운영지원과, 인권상담조정센터, 정책협력국, 침해조사국, 차별시정국, 군인권보호국 및 국가인권교육센터를 두고, 사무총장 밑에 기획조정관 1명을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c1a1e64b",
+      "parent": "n-618c7eaf",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(기획조정관)",
+        "evidenceText": "④ 기획재정담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e3834c4d",
+      "parent": "n-618c7eaf",
+      "child": "n-c41c0eb3",
+      "type": "advisor",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(기획조정관)",
+        "evidenceText": "⑤ 행정법무담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-08715ef3",
+      "parent": "n-618c7eaf",
+      "child": "n-e26f6c14",
+      "type": "advisor",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(기획조정관)",
+        "evidenceText": "⑥ 정보화관리팀장은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e4499d77",
+      "parent": "n-941fa080",
+      "child": "n-476c1235",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(정책협력국)",
+        "evidenceText": "② 정책협력국에 인권정책과, 사회인권과, 국제인권과 및 홍보협력과를 두되, 각 과장은 3급 또는 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0a012f11",
+      "parent": "n-941fa080",
+      "child": "n-53fcadd7",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(정책협력국)",
+        "evidenceText": "② 정책협력국에 인권정책과, 사회인권과, 국제인권과 및 홍보협력과를 두되, 각 과장은 3급 또는 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-57d3c1f2",
+      "parent": "n-941fa080",
+      "child": "n-aa190444",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(정책협력국)",
+        "evidenceText": "② 정책협력국에 인권정책과, 사회인권과, 국제인권과 및 홍보협력과를 두되, 각 과장은 3급 또는 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9f0c4f8f",
+      "parent": "n-941fa080",
+      "child": "n-c243b746",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(정책협력국)",
+        "evidenceText": "② 정책협력국에 인권정책과, 사회인권과, 국제인권과 및 홍보협력과를 두되, 각 과장은 3급 또는 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-43e19acf",
+      "parent": "n-21f6e2d8",
+      "child": "n-59951f0c",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(침해조사국)",
+        "evidenceText": "② 침해조사국에 조사총괄과, 인권침해조사과, 아동청소년인권과, 기획조사팀 및 이주인권팀을 두며, 각 과장은 3급 또는 4급으로 보하고, 팀장은 4급 또는 5급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-68df7b85",
+      "parent": "n-21f6e2d8",
+      "child": "n-e68fe8e7",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(침해조사국)",
+        "evidenceText": "② 침해조사국에 조사총괄과, 인권침해조사과, 아동청소년인권과, 기획조사팀 및 이주인권팀을 두며, 각 과장은 3급 또는 4급으로 보하고, 팀장은 4급 또는 5급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-477d8857",
+      "parent": "n-21f6e2d8",
+      "child": "n-c74fe96b",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(침해조사국)",
+        "evidenceText": "② 침해조사국에 조사총괄과, 인권침해조사과, 아동청소년인권과, 기획조사팀 및 이주인권팀을 두며, 각 과장은 3급 또는 4급으로 보하고, 팀장은 4급 또는 5급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-89511595",
+      "parent": "n-21f6e2d8",
+      "child": "n-b86f5c9e",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(침해조사국)",
+        "evidenceText": "② 침해조사국에 조사총괄과, 인권침해조사과, 아동청소년인권과, 기획조사팀 및 이주인권팀을 두며, 각 과장은 3급 또는 4급으로 보하고, 팀장은 4급 또는 5급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a4cda66d",
+      "parent": "n-21f6e2d8",
+      "child": "n-a59e855b",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(침해조사국)",
+        "evidenceText": "② 침해조사국에 조사총괄과, 인권침해조사과, 아동청소년인권과, 기획조사팀 및 이주인권팀을 두며, 각 과장은 3급 또는 4급으로 보하고, 팀장은 4급 또는 5급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-379516b3",
+      "parent": "n-57f6ac99",
+      "child": "n-c3705eb1",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의2(차별시정국)",
+        "evidenceText": "② 차별시정국에 차별시정총괄과, 장애차별조사1과, 장애차별조사2과 및 성차별시정과를 두며, 각 과장은 3급 또는 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3d8097a0",
+      "parent": "n-57f6ac99",
+      "child": "n-284f0ded",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의2(차별시정국)",
+        "evidenceText": "② 차별시정국에 차별시정총괄과, 장애차별조사1과, 장애차별조사2과 및 성차별시정과를 두며, 각 과장은 3급 또는 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4f5c3805",
+      "parent": "n-57f6ac99",
+      "child": "n-2678a45e",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의2(차별시정국)",
+        "evidenceText": "② 차별시정국에 차별시정총괄과, 장애차별조사1과, 장애차별조사2과 및 성차별시정과를 두며, 각 과장은 3급 또는 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7231807c",
+      "parent": "n-57f6ac99",
+      "child": "n-2aedc415",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의2(차별시정국)",
+        "evidenceText": "② 차별시정국에 차별시정총괄과, 장애차별조사1과, 장애차별조사2과 및 성차별시정과를 두며, 각 과장은 3급 또는 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-38bc4de4",
+      "parent": "n-f5f80ed6",
+      "child": "n-3cc82a6e",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의3(군인권보호국)",
+        "evidenceText": "② 군인권보호국에 군인권보호총괄과, 군인권조사과 및 군인권협력지원과를 두며, 각 과장은 3급 또는 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8b45f176",
+      "parent": "n-f5f80ed6",
+      "child": "n-7ed83c21",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의3(군인권보호국)",
+        "evidenceText": "② 군인권보호국에 군인권보호총괄과, 군인권조사과 및 군인권협력지원과를 두며, 각 과장은 3급 또는 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8301efb1",
+      "parent": "n-f5f80ed6",
+      "child": "n-cdac1fff",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의3(군인권보호국)",
+        "evidenceText": "② 군인권보호국에 군인권보호총괄과, 군인권조사과 및 군인권협력지원과를 두며, 각 과장은 3급 또는 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-00e386e7",
+      "parent": "n-0eca0f73",
+      "child": "n-830f3043",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의4(국가인권교육센터)",
+        "evidenceText": "② 국가인권교육센터에 인권교육기획과ㆍ인권교육운영과 및 인권교육콘텐츠팀을 두며, 각 과장은 3급 또는 4급으로, 팀장은 4급 또는 5급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5ec6c5ab",
+      "parent": "n-0eca0f73",
+      "child": "n-b4e7355b",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의4(국가인권교육센터)",
+        "evidenceText": "② 국가인권교육센터에 인권교육기획과ㆍ인권교육운영과 및 인권교육콘텐츠팀을 두며, 각 과장은 3급 또는 4급으로, 팀장은 4급 또는 5급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7041eff0",
+      "parent": "n-0eca0f73",
+      "child": "n-40e970de",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의4(국가인권교육센터)",
+        "evidenceText": "② 국가인권교육센터에 인권교육기획과ㆍ인권교육운영과 및 인권교육콘텐츠팀을 두며, 각 과장은 3급 또는 4급으로, 팀장은 4급 또는 5급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-df199020",
+      "parent": "n-5e260ef0",
+      "child": "n-cec30963",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조의2(인권팀)",
+        "evidenceText": "① 광주인권사무소의 소관 사무를 분장하기 위하여 광주인권사무소에 제주인권팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f3288cc3",
+      "parent": "n-a3f3a383",
+      "child": "n-cec30963",
+      "type": "assistant",
+      "sources": [
+        "국가인권위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조의2(인권팀)",
+        "evidenceText": "① 광주인권사무소의 소관 사무를 분장하기 위하여 광주인권사무소에 제주인권팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5f6f702d",
+      "parent": "n-5892c2e4",
+      "child": "n-8df81214",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-44257cc0",
+      "parent": "n-8df81214",
+      "child": "n-d02ea452",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-6d7b1393",
+      "parent": "n-d02ea452",
+      "child": "n-e9f8e82f",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-5549018b",
+      "parent": "n-d02ea452",
+      "child": "n-6dacd92f",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-eac9b560",
+      "parent": "n-d02ea452",
+      "child": "n-a3f3a383",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-f05dbf62",
+      "parent": "n-5892c2e4",
+      "child": "n-5e260ef0",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

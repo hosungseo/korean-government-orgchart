@@ -1,0 +1,1522 @@
+{
+  "meta": {
+    "institution": "성평등가족부",
+    "title": "성평등가족부",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "성평등가족부 직제 [시행 20260324]",
+      "성평등가족부 직제 시행규칙 [시행 20260729]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "성평등가족부 직제 [시행 20260324]",
+        "role": "decree"
+      },
+      {
+        "source": "성평등가족부 직제 시행규칙 [시행 20260729]",
+        "role": "rule"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "headcount",
+        "annex": "별표 1",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "성평등가족부 직제 시행규칙 [시행 20260729]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "성평등가족부 직제 시행규칙 [시행 20260729]"
+      }
+    ],
+    "spanDiagnostics": [],
+    "laws": [
+      {
+        "name": "성평등가족부 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260324",
+        "mst": "284635",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=284635&efYd=20260324&BD=on",
+        "annexCount": 2
+      },
+      {
+        "name": "성평등가족부 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260729",
+        "mst": "288499",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288499&efYd=20260729&BD=on",
+        "annexCount": 3
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "성평등가족부 공무원 정원표(제12조제1항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260324",
+        "type": "headcount",
+        "source": "성평등가족부 직제 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162476451",
+          "pdf": "/LSW/flDownload.do?flSeq=162476453",
+          "image": "/LSW/flDownload.do?flSeq=162476455"
+        },
+        "files": {
+          "hwp": "law0149322026032436196KC_000100E_20260324.hwp",
+          "pdf": "law0149322026032436196KC_000100E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 성평등가족부 직제 [별표 1] <개정 2026. 3. 24.>   \n  성평등가족부 공무원 정원표(제12조제1항 관련)        \n                                                      \n    총계                              298             \n                                                      \n      정무직 계                       2               \n                                                      \n        장관                          1               \n                                                      \n        차관                          1               \n                                                      \n      별정직 계                       2               \n                                                      \n        고위공무원단                  1               \n                                                      \n        3급 상당 또는 4급 상당 이하   1               \n                                                      \n      일반직 계                       294             \n                                                      \n        고위공무원단                  10              \n                                                      \n        3급 또는 4급 이하             283             \n                                                      \n        전문경력관 "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "성평등가족부에 두는 평가대상 조직(제14조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260324",
+        "type": "evaluation",
+        "source": "성평등가족부 직제 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162476457",
+          "pdf": "/LSW/flDownload.do?flSeq=162476459",
+          "image": "/LSW/flDownload.do?flSeq=162476461"
+        },
+        "files": {
+          "hwp": "law0149322026032436196KC_000200E_20260324.hwp",
+          "pdf": "law0149322026032436196KC_000200E_20260324.pdf"
+        },
+        "rowCount": 4,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "1. 성평등정책실",
+            "1명"
+          ],
+          [
+            "2. 성평등정책실 1개 정책관등",
+            "1명"
+          ],
+          [
+            "3. 성평등정책실 3개 과",
+            "14명"
+          ]
+        ],
+        "textPreview": "■ 성평등가족부 직제 [별표 2]                         \n                                                        \n  성평등가족부에 두는 평가대상 조직(제14조제1항 관련)   \n                                                        \n                                                        \n┌──────────────┬───────────┐\n│조직                        │정원                  │\n├──────────────┼───────────┤\n│1. 성평등정책실             │1명                   │\n├──────────────┼───────────┤\n│2. 성평등정책실 1개 정책관등│1명                   │\n├──────────────┼───────────┤\n│3. 성평등정책실 3개 과      │14명                  │\n└──────────────┴───────────┘"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "성평등가족부 공무원 정원표(제9조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260729",
+        "type": "headcount",
+        "source": "성평등가족부 직제 시행규칙 [시행 20260729]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167498657",
+          "pdf": "/LSW/flDownload.do?flSeq=167498659",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167498661",
+            "/LSW/flDownload.do?flSeq=167498663"
+          ]
+        },
+        "files": {
+          "hwp": "law0149482026072900014KC_000100E_20260729.hwp",
+          "pdf": "law0149482026072900014KC_000100E_20260729.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 성평등가족부 직제 시행규칙 [별표 1] <개정 2026. 3. 24.>                  \n  성평등가족부 공무원 정원표(제9조제1항 본문 관련)                            \n                                                                              \n     총계                                                               298   \n                                                                              \n       정무직 계                                                        2     \n                                                                              \n         장관                                                           1     \n                                                                              \n         차관                                                           1     \n                                                                              \n       별정직 계                                                        2     \n                                                                              \n         고위공무원단(장관정책보좌관)                                   1     \n                                                                              \n         장관정책보좌관(3급 상당 또는 4급 상당)                         1     \n                 "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "성평등가족부 공무원 정원표(제9조제1항 단서 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260729",
+        "type": "headcount",
+        "source": "성평등가족부 직제 시행규칙 [시행 20260729]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167498665",
+          "pdf": "/LSW/flDownload.do?flSeq=167498667",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167498669",
+            "/LSW/flDownload.do?flSeq=167498671"
+          ]
+        },
+        "files": {
+          "hwp": "law0149482026072900014KC_000200E_20260729.hwp",
+          "pdf": "law0149482026072900014KC_000200E_20260729.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 성평등가족부 직제 시행규칙 [별표 2] <개정 2026. 7. 29.>              \n  성평등가족부 공무원 정원표(제9조제1항 단서 관련)                        \n                                                                          \n     총계                                                           299   \n                                                                          \n       정무직 계                                                    2     \n                                                                          \n         장관                                                       1     \n                                                                          \n         차관                                                       1     \n                                                                          \n       별정직 계                                                    2     \n                                                                          \n         고위공무원단(장관정책보좌관)                               1     \n                                                                          \n         장관정책보좌관(3급 상당 또는 4급 상당)                     1     \n                                                                          \n      "
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "성평등가족부에 두는 평가대상 조직(제11조 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260729",
+        "type": "evaluation",
+        "source": "성평등가족부 직제 시행규칙 [시행 20260729]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167498673",
+          "pdf": "/LSW/flDownload.do?flSeq=167498675",
+          "image": "/LSW/flDownload.do?flSeq=167498677"
+        },
+        "files": {
+          "hwp": "law0149482026072900014KC_000300E_20260729.hwp",
+          "pdf": "law0149482026072900014KC_000300E_20260729.pdf"
+        },
+        "rowCount": 6,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "1. 성평등정책실",
+            "1명 (고위공무원단 가 등급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "2. 성평등정책실 고용평등정책관",
+            "1명 (고위공무원단 나 등급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "3. 성평등정책실 성형평성기획과",
+            "7명 (4급1명, 5급 3명, 6급1명, 7급2명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "4. 성평등정책실 성평등문화협력과",
+            "2명 (4급1명, 5급1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "5. 성평등정책실 디지털성범죄방지과",
+            "5명 (4급 1명, 5급 2명, 6급 1명, 7급 1명)",
+            "2026년 9월 30일까지"
+          ]
+        ],
+        "textPreview": "■ 성평등가족부 직제 시행규칙 [별표 3]                                          \n  성평등가족부에 두는 평가대상 조직(제11조 관련)                                  \n                                                                                  \n                                                                                  \n┌─────────────────┬──────────┬──────────┐\n│조직                              │정원                │평가기간            │\n├─────────────────┼──────────┼──────────┤\n│1. 성평등정책실                   │1명                 │2028년 9월 30일까지 │\n│                                  │(고위공무원단 가    │                    │\n│                                  │등급 1명)           │                    │\n├─────────────────┼──────────┼──────────┤\n│2. 성평등정책실 고용평등정책관    │1명                 │2028년 9월 30일까지 │\n│                                  │(고위공무원단 나    │                    │\n│                                  │등급 1명)           │                    │\n├─────────────────┼──────────┼──────────┤\n│3. 성평등정책실 성형평성기획과    │7명                 │2028년 9월 30일까지 │\n│                                  │(4급1명, 5급 3명,   │                    │\n│                                  │6급1명, 7급2명)     │                    │\n├─────────────────┼──────────┼──"
+      }
+    ]
+  },
+  "rootId": "n-8238aeb7",
+  "nodes": [
+    {
+      "id": "n-8238aeb7",
+      "name": "성평등가족부",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]",
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-4481f335",
+      "name": "차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-7da5dac3",
+      "name": "기획조정실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]",
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]",
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]",
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-3d229184",
+      "name": "성평등정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]",
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-a424adab",
+      "name": "청소년가족정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]",
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-d78755d5",
+      "name": "정책보좌관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-67f14651",
+      "name": "홍보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-ad88cef8",
+      "name": "디지털소통팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-3ea7d450",
+      "name": "혁신행정법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-0c663167",
+      "name": "국제협력담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-1d6d0bb2",
+      "name": "정보통계담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-f1907300",
+      "name": "정책기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-594bab98",
+      "name": "성평등정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-e472955a",
+      "name": "고용평등정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-05ee7685",
+      "name": "안전인권정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-46e73cbe",
+      "name": "성형평성기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-454b8c1c",
+      "name": "성평등정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-59102c14",
+      "name": "성평등문화협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-4e7a3285",
+      "name": "성별영향평가과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-3e6182ff",
+      "name": "고용평등총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-750b3cde",
+      "name": "경제활동촉진과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-f75daab1",
+      "name": "경력이음지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-24979dbc",
+      "name": "권익정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-7a3ae27d",
+      "name": "성폭력방지과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-748e7171",
+      "name": "디지털성범죄방지과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-276f0c56",
+      "name": "친밀관계폭력방지과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-aca6c5b9",
+      "name": "폭력예방교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-e8d10b60",
+      "name": "아동청소년성보호과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-12d3ccf2",
+      "name": "청소년정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-5ded40a8",
+      "name": "가족정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-06d54d0e",
+      "name": "청소년정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-6fdc4250",
+      "name": "청소년활동진흥과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-a0c6846d",
+      "name": "청소년활동안전과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-f7064bb1",
+      "name": "청소년자립지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-836f75af",
+      "name": "학교밖청소년지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-7c2cdef5",
+      "name": "청소년보호환경과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-e9eaf70c",
+      "name": "가족정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-1a5e67c2",
+      "name": "가족지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-1e65f60b",
+      "name": "아이돌봄지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    },
+    {
+      "id": "n-9e0c4998",
+      "name": "다문화가족과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-ddbf5eed",
+      "parent": "n-6d736a60",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6a94cd83",
+      "parent": "n-4481f335",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제6조(기획조정실장)",
+        "evidenceText": "③ 기획조정실장은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-c6824c70",
+      "parent": "n-4481f335",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제7조(감사담당관)",
+        "evidenceText": "② 감사담당관은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-3f2ab03b",
+      "parent": "n-6d736a60",
+      "child": "n-d78755d5",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제5조(정책보좌관)",
+        "evidenceText": "② 정책보좌관은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-011be0c0",
+      "parent": "n-e618142f",
+      "child": "n-67f14651",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제2조(대변인)",
+        "evidenceText": "③ 홍보담당관은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e5da7c49",
+      "parent": "n-e618142f",
+      "child": "n-ad88cef8",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제2조(대변인)",
+        "evidenceText": "④ 디지털소통팀장은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b5600516",
+      "parent": "n-7da5dac3",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정실장)",
+        "evidenceText": "⑤ 기획재정담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-34cc94ce",
+      "parent": "n-7da5dac3",
+      "child": "n-3ea7d450",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정실장)",
+        "evidenceText": "⑥ 혁신행정법무담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-38b572e1",
+      "parent": "n-7da5dac3",
+      "child": "n-0c663167",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정실장)",
+        "evidenceText": "⑦ 국제협력담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-595f2302",
+      "parent": "n-7da5dac3",
+      "child": "n-1d6d0bb2",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정실장)",
+        "evidenceText": "⑧ 정보통계담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-49d09c81",
+      "parent": "n-7da5dac3",
+      "child": "n-f1907300",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정실장)",
+        "evidenceText": "③ 정책기획관은 「성평등가족부 직제」 제6조제3항 각 호의 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-b55ddf9e",
+      "parent": "n-3d229184",
+      "child": "n-594bab98",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "③ 성평등정책관은 「성평등가족부 직제」 제9조제3항제1호부터 제11호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-383f4d18",
+      "parent": "n-3d229184",
+      "child": "n-e472955a",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "④ 고용평등정책관은 「성평등가족부 직제」 제9조제3항제12호부터 제24호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-789e84a7",
+      "parent": "n-3d229184",
+      "child": "n-05ee7685",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑤ 안전인권정책관은 「성평등가족부 직제」 제9조제3항제25호부터 제47호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b878455d",
+      "parent": "n-3d229184",
+      "child": "n-46e73cbe",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c90bc578",
+      "parent": "n-3d229184",
+      "child": "n-454b8c1c",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-38205b39",
+      "parent": "n-3d229184",
+      "child": "n-59102c14",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-534d848d",
+      "parent": "n-3d229184",
+      "child": "n-4e7a3285",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fdebe4e3",
+      "parent": "n-3d229184",
+      "child": "n-3e6182ff",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a99112db",
+      "parent": "n-3d229184",
+      "child": "n-750b3cde",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4a278075",
+      "parent": "n-3d229184",
+      "child": "n-f75daab1",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-902bef54",
+      "parent": "n-3d229184",
+      "child": "n-24979dbc",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c9695984",
+      "parent": "n-3d229184",
+      "child": "n-7a3ae27d",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-234af380",
+      "parent": "n-3d229184",
+      "child": "n-748e7171",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9a305c61",
+      "parent": "n-3d229184",
+      "child": "n-276f0c56",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f1b57baa",
+      "parent": "n-3d229184",
+      "child": "n-aca6c5b9",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4d097e5a",
+      "parent": "n-3d229184",
+      "child": "n-e8d10b60",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제7조(성평등정책실)",
+        "evidenceText": "⑥ 성평등정책실에 성형평성기획과, 성평등정책과, 성평등문화협력과, 성별영향평가과, 고용평등총괄과, 경제활동촉진과, 경력이음지원과, 권익정책과, 성폭력방지과, 디지털성범죄방지과, 친밀관계폭력방지과, 폭력예방교육과, 아동청소년성보호과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-12d932dc",
+      "parent": "n-a424adab",
+      "child": "n-12d3ccf2",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "③ 청소년정책관은 「성평등가족부 직제」 제10조제3항제1호부터 제23호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e997e131",
+      "parent": "n-a424adab",
+      "child": "n-5ded40a8",
+      "type": "advisor",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "④ 가족정책관은 「성평등가족부 직제」 제10조제3항제24호부터 제41호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-34f4bc7a",
+      "parent": "n-a424adab",
+      "child": "n-06d54d0e",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "⑤ 청소년가족정책실에 청소년정책과, 청소년활동진흥과, 청소년활동안전과, 청소년자립지원과, 학교밖청소년지원과, 청소년보호환경과, 가족정책과, 가족지원과, 아이돌봄지원과 및 다문화가족과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-16566576",
+      "parent": "n-a424adab",
+      "child": "n-6fdc4250",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "⑤ 청소년가족정책실에 청소년정책과, 청소년활동진흥과, 청소년활동안전과, 청소년자립지원과, 학교밖청소년지원과, 청소년보호환경과, 가족정책과, 가족지원과, 아이돌봄지원과 및 다문화가족과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-40d5a45a",
+      "parent": "n-a424adab",
+      "child": "n-a0c6846d",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "⑤ 청소년가족정책실에 청소년정책과, 청소년활동진흥과, 청소년활동안전과, 청소년자립지원과, 학교밖청소년지원과, 청소년보호환경과, 가족정책과, 가족지원과, 아이돌봄지원과 및 다문화가족과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ab17af76",
+      "parent": "n-a424adab",
+      "child": "n-f7064bb1",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "⑤ 청소년가족정책실에 청소년정책과, 청소년활동진흥과, 청소년활동안전과, 청소년자립지원과, 학교밖청소년지원과, 청소년보호환경과, 가족정책과, 가족지원과, 아이돌봄지원과 및 다문화가족과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f6a70fea",
+      "parent": "n-a424adab",
+      "child": "n-836f75af",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "⑤ 청소년가족정책실에 청소년정책과, 청소년활동진흥과, 청소년활동안전과, 청소년자립지원과, 학교밖청소년지원과, 청소년보호환경과, 가족정책과, 가족지원과, 아이돌봄지원과 및 다문화가족과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e97a7bf3",
+      "parent": "n-a424adab",
+      "child": "n-7c2cdef5",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "⑤ 청소년가족정책실에 청소년정책과, 청소년활동진흥과, 청소년활동안전과, 청소년자립지원과, 학교밖청소년지원과, 청소년보호환경과, 가족정책과, 가족지원과, 아이돌봄지원과 및 다문화가족과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8fed0062",
+      "parent": "n-a424adab",
+      "child": "n-e9eaf70c",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "⑤ 청소년가족정책실에 청소년정책과, 청소년활동진흥과, 청소년활동안전과, 청소년자립지원과, 학교밖청소년지원과, 청소년보호환경과, 가족정책과, 가족지원과, 아이돌봄지원과 및 다문화가족과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8fb7a892",
+      "parent": "n-a424adab",
+      "child": "n-1a5e67c2",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "⑤ 청소년가족정책실에 청소년정책과, 청소년활동진흥과, 청소년활동안전과, 청소년자립지원과, 학교밖청소년지원과, 청소년보호환경과, 가족정책과, 가족지원과, 아이돌봄지원과 및 다문화가족과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3a03d475",
+      "parent": "n-a424adab",
+      "child": "n-1e65f60b",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "⑤ 청소년가족정책실에 청소년정책과, 청소년활동진흥과, 청소년활동안전과, 청소년자립지원과, 학교밖청소년지원과, 청소년보호환경과, 가족정책과, 가족지원과, 아이돌봄지원과 및 다문화가족과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a79594f5",
+      "parent": "n-a424adab",
+      "child": "n-9e0c4998",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 시행규칙 [시행 20260729]"
+      ],
+      "metadata": {
+        "article": "제8조(청소년가족정책실)",
+        "evidenceText": "⑤ 청소년가족정책실에 청소년정책과, 청소년활동진흥과, 청소년활동안전과, 청소년자립지원과, 학교밖청소년지원과, 청소년보호환경과, 가족정책과, 가족지원과, 아이돌봄지원과 및 다문화가족과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0ea7650c",
+      "parent": "n-8238aeb7",
+      "child": "n-6d736a60",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-fb6f75f2",
+      "parent": "n-6d736a60",
+      "child": "n-4481f335",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-7d314a9d",
+      "parent": "n-4481f335",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 성평등가족부에 운영지원과ㆍ성평등정책실 및 청소년가족정책실을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9f58f6fe",
+      "parent": "n-4481f335",
+      "child": "n-3d229184",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 성평등가족부에 운영지원과ㆍ성평등정책실 및 청소년가족정책실을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0fe79abe",
+      "parent": "n-4481f335",
+      "child": "n-a424adab",
+      "type": "assistant",
+      "sources": [
+        "성평등가족부 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 성평등가족부에 운영지원과ㆍ성평등정책실 및 청소년가족정책실을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    }
+  ]
+}

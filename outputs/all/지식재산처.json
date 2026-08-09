@@ -1,0 +1,3592 @@
+{
+  "meta": {
+    "institution": "지식재산처",
+    "title": "지식재산처",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "지식재산처와 그 소속기관 직제 [시행 20260721]",
+      "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "role": "decree"
+      },
+      {
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "role": "rule"
+      }
+    ],
+    "temporaryHeadcounts": [
+      {
+        "target": "지식재산처",
+        "expires": "2028-02-29",
+        "source": "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      },
+      {
+        "target": "지식재산처",
+        "expires": "2028-06-29",
+        "source": "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "headcount",
+        "annex": "별표 2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 3",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 4",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 5",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      }
+    ],
+    "spanDiagnostics": [
+      {
+        "node": "상표디자인심사국",
+        "directUnits": 10,
+        "status": "split-candidate",
+        "message": "직속 과·팀이 9개를 초과합니다."
+      },
+      {
+        "node": "디지털융합심사국",
+        "directUnits": 10,
+        "status": "split-candidate",
+        "message": "직속 과·팀이 9개를 초과합니다."
+      }
+    ],
+    "laws": [
+      {
+        "name": "지식재산처와 그 소속기관 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288235",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288235&efYd=20260721&BD=on",
+        "annexCount": 4
+      },
+      {
+        "name": "지식재산처와 그 소속기관 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288171",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288171&efYd=20260721&BD=on",
+        "annexCount": 7
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "지식재산처 공무원 정원표(제35조제1항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167073749",
+          "pdf": "/LSW/flDownload.do?flSeq=167073751",
+          "image": "/LSW/flDownload.do?flSeq=167073753"
+        },
+        "files": {
+          "hwp": "law0149392026072136514KC_000100E_20260721.hwp",
+          "pdf": "law0149392026072136514KC_000100E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 지식재산처와 그 소속기관 직제 [별표 1] <개정 2026. 7. 21.>   \n                                                                  \n                                                                  \n  지식재산처 공무원 정원표(제35조제1항 관련)                      \n                                                                  \n                                                                  \n  총계                    1,629                                   \n                                                                  \n    정무직 계             1                                       \n                                                                  \n      처장                1                                       \n                                                                  \n    별정직 계             1                                       \n                                                                  \n      7급 상당 이하       1                                       \n                                                                  \n    일반직 계             1,627                                   \n                                                                  \n      고위공무원단        13                              "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "지식재산처 소속기관 공무원 정원표(제36조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167073755",
+          "pdf": "/LSW/flDownload.do?flSeq=167073757",
+          "image": "/LSW/flDownload.do?flSeq=167073759"
+        },
+        "files": {
+          "hwp": "law0149392026072136514KC_000200E_20260721.hwp",
+          "pdf": "law0149392026072136514KC_000200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 지식재산처와 그 소속기관 직제 [별표 2]             \n                                                        \n                                                        \n  지식재산처 소속기관 공무원 정원표(제36조제1항 관련)   \n                                                        \n                                                        \n  총계                    198                           \n                                                        \n    일반직 계             198                           \n                                                        \n      고위공무원단        12                            \n                                                        \n      3급 또는 4급 이하   186"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "지식재산처에 두는 평가대상 조직 및 정원(제38조제1항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167073761",
+          "pdf": "/LSW/flDownload.do?flSeq=167073763",
+          "image": "/LSW/flDownload.do?flSeq=167073765"
+        },
+        "files": {
+          "hwp": "law0149392026072136514KC_000300E_20260721.hwp",
+          "pdf": "law0149392026072136514KC_000300E_20260721.pdf"
+        },
+        "rowCount": 12,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "가. 지식재산정책국 1개 과",
+            "1명"
+          ],
+          [
+            "나. 지식재산분쟁대응국",
+            "1명"
+          ],
+          [
+            "다. 지식재산분쟁대응국 4개 과",
+            "4명"
+          ],
+          [
+            "라. 지식재산보호협력국 2개 과",
+            "18명"
+          ],
+          [
+            "업무",
+            "정원"
+          ],
+          [
+            "가. 특허 심사업무",
+            "13명"
+          ],
+          [
+            "나. 특허 심사업무",
+            "7명"
+          ],
+          [
+            "다. 상표ㆍ디자인 심사업무",
+            "5명"
+          ],
+          [
+            "라. 특허 심사업무",
+            "4명"
+          ],
+          [
+            "마. 상표ㆍ디자인 심사업무",
+            "3명"
+          ],
+          [
+            "바. 특허 심사업무",
+            "10명"
+          ]
+        ],
+        "textPreview": "■ 지식재산처와 그 소속기관 직제 [별표 3] <개정 2026. 6. 30.>   \n                                                                  \n                                                                  \n  지식재산처에 두는 평가대상 조직 및 정원(제38조제1항 관련)       \n                                                                  \n                                                                  \n  1. 평가대상 조직                                                \n┌───────────────┬───────────────┐\n│조직                          │정원                          │\n├───────────────┼───────────────┤\n│가. 지식재산정책국 1개 과     │1명                           │\n├───────────────┼───────────────┤\n│나. 지식재산분쟁대응국        │1명                           │\n├───────────────┼───────────────┤\n│다. 지식재산분쟁대응국 4개 과 │4명                           │\n├───────────────┼───────────────┤\n│라. 지식재산보호협력국 2개 과 │18명                          │\n└───────────────┴───────────────┘\n                                                                  \n                                                                  \n  2. 평가대상 정원                                                \n┌───────────────┬───────────────┐\n│업무                          │정원                          │\n├───────────────┼──"
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "지식재산처 공무원 한시정원표(제39조 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167073767",
+          "pdf": "/LSW/flDownload.do?flSeq=167073769",
+          "image": "/LSW/flDownload.do?flSeq=167073771"
+        },
+        "files": {
+          "hwp": "law0149392026072136514KC_000400E_20260721.hwp",
+          "pdf": "law0149392026072136514KC_000400E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 지식재산처와 그 소속기관 직제 [별표 4] <개정 2026. 6. 30.>   \n                                                                  \n                                                                  \n  지식재산처 공무원 한시정원표(제39조 관련)                       \n                                                                  \n                                                                  \n  1. 제39조제1항 관련 한시정원(존속기한: 2028년 2월 29일)         \n                                                                  \n    총계          7                                               \n                                                                  \n      일반직 계   7                                               \n                                                                  \n        6급 이하  7                                               \n                                                                  \n  2. 제39조제2항 관련 한시정원(존속기한: 2028년 6월 29일)         \n                                                                  \n    총계          9                                               \n                                                                  \n      일반직 계   9                                               \n             "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "지식재산처 공무원 정원표(제23조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156429",
+          "pdf": "/LSW/flDownload.do?flSeq=167156431",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167156433",
+            "/LSW/flDownload.do?flSeq=167156435"
+          ]
+        },
+        "files": {
+          "hwp": "law0149342026072102138KC_000100E_20260721.hwp",
+          "pdf": "law0149342026072102138KC_000100E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 지식재산처와 그 소속기관 직제 시행규칙 [별표 1] <개정 2026. 7. 21.>  \n                                                                          \n                                                                          \n  지식재산처 공무원 정원표(제23조제1항 본문 관련)                         \n                                                                          \n                                                                          \n  총계                                                            1,629   \n                                                                          \n    정무직 계                                                     1       \n                                                                          \n      처장                                                        1       \n                                                                          \n    별정직 계                                                     1       \n                                                                          \n      비서(7급 상당)                                              1       \n                                                                          \n    일반직 계                                                   "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "지식재산처 공무원 정원표(제23조제1항 단서 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156437",
+          "pdf": "/LSW/flDownload.do?flSeq=167156439",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167156441",
+            "/LSW/flDownload.do?flSeq=167156443"
+          ]
+        },
+        "files": {
+          "hwp": "law0149342026072102138KC_000200E_20260721.hwp",
+          "pdf": "law0149342026072102138KC_000200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 지식재산처와 그 소속기관 직제 시행규칙 [별표 2] <개정 2026. 7. 21.>  \n                                                                          \n                                                                          \n  지식재산처 공무원 정원표(제23조제1항 단서 관련)                         \n                                                                          \n                                                                          \n  총계                                                            1,629   \n                                                                          \n    정무직 계                                                     1       \n                                                                          \n      처장                                                        1       \n                                                                          \n    별정직 계                                                     1       \n                                                                          \n      비서(7급 상당)                                              1       \n                                                                          \n    일반직 계                                                   "
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "특허심판원 공무원 정원표(제24조제1항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156445",
+          "pdf": "/LSW/flDownload.do?flSeq=167156447",
+          "image": "/LSW/flDownload.do?flSeq=167156449"
+        },
+        "files": {
+          "hwp": "law0149342026072102138KC_000300E_20260721.hwp",
+          "pdf": "law0149342026072102138KC_000300E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 지식재산처와 그 소속기관 직제 시행규칙 [별표 3]                    \n                                                                        \n                                                                        \n  특허심판원 공무원 정원표(제24조제1항 관련)                            \n                                                                        \n                                                                        \n  총계                                                            146   \n                                                                        \n    일반직 계                                                     146   \n                                                                        \n      고위공무원단                                                11    \n                                                                        \n      서기관                                                      11    \n                                                                        \n      과학기술서기관 또는 서기관                                  30    \n                                                                        \n      서기관ㆍ행정사무관 또는 사서사무관                          6     \n                                         "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "국제지식재산연수원 공무원 정원표(제24조제3항 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156451",
+          "pdf": "/LSW/flDownload.do?flSeq=167156453",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167156455",
+            "/LSW/flDownload.do?flSeq=167156457"
+          ]
+        },
+        "files": {
+          "hwp": "law0149342026072102138KC_000400E_20260721.hwp",
+          "pdf": "law0149342026072102138KC_000400E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 지식재산처와 그 소속기관 직제 시행규칙 [별표 4]                  \n                                                                      \n                                                                      \n  국제지식재산연수원 공무원 정원표(제24조제3항 관련)                  \n                                                                      \n                                                                      \n  총계                                                            32  \n                                                                      \n    일반직 계                                                     32  \n                                                                      \n      고위공무원단                                                1   \n                                                                      \n      과학기술서기관 또는 서기관                                  3   \n                                                                      \n      과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관      \n  ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의            \n  료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사            \n  무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관            \n  또는 사서사무관                                                 1   \n                                      "
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "지식재산처서울사무소 공무원 정원표(제24조제4항 관련)",
+        "key": "000500E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156459",
+          "pdf": "/LSW/flDownload.do?flSeq=167156461",
+          "image": "/LSW/flDownload.do?flSeq=167156463"
+        },
+        "files": {
+          "hwp": "law0149342026072102138KC_000500E_20260721.hwp",
+          "pdf": "law0149342026072102138KC_000500E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 지식재산처와 그 소속기관 직제 시행규칙 [별표 5]                  \n                                                                      \n                                                                      \n  지식재산처서울사무소 공무원 정원표(제24조제4항 관련)                \n                                                                      \n                                                                      \n  총계                                                            20  \n                                                                      \n    일반직 계                                                     20  \n                                                                      \n      과학기술서기관 또는 서기관                                  1   \n                                                                      \n      공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사      \n  무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관            \n  ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사            \n  무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관                2   \n                                                                      \n      공업주사ㆍ농업주사ㆍ임업주사ㆍ수의주사ㆍ해양수산주사ㆍ기상      \n  주사ㆍ보건주사ㆍ의료기술주사ㆍ약무주사ㆍ환경주사ㆍ항공주            \n  사ㆍ시설주사ㆍ전산주사ㆍ방송통신주사ㆍ행정주사 또는 사서            \n  주사                              "
+      },
+      {
+        "annex": "별표 6",
+        "number": "6",
+        "title": "지식재산처에 두는 평가대상 조직 및 정원(제26조 관련)",
+        "key": "000600E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156465",
+          "pdf": "/LSW/flDownload.do?flSeq=167156467",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167156469",
+            "/LSW/flDownload.do?flSeq=167156471"
+          ]
+        },
+        "files": {
+          "hwp": "law0149342026072102138KC_000600E_20260721.hwp",
+          "pdf": "law0149342026072102138KC_000600E_20260721.pdf"
+        },
+        "rowCount": 16,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "가. 지식재산정책국 지식재산거래과",
+            "1명 (4급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "나. 지식재산분쟁대응국",
+            "1명 (고위공무원단 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "다. 지식재산분쟁대응국 첨단산업 분쟁대응과",
+            "1명 (4급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "라. 지식재산분쟁대응국 특허분쟁 대응과",
+            "1명 (4급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "마. 지식재산분쟁대응국 상표분쟁 대응과",
+            "1명 (4급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "바. 지식재산분쟁대응국 디자인분 쟁대응과",
+            "1명 (4급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "사. 지식재산보호협력국 지식재산 보호분석과",
+            "8명 (4급 1명, 5급 2명, 6급 4명, 7급 1명)",
+            "2029년 3월 31일까지"
+          ],
+          [
+            "아. 지식재산보호협력국 기술유출 특별사법경찰과",
+            "10명 (4급 1명, 4·5급 1명, 5급 3명, 6급 3명, 7급 2명)",
+            "2029년 3월 31일까지"
+          ],
+          [
+            "업무",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "가. 특허 심사업무",
+            "13명 (4급 또는 5급 3명, 6급 10명)",
+            "2026년 12월 31일까지"
+          ],
+          [
+            "나. 특허 심사업무",
+            "7명 (4급 또는 5급 3명, 6급 4명)",
+            "2026년 12월 31일까지"
+          ],
+          [
+            "다. 상표ㆍ디자인 심사업무",
+            "5명 (4급 또는 5급 1명, 6급 4명)",
+            "2026년 12월 31일까지"
+          ],
+          [
+            "라. 특허 심사업무",
+            "4명 (6급 4명)",
+            "2026년 12월 31일까지"
+          ],
+          [
+            "마. 상표ㆍ디자인 심사업무",
+            "3명 (6급 3명)",
+            "2026년 12월 31일까지"
+          ],
+          [
+            "바. 특허 심사업무",
+            "10명 (6급 10명)",
+            "2027년 12월 31일까지"
+          ]
+        ],
+        "textPreview": "■ 지식재산처와 그 소속기관 직제 시행규칙 [별표 6] <개정 2026. 6. 30.>            \n                                                                                    \n                                                                                    \n  지식재산처에 두는 평가대상 조직 및 정원(제26조 관련)                              \n                                                                                    \n                                                                                    \n  1. 평가대상 조직                                                                  \n┌─────────────────┬───────────┬──────────┐\n│조직                              │정원                  │평가기간            │\n├─────────────────┼───────────┼──────────┤\n│가. 지식재산정책국 지식재산거래과 │1명                   │2028년 9월 30일까지 │\n│                                  │(4급 1명)             │                    │\n├─────────────────┼───────────┼──────────┤\n│나. 지식재산분쟁대응국            │1명                   │2028년 9월 30일까지 │\n│                                  │(고위공무원단 1명)    │                    │\n├─────────────────┼───────────┼──────────┤\n│다. 지식재산분쟁대응국 첨단산업   │1명                   │2028년 9월 30일까지 │\n│분쟁대응과                        │(4급 1명)             │                    "
+      },
+      {
+        "annex": "별표 7",
+        "number": "7",
+        "title": "지식재산처 공무원 한시정원표(제27조 관련)",
+        "key": "000700E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156473",
+          "pdf": "/LSW/flDownload.do?flSeq=167156475",
+          "image": "/LSW/flDownload.do?flSeq=167156477"
+        },
+        "files": {
+          "hwp": "law0149342026072102138KC_000700E_20260721.hwp",
+          "pdf": "law0149342026072102138KC_000700E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 지식재산처와 그 소속기관 직제 시행규칙 [별표 7] <개정 2026. 6. 30.>  \n                                                                          \n                                                                          \n  지식재산처 공무원 한시정원표(제27조 관련)                               \n                                                                          \n                                                                          \n  1. 제27조제1항 관련 한시정원(존속기한: 2028년 2월 29일)                 \n                                                                          \n    총계                                                          7       \n                                                                          \n      일반직 계                                                   7       \n                                                                          \n        공업주사ㆍ농업주사ㆍ임업주사ㆍ수의주사ㆍ해양수산주사ㆍ기          \n  상주사ㆍ보건주사ㆍ의료기술주사ㆍ약무주사ㆍ환경주사ㆍ항                  \n  공주사ㆍ시설주사ㆍ전산주사ㆍ방송통신주사ㆍ행정주사 또는                 \n  사서주사                                                        7       \n                                                                          \n                                                                          \n"
+      }
+    ]
+  },
+  "rootId": "n-85294956",
+  "nodes": [
+    {
+      "id": "n-85294956",
+      "name": "지식재산처",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-41d0a448",
+      "name": "특허심판원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution",
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-edbd081d",
+      "name": "국제지식재산연수원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution",
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-736d0ef2",
+      "name": "지식재산처서울사무소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "special-local",
+        "responsible": false,
+        "unitRole": "affiliated-institution",
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4047c766",
+      "name": "처장",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-df604536",
+      "name": "차장",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4b489dd2",
+      "name": "심사품질담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-618c7eaf",
+      "name": "기획조정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e57c05af",
+      "name": "지식재산정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-658c36a7",
+      "name": "지식재산보호협력국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1b5b3de1",
+      "name": "지식재산분쟁대응국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b15d0662",
+      "name": "지식재산정보국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-982beda3",
+      "name": "상표디자인심사국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-de021102",
+      "name": "특허심사기획국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-984a2504",
+      "name": "디지털융합심사국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-60fef18b",
+      "name": "전기통신심사국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-3193df63",
+      "name": "화학생명심사국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d403738d",
+      "name": "기계금속심사국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-36d7b59d",
+      "name": "반도체심사추진단",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]",
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-dd5ea767",
+      "name": "혁신행정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-dadc7298",
+      "name": "규제개혁법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-547cb46c",
+      "name": "지식재산정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-bbc64efa",
+      "name": "지식재산거래과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급",
+        "evaluation": true
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-609598d8",
+      "name": "지식재산창출활용과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8b5a0f4f",
+      "name": "지식재산인력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d1999b9f",
+      "name": "지역지식재산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-85f942e8",
+      "name": "지식재산보호정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-94313d67",
+      "name": "지식재산보호분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f6081b40",
+      "name": "기술디자인특별사법경찰과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-01ab53a2",
+      "name": "기술유출특별사법경찰과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-49ce1021",
+      "name": "상표특별사법경찰과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-7de68d4e",
+      "name": "국제협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-45d30f92",
+      "name": "지식재산보호기준팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ddda5f04",
+      "name": "부정경쟁조사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-12fc801f",
+      "name": "지식재산분쟁대응협력총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c8df24e2",
+      "name": "첨단산업분쟁대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c2774f0c",
+      "name": "특허분쟁대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f702e860",
+      "name": "상표분쟁대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a19c1fa9",
+      "name": "디자인분쟁대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-2f50bc93",
+      "name": "지식재산정보정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a288a9f3",
+      "name": "지식재산정보시스템과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5606e6ee",
+      "name": "지식재산데이터관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-05eb703e",
+      "name": "지식재산출원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-08d8af58",
+      "name": "지식재산등록과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a1500969",
+      "name": "지식재산국제출원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1020d3ae",
+      "name": "상표심사정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-336f079b",
+      "name": "디자인심사정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a0be81fc",
+      "name": "생활용품상표심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6e2f61b6",
+      "name": "화학식품상표심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d478a7c2",
+      "name": "전문서비스상표심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a3196206",
+      "name": "일반서비스상표심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-16fd23c0",
+      "name": "기계전자상표심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-74e465a3",
+      "name": "국제상표심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a643394c",
+      "name": "생활디자인심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-65184272",
+      "name": "산업디자인심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b232ae5b",
+      "name": "특허심사총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5e1c9f98",
+      "name": "특허제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-48d053db",
+      "name": "생활용품심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ad1ce92f",
+      "name": "식품생물자원심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a41fe5d7",
+      "name": "주거기반심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-19cbb0d3",
+      "name": "가전제품심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-490c9423",
+      "name": "국제특허출원심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-bd545730",
+      "name": "인공지능빅데이터심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-337e004e",
+      "name": "사물인터넷심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e30508cd",
+      "name": "바이오기반심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-42a3956c",
+      "name": "지능형로봇심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0a75e3b2",
+      "name": "자율주행심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-7af8e49d",
+      "name": "스마트제조심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-dbda227c",
+      "name": "바이오진단분석심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b87a6664",
+      "name": "바이오의약심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-99ce14a3",
+      "name": "헬스케어기기심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-2a579895",
+      "name": "헬스케어데이터심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-9758515f",
+      "name": "전기심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-842d22dd",
+      "name": "컴퓨터심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-7cb7afdc",
+      "name": "통신심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6f82af7c",
+      "name": "전자상거래심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e46f4b2f",
+      "name": "방송미디어심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-135ae76e",
+      "name": "유기화학심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4e7383b9",
+      "name": "약품화학심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-593a2d86",
+      "name": "기초재료화학심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0d3d8e13",
+      "name": "이차전지소재심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a82f7941",
+      "name": "고분자섬유심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-3f9e84cf",
+      "name": "의료기술심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-586530da",
+      "name": "환경기술심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-14e4add7",
+      "name": "이차전지설계심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5f6b3feb",
+      "name": "이차전지제어관리심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d4329db3",
+      "name": "일반기계심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8f3ee84f",
+      "name": "제어기계심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4cd6d333",
+      "name": "건설기술심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-891dc236",
+      "name": "자동차심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d94bf355",
+      "name": "동력기술심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-bd74c8da",
+      "name": "운송기계심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ab76d3f2",
+      "name": "계측기술심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-dd211c7a",
+      "name": "재료금속심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a2287efb",
+      "name": "반도체제조공정심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b201fdf1",
+      "name": "반도체설계심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4aa1d9b1",
+      "name": "디스플레이심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-db21c655",
+      "name": "반도체소재심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-193ec6f2",
+      "name": "반도체조립공정심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-bf705366",
+      "name": "반도체제조장비심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-526053c5",
+      "name": "심판정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b180629c",
+      "name": "송무과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-55d141ff",
+      "name": "교육기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8ac227b3",
+      "name": "지식재산교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-3c881449",
+      "name": "국제교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-45fbc9d8",
+      "name": "총괄지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ff2a66e1",
+      "name": "출원등록과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          5
+        ],
+        "gradeRange": "5급"
+      },
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-e80ac027",
+      "parent": "n-85294956",
+      "child": "n-41d0a448",
+      "type": "affiliated",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "① 지식재산처장의 관장 사무를 지원하기 위하여 지식재산처장 소속으로 특허심판원 및 국제지식재산연수원을 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-cdcc30fb",
+      "parent": "n-85294956",
+      "child": "n-edbd081d",
+      "type": "affiliated",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "① 지식재산처장의 관장 사무를 지원하기 위하여 지식재산처장 소속으로 특허심판원 및 국제지식재산연수원을 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-76d7aad2",
+      "parent": "n-85294956",
+      "child": "n-736d0ef2",
+      "type": "affiliated",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "② 지식재산처장의 소관 사무를 분장하기 위하여 지식재산처장 소속으로 지식재산처서울사무소를 둔다",
+        "affiliationType": "special-local"
+      }
+    },
+    {
+      "id": "e-d7ac55e1",
+      "parent": "n-4047c766",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 처장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-bc7a4ada",
+      "parent": "n-df604536",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(감사담당관)",
+        "evidenceText": "② 감사담당관은 다음 사항에 관하여 차장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8aeedc10",
+      "parent": "n-df604536",
+      "child": "n-4b489dd2",
+      "type": "advisor",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(심사품질담당관)",
+        "evidenceText": "② 심사품질담당관은 다음 사항에 관하여 차장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-52e3740e",
+      "parent": "n-df604536",
+      "child": "n-618c7eaf",
+      "type": "advisor",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(기획조정관)",
+        "evidenceText": "② 기획조정관은 다음 사항에 관하여 차장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-c1a1e64b",
+      "parent": "n-618c7eaf",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(기획조정관)",
+        "evidenceText": "③ 기획재정담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-a3c1808b",
+      "parent": "n-618c7eaf",
+      "child": "n-dd5ea767",
+      "type": "advisor",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(기획조정관)",
+        "evidenceText": "④ 혁신행정담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-162aca08",
+      "parent": "n-618c7eaf",
+      "child": "n-dadc7298",
+      "type": "advisor",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(기획조정관)",
+        "evidenceText": "⑤ 규제개혁법무담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4be08865",
+      "parent": "n-e57c05af",
+      "child": "n-547cb46c",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(지식재산정책국)",
+        "evidenceText": "② 지식재산정책국에 지식재산정책과ㆍ지식재산거래과ㆍ지식재산창출활용과ㆍ지식재산인력과 및 지역지식재산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-acd54db0",
+      "parent": "n-e57c05af",
+      "child": "n-bbc64efa",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(지식재산정책국)",
+        "evidenceText": "② 지식재산정책국에 지식재산정책과ㆍ지식재산거래과ㆍ지식재산창출활용과ㆍ지식재산인력과 및 지역지식재산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-273f73de",
+      "parent": "n-e57c05af",
+      "child": "n-609598d8",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(지식재산정책국)",
+        "evidenceText": "② 지식재산정책국에 지식재산정책과ㆍ지식재산거래과ㆍ지식재산창출활용과ㆍ지식재산인력과 및 지역지식재산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2be59723",
+      "parent": "n-e57c05af",
+      "child": "n-8b5a0f4f",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(지식재산정책국)",
+        "evidenceText": "② 지식재산정책국에 지식재산정책과ㆍ지식재산거래과ㆍ지식재산창출활용과ㆍ지식재산인력과 및 지역지식재산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-385e076a",
+      "parent": "n-e57c05af",
+      "child": "n-d1999b9f",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(지식재산정책국)",
+        "evidenceText": "② 지식재산정책국에 지식재산정책과ㆍ지식재산거래과ㆍ지식재산창출활용과ㆍ지식재산인력과 및 지역지식재산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-36f44295",
+      "parent": "n-658c36a7",
+      "child": "n-85f942e8",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(지식재산보호협력국)",
+        "evidenceText": "② 지식재산보호협력국에 지식재산보호정책과ㆍ지식재산보호분석과ㆍ기술디자인특별사법경찰과ㆍ기술유출특별사법경찰과ㆍ상표특별사법경찰과ㆍ국제협력과ㆍ지식재산보호기준팀 및 부정경쟁조사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1479a669",
+      "parent": "n-658c36a7",
+      "child": "n-94313d67",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(지식재산보호협력국)",
+        "evidenceText": "② 지식재산보호협력국에 지식재산보호정책과ㆍ지식재산보호분석과ㆍ기술디자인특별사법경찰과ㆍ기술유출특별사법경찰과ㆍ상표특별사법경찰과ㆍ국제협력과ㆍ지식재산보호기준팀 및 부정경쟁조사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b47f03f7",
+      "parent": "n-658c36a7",
+      "child": "n-f6081b40",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(지식재산보호협력국)",
+        "evidenceText": "② 지식재산보호협력국에 지식재산보호정책과ㆍ지식재산보호분석과ㆍ기술디자인특별사법경찰과ㆍ기술유출특별사법경찰과ㆍ상표특별사법경찰과ㆍ국제협력과ㆍ지식재산보호기준팀 및 부정경쟁조사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-26d43dc7",
+      "parent": "n-658c36a7",
+      "child": "n-01ab53a2",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(지식재산보호협력국)",
+        "evidenceText": "② 지식재산보호협력국에 지식재산보호정책과ㆍ지식재산보호분석과ㆍ기술디자인특별사법경찰과ㆍ기술유출특별사법경찰과ㆍ상표특별사법경찰과ㆍ국제협력과ㆍ지식재산보호기준팀 및 부정경쟁조사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0680f727",
+      "parent": "n-658c36a7",
+      "child": "n-49ce1021",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(지식재산보호협력국)",
+        "evidenceText": "② 지식재산보호협력국에 지식재산보호정책과ㆍ지식재산보호분석과ㆍ기술디자인특별사법경찰과ㆍ기술유출특별사법경찰과ㆍ상표특별사법경찰과ㆍ국제협력과ㆍ지식재산보호기준팀 및 부정경쟁조사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d300dccf",
+      "parent": "n-658c36a7",
+      "child": "n-7de68d4e",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(지식재산보호협력국)",
+        "evidenceText": "② 지식재산보호협력국에 지식재산보호정책과ㆍ지식재산보호분석과ㆍ기술디자인특별사법경찰과ㆍ기술유출특별사법경찰과ㆍ상표특별사법경찰과ㆍ국제협력과ㆍ지식재산보호기준팀 및 부정경쟁조사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e5377b17",
+      "parent": "n-658c36a7",
+      "child": "n-45d30f92",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(지식재산보호협력국)",
+        "evidenceText": "② 지식재산보호협력국에 지식재산보호정책과ㆍ지식재산보호분석과ㆍ기술디자인특별사법경찰과ㆍ기술유출특별사법경찰과ㆍ상표특별사법경찰과ㆍ국제협력과ㆍ지식재산보호기준팀 및 부정경쟁조사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-341e6018",
+      "parent": "n-658c36a7",
+      "child": "n-ddda5f04",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(지식재산보호협력국)",
+        "evidenceText": "② 지식재산보호협력국에 지식재산보호정책과ㆍ지식재산보호분석과ㆍ기술디자인특별사법경찰과ㆍ기술유출특별사법경찰과ㆍ상표특별사법경찰과ㆍ국제협력과ㆍ지식재산보호기준팀 및 부정경쟁조사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1455c9cf",
+      "parent": "n-1b5b3de1",
+      "child": "n-12fc801f",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(지식재산분쟁대응국)",
+        "evidenceText": "② 지식재산분쟁대응국에 지식재산분쟁대응협력총괄과ㆍ첨단산업분쟁대응과ㆍ특허분쟁대응과ㆍ상표분쟁대응과 및 디자인분쟁대응과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f7acc450",
+      "parent": "n-1b5b3de1",
+      "child": "n-c8df24e2",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(지식재산분쟁대응국)",
+        "evidenceText": "② 지식재산분쟁대응국에 지식재산분쟁대응협력총괄과ㆍ첨단산업분쟁대응과ㆍ특허분쟁대응과ㆍ상표분쟁대응과 및 디자인분쟁대응과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f05382d0",
+      "parent": "n-1b5b3de1",
+      "child": "n-c2774f0c",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(지식재산분쟁대응국)",
+        "evidenceText": "② 지식재산분쟁대응국에 지식재산분쟁대응협력총괄과ㆍ첨단산업분쟁대응과ㆍ특허분쟁대응과ㆍ상표분쟁대응과 및 디자인분쟁대응과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ae136462",
+      "parent": "n-1b5b3de1",
+      "child": "n-f702e860",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(지식재산분쟁대응국)",
+        "evidenceText": "② 지식재산분쟁대응국에 지식재산분쟁대응협력총괄과ㆍ첨단산업분쟁대응과ㆍ특허분쟁대응과ㆍ상표분쟁대응과 및 디자인분쟁대응과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8e9a2583",
+      "parent": "n-1b5b3de1",
+      "child": "n-a19c1fa9",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(지식재산분쟁대응국)",
+        "evidenceText": "② 지식재산분쟁대응국에 지식재산분쟁대응협력총괄과ㆍ첨단산업분쟁대응과ㆍ특허분쟁대응과ㆍ상표분쟁대응과 및 디자인분쟁대응과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-668397db",
+      "parent": "n-b15d0662",
+      "child": "n-2f50bc93",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(지식재산정보국)",
+        "evidenceText": "② 지식재산정보국에 지식재산정보정책과ㆍ지식재산정보시스템과ㆍ지식재산데이터관리과ㆍ지식재산출원과ㆍ지식재산등록과 및 지식재산국제출원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2a12f50f",
+      "parent": "n-b15d0662",
+      "child": "n-a288a9f3",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(지식재산정보국)",
+        "evidenceText": "② 지식재산정보국에 지식재산정보정책과ㆍ지식재산정보시스템과ㆍ지식재산데이터관리과ㆍ지식재산출원과ㆍ지식재산등록과 및 지식재산국제출원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-79407841",
+      "parent": "n-b15d0662",
+      "child": "n-5606e6ee",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(지식재산정보국)",
+        "evidenceText": "② 지식재산정보국에 지식재산정보정책과ㆍ지식재산정보시스템과ㆍ지식재산데이터관리과ㆍ지식재산출원과ㆍ지식재산등록과 및 지식재산국제출원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-68b2d402",
+      "parent": "n-b15d0662",
+      "child": "n-05eb703e",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(지식재산정보국)",
+        "evidenceText": "② 지식재산정보국에 지식재산정보정책과ㆍ지식재산정보시스템과ㆍ지식재산데이터관리과ㆍ지식재산출원과ㆍ지식재산등록과 및 지식재산국제출원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cfd8a9ab",
+      "parent": "n-b15d0662",
+      "child": "n-08d8af58",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(지식재산정보국)",
+        "evidenceText": "② 지식재산정보국에 지식재산정보정책과ㆍ지식재산정보시스템과ㆍ지식재산데이터관리과ㆍ지식재산출원과ㆍ지식재산등록과 및 지식재산국제출원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b16bd6b4",
+      "parent": "n-b15d0662",
+      "child": "n-a1500969",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(지식재산정보국)",
+        "evidenceText": "② 지식재산정보국에 지식재산정보정책과ㆍ지식재산정보시스템과ㆍ지식재산데이터관리과ㆍ지식재산출원과ㆍ지식재산등록과 및 지식재산국제출원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-51e76a37",
+      "parent": "n-982beda3",
+      "child": "n-1020d3ae",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(상표디자인심사국)",
+        "evidenceText": "② 상표디자인심사국에 상표심사정책과ㆍ디자인심사정책과ㆍ생활용품상표심사과ㆍ화학식품상표심사과ㆍ전문서비스상표심사과ㆍ일반서비스상표심사팀ㆍ기계전자상표심사팀ㆍ국제상표심사팀ㆍ생활디자인심사과 및 산업디자인심사팀을 두되, 각 과장은 부이사관 또는 서기관으로 보하고, 각 팀장은 서기관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b855d3a3",
+      "parent": "n-982beda3",
+      "child": "n-336f079b",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(상표디자인심사국)",
+        "evidenceText": "② 상표디자인심사국에 상표심사정책과ㆍ디자인심사정책과ㆍ생활용품상표심사과ㆍ화학식품상표심사과ㆍ전문서비스상표심사과ㆍ일반서비스상표심사팀ㆍ기계전자상표심사팀ㆍ국제상표심사팀ㆍ생활디자인심사과 및 산업디자인심사팀을 두되, 각 과장은 부이사관 또는 서기관으로 보하고, 각 팀장은 서기관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-507926cb",
+      "parent": "n-982beda3",
+      "child": "n-a0be81fc",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(상표디자인심사국)",
+        "evidenceText": "② 상표디자인심사국에 상표심사정책과ㆍ디자인심사정책과ㆍ생활용품상표심사과ㆍ화학식품상표심사과ㆍ전문서비스상표심사과ㆍ일반서비스상표심사팀ㆍ기계전자상표심사팀ㆍ국제상표심사팀ㆍ생활디자인심사과 및 산업디자인심사팀을 두되, 각 과장은 부이사관 또는 서기관으로 보하고, 각 팀장은 서기관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3c67c36b",
+      "parent": "n-982beda3",
+      "child": "n-6e2f61b6",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(상표디자인심사국)",
+        "evidenceText": "② 상표디자인심사국에 상표심사정책과ㆍ디자인심사정책과ㆍ생활용품상표심사과ㆍ화학식품상표심사과ㆍ전문서비스상표심사과ㆍ일반서비스상표심사팀ㆍ기계전자상표심사팀ㆍ국제상표심사팀ㆍ생활디자인심사과 및 산업디자인심사팀을 두되, 각 과장은 부이사관 또는 서기관으로 보하고, 각 팀장은 서기관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c930dea5",
+      "parent": "n-982beda3",
+      "child": "n-d478a7c2",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(상표디자인심사국)",
+        "evidenceText": "② 상표디자인심사국에 상표심사정책과ㆍ디자인심사정책과ㆍ생활용품상표심사과ㆍ화학식품상표심사과ㆍ전문서비스상표심사과ㆍ일반서비스상표심사팀ㆍ기계전자상표심사팀ㆍ국제상표심사팀ㆍ생활디자인심사과 및 산업디자인심사팀을 두되, 각 과장은 부이사관 또는 서기관으로 보하고, 각 팀장은 서기관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6536f777",
+      "parent": "n-982beda3",
+      "child": "n-a3196206",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(상표디자인심사국)",
+        "evidenceText": "② 상표디자인심사국에 상표심사정책과ㆍ디자인심사정책과ㆍ생활용품상표심사과ㆍ화학식품상표심사과ㆍ전문서비스상표심사과ㆍ일반서비스상표심사팀ㆍ기계전자상표심사팀ㆍ국제상표심사팀ㆍ생활디자인심사과 및 산업디자인심사팀을 두되, 각 과장은 부이사관 또는 서기관으로 보하고, 각 팀장은 서기관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e6f3d016",
+      "parent": "n-982beda3",
+      "child": "n-16fd23c0",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(상표디자인심사국)",
+        "evidenceText": "② 상표디자인심사국에 상표심사정책과ㆍ디자인심사정책과ㆍ생활용품상표심사과ㆍ화학식품상표심사과ㆍ전문서비스상표심사과ㆍ일반서비스상표심사팀ㆍ기계전자상표심사팀ㆍ국제상표심사팀ㆍ생활디자인심사과 및 산업디자인심사팀을 두되, 각 과장은 부이사관 또는 서기관으로 보하고, 각 팀장은 서기관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ca551f9c",
+      "parent": "n-982beda3",
+      "child": "n-74e465a3",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(상표디자인심사국)",
+        "evidenceText": "② 상표디자인심사국에 상표심사정책과ㆍ디자인심사정책과ㆍ생활용품상표심사과ㆍ화학식품상표심사과ㆍ전문서비스상표심사과ㆍ일반서비스상표심사팀ㆍ기계전자상표심사팀ㆍ국제상표심사팀ㆍ생활디자인심사과 및 산업디자인심사팀을 두되, 각 과장은 부이사관 또는 서기관으로 보하고, 각 팀장은 서기관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-963e56b8",
+      "parent": "n-982beda3",
+      "child": "n-a643394c",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(상표디자인심사국)",
+        "evidenceText": "② 상표디자인심사국에 상표심사정책과ㆍ디자인심사정책과ㆍ생활용품상표심사과ㆍ화학식품상표심사과ㆍ전문서비스상표심사과ㆍ일반서비스상표심사팀ㆍ기계전자상표심사팀ㆍ국제상표심사팀ㆍ생활디자인심사과 및 산업디자인심사팀을 두되, 각 과장은 부이사관 또는 서기관으로 보하고, 각 팀장은 서기관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d8e41c0c",
+      "parent": "n-982beda3",
+      "child": "n-65184272",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(상표디자인심사국)",
+        "evidenceText": "② 상표디자인심사국에 상표심사정책과ㆍ디자인심사정책과ㆍ생활용품상표심사과ㆍ화학식품상표심사과ㆍ전문서비스상표심사과ㆍ일반서비스상표심사팀ㆍ기계전자상표심사팀ㆍ국제상표심사팀ㆍ생활디자인심사과 및 산업디자인심사팀을 두되, 각 과장은 부이사관 또는 서기관으로 보하고, 각 팀장은 서기관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ca9ab228",
+      "parent": "n-de021102",
+      "child": "n-b232ae5b",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(특허심사기획국)",
+        "evidenceText": "② 특허심사기획국에 특허심사총괄과ㆍ특허제도과ㆍ생활용품심사과ㆍ식품생물자원심사과ㆍ주거기반심사과ㆍ가전제품심사과 및 국제특허출원심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ac15fbe4",
+      "parent": "n-de021102",
+      "child": "n-5e1c9f98",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(특허심사기획국)",
+        "evidenceText": "② 특허심사기획국에 특허심사총괄과ㆍ특허제도과ㆍ생활용품심사과ㆍ식품생물자원심사과ㆍ주거기반심사과ㆍ가전제품심사과 및 국제특허출원심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-afb9fdc6",
+      "parent": "n-de021102",
+      "child": "n-48d053db",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(특허심사기획국)",
+        "evidenceText": "② 특허심사기획국에 특허심사총괄과ㆍ특허제도과ㆍ생활용품심사과ㆍ식품생물자원심사과ㆍ주거기반심사과ㆍ가전제품심사과 및 국제특허출원심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8baea857",
+      "parent": "n-de021102",
+      "child": "n-ad1ce92f",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(특허심사기획국)",
+        "evidenceText": "② 특허심사기획국에 특허심사총괄과ㆍ특허제도과ㆍ생활용품심사과ㆍ식품생물자원심사과ㆍ주거기반심사과ㆍ가전제품심사과 및 국제특허출원심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b0e30c65",
+      "parent": "n-de021102",
+      "child": "n-a41fe5d7",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(특허심사기획국)",
+        "evidenceText": "② 특허심사기획국에 특허심사총괄과ㆍ특허제도과ㆍ생활용품심사과ㆍ식품생물자원심사과ㆍ주거기반심사과ㆍ가전제품심사과 및 국제특허출원심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f6476498",
+      "parent": "n-de021102",
+      "child": "n-19cbb0d3",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(특허심사기획국)",
+        "evidenceText": "② 특허심사기획국에 특허심사총괄과ㆍ특허제도과ㆍ생활용품심사과ㆍ식품생물자원심사과ㆍ주거기반심사과ㆍ가전제품심사과 및 국제특허출원심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e900746c",
+      "parent": "n-de021102",
+      "child": "n-490c9423",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(특허심사기획국)",
+        "evidenceText": "② 특허심사기획국에 특허심사총괄과ㆍ특허제도과ㆍ생활용품심사과ㆍ식품생물자원심사과ㆍ주거기반심사과ㆍ가전제품심사과 및 국제특허출원심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fb3ddb5a",
+      "parent": "n-984a2504",
+      "child": "n-bd545730",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(디지털융합심사국)",
+        "evidenceText": "② 디지털융합심사국에 인공지능빅데이터심사과ㆍ사물인터넷심사과ㆍ바이오기반심사과ㆍ지능형로봇심사과ㆍ자율주행심사팀ㆍ스마트제조심사팀ㆍ바이오진단분석심사팀ㆍ바이오의약심사팀ㆍ헬스케어기기심사팀 및 헬스케어데이터심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7d8eafff",
+      "parent": "n-984a2504",
+      "child": "n-337e004e",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(디지털융합심사국)",
+        "evidenceText": "② 디지털융합심사국에 인공지능빅데이터심사과ㆍ사물인터넷심사과ㆍ바이오기반심사과ㆍ지능형로봇심사과ㆍ자율주행심사팀ㆍ스마트제조심사팀ㆍ바이오진단분석심사팀ㆍ바이오의약심사팀ㆍ헬스케어기기심사팀 및 헬스케어데이터심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b673876a",
+      "parent": "n-984a2504",
+      "child": "n-e30508cd",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(디지털융합심사국)",
+        "evidenceText": "② 디지털융합심사국에 인공지능빅데이터심사과ㆍ사물인터넷심사과ㆍ바이오기반심사과ㆍ지능형로봇심사과ㆍ자율주행심사팀ㆍ스마트제조심사팀ㆍ바이오진단분석심사팀ㆍ바이오의약심사팀ㆍ헬스케어기기심사팀 및 헬스케어데이터심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f3240bd1",
+      "parent": "n-984a2504",
+      "child": "n-42a3956c",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(디지털융합심사국)",
+        "evidenceText": "② 디지털융합심사국에 인공지능빅데이터심사과ㆍ사물인터넷심사과ㆍ바이오기반심사과ㆍ지능형로봇심사과ㆍ자율주행심사팀ㆍ스마트제조심사팀ㆍ바이오진단분석심사팀ㆍ바이오의약심사팀ㆍ헬스케어기기심사팀 및 헬스케어데이터심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b47ffe21",
+      "parent": "n-984a2504",
+      "child": "n-0a75e3b2",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(디지털융합심사국)",
+        "evidenceText": "② 디지털융합심사국에 인공지능빅데이터심사과ㆍ사물인터넷심사과ㆍ바이오기반심사과ㆍ지능형로봇심사과ㆍ자율주행심사팀ㆍ스마트제조심사팀ㆍ바이오진단분석심사팀ㆍ바이오의약심사팀ㆍ헬스케어기기심사팀 및 헬스케어데이터심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c705a8ac",
+      "parent": "n-984a2504",
+      "child": "n-7af8e49d",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(디지털융합심사국)",
+        "evidenceText": "② 디지털융합심사국에 인공지능빅데이터심사과ㆍ사물인터넷심사과ㆍ바이오기반심사과ㆍ지능형로봇심사과ㆍ자율주행심사팀ㆍ스마트제조심사팀ㆍ바이오진단분석심사팀ㆍ바이오의약심사팀ㆍ헬스케어기기심사팀 및 헬스케어데이터심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4d9568e5",
+      "parent": "n-984a2504",
+      "child": "n-dbda227c",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(디지털융합심사국)",
+        "evidenceText": "② 디지털융합심사국에 인공지능빅데이터심사과ㆍ사물인터넷심사과ㆍ바이오기반심사과ㆍ지능형로봇심사과ㆍ자율주행심사팀ㆍ스마트제조심사팀ㆍ바이오진단분석심사팀ㆍ바이오의약심사팀ㆍ헬스케어기기심사팀 및 헬스케어데이터심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dc5d67ae",
+      "parent": "n-984a2504",
+      "child": "n-b87a6664",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(디지털융합심사국)",
+        "evidenceText": "② 디지털융합심사국에 인공지능빅데이터심사과ㆍ사물인터넷심사과ㆍ바이오기반심사과ㆍ지능형로봇심사과ㆍ자율주행심사팀ㆍ스마트제조심사팀ㆍ바이오진단분석심사팀ㆍ바이오의약심사팀ㆍ헬스케어기기심사팀 및 헬스케어데이터심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9d225b55",
+      "parent": "n-984a2504",
+      "child": "n-99ce14a3",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(디지털융합심사국)",
+        "evidenceText": "② 디지털융합심사국에 인공지능빅데이터심사과ㆍ사물인터넷심사과ㆍ바이오기반심사과ㆍ지능형로봇심사과ㆍ자율주행심사팀ㆍ스마트제조심사팀ㆍ바이오진단분석심사팀ㆍ바이오의약심사팀ㆍ헬스케어기기심사팀 및 헬스케어데이터심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c1e75bcc",
+      "parent": "n-984a2504",
+      "child": "n-2a579895",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(디지털융합심사국)",
+        "evidenceText": "② 디지털융합심사국에 인공지능빅데이터심사과ㆍ사물인터넷심사과ㆍ바이오기반심사과ㆍ지능형로봇심사과ㆍ자율주행심사팀ㆍ스마트제조심사팀ㆍ바이오진단분석심사팀ㆍ바이오의약심사팀ㆍ헬스케어기기심사팀 및 헬스케어데이터심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0873933f",
+      "parent": "n-60fef18b",
+      "child": "n-9758515f",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제15조(전기통신심사국)",
+        "evidenceText": "② 전기통신심사국에 전기심사과ㆍ컴퓨터심사과ㆍ통신심사과ㆍ전자상거래심사과 및 방송미디어심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fc99b8ad",
+      "parent": "n-60fef18b",
+      "child": "n-842d22dd",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제15조(전기통신심사국)",
+        "evidenceText": "② 전기통신심사국에 전기심사과ㆍ컴퓨터심사과ㆍ통신심사과ㆍ전자상거래심사과 및 방송미디어심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2fbcd548",
+      "parent": "n-60fef18b",
+      "child": "n-7cb7afdc",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제15조(전기통신심사국)",
+        "evidenceText": "② 전기통신심사국에 전기심사과ㆍ컴퓨터심사과ㆍ통신심사과ㆍ전자상거래심사과 및 방송미디어심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-23fafaa8",
+      "parent": "n-60fef18b",
+      "child": "n-6f82af7c",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제15조(전기통신심사국)",
+        "evidenceText": "② 전기통신심사국에 전기심사과ㆍ컴퓨터심사과ㆍ통신심사과ㆍ전자상거래심사과 및 방송미디어심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8bbb1720",
+      "parent": "n-60fef18b",
+      "child": "n-e46f4b2f",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제15조(전기통신심사국)",
+        "evidenceText": "② 전기통신심사국에 전기심사과ㆍ컴퓨터심사과ㆍ통신심사과ㆍ전자상거래심사과 및 방송미디어심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4d2a60af",
+      "parent": "n-3193df63",
+      "child": "n-135ae76e",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제16조(화학생명심사국)",
+        "evidenceText": "② 화학생명심사국에 유기화학심사과ㆍ약품화학심사과ㆍ기초재료화학심사과ㆍ이차전지소재심사과ㆍ고분자섬유심사과ㆍ의료기술심사과ㆍ환경기술심사팀ㆍ이차전지설계심사팀 및 이차전지제어관리심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-56e4c5a1",
+      "parent": "n-3193df63",
+      "child": "n-4e7383b9",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제16조(화학생명심사국)",
+        "evidenceText": "② 화학생명심사국에 유기화학심사과ㆍ약품화학심사과ㆍ기초재료화학심사과ㆍ이차전지소재심사과ㆍ고분자섬유심사과ㆍ의료기술심사과ㆍ환경기술심사팀ㆍ이차전지설계심사팀 및 이차전지제어관리심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3bbc88ca",
+      "parent": "n-3193df63",
+      "child": "n-593a2d86",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제16조(화학생명심사국)",
+        "evidenceText": "② 화학생명심사국에 유기화학심사과ㆍ약품화학심사과ㆍ기초재료화학심사과ㆍ이차전지소재심사과ㆍ고분자섬유심사과ㆍ의료기술심사과ㆍ환경기술심사팀ㆍ이차전지설계심사팀 및 이차전지제어관리심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b7e53a2c",
+      "parent": "n-3193df63",
+      "child": "n-0d3d8e13",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제16조(화학생명심사국)",
+        "evidenceText": "② 화학생명심사국에 유기화학심사과ㆍ약품화학심사과ㆍ기초재료화학심사과ㆍ이차전지소재심사과ㆍ고분자섬유심사과ㆍ의료기술심사과ㆍ환경기술심사팀ㆍ이차전지설계심사팀 및 이차전지제어관리심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-611506be",
+      "parent": "n-3193df63",
+      "child": "n-a82f7941",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제16조(화학생명심사국)",
+        "evidenceText": "② 화학생명심사국에 유기화학심사과ㆍ약품화학심사과ㆍ기초재료화학심사과ㆍ이차전지소재심사과ㆍ고분자섬유심사과ㆍ의료기술심사과ㆍ환경기술심사팀ㆍ이차전지설계심사팀 및 이차전지제어관리심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ab249cb6",
+      "parent": "n-3193df63",
+      "child": "n-3f9e84cf",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제16조(화학생명심사국)",
+        "evidenceText": "② 화학생명심사국에 유기화학심사과ㆍ약품화학심사과ㆍ기초재료화학심사과ㆍ이차전지소재심사과ㆍ고분자섬유심사과ㆍ의료기술심사과ㆍ환경기술심사팀ㆍ이차전지설계심사팀 및 이차전지제어관리심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-29f416c8",
+      "parent": "n-3193df63",
+      "child": "n-586530da",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제16조(화학생명심사국)",
+        "evidenceText": "② 화학생명심사국에 유기화학심사과ㆍ약품화학심사과ㆍ기초재료화학심사과ㆍ이차전지소재심사과ㆍ고분자섬유심사과ㆍ의료기술심사과ㆍ환경기술심사팀ㆍ이차전지설계심사팀 및 이차전지제어관리심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ef975578",
+      "parent": "n-3193df63",
+      "child": "n-14e4add7",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제16조(화학생명심사국)",
+        "evidenceText": "② 화학생명심사국에 유기화학심사과ㆍ약품화학심사과ㆍ기초재료화학심사과ㆍ이차전지소재심사과ㆍ고분자섬유심사과ㆍ의료기술심사과ㆍ환경기술심사팀ㆍ이차전지설계심사팀 및 이차전지제어관리심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-78289df9",
+      "parent": "n-3193df63",
+      "child": "n-5f6b3feb",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제16조(화학생명심사국)",
+        "evidenceText": "② 화학생명심사국에 유기화학심사과ㆍ약품화학심사과ㆍ기초재료화학심사과ㆍ이차전지소재심사과ㆍ고분자섬유심사과ㆍ의료기술심사과ㆍ환경기술심사팀ㆍ이차전지설계심사팀 및 이차전지제어관리심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서…",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-52507f95",
+      "parent": "n-d403738d",
+      "child": "n-d4329db3",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제17조(기계금속심사국)",
+        "evidenceText": "② 기계금속심사국에 일반기계심사과ㆍ제어기계심사과ㆍ건설기술심사과ㆍ자동차심사과ㆍ동력기술심사과ㆍ운송기계심사과ㆍ계측기술심사팀 및 재료금속심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5dd72e83",
+      "parent": "n-d403738d",
+      "child": "n-8f3ee84f",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제17조(기계금속심사국)",
+        "evidenceText": "② 기계금속심사국에 일반기계심사과ㆍ제어기계심사과ㆍ건설기술심사과ㆍ자동차심사과ㆍ동력기술심사과ㆍ운송기계심사과ㆍ계측기술심사팀 및 재료금속심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c8dd7faa",
+      "parent": "n-d403738d",
+      "child": "n-4cd6d333",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제17조(기계금속심사국)",
+        "evidenceText": "② 기계금속심사국에 일반기계심사과ㆍ제어기계심사과ㆍ건설기술심사과ㆍ자동차심사과ㆍ동력기술심사과ㆍ운송기계심사과ㆍ계측기술심사팀 및 재료금속심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0d76acc8",
+      "parent": "n-d403738d",
+      "child": "n-891dc236",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제17조(기계금속심사국)",
+        "evidenceText": "② 기계금속심사국에 일반기계심사과ㆍ제어기계심사과ㆍ건설기술심사과ㆍ자동차심사과ㆍ동력기술심사과ㆍ운송기계심사과ㆍ계측기술심사팀 및 재료금속심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-14eff4ae",
+      "parent": "n-d403738d",
+      "child": "n-d94bf355",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제17조(기계금속심사국)",
+        "evidenceText": "② 기계금속심사국에 일반기계심사과ㆍ제어기계심사과ㆍ건설기술심사과ㆍ자동차심사과ㆍ동력기술심사과ㆍ운송기계심사과ㆍ계측기술심사팀 및 재료금속심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0dd5c543",
+      "parent": "n-d403738d",
+      "child": "n-bd74c8da",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제17조(기계금속심사국)",
+        "evidenceText": "② 기계금속심사국에 일반기계심사과ㆍ제어기계심사과ㆍ건설기술심사과ㆍ자동차심사과ㆍ동력기술심사과ㆍ운송기계심사과ㆍ계측기술심사팀 및 재료금속심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7b6da895",
+      "parent": "n-d403738d",
+      "child": "n-ab76d3f2",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제17조(기계금속심사국)",
+        "evidenceText": "② 기계금속심사국에 일반기계심사과ㆍ제어기계심사과ㆍ건설기술심사과ㆍ자동차심사과ㆍ동력기술심사과ㆍ운송기계심사과ㆍ계측기술심사팀 및 재료금속심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fef05cdb",
+      "parent": "n-d403738d",
+      "child": "n-dd211c7a",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제17조(기계금속심사국)",
+        "evidenceText": "② 기계금속심사국에 일반기계심사과ㆍ제어기계심사과ㆍ건설기술심사과ㆍ자동차심사과ㆍ동력기술심사과ㆍ운송기계심사과ㆍ계측기술심사팀 및 재료금속심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5c3636de",
+      "parent": "n-36d7b59d",
+      "child": "n-a2287efb",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제18조(반도체심사추진단)",
+        "evidenceText": "② 반도체심사추진단에 반도체제조공정심사과ㆍ반도체설계심사과ㆍ디스플레이심사과ㆍ반도체소재심사팀ㆍ반도체조립공정심사팀 및 반도체제조장비심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e5de7683",
+      "parent": "n-36d7b59d",
+      "child": "n-b201fdf1",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제18조(반도체심사추진단)",
+        "evidenceText": "② 반도체심사추진단에 반도체제조공정심사과ㆍ반도체설계심사과ㆍ디스플레이심사과ㆍ반도체소재심사팀ㆍ반도체조립공정심사팀 및 반도체제조장비심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6186d6e4",
+      "parent": "n-36d7b59d",
+      "child": "n-4aa1d9b1",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제18조(반도체심사추진단)",
+        "evidenceText": "② 반도체심사추진단에 반도체제조공정심사과ㆍ반도체설계심사과ㆍ디스플레이심사과ㆍ반도체소재심사팀ㆍ반도체조립공정심사팀 및 반도체제조장비심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-74359007",
+      "parent": "n-36d7b59d",
+      "child": "n-db21c655",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제18조(반도체심사추진단)",
+        "evidenceText": "② 반도체심사추진단에 반도체제조공정심사과ㆍ반도체설계심사과ㆍ디스플레이심사과ㆍ반도체소재심사팀ㆍ반도체조립공정심사팀 및 반도체제조장비심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9176ca30",
+      "parent": "n-36d7b59d",
+      "child": "n-193ec6f2",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제18조(반도체심사추진단)",
+        "evidenceText": "② 반도체심사추진단에 반도체제조공정심사과ㆍ반도체설계심사과ㆍ디스플레이심사과ㆍ반도체소재심사팀ㆍ반도체조립공정심사팀 및 반도체제조장비심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c2f20aec",
+      "parent": "n-36d7b59d",
+      "child": "n-bf705366",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제18조(반도체심사추진단)",
+        "evidenceText": "② 반도체심사추진단에 반도체제조공정심사과ㆍ반도체설계심사과ㆍ디스플레이심사과ㆍ반도체소재심사팀ㆍ반도체조립공정심사팀 및 반도체제조장비심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보하고, 각 팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7efa9b38",
+      "parent": "n-41d0a448",
+      "child": "n-526053c5",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제20조(특허심판원)",
+        "evidenceText": "④ 특허심판원에 심판정책과 및 송무과를 두되, 심판정책과장은 과학기술서기관 또는 서기관으로 보하고, 송무과장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d3686b8c",
+      "parent": "n-41d0a448",
+      "child": "n-b180629c",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제20조(특허심판원)",
+        "evidenceText": "④ 특허심판원에 심판정책과 및 송무과를 두되, 심판정책과장은 과학기술서기관 또는 서기관으로 보하고, 송무과장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e50275d7",
+      "parent": "n-edbd081d",
+      "child": "n-55d141ff",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제21조(국제지식재산연수원)",
+        "evidenceText": "② 국제지식재산연수원에 교육기획과ㆍ지식재산교육과 및 국제교육과를 두되, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f0ba7543",
+      "parent": "n-edbd081d",
+      "child": "n-8ac227b3",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제21조(국제지식재산연수원)",
+        "evidenceText": "② 국제지식재산연수원에 교육기획과ㆍ지식재산교육과 및 국제교육과를 두되, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fd08dcad",
+      "parent": "n-edbd081d",
+      "child": "n-3c881449",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제21조(국제지식재산연수원)",
+        "evidenceText": "② 국제지식재산연수원에 교육기획과ㆍ지식재산교육과 및 국제교육과를 두되, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d1cf1aa5",
+      "parent": "n-736d0ef2",
+      "child": "n-45fbc9d8",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제22조(지식재산처서울사무소)",
+        "evidenceText": "② 지식재산처서울사무소에 총괄지원과 및 출원등록과를 두되, 각 과장은 공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-279915b9",
+      "parent": "n-736d0ef2",
+      "child": "n-ff2a66e1",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제22조(지식재산처서울사무소)",
+        "evidenceText": "② 지식재산처서울사무소에 총괄지원과 및 출원등록과를 두되, 각 과장은 공업사무관ㆍ농업사무관ㆍ임업사무관ㆍ수의사무관ㆍ해양수산사무관ㆍ기상사무관ㆍ보건사무관ㆍ의료기술사무관ㆍ의무사무관ㆍ약무사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f855479a",
+      "parent": "n-85294956",
+      "child": "n-4047c766",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-4ab3869c",
+      "parent": "n-4047c766",
+      "child": "n-df604536",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-968b2f77",
+      "parent": "n-df604536",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-04e4fa15",
+      "parent": "n-df604536",
+      "child": "n-e57c05af",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8db900f8",
+      "parent": "n-df604536",
+      "child": "n-658c36a7",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e5f3eb2c",
+      "parent": "n-df604536",
+      "child": "n-1b5b3de1",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-02b4056f",
+      "parent": "n-df604536",
+      "child": "n-b15d0662",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0f91a521",
+      "parent": "n-df604536",
+      "child": "n-982beda3",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ad1d9504",
+      "parent": "n-df604536",
+      "child": "n-de021102",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9d1fdb3e",
+      "parent": "n-df604536",
+      "child": "n-984a2504",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b7dcd301",
+      "parent": "n-df604536",
+      "child": "n-60fef18b",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1036396c",
+      "parent": "n-df604536",
+      "child": "n-3193df63",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0d07b12a",
+      "parent": "n-df604536",
+      "child": "n-d403738d",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-647e0fbd",
+      "parent": "n-df604536",
+      "child": "n-36d7b59d",
+      "type": "assistant",
+      "sources": [
+        "지식재산처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 지식재산처에 운영지원과ㆍ지식재산정책국ㆍ지식재산보호협력국ㆍ지식재산분쟁대응국ㆍ지식재산정보국ㆍ상표디자인심사국ㆍ특허심사기획국ㆍ디지털융합심사국ㆍ전기통신심사국ㆍ화학생명심사국ㆍ기계금속심사국 및 반도체심사추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    }
+  ]
+}

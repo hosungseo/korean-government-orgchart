@@ -1,0 +1,891 @@
+{
+  "meta": {
+    "institution": "행정중심복합도시건설청",
+    "title": "행정중심복합도시건설청",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "행정중심복합도시건설청 직제 [시행 20260106]",
+      "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "행정중심복합도시건설청 직제 [시행 20260106]",
+        "role": "decree"
+      },
+      {
+        "source": "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]",
+        "role": "rule"
+      }
+    ],
+    "temporaryHeadcounts": [
+      {
+        "target": "행정중심복합도시건설청",
+        "expires": "2027-01-24",
+        "source": "행정중심복합도시건설청 직제 [시행 20260106]"
+      },
+      {
+        "target": "행정중심복합도시건설청",
+        "expires": "2027-03-31",
+        "source": "행정중심복합도시건설청 직제 [시행 20260106]"
+      },
+      {
+        "target": "행정중심복합도시건설청",
+        "expires": "2027-11-30",
+        "source": "행정중심복합도시건설청 직제 [시행 20260106]"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "headcount",
+        "annex": "별표 2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 2의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      }
+    ],
+    "spanDiagnostics": [],
+    "laws": [
+      {
+        "name": "행정중심복합도시건설청 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260106",
+        "mst": "282505",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=282505&efYd=20260106&BD=on",
+        "annexCount": 5
+      },
+      {
+        "name": "행정중심복합도시건설청 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260106",
+        "mst": "282753",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=282753&efYd=20260106&BD=on",
+        "annexCount": 5
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "삭제 &lt;2015.1.6.&gt;",
+        "key": "000100E",
+        "effectiveDate": "20260106",
+        "type": "deleted",
+        "source": "행정중심복합도시건설청 직제 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160441257",
+          "pdf": "/LSW/flDownload.do?flSeq=160441259",
+          "image": "/LSW/flDownload.do?flSeq=160441261"
+        },
+        "files": {
+          "hwp": "law0100802026010636027KC_000100E_20260106.hwp",
+          "pdf": "law0100802026010636027KC_000100E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 행정중심복합도시건설청 직제 [별표 1] 삭제 <2015.1.6.>"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "행정중심복합도시건설청 공무원 정원표(제16조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260106",
+        "type": "headcount",
+        "source": "행정중심복합도시건설청 직제 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160441263",
+          "pdf": "/LSW/flDownload.do?flSeq=160441265",
+          "image": "/LSW/flDownload.do?flSeq=160441267"
+        },
+        "files": {
+          "hwp": "law0100802026010636027KC_000200E_20260106.hwp",
+          "pdf": "law0100802026010636027KC_000200E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 행정중심복합도시건설청 직제 [별표 2] <개정 2025. 5. 20.>\n                                                          \n                                                          \n  행정중심복합도시건설청 공무원 정원표(제16조제1항 관련)  \n                                                          \n                                                          \n    총계                    140                           \n                                                          \n      정무직 계             1                             \n                                                          \n        청장(차관급)        1                             \n                                                          \n      일반직 계             139                           \n                                                          \n        고위공무원단        4                             \n                                                          \n        3급 또는 4급 이하   135"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "행정중심복합도시건설청 한시조직에 두는 공무원 정원표(제16조의2제4항 관련)",
+        "key": "000202E",
+        "effectiveDate": "20260106",
+        "type": "temporary-headcount",
+        "source": "행정중심복합도시건설청 직제 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160441269",
+          "pdf": "/LSW/flDownload.do?flSeq=160441271",
+          "image": "/LSW/flDownload.do?flSeq=160441273"
+        },
+        "files": {
+          "hwp": "law0100802026010636027KC_000202E_20260106.hwp",
+          "pdf": "law0100802026010636027KC_000202E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 행정중심복합도시건설청 직제 [별표 2의2] <신설 2026. 1. 6.>                                                                              \n  행정중심복합도시건설청 한시조직에 두는 공무원 정원표(제16조의2제4항 관련)   \n                                                                              \n  대통령세종집무실건립단(존속기한: 2028년 12월 28일)                          \n                                                                              \n    총계          7                                                           \n                                                                              \n      일반직 계   7                                                           \n                                                                              \n        4급 이하  7"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "행정중심복합도시건설청 공무원 한시정원표(제17조 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260106",
+        "type": "deleted",
+        "source": "행정중심복합도시건설청 직제 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160441275",
+          "pdf": "/LSW/flDownload.do?flSeq=160441277",
+          "image": "/LSW/flDownload.do?flSeq=160441279"
+        },
+        "files": {
+          "hwp": "law0100802026010636027KC_000300E_20260106.hwp",
+          "pdf": "law0100802026010636027KC_000300E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 행정중심복합도시건설청 직제 [별표 3] <개정 2026. 1. 6.>\n                                                                \n  행정중심복합도시건설청 공무원 한시정원표(제17조 관련)         \n                                                                \n  1. 제17조제1항 관련 한시정원(존속기한: 2027년 1월 24일)       \n                                                                \n    총계                                                    3   \n                                                                \n      일반직 계                                             3   \n                                                                \n        6급 이하                                            3   \n                                                                \n  2. 삭제 <2023. 3. 28.>                                        \n                                                                \n  3. 제17조제3항 관련 한시정원(존속기한: 2027년 3월 31일)       \n                                                                \n    총계                                                    1   \n                                                                \n      일반직 계                                             1   \n                                                               "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "삭제 &lt;2025. 5. 20.&gt;",
+        "key": "000400E",
+        "effectiveDate": "20260106",
+        "type": "deleted",
+        "source": "행정중심복합도시건설청 직제 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160441281",
+          "pdf": "/LSW/flDownload.do?flSeq=160441283",
+          "image": "/LSW/flDownload.do?flSeq=160441285"
+        },
+        "files": {
+          "hwp": "law0100802026010636027KC_000400E_20260106.hwp",
+          "pdf": "law0100802026010636027KC_000400E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 행정중심복합도시건설청 직제 [별표 4] 삭제 <2025. 5. 20.>"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "행정중심복합도시건설청 공무원 정원표(제10조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260106",
+        "type": "headcount",
+        "source": "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160539505",
+          "pdf": "/LSW/flDownload.do?flSeq=160539507",
+          "image": [
+            "/LSW/flDownload.do?flSeq=160539509",
+            "/LSW/flDownload.do?flSeq=160539511"
+          ]
+        },
+        "files": {
+          "hwp": "law0101572026010601555KC_000100E_20260106.hwp",
+          "pdf": "law0101572026010601555KC_000100E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 행정중심복합도시건설청 직제 시행규칙 [별표 1] <개정 2026. 1. 6.>\n                                                                    \n  행정중심복합도시건설청 공무원 정원표(제10조제1항 본문 관련)       \n                                                                    \n  총계                                                        140   \n                                                                    \n    정무직 계                                                 1     \n                                                                    \n      청장                                                    1     \n                                                                    \n    일반직 계                                                 139   \n                                                                    \n      고위공무원단                                            4     \n                                                                    \n      부이사관ㆍ서기관 또는 과학기술서기관                    4     \n                                                                    \n      서기관 또는 과학기술서기관                              9     \n                                                                    \n      서기관ㆍ과학기술서기관ㆍ행정사무관ㆍ공업사무관ㆍ시설          \n  사무관ㆍ전산사무"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "행정중심복합도시건설청 공무원 정원표(제10조제1항 단서 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260106",
+        "type": "headcount",
+        "source": "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160539513",
+          "pdf": "/LSW/flDownload.do?flSeq=160539515",
+          "image": [
+            "/LSW/flDownload.do?flSeq=160539517",
+            "/LSW/flDownload.do?flSeq=160539519"
+          ]
+        },
+        "files": {
+          "hwp": "law0101572026010601555KC_000200E_20260106.hwp",
+          "pdf": "law0101572026010601555KC_000200E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 행정중심복합도시건설청 직제 시행규칙 [별표 2] <개정 2026. 1. 6.>\n                                                                    \n  행정중심복합도시건설청 공무원 정원표(제10조제1항 단서 관련)       \n                                                                    \n  총계                                                        140   \n                                                                    \n    정무직 계                                                 1     \n                                                                    \n      청장                                                    1     \n                                                                    \n    일반직 계                                                 139   \n                                                                    \n      고위공무원단                                            4     \n                                                                    \n      부이사관ㆍ서기관 또는 과학기술서기관                    4     \n                                                                    \n      서기관 또는 과학기술서기관                              9     \n                                                                    \n      서기관ㆍ과학기술서기관ㆍ행정사무관ㆍ공업사무관ㆍ시설          \n  사무관ㆍ전산사무"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "행정중심복합도시건설청 한시조직에 두는 공무원 정원표(제11조 관련)",
+        "key": "000202E",
+        "effectiveDate": "20260106",
+        "type": "temporary-headcount",
+        "source": "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160539521",
+          "pdf": "/LSW/flDownload.do?flSeq=160539523",
+          "image": "/LSW/flDownload.do?flSeq=160539525"
+        },
+        "files": {
+          "hwp": "law0101572026010601555KC_000202E_20260106.hwp",
+          "pdf": "law0101572026010601555KC_000202E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 행정중심복합도시건설청 직제 시행규칙 [별표 2의2] <신설 2026. 1. 6.>  \n                                                                          \n  행정중심복합도시건설청 한시조직에 두는 공무원 정원표(제11조 관련)       \n                                                                          \n  대통령세종집무실건립단(존속기한: 2028년 12월 28일)                      \n                                                                          \n    총계                                                              7   \n                                                                          \n      일반직 계                                                       7   \n                                                                          \n        서기관 또는 과학기술서기관                                    1   \n                                                                          \n        행정사무관ㆍ공업사무관ㆍ시설사무관ㆍ방재안전사무관ㆍ방송통신      \n  사무관 또는 방호사무관                                              3   \n                                                                          \n        행정주사ㆍ공업주사ㆍ시설주사ㆍ방재안전주사ㆍ방송통신주사 또       \n  는 방호주사                                                         2   \n                                                                          \n        행정주사보"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "행정중심복합도시건설청 공무원 한시정원표(제12조 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260106",
+        "type": "deleted",
+        "source": "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160539527",
+          "pdf": "/LSW/flDownload.do?flSeq=160539529",
+          "image": "/LSW/flDownload.do?flSeq=160539531"
+        },
+        "files": {
+          "hwp": "law0101572026010601555KC_000300E_20260106.hwp",
+          "pdf": "law0101572026010601555KC_000300E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 행정중심복합도시건설청 직제 시행규칙 [별표 3] <개정 2026. 1. 6.>   \n                                                                        \n  행정중심복합도시건설청 공무원 한시정원표(제12조)                      \n                                                                        \n  1. 제12조제1항 관련 한시정원(존속기한: 2027년 1월 24일)               \n                                                                        \n    총계                                                      3         \n                                                                        \n      일반직 계                                               3         \n                                                                        \n        행정주사ㆍ공업주사 또는 시설주사                      1         \n                                                                        \n        행정주사보ㆍ공업주사보 또는 시설주사보                1         \n                                                                        \n        행정서기보 또는 시설서기보                            1         \n                                                                        \n  2. 삭제 <2023. 3. 28.>                                                \n                                                                        \n "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "삭제 &lt;2025. 5. 20.&gt;",
+        "key": "000400E",
+        "effectiveDate": "20260106",
+        "type": "deleted",
+        "source": "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160539533",
+          "pdf": "/LSW/flDownload.do?flSeq=160539535",
+          "image": "/LSW/flDownload.do?flSeq=160539537"
+        },
+        "files": {
+          "hwp": "law0101572026010601555KC_000400E_20260106.hwp",
+          "pdf": "law0101572026010601555KC_000400E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 행정중심복합도시건설청 직제 시행규칙 [별표 4] 삭제 <2025. 5. 20.>"
+      }
+    ]
+  },
+  "rootId": "n-b40ce897",
+  "nodes": [
+    {
+      "id": "n-b40ce897",
+      "name": "행정중심복합도시건설청",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "inferred",
+        "행정중심복합도시건설청 직제 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-ec5e60a7",
+      "name": "청장",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-df604536",
+      "name": "차장",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]",
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-618c7eaf",
+      "name": "기획조정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]",
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-3800fa9d",
+      "name": "도시계획국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]",
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-fb38265d",
+      "name": "시설사업국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]",
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-89033306",
+      "name": "대통령세종집무실건립단",
+      "kind": "temporary",
+      "rank": 4,
+      "metadata": {
+        "temporary": true,
+        "expires": "2028-12-28"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]",
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-dd5ea767",
+      "name": "혁신행정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-3630fc41",
+      "name": "도시정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-2a298626",
+      "name": "도시성장촉진과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-80a3d649",
+      "name": "도시공간건축과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-6c1ee16f",
+      "name": "교통계획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-b470c096",
+      "name": "녹색에너지환경과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-052a4688",
+      "name": "국가시범도시팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-c0243009",
+      "name": "사업관리총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-806fcc65",
+      "name": "광역도로과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-e1e84287",
+      "name": "공공청사건축과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-9de662b8",
+      "name": "공공시설건축과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-1c8a1278",
+      "name": "대통령집무실과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-19036d34",
+      "parent": "n-ec5e60a7",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제6조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 청장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-52e3740e",
+      "parent": "n-df604536",
+      "child": "n-618c7eaf",
+      "type": "advisor",
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제7조(기획조정관)",
+        "evidenceText": "② 기획조정관은 다음 사항에 관하여 차장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-c1a1e64b",
+      "parent": "n-618c7eaf",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정관)",
+        "evidenceText": "③ 기획재정담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-a3c1808b",
+      "parent": "n-618c7eaf",
+      "child": "n-dd5ea767",
+      "type": "advisor",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정관)",
+        "evidenceText": "④ 혁신행정담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-ef92e038",
+      "parent": "n-3800fa9d",
+      "child": "n-3630fc41",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제6조(도시계획국)",
+        "evidenceText": "② 도시계획국에 도시정책과ㆍ도시성장촉진과ㆍ도시공간건축과ㆍ교통계획과ㆍ녹색에너지환경과 및 국가시범도시팀을 두되, 도시정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 도시성장촉진과장, 도시공간건축과장, 교통계획과장 및 녹색에너지환경과장은 과학기술서기관 또는 서기관으로, 국가시범도시팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b690e1c4",
+      "parent": "n-3800fa9d",
+      "child": "n-2a298626",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제6조(도시계획국)",
+        "evidenceText": "② 도시계획국에 도시정책과ㆍ도시성장촉진과ㆍ도시공간건축과ㆍ교통계획과ㆍ녹색에너지환경과 및 국가시범도시팀을 두되, 도시정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 도시성장촉진과장, 도시공간건축과장, 교통계획과장 및 녹색에너지환경과장은 과학기술서기관 또는 서기관으로, 국가시범도시팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fa9294cf",
+      "parent": "n-3800fa9d",
+      "child": "n-80a3d649",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제6조(도시계획국)",
+        "evidenceText": "② 도시계획국에 도시정책과ㆍ도시성장촉진과ㆍ도시공간건축과ㆍ교통계획과ㆍ녹색에너지환경과 및 국가시범도시팀을 두되, 도시정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 도시성장촉진과장, 도시공간건축과장, 교통계획과장 및 녹색에너지환경과장은 과학기술서기관 또는 서기관으로, 국가시범도시팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-794aa0f1",
+      "parent": "n-3800fa9d",
+      "child": "n-6c1ee16f",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제6조(도시계획국)",
+        "evidenceText": "② 도시계획국에 도시정책과ㆍ도시성장촉진과ㆍ도시공간건축과ㆍ교통계획과ㆍ녹색에너지환경과 및 국가시범도시팀을 두되, 도시정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 도시성장촉진과장, 도시공간건축과장, 교통계획과장 및 녹색에너지환경과장은 과학기술서기관 또는 서기관으로, 국가시범도시팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aee142c7",
+      "parent": "n-3800fa9d",
+      "child": "n-b470c096",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제6조(도시계획국)",
+        "evidenceText": "② 도시계획국에 도시정책과ㆍ도시성장촉진과ㆍ도시공간건축과ㆍ교통계획과ㆍ녹색에너지환경과 및 국가시범도시팀을 두되, 도시정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 도시성장촉진과장, 도시공간건축과장, 교통계획과장 및 녹색에너지환경과장은 과학기술서기관 또는 서기관으로, 국가시범도시팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4727bd1e",
+      "parent": "n-3800fa9d",
+      "child": "n-052a4688",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제6조(도시계획국)",
+        "evidenceText": "② 도시계획국에 도시정책과ㆍ도시성장촉진과ㆍ도시공간건축과ㆍ교통계획과ㆍ녹색에너지환경과 및 국가시범도시팀을 두되, 도시정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 도시성장촉진과장, 도시공간건축과장, 교통계획과장 및 녹색에너지환경과장은 과학기술서기관 또는 서기관으로, 국가시범도시팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a488beac",
+      "parent": "n-fb38265d",
+      "child": "n-c0243009",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제7조(시설사업국)",
+        "evidenceText": "② 시설사업국에 사업관리총괄과ㆍ광역도로과ㆍ공공청사건축과 및 공공시설건축과를 두며, 사업관리총괄과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 광역도로과장ㆍ공공청사건축과장 및 공공시설건축과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e6b68a7a",
+      "parent": "n-fb38265d",
+      "child": "n-806fcc65",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제7조(시설사업국)",
+        "evidenceText": "② 시설사업국에 사업관리총괄과ㆍ광역도로과ㆍ공공청사건축과 및 공공시설건축과를 두며, 사업관리총괄과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 광역도로과장ㆍ공공청사건축과장 및 공공시설건축과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-09f450fd",
+      "parent": "n-fb38265d",
+      "child": "n-e1e84287",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제7조(시설사업국)",
+        "evidenceText": "② 시설사업국에 사업관리총괄과ㆍ광역도로과ㆍ공공청사건축과 및 공공시설건축과를 두며, 사업관리총괄과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 광역도로과장ㆍ공공청사건축과장 및 공공시설건축과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b178ed71",
+      "parent": "n-fb38265d",
+      "child": "n-9de662b8",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제7조(시설사업국)",
+        "evidenceText": "② 시설사업국에 사업관리총괄과ㆍ광역도로과ㆍ공공청사건축과 및 공공시설건축과를 두며, 사업관리총괄과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 광역도로과장ㆍ공공청사건축과장 및 공공시설건축과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0e373c92",
+      "parent": "n-89033306",
+      "child": "n-1c8a1278",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 시행규칙 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제11조(대통령세종집무실건립단 및 정원)",
+        "evidenceText": "① 대통령세종집무실건립단에 대통령집무실과를 두며, 대통령집무실과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-77d78945",
+      "parent": "n-b40ce897",
+      "child": "n-ec5e60a7",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-a7b5d79d",
+      "parent": "n-ec5e60a7",
+      "child": "n-df604536",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-968b2f77",
+      "parent": "n-df604536",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 건설청에 운영지원과, 도시계획국 및 시설사업국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f957fa0e",
+      "parent": "n-df604536",
+      "child": "n-3800fa9d",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 건설청에 운영지원과, 도시계획국 및 시설사업국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-414230e3",
+      "parent": "n-df604536",
+      "child": "n-fb38265d",
+      "type": "assistant",
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 건설청에 운영지원과, 도시계획국 및 시설사업국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4c811f1b",
+      "parent": "n-df604536",
+      "child": "n-89033306",
+      "type": "temporary",
+      "sources": [
+        "행정중심복합도시건설청 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제16조의2(대통령세종집무실건립단)",
+        "evidenceText": "① 행정중심복합도시건설청에 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제1호에 따라 2028년 12월 28일까지 존속하는 한시조직으로 대통령세종집무실건립단을 둔다"
+      }
+    }
+  ]
+}

@@ -1,0 +1,5614 @@
+{
+  "meta": {
+    "institution": "보건복지부",
+    "title": "보건복지부",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "보건복지부와 그 소속기관 직제 [시행 20260721]",
+      "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "role": "decree"
+      },
+      {
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "role": "rule"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "jurisdiction",
+        "annex": "별표 1",
+        "description": "관할·등급은 별표를 읽어야 확정됩니다",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 10의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      }
+    ],
+    "temporaryHeadcounts": [
+      {
+        "target": "보건복지부",
+        "expires": "2027-02-22",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      },
+      {
+        "target": "보건복지부",
+        "expires": "2027-12-31",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      },
+      {
+        "target": "보건복지부",
+        "expires": "2027-03-31",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      },
+      {
+        "target": "보건복지부",
+        "expires": "2028-12-31",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      },
+      {
+        "target": "국립재활원",
+        "expires": "2028-03-31",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      }
+    ],
+    "spanDiagnostics": [],
+    "laws": [
+      {
+        "name": "보건복지부와 그 소속기관 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288161",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288161&efYd=20260721&BD=on",
+        "annexCount": 12
+      },
+      {
+        "name": "보건복지부와 그 소속기관 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288317",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288317&efYd=20260721&BD=on",
+        "annexCount": 23
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "국립정신건강센터 및 국립정신병원의 위치(제21조 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "jurisdiction",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167098937",
+          "pdf": "/LSW/flDownload.do?flSeq=167098939",
+          "image": "/LSW/flDownload.do?flSeq=167098941"
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_000100E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_000100E_20260721.pdf"
+        },
+        "rowCount": 1,
+        "rows": [
+          [
+            "국립정신건강센터 국립나주병원 국립부곡병원 국립춘천병원 국립공주병원",
+            "서울특별시 광진구 중곡동 전남광주통합특별시 나주시 산포면 경상남도 창녕군 부곡면 강원특별자치도 춘천시 동산면 충청남도 공주시 오곡동"
+          ]
+        ],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 1] <개정 2026. 6. 23.>   \n                                                                  \n                                                                  \n  국립정신건강센터 및 국립정신병원의 위치(제21조 관련)            \n                                                                  \n┏━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━┓\n┃명칭            │위치                                        ┃\n┠────────┼──────────────────────┨\n┃국립정신건강센터│서울특별시 광진구 중곡동                    ┃\n┃                │                                            ┃\n┃국립나주병원    │전남광주통합특별시 나주시 산포면            ┃\n┃                │                                            ┃\n┃국립부곡병원    │경상남도 창녕군 부곡면                      ┃\n┃                │                                            ┃\n┃국립춘천병원    │강원특별자치도 춘천시 동산면                ┃\n┃                │                                            ┃\n┃국립공주병원    │충청남도 공주시 오곡동                      ┃\n┗━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━┛"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "삭제 &lt;2020. 9. 11.&gt;",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167098943",
+          "pdf": "/LSW/flDownload.do?flSeq=167098945",
+          "image": "/LSW/flDownload.do?flSeq=167098947"
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_000200E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_000200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 2] 삭제 <2020. 9. 11.>"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "삭제 &lt;2020. 9. 11.&gt;",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167098949",
+          "pdf": "/LSW/flDownload.do?flSeq=167098951",
+          "image": "/LSW/flDownload.do?flSeq=167098953"
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_000300E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_000300E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 3] 삭제 <2020. 9. 11.>"
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "보건복지부 공무원 정원표(제41조제1항 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167098955",
+          "pdf": "/LSW/flDownload.do?flSeq=167098957",
+          "image": "/LSW/flDownload.do?flSeq=167098959"
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_000400E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_000400E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 4] <개정 2026. 3. 24.>\n                                              \n  보건복지부 공무원 정원표(제41조제1항 관련)  \n                                              \n  총계                              869       \n                                              \n    정무직 계                       3         \n                                              \n      장관                          1         \n                                              \n      차관                          2         \n                                              \n    별정직 계                       5         \n                                              \n      고위공무원단                  1         \n                                              \n      3급 상당 또는 4급 상당 이하   4         \n                                              \n    일반직 계                       860       \n                                              \n      고위공무원단                  24        \n                                              \n      고위공무원단에 속하는 임기제  1         \n                                              \n      3급 또는 4급 이하             830       \n                                              \n      전문경력관                    5         \n               "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "보건복지부 공무원 정원표(대통령령 제36513호 보건복지부와 그 소속기관 직제 일부개정령 부칙 제3조 관련)",
+        "key": "000402E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167098961",
+          "pdf": "/LSW/flDownload.do?flSeq=167098963",
+          "image": "/LSW/flDownload.do?flSeq=167098965"
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_000402E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_000402E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 4의2] <신설 2026. 7. 21.>            \n  [적용일자: 2026년 8월 19일까지]                                             \n                                                                              \n  보건복지부 공무원 정원표(대통령령 제36513호 보건복지부와 그 소속기관 직제   \n  일부개정령 부칙 제3조 관련)                                                 \n                                                                              \n  총계                              899                                       \n                                                                              \n    정무직 계                       3                                         \n                                                                              \n      장관                          1                                         \n                                                                              \n      차관                          2                                         \n                                                                              \n    별정직 계                       5                                         \n                                                                              \n      고위공무원단         "
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "보건복지부 소속기관 공무원 정원표(제42조제1항 관련)",
+        "key": "000500E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167098967",
+          "pdf": "/LSW/flDownload.do?flSeq=167098969",
+          "image": "/LSW/flDownload.do?flSeq=167098971"
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_000500E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_000500E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 5] <개정 2024. 12. 31.>\n                                                        \n                                                        \n  보건복지부 소속기관 공무원 정원표(제42조제1항 관련)   \n                                                        \n                                                        \n  총계                    314                           \n                                                        \n    일반직 계             314                           \n                                                        \n      고위공무원단        1                             \n                                                        \n      3급 또는 4급 이하   310                           \n                                                        \n      전문경력관          3"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "보건복지부에 두는 평가대상 조직(제43조의2제1항 관련)",
+        "key": "000502E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167098973",
+          "pdf": "/LSW/flDownload.do?flSeq=167098975",
+          "image": "/LSW/flDownload.do?flSeq=167098977"
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_000502E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_000502E_20260721.pdf"
+        },
+        "rowCount": 11,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "1. 보건의료정책실 1개 과",
+            "3명"
+          ],
+          [
+            "2. 지역필수공공의료실 1개 과",
+            "5명"
+          ],
+          [
+            "3. 보건산업정책국 1개 과",
+            "3명"
+          ],
+          [
+            "4. 보건의료정책실 1개 정책관등",
+            "1명"
+          ],
+          [
+            "5. 지역필수공공의료실",
+            "1명"
+          ],
+          [
+            "6. 지역필수공공의료실 1개 정책관등",
+            "1명"
+          ],
+          [
+            "7. 지역필수공공의료실 1개 과",
+            "7명"
+          ],
+          [
+            "8. 지역필수공공의료실 1개 과",
+            "2명"
+          ],
+          [
+            "9. 지역필수공공의료실 1개 과",
+            "2명"
+          ],
+          [
+            "10. 지역필수공공의료실 1개 과",
+            "4명"
+          ]
+        ],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 5의2] <개정 2026. 7. 21.>\n                                                        \n  보건복지부에 두는 평가대상 조직(제43조의2제1항 관련)  \n                                                        \n┌─────────────────┬────────┐\n│조직                              │정원            │\n├─────────────────┼────────┤\n│1. 보건의료정책실 1개 과          │3명             │\n├─────────────────┼────────┤\n│2. 지역필수공공의료실 1개 과      │5명             │\n├─────────────────┼────────┤\n│3. 보건산업정책국 1개 과          │3명             │\n├─────────────────┼────────┤\n│4. 보건의료정책실 1개 정책관등    │1명             │\n├─────────────────┼────────┤\n│5. 지역필수공공의료실             │1명             │\n├─────────────────┼────────┤\n│6. 지역필수공공의료실 1개 정책관등│1명             │\n├─────────────────┼────────┤\n│7. 지역필수공공의료실 1개 과      │7명             │\n├─────────────────┼────────┤\n│8. 지역필수공공의료실 1개 과      │2명             │\n├─────────────────┼────────┤\n│9. 지역필수공공의료실 1개 과      │2명             │\n├─────────────────┼────────┤\n│10. 지역필수공공의료실 1개 과     │4명             │\n└─────────────────┴────────┘"
+      },
+      {
+        "annex": "별표 6",
+        "number": "6",
+        "title": "보건복지부 한시조직에 두는 공무원 정원표(제44조의5제4항, 제44조의6제7항, 제44조의7제4항 및 제44조의8제4항 관련)",
+        "key": "000600E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167098979",
+          "pdf": "/LSW/flDownload.do?flSeq=167098981",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167098983",
+            "/LSW/flDownload.do?flSeq=167098985"
+          ]
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_000600E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_000600E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 6] <개정 2026. 7. 21.>\n                                                                            \n  보건복지부 한시조직에 두는 공무원 정원표                                  \n  (제44조의5제4항, 제44조의6제7항, 제44조의7제4항 및 제44조의8제4항 관련)   \n                                                                            \n  1. 건강보험지불혁신추진단(존속기한: 2027년 12월 31일)                     \n                                                                            \n    총계                                                  4                 \n                                                                            \n      일반직 계                                           4                 \n                                                                            \n         4급 이하                                         4                 \n                                                                            \n  2. 통합돌봄지원관(존속기한: 2028년 12월 31일)                             \n                                                                            \n    총계                                                  1                 \n                                                                            \n      일반"
+      },
+      {
+        "annex": "별표 7",
+        "number": "7",
+        "title": "보건복지부 공무원 한시정원표(제45조 관련)",
+        "key": "000700E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167098987",
+          "pdf": "/LSW/flDownload.do?flSeq=167098989",
+          "image": "/LSW/flDownload.do?flSeq=167098991"
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_000700E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_000700E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 7] <개정 2026. 7. 21.>   \n                                                                  \n  보건복지부 공무원 한시정원표(제45조 관련)                       \n                                                                  \n  1. 제45조제1항 관련 한시정원(존속기한: 2027년 2월 22일)         \n                                                                  \n    총계                                                    2     \n                                                                  \n      일반직 계                                             2     \n                                                                  \n        5급 이하                                            2     \n                                                                  \n  2. 제45조제3항 관련 한시정원(존속기한: 2027년 12월 31일)        \n                                                                  \n    총계                                                    2     \n                                                                  \n      일반직 계                                             2     \n                                                                  \n        5급 이하                                            2     \n                "
+      },
+      {
+        "annex": "별표 8",
+        "number": "8",
+        "title": "삭제 &lt;2018. 3. 30.&gt;",
+        "key": "000800E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167098993",
+          "pdf": "/LSW/flDownload.do?flSeq=167098995",
+          "image": "/LSW/flDownload.do?flSeq=167098997"
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_000800E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_000800E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 8] 삭제 <2018. 3. 30.>"
+      },
+      {
+        "annex": "별표 9",
+        "number": "9",
+        "title": "삭제 &lt;2016. 5. 10.&gt;",
+        "key": "000900E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167098999",
+          "pdf": "/LSW/flDownload.do?flSeq=167099001",
+          "image": "/LSW/flDownload.do?flSeq=167099003"
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_000900E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_000900E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 9] 삭제 <2016. 5. 10.>"
+      },
+      {
+        "annex": "별표 10",
+        "number": "10",
+        "title": "삭제 &lt;2016. 5. 10.&gt;",
+        "key": "001000E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167099005",
+          "pdf": "/LSW/flDownload.do?flSeq=167099007",
+          "image": "/LSW/flDownload.do?flSeq=167099009"
+        },
+        "files": {
+          "hwp": "law0106732026072136513KC_001000E_20260721.hwp",
+          "pdf": "law0106732026072136513KC_001000E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 [별표 10] 삭제 <2016. 5. 10.>"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "삭제 &lt;2020. 9. 11.&gt;",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220471",
+          "pdf": "/LSW/flDownload.do?flSeq=167220473",
+          "image": "/LSW/flDownload.do?flSeq=167220475"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000100E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000100E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 1] 삭제 <2020. 9. 11.>"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "보건복지부 공무원 정원표(제35조제1항 본문 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220477",
+          "pdf": "/LSW/flDownload.do?flSeq=167220479",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167220481",
+            "/LSW/flDownload.do?flSeq=167220483",
+            "/LSW/flDownload.do?flSeq=167220485"
+          ]
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000200E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 2] <개정 2026. 3. 24.>\n                                                                                          \n  보건복지부 공무원 정원표(제35조제1항 본문 관련)                                         \n                                                                                          \n  총계                                                                              869   \n                                                                                          \n    정무직 계                                                                       3     \n                                                                                          \n      장관                                                                          1     \n                                                                                          \n      차관                                                                          2     \n                                                                                          \n    별정직 계                                                                       5     \n                                                                                          \n "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "보건복지부 공무원 정원표(제35조제1항 단서 관련)",
+        "key": "000202E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220487",
+          "pdf": "/LSW/flDownload.do?flSeq=167220489",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167220491",
+            "/LSW/flDownload.do?flSeq=167220493",
+            "/LSW/flDownload.do?flSeq=167220495"
+          ]
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000202E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000202E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 2의2] <개정 2026. 3. 24.>\n                                                                                          \n  보건복지부 공무원 정원표(제35조제1항 단서 관련)                                         \n                                                                                          \n  총계                                                                              872   \n                                                                                          \n    정무직 계                                                                       3     \n                                                                                          \n      장관                                                                          1     \n                                                                                          \n      차관                                                                          2     \n                                                                                          \n    별정직 계                                                                       5     \n                                                                                          "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "보건복지부 공무원 정원표(보건복지부령 제1190호 보건복지부와 그 소속기관 직제 시행규칙 일부개정령 부칙 제2조 관련)",
+        "key": "000204E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220587",
+          "pdf": "/LSW/flDownload.do?flSeq=167220589",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167220591",
+            "/LSW/flDownload.do?flSeq=167220593",
+            "/LSW/flDownload.do?flSeq=167220595"
+          ]
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000204E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000204E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 2의4] <신설 2026. 7. 21.>           \n                                                    [적용일자: 2026년 8월 19일까지]   \n                                                                                      \n  보건복지부 공무원 정원표(보건복지부령 제1190호 보건복지부와 그 소속기관 직제        \n  시행규칙 일부개정령 부칙 제2조 관련)                                                \n                                                                                      \n                                                                                      \n  총계                                                                    902         \n                                                                                      \n    정무직 계                                                             3           \n                                                                                      \n      장관                                                                1           \n                                                                                      \n      차관                                                                2           \n                                                                         "
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "국립정신건강센터 및 국립정신병원 공무원 정원표(제36조제1항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220597",
+          "pdf": "/LSW/flDownload.do?flSeq=167220599",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167220601",
+            "/LSW/flDownload.do?flSeq=167220603"
+          ]
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000300E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000300E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 3] <개정 2026. 7. 21.>\n                                                                    \n  국립정신건강센터 및 국립정신병원 공무원 정원표(제36조제1항 관련)  \n                                                                    \n  1. 국립정신건강센터                                               \n                                                                    \n    총계                                      338                   \n                                                                    \n      일반직 계                               338                   \n                                                                    \n        임기제 국립정신건강센터장(가급)       1                     \n                                                                    \n        고위공무원에 속하는 임기제(의료부장)  1                     \n                                                                    \n        임기제 의사요원(가급)                 5                     \n                                                                    \n        3급 또는 4급 임기제                   2                     \n                                                                    \n        3급 또는 4급 이하                     325                   \n  "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "국립소록도병원 공무원 정원표(제36조제2항 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220605",
+          "pdf": "/LSW/flDownload.do?flSeq=167220607",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167220609",
+            "/LSW/flDownload.do?flSeq=167220611"
+          ]
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000400E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000400E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 4] <개정 2026. 7. 21.>\n                                                                            \n  국립소록도병원 공무원 정원표(제36조제2항 관련)                            \n                                                                            \n  총계                                                                218   \n                                                                            \n    일반직 계                                                         218   \n                                                                            \n      고위공무원단                                                    1     \n                                                                            \n      부이사관 또는 과학기술서기관                                    1     \n                                                                            \n      서기관                                                          1     \n                                                                            \n      과학기술서기관                                                  6     \n                                                                            \n      행정사무관                                       "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "삭제 &lt;2011.8.23&gt;",
+        "key": "000402E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220613",
+          "pdf": "/LSW/flDownload.do?flSeq=167220615",
+          "image": "/LSW/flDownload.do?flSeq=167220617"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000402E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000402E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 4의2] 삭제 <2011.8.23>"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "삭제 &lt;2020. 9. 11.&gt;",
+        "key": "000500E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220619",
+          "pdf": "/LSW/flDownload.do?flSeq=167220621",
+          "image": "/LSW/flDownload.do?flSeq=167220623"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000500E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000500E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 5] 삭제 <2020. 9. 11.>"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "오송생명과학단지지원센터 공무원 정원표(제36조제4항 관련)",
+        "key": "000502E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220625",
+          "pdf": "/LSW/flDownload.do?flSeq=167220627",
+          "image": "/LSW/flDownload.do?flSeq=167220629"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000502E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000502E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 5의2] <개정 2026. 7. 21.>\n                                                                                        \n  오송생명과학단지지원센터 공무원 정원표(제36조제4항 관련)                              \n                                                                                        \n  총계                                                                              35  \n                                                                                        \n    일반직 계                                                                       35  \n                                                                                        \n      과학기술서기관 또는 서기관                                                    1   \n                                                                                        \n      서기관ㆍ과학기술서기관ㆍ행정사무관ㆍ보건사무관ㆍ시설사무관 또는 공업사무관    2   \n                                                                                        \n      행정사무관ㆍ사회복지사무관ㆍ보건사무관ㆍ전산사무관ㆍ약무사무관ㆍ시설사무관        \n  또는 공업사무관                                                                   2   \n                                                                                        \n      행정주사ㆍ보건주사ㆍ시설주사 또는 공"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "국립장기조직혈액관리원 공무원 정원표(제36조제5항 관련)",
+        "key": "000503E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220631",
+          "pdf": "/LSW/flDownload.do?flSeq=167220633",
+          "image": "/LSW/flDownload.do?flSeq=167220635"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000503E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000503E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 5의3] <개정 2026. 7. 21.>\n                                                                \n  국립장기조직혈액관리원 공무원 정원표(제36조제5항 관련)        \n                                                                \n    총계                                                    34  \n                                                                \n      일반직 계                                             34  \n                                                                \n        부이사관ㆍ과학기술서기관 또는 보건연구관            1   \n                                                                \n        서기관 또는 과학기술서기관                          2   \n                                                                \n        행정사무관 또는 보건사무관                          1   \n                                                                \n        행정사무관ㆍ보건사무관 또는 전산사무관              1   \n                                                                \n        행정사무관ㆍ보건사무관ㆍ약무사무관 또는 보건연구관  2   \n                                                                \n        의무사무관 또는 보건사무관                          2   \n                                                                \n        보건사무관 또는 간호사무관                  "
+      },
+      {
+        "annex": "별표 6",
+        "number": "6",
+        "title": "국립망향의동산관리원 공무원정원표(제36조제6항 관련)",
+        "key": "000600E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220637",
+          "pdf": "/LSW/flDownload.do?flSeq=167220639",
+          "image": "/LSW/flDownload.do?flSeq=167220641"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000600E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000600E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 6] <개정 2026. 7. 21.>\n                                                        \n  국립망향의동산관리원 공무원정원표(제36조제6항 관련)   \n                                                        \n  총계                                7                 \n                                                        \n    일반직 계                         7                 \n                                                        \n      과학기술서기관 또는 서기관      1                 \n                                                        \n      행정사무관                      1                 \n                                                        \n      행정사무관 또는 사회복지사무관  1                 \n                                                        \n      행정주사                        1                 \n                                                        \n      시설주사                        1                 \n                                                        \n      행정주사보                      2"
+      },
+      {
+        "annex": "별표 7",
+        "number": "7",
+        "title": "삭제 &lt;2020. 9. 11.&gt;",
+        "key": "000702E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220649",
+          "pdf": "/LSW/flDownload.do?flSeq=167220651",
+          "image": "/LSW/flDownload.do?flSeq=167220653"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000702E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000702E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 7의2] 삭제 <2020. 9. 11.>"
+      },
+      {
+        "annex": "별표 8",
+        "number": "8",
+        "title": "건강보험분쟁조정위원회 사무국 공무원 정원표(제36조제7항 관련)",
+        "key": "000800E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220655",
+          "pdf": "/LSW/flDownload.do?flSeq=167220657",
+          "image": "/LSW/flDownload.do?flSeq=167220659"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000800E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000800E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 8] <개정 2024. 12. 31.>\n                                                                                        \n  건강보험분쟁조정위원회 사무국 공무원 정원표(제36조제7항 관련)                         \n                                                                                        \n  총계                                                                              16  \n                                                                                        \n    일반직 계                                                                       16  \n                                                                                        \n      서기관 또는 과학기술서기관                                                    1   \n                                                                                        \n      행정사무관ㆍ사회복지사무관ㆍ보건사무관ㆍ전산사무관ㆍ약무사무관ㆍ시설사무관    1   \n  또는 공업사무관                                                                       \n                                                                                        \n      보건사무관 또는 간호사무관                                                    1   \n                                                                                        \n    "
+      },
+      {
+        "annex": "별표 8",
+        "number": "8",
+        "title": "첨단재생의료 및 첨단바이오의약품 심의위원회 사무국 공무원 정원표(제36조제8항 관련)",
+        "key": "000802E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220661",
+          "pdf": "/LSW/flDownload.do?flSeq=167220663",
+          "image": "/LSW/flDownload.do?flSeq=167220665"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000802E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000802E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 8의2] <개정 2026. 7. 21.>\n                                                                                      \n  첨단재생의료 및 첨단바이오의약품 심의위원회 사무국 공무원 정원표                    \n  (제36조제8항 관련)                                                                  \n                                                                                      \n  총계                                                                            4   \n                                                                                      \n    일반직 계                                                                     4   \n                                                                                      \n      과학기술서기관 또는 서기관                                                  1   \n                                                                                      \n      서기관ㆍ과학기술서기관ㆍ행정사무관ㆍ사회복지사무관ㆍ보건사무관 또는 약무        \n  사무관                                                                          1   \n                                                                                      \n      행정사무관ㆍ사회복지사무관ㆍ보건사무관ㆍ전산사무관ㆍ약무사무관ㆍ시설사무        \n  관 또는 공업사무관                                              "
+      },
+      {
+        "annex": "별표 9",
+        "number": "9",
+        "title": "국립재활원 공무원 정원표(제36조제9항 관련)",
+        "key": "000900E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220667",
+          "pdf": "/LSW/flDownload.do?flSeq=167220669",
+          "image": "/LSW/flDownload.do?flSeq=167220671"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000900E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000900E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 9] <개정 2026. 3. 24.>\n                                                \n  국립재활원 공무원 정원표(제36조제9항 관련)    \n                                                \n  총계                                    357   \n                                                \n    일반직 계                             357   \n                                                \n      고위공무원단                        1     \n                                                \n      고위공무원단에 속하는 임기제(원장)  1     \n                                                \n      3급 또는 4급 이하                   321   \n                                                \n      전문경력관                          34"
+      },
+      {
+        "annex": "별표 9",
+        "number": "9",
+        "title": "삭제 &lt;2017. 2. 28.&gt;",
+        "key": "000903E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220679",
+          "pdf": "/LSW/flDownload.do?flSeq=167220681",
+          "image": "/LSW/flDownload.do?flSeq=167220683"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_000903E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_000903E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 9의3] 삭제 <2017. 2. 28.>"
+      },
+      {
+        "annex": "별표 10",
+        "number": "10",
+        "title": "보건복지부에 두는 평가대상 조직(제38조 관련)",
+        "key": "001000E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220685",
+          "pdf": "/LSW/flDownload.do?flSeq=167220687",
+          "image": "/LSW/flDownload.do?flSeq=167220689"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_001000E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_001000E_20260721.pdf"
+        },
+        "rowCount": 11,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "1. 보건의료정책실 간호정책과",
+            "3명 (4급 1명, 5급 1명, 6급 1명)",
+            "2026년 12월 31일까지"
+          ],
+          [
+            "2. 지역필수공공의료실 재난의 료정책과",
+            "5명 (4급 1명, 5급 2명, 6급 2명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "3. 보건산업정책국 제약바이오 산업과",
+            "3명 (4급 1명, 5급 1명, 7급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "4. 보건의료정책실 의료자원정 책관",
+            "1명 (고위공무원단 1명)",
+            "2029년 6월 30일까지"
+          ],
+          [
+            "5. 지역필수공공의료실",
+            "1명 (고위공무원단 1명)",
+            "2029년 6월 30일까지"
+          ],
+          [
+            "6. 지역필수공공의료실 지역필 수의료정책관",
+            "1명 (고위공무원단 1명)",
+            "2029년 6월 30일까지"
+          ],
+          [
+            "7. 지역필수공공의료실 지역필 수의료총괄과",
+            "7명 (4급 1명, 4급 또는 5급 1명, 5급 2명, 6급 2명, 7급 1명)",
+            "2029년 6월 30일까지"
+          ],
+          [
+            "8. 지역필수공공의료실 지역의 료정책과",
+            "2명 (4급 1명, 5급 1명)",
+            "2029년 6월 30일까지"
+          ],
+          [
+            "9. 지역필수공공의료실 필수의 료정책과",
+            "2명 (4급 1명, 5급 1명)",
+            "2029년 6월 30일까지"
+          ],
+          [
+            "10. 지역필수공공의료실 국립대 병원정책과",
+            "4명 (4급 1명, 4급 또는 5급 1명, 6급 2명)",
+            "2029년 6월 30일까지"
+          ]
+        ],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 10] <개정 2026. 7. 21.>             \n                                                                                      \n  보건복지부에 두는 평가대상 조직(제38조 관련)                                        \n                                                                                      \n┌───────────────┬──────────────┬──────────┐\n│조직                          │정원                        │평가기간            │\n├───────────────┼──────────────┼──────────┤\n│1. 보건의료정책실 간호정책과  │3명                         │2026년 12월 31일까지│\n│                              │(4급 1명, 5급 1명, 6급 1명) │                    │\n├───────────────┼──────────────┼──────────┤\n│2. 지역필수공공의료실 재난의  │5명                         │2028년 9월 30일까지 │\n│료정책과                      │(4급 1명, 5급 2명, 6급 2명) │                    │\n├───────────────┼──────────────┼──────────┤\n│3. 보건산업정책국 제약바이오  │3명                         │2028년 9월 30일까지 │\n│산업과                        │(4급 1명, 5급 1명, 7급 1명) │                    │\n├───────────────┼──────────────┼──────────┤\n│4. 보건의료정책실 의료자원정  │1명                         │2029년 6월 30일까지 │\n│책관                          │(고위공무원단 1명)          │                    │\n├───────────────┼──────────────┼─────────"
+      },
+      {
+        "annex": "별표 10",
+        "number": "10",
+        "title": "보건복지부 한시조직에 두는 공무원 정원표(제38조의3제2항, 제38조의4제3항, 제38조의5제2항 및 제38조의6제2항 관련)",
+        "key": "001002E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220691",
+          "pdf": "/LSW/flDownload.do?flSeq=167220693",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167220695",
+            "/LSW/flDownload.do?flSeq=167220697"
+          ]
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_001002E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_001002E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 10의2] <개정 2026. 7. 21.>  \n                                                                              \n  보건복지부 한시조직에 두는 공무원 정원표                                    \n  (제38조의3제2항, 제38조의4제3항, 제38조의5제2항 및 제38조의6제2항 관련)     \n                                                                              \n                                                                              \n  1. 건강보험지불혁신추진단(존속기한: 2027년 12월 31일)                       \n                                                                              \n    총계                                                              4       \n                                                                              \n      일반직 계                                                       4       \n                                                                              \n        서기관 또는 과학기술서기관                                    1       \n                                                                              \n        행정사무관ㆍ사회복지사무관ㆍ보건사무관ㆍ전산사무관ㆍ약무사무          \n  관ㆍ시설사무관 또는 공업사무관                                      2       \n                                                                              \n   "
+      },
+      {
+        "annex": "별표 11",
+        "number": "11",
+        "title": "보건복지부와 그 소속기관 공무원 한시정원표(제39조 관련)",
+        "key": "001100E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220699",
+          "pdf": "/LSW/flDownload.do?flSeq=167220701",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167220703",
+            "/LSW/flDownload.do?flSeq=167220705"
+          ]
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_001100E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_001100E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 11] <개정 2026. 7. 21.>\n                                                                              \n  보건복지부와 그 소속기관 공무원 한시정원표(제39조 관련)                     \n                                                                              \n  1. 제39조제1항 관련 한시정원(존속기한: 2027년 2월 22일)                     \n                                                                              \n    총계                                                                  2   \n                                                                              \n      일반직 계                                                           2   \n                                                                              \n        행정사무관ㆍ사회복지사무관ㆍ보건사무관ㆍ전산사무관ㆍ약무사무관        \n  ㆍ시설사무관 또는 공업사무관                                            1   \n                                                                              \n        행정주사보ㆍ사회복지주사보ㆍ보건주사보ㆍ전산주사보ㆍ약무주사보        \n  ㆍ시설주사보ㆍ공업주사보 또는 간호주사보                                1   \n                                                                              \n  2. 제39조제3항 관련 한시정원(존속기한: 2027년 12월 31일)                    \n                                           "
+      },
+      {
+        "annex": "별표 12",
+        "number": "12",
+        "title": "삭제 &lt;2024. 12. 31.&gt;",
+        "key": "001200E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167220707",
+          "pdf": "/LSW/flDownload.do?flSeq=167220709",
+          "image": "/LSW/flDownload.do?flSeq=167220711"
+        },
+        "files": {
+          "hwp": "law0106912026072101190KC_001200E_20260721.hwp",
+          "pdf": "law0106912026072101190KC_001200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 보건복지부와 그 소속기관 직제 시행규칙 [별표 12] 삭제 <2024. 12. 31.>"
+      }
+    ]
+  },
+  "rootId": "n-c17aca40",
+  "nodes": [
+    {
+      "id": "n-c17aca40",
+      "name": "보건복지부",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-2b3385d1",
+      "name": "국립소록도병원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4db62397",
+      "name": "오송생명과학단지지원센터",
+      "kind": "affiliated",
+      "rank": 5,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6aa93082",
+      "name": "국립장기조직혈액관리원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a82e3452",
+      "name": "국립망향의동산관리원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-63902529",
+      "name": "국립정신건강센터",
+      "kind": "affiliated",
+      "rank": 5,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-486874ca",
+      "name": "국립나주병원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-2793040d",
+      "name": "국립부곡병원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-453d6eaa",
+      "name": "국립춘천병원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b4fc77bf",
+      "name": "국립공주병원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b00cc28d",
+      "name": "국립재활원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0b19769d",
+      "name": "지원",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-7ce28e1b",
+      "name": "감사관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a4fafae2",
+      "name": "장관정책보좌관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c74d22a6",
+      "name": "제1차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-7da5dac3",
+      "name": "기획조정실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0a6c3537",
+      "name": "인사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-42f9761e",
+      "name": "사회복지정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1790e651",
+      "name": "장애인정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-12cfffab",
+      "name": "사회서비스정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a9c8be8d",
+      "name": "보건의료정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-485a8710",
+      "name": "지역필수공공의료실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ee463193",
+      "name": "건강보험정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d092c587",
+      "name": "건강정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6c308cd3",
+      "name": "보건산업정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8a775f5b",
+      "name": "제2차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4481f335",
+      "name": "차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f591ac80",
+      "name": "사무국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나",
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5f7370e3",
+      "name": "의료부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-449b9445",
+      "name": "건강보험지불혁신추진단",
+      "kind": "temporary",
+      "rank": 4,
+      "metadata": {
+        "temporary": true,
+        "expires": "2027-12-31",
+        "evaluation": true,
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-dcee0fbc",
+      "name": "통합돌봄사업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "temporary": true,
+        "expires": "2028-12-31",
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-da31ee51",
+      "name": "통합돌봄지원관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true,
+        "grade": "나"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-3aa268a6",
+      "name": "인구ㆍ사회서비스정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-578cf19b",
+      "name": "통합돌봄정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8e8df77a",
+      "name": "기금운용관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4c48841d",
+      "name": "지역의료인력양성과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-46a8dd0c",
+      "name": "홍보기획담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ad88cef8",
+      "name": "디지털소통팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-9e2553ae",
+      "name": "복지급여조사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f1907300",
+      "name": "정책기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-09e8fcb2",
+      "name": "국제협력관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "employmentType": "임기제",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d35fd50b",
+      "name": "비상안전기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "employmentType": "임기제",
+        "staffCategories": [
+          "임기제"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-19560af1",
+      "name": "보건복지상담센터",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b91eb37a",
+      "name": "기획조정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-95eef8de",
+      "name": "재정운용담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-dd5ea767",
+      "name": "혁신행정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-dadc7298",
+      "name": "규제개혁법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-924ddcb4",
+      "name": "양성평등정책담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1d6d0bb2",
+      "name": "정보통계담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-946d4490",
+      "name": "정보보호팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0c663167",
+      "name": "국제협력담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4a28b0cc",
+      "name": "통상개발담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f95c66ca",
+      "name": "복지정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b48e883e",
+      "name": "복지행정지원관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a8a6fc5d",
+      "name": "연금정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5d5e9736",
+      "name": "복지정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-64887941",
+      "name": "기초생활보장과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-76fd08cd",
+      "name": "자활정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1a006796",
+      "name": "기초의료보장과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c33e4245",
+      "name": "지역복지과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-952bb2bc",
+      "name": "급여기준과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-fae90112",
+      "name": "복지정보기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-28479ad2",
+      "name": "복지정보운영과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1313cf5a",
+      "name": "국민연금정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b6b8454e",
+      "name": "기금운용제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1af379fb",
+      "name": "기초연금과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ade3c6e8",
+      "name": "연금급여팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a690346e",
+      "name": "장애인정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-bf1a17ad",
+      "name": "장애인권익지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-cb550be9",
+      "name": "장애인자립기반과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-38df0168",
+      "name": "장애인서비스과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ffe2217d",
+      "name": "장애인건강과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-677f0cda",
+      "name": "장애인학대대응팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-74c524f0",
+      "name": "인구아동정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a51686f5",
+      "name": "노인정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f700a097",
+      "name": "사회서비스정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6b73b9ea",
+      "name": "인구정책총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-2035db95",
+      "name": "출산정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b1f2e4e0",
+      "name": "아동정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-490cc4e7",
+      "name": "아동보호자립과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6dcb1198",
+      "name": "아동학대대응과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-10b45926",
+      "name": "청년정책팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b479293f",
+      "name": "입양정책팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f9189e31",
+      "name": "노인정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-be7bc27b",
+      "name": "노인지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-063634ba",
+      "name": "요양보험제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-149ab317",
+      "name": "요양보험운영과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-bde90b02",
+      "name": "노인건강과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1aff4643",
+      "name": "사회서비스정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-992f2a14",
+      "name": "사회서비스사업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a862aeed",
+      "name": "사회서비스자원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-2dc6c2ef",
+      "name": "사회서비스일자리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5a342545",
+      "name": "사회보장총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-eb693eef",
+      "name": "사회보장조정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-bb97f05d",
+      "name": "사회보장평가과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-05a51a61",
+      "name": "보건의료정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c0adb3c9",
+      "name": "의료자원정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d1cfc34e",
+      "name": "한의약정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-91a5f6c5",
+      "name": "보건의료정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0b5f140d",
+      "name": "의료기관정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6b5581ba",
+      "name": "약무정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ad54b034",
+      "name": "질병정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-477a4a67",
+      "name": "생명윤리정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5caea95d",
+      "name": "의료자원정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-9d76f46c",
+      "name": "의료인력정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0ae9afd5",
+      "name": "간호정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-eaed63d7",
+      "name": "혈액장기정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5dd232b2",
+      "name": "한의약정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4c286d0d",
+      "name": "한의약산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-93115aa4",
+      "name": "지역필수의료정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e17df097",
+      "name": "공공의료정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a3cfb031",
+      "name": "지역필수의료총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f16be0f4",
+      "name": "지역의료정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b017e449",
+      "name": "필수의료정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-057c9643",
+      "name": "공공의료정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-50289632",
+      "name": "국립대병원정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c25905e5",
+      "name": "응급의료과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-12f98a45",
+      "name": "재난의료정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8b66b465",
+      "name": "보험정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-9f8ec980",
+      "name": "보험급여과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-626bf7ac",
+      "name": "보험약제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d5fed5bc",
+      "name": "보험평가과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-be0275ae",
+      "name": "비급여관리팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-51157b27",
+      "name": "정신건강정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-3f937444",
+      "name": "건강정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-99d23575",
+      "name": "건강증진과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-676f133c",
+      "name": "구강정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a98d51cc",
+      "name": "생활보건팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1516afb3",
+      "name": "정신건강정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f5928171",
+      "name": "정신건강관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-64bea0a8",
+      "name": "자살예방정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-917246c3",
+      "name": "첨단의료지원관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-fb2e47f0",
+      "name": "보건산업정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ac05a3ff",
+      "name": "보건의료기술개발과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8115f5cf",
+      "name": "제약바이오산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a37c34e7",
+      "name": "의료기기화장품산업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5bb35482",
+      "name": "보건산업해외진출과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ff1d128e",
+      "name": "의료정보정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-9c6388b7",
+      "name": "의료인공지능데이터정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8e22bd88",
+      "name": "재생의료정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-49c88971",
+      "name": "정신건강연구소",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4134ec06",
+      "name": "약물중독진료소",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e1ff2fcb",
+      "name": "기획운영과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-be79dccd",
+      "name": "내과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-326473a1",
+      "name": "외과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-fe04c367",
+      "name": "피부과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1cc93cc1",
+      "name": "치과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-48faf5f9",
+      "name": "안이비인후가정의학과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-43ad41e0",
+      "name": "약제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-24195777",
+      "name": "간호과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-2e1f0629",
+      "name": "장기기증지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-10b1fe89",
+      "name": "장기이식관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-7267ba0a",
+      "name": "혈액안전감시과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "연구직"
+        ]
+      },
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-84a7e05f",
+      "name": "재활연구소",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-ecb17b25",
+      "parent": "n-c17aca40",
+      "child": "n-2b3385d1",
+      "type": "affiliated",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "① 보건복지부장관의 관장 사무를 지원하기 위하여 보건복지부장관 소속으로 국립소록도병원, 오송생명과학단지지원센터, 국립장기조직혈액관리원 및 국립망향의동산관리원을 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-e0eb9ee4",
+      "parent": "n-c17aca40",
+      "child": "n-4db62397",
+      "type": "affiliated",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "① 보건복지부장관의 관장 사무를 지원하기 위하여 보건복지부장관 소속으로 국립소록도병원, 오송생명과학단지지원센터, 국립장기조직혈액관리원 및 국립망향의동산관리원을 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-fd3da1fd",
+      "parent": "n-c17aca40",
+      "child": "n-6aa93082",
+      "type": "affiliated",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "① 보건복지부장관의 관장 사무를 지원하기 위하여 보건복지부장관 소속으로 국립소록도병원, 오송생명과학단지지원센터, 국립장기조직혈액관리원 및 국립망향의동산관리원을 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-ada7f063",
+      "parent": "n-c17aca40",
+      "child": "n-a82e3452",
+      "type": "affiliated",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "① 보건복지부장관의 관장 사무를 지원하기 위하여 보건복지부장관 소속으로 국립소록도병원, 오송생명과학단지지원센터, 국립장기조직혈액관리원 및 국립망향의동산관리원을 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-155f7a69",
+      "parent": "n-c17aca40",
+      "child": "n-63902529",
+      "type": "affiliated",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "④ 보건복지부장관의 관장 사무를 지원하기 위하여 「책임운영기관의 설치ㆍ운영에 관한 법률」 제4조제1항, 같은 법 시행령 제2조제1항 및 별표 1에 따라 보건복지부장관 소속의 책임운영기관으로 국립정신건강센터ㆍ국립나주병원ㆍ국립부곡병원ㆍ국립춘천병원ㆍ국립공주병원 및 국립재활원을 둔다",
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-f89456a2",
+      "parent": "n-c17aca40",
+      "child": "n-486874ca",
+      "type": "affiliated",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "④ 보건복지부장관의 관장 사무를 지원하기 위하여 「책임운영기관의 설치ㆍ운영에 관한 법률」 제4조제1항, 같은 법 시행령 제2조제1항 및 별표 1에 따라 보건복지부장관 소속의 책임운영기관으로 국립정신건강센터ㆍ국립나주병원ㆍ국립부곡병원ㆍ국립춘천병원ㆍ국립공주병원 및 국립재활원을 둔다",
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-7fa37d08",
+      "parent": "n-c17aca40",
+      "child": "n-2793040d",
+      "type": "affiliated",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "④ 보건복지부장관의 관장 사무를 지원하기 위하여 「책임운영기관의 설치ㆍ운영에 관한 법률」 제4조제1항, 같은 법 시행령 제2조제1항 및 별표 1에 따라 보건복지부장관 소속의 책임운영기관으로 국립정신건강센터ㆍ국립나주병원ㆍ국립부곡병원ㆍ국립춘천병원ㆍ국립공주병원 및 국립재활원을 둔다",
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-85c43b8c",
+      "parent": "n-c17aca40",
+      "child": "n-453d6eaa",
+      "type": "affiliated",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "④ 보건복지부장관의 관장 사무를 지원하기 위하여 「책임운영기관의 설치ㆍ운영에 관한 법률」 제4조제1항, 같은 법 시행령 제2조제1항 및 별표 1에 따라 보건복지부장관 소속의 책임운영기관으로 국립정신건강센터ㆍ국립나주병원ㆍ국립부곡병원ㆍ국립춘천병원ㆍ국립공주병원 및 국립재활원을 둔다",
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-81301900",
+      "parent": "n-c17aca40",
+      "child": "n-b4fc77bf",
+      "type": "affiliated",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "④ 보건복지부장관의 관장 사무를 지원하기 위하여 「책임운영기관의 설치ㆍ운영에 관한 법률」 제4조제1항, 같은 법 시행령 제2조제1항 및 별표 1에 따라 보건복지부장관 소속의 책임운영기관으로 국립정신건강센터ㆍ국립나주병원ㆍ국립부곡병원ㆍ국립춘천병원ㆍ국립공주병원 및 국립재활원을 둔다",
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-cc155a99",
+      "parent": "n-c17aca40",
+      "child": "n-b00cc28d",
+      "type": "affiliated",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "④ 보건복지부장관의 관장 사무를 지원하기 위하여 「책임운영기관의 설치ㆍ운영에 관한 법률」 제4조제1항, 같은 법 시행령 제2조제1항 및 별표 1에 따라 보건복지부장관 소속의 책임운영기관으로 국립정신건강센터ㆍ국립나주병원ㆍ국립부곡병원ㆍ국립춘천병원ㆍ국립공주병원 및 국립재활원을 둔다",
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-ddbf5eed",
+      "parent": "n-6d736a60",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제5조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8e59b7bb",
+      "parent": "n-6d736a60",
+      "child": "n-7ce28e1b",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제5조의2(감사관)",
+        "evidenceText": "② 감사관은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d24d5124",
+      "parent": "n-6d736a60",
+      "child": "n-a4fafae2",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(장관정책보좌관)",
+        "evidenceText": "② 장관정책보좌관은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-e942c600",
+      "parent": "n-c74d22a6",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "② 장관 밑에 대변인 1명, 감사관 1명 및 장관정책보좌관 2명을 두고, 제1차관 밑에 기획조정실장 1명을 둔다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-6232454a",
+      "parent": "n-c74d22a6",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(복수차관의 운영)",
+        "evidenceText": "② 제1차관은 운영지원과, 인사과, 사회복지정책실, 장애인정책국, 인구ㆍ사회서비스정책실 및 사회보장위원회 사무국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-6ed4305a",
+      "parent": "n-c74d22a6",
+      "child": "n-0a6c3537",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(복수차관의 운영)",
+        "evidenceText": "② 제1차관은 운영지원과, 인사과, 사회복지정책실, 장애인정책국, 인구ㆍ사회서비스정책실 및 사회보장위원회 사무국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-ebb1e274",
+      "parent": "n-c74d22a6",
+      "child": "n-42f9761e",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(복수차관의 운영)",
+        "evidenceText": "② 제1차관은 운영지원과, 인사과, 사회복지정책실, 장애인정책국, 인구ㆍ사회서비스정책실 및 사회보장위원회 사무국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-83d595c4",
+      "parent": "n-c74d22a6",
+      "child": "n-1790e651",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(복수차관의 운영)",
+        "evidenceText": "② 제1차관은 운영지원과, 인사과, 사회복지정책실, 장애인정책국, 인구ㆍ사회서비스정책실 및 사회보장위원회 사무국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-569f04cd",
+      "parent": "n-c74d22a6",
+      "child": "n-12cfffab",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(복수차관의 운영)",
+        "evidenceText": "② 제1차관은 운영지원과, 인사과, 사회복지정책실, 장애인정책국, 인구ㆍ사회서비스정책실 및 사회보장위원회 사무국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-500fe004",
+      "parent": "n-8a775f5b",
+      "child": "n-a9c8be8d",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(복수차관의 운영)",
+        "evidenceText": "③ 제2차관은 보건의료정책실ㆍ지역필수공공의료실ㆍ건강보험정책국ㆍ건강정책국 및 보건산업정책국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-16cba176",
+      "parent": "n-8a775f5b",
+      "child": "n-485a8710",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(복수차관의 운영)",
+        "evidenceText": "③ 제2차관은 보건의료정책실ㆍ지역필수공공의료실ㆍ건강보험정책국ㆍ건강정책국 및 보건산업정책국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-40945510",
+      "parent": "n-8a775f5b",
+      "child": "n-ee463193",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(복수차관의 운영)",
+        "evidenceText": "③ 제2차관은 보건의료정책실ㆍ지역필수공공의료실ㆍ건강보험정책국ㆍ건강정책국 및 보건산업정책국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-fe1f028a",
+      "parent": "n-8a775f5b",
+      "child": "n-d092c587",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(복수차관의 운영)",
+        "evidenceText": "③ 제2차관은 보건의료정책실ㆍ지역필수공공의료실ㆍ건강보험정책국ㆍ건강정책국 및 보건산업정책국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-b738a40c",
+      "parent": "n-8a775f5b",
+      "child": "n-6c308cd3",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(복수차관의 운영)",
+        "evidenceText": "③ 제2차관은 보건의료정책실ㆍ지역필수공공의료실ㆍ건강보험정책국ㆍ건강정책국 및 보건산업정책국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-6a94cd83",
+      "parent": "n-4481f335",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조의2(기획조정실장)",
+        "evidenceText": "③ 기획조정실장은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-54186663",
+      "parent": "n-2b3385d1",
+      "child": "n-5f7370e3",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제24조(하부조직)",
+        "evidenceText": "① 소록도병원에 의료부를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a6af732a",
+      "parent": "n-ee463193",
+      "child": "n-449b9445",
+      "type": "temporary",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제44조의5(건강보험지불혁신추진단)",
+        "evidenceText": "① 보건복지부 건강보험정책국에 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제1호에 따라 2027년 12월 31일까지 존속하는 한시조직으로 건강보험지불혁신추진단을 둔다"
+      }
+    },
+    {
+      "id": "e-54349bc0",
+      "parent": "n-4db62397",
+      "child": "n-dcee0fbc",
+      "type": "temporary",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제44조의6(통합돌봄지원관 등)",
+        "evidenceText": "① 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제1호에 따라 2028년 12월 31일까지 존속하는 한시조직으로 인구ㆍ사회서비스정책실장 밑에 통합돌봄지원관을 두고, 인구ㆍ사회서비스정책실에 통합돌봄정책과 및 통합돌봄사업과를 둔다"
+      }
+    },
+    {
+      "id": "e-bcb39e93",
+      "parent": "n-12cfffab",
+      "child": "n-da31ee51",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제44조의6(통합돌봄지원관 등)",
+        "evidenceText": "① 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제1호에 따라 2028년 12월 31일까지 존속하는 한시조직으로 인구ㆍ사회서비스정책실장 밑에 통합돌봄지원관을 두고, 인구ㆍ사회서비스정책실에 통합돌봄정책과 및 통합돌봄사업과를 둔다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-cd1b706e",
+      "parent": "n-3aa268a6",
+      "child": "n-578cf19b",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제44조의6(통합돌봄지원관 등)",
+        "evidenceText": "① 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제1호에 따라 2028년 12월 31일까지 존속하는 한시조직으로 인구ㆍ사회서비스정책실장 밑에 통합돌봄지원관을 두고, 인구ㆍ사회서비스정책실에 통합돌봄정책과 및 통합돌봄사업과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ae7584df",
+      "parent": "n-3aa268a6",
+      "child": "n-dcee0fbc",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제44조의6(통합돌봄지원관 등)",
+        "evidenceText": "① 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제1호에 따라 2028년 12월 31일까지 존속하는 한시조직으로 인구ㆍ사회서비스정책실장 밑에 통합돌봄지원관을 두고, 인구ㆍ사회서비스정책실에 통합돌봄정책과 및 통합돌봄사업과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-12d3c168",
+      "parent": "n-e618142f",
+      "child": "n-46a8dd0c",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(대변인)",
+        "evidenceText": "④ 홍보기획담당관은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e5da7c49",
+      "parent": "n-e618142f",
+      "child": "n-ad88cef8",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(대변인)",
+        "evidenceText": "⑤ 디지털소통팀장은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7f59d817",
+      "parent": "n-7ce28e1b",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조의2(감사관)",
+        "evidenceText": "③ 감사담당관은 다음 사항에 관하여 감사관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-8a903f59",
+      "parent": "n-7ce28e1b",
+      "child": "n-9e2553ae",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조의2(감사관)",
+        "evidenceText": "④ 복지급여조사담당관은 다음 사항에 관하여 감사관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-49d09c81",
+      "parent": "n-7da5dac3",
+      "child": "n-f1907300",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "③ 정책기획관은 「보건복지부와 그 소속기관 직제」 제6조의2제3항제1호부터 제4호까지, 제4호의2, 제4호의3, 제6호, 제7호, 제7호의2, 제8호부터 제19호까지, 제27호 및 제28호의 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-aad0f0b6",
+      "parent": "n-7da5dac3",
+      "child": "n-09e8fcb2",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "④ 국제협력관은 「보건복지부와 그 소속기관 직제」 제6조의2제3항제20호 및 제21호의 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-3020239c",
+      "parent": "n-7da5dac3",
+      "child": "n-d35fd50b",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "⑤ 비상안전기획관은 「보건복지부와 그 소속기관 직제」 제6조의2제3항제22호부터 제26호까지의 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-7a4b1aac",
+      "parent": "n-7da5dac3",
+      "child": "n-19560af1",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "⑦ 보건복지상담센터장은 다음 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7f67a007",
+      "parent": "n-7da5dac3",
+      "child": "n-b91eb37a",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "⑧ 기획조정담당관은 다음 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dff98c4e",
+      "parent": "n-7da5dac3",
+      "child": "n-95eef8de",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "⑨ 재정운용담당관은 다음 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8c355572",
+      "parent": "n-7da5dac3",
+      "child": "n-dd5ea767",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "⑩ 혁신행정담당관은 다음 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1799a8d5",
+      "parent": "n-7da5dac3",
+      "child": "n-dadc7298",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "⑪ 규제개혁법무담당관은 다음 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-876bf63b",
+      "parent": "n-7da5dac3",
+      "child": "n-924ddcb4",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "⑫ 양성평등정책담당관은 다음 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-595f2302",
+      "parent": "n-7da5dac3",
+      "child": "n-1d6d0bb2",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "⑬ 정보통계담당관은 다음 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a5bbcd09",
+      "parent": "n-7da5dac3",
+      "child": "n-946d4490",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "⑭ 정보보호팀장은 다음 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-38b572e1",
+      "parent": "n-7da5dac3",
+      "child": "n-0c663167",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "⑮ 국제협력담당관은 다음 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4beb976e",
+      "parent": "n-7da5dac3",
+      "child": "n-4a28b0cc",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조의2(기획조정실)",
+        "evidenceText": "<16> 통상개발담당관은 다음 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e371d272",
+      "parent": "n-42f9761e",
+      "child": "n-f95c66ca",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "③ 복지정책관은 「보건복지부와 그 소속기관 직제」 제10조제3항제1호부터 제11호까지 및 제18호의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3e71f7ae",
+      "parent": "n-42f9761e",
+      "child": "n-b48e883e",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "④ 복지행정지원관은 「보건복지부와 그 소속기관 직제」 제10조제3항제12호부터 제17호까지, 제19호부터 제21호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-6781499f",
+      "parent": "n-42f9761e",
+      "child": "n-a8a6fc5d",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑤ 연금정책관은 「보건복지부와 그 소속기관 직제」 제10조제3항제22호부터 제33호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-5d031c49",
+      "parent": "n-42f9761e",
+      "child": "n-5d5e9736",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e6fc6892",
+      "parent": "n-42f9761e",
+      "child": "n-64887941",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1e140dab",
+      "parent": "n-42f9761e",
+      "child": "n-76fd08cd",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-050fc575",
+      "parent": "n-42f9761e",
+      "child": "n-1a006796",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9d2bdbf4",
+      "parent": "n-42f9761e",
+      "child": "n-c33e4245",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ba090c7e",
+      "parent": "n-42f9761e",
+      "child": "n-952bb2bc",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d033a508",
+      "parent": "n-42f9761e",
+      "child": "n-fae90112",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-575f854c",
+      "parent": "n-42f9761e",
+      "child": "n-28479ad2",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-877ada54",
+      "parent": "n-42f9761e",
+      "child": "n-1313cf5a",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5a0a6fbd",
+      "parent": "n-42f9761e",
+      "child": "n-b6b8454e",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d6691ab6",
+      "parent": "n-42f9761e",
+      "child": "n-1af379fb",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0966d56e",
+      "parent": "n-42f9761e",
+      "child": "n-ade3c6e8",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(사회복지정책실)",
+        "evidenceText": "⑥ 사회복지정책실에 복지정책과, 기초생활보장과, 자활정책과, 기초의료보장과, 지역복지과, 급여기준과, 복지정보기획과, 복지정보운영과, 국민연금정책과, 기금운용제도과, 기초연금과 및 연금급여팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6be05e87",
+      "parent": "n-1790e651",
+      "child": "n-a690346e",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조의2(장애인정책국)",
+        "evidenceText": "② 장애인정책국에 장애인정책과, 장애인권익지원과, 장애인자립기반과, 장애인서비스과, 장애인건강과 및 장애인학대대응팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6d15ea40",
+      "parent": "n-1790e651",
+      "child": "n-bf1a17ad",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조의2(장애인정책국)",
+        "evidenceText": "② 장애인정책국에 장애인정책과, 장애인권익지원과, 장애인자립기반과, 장애인서비스과, 장애인건강과 및 장애인학대대응팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ba611364",
+      "parent": "n-1790e651",
+      "child": "n-cb550be9",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조의2(장애인정책국)",
+        "evidenceText": "② 장애인정책국에 장애인정책과, 장애인권익지원과, 장애인자립기반과, 장애인서비스과, 장애인건강과 및 장애인학대대응팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c9f46c87",
+      "parent": "n-1790e651",
+      "child": "n-38df0168",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조의2(장애인정책국)",
+        "evidenceText": "② 장애인정책국에 장애인정책과, 장애인권익지원과, 장애인자립기반과, 장애인서비스과, 장애인건강과 및 장애인학대대응팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cefcc1b6",
+      "parent": "n-1790e651",
+      "child": "n-ffe2217d",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조의2(장애인정책국)",
+        "evidenceText": "② 장애인정책국에 장애인정책과, 장애인권익지원과, 장애인자립기반과, 장애인서비스과, 장애인건강과 및 장애인학대대응팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-51920bef",
+      "parent": "n-1790e651",
+      "child": "n-677f0cda",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조의2(장애인정책국)",
+        "evidenceText": "② 장애인정책국에 장애인정책과, 장애인권익지원과, 장애인자립기반과, 장애인서비스과, 장애인건강과 및 장애인학대대응팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9ca603c3",
+      "parent": "n-12cfffab",
+      "child": "n-74c524f0",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "② 「보건복지부와 그 소속기관 직제」 제11조제1항에 따라 인구ㆍ사회서비스정책실장 밑에 두는 보좌기관은 인구아동정책관ㆍ노인정책관 및 사회서비스정책관으로 하며, 인구아동정책관ㆍ노인정책관 및 사회서비스정책관은 고위공무원단에 속하는 일반직공무원으로 보하되, 그 직위의 직무등급은 나등급으로 한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-d846e462",
+      "parent": "n-12cfffab",
+      "child": "n-a51686f5",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "② 「보건복지부와 그 소속기관 직제」 제11조제1항에 따라 인구ㆍ사회서비스정책실장 밑에 두는 보좌기관은 인구아동정책관ㆍ노인정책관 및 사회서비스정책관으로 하며, 인구아동정책관ㆍ노인정책관 및 사회서비스정책관은 고위공무원단에 속하는 일반직공무원으로 보하되, 그 직위의 직무등급은 나등급으로 한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7b2db9fa",
+      "parent": "n-12cfffab",
+      "child": "n-f700a097",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "② 「보건복지부와 그 소속기관 직제」 제11조제1항에 따라 인구ㆍ사회서비스정책실장 밑에 두는 보좌기관은 인구아동정책관ㆍ노인정책관 및 사회서비스정책관으로 하며, 인구아동정책관ㆍ노인정책관 및 사회서비스정책관은 고위공무원단에 속하는 일반직공무원으로 보하되, 그 직위의 직무등급은 나등급으로 한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-8ba292f4",
+      "parent": "n-3aa268a6",
+      "child": "n-6b73b9ea",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c66fdab7",
+      "parent": "n-3aa268a6",
+      "child": "n-2035db95",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2c7c783c",
+      "parent": "n-3aa268a6",
+      "child": "n-b1f2e4e0",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0d48eb08",
+      "parent": "n-3aa268a6",
+      "child": "n-490cc4e7",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-38c165f5",
+      "parent": "n-3aa268a6",
+      "child": "n-6dcb1198",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cc9e7cc0",
+      "parent": "n-3aa268a6",
+      "child": "n-10b45926",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ca22f5db",
+      "parent": "n-3aa268a6",
+      "child": "n-b479293f",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d96f3dd3",
+      "parent": "n-3aa268a6",
+      "child": "n-f9189e31",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9421a6c9",
+      "parent": "n-3aa268a6",
+      "child": "n-be7bc27b",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-144b6e68",
+      "parent": "n-3aa268a6",
+      "child": "n-063634ba",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-18bb3775",
+      "parent": "n-3aa268a6",
+      "child": "n-149ab317",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2f6b1d3d",
+      "parent": "n-3aa268a6",
+      "child": "n-bde90b02",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-93840c24",
+      "parent": "n-3aa268a6",
+      "child": "n-1aff4643",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ec849da7",
+      "parent": "n-3aa268a6",
+      "child": "n-992f2a14",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2cdd2f0b",
+      "parent": "n-3aa268a6",
+      "child": "n-a862aeed",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1a1a2228",
+      "parent": "n-3aa268a6",
+      "child": "n-2dc6c2ef",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인구ㆍ사회서비스정책실)",
+        "evidenceText": "⑥ 인구ㆍ사회서비스정책실에 인구정책총괄과, 출산정책과, 아동정책과, 아동보호자립과, 아동학대대응과, 청년정책팀, 입양정책팀, 노인정책과, 노인지원과, 요양보험제도과, 요양보험운영과, 노인건강과, 사회서비스정책과, 사회서비스사업과, 사회서비스자원과 및 사회서비스일자리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aa53f021",
+      "parent": "n-f591ac80",
+      "child": "n-5a342545",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(사회보장위원회 사무국)",
+        "evidenceText": "② 사회보장위원회 사무국에 사회보장총괄과, 사회보장조정과 및 사회보장평가과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-03c2f983",
+      "parent": "n-f591ac80",
+      "child": "n-eb693eef",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(사회보장위원회 사무국)",
+        "evidenceText": "② 사회보장위원회 사무국에 사회보장총괄과, 사회보장조정과 및 사회보장평가과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-db2e5c05",
+      "parent": "n-f591ac80",
+      "child": "n-bb97f05d",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(사회보장위원회 사무국)",
+        "evidenceText": "② 사회보장위원회 사무국에 사회보장총괄과, 사회보장조정과 및 사회보장평가과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c9713a55",
+      "parent": "n-a9c8be8d",
+      "child": "n-05a51a61",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "③ 보건의료정책관은 「보건복지부와 그 소속기관 직제」 제14조제3항제1호부터 제24호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-9fba98ce",
+      "parent": "n-a9c8be8d",
+      "child": "n-c0adb3c9",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "④ 의료자원정책관은 「보건복지부와 그 소속기관 직제」 제14조제3항제25호부터 제35호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-9f69e02c",
+      "parent": "n-a9c8be8d",
+      "child": "n-d1cfc34e",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑤ 한의약정책관은 「보건복지부와 그 소속기관 직제」 제14조제3항제36호부터 제40호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-ef7dcd27",
+      "parent": "n-a9c8be8d",
+      "child": "n-91a5f6c5",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑥ 보건의료정책실에 보건의료정책과, 의료기관정책과, 약무정책과, 질병정책과, 생명윤리정책과, 의료자원정책과, 의료인력정책과, 간호정책과, 혈액장기정책과, 한의약정책과 및 한의약산업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fda2dd0f",
+      "parent": "n-a9c8be8d",
+      "child": "n-0b5f140d",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑥ 보건의료정책실에 보건의료정책과, 의료기관정책과, 약무정책과, 질병정책과, 생명윤리정책과, 의료자원정책과, 의료인력정책과, 간호정책과, 혈액장기정책과, 한의약정책과 및 한의약산업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-336f6ff7",
+      "parent": "n-a9c8be8d",
+      "child": "n-6b5581ba",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑥ 보건의료정책실에 보건의료정책과, 의료기관정책과, 약무정책과, 질병정책과, 생명윤리정책과, 의료자원정책과, 의료인력정책과, 간호정책과, 혈액장기정책과, 한의약정책과 및 한의약산업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-614b374a",
+      "parent": "n-a9c8be8d",
+      "child": "n-ad54b034",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑥ 보건의료정책실에 보건의료정책과, 의료기관정책과, 약무정책과, 질병정책과, 생명윤리정책과, 의료자원정책과, 의료인력정책과, 간호정책과, 혈액장기정책과, 한의약정책과 및 한의약산업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6ccdb6da",
+      "parent": "n-a9c8be8d",
+      "child": "n-477a4a67",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑥ 보건의료정책실에 보건의료정책과, 의료기관정책과, 약무정책과, 질병정책과, 생명윤리정책과, 의료자원정책과, 의료인력정책과, 간호정책과, 혈액장기정책과, 한의약정책과 및 한의약산업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-42b29452",
+      "parent": "n-a9c8be8d",
+      "child": "n-5caea95d",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑥ 보건의료정책실에 보건의료정책과, 의료기관정책과, 약무정책과, 질병정책과, 생명윤리정책과, 의료자원정책과, 의료인력정책과, 간호정책과, 혈액장기정책과, 한의약정책과 및 한의약산업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5e1d5d6e",
+      "parent": "n-a9c8be8d",
+      "child": "n-9d76f46c",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑥ 보건의료정책실에 보건의료정책과, 의료기관정책과, 약무정책과, 질병정책과, 생명윤리정책과, 의료자원정책과, 의료인력정책과, 간호정책과, 혈액장기정책과, 한의약정책과 및 한의약산업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-167973e2",
+      "parent": "n-a9c8be8d",
+      "child": "n-0ae9afd5",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑥ 보건의료정책실에 보건의료정책과, 의료기관정책과, 약무정책과, 질병정책과, 생명윤리정책과, 의료자원정책과, 의료인력정책과, 간호정책과, 혈액장기정책과, 한의약정책과 및 한의약산업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-84f096e6",
+      "parent": "n-a9c8be8d",
+      "child": "n-eaed63d7",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑥ 보건의료정책실에 보건의료정책과, 의료기관정책과, 약무정책과, 질병정책과, 생명윤리정책과, 의료자원정책과, 의료인력정책과, 간호정책과, 혈액장기정책과, 한의약정책과 및 한의약산업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7a3bba11",
+      "parent": "n-a9c8be8d",
+      "child": "n-5dd232b2",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑥ 보건의료정책실에 보건의료정책과, 의료기관정책과, 약무정책과, 질병정책과, 생명윤리정책과, 의료자원정책과, 의료인력정책과, 간호정책과, 혈액장기정책과, 한의약정책과 및 한의약산업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fa186b4e",
+      "parent": "n-a9c8be8d",
+      "child": "n-4c286d0d",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(보건의료정책실)",
+        "evidenceText": "⑥ 보건의료정책실에 보건의료정책과, 의료기관정책과, 약무정책과, 질병정책과, 생명윤리정책과, 의료자원정책과, 의료인력정책과, 간호정책과, 혈액장기정책과, 한의약정책과 및 한의약산업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-03d58354",
+      "parent": "n-485a8710",
+      "child": "n-93115aa4",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조의2(지역필수공공의료실)",
+        "evidenceText": "③ 지역필수의료정책관은 「보건복지부와 그 소속기관 직제」 제14조의2제3항제1호부터 제8호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-f7ebdf3a",
+      "parent": "n-485a8710",
+      "child": "n-e17df097",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조의2(지역필수공공의료실)",
+        "evidenceText": "④ 공공의료정책관은 「보건복지부와 그 소속기관 직제」 제14조의2제3항제9호부터 제15호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-70353dee",
+      "parent": "n-485a8710",
+      "child": "n-a3cfb031",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조의2(지역필수공공의료실)",
+        "evidenceText": "⑤ 지역필수공공의료실에 지역필수의료총괄과, 지역의료정책과, 필수의료정책과, 공공의료정책과, 국립대병원정책과, 응급의료과 및 재난의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8d62209b",
+      "parent": "n-485a8710",
+      "child": "n-f16be0f4",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조의2(지역필수공공의료실)",
+        "evidenceText": "⑤ 지역필수공공의료실에 지역필수의료총괄과, 지역의료정책과, 필수의료정책과, 공공의료정책과, 국립대병원정책과, 응급의료과 및 재난의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3d8bad29",
+      "parent": "n-485a8710",
+      "child": "n-b017e449",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조의2(지역필수공공의료실)",
+        "evidenceText": "⑤ 지역필수공공의료실에 지역필수의료총괄과, 지역의료정책과, 필수의료정책과, 공공의료정책과, 국립대병원정책과, 응급의료과 및 재난의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2495e822",
+      "parent": "n-485a8710",
+      "child": "n-057c9643",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조의2(지역필수공공의료실)",
+        "evidenceText": "⑤ 지역필수공공의료실에 지역필수의료총괄과, 지역의료정책과, 필수의료정책과, 공공의료정책과, 국립대병원정책과, 응급의료과 및 재난의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e3dd8554",
+      "parent": "n-485a8710",
+      "child": "n-50289632",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조의2(지역필수공공의료실)",
+        "evidenceText": "⑤ 지역필수공공의료실에 지역필수의료총괄과, 지역의료정책과, 필수의료정책과, 공공의료정책과, 국립대병원정책과, 응급의료과 및 재난의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fbcd81df",
+      "parent": "n-485a8710",
+      "child": "n-c25905e5",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조의2(지역필수공공의료실)",
+        "evidenceText": "⑤ 지역필수공공의료실에 지역필수의료총괄과, 지역의료정책과, 필수의료정책과, 공공의료정책과, 국립대병원정책과, 응급의료과 및 재난의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a16b0e43",
+      "parent": "n-485a8710",
+      "child": "n-12f98a45",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조의2(지역필수공공의료실)",
+        "evidenceText": "⑤ 지역필수공공의료실에 지역필수의료총괄과, 지역의료정책과, 필수의료정책과, 공공의료정책과, 국립대병원정책과, 응급의료과 및 재난의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-57f58f76",
+      "parent": "n-ee463193",
+      "child": "n-8b66b465",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(건강보험정책국)",
+        "evidenceText": "② 건강보험정책국에 보험정책과, 보험급여과, 보험약제과, 보험평가과 및 비급여관리팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d9428cf3",
+      "parent": "n-ee463193",
+      "child": "n-9f8ec980",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(건강보험정책국)",
+        "evidenceText": "② 건강보험정책국에 보험정책과, 보험급여과, 보험약제과, 보험평가과 및 비급여관리팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6da3f804",
+      "parent": "n-ee463193",
+      "child": "n-626bf7ac",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(건강보험정책국)",
+        "evidenceText": "② 건강보험정책국에 보험정책과, 보험급여과, 보험약제과, 보험평가과 및 비급여관리팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-12132d05",
+      "parent": "n-ee463193",
+      "child": "n-d5fed5bc",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(건강보험정책국)",
+        "evidenceText": "② 건강보험정책국에 보험정책과, 보험급여과, 보험약제과, 보험평가과 및 비급여관리팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-94a1be92",
+      "parent": "n-ee463193",
+      "child": "n-be0275ae",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(건강보험정책국)",
+        "evidenceText": "② 건강보험정책국에 보험정책과, 보험급여과, 보험약제과, 보험평가과 및 비급여관리팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0221a55b",
+      "parent": "n-d092c587",
+      "child": "n-51157b27",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(건강정책국)",
+        "evidenceText": "③ 정신건강정책관은 「보건복지부와 그 소속기관 직제」 제16조제3항제24호부터 제28호까지, 제28호의2부터 제28호의4까지 및 제29호부터 제31호까지의 사항에 관하여 국장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7da68b97",
+      "parent": "n-d092c587",
+      "child": "n-3f937444",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(건강정책국)",
+        "evidenceText": "④ 건강정책국에 건강정책과, 건강증진과, 구강정책과, 생활보건팀, 정신건강정책과, 정신건강관리과 및 자살예방정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6b6b8f0d",
+      "parent": "n-d092c587",
+      "child": "n-99d23575",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(건강정책국)",
+        "evidenceText": "④ 건강정책국에 건강정책과, 건강증진과, 구강정책과, 생활보건팀, 정신건강정책과, 정신건강관리과 및 자살예방정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ad315690",
+      "parent": "n-d092c587",
+      "child": "n-676f133c",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(건강정책국)",
+        "evidenceText": "④ 건강정책국에 건강정책과, 건강증진과, 구강정책과, 생활보건팀, 정신건강정책과, 정신건강관리과 및 자살예방정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-634d6647",
+      "parent": "n-d092c587",
+      "child": "n-a98d51cc",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(건강정책국)",
+        "evidenceText": "④ 건강정책국에 건강정책과, 건강증진과, 구강정책과, 생활보건팀, 정신건강정책과, 정신건강관리과 및 자살예방정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f7755854",
+      "parent": "n-d092c587",
+      "child": "n-1516afb3",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(건강정책국)",
+        "evidenceText": "④ 건강정책국에 건강정책과, 건강증진과, 구강정책과, 생활보건팀, 정신건강정책과, 정신건강관리과 및 자살예방정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-987d3dd0",
+      "parent": "n-d092c587",
+      "child": "n-f5928171",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(건강정책국)",
+        "evidenceText": "④ 건강정책국에 건강정책과, 건강증진과, 구강정책과, 생활보건팀, 정신건강정책과, 정신건강관리과 및 자살예방정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5adfad6e",
+      "parent": "n-d092c587",
+      "child": "n-64bea0a8",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(건강정책국)",
+        "evidenceText": "④ 건강정책국에 건강정책과, 건강증진과, 구강정책과, 생활보건팀, 정신건강정책과, 정신건강관리과 및 자살예방정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관ㆍ보건사무관ㆍ사회복지사무관ㆍ약무사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8c6a83c8",
+      "parent": "n-6c308cd3",
+      "child": "n-917246c3",
+      "type": "advisor",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(보건산업정책국)",
+        "evidenceText": "③ 첨단의료지원관은 「보건복지부와 그 소속기관 직제」 제17조제3항제10호부터 제13호까지, 제18호 및 제19호의 사항에 관하여 국장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-58a87d1d",
+      "parent": "n-6c308cd3",
+      "child": "n-fb2e47f0",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(보건산업정책국)",
+        "evidenceText": "④ 보건산업정책국에 보건산업정책과, 보건의료기술개발과, 제약바이오산업과, 의료기기화장품산업과, 보건산업해외진출과, 의료정보정책과, 의료인공지능데이터정책과 및 재생의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3db66c4c",
+      "parent": "n-6c308cd3",
+      "child": "n-ac05a3ff",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(보건산업정책국)",
+        "evidenceText": "④ 보건산업정책국에 보건산업정책과, 보건의료기술개발과, 제약바이오산업과, 의료기기화장품산업과, 보건산업해외진출과, 의료정보정책과, 의료인공지능데이터정책과 및 재생의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aa006e42",
+      "parent": "n-6c308cd3",
+      "child": "n-8115f5cf",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(보건산업정책국)",
+        "evidenceText": "④ 보건산업정책국에 보건산업정책과, 보건의료기술개발과, 제약바이오산업과, 의료기기화장품산업과, 보건산업해외진출과, 의료정보정책과, 의료인공지능데이터정책과 및 재생의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-93750312",
+      "parent": "n-6c308cd3",
+      "child": "n-a37c34e7",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(보건산업정책국)",
+        "evidenceText": "④ 보건산업정책국에 보건산업정책과, 보건의료기술개발과, 제약바이오산업과, 의료기기화장품산업과, 보건산업해외진출과, 의료정보정책과, 의료인공지능데이터정책과 및 재생의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-07afb278",
+      "parent": "n-6c308cd3",
+      "child": "n-5bb35482",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(보건산업정책국)",
+        "evidenceText": "④ 보건산업정책국에 보건산업정책과, 보건의료기술개발과, 제약바이오산업과, 의료기기화장품산업과, 보건산업해외진출과, 의료정보정책과, 의료인공지능데이터정책과 및 재생의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1020aca6",
+      "parent": "n-6c308cd3",
+      "child": "n-ff1d128e",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(보건산업정책국)",
+        "evidenceText": "④ 보건산업정책국에 보건산업정책과, 보건의료기술개발과, 제약바이오산업과, 의료기기화장품산업과, 보건산업해외진출과, 의료정보정책과, 의료인공지능데이터정책과 및 재생의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-06575f7b",
+      "parent": "n-6c308cd3",
+      "child": "n-9c6388b7",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(보건산업정책국)",
+        "evidenceText": "④ 보건산업정책국에 보건산업정책과, 보건의료기술개발과, 제약바이오산업과, 의료기기화장품산업과, 보건산업해외진출과, 의료정보정책과, 의료인공지능데이터정책과 및 재생의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d6a66f26",
+      "parent": "n-6c308cd3",
+      "child": "n-8e22bd88",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(보건산업정책국)",
+        "evidenceText": "④ 보건산업정책국에 보건산업정책과, 보건의료기술개발과, 제약바이오산업과, 의료기기화장품산업과, 보건산업해외진출과, 의료정보정책과, 의료인공지능데이터정책과 및 재생의료정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-656747c2",
+      "parent": "n-63902529",
+      "child": "n-49c88971",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제16조(정신건강연구소)",
+        "evidenceText": "① 국립정신건강센터에 정신건강연구소를 두되, 소장은 임기제공무원으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-feb4604c",
+      "parent": "n-2793040d",
+      "child": "n-4134ec06",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제18조(약물중독진료소)",
+        "evidenceText": "① 국립부곡병원에 약물중독진료소를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6014b062",
+      "parent": "n-2b3385d1",
+      "child": "n-e1ff2fcb",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제19조(소록도병원)",
+        "evidenceText": "② 국립소록도병원에 기획운영과를 두되, 기획운영과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4e77dcee",
+      "parent": "n-5f7370e3",
+      "child": "n-be79dccd",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제20조(의료부)",
+        "evidenceText": "② 의료부에 내과ㆍ외과ㆍ피부과ㆍ치과ㆍ안이비인후가정의학과ㆍ약제과 및 간호과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d8a9f5ba",
+      "parent": "n-5f7370e3",
+      "child": "n-326473a1",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제20조(의료부)",
+        "evidenceText": "② 의료부에 내과ㆍ외과ㆍ피부과ㆍ치과ㆍ안이비인후가정의학과ㆍ약제과 및 간호과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a6c40775",
+      "parent": "n-5f7370e3",
+      "child": "n-fe04c367",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제20조(의료부)",
+        "evidenceText": "② 의료부에 내과ㆍ외과ㆍ피부과ㆍ치과ㆍ안이비인후가정의학과ㆍ약제과 및 간호과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c32d1547",
+      "parent": "n-5f7370e3",
+      "child": "n-1cc93cc1",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제20조(의료부)",
+        "evidenceText": "② 의료부에 내과ㆍ외과ㆍ피부과ㆍ치과ㆍ안이비인후가정의학과ㆍ약제과 및 간호과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5cc23dd4",
+      "parent": "n-5f7370e3",
+      "child": "n-48faf5f9",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제20조(의료부)",
+        "evidenceText": "② 의료부에 내과ㆍ외과ㆍ피부과ㆍ치과ㆍ안이비인후가정의학과ㆍ약제과 및 간호과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7aa9c96b",
+      "parent": "n-5f7370e3",
+      "child": "n-43ad41e0",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제20조(의료부)",
+        "evidenceText": "② 의료부에 내과ㆍ외과ㆍ피부과ㆍ치과ㆍ안이비인후가정의학과ㆍ약제과 및 간호과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a057ef6b",
+      "parent": "n-5f7370e3",
+      "child": "n-24195777",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제20조(의료부)",
+        "evidenceText": "② 의료부에 내과ㆍ외과ㆍ피부과ㆍ치과ㆍ안이비인후가정의학과ㆍ약제과 및 간호과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b3ab1a14",
+      "parent": "n-6aa93082",
+      "child": "n-2e1f0629",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제21조의3(원장 등)",
+        "evidenceText": "② 국립장기조직혈액관리원에 장기기증지원과, 장기이식관리과 및 혈액안전감시과를 두며, 장기기증지원과장 및 장기이식관리과장은 과학기술서기관 또는 서기관으로, 혈액안전감시과장은 과학기술서기관 또는 보건연구관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8c4c1fd7",
+      "parent": "n-6aa93082",
+      "child": "n-10b1fe89",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제21조의3(원장 등)",
+        "evidenceText": "② 국립장기조직혈액관리원에 장기기증지원과, 장기이식관리과 및 혈액안전감시과를 두며, 장기기증지원과장 및 장기이식관리과장은 과학기술서기관 또는 서기관으로, 혈액안전감시과장은 과학기술서기관 또는 보건연구관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9da3bb45",
+      "parent": "n-6aa93082",
+      "child": "n-7267ba0a",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제21조의3(원장 등)",
+        "evidenceText": "② 국립장기조직혈액관리원에 장기기증지원과, 장기이식관리과 및 혈액안전감시과를 두며, 장기기증지원과장 및 장기이식관리과장은 과학기술서기관 또는 서기관으로, 혈액안전감시과장은 과학기술서기관 또는 보건연구관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-92b9eb87",
+      "parent": "n-b00cc28d",
+      "child": "n-84a7e05f",
+      "type": "assistant",
+      "sources": [
+        "보건복지부와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제34조의2(재활연구소)",
+        "evidenceText": "① 국립재활원에 재활연구소를 두되, 소장은 부이사관ㆍ과학기술서기관ㆍ보건연구관 또는 공업연구관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-46437fb0",
+      "parent": "n-c17aca40",
+      "child": "n-6d736a60",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-965e9c53",
+      "parent": "n-6d736a60",
+      "child": "n-c74d22a6",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-05b1de4f",
+      "parent": "n-6d736a60",
+      "child": "n-8a775f5b",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-fb6f75f2",
+      "parent": "n-6d736a60",
+      "child": "n-4481f335",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-6b8cfd6a",
+      "parent": "n-6d736a60",
+      "child": "n-0b19769d",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-d22cb451",
+      "parent": "n-6d736a60",
+      "child": "n-f591ac80",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-cb8669e4",
+      "parent": "n-6d736a60",
+      "child": "n-3aa268a6",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-7044dd46",
+      "parent": "n-6d736a60",
+      "child": "n-8e8df77a",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-6ba37d82",
+      "parent": "n-6d736a60",
+      "child": "n-4c48841d",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

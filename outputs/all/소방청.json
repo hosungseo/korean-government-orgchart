@@ -1,0 +1,1746 @@
+{
+  "meta": {
+    "institution": "소방청",
+    "title": "소방청",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "소방청과 그 소속기관 직제 [시행 20260721]",
+      "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "소방청과 그 소속기관 직제 [시행 20260721]",
+        "role": "decree"
+      },
+      {
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "role": "rule"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "jurisdiction",
+        "annex": "별표 1",
+        "description": "관할·등급은 별표를 읽어야 확정됩니다",
+        "source": "소방청과 그 소속기관 직제 [시행 20260721]"
+      },
+      {
+        "type": "jurisdiction",
+        "annex": "별표 1",
+        "description": "관할·등급은 별표를 읽어야 확정됩니다",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "jurisdiction",
+        "annex": "별표 2",
+        "description": "관할·등급은 별표를 읽어야 확정됩니다",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "jurisdiction",
+        "annex": "별표 2의2",
+        "description": "관할·등급은 별표를 읽어야 확정됩니다",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 3의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 4",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 4의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 5의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      }
+    ],
+    "spanDiagnostics": [],
+    "laws": [
+      {
+        "name": "소방청과 그 소속기관 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288243",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288243&efYd=20260721&BD=on",
+        "annexCount": 5
+      },
+      {
+        "name": "소방청과 그 소속기관 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288281",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288281&efYd=20260721&BD=on",
+        "annexCount": 13
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "119특수구조대의 명칭 및 위치(제20조제2항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "jurisdiction",
+        "source": "소방청과 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167046799",
+          "pdf": "/LSW/flDownload.do?flSeq=167046801",
+          "image": "/LSW/flDownload.do?flSeq=167046803"
+        },
+        "files": {
+          "hwp": "law0129152026072136514KC_000100E_20260721.hwp",
+          "pdf": "law0129152026072136514KC_000100E_20260721.pdf"
+        },
+        "rowCount": 4,
+        "rows": [
+          [
+            "수도권119특수구조대",
+            "경기도 남양주시"
+          ],
+          [
+            "영남119특수구조대",
+            "대구광역시 달성군"
+          ],
+          [
+            "호남119특수구조대",
+            "전남광주통합특별시 화순군"
+          ],
+          [
+            "충청·강원119특수구조대",
+            "충청북도 충주시"
+          ]
+        ],
+        "textPreview": "■ 소방청과 그 소속기관 직제 [별표 1] <개정 2026. 6. 23.>   \n                                                              \n  119특수구조대의 명칭 및 위치(제20조제2항 관련)              \n┌────────────┬────────────────┐\n│명칭                    │위치                            │\n├────────────┼────────────────┤\n│수도권119특수구조대     │경기도 남양주시                 │\n├────────────┼────────────────┤\n│영남119특수구조대       │대구광역시 달성군               │\n├────────────┼────────────────┤\n│호남119특수구조대       │전남광주통합특별시 화순군       │\n├────────────┼────────────────┤\n│충청·강원119특수구조대 │충청북도 충주시                 │\n└────────────┴────────────────┘"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "소방청 공무원 정원표(제22조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "소방청과 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167046807",
+          "pdf": "/LSW/flDownload.do?flSeq=167046809",
+          "image": "/LSW/flDownload.do?flSeq=167046811"
+        },
+        "files": {
+          "hwp": "law0129152026072136514KC_000200E_20260721.hwp",
+          "pdf": "law0129152026072136514KC_000200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 [별표 2] <개정 2026. 7. 21.>   \n                                                              \n  소방청 공무원 정원표(제22조제1항 관련)                      \n                                                              \n  총계                    287                                 \n                                                              \n    소방공무원 계         240                                 \n                                                              \n      소방총감            1                                   \n                                                              \n      소방정감            1                                   \n                                                              \n      소방감              4                                   \n                                                              \n      소방준감 이하       234                                 \n                                                              \n    일반직 계             43                                  \n                                                              \n      3급 또는 4급 이하   37                                  \n                                                              \n      전문"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "소방청 소속기관 공무원 정원표(제23조제1항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "소방청과 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167046813",
+          "pdf": "/LSW/flDownload.do?flSeq=167046815",
+          "image": "/LSW/flDownload.do?flSeq=167046817"
+        },
+        "files": {
+          "hwp": "law0129152026072136514KC_000300E_20260721.hwp",
+          "pdf": "law0129152026072136514KC_000300E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 [별표 3] <개정 2025. 12. 31.>  \n                                                              \n  소방청 소속기관 공무원 정원표(제23조제1항 관련)             \n                                                              \n  총계                    601                                 \n                                                              \n    소방공무원 계         478                                 \n                                                              \n      소방감              2                                   \n                                                              \n      소방준감 이하       476                                 \n                                                              \n    일반직 계             123                                 \n                                                              \n      3급 또는 4급 이하   9                                   \n                                                              \n      전문경력관          114"
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "소방청에 두는 평가대상 조직(제24조제1항 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "소방청과 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167046819",
+          "pdf": "/LSW/flDownload.do?flSeq=167046821",
+          "image": "/LSW/flDownload.do?flSeq=167046823"
+        },
+        "files": {
+          "hwp": "law0129152026072136514KC_000400E_20260721.hwp",
+          "pdf": "law0129152026072136514KC_000400E_20260721.pdf"
+        },
+        "rowCount": 2,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "장비기술국",
+            "1명"
+          ]
+        ],
+        "textPreview": "■ 소방청과 그 소속기관 직제 [별표 4] <개정 2026. 3. 24.>   \n                                                              \n  소방청에 두는 평가대상 조직(제24조제1항 관련)               \n                                                              \n┌─────┬───────────────────────┐\n│조직      │정원                                          │\n├─────┼───────────────────────┤\n│장비기술국│1명                                           │\n└─────┴───────────────────────┘"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "삭제 &lt;2025. 12. 31.&gt;",
+        "key": "000500E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "소방청과 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167046825",
+          "pdf": "/LSW/flDownload.do?flSeq=167046827",
+          "image": "/LSW/flDownload.do?flSeq=167046829"
+        },
+        "files": {
+          "hwp": "law0129152026072136514KC_000500E_20260721.hwp",
+          "pdf": "law0129152026072136514KC_000500E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 [별표 5] 삭제 <2025. 12. 31.>"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "119특수구조대의 명칭ㆍ위치 및 관할구역(제7조제1항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "jurisdiction",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166179",
+          "pdf": "/LSW/flDownload.do?flSeq=167166181",
+          "image": "/LSW/flDownload.do?flSeq=167166183"
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000100E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000100E_20260721.pdf"
+        },
+        "rowCount": 4,
+        "rows": [
+          [
+            "수도권119특수구조대",
+            "경기도 남양주시",
+            "서울특별시, 인천광역시, 경기도"
+          ],
+          [
+            "영남119특수구조대",
+            "대구광역시 달성군",
+            "부산광역시, 대구광역시, 울산광역시, 경상북도, 경상남도"
+          ],
+          [
+            "호남119특수구조대",
+            "전남광주통합특별시 화순군",
+            "전남광주통합특별시, 전북특별자치도, 제주특별자치도"
+          ],
+          [
+            "충청ㆍ강원 119특수구조대",
+            "충청북도 충주시",
+            "대전광역시, 세종특별자치시, 강원특별 자치도, 충청북도, 충청남도"
+          ]
+        ],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 1] <개정 2026. 7. 1.>                 \n                                                                                    \n  119특수구조대의 명칭ㆍ위치 및 관할구역(제7조제1항 관련)                           \n┌──────────┬──────────┬──────────────────┐\n│명칭                │위치                │관할구역                            │\n├──────────┼──────────┼──────────────────┤\n│수도권119특수구조대 │경기도 남양주시     │서울특별시, 인천광역시, 경기도      │\n├──────────┼──────────┼──────────────────┤\n│영남119특수구조대   │대구광역시 달성군   │부산광역시, 대구광역시, 울산광역시, │\n│                    │                    │경상북도, 경상남도                  │\n├──────────┼──────────┼──────────────────┤\n│호남119특수구조대   │전남광주통합특별시  │전남광주통합특별시, 전북특별자치도, │\n│                    │화순군              │제주특별자치도                      │\n├──────────┼──────────┼──────────────────┤\n│충청ㆍ강원          │충청북도 충주시     │대전광역시, 세종특별자치시, 강원특별│\n│119특수구조대       │                    │자치도, 충청북도, 충청남도          │\n└──────────┴──────────┴──────────────────┘"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "119화학구조센터의 명칭ㆍ위치 및 관할구역(제8조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "jurisdiction",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166185",
+          "pdf": "/LSW/flDownload.do?flSeq=167166187",
+          "image": "/LSW/flDownload.do?flSeq=167166189"
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000200E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000200E_20260721.pdf"
+        },
+        "rowCount": 7,
+        "rows": [
+          [
+            "수도권119 특수구조대",
+            "시흥119 화학구조센터",
+            "경기도 시흥시",
+            "서울특별시, 인천광역시, 경기도"
+          ],
+          [
+            "영남119 특수구조대",
+            "구미119 화학구조센터",
+            "경상북도 구미시",
+            "대구광역시, 경상북도"
+          ],
+          [
+            "영남119 특수구조대",
+            "울산119 화학구조센터",
+            "울산광역시 울주군",
+            "부산광역시, 울산광역시, 경상남도"
+          ],
+          [
+            "호남119 특수구조대",
+            "익산119 화학구조센터",
+            "전북특별자치도 익산시",
+            "전북특별자치도"
+          ],
+          [
+            "호남119 특수구조대",
+            "여수119 화학구조센터",
+            "전남광주통합특별시 여수시",
+            "전남광주통합특별시, 제주특별자치도"
+          ],
+          [
+            "충청ㆍ강원 119특수구조대",
+            "서산119 화학구조센터",
+            "충청남도 서산시",
+            "대전광역시, 세종특별자치시, 충청남도"
+          ],
+          [
+            "충청ㆍ강원 119특수구조대",
+            "충주119 화학구조센터",
+            "충청북도 충주시",
+            "강원특별자치도, 충청북도"
+          ]
+        ],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 2] <개정 2026. 7. 1.>                 \n                                                                                    \n  119화학구조센터의 명칭ㆍ위치 및 관할구역(제8조제1항 관련)                         \n┌──────────────┬──────────┬──────────────┐\n│명칭                        │위치                │관할구역                    │\n├───────┬──────┼──────────┼──────────────┤\n│수도권119     │시흥119     │경기도              │서울특별시, 인천광역시,     │\n│특수구조대    │화학구조센터│시흥시              │경기도                      │\n├───────┼──────┼──────────┼──────────────┤\n│영남119       │구미119     │경상북도            │대구광역시, 경상북도        │\n│특수구조대    │화학구조센터│구미시              │                            │\n│              ├──────┼──────────┼──────────────┤\n│              │울산119     │울산광역시          │부산광역시, 울산광역시,     │\n│              │화학구조센터│울주군              │경상남도                    │\n├───────┼──────┼──────────┼──────────────┤\n│호남119       │익산119     │전북특별자치도      │전북특별자치도              │\n│특수구조대    │화학구조센터│익산시              │                            │\n│              ├──────┼──────────┼──────────────┤\n│              │여수119     │전남광주통합특별시  │전남광주통합특별시,         │\n│              │화학구조센터│여수시              │제주특별자치도              │\n├───────┼"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "소방정대의 명칭ㆍ위치 및 관할구역(제8조의2제1항 관련)",
+        "key": "000202E",
+        "effectiveDate": "20260721",
+        "type": "jurisdiction",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166191",
+          "pdf": "/LSW/flDownload.do?flSeq=167166193",
+          "image": "/LSW/flDownload.do?flSeq=167166195"
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000202E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000202E_20260721.pdf"
+        },
+        "rowCount": 2,
+        "rows": [
+          [
+            "영남119 특수구조대",
+            "부산항만 소방정대",
+            "경상남도 창원시",
+            "부산광역시, 경상남도"
+          ],
+          [
+            "영남119 특수구조대",
+            "울산항만 소방정대",
+            "울산광역시 남구",
+            "울산광역시, 경상북도"
+          ]
+        ],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 2의2] <개정 2025. 12. 31.>\n                                                          \n  소방정대의 명칭ㆍ위치 및 관할구역(제8조의2제1항 관련)   \n┌──────────┬─────┬──────────┐\n│명칭                │위치      │관할구역            │\n├─────┬────┼─────┼──────────┤\n│영남119   │부산항만│경상남도  │부산광역시, 경상남도│\n│특수구조대│소방정대│창원시    │                    │\n│          ├────┼─────┼──────────┤\n│          │울산항만│울산광역시│울산광역시, 경상북도│\n│          │소방정대│남구      │                    │\n└─────┴────┴─────┴──────────┘"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "소방청 공무원 정원표(제9조제1항 본문 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166197",
+          "pdf": "/LSW/flDownload.do?flSeq=167166199",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167166201",
+            "/LSW/flDownload.do?flSeq=167166203"
+          ]
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000300E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000300E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 3] <개정 2026. 7. 21.>\n                                                                  \n  소방청 공무원 정원표(제9조제1항 본문 관련)                      \n                                                                  \n                                                                  \n  총계                                                      287   \n                                                                  \n    소방공무원 계                                           240   \n                                                                  \n      소방총감                                              1     \n                                                                  \n      소방정감                                              1     \n                                                                  \n      소방감                                                4     \n                                                                  \n      소방준감                                              7     \n                                                                  \n      소방정                                                18    \n                                                         "
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "소방청 공무원 정원표(제9조제1항 단서 관련)",
+        "key": "000302E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166205",
+          "pdf": "/LSW/flDownload.do?flSeq=167166207",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167166209",
+            "/LSW/flDownload.do?flSeq=167166211"
+          ]
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000302E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000302E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 3의2] <개정 2026. 7. 21.>\n                                                                    \n  소방청 공무원 정원표(제9조제1항 단서 관련)                        \n                                                                    \n                                                                    \n  총계                                                        289   \n                                                                    \n    소방공무원 계                                             240   \n                                                                    \n      소방총감                                                1     \n                                                                    \n      소방정감                                                1     \n                                                                    \n      소방감                                                  4     \n                                                                    \n      소방준감                                                7     \n                                                                    \n      소방정                                                  18    \n                     "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "중앙소방학교 공무원 정원표(제10조제1항 본문 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166213",
+          "pdf": "/LSW/flDownload.do?flSeq=167166215",
+          "image": "/LSW/flDownload.do?flSeq=167166217"
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000400E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000400E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 4] <개정 2023. 12. 29.>   \n                                                                        \n  중앙소방학교 공무원 정원표(제10조제1항 본문 관련)                     \n                                                                        \n  총계                                                              85  \n                                                                        \n    소방공무원 계                                                   77  \n                                                                        \n      소방감                                                        1   \n                                                                        \n      소방정                                                        3   \n                                                                        \n      소방령                                                        5   \n                                                                        \n      소방경                                                        12  \n                                                                        \n      소방위                                                        22  \n                        "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "중앙소방학교 공무원 정원표(제10조제1항 단서 관련)",
+        "key": "000402E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166219",
+          "pdf": "/LSW/flDownload.do?flSeq=167166221",
+          "image": "/LSW/flDownload.do?flSeq=167166223"
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000402E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000402E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 4의2] <개정 2024. 12. 30.>\n                                                                    \n  중앙소방학교 공무원 정원표(제10조제1항 단서 관련)                 \n                                                                    \n  총계                                                          85  \n                                                                    \n    소방공무원 계                                               77  \n                                                                    \n      소방감                                                    1   \n                                                                    \n      소방정                                                    3   \n                                                                    \n      소방령                                                    5   \n                                                                    \n      소방경                                                    13  \n                                                                    \n      소방위                                                    21  \n                                                                    \n      소방장           "
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "중앙119구조본부 공무원 정원표(제10조제2항 본문 관련)",
+        "key": "000500E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166225",
+          "pdf": "/LSW/flDownload.do?flSeq=167166227",
+          "image": "/LSW/flDownload.do?flSeq=167166229"
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000500E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000500E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 5] <개정 2025. 12. 31.>   \n                                                                        \n  중앙119구조본부 공무원 정원표(제10조제2항 본문 관련)                  \n                                                                        \n  총계                                                  516             \n                                                                        \n    소방공무원 계                                       401             \n                                                                        \n      소방감                                            1               \n                                                                        \n      소방정                                            8               \n                                                                        \n      소방령                                            24              \n                                                                        \n      소방경                                            44              \n                                                                        \n      소방위                                            66              \n                        "
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "중앙119구조본부 공무원 정원표(제10조제2항 단서 관련)",
+        "key": "000502E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166231",
+          "pdf": "/LSW/flDownload.do?flSeq=167166233",
+          "image": "/LSW/flDownload.do?flSeq=167166235"
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000502E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000502E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 5의2] <개정 2025. 12. 31.>\n                                                                      \n  중앙119구조본부 공무원 정원표(제10조제2항 단서 관련)                \n                                                                      \n  총계                                                          516   \n                                                                      \n    소방공무원 계                                               401   \n                                                                      \n      소방감                                                    1     \n                                                                      \n      소방정                                                    8     \n                                                                      \n      소방령                                                    24    \n                                                                      \n      소방경                                                    45    \n                                                                      \n      소방위                                                    65    \n                                                         "
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "국립소방연구원 공무원 정원표(제10조제3항 관련)",
+        "key": "000503E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166237",
+          "pdf": "/LSW/flDownload.do?flSeq=167166239",
+          "image": "/LSW/flDownload.do?flSeq=167166241"
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000503E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000503E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 5의3] <개정 2026. 3. 24.>\n                                                  \n  국립소방연구원 공무원 정원표(제10조제3항 관련)  \n                                                  \n    총계                                    46    \n                                                  \n      소방공무원 계                         18    \n                                                  \n        소방정 이하                         18    \n                                                  \n      일반직 계                             28    \n                                                  \n        고위공무원단에 속하는 임기제(원장)  1     \n                                                  \n        4급 이하                            27"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "[별표 5의2]로 이동 &lt;2025. 2. 25.&gt;",
+        "key": "000504E",
+        "effectiveDate": "20260721",
+        "type": "organization-matrix",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166243",
+          "pdf": "/LSW/flDownload.do?flSeq=167166245",
+          "image": "/LSW/flDownload.do?flSeq=167166247"
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000504E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000504E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 5의4] [별표 5의2]로 이동 <2025. 2. 25.>"
+      },
+      {
+        "annex": "별표 6",
+        "number": "6",
+        "title": "소방청에 두는 평가대상 조직(제12조 관련)",
+        "key": "000600E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166249",
+          "pdf": "/LSW/flDownload.do?flSeq=167166251",
+          "image": "/LSW/flDownload.do?flSeq=167166253"
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000600E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000600E_20260721.pdf"
+        },
+        "rowCount": 2,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "장비기술국",
+            "1명 (소방감 1명)",
+            "2027년 3월 31일까지"
+          ]
+        ],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 6] <개정 2026. 3. 24.>  \n                                                                      \n                                                                      \n  소방청에 두는 평가대상 조직(제12조 관련)                            \n                                                                      \n┌─────┬──────┬────────────────────┐\n│조직      │정원        │평가기간                                │\n├─────┼──────┼────────────────────┤\n│장비기술국│1명         │2027년 3월 31일까지                     │\n│          │(소방감 1명)│                                        │\n└─────┴──────┴────────────────────┘"
+      },
+      {
+        "annex": "별표 7",
+        "number": "7",
+        "title": "삭제 &lt;2025. 12. 31.&gt;",
+        "key": "000700E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167166255",
+          "pdf": "/LSW/flDownload.do?flSeq=167166257",
+          "image": "/LSW/flDownload.do?flSeq=167166259"
+        },
+        "files": {
+          "hwp": "law0129382026072100632KC_000700E_20260721.hwp",
+          "pdf": "law0129382026072100632KC_000700E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 소방청과 그 소속기관 직제 시행규칙 [별표 7] 삭제 <2025. 12. 31.>"
+      }
+    ]
+  },
+  "rootId": "n-4ba14891",
+  "nodes": [
+    {
+      "id": "n-4ba14891",
+      "name": "소방청",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-2a65bb71",
+      "name": "중앙소방학교",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]",
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f7bb1d8c",
+      "name": "중앙119구조본부",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]",
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-94e0dd6c",
+      "name": "국립소방연구원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]",
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-df604536",
+      "name": "차장",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {
+        "specificRank": "소방정감",
+        "staffCategories": [
+          "특정직"
+        ],
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ec5e60a7",
+      "name": "청장",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {
+        "specificRank": "소방총감",
+        "staffCategories": [
+          "특정직"
+        ]
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-972cbe4a",
+      "name": "119종합상황실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]",
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-618c7eaf",
+      "name": "기획조정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]",
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]",
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d6090d10",
+      "name": "119대응국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]",
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-3b567f8d",
+      "name": "화재예방국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]",
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ac1a02e3",
+      "name": "장비기술국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]",
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-cd806409",
+      "name": "119화학구조센터",
+      "kind": "affiliated",
+      "rank": 5,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b4a34f35",
+      "name": "119특수구조대",
+      "kind": "unknown",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ed6ffab0",
+      "name": "119특수구조대장",
+      "kind": "unknown",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0894f3a8",
+      "name": "상황담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "mixedAppointment": true
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-3ea7d450",
+      "name": "혁신행정법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c12572fe",
+      "name": "보건안전담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b81ab7fb",
+      "name": "교육훈련담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "mixedAppointment": true
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-649c112c",
+      "name": "대응정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "mixedAppointment": true
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ae5bab76",
+      "name": "화재대응조사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d9353367",
+      "name": "구조과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5ece0827",
+      "name": "119구급과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "mixedAppointment": true
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-02e03c86",
+      "name": "구급의료팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급",
+        "mixedAppointment": true
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-59acffbc",
+      "name": "예방정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "mixedAppointment": true
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-fde64023",
+      "name": "예방분석제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e8df2375",
+      "name": "위험물안전과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0e761c9c",
+      "name": "생활안전과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "mixedAppointment": true
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-54d36038",
+      "name": "첨단장비과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "mixedAppointment": true
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-fcaabc70",
+      "name": "소방항공과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-cd48c647",
+      "name": "정보통신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-a689cde4",
+      "name": "소방산업진흥정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "mixedAppointment": true
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6624a182",
+      "name": "교육지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-922a1417",
+      "name": "인재개발과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-62c830a2",
+      "name": "교육훈련과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4f7c23a4",
+      "name": "기획협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8473c649",
+      "name": "특수대응훈련과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-2604670b",
+      "name": "특수장비과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-3709cc19",
+      "parent": "n-4ba14891",
+      "child": "n-2a65bb71",
+      "type": "affiliated",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "① 소방청장의 관장사무를 지원하기 위하여 소방청장 소속으로 중앙소방학교 및 중앙119구조본부를 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-d13fc9fe",
+      "parent": "n-4ba14891",
+      "child": "n-f7bb1d8c",
+      "type": "affiliated",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "① 소방청장의 관장사무를 지원하기 위하여 소방청장 소속으로 중앙소방학교 및 중앙119구조본부를 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-74608726",
+      "parent": "n-4ba14891",
+      "child": "n-94e0dd6c",
+      "type": "affiliated",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "② 소방청장의 관장 사무를 지원하기 위하여 「책임운영기관의 설치ㆍ운영에 관한 법률」 제4조제1항, 같은 법 시행령 제2조제1항 및 별표 1에 따라 소방청장 소속의 책임운영기관으로 국립소방연구원을 둔다",
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-19036d34",
+      "parent": "n-ec5e60a7",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 청장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-345f0276",
+      "parent": "n-ec5e60a7",
+      "child": "n-972cbe4a",
+      "type": "advisor",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(119종합상황실장)",
+        "evidenceText": "② 119종합상황실장은 다음 사항에 관하여 청장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-52e3740e",
+      "parent": "n-df604536",
+      "child": "n-618c7eaf",
+      "type": "advisor",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(기획조정관)",
+        "evidenceText": "② 기획조정관은 다음 사항에 관하여 차장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-bc7a4ada",
+      "parent": "n-df604536",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의2(감사담당관)",
+        "evidenceText": "② 감사담당관은 다음 사항에 관하여 차장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-85d91f95",
+      "parent": "n-b4a34f35",
+      "child": "n-cd806409",
+      "type": "affiliated",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제21조(119화학구조센터)",
+        "evidenceText": "① 119특수구조대의 소관사무를 분장하기 위하여 119특수구조대장 소속으로 119화학구조센터를 둔다",
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-970aa197",
+      "parent": "n-ed6ffab0",
+      "child": "n-cd806409",
+      "type": "affiliated",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제21조(119화학구조센터)",
+        "evidenceText": "① 119특수구조대의 소관사무를 분장하기 위하여 119특수구조대장 소속으로 119화학구조센터를 둔다",
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-cb40289f",
+      "parent": "n-972cbe4a",
+      "child": "n-0894f3a8",
+      "type": "advisor",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제1조의2(119종합상황실)",
+        "evidenceText": "② 상황담당관은 다음 사항에 관하여 119종합상황실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-c1a1e64b",
+      "parent": "n-618c7eaf",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(기획조정관)",
+        "evidenceText": "② 기획재정담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-0c8ea5c7",
+      "parent": "n-618c7eaf",
+      "child": "n-3ea7d450",
+      "type": "advisor",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(기획조정관)",
+        "evidenceText": "③ 혁신행정법무담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4cc16adb",
+      "parent": "n-618c7eaf",
+      "child": "n-c12572fe",
+      "type": "advisor",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(기획조정관)",
+        "evidenceText": "④ 보건안전담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-f8de2e0d",
+      "parent": "n-618c7eaf",
+      "child": "n-b81ab7fb",
+      "type": "advisor",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(기획조정관)",
+        "evidenceText": "⑤ 교육훈련담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-ecdd72e8",
+      "parent": "n-d6090d10",
+      "child": "n-649c112c",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(119대응국)",
+        "evidenceText": "① 119대응국에 대응정책과ㆍ화재대응조사과ㆍ구조과ㆍ119구급과 및 구급의료팀을 두며, 대응정책과장은 소방준감으로, 화재대응조사과장ㆍ구조과장 및 119구급과장은 소방준감 또는 소방정으로, 구급의료팀장은 과학기술서기관ㆍ의무사무관ㆍ소방정 또는 소방령으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dcf5a5e4",
+      "parent": "n-d6090d10",
+      "child": "n-ae5bab76",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(119대응국)",
+        "evidenceText": "① 119대응국에 대응정책과ㆍ화재대응조사과ㆍ구조과ㆍ119구급과 및 구급의료팀을 두며, 대응정책과장은 소방준감으로, 화재대응조사과장ㆍ구조과장 및 119구급과장은 소방준감 또는 소방정으로, 구급의료팀장은 과학기술서기관ㆍ의무사무관ㆍ소방정 또는 소방령으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dce31c05",
+      "parent": "n-d6090d10",
+      "child": "n-d9353367",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(119대응국)",
+        "evidenceText": "① 119대응국에 대응정책과ㆍ화재대응조사과ㆍ구조과ㆍ119구급과 및 구급의료팀을 두며, 대응정책과장은 소방준감으로, 화재대응조사과장ㆍ구조과장 및 119구급과장은 소방준감 또는 소방정으로, 구급의료팀장은 과학기술서기관ㆍ의무사무관ㆍ소방정 또는 소방령으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-378912ce",
+      "parent": "n-d6090d10",
+      "child": "n-5ece0827",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(119대응국)",
+        "evidenceText": "① 119대응국에 대응정책과ㆍ화재대응조사과ㆍ구조과ㆍ119구급과 및 구급의료팀을 두며, 대응정책과장은 소방준감으로, 화재대응조사과장ㆍ구조과장 및 119구급과장은 소방준감 또는 소방정으로, 구급의료팀장은 과학기술서기관ㆍ의무사무관ㆍ소방정 또는 소방령으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d44ea740",
+      "parent": "n-d6090d10",
+      "child": "n-02e03c86",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(119대응국)",
+        "evidenceText": "① 119대응국에 대응정책과ㆍ화재대응조사과ㆍ구조과ㆍ119구급과 및 구급의료팀을 두며, 대응정책과장은 소방준감으로, 화재대응조사과장ㆍ구조과장 및 119구급과장은 소방준감 또는 소방정으로, 구급의료팀장은 과학기술서기관ㆍ의무사무관ㆍ소방정 또는 소방령으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0a4eb1bb",
+      "parent": "n-3b567f8d",
+      "child": "n-59acffbc",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(화재예방국)",
+        "evidenceText": "① 화재예방국에 예방정책과ㆍ예방분석제도과ㆍ위험물안전과 및 생활안전과를 두며, 예방정책과장은 소방준감으로, 예방분석제도과장ㆍ위험물안전과장 및 생활안전과장은 과학기술서기관ㆍ서기관 또는 소방정으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a0933088",
+      "parent": "n-3b567f8d",
+      "child": "n-fde64023",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(화재예방국)",
+        "evidenceText": "① 화재예방국에 예방정책과ㆍ예방분석제도과ㆍ위험물안전과 및 생활안전과를 두며, 예방정책과장은 소방준감으로, 예방분석제도과장ㆍ위험물안전과장 및 생활안전과장은 과학기술서기관ㆍ서기관 또는 소방정으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3eb30452",
+      "parent": "n-3b567f8d",
+      "child": "n-e8df2375",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(화재예방국)",
+        "evidenceText": "① 화재예방국에 예방정책과ㆍ예방분석제도과ㆍ위험물안전과 및 생활안전과를 두며, 예방정책과장은 소방준감으로, 예방분석제도과장ㆍ위험물안전과장 및 생활안전과장은 과학기술서기관ㆍ서기관 또는 소방정으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-eaf77c28",
+      "parent": "n-3b567f8d",
+      "child": "n-0e761c9c",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(화재예방국)",
+        "evidenceText": "① 화재예방국에 예방정책과ㆍ예방분석제도과ㆍ위험물안전과 및 생활안전과를 두며, 예방정책과장은 소방준감으로, 예방분석제도과장ㆍ위험물안전과장 및 생활안전과장은 과학기술서기관ㆍ서기관 또는 소방정으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a391e6a6",
+      "parent": "n-ac1a02e3",
+      "child": "n-54d36038",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(장비기술국)",
+        "evidenceText": "① 장비기술국에 첨단장비과ㆍ소방항공과ㆍ정보통신과 및 소방산업진흥정책과를 두며, 첨단장비과장은 소방준감으로, 소방항공과장ㆍ정보통신과장 및 소방산업진흥정책과장은 과학기술서기관ㆍ서기관 또는 소방정으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1f6da886",
+      "parent": "n-ac1a02e3",
+      "child": "n-fcaabc70",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(장비기술국)",
+        "evidenceText": "① 장비기술국에 첨단장비과ㆍ소방항공과ㆍ정보통신과 및 소방산업진흥정책과를 두며, 첨단장비과장은 소방준감으로, 소방항공과장ㆍ정보통신과장 및 소방산업진흥정책과장은 과학기술서기관ㆍ서기관 또는 소방정으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e0746b54",
+      "parent": "n-ac1a02e3",
+      "child": "n-cd48c647",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(장비기술국)",
+        "evidenceText": "① 장비기술국에 첨단장비과ㆍ소방항공과ㆍ정보통신과 및 소방산업진흥정책과를 두며, 첨단장비과장은 소방준감으로, 소방항공과장ㆍ정보통신과장 및 소방산업진흥정책과장은 과학기술서기관ㆍ서기관 또는 소방정으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7f99522d",
+      "parent": "n-ac1a02e3",
+      "child": "n-a689cde4",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조의2(장비기술국)",
+        "evidenceText": "① 장비기술국에 첨단장비과ㆍ소방항공과ㆍ정보통신과 및 소방산업진흥정책과를 두며, 첨단장비과장은 소방준감으로, 소방항공과장ㆍ정보통신과장 및 소방산업진흥정책과장은 과학기술서기관ㆍ서기관 또는 소방정으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f3999c4d",
+      "parent": "n-2a65bb71",
+      "child": "n-6624a182",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제5조(중앙소방학교)",
+        "evidenceText": "① 중앙소방학교에 교육지원과ㆍ인재개발과 및 교육훈련과를 두며, 각 과장은 소방정으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-22601000",
+      "parent": "n-2a65bb71",
+      "child": "n-922a1417",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제5조(중앙소방학교)",
+        "evidenceText": "① 중앙소방학교에 교육지원과ㆍ인재개발과 및 교육훈련과를 두며, 각 과장은 소방정으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0b8d58d8",
+      "parent": "n-2a65bb71",
+      "child": "n-62c830a2",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제5조(중앙소방학교)",
+        "evidenceText": "① 중앙소방학교에 교육지원과ㆍ인재개발과 및 교육훈련과를 두며, 각 과장은 소방정으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-15a775a8",
+      "parent": "n-f7bb1d8c",
+      "child": "n-4f7c23a4",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(중앙119구조본부)",
+        "evidenceText": "① 중앙119구조본부에 기획협력과ㆍ특수대응훈련과ㆍ특수장비과ㆍ중앙소방항공대 및 119구조견교육대를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f8e81946",
+      "parent": "n-f7bb1d8c",
+      "child": "n-8473c649",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(중앙119구조본부)",
+        "evidenceText": "① 중앙119구조본부에 기획협력과ㆍ특수대응훈련과ㆍ특수장비과ㆍ중앙소방항공대 및 119구조견교육대를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4316cd0f",
+      "parent": "n-f7bb1d8c",
+      "child": "n-2604670b",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(중앙119구조본부)",
+        "evidenceText": "① 중앙119구조본부에 기획협력과ㆍ특수대응훈련과ㆍ특수장비과ㆍ중앙소방항공대 및 119구조견교육대를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4177eab9",
+      "parent": "n-4ba14891",
+      "child": "n-ec5e60a7",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-a7b5d79d",
+      "parent": "n-ec5e60a7",
+      "child": "n-df604536",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-968b2f77",
+      "parent": "n-df604536",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "① 소방청에 운영지원과ㆍ119대응국ㆍ화재예방국 및 장비기술국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-83a32a01",
+      "parent": "n-df604536",
+      "child": "n-d6090d10",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "① 소방청에 운영지원과ㆍ119대응국ㆍ화재예방국 및 장비기술국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-97b1db02",
+      "parent": "n-df604536",
+      "child": "n-3b567f8d",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "① 소방청에 운영지원과ㆍ119대응국ㆍ화재예방국 및 장비기술국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a3e90839",
+      "parent": "n-df604536",
+      "child": "n-ac1a02e3",
+      "type": "assistant",
+      "sources": [
+        "소방청과 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(하부조직)",
+        "evidenceText": "① 소방청에 운영지원과ㆍ119대응국ㆍ화재예방국 및 장비기술국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d9f28e6d",
+      "parent": "n-df604536",
+      "child": "n-b4a34f35",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-9e560183",
+      "parent": "n-df604536",
+      "child": "n-ed6ffab0",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

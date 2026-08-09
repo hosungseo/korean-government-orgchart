@@ -1,0 +1,2122 @@
+{
+  "meta": {
+    "institution": "인사혁신처",
+    "title": "인사혁신처",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+      "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "role": "decree"
+      },
+      {
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "role": "rule"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "headcount",
+        "annex": "별표 3의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 6",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      }
+    ],
+    "spanDiagnostics": [
+      {
+        "node": "사무국",
+        "directUnits": 0,
+        "status": "consolidation-candidate",
+        "message": "직속 과·팀이 3개 미만입니다."
+      }
+    ],
+    "laws": [
+      {
+        "name": "인사혁신처와 그 소속기관 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288227",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288227&efYd=20260721&BD=on",
+        "annexCount": 5
+      },
+      {
+        "name": "인사혁신처와 그 소속기관 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288169",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288169&efYd=20260721&BD=on",
+        "annexCount": 10
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "인사혁신처 공무원 정원표(제26조제1항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167049259",
+          "pdf": "/LSW/flDownload.do?flSeq=167049261",
+          "image": "/LSW/flDownload.do?flSeq=167049263"
+        },
+        "files": {
+          "hwp": "law0121682026072136514KC_000100E_20260721.hwp",
+          "pdf": "law0121682026072136514KC_000100E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 [별표 1] <개정 2026. 7. 21.>\n                                              \n  인사혁신처 공무원 정원표(제26조제1항 관련)  \n                                              \n                                              \n    총계                    418               \n                                              \n      정무직 계             1                 \n                                              \n        처장(차관급)        1                 \n                                              \n      일반직 계             417               \n                                              \n        고위공무원단        9                 \n                                              \n        3급 또는 4급 이하   391               \n                                              \n        전문직공무원        10                \n                                              \n        전문경력관          7"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "인사혁신처 소속기관 공무원 정원표(제27조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167049265",
+          "pdf": "/LSW/flDownload.do?flSeq=167049267",
+          "image": "/LSW/flDownload.do?flSeq=167049269"
+        },
+        "files": {
+          "hwp": "law0121682026072136514KC_000200E_20260721.hwp",
+          "pdf": "law0121682026072136514KC_000200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 [별표 2] <개정 2025. 12. 30.>\n                                                                      \n  인사혁신처 소속기관 공무원 정원표(제27조제1항 관련)                 \n                                                                      \n                                                                      \n    총계                                196                           \n                                                                      \n      정무직 계                         2                             \n                                                                      \n        국가공무원인재개발원장(차관급)  1                             \n                                                                      \n        소청심사위원장(차관급)          1                             \n                                                                      \n      일반직 계                         194                           \n                                                                      \n        고위공무원단                    5                             \n                                                                      \n        고위공무원단에 속하는 임기제    4                             \n                      "
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "인사혁신처에 두는 평가대상 조직(제29조제1항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167049271",
+          "pdf": "/LSW/flDownload.do?flSeq=167049273",
+          "image": "/LSW/flDownload.do?flSeq=167049275"
+        },
+        "files": {
+          "hwp": "law0121682026072136514KC_000300E_20260721.hwp",
+          "pdf": "law0121682026072136514KC_000300E_20260721.pdf"
+        },
+        "rowCount": 5,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "1) 재해보상정책관 1개 담당관",
+            "3명"
+          ],
+          [
+            "2) 인사혁신국 1개 과",
+            "3명"
+          ],
+          [
+            "3) 인사관리국 1개 과",
+            "3명"
+          ],
+          [
+            "4) 윤리복무국 1개 과",
+            "6명"
+          ]
+        ],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 [별표 3] <개정 2025. 12. 30.>  \n                                                                  \n  인사혁신처에 두는 평가대상 조직(제29조제1항 관련)               \n┌──────────────┬────────────────┐\n│조직                        │정원                            │\n├──────────────┼────────────────┤\n│1) 재해보상정책관 1개 담당관│3명                             │\n├──────────────┼────────────────┤\n│2) 인사혁신국 1개 과        │3명                             │\n├──────────────┼────────────────┤\n│3) 인사관리국 1개 과        │3명                             │\n├──────────────┼────────────────┤\n│4) 윤리복무국 1개 과        │6명                             │\n└──────────────┴────────────────┘"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "인사혁신처 한시조직에 두는 공무원 정원표(제29조의2제4항 관련)",
+        "key": "000302E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167049277",
+          "pdf": "/LSW/flDownload.do?flSeq=167049279",
+          "image": "/LSW/flDownload.do?flSeq=167049281"
+        },
+        "files": {
+          "hwp": "law0121682026072136514KC_000302E_20260721.hwp",
+          "pdf": "law0121682026072136514KC_000302E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 [별표 3의2] <신설 2024. 3. 26.>\n                                                                  \n  인사혁신처 한시조직에 두는 공무원 정원표(제29조의2제4항 관련)   \n                                                                  \n  정부인사디지털추진담당관(존속기한: 2026년 12월 31일)            \n                                                                  \n  총계          3                                                 \n                                                                  \n    일반직 계   3                                                 \n                                                                  \n      4급 이하  3"
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "삭제 &lt;2025. 12. 30.&gt;",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167049283",
+          "pdf": "/LSW/flDownload.do?flSeq=167049285",
+          "image": "/LSW/flDownload.do?flSeq=167049287"
+        },
+        "files": {
+          "hwp": "law0121682026072136514KC_000400E_20260721.hwp",
+          "pdf": "law0121682026072136514KC_000400E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 [별표 4] 삭제 <2025. 12. 30.>"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "인사혁신처 공무원 정원표(제16조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156225",
+          "pdf": "/LSW/flDownload.do?flSeq=167156227",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167156229",
+            "/LSW/flDownload.do?flSeq=167156231",
+            "/LSW/flDownload.do?flSeq=167156233"
+          ]
+        },
+        "files": {
+          "hwp": "law0121762026072102134KC_000100E_20260721.hwp",
+          "pdf": "law0121762026072102134KC_000100E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 시행규칙 [별표 1] <개정 2026. 7. 21.>\n                                                                      \n  인사혁신처 공무원 정원표(제16조제1항 본문 관련)                     \n                                                                      \n  총계                                                          418   \n                                                                      \n    정무직 계                                                   1     \n                                                                      \n      처장(차관급)                                              1     \n                                                                      \n    일반직 계                                                   417   \n                                                                      \n      고위공무원단                                              9     \n                                                                      \n      부이사관ㆍ서기관 또는 과학기술서기관                      8     \n                                                                      \n      부이사관ㆍ서기관ㆍ과학기술서기관 또는 수석전문관          1     \n                                                                      \n      서기관               "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "인사혁신처 공무원 정원표(제16조제1항 단서 관련)",
+        "key": "000102E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156235",
+          "pdf": "/LSW/flDownload.do?flSeq=167156237",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167156239",
+            "/LSW/flDownload.do?flSeq=167156241",
+            "/LSW/flDownload.do?flSeq=167156243"
+          ]
+        },
+        "files": {
+          "hwp": "law0121762026072102134KC_000102E_20260721.hwp",
+          "pdf": "law0121762026072102134KC_000102E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 시행규칙 [별표 1의2] <개정 2026. 7. 21.>\n                                                                      \n  인사혁신처 공무원 정원표(제16조제1항 단서 관련)                     \n                                                                      \n  총계                                                          417   \n                                                                      \n    정무직 계                                                   1     \n                                                                      \n      처장(차관급)                                              1     \n                                                                      \n    일반직 계                                                   416   \n                                                                      \n      고위공무원단                                              9     \n                                                                      \n      부이사관ㆍ서기관 또는 과학기술서기관                      8     \n                                                                      \n      부이사관ㆍ서기관ㆍ과학기술서기관 또는 수석전문관          1     \n                                                                      \n      서기관             "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "삭제 &lt;2015.1.9.&gt;",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156245",
+          "pdf": "/LSW/flDownload.do?flSeq=167156247",
+          "image": "/LSW/flDownload.do?flSeq=167156249"
+        },
+        "files": {
+          "hwp": "law0121762026072102134KC_000200E_20260721.hwp",
+          "pdf": "law0121762026072102134KC_000200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 시행규칙 [별표 2] 삭제 <2015.1.9.>"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "국가공무원인재개발원 공무원 정원표(제17조제1항 본문 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156251",
+          "pdf": "/LSW/flDownload.do?flSeq=167156253",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167156255",
+            "/LSW/flDownload.do?flSeq=167156257",
+            "/LSW/flDownload.do?flSeq=167156299"
+          ]
+        },
+        "files": {
+          "hwp": "law0121762026072102134KC_000300E_20260721.hwp",
+          "pdf": "law0121762026072102134KC_000300E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 시행규칙 [별표 3] <개정 2025. 12. 30.>\n                                                                          \n  국가공무원인재개발원 공무원 정원표                                      \n  (제17조제1항 본문 관련)                                                 \n                                                                          \n  총계                                                          150       \n                                                                          \n    정무직 계                                                   1         \n                                                                          \n      원장(차관급)                                              1         \n                                                                          \n    일반직 계                                                   149       \n                                                                          \n      고위공무원단                                              4         \n                                                                          \n      부이사관ㆍ서기관 또는 과학기술서기관                      1         \n                                                                          \n      서기관 또는"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "국가공무원인재개발원 공무원 정원표(제17조제1항 단서 관련)",
+        "key": "000302E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156301",
+          "pdf": "/LSW/flDownload.do?flSeq=167156303",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167156305",
+            "/LSW/flDownload.do?flSeq=167156307",
+            "/LSW/flDownload.do?flSeq=167156309"
+          ]
+        },
+        "files": {
+          "hwp": "law0121762026072102134KC_000302E_20260721.hwp",
+          "pdf": "law0121762026072102134KC_000302E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 시행규칙 [별표 3의2] <개정 2026. 3. 24.>\n                                                                        \n  국가공무원인재개발원 공무원 정원표(제17조제1항 단서 관련)             \n                                                                        \n                                                                        \n  총계                                                      148         \n                                                                        \n    정무직 계                                               1           \n                                                                        \n      원장(차관급)                                          1           \n                                                                        \n    일반직 계                                               147         \n                                                                        \n      고위공무원단                                          4           \n                                                                        \n      부이사관ㆍ서기관 또는 과학기술서기관                  1           \n                                                                        \n      서기관 또는 과학기술서기관                       "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "소청심사위원회 공무원 정원표(제17조제2항 본문 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156311",
+          "pdf": "/LSW/flDownload.do?flSeq=167156313",
+          "image": "/LSW/flDownload.do?flSeq=167156315"
+        },
+        "files": {
+          "hwp": "law0121762026072102134KC_000400E_20260721.hwp",
+          "pdf": "law0121762026072102134KC_000400E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 시행규칙 [별표 4] <개정 2025. 2. 25.>\n                                                            \n                                                            \n  소청심사위원회 공무원 정원표(제17조제2항 본문 관련)       \n                                                            \n                                                            \n  총계                                                  38  \n                                                            \n    정무직 계                                           1   \n                                                            \n      위원장(차관급)                                    1   \n                                                            \n    일반직 계                                           37  \n                                                            \n      고위공무원단에 속하는 임기제(상임위원)            4   \n                                                            \n      서기관 또는 과학기술서기관                        1   \n                                                            \n      서기관 또는 행정사무관                            2   \n                                                            \n      행정사무관                                        13  \n            "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "공무원재해보상연금위원회 사무국 정원표(제17조제3항 관련)",
+        "key": "000402E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156317",
+          "pdf": "/LSW/flDownload.do?flSeq=167156319",
+          "image": "/LSW/flDownload.do?flSeq=167156321"
+        },
+        "files": {
+          "hwp": "law0121762026072102134KC_000402E_20260721.hwp",
+          "pdf": "law0121762026072102134KC_000402E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 시행규칙 [별표 4의2]                                                            \n                                                            \n  공무원재해보상연금위원회 사무국 정원표(제17조제3항 관련)  \n                                                            \n                                                            \n  총계                            8                         \n                                                            \n    일반직 계                     8                         \n                                                            \n      고위공무원단                1                         \n                                                            \n      서기관 또는 행정사무관      1                         \n                                                            \n      행정사무관 또는 전산사무관  3                         \n                                                            \n      행정주사 또는 전산주사      3                         \n                                                            \n <신설 2025. 12. 30.>"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "인사혁신처에 두는 평가대상 조직(제20조 관련)",
+        "key": "000500E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156323",
+          "pdf": "/LSW/flDownload.do?flSeq=167156325",
+          "image": "/LSW/flDownload.do?flSeq=167156327"
+        },
+        "files": {
+          "hwp": "law0121762026072102134KC_000500E_20260721.hwp",
+          "pdf": "law0121762026072102134KC_000500E_20260721.pdf"
+        },
+        "rowCount": 5,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "1. 재해보상정책관 재해예방정 책담당관",
+            "3명 (4급 1명, 5급 1명, 6급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "2. 인사혁신국 적극행정과",
+            "3명 (5급 1명, 6급 1명, 7급 1명)",
+            "2026년 9월 30일까지"
+          ],
+          [
+            "3. 인사관리국 성과평가과",
+            "3명 (4급 1명, 5급 1명, 6급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "4. 윤리복무국 재산심사관리과",
+            "6명 (4급 1명, 5급 3명, 6급 1명, 7급 1명)",
+            "2026년 12월 31일까지"
+          ]
+        ],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 시행규칙 [별표 5] <개정 2025. 12. 30.>\n                                                                          \n                                                                          \n  인사혁신처에 두는 평가대상 조직(제20조 관련)                            \n                                                                          \n┌──────────────┬─────────┬──────────┐\n│조직                        │정원              │평가기간            │\n├──────────────┼─────────┼──────────┤\n│1. 재해보상정책관 재해예방정│3명               │2028년 9월 30일까지 │\n│책담당관                    │(4급 1명, 5급 1명,│                    │\n│                            │6급 1명)          │                    │\n├──────────────┼─────────┼──────────┤\n│2. 인사혁신국 적극행정과    │3명               │2026년 9월 30일까지 │\n│                            │(5급 1명, 6급 1명,│                    │\n│                            │7급 1명)          │                    │\n├──────────────┼─────────┼──────────┤\n│3. 인사관리국 성과평가과    │3명               │2028년 9월 30일까지 │\n│                            │(4급 1명, 5급 1명,│                    │\n│                            │6급 1명)          │                    │\n├──────────────┼─────────┼──────────┤\n│4. 윤리복무국 재산심사관리과│6명               │2026년 12월 31"
+      },
+      {
+        "annex": "별표 6",
+        "number": "6",
+        "title": "인사혁신처 한시조직에 두는 공무원 정원표(제20조의2제2항 관련)",
+        "key": "000600E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156329",
+          "pdf": "/LSW/flDownload.do?flSeq=167156331",
+          "image": "/LSW/flDownload.do?flSeq=167156333"
+        },
+        "files": {
+          "hwp": "law0121762026072102134KC_000600E_20260721.hwp",
+          "pdf": "law0121762026072102134KC_000600E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 시행규칙 [별표 6] <신설 2024. 3. 26.>  \n                                                                          \n  인사혁신처 한시조직에 두는 공무원 정원표(제20조의2제2항 관련)           \n                                                                          \n  정부인사디지털추진담당관(존속기한: 2026년 12월 31일)                    \n                                                                          \n  총계                                                    3               \n                                                                          \n    일반직 계                                             3               \n                                                                          \n      서기관 또는 과학기술서기관                          1               \n                                                                          \n      서기관ㆍ과학기술서기관ㆍ행정사무관 또는 전산사무관  1               \n                                                                          \n      행정주사 또는 전산주사                              1"
+      },
+      {
+        "annex": "별표 7",
+        "number": "7",
+        "title": "삭제 &lt;2026. 3. 24.&gt;",
+        "key": "000700E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167156335",
+          "pdf": "/LSW/flDownload.do?flSeq=167156337",
+          "image": "/LSW/flDownload.do?flSeq=167156339"
+        },
+        "files": {
+          "hwp": "law0121762026072102134KC_000700E_20260721.hwp",
+          "pdf": "law0121762026072102134KC_000700E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 인사혁신처와 그 소속기관 직제 시행규칙 [별표 7] 삭제 <2026. 3. 24.>"
+      }
+    ]
+  },
+  "rootId": "n-59db1558",
+  "nodes": [
+    {
+      "id": "n-59db1558",
+      "name": "인사혁신처",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-0519df5e",
+      "name": "소청심사위원회",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4047c766",
+      "name": "처장",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b7188fad",
+      "name": "인재정보기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-df604536",
+      "name": "차장",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-618c7eaf",
+      "name": "기획조정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-cd3f78c4",
+      "name": "재해보상정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true,
+        "grade": "나"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ee0b019e",
+      "name": "인사조직과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-75fdb4cd",
+      "name": "인재채용국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ceab0087",
+      "name": "인사혁신국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-66052bd0",
+      "name": "인사관리국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-be2c1cfb",
+      "name": "윤리복무국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1e1d25be",
+      "name": "공무원노사협력관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-72312572",
+      "name": "기획부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-3cc72ce8",
+      "name": "리더십개발부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-83061eac",
+      "name": "글로벌교육부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ca1dad1d",
+      "name": "연구개발센터",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f591ac80",
+      "name": "사무국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-9cfb3f25",
+      "name": "정부인사디지털추진담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "temporary": true,
+        "expires": "2026-12-31",
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]",
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0a8767eb",
+      "name": "인재기획담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-41867f95",
+      "name": "인재정보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1e62dc16",
+      "name": "법무감사혁신담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-06104873",
+      "name": "데이터정보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0c663167",
+      "name": "국제협력담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-05559048",
+      "name": "노사협력담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-beeb8e59",
+      "name": "재해보상정책담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-733e113d",
+      "name": "재해예방정책담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-abf3e39f",
+      "name": "재해보상심사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c870aa15",
+      "name": "인재정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8ccbffb5",
+      "name": "공개채용과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0af8f894",
+      "name": "경력채용과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-22dc61ff",
+      "name": "시험출제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d64b7a1e",
+      "name": "5급공채팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-605385b1",
+      "name": "인사혁신기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f42e24bb",
+      "name": "적극행정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f7e764d6",
+      "name": "심사임용과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ef53d026",
+      "name": "개방교류과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5d9d8292",
+      "name": "균형인사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-993ceabe",
+      "name": "급여정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-922a1417",
+      "name": "인재개발과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-719c8584",
+      "name": "연금복지과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b3f83d17",
+      "name": "성과평가과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-3c61fe70",
+      "name": "복무과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c87f0511",
+      "name": "윤리정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-fe9ed022",
+      "name": "재산심사기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-c20f9483",
+      "name": "재산심사관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-83eeefce",
+      "name": "취업심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-4f7c23a4",
+      "name": "기획협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6624a182",
+      "name": "교육지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e94c91f4",
+      "name": "신규자교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ee8d1a04",
+      "name": "관리자교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-13117a60",
+      "name": "전문역량교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b7213388",
+      "name": "글로벌교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-48723825",
+      "name": "스마트개발과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-b191aa8d",
+      "name": "행정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-f5ecd87b",
+      "parent": "n-59db1558",
+      "child": "n-0519df5e",
+      "type": "affiliated",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "② 행정기관 소속 공무원의 징계처분 및 그 밖에 그 의사에 반하는 불리한 처분에 대한 소청을 심사ㆍ결정하기 위하여 「국가공무원법」 제9조제1항에 따라 인사혁신처에 소청심사위원회를 둔다",
+        "legalBasis": "에 둔다",
+        "affiliationType": "affiliated",
+        "unitRole": "affiliated-institution"
+      }
+    },
+    {
+      "id": "e-d7ac55e1",
+      "parent": "n-4047c766",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 처장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d4c34393",
+      "parent": "n-4047c766",
+      "child": "n-b7188fad",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(인재정보기획관)",
+        "evidenceText": "② 인재정보기획관은 다음 사항에 관하여 처장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-52e3740e",
+      "parent": "n-df604536",
+      "child": "n-618c7eaf",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(기획조정관)",
+        "evidenceText": "② 기획조정관은 다음 사항에 관하여 차장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d4f1489f",
+      "parent": "n-df604536",
+      "child": "n-cd3f78c4",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조의2(재해보상정책관)",
+        "evidenceText": "② 재해보상정책관은 다음 사항에 관하여 차장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-cc394b4a",
+      "parent": "n-df604536",
+      "child": "n-1e1d25be",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(공무원노사협력관)",
+        "evidenceText": "② 공무원노사협력관은 다음 사항에 관하여 차장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-2f4e478a",
+      "parent": "n-618c7eaf",
+      "child": "n-9cfb3f25",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제29조의2(정부인사디지털추진담당관)",
+        "evidenceText": "③ 정부인사디지털추진담당관은 다음 사항에 관하여 기획조정관을 보좌한다"
+      }
+    },
+    {
+      "id": "e-26f33686",
+      "parent": "n-b7188fad",
+      "child": "n-0a8767eb",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(인재정보기획관)",
+        "evidenceText": "③ 인재기획담당관은 다음 사항에 관하여 인재정보기획관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-20f92962",
+      "parent": "n-b7188fad",
+      "child": "n-41867f95",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(인재정보기획관)",
+        "evidenceText": "④ 인재정보담당관은 다음 사항에 관하여 인재정보기획관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-c1a1e64b",
+      "parent": "n-618c7eaf",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제5조(기획조정관)",
+        "evidenceText": "③ 기획재정담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-1c707472",
+      "parent": "n-618c7eaf",
+      "child": "n-1e62dc16",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제5조(기획조정관)",
+        "evidenceText": "④ 법무감사혁신담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-d072f7a7",
+      "parent": "n-618c7eaf",
+      "child": "n-06104873",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제5조(기획조정관)",
+        "evidenceText": "⑤ 데이터정보담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-2a16499c",
+      "parent": "n-618c7eaf",
+      "child": "n-0c663167",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제5조(기획조정관)",
+        "evidenceText": "⑥ 국제협력담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-32a3331a",
+      "parent": "n-1e1d25be",
+      "child": "n-05559048",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조(공무원노사협력관)",
+        "evidenceText": "③ 노사협력담당관은 다음 사항에 관하여 공무원노사협력관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3167628e",
+      "parent": "n-cd3f78c4",
+      "child": "n-beeb8e59",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조의2(재해보상정책관)",
+        "evidenceText": "③ 재해보상정책담당관은 다음 사항에 관하여 재해보상정책관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-a9e2015e",
+      "parent": "n-cd3f78c4",
+      "child": "n-733e113d",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조의2(재해보상정책관)",
+        "evidenceText": "④ 재해예방정책담당관은 다음 사항에 관하여 재해보상정책관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-8f0f8f8e",
+      "parent": "n-cd3f78c4",
+      "child": "n-abf3e39f",
+      "type": "advisor",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제6조의2(재해보상정책관)",
+        "evidenceText": "⑤ 재해보상심사담당관은 다음 사항에 관하여 재해보상정책관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e7cb4d32",
+      "parent": "n-75fdb4cd",
+      "child": "n-c870aa15",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인재채용국)",
+        "evidenceText": "② 인재채용국에 인재정책과ㆍ공개채용과ㆍ경력채용과ㆍ시험출제과 및 5급공채팀을 두며, 각 과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 5급공채팀장은 과학기술서기관ㆍ서기관ㆍ행정사무관 또는 수석전문관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3cacc1ef",
+      "parent": "n-75fdb4cd",
+      "child": "n-8ccbffb5",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인재채용국)",
+        "evidenceText": "② 인재채용국에 인재정책과ㆍ공개채용과ㆍ경력채용과ㆍ시험출제과 및 5급공채팀을 두며, 각 과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 5급공채팀장은 과학기술서기관ㆍ서기관ㆍ행정사무관 또는 수석전문관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1313b544",
+      "parent": "n-75fdb4cd",
+      "child": "n-0af8f894",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인재채용국)",
+        "evidenceText": "② 인재채용국에 인재정책과ㆍ공개채용과ㆍ경력채용과ㆍ시험출제과 및 5급공채팀을 두며, 각 과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 5급공채팀장은 과학기술서기관ㆍ서기관ㆍ행정사무관 또는 수석전문관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3c3dde66",
+      "parent": "n-75fdb4cd",
+      "child": "n-22dc61ff",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인재채용국)",
+        "evidenceText": "② 인재채용국에 인재정책과ㆍ공개채용과ㆍ경력채용과ㆍ시험출제과 및 5급공채팀을 두며, 각 과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 5급공채팀장은 과학기술서기관ㆍ서기관ㆍ행정사무관 또는 수석전문관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f7ae0f1c",
+      "parent": "n-75fdb4cd",
+      "child": "n-d64b7a1e",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(인재채용국)",
+        "evidenceText": "② 인재채용국에 인재정책과ㆍ공개채용과ㆍ경력채용과ㆍ시험출제과 및 5급공채팀을 두며, 각 과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 5급공채팀장은 과학기술서기관ㆍ서기관ㆍ행정사무관 또는 수석전문관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-703d08bd",
+      "parent": "n-ceab0087",
+      "child": "n-605385b1",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(인사혁신국)",
+        "evidenceText": "② 인사혁신국에 인사혁신기획과ㆍ적극행정과ㆍ심사임용과ㆍ개방교류과 및 균형인사과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-40065078",
+      "parent": "n-ceab0087",
+      "child": "n-f42e24bb",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(인사혁신국)",
+        "evidenceText": "② 인사혁신국에 인사혁신기획과ㆍ적극행정과ㆍ심사임용과ㆍ개방교류과 및 균형인사과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0e41118e",
+      "parent": "n-ceab0087",
+      "child": "n-f7e764d6",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(인사혁신국)",
+        "evidenceText": "② 인사혁신국에 인사혁신기획과ㆍ적극행정과ㆍ심사임용과ㆍ개방교류과 및 균형인사과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bd54fcc2",
+      "parent": "n-ceab0087",
+      "child": "n-ef53d026",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(인사혁신국)",
+        "evidenceText": "② 인사혁신국에 인사혁신기획과ㆍ적극행정과ㆍ심사임용과ㆍ개방교류과 및 균형인사과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-953c0520",
+      "parent": "n-ceab0087",
+      "child": "n-5d9d8292",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(인사혁신국)",
+        "evidenceText": "② 인사혁신국에 인사혁신기획과ㆍ적극행정과ㆍ심사임용과ㆍ개방교류과 및 균형인사과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7c22dc71",
+      "parent": "n-66052bd0",
+      "child": "n-993ceabe",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(인사관리국)",
+        "evidenceText": "② 인사관리국에 급여정책과ㆍ인재개발과ㆍ연금복지과 및 성과평가과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bfce7591",
+      "parent": "n-66052bd0",
+      "child": "n-922a1417",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(인사관리국)",
+        "evidenceText": "② 인사관리국에 급여정책과ㆍ인재개발과ㆍ연금복지과 및 성과평가과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fd711fc9",
+      "parent": "n-66052bd0",
+      "child": "n-719c8584",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(인사관리국)",
+        "evidenceText": "② 인사관리국에 급여정책과ㆍ인재개발과ㆍ연금복지과 및 성과평가과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9ca87f0c",
+      "parent": "n-66052bd0",
+      "child": "n-b3f83d17",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(인사관리국)",
+        "evidenceText": "② 인사관리국에 급여정책과ㆍ인재개발과ㆍ연금복지과 및 성과평가과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-982ac074",
+      "parent": "n-be2c1cfb",
+      "child": "n-3c61fe70",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(윤리복무국)",
+        "evidenceText": "② 윤리복무국에 복무과ㆍ윤리정책과ㆍ재산심사기획과ㆍ재산심사관리과 및 취업심사과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-29f07e66",
+      "parent": "n-be2c1cfb",
+      "child": "n-c87f0511",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(윤리복무국)",
+        "evidenceText": "② 윤리복무국에 복무과ㆍ윤리정책과ㆍ재산심사기획과ㆍ재산심사관리과 및 취업심사과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-61b35fd6",
+      "parent": "n-be2c1cfb",
+      "child": "n-fe9ed022",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(윤리복무국)",
+        "evidenceText": "② 윤리복무국에 복무과ㆍ윤리정책과ㆍ재산심사기획과ㆍ재산심사관리과 및 취업심사과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7bc381d2",
+      "parent": "n-be2c1cfb",
+      "child": "n-c20f9483",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(윤리복무국)",
+        "evidenceText": "② 윤리복무국에 복무과ㆍ윤리정책과ㆍ재산심사기획과ㆍ재산심사관리과 및 취업심사과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f7f526a9",
+      "parent": "n-be2c1cfb",
+      "child": "n-83eeefce",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(윤리복무국)",
+        "evidenceText": "② 윤리복무국에 복무과ㆍ윤리정책과ㆍ재산심사기획과ㆍ재산심사관리과 및 취업심사과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e243ec92",
+      "parent": "n-72312572",
+      "child": "n-4f7c23a4",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(기획부)",
+        "evidenceText": "② 기획부에 기획협력과 및 교육지원과를 두며, 기획협력과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 교육지원과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-74a81afe",
+      "parent": "n-72312572",
+      "child": "n-6624a182",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제12조(기획부)",
+        "evidenceText": "② 기획부에 기획협력과 및 교육지원과를 두며, 기획협력과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 교육지원과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c2e29042",
+      "parent": "n-3cc72ce8",
+      "child": "n-e94c91f4",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(리더십개발부)",
+        "evidenceText": "② 리더십개발부에 신규자교육과ㆍ관리자교육과 및 전문역량교육과를 두며, 신규자교육과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 관리자교육과장 및 전문역량교육과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aa63c9a9",
+      "parent": "n-3cc72ce8",
+      "child": "n-ee8d1a04",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(리더십개발부)",
+        "evidenceText": "② 리더십개발부에 신규자교육과ㆍ관리자교육과 및 전문역량교육과를 두며, 신규자교육과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 관리자교육과장 및 전문역량교육과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9735812d",
+      "parent": "n-3cc72ce8",
+      "child": "n-13117a60",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제13조(리더십개발부)",
+        "evidenceText": "② 리더십개발부에 신규자교육과ㆍ관리자교육과 및 전문역량교육과를 두며, 신규자교육과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 관리자교육과장 및 전문역량교육과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9c20ddb0",
+      "parent": "n-83061eac",
+      "child": "n-b7213388",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조(글로벌교육부)",
+        "evidenceText": "② 글로벌교육부에 글로벌교육과를 두며, 글로벌교육과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-88367453",
+      "parent": "n-ca1dad1d",
+      "child": "n-48723825",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제14조의2(연구개발센터)",
+        "evidenceText": "② 연구개발센터에 스마트개발과를 두며, 스마트개발과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-85ecefa1",
+      "parent": "n-0519df5e",
+      "child": "n-b191aa8d",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제15조(소청심사위원회)",
+        "evidenceText": "② 소청심사위원회에 행정과를 두며, 행정과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-10e16165",
+      "parent": "n-59db1558",
+      "child": "n-4047c766",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-4ab3869c",
+      "parent": "n-4047c766",
+      "child": "n-df604536",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-b83aaf74",
+      "parent": "n-df604536",
+      "child": "n-ee0b019e",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 인사혁신처에 인사조직과, 인재채용국, 인사혁신국, 인사관리국, 윤리복무국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0bdfde02",
+      "parent": "n-df604536",
+      "child": "n-75fdb4cd",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 인사혁신처에 인사조직과, 인재채용국, 인사혁신국, 인사관리국, 윤리복무국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-87bb899b",
+      "parent": "n-df604536",
+      "child": "n-ceab0087",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 인사혁신처에 인사조직과, 인재채용국, 인사혁신국, 인사관리국, 윤리복무국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-58a83146",
+      "parent": "n-df604536",
+      "child": "n-66052bd0",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 인사혁신처에 인사조직과, 인재채용국, 인사혁신국, 인사관리국, 윤리복무국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0b339f17",
+      "parent": "n-df604536",
+      "child": "n-be2c1cfb",
+      "type": "assistant",
+      "sources": [
+        "인사혁신처와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 인사혁신처에 인사조직과, 인재채용국, 인사혁신국, 인사관리국, 윤리복무국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0280fc04",
+      "parent": "n-df604536",
+      "child": "n-72312572",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-9718e50f",
+      "parent": "n-df604536",
+      "child": "n-3cc72ce8",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-87f69158",
+      "parent": "n-df604536",
+      "child": "n-83061eac",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-9a13dbf4",
+      "parent": "n-df604536",
+      "child": "n-ca1dad1d",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-6603eace",
+      "parent": "n-df604536",
+      "child": "n-f591ac80",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

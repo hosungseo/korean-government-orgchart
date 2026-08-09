@@ -1,0 +1,4413 @@
+{
+  "meta": {
+    "institution": "행정기관",
+    "title": "행정기관",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "재정경제부 직제 [시행 20260102]",
+      "재정경제부 직제 시행규칙 [시행 20260102]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "재정경제부 직제 [시행 20260102]",
+        "role": "decree"
+      },
+      {
+        "source": "재정경제부 직제 시행규칙 [시행 20260102]",
+        "role": "rule"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "headcount",
+        "annex": "별표 2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "재정경제부 직제 시행규칙 [시행 20260102]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 4",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "재정경제부 직제 시행규칙 [시행 20260102]"
+      }
+    ],
+    "spanDiagnostics": [
+      {
+        "node": "경제정책국민생경제국",
+        "directUnits": 0,
+        "status": "consolidation-candidate",
+        "message": "직속 과·팀이 3개 미만입니다."
+      }
+    ],
+    "laws": [
+      {
+        "name": "재정경제부 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260102",
+        "mst": "280775",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=280775&efYd=20260102&BD=on",
+        "annexCount": 3
+      },
+      {
+        "name": "재정경제부 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260102",
+        "mst": "282587",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=282587&efYd=20260102&BD=on",
+        "annexCount": 4
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "재정경제부 공무원 정원표(제27조제1항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260102",
+        "type": "headcount",
+        "source": "재정경제부 직제 [시행 20260102]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160107609",
+          "pdf": "/LSW/flDownload.do?flSeq=160107611",
+          "image": "/LSW/flDownload.do?flSeq=160107613"
+        },
+        "files": {
+          "hwp": "law0150022025123035947KC_000100E_20260102.hwp",
+          "pdf": "law0150022025123035947KC_000100E_20260102.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 재정경제부 직제 [별표 1]                 \n                                              \n  재정경제부 공무원 정원표(제27조제1항 관련)  \n                                              \n  총계                              777       \n                                              \n    정무직 계                       3         \n                                              \n      장관                          1         \n                                              \n      차관                          2         \n                                              \n    별정직 계                       5         \n                                              \n      고위공무원단                  1         \n                                              \n      3급 상당 또는 4급 상당 이하   4         \n                                              \n    일반직 계                       769       \n                                              \n      고위공무원단                  33        \n                                              \n      고위공무원단에 속하는 임기제  1         \n                                              \n      3급 또는 4급 이하             732       \n                                              \n      전문경력관                    3"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "재정경제부에 두는 평가대상 조직(제29조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260102",
+        "type": "evaluation",
+        "source": "재정경제부 직제 [시행 20260102]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160107615",
+          "pdf": "/LSW/flDownload.do?flSeq=160107617",
+          "image": "/LSW/flDownload.do?flSeq=160107619"
+        },
+        "files": {
+          "hwp": "law0150022025123035947KC_000200E_20260102.hwp",
+          "pdf": "law0150022025123035947KC_000200E_20260102.pdf"
+        },
+        "rowCount": 17,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "1. 전략기획관",
+            "9명"
+          ],
+          [
+            "2. 경제공급망기획관 및 2개 담당관",
+            "14명"
+          ],
+          [
+            "3. 혁신성장실",
+            "1명"
+          ],
+          [
+            "4. 혁신성장실 5개 과",
+            "15명"
+          ],
+          [
+            "5. 세제실 1개 정책관등",
+            "1명"
+          ],
+          [
+            "6. 세제실 1개 과",
+            "3명"
+          ],
+          [
+            "7. 국고실",
+            "1명"
+          ],
+          [
+            "8. 국고실 1개 정책관등",
+            "1명"
+          ],
+          [
+            "9. 국고실 2개 과",
+            "6명"
+          ],
+          [
+            "10. 경제정책국 2개 과",
+            "6명"
+          ],
+          [
+            "11. 민생경제국",
+            "1명"
+          ],
+          [
+            "12. 민생경제국 1개 과",
+            "3명"
+          ],
+          [
+            "13. 경제구조개혁국 2개 과",
+            "9명"
+          ],
+          [
+            "14. 대외경제국 1개 정책관등",
+            "1명"
+          ],
+          [
+            "15. 대외경제국 1개 과",
+            "3명"
+          ],
+          [
+            "16. 개발금융국 1개 과",
+            "4명"
+          ]
+        ],
+        "textPreview": "■ 재정경제부 직제 [별표 2]                         \n                                                      \n  재정경제부에 두는 평가대상 조직(제29조제1항 관련)   \n                                                      \n  ┌─────────────────┬──┐        \n  │조직                              │정원│        \n  ├─────────────────┼──┤        \n  │1. 전략기획관                     │9명 │        \n  ├─────────────────┼──┤        \n  │2. 경제공급망기획관 및 2개 담당관 │14명│        \n  ├─────────────────┼──┤        \n  │3. 혁신성장실                     │1명 │        \n  ├─────────────────┼──┤        \n  │4. 혁신성장실 5개 과              │15명│        \n  ├─────────────────┼──┤        \n  │5. 세제실 1개 정책관등            │1명 │        \n  ├─────────────────┼──┤        \n  │6. 세제실 1개 과                  │3명 │        \n  ├─────────────────┼──┤        \n  │7. 국고실                         │1명 │        \n  ├─────────────────┼──┤        \n  │8. 국고실 1개 정책관등            │1명 │        \n  ├─────────────────┼──┤        \n  │9. 국고실 2개 과                  │6명 │        \n  ├─────────────────┼──┤        \n  │10. 경제정책국 2개 과             │6명 │        \n  ├─────────────────┼──┤        \n  │11. 민생경제국                    │1명 │        \n  ├─────────────────┼──┤        \n  │12. 민생경제국 1개 과             │3명 │        \n "
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "재정경제부 한시조직에 두는 공무원 정원표(제30조제4항 및 제31조제4항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260102",
+        "type": "temporary-headcount",
+        "source": "재정경제부 직제 [시행 20260102]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160107621",
+          "pdf": "/LSW/flDownload.do?flSeq=160107623",
+          "image": "/LSW/flDownload.do?flSeq=160107625"
+        },
+        "files": {
+          "hwp": "law0150022025123035947KC_000300E_20260102.hwp",
+          "pdf": "law0150022025123035947KC_000300E_20260102.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 재정경제부 직제 [별표 3]                                                 \n                                                                              \n  재정경제부 한시조직에 두는 공무원 정원표(제30조제4항 및 제31조제4항 관련)   \n                                                                              \n  1. 신국제조세규범과(존속기한: 2028년 2월 29일)                              \n                                                                              \n  총계                    3                                                   \n                                                                              \n    일반직 계             3                                                   \n                                                                              \n      4급 이하            3                                                   \n                                                                              \n  2. 국유재산협력과(존속기한: 2028년 4월 30일)                                \n                                                                              \n  총계                    4                                                   \n                                                                              \n    일반직 계        "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "재정경제부 공무원 정원표(제23조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260102",
+        "type": "headcount",
+        "source": "재정경제부 직제 시행규칙 [시행 20260102]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160256515",
+          "pdf": "/LSW/flDownload.do?flSeq=160256517",
+          "image": [
+            "/LSW/flDownload.do?flSeq=160256519",
+            "/LSW/flDownload.do?flSeq=160256521"
+          ]
+        },
+        "files": {
+          "hwp": "law0150232026010200001KC_000100E_20260102.hwp",
+          "pdf": "law0150232026010200001KC_000100E_20260102.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 재정경제부 직제 시행규칙 [별표 1]\n                                                                            \n                                                                            \n  재정경제부 공무원 정원표(제23조제1항 본문 관련)                           \n                                                                            \n                                                                            \n  총계                                                                777   \n                                                                            \n    정무직 계                                                         3     \n                                                                            \n      장관                                                            1     \n                                                                            \n      차관                                                            2     \n                                                                            \n    별정직 계                                                         5     \n                                                                            \n      고위공무원단(장관정책보좌관)                                  "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "재정경제부 공무원 정원표(제23조제1항 단서 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260102",
+        "type": "headcount",
+        "source": "재정경제부 직제 시행규칙 [시행 20260102]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160256523",
+          "pdf": "/LSW/flDownload.do?flSeq=160256525",
+          "image": [
+            "/LSW/flDownload.do?flSeq=160256527",
+            "/LSW/flDownload.do?flSeq=160256529"
+          ]
+        },
+        "files": {
+          "hwp": "law0150232026010200001KC_000200E_20260102.hwp",
+          "pdf": "law0150232026010200001KC_000200E_20260102.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 재정경제부 직제 시행규칙 [별표 2]\n                                                                            \n                                                                            \n  재정경제부 공무원 정원표(제23조제1항 단서 관련)                           \n                                                                            \n                                                                            \n  총계                                                                777   \n                                                                            \n    정무직 계                                                         3     \n                                                                            \n      장관                                                            1     \n                                                                            \n      차관                                                            2     \n                                                                            \n    별정직 계                                                         5     \n                                                                            \n      고위공무원단(장관정책보좌관)                                  "
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "재정경제부에 두는 평가대상 조직(제25조 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260102",
+        "type": "evaluation",
+        "source": "재정경제부 직제 시행규칙 [시행 20260102]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160256531",
+          "pdf": "/LSW/flDownload.do?flSeq=160256533",
+          "image": [
+            "/LSW/flDownload.do?flSeq=160256535",
+            "/LSW/flDownload.do?flSeq=160256537"
+          ]
+        },
+        "files": {
+          "hwp": "law0150232026010200001KC_000300E_20260102.hwp",
+          "pdf": "law0150232026010200001KC_000300E_20260102.pdf"
+        },
+        "rowCount": 24,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "1. 전략기획관",
+            "9명 (고위공무원단 1명, 4 급 또는 5급 8명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "2. 경제공급망기획관, 공급망정책담 당관 및 공급망대응담당관",
+            "14명 (고위공무원단 1명, 4급 2명, 4급 또는 5급 1 명, 5급 8명, 6급 2명)",
+            "2027년 3월 31일까지"
+          ],
+          [
+            "3. 혁신성장실",
+            "1명 (고위공무원단 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "4. 혁신성장실 녹색전환경제과",
+            "3명 (4급 1명, 5급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "5. 혁신성장실 전략경제분석과",
+            "3명 (4급 1명, 5급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "6. 혁신성장실 전략투자지원과",
+            "3명 (4급 1명, 5급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "7. 혁신성장실 전략수출지원과",
+            "3명 (4급 1명, 5급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "8. 혁신성장실 인공지능경제과",
+            "3명 (4급 1명, 5급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "9. 세제실 국제조세정책관",
+            "1명 (고위공무원단 1명)",
+            "2027년 9월 30일까지"
+          ],
+          [
+            "10. 세제실 조세추계과",
+            "3명 (4급 1명, 6급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "11. 국고실",
+            "1명 (고위공무원단 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "12. 국고실 조달계약정책관",
+            "1명 (고위공무원단 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "13. 국고실 국채시장과",
+            "3명 (4급 1명, 6급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "14. 국고실 국유재산개발과",
+            "3명 (4급 1명, 6급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "15. 경제정책국 자금시장분석과",
+            "3명 (4급 1명, 6급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "16. 경제정책국 부동산시장과",
+            "3명 (4급 1명, 6급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "17. 민생경제국",
+            "1명 (고위공무원단 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "18. 민생경제국 민생경제총괄과",
+            "3명 (4급 1명, 5급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "19. 경제구조개혁국 노동시장경제과",
+            "5명 (4급 1명, 4급 또는 5급 1명, 5급 2명, 7급 1명)",
+            "2027년 9월 30일까지"
+          ],
+          [
+            "20. 경제구조개혁국 청년정책과",
+            "4명 (4급 1명, 5급 1명, 6급 1명, 7급 1명)",
+            "2026년 3월 31일까지"
+          ],
+          [
+            "21. 대외경제국 대외경제심의관",
+            "1명 (고위공무원단 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "22. 대외경제국 경제협력과",
+            "3명 (4급 1명, 6급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "23. 개발금융국 개발사업협력과",
+            "4명 (4급 1명, 5급 1명, 6급 1명, 7급 1명)",
+            "2026년 3월 31일까지"
+          ]
+        ],
+        "textPreview": "■ 재정경제부 직제 시행규칙 [별표 3]\n                                                                                      \n                                                                                      \n  재정경제부에 두는 평가대상 조직(제25조 관련)                                        \n                                                                                      \n┌─────────────────┬────────────┬──────────┐\n│조직                              │정원                    │평가기간            │\n├─────────────────┼────────────┼──────────┤\n│1. 전략기획관                     │9명                     │2028년 12월 31일까지│\n│                                  │(고위공무원단 1명, 4    │                    │\n│                                  │급 또는 5급 8명)        │                    │\n├─────────────────┼────────────┼──────────┤\n│2. 경제공급망기획관, 공급망정책담 │14명                    │2027년 3월 31일까지 │\n│당관 및 공급망대응담당관          │(고위공무원단 1명, 4급  │                    │\n│                                  │2명, 4급 또는 5급 1     │                    │\n│                                  │명, 5급 8명, 6급 2명)   │                    │\n├─────────────────┼────────────┼──────────┤\n│3. 혁신성장실                     │1명                     │2028년 12월 31일까지│\n│              "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "재정경제부 한시조직에 두는 공무원 정원표(제26조제2항 및 제27조제2항 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260102",
+        "type": "temporary-headcount",
+        "source": "재정경제부 직제 시행규칙 [시행 20260102]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160256539",
+          "pdf": "/LSW/flDownload.do?flSeq=160256541",
+          "image": "/LSW/flDownload.do?flSeq=160256543"
+        },
+        "files": {
+          "hwp": "law0150232026010200001KC_000400E_20260102.hwp",
+          "pdf": "law0150232026010200001KC_000400E_20260102.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 재정경제부 직제 시행규칙 [별표 4]\n                                                                              \n  재정경제부 한시조직에 두는 공무원 정원표(제26조제2항 및 제27조제2항 관련)   \n                                                                              \n  1. 신국제조세규범과(존속기한: 2028년 2월 28일)                              \n                                                                              \n  총계                                                                3       \n                                                                              \n    일반직 계                                                         3       \n                                                                              \n      서기관 또는 과학기술서기관                                      1       \n                                                                              \n      행정사무관ㆍ전산사무관ㆍ시설사무관ㆍ농업사무관ㆍ환경사무관ㆍ공          \n  업사무관ㆍ사서사무관 또는 기록연구관                                1       \n                                                                              \n      행정주사보ㆍ세무주사보ㆍ관세주사보ㆍ전산주사보 또는 통계주사보  1       \n                                                                              \n  2. 국유재산협력과(존속기한: 2028년 4월 30일)                     "
+      }
+    ]
+  },
+  "rootId": "n-c84c464b",
+  "nodes": [
+    {
+      "id": "n-c84c464b",
+      "name": "행정기관",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-7ce28e1b",
+      "name": "감사관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-e875f603",
+      "name": "전략기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true,
+        "grade": "나"
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-1cc2a430",
+      "name": "장관비서관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-a4fafae2",
+      "name": "장관정책보좌관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-8a775f5b",
+      "name": "제2차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-7da5dac3",
+      "name": "기획조정실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-4a9b90be",
+      "name": "경제공급망기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true,
+        "grade": "나"
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-540db781",
+      "name": "재정경제부",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-f0b32413",
+      "name": "국제경제관리관",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-0a6c3537",
+      "name": "인사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-7e4f13ee",
+      "name": "혁신성장실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-897340bf",
+      "name": "세제실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-1b8539c4",
+      "name": "국고실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-8ca82ec5",
+      "name": "경제정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-eaf198fa",
+      "name": "민생경제국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-c7fd5e26",
+      "name": "경제구조개혁국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-83411fc2",
+      "name": "국제금융국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-3b9c5383",
+      "name": "대외경제국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-8ccc4551",
+      "name": "개발금융국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-63994084",
+      "name": "공공정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-98908cd3",
+      "name": "차관보",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-c74d22a6",
+      "name": "제1차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-87a94ffa",
+      "name": "경제정책국민생경제국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-50d438e6",
+      "name": "신국제조세규범과",
+      "kind": "temporary",
+      "rank": 5,
+      "metadata": {
+        "temporary": true,
+        "expires": "2028-02-29",
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-78783f76",
+      "name": "국유재산협력과",
+      "kind": "temporary",
+      "rank": 5,
+      "metadata": {
+        "temporary": true,
+        "expires": "2028-04-30",
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 [시행 20260102]",
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-67f14651",
+      "name": "홍보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-54869c03",
+      "name": "혁신정책담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-dadc7298",
+      "name": "규제개혁법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-fbf09f55",
+      "name": "정보화담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-f1907300",
+      "name": "정책기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "employmentType": "임기제",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-d35fd50b",
+      "name": "비상안전기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "employmentType": "임기제",
+        "staffCategories": [
+          "임기제"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-83125d4d",
+      "name": "공급망정책담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-5f0b4d4a",
+      "name": "공급망대응담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-c0717c98",
+      "name": "정책조정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-d6668def",
+      "name": "전략경제정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-b4953b57",
+      "name": "정책조정총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-fbad56d9",
+      "name": "산업경제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-31e77032",
+      "name": "서비스경제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-cbe672df",
+      "name": "지역경제정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-82944a73",
+      "name": "기업환경과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-153d5f7a",
+      "name": "녹색전환경제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-843931e2",
+      "name": "전략경제총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-65ceef6c",
+      "name": "전략경제분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-8661b8e6",
+      "name": "전략투자지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-ca4514ce",
+      "name": "전략수출지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-ef0eb080",
+      "name": "인공지능경제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-ff3fa766",
+      "name": "조세총괄정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-0b50aea5",
+      "name": "소득법인세정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-75b7f7bf",
+      "name": "재산소비세정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-7cf3ea36",
+      "name": "국제조세정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-3018d59d",
+      "name": "관세정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-7694d5b9",
+      "name": "조세정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-58785100",
+      "name": "조세특례제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-81205d8b",
+      "name": "조세추계과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-30125e52",
+      "name": "조세분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-ae1ee85e",
+      "name": "소득세제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-ee121fd8",
+      "name": "법인세제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-d38937ea",
+      "name": "금융세제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-eef778bb",
+      "name": "재산세제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-9940155f",
+      "name": "부가가치세제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-0ae9f8be",
+      "name": "환경에너지세제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-71780388",
+      "name": "국제조세제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-329bbe83",
+      "name": "관세제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-aad08e6e",
+      "name": "산업관세과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-24d47045",
+      "name": "관세협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-6e8e016d",
+      "name": "자유무역협정관세이행과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-d65407f2",
+      "name": "국고정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-8ff7c5c6",
+      "name": "국유재산정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-83bb2f24",
+      "name": "조달계약정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-fc07fe97",
+      "name": "국고총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-70962a1a",
+      "name": "국채정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-3fd9de81",
+      "name": "국채시장과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-776daa13",
+      "name": "출자관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-650b7d7b",
+      "name": "회계결산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-cbf8243a",
+      "name": "국유재산정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-7470ec90",
+      "name": "국유재산개발과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-7c235385",
+      "name": "국유재산조정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-7ee1443d",
+      "name": "조달정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-2e8ac28c",
+      "name": "계약정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-9acb4c3c",
+      "name": "거시경제심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-068b9ac3",
+      "name": "종합정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-b0f1d149",
+      "name": "경제분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-9f68a7dc",
+      "name": "자금시장정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-4c2a479b",
+      "name": "자금시장분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-11cab7b7",
+      "name": "부동산시장과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-3c7991af",
+      "name": "재정기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-9699a3e2",
+      "name": "민생경제총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-1d73d465",
+      "name": "물가정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-9ccc9b28",
+      "name": "인력정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-5558b137",
+      "name": "복지경제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-7bcc993e",
+      "name": "경제구조개혁총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-4983c14d",
+      "name": "경제구조분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-60e472f0",
+      "name": "노동시장경제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-f1fad7f0",
+      "name": "연금보건경제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-0d4526da",
+      "name": "청년정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-24f658d5",
+      "name": "국제금융심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-f44364a5",
+      "name": "국제금융과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-bd1d46ef",
+      "name": "외화자금과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-bcde84fb",
+      "name": "외환제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-17562904",
+      "name": "금융협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-184b06da",
+      "name": "다자금융과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-10614068",
+      "name": "대외경제심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-d24aea8b",
+      "name": "대외경제총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-f4e7ed23",
+      "name": "국제경제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-e7608edb",
+      "name": "통상정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-1782353a",
+      "name": "신통상분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-b95b245e",
+      "name": "경제협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-aeeb216d",
+      "name": "남북경제과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-dfb42e79",
+      "name": "개발금융총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-990e573c",
+      "name": "국제기구과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-b1ac08ea",
+      "name": "개발전략과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-7bb31c30",
+      "name": "개발사업협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-e7d8a803",
+      "name": "개발정책협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-145d45d0",
+      "name": "녹색기후기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-8061658e",
+      "name": "공공혁신심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-6ef5e0a4",
+      "name": "공공정책총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-b382063c",
+      "name": "공공제도기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-8bd30f4d",
+      "name": "재무경영과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-09dbe379",
+      "name": "평가분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-a1154b39",
+      "name": "인재경영과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-2c812fbf",
+      "name": "공공윤리정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-e5662fab",
+      "name": "공공혁신기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    },
+    {
+      "id": "n-51357921",
+      "name": "경영관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-ddbf5eed",
+      "parent": "n-6d736a60",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제7조(대변인)",
+        "evidenceText": "② 대변인은 다음의 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8e59b7bb",
+      "parent": "n-6d736a60",
+      "child": "n-7ce28e1b",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제8조(감사관)",
+        "evidenceText": "② 감사관은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-7585c3ce",
+      "parent": "n-6d736a60",
+      "child": "n-e875f603",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제9조(전략기획관)",
+        "evidenceText": "② 전략기획관은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-42f799ad",
+      "parent": "n-6d736a60",
+      "child": "n-1cc2a430",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "③ 장관 밑에 대변인 1명, 감사관 1명, 전략기획관 1명, 장관비서관 1명 및 장관정책보좌관 3명을 두고, 제2차관 밑에 기획조정실장 및 경제공급망기획관 각 1명을 둔다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-d24d5124",
+      "parent": "n-6d736a60",
+      "child": "n-a4fafae2",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제11조(장관정책보좌관)",
+        "evidenceText": "② 장관정책보좌관은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-954d2e98",
+      "parent": "n-8a775f5b",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제12조(기획조정실장)",
+        "evidenceText": "③ 기획조정실장은 다음 사항에 관하여 제2차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-3ef15a74",
+      "parent": "n-8a775f5b",
+      "child": "n-4a9b90be",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(경제공급망기획관)",
+        "evidenceText": "② 경제공급망기획관은 다음 사항에 관하여 제2차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-e5a37577",
+      "parent": "n-540db781",
+      "child": "n-f0b32413",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 재정경제부에 차관보 1명, 국제경제관리관 1명을 두되, 차관보는 경제정책ㆍ민생경제 및 경제구조개혁 업무에 관하여 장관과 제1차관을, 국제경제관리관은 국제금융 및 대외경제업무에 관하여 장관과 제2차관을 보좌한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d12ad55a",
+      "parent": "n-540db781",
+      "child": "n-0a6c3537",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c488ea4a",
+      "parent": "n-540db781",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c9ede448",
+      "parent": "n-540db781",
+      "child": "n-7e4f13ee",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9b8c624d",
+      "parent": "n-540db781",
+      "child": "n-897340bf",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c9f199db",
+      "parent": "n-540db781",
+      "child": "n-1b8539c4",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-15336029",
+      "parent": "n-540db781",
+      "child": "n-8ca82ec5",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ddfe442b",
+      "parent": "n-540db781",
+      "child": "n-eaf198fa",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8c42df36",
+      "parent": "n-540db781",
+      "child": "n-c7fd5e26",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ca8041f0",
+      "parent": "n-540db781",
+      "child": "n-83411fc2",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b0723b84",
+      "parent": "n-540db781",
+      "child": "n-3b9c5383",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0dd6574e",
+      "parent": "n-540db781",
+      "child": "n-8ccc4551",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3bc4e4e5",
+      "parent": "n-540db781",
+      "child": "n-63994084",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "② 재정경제부에 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ국고실ㆍ경제정책국ㆍ민생경제국ㆍ경제구조개혁국ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6208394a",
+      "parent": "n-6d736a60",
+      "child": "n-98908cd3",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 재정경제부에 차관보 1명, 국제경제관리관 1명을 두되, 차관보는 경제정책ㆍ민생경제 및 경제구조개혁 업무에 관하여 장관과 제1차관을, 국제경제관리관은 국제금융 및 대외경제업무에 관하여 장관과 제2차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-208a02fc",
+      "parent": "n-8a775f5b",
+      "child": "n-98908cd3",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 재정경제부에 차관보 1명, 국제경제관리관 1명을 두되, 차관보는 경제정책ㆍ민생경제 및 경제구조개혁 업무에 관하여 장관과 제1차관을, 국제경제관리관은 국제금융 및 대외경제업무에 관하여 장관과 제2차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6ed4305a",
+      "parent": "n-c74d22a6",
+      "child": "n-0a6c3537",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "② 제1차관은 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ경제정책국민생경제국 및 경제구조개혁국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-6232454a",
+      "parent": "n-c74d22a6",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "② 제1차관은 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ경제정책국민생경제국 및 경제구조개혁국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-67973f48",
+      "parent": "n-c74d22a6",
+      "child": "n-7e4f13ee",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "② 제1차관은 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ경제정책국민생경제국 및 경제구조개혁국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-3935bd4d",
+      "parent": "n-c74d22a6",
+      "child": "n-897340bf",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "② 제1차관은 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ경제정책국민생경제국 및 경제구조개혁국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-5dd8ef40",
+      "parent": "n-c74d22a6",
+      "child": "n-87a94ffa",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "② 제1차관은 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ경제정책국민생경제국 및 경제구조개혁국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-29ec3a36",
+      "parent": "n-c74d22a6",
+      "child": "n-c7fd5e26",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "② 제1차관은 인사과ㆍ운영지원과ㆍ혁신성장실ㆍ세제실ㆍ경제정책국민생경제국 및 경제구조개혁국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-8fc158d3",
+      "parent": "n-8a775f5b",
+      "child": "n-1b8539c4",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "③ 제2차관은 국고실ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-9cdf9938",
+      "parent": "n-8a775f5b",
+      "child": "n-83411fc2",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "③ 제2차관은 국고실ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-75e629bc",
+      "parent": "n-8a775f5b",
+      "child": "n-3b9c5383",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "③ 제2차관은 국고실ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-3cb5b936",
+      "parent": "n-8a775f5b",
+      "child": "n-8ccc4551",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "③ 제2차관은 국고실ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-16eed58d",
+      "parent": "n-8a775f5b",
+      "child": "n-63994084",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "③ 제2차관은 국고실ㆍ국제금융국ㆍ대외경제국ㆍ개발금융국 및 공공정책국의 소관업무에 관하여 장관을 보조한다",
+        "jurisdiction": true,
+        "legalBasis": "소관업무에 관하여 보조한다"
+      }
+    },
+    {
+      "id": "e-6715d9e1",
+      "parent": "n-540db781",
+      "child": "n-c74d22a6",
+      "type": "structural",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "① 재정경제부에 제1차관 및 제2차관을 두며, 장관이 부득이한 사유로 그 직무를 수행할 수 없을 때에는 제1차관, 제2차관의 순으로 그 직무를 대행한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6d29eed1",
+      "parent": "n-540db781",
+      "child": "n-8a775f5b",
+      "type": "structural",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(복수차관의 운영)",
+        "evidenceText": "① 재정경제부에 제1차관 및 제2차관을 두며, 장관이 부득이한 사유로 그 직무를 수행할 수 없을 때에는 제1차관, 제2차관의 순으로 그 직무를 대행한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5892e569",
+      "parent": "n-897340bf",
+      "child": "n-50d438e6",
+      "type": "temporary",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제30조(신국제조세규범과)",
+        "evidenceText": "① 재정경제부 세제실에 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제1호에 따라 2028년 2월 29일까지 존속하는 한시조직으로 신국제조세규범과를 둔다"
+      }
+    },
+    {
+      "id": "e-f2923006",
+      "parent": "n-1b8539c4",
+      "child": "n-78783f76",
+      "type": "temporary",
+      "sources": [
+        "재정경제부 직제 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제31조(국유재산협력과)",
+        "evidenceText": "① 재정경제부 국고실에 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제1호에 따라 2028년 4월 30일까지 존속하는 한시조직으로 국유재산협력과를 둔다"
+      }
+    },
+    {
+      "id": "e-011be0c0",
+      "parent": "n-e618142f",
+      "child": "n-67f14651",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제4조(대변인)",
+        "evidenceText": "③ 홍보담당관은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7f59d817",
+      "parent": "n-7ce28e1b",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제5조(감사관)",
+        "evidenceText": "③ 감사담당관은 다음 사항에 관하여 감사관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b5600516",
+      "parent": "n-7da5dac3",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제9조(기획조정실장)",
+        "evidenceText": "⑥ 기획재정담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-04a76965",
+      "parent": "n-7da5dac3",
+      "child": "n-54869c03",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제9조(기획조정실장)",
+        "evidenceText": "⑦ 혁신정책담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-1799a8d5",
+      "parent": "n-7da5dac3",
+      "child": "n-dadc7298",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제9조(기획조정실장)",
+        "evidenceText": "⑧ 규제개혁법무담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6dfc53cc",
+      "parent": "n-7da5dac3",
+      "child": "n-fbf09f55",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제9조(기획조정실장)",
+        "evidenceText": "⑨ 정보화담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-49d09c81",
+      "parent": "n-7da5dac3",
+      "child": "n-f1907300",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제9조(기획조정실장)",
+        "evidenceText": "③ 정책기획관은 「재정경제부 직제」 제12조제3항제1호부터 제19호까지의 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-3020239c",
+      "parent": "n-7da5dac3",
+      "child": "n-d35fd50b",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제9조(기획조정실장)",
+        "evidenceText": "④ 비상안전기획관은 「재정경제부 직제」 제12조제3항제20호부터 제25호까지의 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-0ffab0e4",
+      "parent": "n-4a9b90be",
+      "child": "n-83125d4d",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제10조(경제공급망기획관)",
+        "evidenceText": "③ 공급망정책담당관은 다음 사항에 관하여 경제공급망기획관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3d67ec69",
+      "parent": "n-4a9b90be",
+      "child": "n-5f0b4d4a",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제10조(경제공급망기획관)",
+        "evidenceText": "④ 공급망대응담당관은 다음 사항에 관하여 경제공급망기획관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-c12044cb",
+      "parent": "n-7e4f13ee",
+      "child": "n-c0717c98",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "③ 정책조정관은 「재정경제부 직제」 제16조제3항제1호부터 제23호까지의 사항에 관하여 혁신성장실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-e021c11e",
+      "parent": "n-7e4f13ee",
+      "child": "n-d6668def",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "④ 전략경제정책관은 「재정경제부 직제」 제16조제3항제24호부터 제39호까지의 사항에 관하여 혁신성장실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-9d6f1296",
+      "parent": "n-7e4f13ee",
+      "child": "n-b4953b57",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "⑤ 혁신성장실에 정책조정총괄과ㆍ산업경제과ㆍ서비스경제과ㆍ지역경제정책과ㆍ기업환경과ㆍ녹색전환경제과ㆍ전략경제총괄과ㆍ전략경제분석과ㆍ전략투자지원과ㆍ전략수출지원과 및 인공지능경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3f04e1de",
+      "parent": "n-7e4f13ee",
+      "child": "n-fbad56d9",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "⑤ 혁신성장실에 정책조정총괄과ㆍ산업경제과ㆍ서비스경제과ㆍ지역경제정책과ㆍ기업환경과ㆍ녹색전환경제과ㆍ전략경제총괄과ㆍ전략경제분석과ㆍ전략투자지원과ㆍ전략수출지원과 및 인공지능경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0a7d4b4d",
+      "parent": "n-7e4f13ee",
+      "child": "n-31e77032",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "⑤ 혁신성장실에 정책조정총괄과ㆍ산업경제과ㆍ서비스경제과ㆍ지역경제정책과ㆍ기업환경과ㆍ녹색전환경제과ㆍ전략경제총괄과ㆍ전략경제분석과ㆍ전략투자지원과ㆍ전략수출지원과 및 인공지능경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d65ea4d6",
+      "parent": "n-7e4f13ee",
+      "child": "n-cbe672df",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "⑤ 혁신성장실에 정책조정총괄과ㆍ산업경제과ㆍ서비스경제과ㆍ지역경제정책과ㆍ기업환경과ㆍ녹색전환경제과ㆍ전략경제총괄과ㆍ전략경제분석과ㆍ전략투자지원과ㆍ전략수출지원과 및 인공지능경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a3951109",
+      "parent": "n-7e4f13ee",
+      "child": "n-82944a73",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "⑤ 혁신성장실에 정책조정총괄과ㆍ산업경제과ㆍ서비스경제과ㆍ지역경제정책과ㆍ기업환경과ㆍ녹색전환경제과ㆍ전략경제총괄과ㆍ전략경제분석과ㆍ전략투자지원과ㆍ전략수출지원과 및 인공지능경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5cc30cb9",
+      "parent": "n-7e4f13ee",
+      "child": "n-153d5f7a",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "⑤ 혁신성장실에 정책조정총괄과ㆍ산업경제과ㆍ서비스경제과ㆍ지역경제정책과ㆍ기업환경과ㆍ녹색전환경제과ㆍ전략경제총괄과ㆍ전략경제분석과ㆍ전략투자지원과ㆍ전략수출지원과 및 인공지능경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3ce66418",
+      "parent": "n-7e4f13ee",
+      "child": "n-843931e2",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "⑤ 혁신성장실에 정책조정총괄과ㆍ산업경제과ㆍ서비스경제과ㆍ지역경제정책과ㆍ기업환경과ㆍ녹색전환경제과ㆍ전략경제총괄과ㆍ전략경제분석과ㆍ전략투자지원과ㆍ전략수출지원과 및 인공지능경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6939fb72",
+      "parent": "n-7e4f13ee",
+      "child": "n-65ceef6c",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "⑤ 혁신성장실에 정책조정총괄과ㆍ산업경제과ㆍ서비스경제과ㆍ지역경제정책과ㆍ기업환경과ㆍ녹색전환경제과ㆍ전략경제총괄과ㆍ전략경제분석과ㆍ전략투자지원과ㆍ전략수출지원과 및 인공지능경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-976cf885",
+      "parent": "n-7e4f13ee",
+      "child": "n-8661b8e6",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "⑤ 혁신성장실에 정책조정총괄과ㆍ산업경제과ㆍ서비스경제과ㆍ지역경제정책과ㆍ기업환경과ㆍ녹색전환경제과ㆍ전략경제총괄과ㆍ전략경제분석과ㆍ전략투자지원과ㆍ전략수출지원과 및 인공지능경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-362cb0b1",
+      "parent": "n-7e4f13ee",
+      "child": "n-ca4514ce",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "⑤ 혁신성장실에 정책조정총괄과ㆍ산업경제과ㆍ서비스경제과ㆍ지역경제정책과ㆍ기업환경과ㆍ녹색전환경제과ㆍ전략경제총괄과ㆍ전략경제분석과ㆍ전략투자지원과ㆍ전략수출지원과 및 인공지능경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-35d96d3d",
+      "parent": "n-7e4f13ee",
+      "child": "n-ef0eb080",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제13조(혁신성장실)",
+        "evidenceText": "⑤ 혁신성장실에 정책조정총괄과ㆍ산업경제과ㆍ서비스경제과ㆍ지역경제정책과ㆍ기업환경과ㆍ녹색전환경제과ㆍ전략경제총괄과ㆍ전략경제분석과ㆍ전략투자지원과ㆍ전략수출지원과 및 인공지능경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-89b30821",
+      "parent": "n-897340bf",
+      "child": "n-ff3fa766",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "③ 조세총괄정책관은 「재정경제부 직제」 제17조제3항제1호부터 제20호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-26c5940b",
+      "parent": "n-897340bf",
+      "child": "n-0b50aea5",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "④ 소득법인세정책관은 「재정경제부 직제」 제17조제3항제24호부터 제27호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4854847c",
+      "parent": "n-897340bf",
+      "child": "n-75b7f7bf",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑤ 재산소비세정책관은 「재정경제부 직제」 제17조제3항제32호부터 제37호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7f3eb53e",
+      "parent": "n-897340bf",
+      "child": "n-7cf3ea36",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑥ 국제조세정책관은 「재정경제부 직제」 제17조제3항제21호부터 제23호까지 및 제28호부터 제31호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-bfdbf5bc",
+      "parent": "n-897340bf",
+      "child": "n-3018d59d",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑦ 관세정책관은 「재정경제부 직제」 제17조제3항제38호부터 제52호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-df8fe75e",
+      "parent": "n-897340bf",
+      "child": "n-7694d5b9",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-105e7380",
+      "parent": "n-897340bf",
+      "child": "n-58785100",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-20c642da",
+      "parent": "n-897340bf",
+      "child": "n-81205d8b",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9c185fd1",
+      "parent": "n-897340bf",
+      "child": "n-30125e52",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-beed8587",
+      "parent": "n-897340bf",
+      "child": "n-ae1ee85e",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0bc56bce",
+      "parent": "n-897340bf",
+      "child": "n-ee121fd8",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-480a875a",
+      "parent": "n-897340bf",
+      "child": "n-d38937ea",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9b01ee82",
+      "parent": "n-897340bf",
+      "child": "n-eef778bb",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-de96b063",
+      "parent": "n-897340bf",
+      "child": "n-9940155f",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-44c78f3a",
+      "parent": "n-897340bf",
+      "child": "n-0ae9f8be",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9abf090a",
+      "parent": "n-897340bf",
+      "child": "n-71780388",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9dcb39b2",
+      "parent": "n-897340bf",
+      "child": "n-329bbe83",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d78c7ee4",
+      "parent": "n-897340bf",
+      "child": "n-aad08e6e",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-17b4f82a",
+      "parent": "n-897340bf",
+      "child": "n-24d47045",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-630a0b17",
+      "parent": "n-897340bf",
+      "child": "n-6e8e016d",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제14조(세제실)",
+        "evidenceText": "⑧ 세제실에 조세정책과ㆍ조세특례제도과ㆍ조세추계과ㆍ조세분석과ㆍ소득세제과ㆍ법인세제과ㆍ금융세제과ㆍ재산세제과ㆍ부가가치세제과ㆍ환경에너지세제과ㆍ국제조세제도과ㆍ관세제도과ㆍ산업관세과ㆍ관세협력과 및 자유무역협정관세이행과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-37fabf1c",
+      "parent": "n-1b8539c4",
+      "child": "n-d65407f2",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "③ 국고정책관은 「재정경제부 직제」 제18조제3항제1호부터 제21호까지의 사항에 관하여 국고실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-24063b2e",
+      "parent": "n-1b8539c4",
+      "child": "n-8ff7c5c6",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "④ 국유재산정책관은 「재정경제부 직제」 제18조제3항제22호부터 제29호까지의 사항에 관하여 국고실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-0c07d729",
+      "parent": "n-1b8539c4",
+      "child": "n-83bb2f24",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "⑤ 조달계약정책관은 「재정경제부 직제」 제18조제3항제30호부터 제35호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-a27687ad",
+      "parent": "n-1b8539c4",
+      "child": "n-fc07fe97",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "⑥ 국고실에 국고총괄과ㆍ국채정책과ㆍ국채시장과ㆍ출자관리과ㆍ회계결산과ㆍ국유재산정책과ㆍ국유재산개발과ㆍ국유재산조정과ㆍ조달정책과 및 계약정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c7b934ed",
+      "parent": "n-1b8539c4",
+      "child": "n-70962a1a",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "⑥ 국고실에 국고총괄과ㆍ국채정책과ㆍ국채시장과ㆍ출자관리과ㆍ회계결산과ㆍ국유재산정책과ㆍ국유재산개발과ㆍ국유재산조정과ㆍ조달정책과 및 계약정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f62bff6c",
+      "parent": "n-1b8539c4",
+      "child": "n-3fd9de81",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "⑥ 국고실에 국고총괄과ㆍ국채정책과ㆍ국채시장과ㆍ출자관리과ㆍ회계결산과ㆍ국유재산정책과ㆍ국유재산개발과ㆍ국유재산조정과ㆍ조달정책과 및 계약정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-960a143c",
+      "parent": "n-1b8539c4",
+      "child": "n-776daa13",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "⑥ 국고실에 국고총괄과ㆍ국채정책과ㆍ국채시장과ㆍ출자관리과ㆍ회계결산과ㆍ국유재산정책과ㆍ국유재산개발과ㆍ국유재산조정과ㆍ조달정책과 및 계약정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bdd154a3",
+      "parent": "n-1b8539c4",
+      "child": "n-650b7d7b",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "⑥ 국고실에 국고총괄과ㆍ국채정책과ㆍ국채시장과ㆍ출자관리과ㆍ회계결산과ㆍ국유재산정책과ㆍ국유재산개발과ㆍ국유재산조정과ㆍ조달정책과 및 계약정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4e50e63f",
+      "parent": "n-1b8539c4",
+      "child": "n-cbf8243a",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "⑥ 국고실에 국고총괄과ㆍ국채정책과ㆍ국채시장과ㆍ출자관리과ㆍ회계결산과ㆍ국유재산정책과ㆍ국유재산개발과ㆍ국유재산조정과ㆍ조달정책과 및 계약정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-443cf99b",
+      "parent": "n-1b8539c4",
+      "child": "n-7470ec90",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "⑥ 국고실에 국고총괄과ㆍ국채정책과ㆍ국채시장과ㆍ출자관리과ㆍ회계결산과ㆍ국유재산정책과ㆍ국유재산개발과ㆍ국유재산조정과ㆍ조달정책과 및 계약정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-05eb3fe0",
+      "parent": "n-1b8539c4",
+      "child": "n-7c235385",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "⑥ 국고실에 국고총괄과ㆍ국채정책과ㆍ국채시장과ㆍ출자관리과ㆍ회계결산과ㆍ국유재산정책과ㆍ국유재산개발과ㆍ국유재산조정과ㆍ조달정책과 및 계약정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7939becb",
+      "parent": "n-1b8539c4",
+      "child": "n-7ee1443d",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "⑥ 국고실에 국고총괄과ㆍ국채정책과ㆍ국채시장과ㆍ출자관리과ㆍ회계결산과ㆍ국유재산정책과ㆍ국유재산개발과ㆍ국유재산조정과ㆍ조달정책과 및 계약정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-df6612e8",
+      "parent": "n-1b8539c4",
+      "child": "n-2e8ac28c",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제15조(국고실)",
+        "evidenceText": "⑥ 국고실에 국고총괄과ㆍ국채정책과ㆍ국채시장과ㆍ출자관리과ㆍ회계결산과ㆍ국유재산정책과ㆍ국유재산개발과ㆍ국유재산조정과ㆍ조달정책과 및 계약정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ab38aa5c",
+      "parent": "n-8ca82ec5",
+      "child": "n-9acb4c3c",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제16조(경제정책국)",
+        "evidenceText": "③ 거시경제심의관은 「재정경제부 직제」 제19조제3항제4호, 제8호, 제11호 및 제14호의 사항에 관하여 국장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-f394cfe8",
+      "parent": "n-8ca82ec5",
+      "child": "n-068b9ac3",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제16조(경제정책국)",
+        "evidenceText": "④ 경제정책국에 종합정책과ㆍ경제분석과ㆍ자금시장정책과ㆍ자금시장분석과ㆍ부동산시장과 및 재정기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-09bdcc3f",
+      "parent": "n-8ca82ec5",
+      "child": "n-b0f1d149",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제16조(경제정책국)",
+        "evidenceText": "④ 경제정책국에 종합정책과ㆍ경제분석과ㆍ자금시장정책과ㆍ자금시장분석과ㆍ부동산시장과 및 재정기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-47b22d88",
+      "parent": "n-8ca82ec5",
+      "child": "n-9f68a7dc",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제16조(경제정책국)",
+        "evidenceText": "④ 경제정책국에 종합정책과ㆍ경제분석과ㆍ자금시장정책과ㆍ자금시장분석과ㆍ부동산시장과 및 재정기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1f8740ba",
+      "parent": "n-8ca82ec5",
+      "child": "n-4c2a479b",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제16조(경제정책국)",
+        "evidenceText": "④ 경제정책국에 종합정책과ㆍ경제분석과ㆍ자금시장정책과ㆍ자금시장분석과ㆍ부동산시장과 및 재정기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-78a7b556",
+      "parent": "n-8ca82ec5",
+      "child": "n-11cab7b7",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제16조(경제정책국)",
+        "evidenceText": "④ 경제정책국에 종합정책과ㆍ경제분석과ㆍ자금시장정책과ㆍ자금시장분석과ㆍ부동산시장과 및 재정기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4ecca483",
+      "parent": "n-8ca82ec5",
+      "child": "n-3c7991af",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제16조(경제정책국)",
+        "evidenceText": "④ 경제정책국에 종합정책과ㆍ경제분석과ㆍ자금시장정책과ㆍ자금시장분석과ㆍ부동산시장과 및 재정기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-78701634",
+      "parent": "n-eaf198fa",
+      "child": "n-9699a3e2",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제17조(민생경제국)",
+        "evidenceText": "② 민생경제국에 민생경제총괄과, 물가정책과, 인력정책과 및 복지경제과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b9d6075c",
+      "parent": "n-eaf198fa",
+      "child": "n-1d73d465",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제17조(민생경제국)",
+        "evidenceText": "② 민생경제국에 민생경제총괄과, 물가정책과, 인력정책과 및 복지경제과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-414c3e31",
+      "parent": "n-eaf198fa",
+      "child": "n-9ccc9b28",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제17조(민생경제국)",
+        "evidenceText": "② 민생경제국에 민생경제총괄과, 물가정책과, 인력정책과 및 복지경제과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3c18c1d2",
+      "parent": "n-eaf198fa",
+      "child": "n-5558b137",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제17조(민생경제국)",
+        "evidenceText": "② 민생경제국에 민생경제총괄과, 물가정책과, 인력정책과 및 복지경제과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-24a24150",
+      "parent": "n-c7fd5e26",
+      "child": "n-7bcc993e",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제18조(경제구조개혁국)",
+        "evidenceText": "② 경제구조개혁국에 경제구조개혁총괄과, 경제구조분석과, 노동시장경제과, 연금보건경제과 및 청년정책과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1e84c3b7",
+      "parent": "n-c7fd5e26",
+      "child": "n-4983c14d",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제18조(경제구조개혁국)",
+        "evidenceText": "② 경제구조개혁국에 경제구조개혁총괄과, 경제구조분석과, 노동시장경제과, 연금보건경제과 및 청년정책과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-29293d45",
+      "parent": "n-c7fd5e26",
+      "child": "n-60e472f0",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제18조(경제구조개혁국)",
+        "evidenceText": "② 경제구조개혁국에 경제구조개혁총괄과, 경제구조분석과, 노동시장경제과, 연금보건경제과 및 청년정책과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-74e917c2",
+      "parent": "n-c7fd5e26",
+      "child": "n-f1fad7f0",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제18조(경제구조개혁국)",
+        "evidenceText": "② 경제구조개혁국에 경제구조개혁총괄과, 경제구조분석과, 노동시장경제과, 연금보건경제과 및 청년정책과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3fcf3d99",
+      "parent": "n-c7fd5e26",
+      "child": "n-0d4526da",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제18조(경제구조개혁국)",
+        "evidenceText": "② 경제구조개혁국에 경제구조개혁총괄과, 경제구조분석과, 노동시장경제과, 연금보건경제과 및 청년정책과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-deef255f",
+      "parent": "n-83411fc2",
+      "child": "n-24f658d5",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제19조(국제금융국)",
+        "evidenceText": "③ 국제금융심의관은 「재정경제부 직제」 제22조제3항제24호부터 제34호까지의 사항에 관하여 국제금융국장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-f3e18264",
+      "parent": "n-83411fc2",
+      "child": "n-f44364a5",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제19조(국제금융국)",
+        "evidenceText": "④ 국제금융국에 국제금융과ㆍ외화자금과ㆍ외환제도과ㆍ금융협력과 및 다자금융과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5b010e71",
+      "parent": "n-83411fc2",
+      "child": "n-bd1d46ef",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제19조(국제금융국)",
+        "evidenceText": "④ 국제금융국에 국제금융과ㆍ외화자금과ㆍ외환제도과ㆍ금융협력과 및 다자금융과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-254d0107",
+      "parent": "n-83411fc2",
+      "child": "n-bcde84fb",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제19조(국제금융국)",
+        "evidenceText": "④ 국제금융국에 국제금융과ㆍ외화자금과ㆍ외환제도과ㆍ금융협력과 및 다자금융과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-26caa421",
+      "parent": "n-83411fc2",
+      "child": "n-17562904",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제19조(국제금융국)",
+        "evidenceText": "④ 국제금융국에 국제금융과ㆍ외화자금과ㆍ외환제도과ㆍ금융협력과 및 다자금융과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-40f9bdad",
+      "parent": "n-83411fc2",
+      "child": "n-184b06da",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제19조(국제금융국)",
+        "evidenceText": "④ 국제금융국에 국제금융과ㆍ외화자금과ㆍ외환제도과ㆍ금융협력과 및 다자금융과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8a34a5ad",
+      "parent": "n-3b9c5383",
+      "child": "n-10614068",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제20조(대외경제국)",
+        "evidenceText": "③ 대외경제심의관은 「재정경제부 직제」 제23조제3항제16호부터 제23호까지의 사항에 관하여 대외경제국장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-de7aa216",
+      "parent": "n-3b9c5383",
+      "child": "n-d24aea8b",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제20조(대외경제국)",
+        "evidenceText": "④ 대외경제국에 대외경제총괄과ㆍ국제경제과ㆍ통상정책과ㆍ신통상분석과ㆍ경제협력과 및 남북경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-06c17997",
+      "parent": "n-3b9c5383",
+      "child": "n-f4e7ed23",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제20조(대외경제국)",
+        "evidenceText": "④ 대외경제국에 대외경제총괄과ㆍ국제경제과ㆍ통상정책과ㆍ신통상분석과ㆍ경제협력과 및 남북경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cd9786d8",
+      "parent": "n-3b9c5383",
+      "child": "n-e7608edb",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제20조(대외경제국)",
+        "evidenceText": "④ 대외경제국에 대외경제총괄과ㆍ국제경제과ㆍ통상정책과ㆍ신통상분석과ㆍ경제협력과 및 남북경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ad867f55",
+      "parent": "n-3b9c5383",
+      "child": "n-1782353a",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제20조(대외경제국)",
+        "evidenceText": "④ 대외경제국에 대외경제총괄과ㆍ국제경제과ㆍ통상정책과ㆍ신통상분석과ㆍ경제협력과 및 남북경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-899834a1",
+      "parent": "n-3b9c5383",
+      "child": "n-b95b245e",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제20조(대외경제국)",
+        "evidenceText": "④ 대외경제국에 대외경제총괄과ㆍ국제경제과ㆍ통상정책과ㆍ신통상분석과ㆍ경제협력과 및 남북경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e97705b1",
+      "parent": "n-3b9c5383",
+      "child": "n-aeeb216d",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제20조(대외경제국)",
+        "evidenceText": "④ 대외경제국에 대외경제총괄과ㆍ국제경제과ㆍ통상정책과ㆍ신통상분석과ㆍ경제협력과 및 남북경제과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-21ef468c",
+      "parent": "n-8ccc4551",
+      "child": "n-dfb42e79",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제21조(개발금융국)",
+        "evidenceText": "② 개발금융국에 개발금융총괄과ㆍ국제기구과ㆍ개발전략과ㆍ개발사업협력과ㆍ개발정책협력과 및 녹색기후기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c85965aa",
+      "parent": "n-8ccc4551",
+      "child": "n-990e573c",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제21조(개발금융국)",
+        "evidenceText": "② 개발금융국에 개발금융총괄과ㆍ국제기구과ㆍ개발전략과ㆍ개발사업협력과ㆍ개발정책협력과 및 녹색기후기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-23836ffa",
+      "parent": "n-8ccc4551",
+      "child": "n-b1ac08ea",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제21조(개발금융국)",
+        "evidenceText": "② 개발금융국에 개발금융총괄과ㆍ국제기구과ㆍ개발전략과ㆍ개발사업협력과ㆍ개발정책협력과 및 녹색기후기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3aac59e8",
+      "parent": "n-8ccc4551",
+      "child": "n-7bb31c30",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제21조(개발금융국)",
+        "evidenceText": "② 개발금융국에 개발금융총괄과ㆍ국제기구과ㆍ개발전략과ㆍ개발사업협력과ㆍ개발정책협력과 및 녹색기후기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3f5efea5",
+      "parent": "n-8ccc4551",
+      "child": "n-e7d8a803",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제21조(개발금융국)",
+        "evidenceText": "② 개발금융국에 개발금융총괄과ㆍ국제기구과ㆍ개발전략과ㆍ개발사업협력과ㆍ개발정책협력과 및 녹색기후기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1800069e",
+      "parent": "n-8ccc4551",
+      "child": "n-145d45d0",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제21조(개발금융국)",
+        "evidenceText": "② 개발금융국에 개발금융총괄과ㆍ국제기구과ㆍ개발전략과ㆍ개발사업협력과ㆍ개발정책협력과 및 녹색기후기획과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5329f623",
+      "parent": "n-63994084",
+      "child": "n-8061658e",
+      "type": "advisor",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제22조(공공정책국)",
+        "evidenceText": "③ 공공혁신심의관은 「재정경제부 직제」 제25조제3항제4호ㆍ제5호ㆍ제11호ㆍ제19호부터 제22호까지 및 제26호부터 제29호까지의 사항에 관하여 공공정책국장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-7d59a130",
+      "parent": "n-63994084",
+      "child": "n-6ef5e0a4",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제22조(공공정책국)",
+        "evidenceText": "④ 공공정책국에 공공정책총괄과ㆍ공공제도기획과ㆍ재무경영과ㆍ평가분석과ㆍ인재경영과ㆍ공공윤리정책과ㆍ공공혁신기획과 및 경영관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2dd27ab5",
+      "parent": "n-63994084",
+      "child": "n-b382063c",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제22조(공공정책국)",
+        "evidenceText": "④ 공공정책국에 공공정책총괄과ㆍ공공제도기획과ㆍ재무경영과ㆍ평가분석과ㆍ인재경영과ㆍ공공윤리정책과ㆍ공공혁신기획과 및 경영관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-22395735",
+      "parent": "n-63994084",
+      "child": "n-8bd30f4d",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제22조(공공정책국)",
+        "evidenceText": "④ 공공정책국에 공공정책총괄과ㆍ공공제도기획과ㆍ재무경영과ㆍ평가분석과ㆍ인재경영과ㆍ공공윤리정책과ㆍ공공혁신기획과 및 경영관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d813a815",
+      "parent": "n-63994084",
+      "child": "n-09dbe379",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제22조(공공정책국)",
+        "evidenceText": "④ 공공정책국에 공공정책총괄과ㆍ공공제도기획과ㆍ재무경영과ㆍ평가분석과ㆍ인재경영과ㆍ공공윤리정책과ㆍ공공혁신기획과 및 경영관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e1dfff02",
+      "parent": "n-63994084",
+      "child": "n-a1154b39",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제22조(공공정책국)",
+        "evidenceText": "④ 공공정책국에 공공정책총괄과ㆍ공공제도기획과ㆍ재무경영과ㆍ평가분석과ㆍ인재경영과ㆍ공공윤리정책과ㆍ공공혁신기획과 및 경영관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e642b538",
+      "parent": "n-63994084",
+      "child": "n-2c812fbf",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제22조(공공정책국)",
+        "evidenceText": "④ 공공정책국에 공공정책총괄과ㆍ공공제도기획과ㆍ재무경영과ㆍ평가분석과ㆍ인재경영과ㆍ공공윤리정책과ㆍ공공혁신기획과 및 경영관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f7bca58d",
+      "parent": "n-63994084",
+      "child": "n-e5662fab",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제22조(공공정책국)",
+        "evidenceText": "④ 공공정책국에 공공정책총괄과ㆍ공공제도기획과ㆍ재무경영과ㆍ평가분석과ㆍ인재경영과ㆍ공공윤리정책과ㆍ공공혁신기획과 및 경영관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a94b5d0f",
+      "parent": "n-63994084",
+      "child": "n-51357921",
+      "type": "assistant",
+      "sources": [
+        "재정경제부 직제 시행규칙 [시행 20260102]"
+      ],
+      "metadata": {
+        "article": "제22조(공공정책국)",
+        "evidenceText": "④ 공공정책국에 공공정책총괄과ㆍ공공제도기획과ㆍ재무경영과ㆍ평가분석과ㆍ인재경영과ㆍ공공윤리정책과ㆍ공공혁신기획과 및 경영관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e9e743de",
+      "parent": "n-c84c464b",
+      "child": "n-6d736a60",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-05b1de4f",
+      "parent": "n-6d736a60",
+      "child": "n-8a775f5b",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-965e9c53",
+      "parent": "n-6d736a60",
+      "child": "n-c74d22a6",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-94ca1177",
+      "parent": "n-6d736a60",
+      "child": "n-540db781",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

@@ -1,0 +1,2928 @@
+{
+  "meta": {
+    "institution": "통일부",
+    "title": "통일부",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "통일부와 그 소속기관 직제 [시행 20260106]",
+      "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "통일부와 그 소속기관 직제 [시행 20260106]",
+        "role": "decree"
+      },
+      {
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "role": "rule"
+      }
+    ],
+    "temporaryHeadcounts": [
+      {
+        "target": "통일부",
+        "expires": "2026-12-31",
+        "source": "통일부와 그 소속기관 직제 [시행 20260106]"
+      }
+    ],
+    "appointmentExceptions": [
+      {
+        "names": [
+          "화천분소"
+        ],
+        "clause": "「행정기관의 조직과 정원에 관한 통칙」 제27조제3항에 따라 상호이체하여 배정ㆍ운영하는 부이사관 또는 서기관으로 보할 수 있다",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "headcount",
+        "annex": "별표 1",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 1의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 2의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 4",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 7의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 11",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      }
+    ],
+    "spanDiagnostics": [],
+    "laws": [
+      {
+        "name": "통일부와 그 소속기관 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260106",
+        "mst": "282495",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=282495&efYd=20260106&BD=on",
+        "annexCount": 6
+      },
+      {
+        "name": "통일부와 그 소속기관 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260630",
+        "mst": "287751",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=287751&efYd=20260630&BD=on",
+        "annexCount": 23
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "통일부 공무원 정원표(제33조제1항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260106",
+        "type": "headcount",
+        "source": "통일부와 그 소속기관 직제 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160445349",
+          "pdf": "/LSW/flDownload.do?flSeq=160445351",
+          "image": "/LSW/flDownload.do?flSeq=160445353"
+        },
+        "files": {
+          "hwp": "law0053002026010636022KC_000100E_20260106.hwp",
+          "pdf": "law0053002026010636022KC_000100E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 [별표 1] <개정 2026. 1. 6.>\n                                            \n  통일부 공무원 정원표(제33조제1항 관련)    \n                                            \n    총계                              328   \n                                            \n      정무직 계                       2     \n                                            \n        장관                          1     \n                                            \n        차관                          1     \n                                            \n      별정직 계                       2     \n                                            \n         고위공무원단                 1     \n                                            \n         3급 상당 또는 4급 상당 이하  1     \n                                            \n      일반직 계                       323   \n                                            \n        고위공무원단                  11    \n                                            \n        3급 또는 4급 이하             303   \n                                            \n        전문경력관                    7     \n                                            \n        전문직공무원                  2     \n                                            \n      경찰공무원 계   "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "삭제 &lt;2023. 4. 11.&gt;",
+        "key": "000102E",
+        "effectiveDate": "20260106",
+        "type": "deleted",
+        "source": "통일부와 그 소속기관 직제 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160445355",
+          "pdf": "/LSW/flDownload.do?flSeq=160445357",
+          "image": "/LSW/flDownload.do?flSeq=160445359"
+        },
+        "files": {
+          "hwp": "law0053002026010636022KC_000102E_20260106.hwp",
+          "pdf": "law0053002026010636022KC_000102E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 [별표 1의2] 삭제 <2023. 4. 11.>"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "통일부 소속기관 공무원 정원표(제34조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260106",
+        "type": "headcount",
+        "source": "통일부와 그 소속기관 직제 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160445361",
+          "pdf": "/LSW/flDownload.do?flSeq=160445363",
+          "image": "/LSW/flDownload.do?flSeq=160445365"
+        },
+        "files": {
+          "hwp": "law0053002026010636022KC_000200E_20260106.hwp",
+          "pdf": "law0053002026010636022KC_000200E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 [별표 2] <개정 2025. 11. 4.>\n                                                    \n  통일부 소속기관 공무원 정원표(제34조제1항 관련)   \n                                                    \n    총계                    178                     \n                                                    \n      일반직 계             178                     \n                                                    \n        고위공무원단        4                       \n                                                    \n        3급 또는 4급 이하   173                     \n                                                    \n        전문경력관          1"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "통일부에 두는 평가대상 조직(제37조제1항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260106",
+        "type": "evaluation",
+        "source": "통일부와 그 소속기관 직제 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160445367",
+          "pdf": "/LSW/flDownload.do?flSeq=160445369",
+          "image": "/LSW/flDownload.do?flSeq=160445371"
+        },
+        "files": {
+          "hwp": "law0053002026010636022KC_000300E_20260106.hwp",
+          "pdf": "law0053002026010636022KC_000300E_20260106.pdf"
+        },
+        "rowCount": 7,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "1. 평화교류실",
+            "0명"
+          ],
+          [
+            "2. 평화교류실 1개 정책관등",
+            "0명"
+          ],
+          [
+            "3. 평화교류실 4개 과",
+            "17명"
+          ],
+          [
+            "4. 사회문화협력국 2개 과",
+            "0명"
+          ],
+          [
+            "5. 평화협력지구추진단",
+            "1명"
+          ],
+          [
+            "6. 평화협력지구추진단 2개 과",
+            "15명"
+          ]
+        ],
+        "textPreview": "■ 통일부와 그 소속기관 직제 [별표 3] <개정 2025. 11. 4.>   \n  통일부에 두는 평가대상 조직(제37조제1항 관련)               \n┌──────────────┬──────────────┐\n│조직                        │정원                        │\n├──────────────┼──────────────┤\n│1. 평화교류실               │0명                         │\n├──────────────┼──────────────┤\n│2. 평화교류실 1개 정책관등  │0명                         │\n├──────────────┼──────────────┤\n│3. 평화교류실 4개 과        │17명                        │\n├──────────────┼──────────────┤\n│4. 사회문화협력국 2개 과    │0명                         │\n├──────────────┼──────────────┤\n│5. 평화협력지구추진단       │1명                         │\n├──────────────┼──────────────┤\n│6. 평화협력지구추진단 2개 과│15명                        │\n└──────────────┴──────────────┘"
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "통일부 한시조직에 두는 공무원 정원표(제38조제4항 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260106",
+        "type": "temporary-headcount",
+        "source": "통일부와 그 소속기관 직제 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160445373",
+          "pdf": "/LSW/flDownload.do?flSeq=160445375",
+          "image": "/LSW/flDownload.do?flSeq=160445377"
+        },
+        "files": {
+          "hwp": "law0053002026010636022KC_000400E_20260106.hwp",
+          "pdf": "law0053002026010636022KC_000400E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 [별표 4] <개정 2025. 11. 4.>       \n  통일부 한시조직에 두는 공무원 정원표(제38조제4항 관련)          \n                                                                  \n  한반도평화경청단(존속기한: 2026년 12월 31일)                    \n                                                                  \n  총계                                                        8   \n                                                                  \n    일반직 계                                                 8   \n                                                                  \n      고위공무원단                                            1   \n                                                                  \n      4급 이하                                                7"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "통일부 공무원 한시정원표(제39조 관련)",
+        "key": "000500E",
+        "effectiveDate": "20260106",
+        "type": "temporary-headcount",
+        "source": "통일부와 그 소속기관 직제 [시행 20260106]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=160445379",
+          "pdf": "/LSW/flDownload.do?flSeq=160445381",
+          "image": "/LSW/flDownload.do?flSeq=160445383"
+        },
+        "files": {
+          "hwp": "law0053002026010636022KC_000500E_20260106.hwp",
+          "pdf": "law0053002026010636022KC_000500E_20260106.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 [별표 5] <개정 2025. 11. 4.>   \n  통일부 공무원 한시정원표(제39조 관련)                       \n                                                              \n                                                              \n  제39조 관련 한시정원(존속기한: 2026년 12월 31일)            \n                                                              \n    총계                                            1         \n                                                              \n      일반직 계                                     1         \n                                                              \n        5급 이하                                    1"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "통일부 공무원 정원표(제21조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260630",
+        "type": "headcount",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166333919",
+          "pdf": "/LSW/flDownload.do?flSeq=166333921",
+          "image": [
+            "/LSW/flDownload.do?flSeq=166333923",
+            "/LSW/flDownload.do?flSeq=166333925"
+          ]
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000100E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000100E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 1] <개정 2026. 6. 30.>      \n                                                                          \n  통일부 공무원 정원표(제21조제1항 본문 관련)                             \n                                                                          \n    총계                                                            328   \n                                                                          \n      정무직 계                                                     2     \n                                                                          \n        장관                                                        1     \n                                                                          \n        차관                                                        1     \n                                                                          \n      별정직 계                                                     2     \n                                                                          \n        고위공무원단(장관정책보좌관)                                1     \n                                                                          \n        장관정책보좌관(3급 상당 또는 4급 상당)                      1     \n      "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "통일부 공무원 정원표(제21조제1항 단서 관련)",
+        "key": "000102E",
+        "effectiveDate": "20260630",
+        "type": "headcount",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166333927",
+          "pdf": "/LSW/flDownload.do?flSeq=166333929",
+          "image": [
+            "/LSW/flDownload.do?flSeq=166333931",
+            "/LSW/flDownload.do?flSeq=166333933"
+          ]
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000102E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000102E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 1의2] <신설 2026. 6. 30.>   \n                                                                          \n  통일부 공무원 정원표(제21조제1항 단서 관련)                             \n                                                                          \n    총계                                                            328   \n                                                                          \n      정무직 계                                                     2     \n                                                                          \n        장관                                                        1     \n                                                                          \n        차관                                                        1     \n                                                                          \n      별정직 계                                                     2     \n                                                                          \n        고위공무원단(장관정책보좌관)                                1     \n                                                                          \n        장관정책보좌관(3급 상당 또는 4급 상당)                      1     \n       "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "삭제 &lt;2022. 8. 3.&gt;",
+        "key": "000104E",
+        "effectiveDate": "20260630",
+        "type": "deleted",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166333941",
+          "pdf": "/LSW/flDownload.do?flSeq=166333943",
+          "image": "/LSW/flDownload.do?flSeq=166333945"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000104E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000104E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 1의4] 삭제 <2022. 8. 3.>"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "남북회담본부 공무원 정원표(제22조제1항 본문 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260630",
+        "type": "headcount",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166333947",
+          "pdf": "/LSW/flDownload.do?flSeq=166333949",
+          "image": "/LSW/flDownload.do?flSeq=166333951"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000200E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000200E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 2] <개정 2025. 11. 4.>                                                                              \n  남북회담본부 공무원 정원표(제22조제1항 본문 관련)                           \n                                                                              \n  총계                                                                    74  \n                                                                              \n    일반직 계                                                             74  \n                                                                              \n      고위공무원단                                                        2   \n                                                                              \n      부이사관 또는 서기관                                                1   \n                                                                              \n      서기관                                                              3   \n                                                                              \n      서기관 또는 과학기술서기관                                          1   \n                                                                              \n      서기관 또는 행정사무관       "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "남북회담본부 공무원 정원표(제22조제1항 단서 관련)",
+        "key": "000202E",
+        "effectiveDate": "20260630",
+        "type": "headcount",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166333953",
+          "pdf": "/LSW/flDownload.do?flSeq=166333955",
+          "image": "/LSW/flDownload.do?flSeq=166333957"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000202E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000202E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 2의2] <신설 2026. 6. 30.>       \n                                                                              \n  남북회담본부 공무원 정원표(제22조제1항 단서 관련)                           \n                                                                              \n  총계                                                                    74  \n                                                                              \n    일반직 계                                                             74  \n                                                                              \n      고위공무원단                                                        2   \n                                                                              \n      부이사관 또는 서기관                                                1   \n                                                                              \n      서기관                                                              3   \n                                                                              \n      서기관 또는 과학기술서기관                                          1   \n                                                                              \n      서기관 또는 행정"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "삭제 &lt;2016.2.29.&gt;",
+        "key": "000300E",
+        "effectiveDate": "20260630",
+        "type": "deleted",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166333959",
+          "pdf": "/LSW/flDownload.do?flSeq=166333961",
+          "image": "/LSW/flDownload.do?flSeq=166333963"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000300E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000300E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 3] 삭제 <2016.2.29.>"
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "북한이탈주민정착지원사무소 공무원 정원표(제22조제3항 본문 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260630",
+        "type": "headcount",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166333965",
+          "pdf": "/LSW/flDownload.do?flSeq=166333967",
+          "image": [
+            "/LSW/flDownload.do?flSeq=166333969",
+            "/LSW/flDownload.do?flSeq=166333971"
+          ]
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000400E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000400E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 4] <개정 2025. 2. 25.>\n                                                                    \n  북한이탈주민정착지원사무소 공무원 정원표(제22조제3항 본문 관련)   \n                                                                    \n  총계                                                      90      \n                                                                    \n    일반직 계                                               90      \n                                                                    \n      고위공무원단                                          1       \n                                                                    \n      서기관                                                2       \n                                                                    \n      서기관 또는 행정사무관                                3       \n                                                                    \n      행정사무관                                            8       \n                                                                    \n      행정사무관ㆍ공업사무관ㆍ시설사무관 또는 방송통신사무  1       \n  관                                                                \n                                                               "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "북한이탈주민정착지원사무소 공무원 정원표(제22조제3항 단서 관련)",
+        "key": "000402E",
+        "effectiveDate": "20260630",
+        "type": "headcount",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166333973",
+          "pdf": "/LSW/flDownload.do?flSeq=166333975",
+          "image": [
+            "/LSW/flDownload.do?flSeq=166333977",
+            "/LSW/flDownload.do?flSeq=166333979"
+          ]
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000402E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000402E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 4의2] <개정 2025. 2. 25.>\n                                                              \n  북한이탈주민정착지원사무소 공무원 정원표                    \n  (제22조제3항 단서 관련)                                     \n                                                              \n                                                              \n  총계                                                    90  \n                                                              \n    일반직 계                                             90  \n                                                              \n      고위공무원단                                        1   \n                                                              \n      서기관                                              2   \n                                                              \n      서기관 또는 행정사무관                              3   \n                                                              \n      행정사무관                                          10  \n                                                              \n      행정사무관ㆍ공업사무관ㆍ시설사무관 또는 방송통신사  1   \n  무관                                                        \n                                     "
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "삭제 &lt;2023. 9. 8.&gt;",
+        "key": "000500E",
+        "effectiveDate": "20260630",
+        "type": "deleted",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166333981",
+          "pdf": "/LSW/flDownload.do?flSeq=166333983",
+          "image": "/LSW/flDownload.do?flSeq=166333985"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000500E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000500E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 5] 삭제 <2023. 9. 8.>"
+      },
+      {
+        "annex": "별표 6",
+        "number": "6",
+        "title": "삭제 &lt;2023. 4. 11.&gt;",
+        "key": "000600E",
+        "effectiveDate": "20260630",
+        "type": "deleted",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166333987",
+          "pdf": "/LSW/flDownload.do?flSeq=166333989",
+          "image": "/LSW/flDownload.do?flSeq=166333991"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000600E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000600E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 6] 삭제 <2023. 4. 11.>"
+      },
+      {
+        "annex": "별표 6",
+        "number": "6",
+        "title": "삭제 &lt;2013.12.12&gt;",
+        "key": "000602E",
+        "effectiveDate": "20260630",
+        "type": "deleted",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166333993",
+          "pdf": "/LSW/flDownload.do?flSeq=166333995",
+          "image": "/LSW/flDownload.do?flSeq=166333997"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000602E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000602E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 6의2] 삭제 <2013.12.12>"
+      },
+      {
+        "annex": "별표 7",
+        "number": "7",
+        "title": "삭제 &lt;2022. 12. 29.&gt;",
+        "key": "000705E",
+        "effectiveDate": "20260630",
+        "type": "deleted",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166334023",
+          "pdf": "/LSW/flDownload.do?flSeq=166334025",
+          "image": "/LSW/flDownload.do?flSeq=166334027"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000705E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000705E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 7의5] 삭제 <2022. 12. 29.>"
+      },
+      {
+        "annex": "별표 7",
+        "number": "7",
+        "title": "북한인권기록센터 공무원 정원표(제22조제8항 본문 관련)",
+        "key": "000702E",
+        "effectiveDate": "20260630",
+        "type": "headcount",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166334005",
+          "pdf": "/LSW/flDownload.do?flSeq=166334007",
+          "image": "/LSW/flDownload.do?flSeq=166334009"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000702E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000702E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 7의2] <개정 2025. 2. 25.>\n                                                          \n                                                          \n  북한인권기록센터 공무원 정원표(제22조제8항 본문 관련)   \n                                                          \n      총계                        14                      \n                                                          \n        일반직 계                 14                      \n                                                          \n          고위공무원단            1                       \n                                                          \n          서기관 또는 행정사무관  2                       \n                                                          \n          행정사무관              4                       \n                                                          \n          행정주사                4                       \n                                                          \n          행정주사보              2                       \n                                                          \n          전산주사보              1"
+      },
+      {
+        "annex": "별표 7",
+        "number": "7",
+        "title": "삭제 &lt;2025. 2. 25.&gt;",
+        "key": "000703E",
+        "effectiveDate": "20260630",
+        "type": "deleted",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166334011",
+          "pdf": "/LSW/flDownload.do?flSeq=166334013",
+          "image": "/LSW/flDownload.do?flSeq=166334015"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000703E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000703E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 7의3] 삭제 <2025. 2. 25.>"
+      },
+      {
+        "annex": "별표 7",
+        "number": "7",
+        "title": "삭제 &lt;2023. 12. 29.&gt;",
+        "key": "000704E",
+        "effectiveDate": "20260630",
+        "type": "deleted",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166334017",
+          "pdf": "/LSW/flDownload.do?flSeq=166334019",
+          "image": "/LSW/flDownload.do?flSeq=166334021"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000704E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000704E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 7의4] 삭제 <2023. 12. 29.>"
+      },
+      {
+        "annex": "별표 7",
+        "number": "7",
+        "title": "국립평화통일민주교육원 공무원 정원표(제22조제10항 관련)",
+        "key": "000706E",
+        "effectiveDate": "20260630",
+        "type": "headcount",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166334029",
+          "pdf": "/LSW/flDownload.do?flSeq=166334031",
+          "image": "/LSW/flDownload.do?flSeq=166334033"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000706E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000706E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 7의6] <개정 2025. 11. 4.>\n                                                            \n  국립평화통일민주교육원 공무원 정원표(제22조제10항 관련)   \n                                                            \n  총계                                    86                \n                                                            \n    일반직 계                             86                \n                                                            \n      고위공무원단에 속하는 임기제(원장)  1                 \n                                                            \n      고위공무원단에 속하는 일반직        2                 \n                                                            \n      3급 또는 4급 이하                   74                \n                                                            \n      임기제(교수요원)                    9"
+      },
+      {
+        "annex": "별표 8",
+        "number": "8",
+        "title": "삭제 &lt;2022. 2. 22.&gt;",
+        "key": "000800E",
+        "effectiveDate": "20260630",
+        "type": "deleted",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166334035",
+          "pdf": "/LSW/flDownload.do?flSeq=166334037",
+          "image": "/LSW/flDownload.do?flSeq=166334039"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000800E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000800E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 8] 삭제 <2022. 2. 22.>"
+      },
+      {
+        "annex": "별표 9",
+        "number": "9",
+        "title": "통일부에 두는 평가대상 조직(제24조 관련)",
+        "key": "000900E",
+        "effectiveDate": "20260630",
+        "type": "evaluation",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166334041",
+          "pdf": "/LSW/flDownload.do?flSeq=166334043",
+          "image": "/LSW/flDownload.do?flSeq=166334045"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_000900E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_000900E_20260630.pdf"
+        },
+        "rowCount": 12,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "1. 평화교류실",
+            "0명",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "2. 평화교류실 평화경제기획관",
+            "0명",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "3. 평화교류실 평화교류총괄과",
+            "3명 (3급 또는 4급 1명, 4급 또는 5급 1명, 6급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "4. 평화교류실 평화경제ㆍ제재 관리과",
+            "5명 (4급 1명, 6급 3명, 8급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "5. 평화교류실 남북경제협력과",
+            "5명 (4급 1명, 5급 2명, 6급 1명, 8급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "6. 평화교류실 접경협력과",
+            "4명 (5급 2명, 6급 1명, 7급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "7. 사회문화협력국 남북인권협 력과",
+            "0명",
+            "2028년 3월 31일까지"
+          ],
+          [
+            "8. 사회문화협력국 안전지원과",
+            "0명",
+            "2028년 3월 31일까지"
+          ],
+          [
+            "9. 평화협력지구추진단",
+            "1명 (고위공무원 나등급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "10. 평화협력지구추진단 평화 협력지구기획과",
+            "8명 (4급 1명, 4급 또는 5급 1명, 5급 1명, 6급 3명, 7급 1명, 8급 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "11. 평화협력지구추진단 개성 공업지구지원과",
+            "7명 (4급 1명, 5급 2명, 6급 3명, 7급 1명)",
+            "2028년 9월 30일까지"
+          ]
+        ],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 9] <개정 2026. 3. 27.>                \n                                                                                    \n  통일부에 두는 평가대상 조직(제24조 관련)                                          \n                                                                                    \n                                                                                    \n┌──────────────┬──────────────┬──────────┐\n│조직                        │정원                        │평가기간            │\n├──────────────┼──────────────┼──────────┤\n│1. 평화교류실               │0명                         │2028년 9월 30일까지 │\n├──────────────┼──────────────┼──────────┤\n│2. 평화교류실 평화경제기획관│0명                         │2028년 9월 30일까지 │\n├──────────────┼──────────────┼──────────┤\n│3. 평화교류실 평화교류총괄과│3명                         │2028년 9월 30일까지 │\n│                            │(3급 또는 4급 1명, 4급      │                    │\n│                            │또는 5급 1명, 6급 1명)      │                    │\n├──────────────┼──────────────┼──────────┤\n│4. 평화교류실 평화경제ㆍ제재│5명                         │2028년 9월 30일까지 │\n│관리과                      │(4급 1명, 6급 3명,          │                    │\n│                            │8급 1명)      "
+      },
+      {
+        "annex": "별표 10",
+        "number": "10",
+        "title": "삭제 &lt;2020. 6. 1.&gt;",
+        "key": "001000E",
+        "effectiveDate": "20260630",
+        "type": "deleted",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166334047",
+          "pdf": "/LSW/flDownload.do?flSeq=166334049",
+          "image": "/LSW/flDownload.do?flSeq=166334051"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_001000E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_001000E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 10] 삭제 <2020. 6. 1.>"
+      },
+      {
+        "annex": "별표 11",
+        "number": "11",
+        "title": "통일부 한시조직에 두는 공무원 정원표(제25조제6항 관련)",
+        "key": "001100E",
+        "effectiveDate": "20260630",
+        "type": "temporary-headcount",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166334053",
+          "pdf": "/LSW/flDownload.do?flSeq=166334055",
+          "image": "/LSW/flDownload.do?flSeq=166334057"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_001100E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_001100E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 11] <개정 2025. 11. 4.>   \n                                                                        \n  통일부 한시조직에 두는 공무원 정원표(제25조제6항 관련)                \n                                                                        \n  한반도평화경청단(존속기한: 2026년 12월 31일)                          \n                                                                        \n    총계                                        8                       \n                                                                        \n      일반직 계                                 8                       \n                                                                        \n        고위공무원단                            1                       \n                                                                        \n        서기관                                  1                       \n                                                                        \n        행정사무관 또는 기록연구관              3                       \n                                                                        \n        행정주사                                2                       \n                                                 "
+      },
+      {
+        "annex": "별표 12",
+        "number": "12",
+        "title": "통일부 공무원 한시정원표(제27조 관련)",
+        "key": "001200E",
+        "effectiveDate": "20260630",
+        "type": "temporary-headcount",
+        "source": "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166334059",
+          "pdf": "/LSW/flDownload.do?flSeq=166334061",
+          "image": "/LSW/flDownload.do?flSeq=166334063"
+        },
+        "files": {
+          "hwp": "law0085372026063000143KC_001200E_20260630.hwp",
+          "pdf": "law0085372026063000143KC_001200E_20260630.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 통일부와 그 소속기관 직제 시행규칙 [별표 12] <신설 2023. 4. 11.>\n                                          \n  통일부 공무원 한시정원표(제27조 관련)   \n                                          \n                                          \n  총계            1                       \n                                          \n    일반직 계     1                       \n                                          \n      시설사무관  1"
+      }
+    ]
+  },
+  "rootId": "n-2c301d8c",
+  "nodes": [
+    {
+      "id": "n-2c301d8c",
+      "name": "통일부",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-8ba82392",
+      "name": "남북회담본부",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution",
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-c2a3695e",
+      "name": "북한이탈주민정착지원사무소",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution",
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-9361d2af",
+      "name": "북한인권기록센터",
+      "kind": "affiliated",
+      "rank": 5,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-419f9c90",
+      "name": "국립평화통일민주교육원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-a4fafae2",
+      "name": "장관정책보좌관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-4481f335",
+      "name": "차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-7da5dac3",
+      "name": "기획조정실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-2cc3db62",
+      "name": "통일정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-adfb10c4",
+      "name": "평화교류실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-67c9c9f2",
+      "name": "정세분석국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-9818a72e",
+      "name": "사회문화협력국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-a3a60632",
+      "name": "평화협력지구추진단",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-1cb5d75a",
+      "name": "회담기획부",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-68a0ffc3",
+      "name": "정착지원",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-018b0465",
+      "name": "화천분소",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "appointmentException": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-cd3e640d",
+      "name": "분소",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ]
+    },
+    {
+      "id": "n-335ccc30",
+      "name": "한반도평화경청단",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "temporary": true,
+        "expires": "2026-12-31",
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]",
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-4293d199",
+      "name": "공보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-67f14651",
+      "name": "홍보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-3ea7d450",
+      "name": "혁신행정법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-fbf09f55",
+      "name": "정보화담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-b13631cb",
+      "name": "비상안전담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "staffCategories": [
+          "임기제"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-f1907300",
+      "name": "정책기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-01204c17",
+      "name": "정책협력관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-7fb3f03e",
+      "name": "정책총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-4d3d2393",
+      "name": "한반도평화전략과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-8b0aabe6",
+      "name": "한반도통합기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-5429b212",
+      "name": "시민사회소통과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-0da53a05",
+      "name": "시민사회협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-43bc57f3",
+      "name": "국제협력기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-2b2b8a8d",
+      "name": "국제협력증진팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-fbacb0ae",
+      "name": "평화경제기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-80e33997",
+      "name": "평화교류총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급",
+        "evaluation": true
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-94bc127f",
+      "name": "제재관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-815336af",
+      "name": "남북경제협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급",
+        "evaluation": true
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-d5b3651f",
+      "name": "접경협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급",
+        "evaluation": true
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-f526fc77",
+      "name": "인도지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-3577af08",
+      "name": "기후환경협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-f7be336d",
+      "name": "북한정보협력관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-83d2c14a",
+      "name": "정세분석총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-cfa3f789",
+      "name": "정치군사분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-b0f1d149",
+      "name": "경제분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-3ea4771a",
+      "name": "사회문화분석팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-2d65019f",
+      "name": "위성기반분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-7fcf55b1",
+      "name": "북한정보서비스과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-2c63ecef",
+      "name": "자료관리팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-c8bb006c",
+      "name": "사회문화협력기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-3465d098",
+      "name": "이산가족납북자과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-c4e54d24",
+      "name": "남북인권협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-90e5c75e",
+      "name": "자립지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-b4aa3da7",
+      "name": "안전지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급",
+        "evaluation": true
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-09bbdf13",
+      "name": "25전쟁납북자기념관팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-d868c07b",
+      "name": "평화협력지구기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-26a549cc",
+      "name": "개성공업지구지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-398c5f90",
+      "name": "정치군사회담과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-e98a1f8c",
+      "name": "경제인도회담과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-bf2a415b",
+      "name": "회담지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-2daa495b",
+      "name": "회담운영연락과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-c07adfce",
+      "name": "출입관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-55d141ff",
+      "name": "교육기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-62c830a2",
+      "name": "교육훈련과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-7d8cfb46",
+      "name": "관리후생과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-ba3390f3",
+      "name": "교육운영팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-b99b84ba",
+      "name": "관리후생팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-a355fcb6",
+      "name": "평화공존담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-f301419b",
+      "name": "민간참여팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    },
+    {
+      "id": "n-fbe1fe30",
+      "name": "사회적대화팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-343c2ebc",
+      "parent": "n-2c301d8c",
+      "child": "n-8ba82392",
+      "type": "affiliated",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "①통일부장관의 관장사무를 지원하기 위하여 통일부장관 소속 하에 남북회담본부, 북한이탈주민정착지원사무소 및 북한인권기록센터를 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-7e6ab045",
+      "parent": "n-2c301d8c",
+      "child": "n-c2a3695e",
+      "type": "affiliated",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "①통일부장관의 관장사무를 지원하기 위하여 통일부장관 소속 하에 남북회담본부, 북한이탈주민정착지원사무소 및 북한인권기록센터를 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-51a7c8f7",
+      "parent": "n-2c301d8c",
+      "child": "n-9361d2af",
+      "type": "affiliated",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "①통일부장관의 관장사무를 지원하기 위하여 통일부장관 소속 하에 남북회담본부, 북한이탈주민정착지원사무소 및 북한인권기록센터를 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-8128ff02",
+      "parent": "n-2c301d8c",
+      "child": "n-419f9c90",
+      "type": "affiliated",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "② 통일부장관의 관장사무를 지원하기 위하여 「책임운영기관의 설치ㆍ운영에 관한 법률」 제4조제1항, 같은 법 시행령 제2조제1항 및 별표 1에 따라 통일부장관 소속의 책임운영기관으로 국립평화통일민주교육원을 둔다",
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-ddbf5eed",
+      "parent": "n-6d736a60",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제5조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d24d5124",
+      "parent": "n-6d736a60",
+      "child": "n-a4fafae2",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제6조(장관정책보좌관)",
+        "evidenceText": "② 장관정책보좌관은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6a94cd83",
+      "parent": "n-4481f335",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제6조의2(기획조정실장)",
+        "evidenceText": "③ 기획조정실장은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-c6824c70",
+      "parent": "n-4481f335",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제7조(감사담당관)",
+        "evidenceText": "② 감사담당관은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8750d451",
+      "parent": "n-9361d2af",
+      "child": "n-1cb5d75a",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제15조(본부장)",
+        "evidenceText": "① 남북회담본부에 본부장 1명을 두고, 본부장 밑에 회담기획부장 1명을 둔다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-eb71f4c6",
+      "parent": "n-018b0465",
+      "child": "n-cd3e640d",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제30조의2(북한이탈주민정착지원사무소 화천분소)",
+        "evidenceText": "② 화천분소에 분소장 1명을 두며, 분소장은 4급으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2aca3478",
+      "parent": "n-9361d2af",
+      "child": "n-335ccc30",
+      "type": "temporary",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제38조(한반도평화경청단장)",
+        "evidenceText": "① 장관 밑에 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제2호에 따라 2026년 12월 31일까지 존속하는 한시조직으로 한반도평화경청단장을 둔다"
+      }
+    },
+    {
+      "id": "e-7b29a3c5",
+      "parent": "n-6d736a60",
+      "child": "n-335ccc30",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제38조(한반도평화경청단장)",
+        "evidenceText": "③ 한반도평화경청단장은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-aecc9c3d",
+      "parent": "n-e618142f",
+      "child": "n-4293d199",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제2조(대변인)",
+        "evidenceText": "③ 공보담당관은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-011be0c0",
+      "parent": "n-e618142f",
+      "child": "n-67f14651",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제2조(대변인)",
+        "evidenceText": "④ 홍보담당관은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b5600516",
+      "parent": "n-7da5dac3",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제2조의4(기획조정실장)",
+        "evidenceText": "⑤ 기획재정담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-34cc94ce",
+      "parent": "n-7da5dac3",
+      "child": "n-3ea7d450",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제2조의4(기획조정실장)",
+        "evidenceText": "⑥ 혁신행정법무담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6dfc53cc",
+      "parent": "n-7da5dac3",
+      "child": "n-fbf09f55",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제2조의4(기획조정실장)",
+        "evidenceText": "⑦ 정보화담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-b6b5592a",
+      "parent": "n-7da5dac3",
+      "child": "n-b13631cb",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제2조의4(기획조정실장)",
+        "evidenceText": "⑧ 비상안전담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-49d09c81",
+      "parent": "n-7da5dac3",
+      "child": "n-f1907300",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제2조의4(기획조정실장)",
+        "evidenceText": "③ 정책기획관은 「통일부와 그 소속기관 직제」 제6조의2제3항 각 호의 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d2d2e42e",
+      "parent": "n-2cc3db62",
+      "child": "n-01204c17",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조(통일정책실)",
+        "evidenceText": "③ 정책협력관은 「통일부와 그 소속기관 직제」 제10조제3항제9호부터 제16호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-c44b9b1e",
+      "parent": "n-2cc3db62",
+      "child": "n-7fb3f03e",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조(통일정책실)",
+        "evidenceText": "④ 통일정책실에 정책총괄과ㆍ한반도평화전략과ㆍ한반도통합기획과ㆍ시민사회소통과ㆍ시민사회협력과ㆍ국제협력기획과 및 국제협력증진팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4f51c0fe",
+      "parent": "n-2cc3db62",
+      "child": "n-4d3d2393",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조(통일정책실)",
+        "evidenceText": "④ 통일정책실에 정책총괄과ㆍ한반도평화전략과ㆍ한반도통합기획과ㆍ시민사회소통과ㆍ시민사회협력과ㆍ국제협력기획과 및 국제협력증진팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d200c743",
+      "parent": "n-2cc3db62",
+      "child": "n-8b0aabe6",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조(통일정책실)",
+        "evidenceText": "④ 통일정책실에 정책총괄과ㆍ한반도평화전략과ㆍ한반도통합기획과ㆍ시민사회소통과ㆍ시민사회협력과ㆍ국제협력기획과 및 국제협력증진팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-51ae2f59",
+      "parent": "n-2cc3db62",
+      "child": "n-5429b212",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조(통일정책실)",
+        "evidenceText": "④ 통일정책실에 정책총괄과ㆍ한반도평화전략과ㆍ한반도통합기획과ㆍ시민사회소통과ㆍ시민사회협력과ㆍ국제협력기획과 및 국제협력증진팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-95e563ef",
+      "parent": "n-2cc3db62",
+      "child": "n-0da53a05",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조(통일정책실)",
+        "evidenceText": "④ 통일정책실에 정책총괄과ㆍ한반도평화전략과ㆍ한반도통합기획과ㆍ시민사회소통과ㆍ시민사회협력과ㆍ국제협력기획과 및 국제협력증진팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-68049263",
+      "parent": "n-2cc3db62",
+      "child": "n-43bc57f3",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조(통일정책실)",
+        "evidenceText": "④ 통일정책실에 정책총괄과ㆍ한반도평화전략과ㆍ한반도통합기획과ㆍ시민사회소통과ㆍ시민사회협력과ㆍ국제협력기획과 및 국제협력증진팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5fa79ae1",
+      "parent": "n-2cc3db62",
+      "child": "n-2b2b8a8d",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조(통일정책실)",
+        "evidenceText": "④ 통일정책실에 정책총괄과ㆍ한반도평화전략과ㆍ한반도통합기획과ㆍ시민사회소통과ㆍ시민사회협력과ㆍ국제협력기획과 및 국제협력증진팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7c0847ae",
+      "parent": "n-adfb10c4",
+      "child": "n-fbacb0ae",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조의2(평화교류실)",
+        "evidenceText": "③ 평화경제기획관은 「통일부와 그 소속기관 직제」 제10조의2제3항제8호부터 제18호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-bb4014fe",
+      "parent": "n-adfb10c4",
+      "child": "n-80e33997",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조의2(평화교류실)",
+        "evidenceText": "④ 평화교류실에 평화교류총괄과, 평화경제ㆍ제재관리과, 남북경제협력과, 접경협력과, 인도지원과 및 기후환경협력과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-359fa11a",
+      "parent": "n-adfb10c4",
+      "child": "n-94bc127f",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조의2(평화교류실)",
+        "evidenceText": "④ 평화교류실에 평화교류총괄과, 평화경제ㆍ제재관리과, 남북경제협력과, 접경협력과, 인도지원과 및 기후환경협력과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6a3c9d6f",
+      "parent": "n-adfb10c4",
+      "child": "n-815336af",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조의2(평화교류실)",
+        "evidenceText": "④ 평화교류실에 평화교류총괄과, 평화경제ㆍ제재관리과, 남북경제협력과, 접경협력과, 인도지원과 및 기후환경협력과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-da2fb478",
+      "parent": "n-adfb10c4",
+      "child": "n-d5b3651f",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조의2(평화교류실)",
+        "evidenceText": "④ 평화교류실에 평화교류총괄과, 평화경제ㆍ제재관리과, 남북경제협력과, 접경협력과, 인도지원과 및 기후환경협력과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b008a736",
+      "parent": "n-adfb10c4",
+      "child": "n-f526fc77",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조의2(평화교류실)",
+        "evidenceText": "④ 평화교류실에 평화교류총괄과, 평화경제ㆍ제재관리과, 남북경제협력과, 접경협력과, 인도지원과 및 기후환경협력과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bc4f9887",
+      "parent": "n-adfb10c4",
+      "child": "n-3577af08",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제6조의2(평화교류실)",
+        "evidenceText": "④ 평화교류실에 평화교류총괄과, 평화경제ㆍ제재관리과, 남북경제협력과, 접경협력과, 인도지원과 및 기후환경협력과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e41c2004",
+      "parent": "n-67c9c9f2",
+      "child": "n-f7be336d",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제7조(정세분석국)",
+        "evidenceText": "③ 북한정보협력관은 「통일부와 그 소속기관 직제」 제11조제3항제5호부터 제11호까지의 사항에 관하여 국장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b595b88a",
+      "parent": "n-67c9c9f2",
+      "child": "n-83d2c14a",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제7조(정세분석국)",
+        "evidenceText": "④ 정세분석국에 정세분석총괄과ㆍ정치군사분석과ㆍ경제분석과ㆍ사회문화분석팀ㆍ위성기반분석과ㆍ북한정보서비스과 및 자료관리팀을 두며, 각 과장은 부이사관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b7c24d8f",
+      "parent": "n-67c9c9f2",
+      "child": "n-cfa3f789",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제7조(정세분석국)",
+        "evidenceText": "④ 정세분석국에 정세분석총괄과ㆍ정치군사분석과ㆍ경제분석과ㆍ사회문화분석팀ㆍ위성기반분석과ㆍ북한정보서비스과 및 자료관리팀을 두며, 각 과장은 부이사관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e654c4ad",
+      "parent": "n-67c9c9f2",
+      "child": "n-b0f1d149",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제7조(정세분석국)",
+        "evidenceText": "④ 정세분석국에 정세분석총괄과ㆍ정치군사분석과ㆍ경제분석과ㆍ사회문화분석팀ㆍ위성기반분석과ㆍ북한정보서비스과 및 자료관리팀을 두며, 각 과장은 부이사관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ee6a01fb",
+      "parent": "n-67c9c9f2",
+      "child": "n-3ea4771a",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제7조(정세분석국)",
+        "evidenceText": "④ 정세분석국에 정세분석총괄과ㆍ정치군사분석과ㆍ경제분석과ㆍ사회문화분석팀ㆍ위성기반분석과ㆍ북한정보서비스과 및 자료관리팀을 두며, 각 과장은 부이사관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5d023545",
+      "parent": "n-67c9c9f2",
+      "child": "n-2d65019f",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제7조(정세분석국)",
+        "evidenceText": "④ 정세분석국에 정세분석총괄과ㆍ정치군사분석과ㆍ경제분석과ㆍ사회문화분석팀ㆍ위성기반분석과ㆍ북한정보서비스과 및 자료관리팀을 두며, 각 과장은 부이사관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b54385e9",
+      "parent": "n-67c9c9f2",
+      "child": "n-7fcf55b1",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제7조(정세분석국)",
+        "evidenceText": "④ 정세분석국에 정세분석총괄과ㆍ정치군사분석과ㆍ경제분석과ㆍ사회문화분석팀ㆍ위성기반분석과ㆍ북한정보서비스과 및 자료관리팀을 두며, 각 과장은 부이사관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-96d6e555",
+      "parent": "n-67c9c9f2",
+      "child": "n-2c63ecef",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제7조(정세분석국)",
+        "evidenceText": "④ 정세분석국에 정세분석총괄과ㆍ정치군사분석과ㆍ경제분석과ㆍ사회문화분석팀ㆍ위성기반분석과ㆍ북한정보서비스과 및 자료관리팀을 두며, 각 과장은 부이사관 또는 서기관으로, 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-90098ed0",
+      "parent": "n-9818a72e",
+      "child": "n-c8bb006c",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제8조(사회문화협력국)",
+        "evidenceText": "② 사회문화협력국에 사회문화협력기획과ㆍ이산가족납북자과ㆍ남북인권협력과ㆍ자립지원과ㆍ안전지원과 및 국립6ㆍ25전쟁납북자기념관팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3760837b",
+      "parent": "n-9818a72e",
+      "child": "n-3465d098",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제8조(사회문화협력국)",
+        "evidenceText": "② 사회문화협력국에 사회문화협력기획과ㆍ이산가족납북자과ㆍ남북인권협력과ㆍ자립지원과ㆍ안전지원과 및 국립6ㆍ25전쟁납북자기념관팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7c4b1ddb",
+      "parent": "n-9818a72e",
+      "child": "n-c4e54d24",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제8조(사회문화협력국)",
+        "evidenceText": "② 사회문화협력국에 사회문화협력기획과ㆍ이산가족납북자과ㆍ남북인권협력과ㆍ자립지원과ㆍ안전지원과 및 국립6ㆍ25전쟁납북자기념관팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bd93b30b",
+      "parent": "n-9818a72e",
+      "child": "n-90e5c75e",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제8조(사회문화협력국)",
+        "evidenceText": "② 사회문화협력국에 사회문화협력기획과ㆍ이산가족납북자과ㆍ남북인권협력과ㆍ자립지원과ㆍ안전지원과 및 국립6ㆍ25전쟁납북자기념관팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-031de0ef",
+      "parent": "n-9818a72e",
+      "child": "n-b4aa3da7",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제8조(사회문화협력국)",
+        "evidenceText": "② 사회문화협력국에 사회문화협력기획과ㆍ이산가족납북자과ㆍ남북인권협력과ㆍ자립지원과ㆍ안전지원과 및 국립6ㆍ25전쟁납북자기념관팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9feda2d5",
+      "parent": "n-9818a72e",
+      "child": "n-09bbdf13",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제8조(사회문화협력국)",
+        "evidenceText": "② 사회문화협력국에 사회문화협력기획과ㆍ이산가족납북자과ㆍ남북인권협력과ㆍ자립지원과ㆍ안전지원과 및 국립6ㆍ25전쟁납북자기념관팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 팀장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-019fad67",
+      "parent": "n-a3a60632",
+      "child": "n-d868c07b",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제8조의2(평화협력지구추진단)",
+        "evidenceText": "② 평화협력지구추진단에 평화협력지구기획과 및 개성공업지구지원과를 두며, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ff0db944",
+      "parent": "n-a3a60632",
+      "child": "n-26a549cc",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제8조의2(평화협력지구추진단)",
+        "evidenceText": "② 평화협력지구추진단에 평화협력지구기획과 및 개성공업지구지원과를 두며, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3c91c175",
+      "parent": "n-8ba82392",
+      "child": "n-398c5f90",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제9조(남북회담본부)",
+        "evidenceText": "④ 남북회담본부에 정치군사회담과ㆍ경제인도회담과ㆍ회담지원과ㆍ회담운영연락과 및 출입관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-21b3efcd",
+      "parent": "n-8ba82392",
+      "child": "n-e98a1f8c",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제9조(남북회담본부)",
+        "evidenceText": "④ 남북회담본부에 정치군사회담과ㆍ경제인도회담과ㆍ회담지원과ㆍ회담운영연락과 및 출입관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-be58d793",
+      "parent": "n-8ba82392",
+      "child": "n-bf2a415b",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제9조(남북회담본부)",
+        "evidenceText": "④ 남북회담본부에 정치군사회담과ㆍ경제인도회담과ㆍ회담지원과ㆍ회담운영연락과 및 출입관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c5e2d582",
+      "parent": "n-8ba82392",
+      "child": "n-2daa495b",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제9조(남북회담본부)",
+        "evidenceText": "④ 남북회담본부에 정치군사회담과ㆍ경제인도회담과ㆍ회담지원과ㆍ회담운영연락과 및 출입관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d3d369af",
+      "parent": "n-8ba82392",
+      "child": "n-c07adfce",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제9조(남북회담본부)",
+        "evidenceText": "④ 남북회담본부에 정치군사회담과ㆍ경제인도회담과ㆍ회담지원과ㆍ회담운영연락과 및 출입관리과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e6461f40",
+      "parent": "n-8ba82392",
+      "child": "n-1cb5d75a",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제9조(남북회담본부)",
+        "evidenceText": "③ 회담기획부장은 「통일부와 그 소속기관 직제」 제14조 각 호의 사항에 관하여 남북회담본부장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-fcb67057",
+      "parent": "n-c2a3695e",
+      "child": "n-55d141ff",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제19조(북한이탈주민정착지원사무소)",
+        "evidenceText": "② 북한이탈주민정착지원사무소에 교육기획과ㆍ교육훈련과 및 관리후생과를 두되, 각 과장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-62d90c4e",
+      "parent": "n-c2a3695e",
+      "child": "n-62c830a2",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제19조(북한이탈주민정착지원사무소)",
+        "evidenceText": "② 북한이탈주민정착지원사무소에 교육기획과ㆍ교육훈련과 및 관리후생과를 두되, 각 과장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0076554d",
+      "parent": "n-c2a3695e",
+      "child": "n-7d8cfb46",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제19조(북한이탈주민정착지원사무소)",
+        "evidenceText": "② 북한이탈주민정착지원사무소에 교육기획과ㆍ교육훈련과 및 관리후생과를 두되, 각 과장은 서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-559f6f56",
+      "parent": "n-018b0465",
+      "child": "n-ba3390f3",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제19조의2(북한이탈주민정착지원사무소 화천분소)",
+        "evidenceText": "② 화천분소에 교육운영팀 및 관리후생팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3a833bf8",
+      "parent": "n-018b0465",
+      "child": "n-b99b84ba",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제19조의2(북한이탈주민정착지원사무소 화천분소)",
+        "evidenceText": "② 화천분소에 교육운영팀 및 관리후생팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-28ee0a83",
+      "parent": "n-335ccc30",
+      "child": "n-a355fcb6",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제25조(한반도평화경청단장)",
+        "evidenceText": "③ 평화공존담당관은 다음 사항에 대하여 한반도평화경청단장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-1034101e",
+      "parent": "n-335ccc30",
+      "child": "n-f301419b",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제25조(한반도평화경청단장)",
+        "evidenceText": "② 한반도평화경청단장 밑에 평화공존담당관, 민간참여팀 및 사회적대화팀을 두며, 담당관은 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-c5599aa2",
+      "parent": "n-335ccc30",
+      "child": "n-fbe1fe30",
+      "type": "advisor",
+      "sources": [
+        "통일부와 그 소속기관 직제 시행규칙 [시행 20260630]"
+      ],
+      "metadata": {
+        "article": "제25조(한반도평화경청단장)",
+        "evidenceText": "② 한반도평화경청단장 밑에 평화공존담당관, 민간참여팀 및 사회적대화팀을 두며, 담당관은 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-9bd87350",
+      "parent": "n-2c301d8c",
+      "child": "n-6d736a60",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-fb6f75f2",
+      "parent": "n-6d736a60",
+      "child": "n-4481f335",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-7d314a9d",
+      "parent": "n-4481f335",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 통일부에 운영지원과, 통일정책실, 평화교류실, 정세분석국, 사회문화협력국 및 평화협력지구추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-83d0a900",
+      "parent": "n-4481f335",
+      "child": "n-2cc3db62",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 통일부에 운영지원과, 통일정책실, 평화교류실, 정세분석국, 사회문화협력국 및 평화협력지구추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-beb06d5c",
+      "parent": "n-4481f335",
+      "child": "n-adfb10c4",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 통일부에 운영지원과, 통일정책실, 평화교류실, 정세분석국, 사회문화협력국 및 평화협력지구추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c31adcb4",
+      "parent": "n-4481f335",
+      "child": "n-67c9c9f2",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 통일부에 운영지원과, 통일정책실, 평화교류실, 정세분석국, 사회문화협력국 및 평화협력지구추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-780d84c6",
+      "parent": "n-4481f335",
+      "child": "n-9818a72e",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 통일부에 운영지원과, 통일정책실, 평화교류실, 정세분석국, 사회문화협력국 및 평화협력지구추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e8b11853",
+      "parent": "n-4481f335",
+      "child": "n-a3a60632",
+      "type": "assistant",
+      "sources": [
+        "통일부와 그 소속기관 직제 [시행 20260106]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 통일부에 운영지원과, 통일정책실, 평화교류실, 정세분석국, 사회문화협력국 및 평화협력지구추진단을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d55be76a",
+      "parent": "n-4481f335",
+      "child": "n-68a0ffc3",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-4f13ba77",
+      "parent": "n-4481f335",
+      "child": "n-018b0465",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

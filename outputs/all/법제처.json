@@ -1,0 +1,1391 @@
+{
+  "meta": {
+    "institution": "행정기관",
+    "title": "행정기관",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "법제처 직제 [시행 20260721]",
+      "법제처 직제 시행규칙 [시행 20260801]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "법제처 직제 [시행 20260721]",
+        "role": "rule"
+      },
+      {
+        "source": "법제처 직제 시행규칙 [시행 20260801]",
+        "role": "rule"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "headcount",
+        "annex": "별표 2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "법제처 직제 시행규칙 [시행 20260801]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 4",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "법제처 직제 시행규칙 [시행 20260801]"
+      }
+    ],
+    "spanDiagnostics": [
+      {
+        "node": "법제정책국",
+        "directUnits": 2,
+        "status": "consolidation-candidate",
+        "message": "직속 과·팀이 3개 미만입니다."
+      },
+      {
+        "node": "행정법제국",
+        "directUnits": 0,
+        "status": "consolidation-candidate",
+        "message": "직속 과·팀이 3개 미만입니다."
+      },
+      {
+        "node": "경제법제국",
+        "directUnits": 0,
+        "status": "consolidation-candidate",
+        "message": "직속 과·팀이 3개 미만입니다."
+      },
+      {
+        "node": "사회문화법제국",
+        "directUnits": 0,
+        "status": "consolidation-candidate",
+        "message": "직속 과·팀이 3개 미만입니다."
+      }
+    ],
+    "laws": [
+      {
+        "name": "법제처 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288229",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288229&efYd=20260721&BD=on",
+        "annexCount": 3
+      },
+      {
+        "name": "법제처 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260801",
+        "mst": "287369",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=287369&efYd=20260801&BD=on",
+        "annexCount": 4
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "법제처 공무원 정원표(제15조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "법제처 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167072721",
+          "pdf": "/LSW/flDownload.do?flSeq=167072723",
+          "image": "/LSW/flDownload.do?flSeq=167072725"
+        },
+        "files": {
+          "hwp": "law0036162026072136514KC_000100E_20260721.hwp",
+          "pdf": "law0036162026072136514KC_000100E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 법제처 직제 [별표 1] <개정 2026. 7. 21.>   \n                                                \n  법제처 공무원 정원표(제15조제1항 본문 관련)   \n                                                \n    총 계                   247                 \n                                                \n      정무직 계             1                   \n                                                \n        처장(차관급)        1                   \n                                                \n      일반직 계             246                 \n                                                \n        고위공무원단        14                  \n                                                \n        3급 또는 4급 이하   231                 \n                                                \n        전문경력관          1"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "법제처에 두는 평가대상 조직(제17조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "법제처 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167072727",
+          "pdf": "/LSW/flDownload.do?flSeq=167072729",
+          "image": "/LSW/flDownload.do?flSeq=167072731"
+        },
+        "files": {
+          "hwp": "law0036162026072136514KC_000200E_20260721.hwp",
+          "pdf": "law0036162026072136514KC_000200E_20260721.pdf"
+        },
+        "rowCount": 5,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "1. 법제정책국 법제조정정책관",
+            "1명"
+          ],
+          [
+            "2. 법령정비국 2개 과",
+            "8명"
+          ],
+          [
+            "3. 사회문화법제국 1개 법제관",
+            "1명"
+          ],
+          [
+            "4. 법제정보지원국 1개 센터",
+            "1명"
+          ]
+        ],
+        "textPreview": "■ 법제처 직제 [별표 2] <개정 2026. 5. 6.>      \n                                                  \n                                                  \n  법제처에 두는 평가대상 조직(제17조제1항 관련)   \n                                                  \n┌──────────────┬────────┐\n│조직                        │정원            │\n├──────────────┼────────┤\n│1. 법제정책국 법제조정정책관│1명             │\n├──────────────┼────────┤\n│2. 법령정비국 2개 과        │8명             │\n├──────────────┼────────┤\n│3. 사회문화법제국 1개 법제관│1명             │\n├──────────────┼────────┤\n│4. 법제정보지원국 1개 센터  │1명             │\n└──────────────┴────────┘"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "법제처 한시조직에 두는 공무원 정원표(제18조제4항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "법제처 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167072733",
+          "pdf": "/LSW/flDownload.do?flSeq=167072735",
+          "image": "/LSW/flDownload.do?flSeq=167072737"
+        },
+        "files": {
+          "hwp": "law0036162026072136514KC_000300E_20260721.hwp",
+          "pdf": "law0036162026072136514KC_000300E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 법제처 직제 [별표 3] <신설 2026. 5. 6.>              \n                                                          \n  법제처 한시조직에 두는 공무원 정원표(제18조제4항 관련)  \n                                                          \n  법제자문조정관(존속기한: 2029년 5월 5일)                \n                                                          \n  총계              14                                    \n                                                          \n    일반직 계       14                                    \n                                                          \n      고위공무원단  1                                     \n                                                          \n      4급 이하      13"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "법제처 공무원 정원표(제11조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "법제처 직제 시행규칙 [시행 20260801]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167157205",
+          "pdf": "/LSW/flDownload.do?flSeq=167157207",
+          "image": "/LSW/flDownload.do?flSeq=167157209"
+        },
+        "files": {
+          "hwp": "law0072332026072102135KC_000100E_20260721.hwp",
+          "pdf": "law0072332026072102135KC_000100E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 법제처 직제 시행규칙 [별표 1] <개정 2026. 7. 21.>            \n                                                                  \n  법제처 공무원 정원표(제11조제1항 본문 관련)                     \n                                                                  \n    총계                                                    247   \n                                                                  \n      정무직 계                                             1     \n                                                                  \n        처장(차관급)                                        1     \n                                                                  \n      일반직 계                                             246   \n                                                                  \n        고위공무원단                                        14    \n                                                                  \n        부이사관 또는 서기관                                11    \n                                                                  \n        부이사관, 서기관 또는 과학기술서기관                1     \n                                                                  \n        서기관                                              26    \n         "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "법제처 공무원 정원표(제11조제1항 단서 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "법제처 직제 시행규칙 [시행 20260801]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167157211",
+          "pdf": "/LSW/flDownload.do?flSeq=167157213",
+          "image": "/LSW/flDownload.do?flSeq=167157215"
+        },
+        "files": {
+          "hwp": "law0072332026072102135KC_000200E_20260721.hwp",
+          "pdf": "law0072332026072102135KC_000200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 법제처 직제 시행규칙 [별표 2] <개정 2026. 7. 21.>            \n                                                                  \n  법제처 공무원 정원표(제11조제1항 단서 관련)                     \n                                                                  \n    총계                                                    247   \n                                                                  \n      정무직 계                                             1     \n                                                                  \n        처장(차관급)                                        1     \n                                                                  \n      일반직 계                                             246   \n                                                                  \n        고위공무원단                                        14    \n                                                                  \n        부이사관 또는 서기관                                11    \n                                                                  \n        부이사관, 서기관 또는 과학기술서기관                1     \n                                                                  \n        서기관                                              26    \n         "
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "법제처에 두는 평가대상 조직(제13조 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "법제처 직제 시행규칙 [시행 20260801]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167157217",
+          "pdf": "/LSW/flDownload.do?flSeq=167157219",
+          "image": "/LSW/flDownload.do?flSeq=167157221"
+        },
+        "files": {
+          "hwp": "law0072332026072102135KC_000300E_20260721.hwp",
+          "pdf": "law0072332026072102135KC_000300E_20260721.pdf"
+        },
+        "rowCount": 6,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "1. 법제정책국 법제조정정책관",
+            "1명 (고위공무원단 1명)",
+            "2027년 9월 30일까지"
+          ],
+          [
+            "2. 법령정비국 법령정비총괄과",
+            "5명 (3급 또는 4급 1명, 4급 또는 5급 1명, 5급 2명, 7급 1명)",
+            "2029년 3월 31일까지"
+          ],
+          [
+            "3. 법령정비국 법령품질개선과",
+            "3명 (4급 또는 5급 1명, 5급 2명)",
+            "2029년 3월 31일까지"
+          ],
+          [
+            "4. 사회문화법제국 법제관",
+            "1명 (4급 1명)",
+            "2027년 6월 30일까지"
+          ],
+          [
+            "5. 법제정보지원국 국가법령정보센터",
+            "1명 (7급 1명)",
+            "2028년 9월 30일까지"
+          ]
+        ],
+        "textPreview": "■ 법제처 직제 시행규칙 [별표 3] <개정 2026. 5. 6.>                             \n                                                                                  \n                                                                                  \n  법제처에 두는 평가대상 조직(제13조 관련)                                        \n                                                                                  \n┌─────────────────┬──────────┬──────────┐\n│조직                              │정원                │평가기간            │\n├─────────────────┼──────────┼──────────┤\n│1. 법제정책국 법제조정정책관      │1명                 │2027년 9월 30일까지 │\n│                                  │(고위공무원단 1명)  │                    │\n├─────────────────┼──────────┼──────────┤\n│2. 법령정비국 법령정비총괄과      │5명                 │2029년 3월 31일까지 │\n│                                  │(3급 또는 4급 1명,  │                    │\n│                                  │4급 또는 5급 1명,   │                    │\n│                                  │5급 2명, 7급 1명)   │                    │\n├─────────────────┼──────────┼──────────┤\n│3. 법령정비국 법령품질개선과      │3명                 │2029년 3월 31일까지 │\n│                                  │(4급 또는 5급 1명,  │                    │\n│                         "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "법제처 한시조직에 두는 공무원 정원표(제14조제6항 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "법제처 직제 시행규칙 [시행 20260801]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167157223",
+          "pdf": "/LSW/flDownload.do?flSeq=167157225",
+          "image": "/LSW/flDownload.do?flSeq=167157227"
+        },
+        "files": {
+          "hwp": "law0072332026072102135KC_000400E_20260721.hwp",
+          "pdf": "law0072332026072102135KC_000400E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 법제처 직제 시행규칙 [별표 4] <신설 2026. 5. 6.>     \n                                                          \n                                                          \n  법제처 한시조직에 두는 공무원 정원표(제14조제6항 관련)  \n                                                          \n                                                          \n  법제자문조정관(존속기한: 2029년 5월 5일)                \n                                                          \n  총계              14                                    \n                                                          \n    일반직 계       14                                    \n                                                          \n      고위공무원단  1                                     \n                                                          \n      서기관        2                                     \n                                                          \n      행정사무관    8                                     \n                                                          \n      행정주사      1                                     \n                                                          \n      행정주사보    2"
+      }
+    ]
+  },
+  "rootId": "n-c84c464b",
+  "nodes": [
+    {
+      "id": "n-c84c464b",
+      "name": "행정기관",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-4047c766",
+      "name": "처장",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-7ff3a114",
+      "name": "법제처",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "unitRole": "affiliated-institution",
+        "evaluation": true
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-504d13cd",
+      "name": "법제정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-3258caf5",
+      "name": "법령정비국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-12d5a0f5",
+      "name": "행정법제국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-53b685e8",
+      "name": "경제법제국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-eda07d0f",
+      "name": "사회문화법제국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-f1c22da7",
+      "name": "법령해석국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-bc800460",
+      "name": "법제정보지원국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-df604536",
+      "name": "차장",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-618c7eaf",
+      "name": "기획조정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-5bbe4a77",
+      "name": "법제조정정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true,
+        "grade": "나"
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-0a7e3de0",
+      "name": "법제심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-a5171c89",
+      "name": "법제자문조정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "temporary": true,
+        "expires": "2029-05-05",
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true,
+        "grade": "나"
+      },
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-a894a89b",
+      "name": "혁신행정감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-185bfde7",
+      "name": "법제교류협력담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-6340fa45",
+      "name": "법제정책총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-bcdafce1",
+      "name": "법제조정총괄법제관",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-15ee4176",
+      "name": "법제조정법제관",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-7d7a7789",
+      "name": "법제조정지원팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-0c26025d",
+      "name": "법령정비총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-55b06f72",
+      "name": "법령정비지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-dacaa131",
+      "name": "법령품질개선과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급",
+        "evaluation": true
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-2b4eb9cf",
+      "name": "행정규칙심사정비팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-9d44398f",
+      "name": "법령해석총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-325d8b1e",
+      "name": "행정법령해석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-0d05f084",
+      "name": "경제법령해석1과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-0efe846f",
+      "name": "경제법령해석2과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-a61b97f0",
+      "name": "사회문화법령해석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-8da83b6d",
+      "name": "법령정보총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-f7204a3f",
+      "name": "국가법령정보센터",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-235f8108",
+      "name": "자치법제지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-746f71c1",
+      "name": "법제교육과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-8abe4bf0",
+      "name": "법제자문1담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-c476448b",
+      "name": "법제자문2담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-d7ac55e1",
+      "parent": "n-4047c766",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제4조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 처장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-db082d8e",
+      "parent": "n-7ff3a114",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 법제처에 운영지원과, 법제정책국, 법령정비국, 행정법제국, 경제법제국, 사회문화법제국, 법령해석국 및 법제정보지원국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4c058726",
+      "parent": "n-7ff3a114",
+      "child": "n-504d13cd",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 법제처에 운영지원과, 법제정책국, 법령정비국, 행정법제국, 경제법제국, 사회문화법제국, 법령해석국 및 법제정보지원국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b1c09e55",
+      "parent": "n-7ff3a114",
+      "child": "n-3258caf5",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 법제처에 운영지원과, 법제정책국, 법령정비국, 행정법제국, 경제법제국, 사회문화법제국, 법령해석국 및 법제정보지원국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4212af0c",
+      "parent": "n-7ff3a114",
+      "child": "n-12d5a0f5",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 법제처에 운영지원과, 법제정책국, 법령정비국, 행정법제국, 경제법제국, 사회문화법제국, 법령해석국 및 법제정보지원국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-af31156a",
+      "parent": "n-7ff3a114",
+      "child": "n-53b685e8",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 법제처에 운영지원과, 법제정책국, 법령정비국, 행정법제국, 경제법제국, 사회문화법제국, 법령해석국 및 법제정보지원국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f2318089",
+      "parent": "n-7ff3a114",
+      "child": "n-eda07d0f",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 법제처에 운영지원과, 법제정책국, 법령정비국, 행정법제국, 경제법제국, 사회문화법제국, 법령해석국 및 법제정보지원국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c07fc466",
+      "parent": "n-7ff3a114",
+      "child": "n-f1c22da7",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 법제처에 운영지원과, 법제정책국, 법령정비국, 행정법제국, 경제법제국, 사회문화법제국, 법령해석국 및 법제정보지원국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7c0c0399",
+      "parent": "n-7ff3a114",
+      "child": "n-bc800460",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제3조(하부조직)",
+        "evidenceText": "① 법제처에 운영지원과, 법제정책국, 법령정비국, 행정법제국, 경제법제국, 사회문화법제국, 법령해석국 및 법제정보지원국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-52e3740e",
+      "parent": "n-df604536",
+      "child": "n-618c7eaf",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제5조(기획조정관)",
+        "evidenceText": "② 기획조정관은 다음 사항에 관하여 차장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-1b0b6832",
+      "parent": "n-504d13cd",
+      "child": "n-5bbe4a77",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 [시행 20260721]",
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제6조(법제정책국)",
+        "evidenceText": "③ 법제조정정책관은 「법제처 직제」 제7조제3항제2호, 제11호 및 제12호의 사항에 관하여 법제정책국장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6c113eb6",
+      "parent": "n-12d5a0f5",
+      "child": "n-0a7e3de0",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(행정법제국)",
+        "evidenceText": "① 행정법제국에 국장 1명을 두고, 국장 밑에 법제심의관 2명과 법제관 5명을 둔다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3f2ce8a0",
+      "parent": "n-53b685e8",
+      "child": "n-0a7e3de0",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(경제법제국)",
+        "evidenceText": "① 경제법제국에 국장 1명을 두고, 국장 밑에 법제심의관 1명과 법제관 6명을 둔다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-f8dbe26d",
+      "parent": "n-eda07d0f",
+      "child": "n-0a7e3de0",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(사회문화법제국)",
+        "evidenceText": "① 사회문화법제국에 국장 1명을 두고, 국장 밑에 법제심의관 1명과 법제관 7명을 둔다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-578c0a13",
+      "parent": "n-4047c766",
+      "child": "n-a5171c89",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제18조(법제자문조정관)",
+        "evidenceText": "③ 법제자문조정관은 다음 사항에 관하여 처장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-c1a1e64b",
+      "parent": "n-618c7eaf",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정관)",
+        "evidenceText": "④ 기획재정담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-01e00ae0",
+      "parent": "n-618c7eaf",
+      "child": "n-a894a89b",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정관)",
+        "evidenceText": "⑤ 혁신행정감사담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-5fb374f6",
+      "parent": "n-618c7eaf",
+      "child": "n-185bfde7",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정관)",
+        "evidenceText": "⑥ 법제교류협력담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e993ef84",
+      "parent": "n-504d13cd",
+      "child": "n-6340fa45",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제6조(법제정책국)",
+        "evidenceText": "① 법제정책국에 법제정책총괄과, 법제조정총괄법제관 1명, 법제조정법제관 3명 및 법제조정지원팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6102e5ac",
+      "parent": "n-504d13cd",
+      "child": "n-bcdafce1",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제6조(법제정책국)",
+        "evidenceText": "① 법제정책국에 법제정책총괄과, 법제조정총괄법제관 1명, 법제조정법제관 3명 및 법제조정지원팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3a9e675f",
+      "parent": "n-504d13cd",
+      "child": "n-15ee4176",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제6조(법제정책국)",
+        "evidenceText": "① 법제정책국에 법제정책총괄과, 법제조정총괄법제관 1명, 법제조정법제관 3명 및 법제조정지원팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9d8d8a47",
+      "parent": "n-504d13cd",
+      "child": "n-7d7a7789",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제6조(법제정책국)",
+        "evidenceText": "① 법제정책국에 법제정책총괄과, 법제조정총괄법제관 1명, 법제조정법제관 3명 및 법제조정지원팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ed946626",
+      "parent": "n-3258caf5",
+      "child": "n-0c26025d",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제6조의2(법령정비국)",
+        "evidenceText": "① 법령정비국에 법령정비총괄과, 법령정비지원과, 법령품질개선과 및 행정규칙심사정비팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e8c2a0ad",
+      "parent": "n-3258caf5",
+      "child": "n-55b06f72",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제6조의2(법령정비국)",
+        "evidenceText": "① 법령정비국에 법령정비총괄과, 법령정비지원과, 법령품질개선과 및 행정규칙심사정비팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dfa6fbbd",
+      "parent": "n-3258caf5",
+      "child": "n-dacaa131",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제6조의2(법령정비국)",
+        "evidenceText": "① 법령정비국에 법령정비총괄과, 법령정비지원과, 법령품질개선과 및 행정규칙심사정비팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ca0d245f",
+      "parent": "n-3258caf5",
+      "child": "n-2b4eb9cf",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제6조의2(법령정비국)",
+        "evidenceText": "① 법령정비국에 법령정비총괄과, 법령정비지원과, 법령품질개선과 및 행정규칙심사정비팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b213e57a",
+      "parent": "n-f1c22da7",
+      "child": "n-9d44398f",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제8조(법령해석국)",
+        "evidenceText": "① 법령해석국에 법령해석총괄과, 행정법령해석과, 경제법령해석1과, 경제법령해석2과 및 사회문화법령해석과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-32269ad9",
+      "parent": "n-f1c22da7",
+      "child": "n-325d8b1e",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제8조(법령해석국)",
+        "evidenceText": "① 법령해석국에 법령해석총괄과, 행정법령해석과, 경제법령해석1과, 경제법령해석2과 및 사회문화법령해석과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ccd476d8",
+      "parent": "n-f1c22da7",
+      "child": "n-0d05f084",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제8조(법령해석국)",
+        "evidenceText": "① 법령해석국에 법령해석총괄과, 행정법령해석과, 경제법령해석1과, 경제법령해석2과 및 사회문화법령해석과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-26c0970b",
+      "parent": "n-f1c22da7",
+      "child": "n-0efe846f",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제8조(법령해석국)",
+        "evidenceText": "① 법령해석국에 법령해석총괄과, 행정법령해석과, 경제법령해석1과, 경제법령해석2과 및 사회문화법령해석과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-deafcd87",
+      "parent": "n-f1c22da7",
+      "child": "n-a61b97f0",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제8조(법령해석국)",
+        "evidenceText": "① 법령해석국에 법령해석총괄과, 행정법령해석과, 경제법령해석1과, 경제법령해석2과 및 사회문화법령해석과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-72b60bbe",
+      "parent": "n-bc800460",
+      "child": "n-8da83b6d",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제9조(법제정보지원국)",
+        "evidenceText": "① 법제정보지원국에 법령정보총괄과, 국가법령정보센터, 자치법제지원과 및 법제교육과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8af9e25f",
+      "parent": "n-bc800460",
+      "child": "n-f7204a3f",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제9조(법제정보지원국)",
+        "evidenceText": "① 법제정보지원국에 법령정보총괄과, 국가법령정보센터, 자치법제지원과 및 법제교육과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4500e277",
+      "parent": "n-bc800460",
+      "child": "n-235f8108",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제9조(법제정보지원국)",
+        "evidenceText": "① 법제정보지원국에 법령정보총괄과, 국가법령정보센터, 자치법제지원과 및 법제교육과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f6213ebb",
+      "parent": "n-bc800460",
+      "child": "n-746f71c1",
+      "type": "assistant",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제9조(법제정보지원국)",
+        "evidenceText": "① 법제정보지원국에 법령정보총괄과, 국가법령정보센터, 자치법제지원과 및 법제교육과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8ff9a3c6",
+      "parent": "n-a5171c89",
+      "child": "n-8abe4bf0",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제14조(법제자문조정관)",
+        "evidenceText": "④ 법제자문1담당관은 다음 사항에 관하여 법제자문조정관을 보좌한다"
+      }
+    },
+    {
+      "id": "e-9d1f7b3c",
+      "parent": "n-a5171c89",
+      "child": "n-c476448b",
+      "type": "advisor",
+      "sources": [
+        "법제처 직제 시행규칙 [시행 20260801]"
+      ],
+      "metadata": {
+        "article": "제14조(법제자문조정관)",
+        "evidenceText": "⑤ 법제자문2담당관은 다음 사항에 관하여 법제자문조정관을 보좌한다"
+      }
+    },
+    {
+      "id": "e-e9e743de",
+      "parent": "n-c84c464b",
+      "child": "n-6d736a60",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-1b13e628",
+      "parent": "n-6d736a60",
+      "child": "n-df604536",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-465cc7ee",
+      "parent": "n-df604536",
+      "child": "n-4047c766",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-86dad70c",
+      "parent": "n-c84c464b",
+      "child": "n-7ff3a114",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

@@ -1,0 +1,3830 @@
+{
+  "meta": {
+    "institution": "국방부",
+    "title": "국방부",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "국방부와 그 소속기관 직제 [시행 20260324]",
+      "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "국방부와 그 소속기관 직제 [시행 20260324]",
+        "role": "decree"
+      },
+      {
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]",
+        "role": "rule"
+      }
+    ],
+    "temporaryHeadcounts": [
+      {
+        "target": "국방부",
+        "expires": "2026-12-31",
+        "source": "국방부와 그 소속기관 직제 [시행 20260324]"
+      },
+      {
+        "target": "국방부",
+        "expires": "2028-03-31",
+        "source": "국방부와 그 소속기관 직제 [시행 20260324]"
+      },
+      {
+        "target": "국방부",
+        "expires": "2028-12-31",
+        "source": "국방부와 그 소속기관 직제 [시행 20260324]"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "headcount",
+        "annex": "별표 1의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 6",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      }
+    ],
+    "spanDiagnostics": [],
+    "laws": [
+      {
+        "name": "국방부와 그 소속기관 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260324",
+        "mst": "284581",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=284581&efYd=20260324&BD=on",
+        "annexCount": 5
+      },
+      {
+        "name": "국방부와 그 소속기관 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260324",
+        "mst": "285081",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=285081&efYd=20260324&BD=on",
+        "annexCount": 9
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "국방부 공무원(군인제외) 정원표(제25조제1항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260324",
+        "type": "headcount",
+        "source": "국방부와 그 소속기관 직제 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162414409",
+          "pdf": "/LSW/flDownload.do?flSeq=162414411",
+          "image": "/LSW/flDownload.do?flSeq=162414413"
+        },
+        "files": {
+          "hwp": "law0028632026032436191KC_000100E_20260324.hwp",
+          "pdf": "law0028632026032436191KC_000100E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 [별표 1] <개정 2026. 3. 24.>\n                                                        \n  국방부 공무원(군인제외) 정원표(제25조제1항 관련)      \n                                                        \n    총계                                          687   \n                                                        \n      정무직 계                                   2     \n                                                        \n        장관                                      1     \n                                                        \n        차관                                      1     \n                                                        \n      별정직 계                                   6     \n                                                        \n        고위공무원단                              1     \n                                                        \n        3급 상당 또는 4급 상당 이하               5     \n                                                        \n      일반직 계                                   679   \n                                                        \n        고위공무원단                              18    \n                                                        \n        고위공무원단에 속하는 "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "삭제 &lt;2024. 6. 25.&gt;",
+        "key": "000200E",
+        "effectiveDate": "20260324",
+        "type": "deleted",
+        "source": "국방부와 그 소속기관 직제 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162414415",
+          "pdf": "/LSW/flDownload.do?flSeq=162414417",
+          "image": "/LSW/flDownload.do?flSeq=162414619"
+        },
+        "files": {
+          "hwp": "law0028632026032436191KC_000200E_20260324.hwp",
+          "pdf": "law0028632026032436191KC_000200E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 [별표 2] 삭제 <2024. 6. 25.>"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "국방부에 두는 평가대상 조직(제27조의2제1항 관련)",
+        "key": "000202E",
+        "effectiveDate": "20260324",
+        "type": "evaluation",
+        "source": "국방부와 그 소속기관 직제 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162414621",
+          "pdf": "/LSW/flDownload.do?flSeq=162414623",
+          "image": "/LSW/flDownload.do?flSeq=162414625"
+        },
+        "files": {
+          "hwp": "law0028632026032436191KC_000202E_20260324.hwp",
+          "pdf": "law0028632026032436191KC_000202E_20260324.pdf"
+        },
+        "rowCount": 2,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "국방인공지능기획국 1개 과",
+            "7명"
+          ]
+        ],
+        "textPreview": "■ 국방부와 그 소속기관 직제 [별표 2의2] <신설 2026. 1. 2.>   \n                                                                \n  국방부에 두는 평가대상 조직(제27조의2제1항 관련)              \n┌─────────────┬────────────────┐\n│조직                      │정원                            │\n├─────────────┼────────────────┤\n│ 국방인공지능기획국 1개 과│7명                             │\n└─────────────┴────────────────┘"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "국방부 한시조직에 두는 공무원(군인제외) 정원표(제29조제4항, 제29조의2제4항, 제29조의3제4항, 제29조의4제4항 및 제29조의6제4항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260324",
+        "type": "temporary-headcount",
+        "source": "국방부와 그 소속기관 직제 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162414627",
+          "pdf": "/LSW/flDownload.do?flSeq=162414629",
+          "image": "/LSW/flDownload.do?flSeq=162414631"
+        },
+        "files": {
+          "hwp": "law0028632026032436191KC_000300E_20260324.hwp",
+          "pdf": "law0028632026032436191KC_000300E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 [별표 3] <개정 2026. 1. 2.>                      \n                                                                                \n  국방부 한시조직에 두는 공무원(군인제외) 정원표(제29조제4항, 제29조의2제4항,   \n  제29조의3제4항, 제29조의4제4항 및 제29조의6제4항 관련)                        \n                                                                                \n  1. 군공항이전사업단(존속기한: 2028년 1월 30일)                                \n                                                                                \n    총계                    15                                                  \n                                                                                \n      일반직 계             15                                                  \n                                                                                \n        고위공무원단        1                                                   \n                                                                                \n        3급 또는 4급 이하   14                                                  \n                                                                                \n  2. 군인권개선추진단(존속기한: 2028년 2월 29일)                                \n                 "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "국방부 공무원(군인제외) 한시정원표(제30조 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260324",
+        "type": "temporary-headcount",
+        "source": "국방부와 그 소속기관 직제 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162414633",
+          "pdf": "/LSW/flDownload.do?flSeq=162414635",
+          "image": "/LSW/flDownload.do?flSeq=162414637"
+        },
+        "files": {
+          "hwp": "law0028632026032436191KC_000400E_20260324.hwp",
+          "pdf": "law0028632026032436191KC_000400E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 [별표 4] <개정 2026. 1. 2.>  \n                                                            \n  국방부 공무원(군인제외) 한시정원표(제30조 관련)           \n                                                            \n  제30조제1항 관련 한시정원(존속기한: 2026년 12월 31일)     \n                                                            \n    총계                    2                               \n                                                            \n      일반직 계             2                               \n                                                            \n        5급 이하            2                               \n                                                            \n  2. 제30조제3항 관련 한시정원(존속기한: 2028년 3월 31일)   \n                                                            \n    총계                    2                               \n                                                            \n      일반직 계             2                               \n                                                            \n        5급 이하            2                               \n                                                            \n  3. 제30조제4항 관련 한시정원(존속기한: 2028년 12월 31일)  \n                         "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "국방부 공무원(군인제외) 정원표(제16조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260324",
+        "type": "headcount",
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162703923",
+          "pdf": "/LSW/flDownload.do?flSeq=162703925",
+          "image": [
+            "/LSW/flDownload.do?flSeq=162703927",
+            "/LSW/flDownload.do?flSeq=162703929"
+          ]
+        },
+        "files": {
+          "hwp": "law0067372026032401209KC_000100E_20260324.hwp",
+          "pdf": "law0067372026032401209KC_000100E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 시행규칙 [별표 1] <개정 2026. 3. 24.>\n                                                                  \n  국방부 공무원(군인제외) 정원표(제16조제1항 본문 관련)           \n                                                                  \n  총계                                                      687   \n                                                                  \n    정무직 계                                               2     \n                                                                  \n      장관                                                  1     \n                                                                  \n      차관                                                  1     \n                                                                  \n    별정직 계                                               6     \n                                                                  \n      고위공무원단(장관정책보좌관)                          1     \n                                                                  \n      장관정책보좌관(3급 상당 또는 4급 상당)                2     \n                                                                  \n      비서(7급 상당)                                        2     \n               "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "국방부 공무원(군인제외) 정원표(제16조제1항 단서 관련)",
+        "key": "000102E",
+        "effectiveDate": "20260324",
+        "type": "headcount",
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162703931",
+          "pdf": "/LSW/flDownload.do?flSeq=162703933",
+          "image": [
+            "/LSW/flDownload.do?flSeq=162703935",
+            "/LSW/flDownload.do?flSeq=162703937"
+          ]
+        },
+        "files": {
+          "hwp": "law0067372026032401209KC_000102E_20260324.hwp",
+          "pdf": "law0067372026032401209KC_000102E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 시행규칙 [별표 1의2] <개정 2026. 3. 24.>\n                                                                  \n  국방부 공무원(군인제외) 정원표(제16조제1항 단서 관련)           \n                                                                  \n  총계                                                      690   \n                                                                  \n    정무직 계                                               2     \n                                                                  \n      장관                                                  1     \n                                                                  \n      차관                                                  1     \n                                                                  \n    별정직 계                                               6     \n                                                                  \n      고위공무원단(장관정책보좌관)                          1     \n                                                                  \n      장관정책보좌관(3급 상당 또는 4급 상당)                2     \n                                                                  \n      비서(7급 상당)                                        2     \n             "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "삭제 &lt;2024. 7. 24.&gt;",
+        "key": "000200E",
+        "effectiveDate": "20260324",
+        "type": "deleted",
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162703939",
+          "pdf": "/LSW/flDownload.do?flSeq=162703941",
+          "image": "/LSW/flDownload.do?flSeq=162703943"
+        },
+        "files": {
+          "hwp": "law0067372026032401209KC_000200E_20260324.hwp",
+          "pdf": "law0067372026032401209KC_000200E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 시행규칙 [별표 2] 삭제 <2024. 7. 24.>"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "국방홍보원 공무원(군인제외) 정원표(제17조제2항 전단 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260324",
+        "type": "headcount",
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162703945",
+          "pdf": "/LSW/flDownload.do?flSeq=162703947",
+          "image": "/LSW/flDownload.do?flSeq=162703949"
+        },
+        "files": {
+          "hwp": "law0067372026032401209KC_000300E_20260324.hwp",
+          "pdf": "law0067372026032401209KC_000300E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 시행규칙 [별표 3]                                                              \n  국방홍보원 공무원(군인제외) 정원표(제17조제2항 전단 관련)   \n                                                              \n  총계                                            157         \n                                                              \n    일반직 계                                     157         \n                                                              \n      고위공무원단에 속하는 임기제(국방홍보원장)  1           \n                                                              \n      3급 또는 4급 이하                           117         \n                                                              \n      전문경력관                                  39          \n                                                              \n <개정 2024. 11. 26.>"
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "국방전산정보원 공무원(군인제외) 정원표(제17조제3항 전단 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260324",
+        "type": "headcount",
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162703951",
+          "pdf": "/LSW/flDownload.do?flSeq=162703953",
+          "image": "/LSW/flDownload.do?flSeq=162703955"
+        },
+        "files": {
+          "hwp": "law0067372026032401209KC_000400E_20260324.hwp",
+          "pdf": "law0067372026032401209KC_000400E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 시행규칙 [별표 4]                                                                  \n  국방전산정보원 공무원(군인제외) 정원표(제17조제3항 전단 관련)   \n                                                                  \n  총계                                                41          \n                                                                  \n    일반직 계                                         41          \n                                                                  \n      고위공무원단에 속하는 임기제(국방전산정보원장)  1           \n                                                                  \n      3급 또는 4급 이하                               40          \n                                                                  \n <개정 2022. 12. 13.>"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "삭제 &lt;2018. 12. 24.&gt;",
+        "key": "000500E",
+        "effectiveDate": "20260324",
+        "type": "deleted",
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162703957",
+          "pdf": "/LSW/flDownload.do?flSeq=162703959",
+          "image": "/LSW/flDownload.do?flSeq=162703961"
+        },
+        "files": {
+          "hwp": "law0067372026032401209KC_000500E_20260324.hwp",
+          "pdf": "law0067372026032401209KC_000500E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 시행규칙 [별표 5] 삭제 <2018. 12. 24.>"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "국방부에 두는 평가대상 조직(제18조의2 관련)",
+        "key": "000502E",
+        "effectiveDate": "20260324",
+        "type": "evaluation",
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162703963",
+          "pdf": "/LSW/flDownload.do?flSeq=162703965",
+          "image": "/LSW/flDownload.do?flSeq=162703967"
+        },
+        "files": {
+          "hwp": "law0067372026032401209KC_000502E_20260324.hwp",
+          "pdf": "law0067372026032401209KC_000502E_20260324.pdf"
+        },
+        "rowCount": 2,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "국방인공지능기획국 국방인공 지능정책과",
+            "7명 (4급 1명, 5급 3명, 6급 2 명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ]
+        ],
+        "textPreview": "■ 국방부와 그 소속기관 직제 시행규칙 [별표 5의2] <신설 2026. 1. 2.>\n                                                                      \n  국방부에 두는 평가대상 조직(제18조의2 관련)                         \n┌──────────────┬───────┬──────────┐\n│조직                        │정원          │평가기간            │\n├──────────────┼───────┼──────────┤\n│ 국방인공지능기획국 국방인공│7명           │2028년 12월 31일까지│\n│지능정책과                  │(4급 1명,     │                    │\n│                            │5급 3명, 6급 2│                    │\n│                            │명, 7급 1명)  │                    │\n└──────────────┴───────┴──────────┘"
+      },
+      {
+        "annex": "별표 6",
+        "number": "6",
+        "title": "국방부 한시조직에 두는 공무원(군인제외) 정원표(제20조제6항, 제20조의2제7항, 제20조의3제2항, 제20조의4제2항 및 제20조의6제2항 관련)",
+        "key": "000600E",
+        "effectiveDate": "20260324",
+        "type": "temporary-headcount",
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162703969",
+          "pdf": "/LSW/flDownload.do?flSeq=162703971",
+          "image": [
+            "/LSW/flDownload.do?flSeq=162703973",
+            "/LSW/flDownload.do?flSeq=162703975"
+          ]
+        },
+        "files": {
+          "hwp": "law0067372026032401209KC_000600E_20260324.hwp",
+          "pdf": "law0067372026032401209KC_000600E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 시행규칙 [별표 6] <개정 2026. 1. 2.>     \n                                                                        \n  국방부 한시조직에 두는 공무원(군인제외) 정원표(제20조제6항,           \n  제20조의2제7항, 제20조의3제2항, 제20조의4제2항 및 제20조의6제2항      \n  관련)                                                                 \n                                                                        \n  1. 군공항이전사업단(존속기한: 2028년 1월 30일)                        \n                                                                        \n    총계                                                            15  \n                                                                        \n      일반직 계                                                     15  \n                                                                        \n        고위공무원단                                                1   \n                                                                        \n        부이사관ㆍ서기관 또는 과학기술서기관                        1   \n                                                                        \n        서기관 또는 과학기술서기관                                  1   \n                                                                        \n        서기관"
+      },
+      {
+        "annex": "별표 7",
+        "number": "7",
+        "title": "국방부 공무원(군인제외) 한시정원표(제21조 관련)",
+        "key": "000700E",
+        "effectiveDate": "20260324",
+        "type": "temporary-headcount",
+        "source": "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162703977",
+          "pdf": "/LSW/flDownload.do?flSeq=162703979",
+          "image": "/LSW/flDownload.do?flSeq=162703981"
+        },
+        "files": {
+          "hwp": "law0067372026032401209KC_000700E_20260324.hwp",
+          "pdf": "law0067372026032401209KC_000700E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국방부와 그 소속기관 직제 시행규칙 [별표 7] <개정 2026. 1. 2.>       \n                                                                          \n  국방부 공무원(군인제외) 한시정원표(제21조 관련)                         \n                                                                          \n  1. 제21조제1항 관련 한시정원(존속기한: 2026년 12월 31일)                \n                                                                          \n    총계                                                              2   \n                                                                          \n      일반직 계                                                       2   \n                                                                          \n        행정사무관ㆍ사서사무관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관    1   \n  ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ방재안전사무관ㆍ                  \n  전산사무관ㆍ방송통신사무관 또는 기록연구관                              \n                                                                          \n        행정주사보ㆍ사서주사보ㆍ공업주사보ㆍ임업주사보ㆍ보건주사보ㆍ  1   \n  환경주사보ㆍ항공주사보ㆍ시설주사보ㆍ방재안전주사보ㆍ전산                \n  주사보 또는 방송통신주사보                                              \n                                                                          \n  2. 제21조제3항 관련 한시정원(존속기한: 2028년 3월 31일)                 \n  "
+      }
+    ]
+  },
+  "rootId": "n-870726b9",
+  "nodes": [
+    {
+      "id": "n-870726b9",
+      "name": "국방부",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred",
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-58b9affe",
+      "name": "국방홍보원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-5ac216fa",
+      "name": "국방전산정보원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "responsible",
+        "responsible": true,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-3fb5e401",
+      "name": "국방보좌관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "employmentType": "별정직",
+        "staffCategories": [
+          "일반직",
+          "별정직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-a4fafae2",
+      "name": "장관정책보좌관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-4481f335",
+      "name": "차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-7da5dac3",
+      "name": "기획조정실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-bf4d4808",
+      "name": "법무관리관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-7ce28e1b",
+      "name": "감사관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-93d34cd3",
+      "name": "국방정책실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-1d108940",
+      "name": "인사복지실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-d4097873",
+      "name": "국방인공지능기획국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-75cf1dc7",
+      "name": "전력정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-a0d2b03d",
+      "name": "국방정보화국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-969c10dc",
+      "name": "군수관리국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-41f80804",
+      "name": "군사시설국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-98908cd3",
+      "name": "차관보",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-9e7cb3d2",
+      "name": "군공항이전사업단",
+      "kind": "temporary",
+      "rank": 4,
+      "metadata": {
+        "temporary": true,
+        "expires": "2028-01-30",
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-9b325fa5",
+      "name": "군인권개선추진단",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "temporary": true,
+        "expires": "2028-02-29",
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-de28eb28",
+      "name": "방위산업수출기획과",
+      "kind": "temporary",
+      "rank": 5,
+      "metadata": {
+        "temporary": true,
+        "expires": "2028-04-30",
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-2f10206f",
+      "name": "중동아프리카정책과",
+      "kind": "temporary",
+      "rank": 5,
+      "metadata": {
+        "temporary": true,
+        "expires": "2027-07-25",
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-ab32e444",
+      "name": "국방연구개발기획과",
+      "kind": "temporary",
+      "rank": 5,
+      "metadata": {
+        "temporary": true,
+        "expires": "2027-07-25",
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]",
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-56ccd04c",
+      "name": "정책관리담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "employmentType": "별정직",
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "staffCategories": [
+          "별정직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-0e7eb99e",
+      "name": "의전담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-4293d199",
+      "name": "공보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-7b9676f7",
+      "name": "정책홍보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-ad88cef8",
+      "name": "디지털소통팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-3c19c188",
+      "name": "기획총괄담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-ad379304",
+      "name": "국군조직담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-a7ffa6f7",
+      "name": "조직관리담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-dd5ea767",
+      "name": "혁신행정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-de83963a",
+      "name": "재정계획담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-74e59b33",
+      "name": "예산편성담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-27dca627",
+      "name": "예산운영담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-d1863383",
+      "name": "재정회계담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-338e9809",
+      "name": "군구조개혁담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-b67f7bdc",
+      "name": "국방운영개혁담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-c17df88e",
+      "name": "기획관리관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-e051ec76",
+      "name": "계획예산관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-51b93b59",
+      "name": "국방개혁기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-f3f5cc83",
+      "name": "군사법정책담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-a76582f0",
+      "name": "규제개혁법제담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-1eb91e49",
+      "name": "송무소청팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-971be115",
+      "name": "직무감찰담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-f57bbfe0",
+      "name": "종합감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-e5292a47",
+      "name": "사업감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-7a1b3203",
+      "name": "국방민원센터",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-ed906cb4",
+      "name": "정책기획과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-ab00b904",
+      "name": "국방전략과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-d2328636",
+      "name": "북한정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-9f31d445",
+      "name": "군비통제비확산정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-98c1434c",
+      "name": "교육훈련정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-09217c53",
+      "name": "정신전력정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-aef83892",
+      "name": "국제정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-927d2bc0",
+      "name": "미국정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-e3f92ff5",
+      "name": "동북아정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-a3396399",
+      "name": "국제평화협력과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-526a2d8d",
+      "name": "인도태평양정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-6746b826",
+      "name": "방위정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-9618d616",
+      "name": "북핵대응정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-c939bc53",
+      "name": "미사일우주정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-f1907300",
+      "name": "정책기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-e2fa1d6e",
+      "name": "국제정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-6346b1da",
+      "name": "방위정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-64189fce",
+      "name": "인사기획관리과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-9ccc9b28",
+      "name": "인력정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-80a67d4f",
+      "name": "병영정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-0defc10a",
+      "name": "인적자원개발과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-dd4668c0",
+      "name": "군종정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-fce7325b",
+      "name": "군무원정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-d9eb5e0c",
+      "name": "군무원채용팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-48a09a9c",
+      "name": "군인사운영팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-5517c763",
+      "name": "예비전력기획과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-27c64b28",
+      "name": "자원동원과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-d9fc686b",
+      "name": "예비군훈련정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-5d5e9736",
+      "name": "복지정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-075340d5",
+      "name": "국방일자리정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-26683a39",
+      "name": "보건정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-4eb4f0eb",
+      "name": "군인연금과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-baa35f06",
+      "name": "군인재해보상과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-e85b3c31",
+      "name": "감염병대응팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-274000ce",
+      "name": "인사기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-534f4fdc",
+      "name": "예비전력정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-4160d0c0",
+      "name": "보건복지관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-320134db",
+      "name": "국방인공지능정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-803d2899",
+      "name": "국방데이터정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-ec423d5f",
+      "name": "유무인복합체계과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-e4ce3984",
+      "name": "전력정책과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-fdb2a8aa",
+      "name": "기반전력과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-f8c84150",
+      "name": "공통전력과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-792e2c44",
+      "name": "국방정보화정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-2acaed22",
+      "name": "국방정보화기반과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-7a24d869",
+      "name": "사이버전자기정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-0aa2bc53",
+      "name": "소프트웨어융합팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-54625dbe",
+      "name": "군수기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-731c0dcc",
+      "name": "장비관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-2c298473",
+      "name": "물자관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-d5e0e15f",
+      "name": "탄약수송관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-5ab8c6eb",
+      "name": "재난안전관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-caf798da",
+      "name": "군수지능화팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-2e837086",
+      "name": "시설기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-58ae435b",
+      "name": "시설제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-327e332f",
+      "name": "건설관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-1f839ba3",
+      "name": "부대건설과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-f07cc538",
+      "name": "국유재산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-c0fa26b3",
+      "name": "군주거정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-a13c689a",
+      "name": "환경소음팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-739beafb",
+      "name": "지뢰대응활동팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-1b9cd668",
+      "name": "이전총괄과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-687e4d22",
+      "name": "이전사업과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-f2971e52",
+      "name": "이전계획과",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-914cc2d3",
+      "name": "군인권총괄담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-d7869dbb",
+      "name": "성폭력예방대응담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-8775ff7b",
+      "name": "병영문화혁신담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-d6179851",
+      "name": "양성평등정책팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-e1f217fa",
+      "parent": "n-870726b9",
+      "child": "n-58b9affe",
+      "type": "affiliated",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "제2조(소속기관) 국방부장관의 관장사무를 지원하기 위하여 「책임운영기관의 설치ㆍ운영에 관한 법률」 제4조제1항, 같은 법 시행령 제2조제1항 및 별표 1에 따라 국방부장관 소속의 책임운영기관으로 국방홍보원 및 국방전산정보원을 둔다",
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-6abff7dd",
+      "parent": "n-870726b9",
+      "child": "n-5ac216fa",
+      "type": "affiliated",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "제2조(소속기관) 국방부장관의 관장사무를 지원하기 위하여 「책임운영기관의 설치ㆍ운영에 관한 법률」 제4조제1항, 같은 법 시행령 제2조제1항 및 별표 1에 따라 국방부장관 소속의 책임운영기관으로 국방홍보원 및 국방전산정보원을 둔다",
+        "affiliationType": "responsible"
+      }
+    },
+    {
+      "id": "e-da5ee560",
+      "parent": "n-6d736a60",
+      "child": "n-3fb5e401",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제5조(국방보좌관)",
+        "evidenceText": "② 국방보좌관은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-ddbf5eed",
+      "parent": "n-6d736a60",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제6조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d24d5124",
+      "parent": "n-6d736a60",
+      "child": "n-a4fafae2",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제7조(장관정책보좌관)",
+        "evidenceText": "② 장관정책보좌관은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6a94cd83",
+      "parent": "n-4481f335",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제7조의2(기획조정실장)",
+        "evidenceText": "③ 기획조정실장은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-899e603f",
+      "parent": "n-4481f335",
+      "child": "n-bf4d4808",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제8조(법무관리관)",
+        "evidenceText": "② 법무관리관은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-576e9be6",
+      "parent": "n-4481f335",
+      "child": "n-7ce28e1b",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(감사관)",
+        "evidenceText": "② 감사관은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6208394a",
+      "parent": "n-6d736a60",
+      "child": "n-98908cd3",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(차관보)",
+        "evidenceText": "② 차관보는 다음 사항에 관하여 장관과 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-014f5adb",
+      "parent": "n-4481f335",
+      "child": "n-98908cd3",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(차관보)",
+        "evidenceText": "② 차관보는 다음 사항에 관하여 장관과 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-61754c80",
+      "parent": "n-4481f335",
+      "child": "n-9b325fa5",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제29조의2(군인권개선추진단장)",
+        "evidenceText": "③ 군인권개선추진단장은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-f7c350c5",
+      "parent": "n-75cf1dc7",
+      "child": "n-de28eb28",
+      "type": "temporary",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제29조의3(방위산업수출기획과)",
+        "evidenceText": "① 국방부 전력정책국에 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제2호에 따라 2028년 4월 30일까지 존속하는 한시조직으로 방위산업수출기획과를 둔다"
+      }
+    },
+    {
+      "id": "e-f5e7cad7",
+      "parent": "n-93d34cd3",
+      "child": "n-2f10206f",
+      "type": "temporary",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제29조의4(중동아프리카정책과)",
+        "evidenceText": "① 국방부 국방정책실에 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제2호에 따라 2027년 7월 25일까지 존속하는 한시조직으로 중동아프리카정책과를 둔다"
+      }
+    },
+    {
+      "id": "e-b51351a6",
+      "parent": "n-d4097873",
+      "child": "n-ab32e444",
+      "type": "temporary",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제29조의6(국방연구개발기획과)",
+        "evidenceText": "① 국방부 국방인공지능기획국에 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제2호에 따라 2027년 7월 25일까지 존속하는 한시조직으로 국방연구개발기획과를 둔다"
+      }
+    },
+    {
+      "id": "e-9e237c2d",
+      "parent": "n-3fb5e401",
+      "child": "n-56ccd04c",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제2조(국방보좌관)",
+        "evidenceText": "③ 정책관리담당관은 다음 사항에 관하여 국방보좌관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-9a283435",
+      "parent": "n-3fb5e401",
+      "child": "n-0e7eb99e",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제2조(국방보좌관)",
+        "evidenceText": "④ 의전담당관은 다음 사항에 관하여 국방보좌관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-aecc9c3d",
+      "parent": "n-e618142f",
+      "child": "n-4293d199",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제3조(대변인)",
+        "evidenceText": "③ 공보담당관은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e11e6ade",
+      "parent": "n-e618142f",
+      "child": "n-7b9676f7",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제3조(대변인)",
+        "evidenceText": "④ 정책홍보담당관은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e5da7c49",
+      "parent": "n-e618142f",
+      "child": "n-ad88cef8",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제3조(대변인)",
+        "evidenceText": "⑤ 디지털소통팀장은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-85edf77f",
+      "parent": "n-7da5dac3",
+      "child": "n-3c19c188",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑦ 기획총괄담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6517e898",
+      "parent": "n-7da5dac3",
+      "child": "n-ad379304",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑧ 국군조직담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-b2643d8b",
+      "parent": "n-7da5dac3",
+      "child": "n-a7ffa6f7",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑨ 조직관리담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8c355572",
+      "parent": "n-7da5dac3",
+      "child": "n-dd5ea767",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑩ 혁신행정담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-1ee4b45a",
+      "parent": "n-7da5dac3",
+      "child": "n-de83963a",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑪ 재정계획담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-bf6d8cbf",
+      "parent": "n-7da5dac3",
+      "child": "n-74e59b33",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑫ 예산편성담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-4a19df19",
+      "parent": "n-7da5dac3",
+      "child": "n-27dca627",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑬ 예산운영담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-dc8a1691",
+      "parent": "n-7da5dac3",
+      "child": "n-d1863383",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑭ 재정회계담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-5f8730b4",
+      "parent": "n-7da5dac3",
+      "child": "n-338e9809",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑮ 군구조개혁담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d258c2f2",
+      "parent": "n-7da5dac3",
+      "child": "n-b67f7bdc",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "<16> 국방운영개혁담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8ec96ef1",
+      "parent": "n-7da5dac3",
+      "child": "n-c17df88e",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "③ 기획관리관은 「국방부와 그 소속기관 직제」 제7조의2제3항제1호부터 제21호까지, 제25호 및 제26호의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7cd0d4b1",
+      "parent": "n-7da5dac3",
+      "child": "n-e051ec76",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "④ 계획예산관은 「국방부와 그 소속기관 직제」 제7조의2제3항제22호부터 제24호까지 및 제27호부터 제31호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b6f3edeb",
+      "parent": "n-7da5dac3",
+      "child": "n-51b93b59",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "② 「국방부와 그 소속기관 직제」제7조의2제1항에 따라 기획조정실장 밑에 두는 보좌기관은 기획관리관ㆍ계획예산관 및 국방개혁기획관으로 하며, 기획관리관 및 계획예산관은 고위공무원단에 속하는 일반직공무원으로 보하되, 그 직위의 직무등급은 나등급으로 하고, 국방개혁기획관은 장성급장교로 보한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7ae9b5da",
+      "parent": "n-bf4d4808",
+      "child": "n-f3f5cc83",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제5조(법무관리관)",
+        "evidenceText": "③ 군사법정책담당관은 다음 사항에 관하여 법무관리관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-fffef6f6",
+      "parent": "n-bf4d4808",
+      "child": "n-a76582f0",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제5조(법무관리관)",
+        "evidenceText": "④ 규제개혁법제담당관은 다음 사항에 관하여 법무관리관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-72560019",
+      "parent": "n-bf4d4808",
+      "child": "n-1eb91e49",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제5조(법무관리관)",
+        "evidenceText": "⑤ 송무소청팀장은 다음 사항에 관하여 법무관리관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-5040fa4f",
+      "parent": "n-7ce28e1b",
+      "child": "n-971be115",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제6조(감사관)",
+        "evidenceText": "③ 직무감찰담당관은 다음 사항에 관하여 감사관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-095d02ed",
+      "parent": "n-7ce28e1b",
+      "child": "n-f57bbfe0",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제6조(감사관)",
+        "evidenceText": "④ 종합감사담당관은 다음 사항에 관하여 감사관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e4ff4083",
+      "parent": "n-7ce28e1b",
+      "child": "n-e5292a47",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제6조(감사관)",
+        "evidenceText": "⑤ 사업감사담당관은 다음 사항에 관하여 감사관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-f07b3613",
+      "parent": "n-7ce28e1b",
+      "child": "n-7a1b3203",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제6조(감사관)",
+        "evidenceText": "⑥ 국방민원센터장은 다음 사항에 관하여 감사관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-2f109b81",
+      "parent": "n-93d34cd3",
+      "child": "n-ed906cb4",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3646c58e",
+      "parent": "n-93d34cd3",
+      "child": "n-ab00b904",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-840dcd60",
+      "parent": "n-93d34cd3",
+      "child": "n-d2328636",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-a1c62850",
+      "parent": "n-93d34cd3",
+      "child": "n-9f31d445",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4fffb2a9",
+      "parent": "n-93d34cd3",
+      "child": "n-98c1434c",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e6236ad0",
+      "parent": "n-93d34cd3",
+      "child": "n-09217c53",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-584a97a4",
+      "parent": "n-93d34cd3",
+      "child": "n-aef83892",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-03ebd3db",
+      "parent": "n-93d34cd3",
+      "child": "n-927d2bc0",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3f30611c",
+      "parent": "n-93d34cd3",
+      "child": "n-e3f92ff5",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3eb3db41",
+      "parent": "n-93d34cd3",
+      "child": "n-a3396399",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-731bf0c0",
+      "parent": "n-93d34cd3",
+      "child": "n-526a2d8d",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-1c7e46a7",
+      "parent": "n-93d34cd3",
+      "child": "n-6746b826",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7a75727b",
+      "parent": "n-93d34cd3",
+      "child": "n-9618d616",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-c703cf03",
+      "parent": "n-93d34cd3",
+      "child": "n-c939bc53",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "⑥ 국방정책실장 밑에 정책기획과ㆍ국방전략과ㆍ북한정책과ㆍ군비통제비확산정책과ㆍ교육훈련정책과ㆍ정신전력정책과ㆍ국제정책과ㆍ미국정책과ㆍ동북아정책과ㆍ국제평화협력과ㆍ인도태평양정책과ㆍ방위정책과ㆍ북핵대응정책과 및 미사일우주정책과를 두며, 정책기획과장ㆍ북한정책과장ㆍ교육훈련정책과장ㆍ정신전력정책과장ㆍ미국정책과장ㆍ방위정책과장ㆍ북핵대응정책과장 및 미사일우주정책과장은 영관급장교로, 국방전략과장ㆍ군비통제비확산정책과장ㆍ국제정책과장ㆍ동북아정책과장ㆍ국제평화협력과장 및 인도태평양정책과장은 부이사관…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-6d0ef6c6",
+      "parent": "n-93d34cd3",
+      "child": "n-f1907300",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "③ 정책기획관은 「국방부와 그 소속기관 직제」 제12조제3항제1호부터 제5호까지, 제9호부터 제15호까지, 제24호부터 제30호까지 및 제32호부터 제35호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-0271df9a",
+      "parent": "n-93d34cd3",
+      "child": "n-e2fa1d6e",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "② 「국방부와 그 소속기관 직제」 제12조제1항에 따라 국방정책실장 밑에 두는 보좌기관은 정책기획관ㆍ국제정책관 및 방위정책관으로 하며, 정책기획관 및 방위정책관은 고위공무원단에 속하는 일반직공무원 또는 장성급장교로 보하되, 고위공무원단에 속하는 일반직공무원으로 보하는 경우 그 직위의 직무등급은 나등급으로 하고, 국제정책관은 고위공무원단에 속하는 일반직공무원으로 보하되, 그 직위의 직무등급은 나등급으로 한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-cfda7dfb",
+      "parent": "n-93d34cd3",
+      "child": "n-6346b1da",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제9조(국방정책실)",
+        "evidenceText": "② 「국방부와 그 소속기관 직제」 제12조제1항에 따라 국방정책실장 밑에 두는 보좌기관은 정책기획관ㆍ국제정책관 및 방위정책관으로 하며, 정책기획관 및 방위정책관은 고위공무원단에 속하는 일반직공무원 또는 장성급장교로 보하되, 고위공무원단에 속하는 일반직공무원으로 보하는 경우 그 직위의 직무등급은 나등급으로 하고, 국제정책관은 고위공무원단에 속하는 일반직공무원으로 보하되, 그 직위의 직무등급은 나등급으로 한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-16d0c20e",
+      "parent": "n-1d108940",
+      "child": "n-64189fce",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-86ac3bc9",
+      "parent": "n-1d108940",
+      "child": "n-9ccc9b28",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-1efb3d64",
+      "parent": "n-1d108940",
+      "child": "n-80a67d4f",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4fe7e81a",
+      "parent": "n-1d108940",
+      "child": "n-0defc10a",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-cb1afa8d",
+      "parent": "n-1d108940",
+      "child": "n-dd4668c0",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-f02e638b",
+      "parent": "n-1d108940",
+      "child": "n-fce7325b",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-5f4994bd",
+      "parent": "n-1d108940",
+      "child": "n-d9eb5e0c",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-96bdf955",
+      "parent": "n-1d108940",
+      "child": "n-48a09a9c",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-6c7375b5",
+      "parent": "n-1d108940",
+      "child": "n-5517c763",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-49077588",
+      "parent": "n-1d108940",
+      "child": "n-27c64b28",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-dc693dc0",
+      "parent": "n-1d108940",
+      "child": "n-d9fc686b",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-8f5dd694",
+      "parent": "n-1d108940",
+      "child": "n-5d5e9736",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-9cbacc60",
+      "parent": "n-1d108940",
+      "child": "n-075340d5",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-9404c250",
+      "parent": "n-1d108940",
+      "child": "n-26683a39",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e30251f2",
+      "parent": "n-1d108940",
+      "child": "n-4eb4f0eb",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-1e39dede",
+      "parent": "n-1d108940",
+      "child": "n-baa35f06",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-cb8caf6a",
+      "parent": "n-1d108940",
+      "child": "n-e85b3c31",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "⑥ 인사복지실장 밑에 인사기획관리과ㆍ인력정책과ㆍ병영정책과ㆍ인적자원개발과ㆍ군종정책과ㆍ군무원정책과ㆍ군무원채용팀ㆍ군인사운영팀ㆍ예비전력기획과ㆍ자원동원과ㆍ예비군훈련정책과ㆍ복지정책과ㆍ국방일자리정책과ㆍ보건정책과ㆍ군인연금과ㆍ군인재해보상과 및 감염병대응팀을 두며, 병영정책과장ㆍ인적자원개발과장ㆍ군종정책과장ㆍ예비군훈련정책과장 및 복지정책과장은 영관급장교로, 인사기획관리과장ㆍ인력정책과장ㆍ군무원정책과장ㆍ예비전력기획과장ㆍ자원동원과장ㆍ국방일자리정책과장ㆍ보건정책과장ㆍ군인연금과장 및 군인재…",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-7847ea4d",
+      "parent": "n-1d108940",
+      "child": "n-274000ce",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "② 「국방부와 그 소속기관 직제」 제13조제1항에 따라 인사복지실장 밑에 두는 보좌기관은 인사기획관ㆍ예비전력정책관 및 보건복지관으로 하며, 인사기획관ㆍ예비전력정책관 및 보건복지관은 고위공무원단에 속하는 일반직공무원으로 보하되, 그 직위의 직무등급은 나등급으로 한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-f90e5a17",
+      "parent": "n-1d108940",
+      "child": "n-534f4fdc",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "② 「국방부와 그 소속기관 직제」 제13조제1항에 따라 인사복지실장 밑에 두는 보좌기관은 인사기획관ㆍ예비전력정책관 및 보건복지관으로 하며, 인사기획관ㆍ예비전력정책관 및 보건복지관은 고위공무원단에 속하는 일반직공무원으로 보하되, 그 직위의 직무등급은 나등급으로 한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-92a47dac",
+      "parent": "n-1d108940",
+      "child": "n-4160d0c0",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제10조(인사복지실)",
+        "evidenceText": "② 「국방부와 그 소속기관 직제」 제13조제1항에 따라 인사복지실장 밑에 두는 보좌기관은 인사기획관ㆍ예비전력정책관 및 보건복지관으로 하며, 인사기획관ㆍ예비전력정책관 및 보건복지관은 고위공무원단에 속하는 일반직공무원으로 보하되, 그 직위의 직무등급은 나등급으로 한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e9346fca",
+      "parent": "n-d4097873",
+      "child": "n-320134db",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의2(국방인공지능기획국)",
+        "evidenceText": "② 국방인공지능기획국에 국방인공지능정책과ㆍ국방데이터정책과ㆍ유무인복합체계과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-68d1ac52",
+      "parent": "n-d4097873",
+      "child": "n-803d2899",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의2(국방인공지능기획국)",
+        "evidenceText": "② 국방인공지능기획국에 국방인공지능정책과ㆍ국방데이터정책과ㆍ유무인복합체계과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-df5c9f5f",
+      "parent": "n-d4097873",
+      "child": "n-ec423d5f",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의2(국방인공지능기획국)",
+        "evidenceText": "② 국방인공지능기획국에 국방인공지능정책과ㆍ국방데이터정책과ㆍ유무인복합체계과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-df7d0d24",
+      "parent": "n-75cf1dc7",
+      "child": "n-e4ce3984",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의3(전력정책국)",
+        "evidenceText": "② 전력정책국장 밑에 전력정책과ㆍ기반전력과 및 공통전력과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4412c38c",
+      "parent": "n-75cf1dc7",
+      "child": "n-fdb2a8aa",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의3(전력정책국)",
+        "evidenceText": "② 전력정책국장 밑에 전력정책과ㆍ기반전력과 및 공통전력과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4cefba82",
+      "parent": "n-75cf1dc7",
+      "child": "n-f8c84150",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의3(전력정책국)",
+        "evidenceText": "② 전력정책국장 밑에 전력정책과ㆍ기반전력과 및 공통전력과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b7a549ef",
+      "parent": "n-a0d2b03d",
+      "child": "n-792e2c44",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의4(국방정보화국)",
+        "evidenceText": "② 국방정보화국에 국방정보화정책과ㆍ국방정보화기반과ㆍ사이버전자기정책과 및 소프트웨어융합팀을 두며, 국방정보화정책과장 및 사이버전자기정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 국방정보화기반과장은 영관급장교로, 소프트웨어융합팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5a56d97d",
+      "parent": "n-a0d2b03d",
+      "child": "n-2acaed22",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의4(국방정보화국)",
+        "evidenceText": "② 국방정보화국에 국방정보화정책과ㆍ국방정보화기반과ㆍ사이버전자기정책과 및 소프트웨어융합팀을 두며, 국방정보화정책과장 및 사이버전자기정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 국방정보화기반과장은 영관급장교로, 소프트웨어융합팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ca1d0c56",
+      "parent": "n-a0d2b03d",
+      "child": "n-7a24d869",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의4(국방정보화국)",
+        "evidenceText": "② 국방정보화국에 국방정보화정책과ㆍ국방정보화기반과ㆍ사이버전자기정책과 및 소프트웨어융합팀을 두며, 국방정보화정책과장 및 사이버전자기정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 국방정보화기반과장은 영관급장교로, 소프트웨어융합팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-92ca0056",
+      "parent": "n-a0d2b03d",
+      "child": "n-0aa2bc53",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의4(국방정보화국)",
+        "evidenceText": "② 국방정보화국에 국방정보화정책과ㆍ국방정보화기반과ㆍ사이버전자기정책과 및 소프트웨어융합팀을 두며, 국방정보화정책과장 및 사이버전자기정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 국방정보화기반과장은 영관급장교로, 소프트웨어융합팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9a61ba77",
+      "parent": "n-969c10dc",
+      "child": "n-54625dbe",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의5(군수관리국)",
+        "evidenceText": "② 군수관리국에 군수기획과ㆍ장비관리과ㆍ물자관리과ㆍ탄약수송관리과ㆍ재난안전관리과 및 군수지능화팀을 두며, 군수기획과장ㆍ물자관리과장 및 재난안전관리과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 장비관리과장 및 탄약수송관리과장은 영관급장교로, 군수지능화팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5cb53e02",
+      "parent": "n-969c10dc",
+      "child": "n-731c0dcc",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의5(군수관리국)",
+        "evidenceText": "② 군수관리국에 군수기획과ㆍ장비관리과ㆍ물자관리과ㆍ탄약수송관리과ㆍ재난안전관리과 및 군수지능화팀을 두며, 군수기획과장ㆍ물자관리과장 및 재난안전관리과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 장비관리과장 및 탄약수송관리과장은 영관급장교로, 군수지능화팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7ab04562",
+      "parent": "n-969c10dc",
+      "child": "n-2c298473",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의5(군수관리국)",
+        "evidenceText": "② 군수관리국에 군수기획과ㆍ장비관리과ㆍ물자관리과ㆍ탄약수송관리과ㆍ재난안전관리과 및 군수지능화팀을 두며, 군수기획과장ㆍ물자관리과장 및 재난안전관리과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 장비관리과장 및 탄약수송관리과장은 영관급장교로, 군수지능화팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-df6c9c9d",
+      "parent": "n-969c10dc",
+      "child": "n-d5e0e15f",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의5(군수관리국)",
+        "evidenceText": "② 군수관리국에 군수기획과ㆍ장비관리과ㆍ물자관리과ㆍ탄약수송관리과ㆍ재난안전관리과 및 군수지능화팀을 두며, 군수기획과장ㆍ물자관리과장 및 재난안전관리과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 장비관리과장 및 탄약수송관리과장은 영관급장교로, 군수지능화팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3f37573c",
+      "parent": "n-969c10dc",
+      "child": "n-5ab8c6eb",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의5(군수관리국)",
+        "evidenceText": "② 군수관리국에 군수기획과ㆍ장비관리과ㆍ물자관리과ㆍ탄약수송관리과ㆍ재난안전관리과 및 군수지능화팀을 두며, 군수기획과장ㆍ물자관리과장 및 재난안전관리과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 장비관리과장 및 탄약수송관리과장은 영관급장교로, 군수지능화팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8a5efd47",
+      "parent": "n-969c10dc",
+      "child": "n-caf798da",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의5(군수관리국)",
+        "evidenceText": "② 군수관리국에 군수기획과ㆍ장비관리과ㆍ물자관리과ㆍ탄약수송관리과ㆍ재난안전관리과 및 군수지능화팀을 두며, 군수기획과장ㆍ물자관리과장 및 재난안전관리과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 장비관리과장 및 탄약수송관리과장은 영관급장교로, 군수지능화팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-24ecce6d",
+      "parent": "n-41f80804",
+      "child": "n-2e837086",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의6(군사시설국)",
+        "evidenceText": "② 군사시설국에 시설기획과ㆍ시설제도과ㆍ건설관리과ㆍ부대건설과ㆍ국유재산과ㆍ군주거정책과ㆍ환경소음팀 및 지뢰대응활동팀을 두며, 시설기획과장ㆍ시설제도과장ㆍ건설관리과장ㆍ부대건설과장ㆍ국유재산과장 및 군주거정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 환경소음팀장 및 지뢰대응활동팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-19392089",
+      "parent": "n-41f80804",
+      "child": "n-58ae435b",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의6(군사시설국)",
+        "evidenceText": "② 군사시설국에 시설기획과ㆍ시설제도과ㆍ건설관리과ㆍ부대건설과ㆍ국유재산과ㆍ군주거정책과ㆍ환경소음팀 및 지뢰대응활동팀을 두며, 시설기획과장ㆍ시설제도과장ㆍ건설관리과장ㆍ부대건설과장ㆍ국유재산과장 및 군주거정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 환경소음팀장 및 지뢰대응활동팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9ef41cd3",
+      "parent": "n-41f80804",
+      "child": "n-327e332f",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의6(군사시설국)",
+        "evidenceText": "② 군사시설국에 시설기획과ㆍ시설제도과ㆍ건설관리과ㆍ부대건설과ㆍ국유재산과ㆍ군주거정책과ㆍ환경소음팀 및 지뢰대응활동팀을 두며, 시설기획과장ㆍ시설제도과장ㆍ건설관리과장ㆍ부대건설과장ㆍ국유재산과장 및 군주거정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 환경소음팀장 및 지뢰대응활동팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5c9fbb65",
+      "parent": "n-41f80804",
+      "child": "n-1f839ba3",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의6(군사시설국)",
+        "evidenceText": "② 군사시설국에 시설기획과ㆍ시설제도과ㆍ건설관리과ㆍ부대건설과ㆍ국유재산과ㆍ군주거정책과ㆍ환경소음팀 및 지뢰대응활동팀을 두며, 시설기획과장ㆍ시설제도과장ㆍ건설관리과장ㆍ부대건설과장ㆍ국유재산과장 및 군주거정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 환경소음팀장 및 지뢰대응활동팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4232530b",
+      "parent": "n-41f80804",
+      "child": "n-f07cc538",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의6(군사시설국)",
+        "evidenceText": "② 군사시설국에 시설기획과ㆍ시설제도과ㆍ건설관리과ㆍ부대건설과ㆍ국유재산과ㆍ군주거정책과ㆍ환경소음팀 및 지뢰대응활동팀을 두며, 시설기획과장ㆍ시설제도과장ㆍ건설관리과장ㆍ부대건설과장ㆍ국유재산과장 및 군주거정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 환경소음팀장 및 지뢰대응활동팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f1c16ca5",
+      "parent": "n-41f80804",
+      "child": "n-c0fa26b3",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의6(군사시설국)",
+        "evidenceText": "② 군사시설국에 시설기획과ㆍ시설제도과ㆍ건설관리과ㆍ부대건설과ㆍ국유재산과ㆍ군주거정책과ㆍ환경소음팀 및 지뢰대응활동팀을 두며, 시설기획과장ㆍ시설제도과장ㆍ건설관리과장ㆍ부대건설과장ㆍ국유재산과장 및 군주거정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 환경소음팀장 및 지뢰대응활동팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5588b94c",
+      "parent": "n-41f80804",
+      "child": "n-a13c689a",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의6(군사시설국)",
+        "evidenceText": "② 군사시설국에 시설기획과ㆍ시설제도과ㆍ건설관리과ㆍ부대건설과ㆍ국유재산과ㆍ군주거정책과ㆍ환경소음팀 및 지뢰대응활동팀을 두며, 시설기획과장ㆍ시설제도과장ㆍ건설관리과장ㆍ부대건설과장ㆍ국유재산과장 및 군주거정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 환경소음팀장 및 지뢰대응활동팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7d682b5f",
+      "parent": "n-41f80804",
+      "child": "n-739beafb",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제11조의6(군사시설국)",
+        "evidenceText": "② 군사시설국에 시설기획과ㆍ시설제도과ㆍ건설관리과ㆍ부대건설과ㆍ국유재산과ㆍ군주거정책과ㆍ환경소음팀 및 지뢰대응활동팀을 두며, 시설기획과장ㆍ시설제도과장ㆍ건설관리과장ㆍ부대건설과장ㆍ국유재산과장 및 군주거정책과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 환경소음팀장 및 지뢰대응활동팀장은 과학기술서기관ㆍ서기관ㆍ공업사무관ㆍ임업사무관ㆍ보건사무관ㆍ환경사무관ㆍ항공사무관ㆍ시설사무관ㆍ전산사무관ㆍ방송통신사무관ㆍ행정사무관 또는 사서사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-47f6fca7",
+      "parent": "n-9e7cb3d2",
+      "child": "n-1b9cd668",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제20조(군공항이전사업단)",
+        "evidenceText": "② 군공항이전사업단장 밑에 이전총괄과장, 이전사업과장 및 이전계획과장 각 1명을 두되, 이전총괄과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 이전사업과장은 영관급장교로, 이전계획과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-ea4522fa",
+      "parent": "n-9e7cb3d2",
+      "child": "n-687e4d22",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제20조(군공항이전사업단)",
+        "evidenceText": "② 군공항이전사업단장 밑에 이전총괄과장, 이전사업과장 및 이전계획과장 각 1명을 두되, 이전총괄과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 이전사업과장은 영관급장교로, 이전계획과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4a1fc26d",
+      "parent": "n-9e7cb3d2",
+      "child": "n-f2971e52",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제20조(군공항이전사업단)",
+        "evidenceText": "② 군공항이전사업단장 밑에 이전총괄과장, 이전사업과장 및 이전계획과장 각 1명을 두되, 이전총괄과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 이전사업과장은 영관급장교로, 이전계획과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-10698f19",
+      "parent": "n-9b325fa5",
+      "child": "n-914cc2d3",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제20조의2(군인권개선추진단장)",
+        "evidenceText": "③ 군인권총괄담당관은 다음 사항에 관하여 군인권개선추진단장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-e65b8b0c",
+      "parent": "n-9b325fa5",
+      "child": "n-d7869dbb",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제20조의2(군인권개선추진단장)",
+        "evidenceText": "④ 성폭력예방대응담당관은 다음 사항에 관하여 군인권개선추진단장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-ffca91a6",
+      "parent": "n-9b325fa5",
+      "child": "n-8775ff7b",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제20조의2(군인권개선추진단장)",
+        "evidenceText": "⑤ 병영문화혁신담당관은 다음 사항에 관하여 군인권개선추진단장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-35bea4e3",
+      "parent": "n-9b325fa5",
+      "child": "n-d6179851",
+      "type": "advisor",
+      "sources": [
+        "국방부와 그 소속기관 직제 시행규칙 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제20조의2(군인권개선추진단장)",
+        "evidenceText": "⑥ 양성평등정책팀장은 다음 사항에 관하여 군인권개선추진단장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-e4ab0bc7",
+      "parent": "n-870726b9",
+      "child": "n-6d736a60",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-fb6f75f2",
+      "parent": "n-6d736a60",
+      "child": "n-4481f335",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-7d314a9d",
+      "parent": "n-4481f335",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "② 국방부에 운영지원과ㆍ국방정책실ㆍ인사복지실ㆍ국방인공지능기획국ㆍ전력정책국ㆍ국방정보화국ㆍ군수관리국 및 군사시설국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ef9f5d7a",
+      "parent": "n-4481f335",
+      "child": "n-93d34cd3",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "② 국방부에 운영지원과ㆍ국방정책실ㆍ인사복지실ㆍ국방인공지능기획국ㆍ전력정책국ㆍ국방정보화국ㆍ군수관리국 및 군사시설국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fda50074",
+      "parent": "n-4481f335",
+      "child": "n-1d108940",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "② 국방부에 운영지원과ㆍ국방정책실ㆍ인사복지실ㆍ국방인공지능기획국ㆍ전력정책국ㆍ국방정보화국ㆍ군수관리국 및 군사시설국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dd627e8d",
+      "parent": "n-4481f335",
+      "child": "n-d4097873",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "② 국방부에 운영지원과ㆍ국방정책실ㆍ인사복지실ㆍ국방인공지능기획국ㆍ전력정책국ㆍ국방정보화국ㆍ군수관리국 및 군사시설국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c8500e65",
+      "parent": "n-4481f335",
+      "child": "n-75cf1dc7",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "② 국방부에 운영지원과ㆍ국방정책실ㆍ인사복지실ㆍ국방인공지능기획국ㆍ전력정책국ㆍ국방정보화국ㆍ군수관리국 및 군사시설국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-39ee0da9",
+      "parent": "n-4481f335",
+      "child": "n-a0d2b03d",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "② 국방부에 운영지원과ㆍ국방정책실ㆍ인사복지실ㆍ국방인공지능기획국ㆍ전력정책국ㆍ국방정보화국ㆍ군수관리국 및 군사시설국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-68ee75c0",
+      "parent": "n-4481f335",
+      "child": "n-969c10dc",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "② 국방부에 운영지원과ㆍ국방정책실ㆍ인사복지실ㆍ국방인공지능기획국ㆍ전력정책국ㆍ국방정보화국ㆍ군수관리국 및 군사시설국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cb332f7a",
+      "parent": "n-4481f335",
+      "child": "n-41f80804",
+      "type": "assistant",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "② 국방부에 운영지원과ㆍ국방정책실ㆍ인사복지실ㆍ국방인공지능기획국ㆍ전력정책국ㆍ국방정보화국ㆍ군수관리국 및 군사시설국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-59790986",
+      "parent": "n-4481f335",
+      "child": "n-9e7cb3d2",
+      "type": "temporary",
+      "sources": [
+        "국방부와 그 소속기관 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제29조(군공항이전사업단)",
+        "evidenceText": "① 국방부에 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제1호에 따라 2028년 1월 30일까지 존속하는 한시조직으로 군공항이전사업단을 둔다"
+      }
+    }
+  ]
+}

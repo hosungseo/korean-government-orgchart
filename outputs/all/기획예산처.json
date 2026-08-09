@@ -1,0 +1,2558 @@
+{
+  "meta": {
+    "institution": "기획예산처",
+    "title": "기획예산처",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "기획예산처와 그 소속기관 직제 [시행 20260714]",
+      "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "role": "decree"
+      },
+      {
+        "source": "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]",
+        "role": "rule"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "headcount",
+        "annex": "별표 2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 3",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      }
+    ],
+    "spanDiagnostics": [],
+    "laws": [
+      {
+        "name": "기획예산처와 그 소속기관 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260714",
+        "mst": "288035",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288035&efYd=20260714&BD=on",
+        "annexCount": 3
+      },
+      {
+        "name": "기획예산처와 그 소속기관 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260714",
+        "mst": "288141",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288141&efYd=20260714&BD=on",
+        "annexCount": 4
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "기획예산처 공무원 정원표(제17조제1항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260714",
+        "type": "headcount",
+        "source": "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166788005",
+          "pdf": "/LSW/flDownload.do?flSeq=166788007",
+          "image": "/LSW/flDownload.do?flSeq=166788009"
+        },
+        "files": {
+          "hwp": "law0150032026071436504KC_000100E_20260714.hwp",
+          "pdf": "law0150032026071436504KC_000100E_20260714.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 기획예산처와 그 소속기관 직제 [별표 1] <개정 2026. 7. 14.>\n                                              \n  기획예산처 공무원 정원표(제17조제1항 관련)  \n                                              \n  총계                              460       \n                                              \n    정무직 계                       2         \n                                              \n      장관                          1         \n                                              \n      차관                          1         \n                                              \n    별정직 계                       4         \n                                              \n      고위공무원단                  1         \n                                              \n      3급 상당 또는 4급 상당 이하   3         \n                                              \n    일반직 계                       454       \n                                              \n      고위공무원단                  17        \n                                              \n      3급 또는 4급 이하             435       \n                                              \n      전문경력관                    2"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "기획예산처 소속기관 공무원 정원표(제18조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260714",
+        "type": "headcount",
+        "source": "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166788011",
+          "pdf": "/LSW/flDownload.do?flSeq=166788013",
+          "image": "/LSW/flDownload.do?flSeq=166788015"
+        },
+        "files": {
+          "hwp": "law0150032026071436504KC_000200E_20260714.hwp",
+          "pdf": "law0150032026071436504KC_000200E_20260714.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 기획예산처와 그 소속기관 직제 [별표 2]\n                                                        \n  기획예산처 소속기관 공무원 정원표(제18조제1항 관련)   \n                                                        \n  총계                    26                            \n                                                        \n    일반직 계             26                            \n                                                        \n      고위공무원단        1                             \n                                                        \n      3급 또는 4급 이하   25"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "기획예산처에 두는 평가대상 조직(제20조제1항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260714",
+        "type": "evaluation",
+        "source": "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=166788017",
+          "pdf": "/LSW/flDownload.do?flSeq=166788019",
+          "image": "/LSW/flDownload.do?flSeq=166788021"
+        },
+        "files": {
+          "hwp": "law0150032026071436504KC_000300E_20260714.hwp",
+          "pdf": "law0150032026071436504KC_000300E_20260714.pdf"
+        },
+        "rowCount": 8,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "1. 미래전략기획실",
+            "1명"
+          ],
+          [
+            "2. 미래전략기획실 1개 정책관등",
+            "1명"
+          ],
+          [
+            "3. 미래전략기획실 4개 과",
+            "12명"
+          ],
+          [
+            "4. 예산실 1개 과",
+            "4명"
+          ],
+          [
+            "5. 재정성과국 2개 과",
+            "5명"
+          ],
+          [
+            "6. 국고보조금관리단",
+            "1명"
+          ],
+          [
+            "7. 국고보조금관리단 2개 담당관",
+            "22명"
+          ]
+        ],
+        "textPreview": "■ 기획예산처와 그 소속기관 직제 [별표 3] <개정 2026. 7. 14.>\n                                                      \n  기획예산처에 두는 평가대상 조직(제20조제1항 관련)   \n                                                      \n  ┌────────────────┬──┐          \n  │조직                            │정원│          \n  ├────────────────┼──┤          \n  │1. 미래전략기획실               │1명 │          \n  ├────────────────┼──┤          \n  │2. 미래전략기획실 1개 정책관등  │1명 │          \n  ├────────────────┼──┤          \n  │3. 미래전략기획실 4개 과        │12명│          \n  ├────────────────┼──┤          \n  │4. 예산실 1개 과                │4명 │          \n  ├────────────────┼──┤          \n  │5. 재정성과국 2개 과            │5명 │          \n  ├────────────────┼──┤          \n  │6. 국고보조금관리단             │1명 │          \n  ├────────────────┼──┤          \n  │7. 국고보조금관리단 2개 담당관  │22명│          \n  └────────────────┴──┘"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "기획예산처 공무원 정원표(제11조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260714",
+        "type": "headcount",
+        "source": "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167072591",
+          "pdf": "/LSW/flDownload.do?flSeq=167072593",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167072595",
+            "/LSW/flDownload.do?flSeq=167072597"
+          ]
+        },
+        "files": {
+          "hwp": "law0150212026071402133KC_000100E_20260714.hwp",
+          "pdf": "law0150212026071402133KC_000100E_20260714.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 기획예산처와 그 소속기관 직제 시행규칙 [별표 1] <개정 2026. 7. 14.>  \n                                                                          \n                                                                          \n  기획예산처 공무원 정원표(제11조제1항 본문 관련)                         \n                                                                          \n                                                                          \n  총계                                                              460   \n                                                                          \n    정무직 계                                                       2     \n                                                                          \n      장관                                                          1     \n                                                                          \n      차관                                                          1     \n                                                                          \n    별정직 계                                                       4     \n                                                                          \n      고위공무원단(장관정책보좌관)                                  1 "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "기획예산처 공무원 정원표(제11조제1항 단서 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260714",
+        "type": "headcount",
+        "source": "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167072599",
+          "pdf": "/LSW/flDownload.do?flSeq=167072601",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167072603",
+            "/LSW/flDownload.do?flSeq=167072605"
+          ]
+        },
+        "files": {
+          "hwp": "law0150212026071402133KC_000200E_20260714.hwp",
+          "pdf": "law0150212026071402133KC_000200E_20260714.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 기획예산처와 그 소속기관 직제 시행규칙 [별표 2] <개정 2026. 7. 14.>  \n                                                                          \n                                                                          \n  기획예산처 공무원 정원표(제11조제1항 단서 관련)                         \n                                                                          \n                                                                          \n  총계                                                              460   \n                                                                          \n    정무직 계                                                       2     \n                                                                          \n      장관                                                          1     \n                                                                          \n      차관                                                          1     \n                                                                          \n    별정직 계                                                       4     \n                                                                          \n      고위공무원단(장관정책보좌관)                                  1 "
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "복권위원회사무처 공무원 정원표(제12조제1항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260714",
+        "type": "headcount",
+        "source": "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167072607",
+          "pdf": "/LSW/flDownload.do?flSeq=167072609",
+          "image": "/LSW/flDownload.do?flSeq=167072611"
+        },
+        "files": {
+          "hwp": "law0150212026071402133KC_000300E_20260714.hwp",
+          "pdf": "law0150212026071402133KC_000300E_20260714.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 기획예산처와 그 소속기관 직제 시행규칙 [별표 3]                                  \n                                                                                      \n                                                                                      \n  복권위원회사무처 공무원 정원표(제12조제1항 관련)                                    \n                                                                                      \n                                                                                      \n  총계                                                                            26  \n                                                                                      \n    일반직 계                                                                     26  \n                                                                                      \n      고위공무원단                                                                1   \n                                                                                      \n      서기관                                                                      3   \n                                                                                      \n      서기관 또는 행정사무관                     "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "기획예산처에 두는 평가대상 조직(제14조 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260714",
+        "type": "evaluation",
+        "source": "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167072613",
+          "pdf": "/LSW/flDownload.do?flSeq=167072615",
+          "image": "/LSW/flDownload.do?flSeq=167072617"
+        },
+        "files": {
+          "hwp": "law0150212026071402133KC_000400E_20260714.hwp",
+          "pdf": "law0150212026071402133KC_000400E_20260714.pdf"
+        },
+        "rowCount": 10,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "1. 미래전략기획실",
+            "1명 (고위공무원단 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "2. 미래전략기획실 성장기획정책관",
+            "1명 (고위공무원단 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "3. 미래전략기획실 혁신경제전환과, 포용사회전략과, 상생협력전략과, 재정협력총괄과",
+            "12명 (4급 4명, 5급 3명, 6 급 1명, 7급 4명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "4. 예산실 기후에너지환경예산과",
+            "4명 (4급 1명, 4급 또는 5 급 1명, 5급 1명, 7급 1명)",
+            "2026년 12월 31일까지"
+          ],
+          [
+            "5. 재정성과국 통합평가과",
+            "3명 (4급 1명, 6급 1명, 7 급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "6. 재정성과국 재정집행과",
+            "2명 (4급 1명, 5급 1명)",
+            "2027년 12월 31일까지"
+          ],
+          [
+            "7. 국고보조금관리단",
+            "1명 (고위공무원단 1명)",
+            "2029년 6월 30일까지"
+          ],
+          [
+            "8. 국고보조금관리단 국고보조금 총괄담당관",
+            "10명 (3급 또는 4급 1명, 5 급 4명, 6급 5명)",
+            "2029년 6월 30일까지"
+          ],
+          [
+            "9. 국고보조금관리단 국고보조금 점검담당관",
+            "12명 (4급 1명, 5급 8명, 6 급 3명)",
+            "2029년 6월 30일까지"
+          ]
+        ],
+        "textPreview": "■ 기획예산처와 그 소속기관 직제 시행규칙 [별표 4] <개정 2026. 7. 14.>                \n                                                                                        \n                                                                                        \n  기획예산처에 두는 평가대상 조직(제14조 관련)                                          \n                                                                                        \n                                                                                        \n  ┌─────────────────┬───────────┬──────────┐  \n  │조직                              │정원                  │평가기간            │  \n  ├─────────────────┼───────────┼──────────┤  \n  │1. 미래전략기획실                 │1명                   │2028년 12월 31일까지│  \n  │                                  │(고위공무원단 1명)    │                    │  \n  ├─────────────────┼───────────┼──────────┤  \n  │2. 미래전략기획실 성장기획정책관  │1명                   │2028년 12월 31일까지│  \n  │                                  │(고위공무원단 1명)    │                    │  \n  ├─────────────────┼───────────┼──────────┤  \n  │3. 미래전략기획실 혁신경제전환과, │12명                  │2028년 12월 31일까지│  \n  │포용사회전략과, 상생협력전략과,   │(4급 4명, 5급 3명, 6  │                    │  \n  │재정협력총괄과        "
+      }
+    ]
+  },
+  "rootId": "n-a8e209e2",
+  "nodes": [
+    {
+      "id": "n-a8e209e2",
+      "name": "기획예산처",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-a4fafae2",
+      "name": "장관정책보좌관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-4481f335",
+      "name": "차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-7da5dac3",
+      "name": "기획조정실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-16730a90",
+      "name": "국고보조금관리단",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true,
+        "grade": "나"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-d4568e17",
+      "name": "미래전략기획실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-e2fe9433",
+      "name": "예산실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {
+        "evaluation": true,
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-71379d8e",
+      "name": "재정성과국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-e9f8e82f",
+      "name": "사무처",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]",
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-67f14651",
+      "name": "홍보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-dd5ea767",
+      "name": "혁신행정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-dadc7298",
+      "name": "규제개혁법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-fbf09f55",
+      "name": "정보화담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-f1907300",
+      "name": "정책기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-8abdb56a",
+      "name": "국고보조금총괄담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-da82c849",
+      "name": "국고보조금점검담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-529f7f06",
+      "name": "성장기획정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-c7306061",
+      "name": "통합성장정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-3c45374f",
+      "name": "재정혁신정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-ef5d7114",
+      "name": "재정참여정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-95341872",
+      "name": "미래전략과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-dfa60077",
+      "name": "혁신경제전환과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-0d886a03",
+      "name": "탄소중립정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-394d8c7f",
+      "name": "포용사회전략과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-07169a58",
+      "name": "인구구조혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-42dfb3ae",
+      "name": "상생협력전략과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-da9c1d02",
+      "name": "재정혁신총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-f305d5b2",
+      "name": "지속가능재정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-be79cc06",
+      "name": "재정기획분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-41fb0e6c",
+      "name": "지출혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-9b95c60b",
+      "name": "재정협력총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-78e44ee3",
+      "name": "국제재정협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-878bdb59",
+      "name": "열린재정정보과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-fc690a80",
+      "name": "예산총괄심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-49954acb",
+      "name": "사회예산심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-2f555980",
+      "name": "경제예산심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-c8e0e6a8",
+      "name": "복지안전예산심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-c29b193f",
+      "name": "행정국방예산심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-708ec008",
+      "name": "예산총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-5b03e129",
+      "name": "예산정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-ddc8f453",
+      "name": "예산기준과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-6d1d70b1",
+      "name": "기금운용혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-db6e0500",
+      "name": "예산소통협력과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-837e78ab",
+      "name": "고용노동예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-aa299e20",
+      "name": "기후에너지환경예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-7e292da2",
+      "name": "인적자원예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-fc84c45b",
+      "name": "문화체육관광예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-6c50f1c2",
+      "name": "투자사업관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-4556efb1",
+      "name": "국토교통예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-8d433d71",
+      "name": "산업중소벤처예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-4fe99bad",
+      "name": "인공지능디지털예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-1e81a625",
+      "name": "농림해양예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-75c7fcf9",
+      "name": "과학기술혁신예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-99903027",
+      "name": "국민복지예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-1f0eb6ab",
+      "name": "연금보건예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-d4459446",
+      "name": "지역예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-6edbd2f4",
+      "name": "국민안전예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-d2338b30",
+      "name": "법사예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-57ac361d",
+      "name": "행정외교예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-7d6bb15d",
+      "name": "국방예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-fceec9be",
+      "name": "방위력강화예산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-53abfe26",
+      "name": "재정투자심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-7720cd36",
+      "name": "재정성과총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-cc23c7ff",
+      "name": "성과제도혁신과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-a53f449a",
+      "name": "통합평가과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-296818bc",
+      "name": "재정집행과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급",
+        "evaluation": true
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-fbc2db5f",
+      "name": "타당성심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-c55e53bd",
+      "name": "민간투자정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-8649f734",
+      "name": "복권위원회사무처",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-5748f393",
+      "name": "복권총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-c0f4ee82",
+      "name": "발행관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-ccbdf522",
+      "name": "기금사업과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    },
+    {
+      "id": "n-4047c766",
+      "name": "처장",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-ddbf5eed",
+      "parent": "n-6d736a60",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제5조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d24d5124",
+      "parent": "n-6d736a60",
+      "child": "n-a4fafae2",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제6조(장관정책보좌관)",
+        "evidenceText": "② 장관정책보좌관은 다음 사항에 관하여 장관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6a94cd83",
+      "parent": "n-4481f335",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(기획조정실장)",
+        "evidenceText": "③ 기획조정실장은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-95a74cb0",
+      "parent": "n-4481f335",
+      "child": "n-16730a90",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조의2(국고보조금관리단장)",
+        "evidenceText": "② 국고보조금관리단장은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-c6824c70",
+      "parent": "n-4481f335",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(감사담당관)",
+        "evidenceText": "② 감사담당관은 다음 사항에 관하여 차관을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-011be0c0",
+      "parent": "n-e618142f",
+      "child": "n-67f14651",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제2조(대변인)",
+        "evidenceText": "③ 홍보담당관은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b5600516",
+      "parent": "n-7da5dac3",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정실장)",
+        "evidenceText": "⑤ 기획재정담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-8c355572",
+      "parent": "n-7da5dac3",
+      "child": "n-dd5ea767",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정실장)",
+        "evidenceText": "⑥ 혁신행정담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-1799a8d5",
+      "parent": "n-7da5dac3",
+      "child": "n-dadc7298",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정실장)",
+        "evidenceText": "⑦ 규제개혁법무담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6dfc53cc",
+      "parent": "n-7da5dac3",
+      "child": "n-fbf09f55",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정실장)",
+        "evidenceText": "⑧ 정보화담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-49d09c81",
+      "parent": "n-7da5dac3",
+      "child": "n-f1907300",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정실장)",
+        "evidenceText": "③ 정책기획관은 「기획예산처와 그 소속기관 직제」 제7조제3항제1호부터 제21호까지의 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-a857fcb7",
+      "parent": "n-16730a90",
+      "child": "n-8abdb56a",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제4조의2(국고보조금관리단장)",
+        "evidenceText": "③ 국고보조금총괄담당관은 다음 사항에 관하여 국고보조금관리단장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-63ffee2f",
+      "parent": "n-16730a90",
+      "child": "n-da82c849",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제4조의2(국고보조금관리단장)",
+        "evidenceText": "④ 국고보조금점검담당관은 다음 사항에 관하여 국고보조금관리단장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-30247b9c",
+      "parent": "n-d4568e17",
+      "child": "n-529f7f06",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "③ 성장기획정책관은 「기획예산처와 그 소속기관 직제」 제10조제3항제1호부터 제12호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-c56bb525",
+      "parent": "n-d4568e17",
+      "child": "n-c7306061",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "④ 통합성장정책관은 「기획예산처와 그 소속기관 직제」 제10조제3항제13호부터 제23호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-865a8512",
+      "parent": "n-d4568e17",
+      "child": "n-3c45374f",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑤ 재정혁신정책관은 「기획예산처와 그 소속기관 직제」 제10조제3항제24호부터 제40호까지, 제42호부터 제47호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e1304834",
+      "parent": "n-d4568e17",
+      "child": "n-ef5d7114",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑥ 재정참여정책관은 「기획예산처와 그 소속기관 직제」 제10조제3항제41호, 제48호부터 제60호까지의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4c27de22",
+      "parent": "n-d4568e17",
+      "child": "n-95341872",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-29bcabec",
+      "parent": "n-d4568e17",
+      "child": "n-dfa60077",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5bd9258f",
+      "parent": "n-d4568e17",
+      "child": "n-0d886a03",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1cc0ebbb",
+      "parent": "n-d4568e17",
+      "child": "n-394d8c7f",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1ebe6e4e",
+      "parent": "n-d4568e17",
+      "child": "n-07169a58",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e3d6f5ca",
+      "parent": "n-d4568e17",
+      "child": "n-42dfb3ae",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d7054d57",
+      "parent": "n-d4568e17",
+      "child": "n-da9c1d02",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3bd5ee68",
+      "parent": "n-d4568e17",
+      "child": "n-f305d5b2",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-48276d7e",
+      "parent": "n-d4568e17",
+      "child": "n-be79cc06",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ca32e8d0",
+      "parent": "n-d4568e17",
+      "child": "n-41fb0e6c",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1e15f1bd",
+      "parent": "n-d4568e17",
+      "child": "n-9b95c60b",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3e0ab46e",
+      "parent": "n-d4568e17",
+      "child": "n-78e44ee3",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7406d32c",
+      "parent": "n-d4568e17",
+      "child": "n-878bdb59",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제7조(미래전략기획실)",
+        "evidenceText": "⑦ 미래전략기획실에 미래전략과ㆍ혁신경제전환과ㆍ탄소중립정책과ㆍ포용사회전략과ㆍ인구구조혁신과ㆍ상생협력전략과ㆍ재정혁신총괄과ㆍ지속가능재정과ㆍ재정기획분석과ㆍ지출혁신과ㆍ재정협력총괄과ㆍ국제재정협력과 및 열린재정정보과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-225dc029",
+      "parent": "n-e2fe9433",
+      "child": "n-fc690a80",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "② 「기획예산처와 그 소속기관 직제」 제11조제1항에 따라 예산실장 밑에 두는 보좌기관은 예산총괄심의관ㆍ사회예산심의관ㆍ경제예산심의관ㆍ복지안전예산심의관 및 행정국방예산심의관으로 하며, 예산총괄심의관ㆍ사회예산심의관ㆍ경제예산심의관ㆍ복지안전예산심의관 및 행정국방예산심의관은 고위공무원단에 속하는 일반직공무원으로 보하되, 그 직위의 직무등급은 나등급으로 한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4d1cea63",
+      "parent": "n-e2fe9433",
+      "child": "n-49954acb",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "④ 사회예산심의관은 사회 분야의 중장기 추진방향, 예산편성ㆍ집행, 기금운용계획의 협의ㆍ조정, 성과관리 및 「기획예산처와 그 소속기관 직제」 제11조제3항제26호ㆍ제27호의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-db3edf94",
+      "parent": "n-e2fe9433",
+      "child": "n-2f555980",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑤ 경제예산심의관은 경제 분야의 중장기 추진방향, 예산편성ㆍ집행, 기금운용계획의 협의ㆍ조정 및 성과관리 등의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-90925980",
+      "parent": "n-e2fe9433",
+      "child": "n-c8e0e6a8",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑥ 복지안전예산심의관은 보건복지 및 안전 분야의 중장기 추진방향, 예산편성ㆍ집행, 기금운용계획의 협의ㆍ조정, 성과관리 및 「기획예산처와 그 소속기관 직제」 제11조제3항제28호부터 제32호까지의 사항 등에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-3fa09e7d",
+      "parent": "n-e2fe9433",
+      "child": "n-c29b193f",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑦ 행정국방예산심의관은 행정 및 국방 분야의 중장기 추진방향, 예산편성ㆍ집행, 기금운용계획의 협의ㆍ조정 및 성과관리 등의 사항에 관하여 실장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-24c38fbf",
+      "parent": "n-e2fe9433",
+      "child": "n-708ec008",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e81a4b4d",
+      "parent": "n-e2fe9433",
+      "child": "n-5b03e129",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d32eb1d1",
+      "parent": "n-e2fe9433",
+      "child": "n-ddc8f453",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ec42f6c9",
+      "parent": "n-e2fe9433",
+      "child": "n-6d1d70b1",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-16767348",
+      "parent": "n-e2fe9433",
+      "child": "n-db6e0500",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-232ec8e5",
+      "parent": "n-e2fe9433",
+      "child": "n-837e78ab",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-190b2e3b",
+      "parent": "n-e2fe9433",
+      "child": "n-aa299e20",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5d1f3ef0",
+      "parent": "n-e2fe9433",
+      "child": "n-7e292da2",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8170ef0b",
+      "parent": "n-e2fe9433",
+      "child": "n-fc84c45b",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3d30c8f2",
+      "parent": "n-e2fe9433",
+      "child": "n-6c50f1c2",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-77427436",
+      "parent": "n-e2fe9433",
+      "child": "n-4556efb1",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1a794a72",
+      "parent": "n-e2fe9433",
+      "child": "n-8d433d71",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3db8bbaa",
+      "parent": "n-e2fe9433",
+      "child": "n-4fe99bad",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-15276b37",
+      "parent": "n-e2fe9433",
+      "child": "n-1e81a625",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dc8c423c",
+      "parent": "n-e2fe9433",
+      "child": "n-75c7fcf9",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0c37597b",
+      "parent": "n-e2fe9433",
+      "child": "n-99903027",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-161cecd7",
+      "parent": "n-e2fe9433",
+      "child": "n-1f0eb6ab",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d82d3f74",
+      "parent": "n-e2fe9433",
+      "child": "n-d4459446",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1a012b7b",
+      "parent": "n-e2fe9433",
+      "child": "n-6edbd2f4",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ba4319e9",
+      "parent": "n-e2fe9433",
+      "child": "n-d2338b30",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f16daedc",
+      "parent": "n-e2fe9433",
+      "child": "n-57ac361d",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-00336137",
+      "parent": "n-e2fe9433",
+      "child": "n-7d6bb15d",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fa748298",
+      "parent": "n-e2fe9433",
+      "child": "n-fceec9be",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제8조(예산실)",
+        "evidenceText": "⑧ 예산실에 예산총괄과ㆍ예산정책과ㆍ예산기준과ㆍ기금운용혁신과ㆍ예산소통협력과ㆍ고용노동예산과ㆍ기후에너지환경예산과ㆍ인적자원예산과ㆍ문화체육관광예산과ㆍ투자사업관리과ㆍ국토교통예산과ㆍ산업중소벤처예산과ㆍ인공지능디지털예산과ㆍ농림해양예산과ㆍ과학기술혁신예산과ㆍ국민복지예산과ㆍ연금보건예산과ㆍ지역예산과ㆍ국민안전예산과ㆍ법사예산과ㆍ행정외교예산과ㆍ국방예산과 및 방위력강화예산과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-82d4e13d",
+      "parent": "n-71379d8e",
+      "child": "n-53abfe26",
+      "type": "advisor",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제9조(재정성과국)",
+        "evidenceText": "③ 재정투자심의관은 「기획예산처와 그 소속기관 직제」 제12조제3항제7호, 제18호부터 제28호까지의 사항에 관하여 국장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-9d4e3639",
+      "parent": "n-71379d8e",
+      "child": "n-7720cd36",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제9조(재정성과국)",
+        "evidenceText": "④ 재정성과국에 재정성과총괄과ㆍ성과제도혁신과ㆍ통합평가과ㆍ재정집행과ㆍ타당성심사과 및 민간투자정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2d2b9a84",
+      "parent": "n-71379d8e",
+      "child": "n-cc23c7ff",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제9조(재정성과국)",
+        "evidenceText": "④ 재정성과국에 재정성과총괄과ㆍ성과제도혁신과ㆍ통합평가과ㆍ재정집행과ㆍ타당성심사과 및 민간투자정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ac64c30e",
+      "parent": "n-71379d8e",
+      "child": "n-a53f449a",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제9조(재정성과국)",
+        "evidenceText": "④ 재정성과국에 재정성과총괄과ㆍ성과제도혁신과ㆍ통합평가과ㆍ재정집행과ㆍ타당성심사과 및 민간투자정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-48067c4e",
+      "parent": "n-71379d8e",
+      "child": "n-296818bc",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제9조(재정성과국)",
+        "evidenceText": "④ 재정성과국에 재정성과총괄과ㆍ성과제도혁신과ㆍ통합평가과ㆍ재정집행과ㆍ타당성심사과 및 민간투자정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ac5fe843",
+      "parent": "n-71379d8e",
+      "child": "n-fbc2db5f",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제9조(재정성과국)",
+        "evidenceText": "④ 재정성과국에 재정성과총괄과ㆍ성과제도혁신과ㆍ통합평가과ㆍ재정집행과ㆍ타당성심사과 및 민간투자정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-eb608cab",
+      "parent": "n-71379d8e",
+      "child": "n-c55e53bd",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제9조(재정성과국)",
+        "evidenceText": "④ 재정성과국에 재정성과총괄과ㆍ성과제도혁신과ㆍ통합평가과ㆍ재정집행과ㆍ타당성심사과 및 민간투자정책과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e05f5597",
+      "parent": "n-e9f8e82f",
+      "child": "n-5748f393",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제10조(복권위원회사무처)",
+        "evidenceText": "② 사무처에 복권총괄과ㆍ발행관리과 및 기금사업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-74b6334d",
+      "parent": "n-e9f8e82f",
+      "child": "n-c0f4ee82",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제10조(복권위원회사무처)",
+        "evidenceText": "② 사무처에 복권총괄과ㆍ발행관리과 및 기금사업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-036fc521",
+      "parent": "n-e9f8e82f",
+      "child": "n-ccbdf522",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 시행규칙 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제10조(복권위원회사무처)",
+        "evidenceText": "② 사무처에 복권총괄과ㆍ발행관리과 및 기금사업과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-dd299612",
+      "parent": "n-a8e209e2",
+      "child": "n-4047c766",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-0b019806",
+      "parent": "n-4047c766",
+      "child": "n-4481f335",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-7d314a9d",
+      "parent": "n-4481f335",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 기획예산처에 운영지원과ㆍ미래전략기획실ㆍ예산실 및 재정성과국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c8b8faaf",
+      "parent": "n-4481f335",
+      "child": "n-d4568e17",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 기획예산처에 운영지원과ㆍ미래전략기획실ㆍ예산실 및 재정성과국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6ed86b72",
+      "parent": "n-4481f335",
+      "child": "n-e2fe9433",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 기획예산처에 운영지원과ㆍ미래전략기획실ㆍ예산실 및 재정성과국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-be1b91f7",
+      "parent": "n-4481f335",
+      "child": "n-71379d8e",
+      "type": "assistant",
+      "sources": [
+        "기획예산처와 그 소속기관 직제 [시행 20260714]"
+      ],
+      "metadata": {
+        "article": "제4조(하부조직)",
+        "evidenceText": "① 기획예산처에 운영지원과ㆍ미래전략기획실ㆍ예산실 및 재정성과국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d3278838",
+      "parent": "n-4481f335",
+      "child": "n-6d736a60",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-9735b51e",
+      "parent": "n-4481f335",
+      "child": "n-e9f8e82f",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-8cd29440",
+      "parent": "n-a8e209e2",
+      "child": "n-8649f734",
+      "type": "affiliated",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

@@ -1,0 +1,2014 @@
+{
+  "meta": {
+    "institution": "금융위원회",
+    "title": "금융위원회",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "금융위원회와 그 소속기관 직제 [시행 20260721]",
+      "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "role": "decree"
+      },
+      {
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "role": "rule"
+      }
+    ],
+    "temporaryHeadcounts": [
+      {
+        "target": "위원회",
+        "expires": "2028-03-31",
+        "source": "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "headcount",
+        "annex": "별표 1의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 2의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      },
+      {
+        "type": "headcount",
+        "annex": "별표 5",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      }
+    ],
+    "spanDiagnostics": [],
+    "laws": [
+      {
+        "name": "금융위원회와 그 소속기관 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288253",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288253&efYd=20260721&BD=on",
+        "annexCount": 5
+      },
+      {
+        "name": "금융위원회와 그 소속기관 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260721",
+        "mst": "288295",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=288295&efYd=20260721&BD=on",
+        "annexCount": 9
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "금융위원회 공무원 정원표(제18조 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039129",
+          "pdf": "/LSW/flDownload.do?flSeq=167039131",
+          "image": "/LSW/flDownload.do?flSeq=167039133"
+        },
+        "files": {
+          "hwp": "law0106742026072136514KC_000100E_20260721.hwp",
+          "pdf": "law0106742026072136514KC_000100E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 [별표 1] <개정 2026. 7. 21.>   \n                                                                  \n  금융위원회 공무원 정원표(제18조 관련)                           \n                                                                  \n    총계                              273                         \n                                                                  \n      정무직 계                       2                           \n                                                                  \n        위원장(장관급)                1                           \n                                                                  \n        부위원장(차관급)              1                           \n                                                                  \n      일반직 계                       271                         \n                                                                  \n        고위공무원단                  9                           \n                                                                  \n        고위공무원단에 속하는 임기제  3                           \n                                                                  \n        3급 또는 4급 이하             246                         \n          "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "금융정보분석원 공무원 정원표(제19조 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039135",
+          "pdf": "/LSW/flDownload.do?flSeq=167039137",
+          "image": "/LSW/flDownload.do?flSeq=167039139"
+        },
+        "files": {
+          "hwp": "law0106742026072136514KC_000200E_20260721.hwp",
+          "pdf": "law0106742026072136514KC_000200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 [별표 2] <개정 2025. 12. 30.>\n                                              \n  금융정보분석원 공무원 정원표(제19조 관련)   \n                                              \n    총계                    79                \n                                              \n      일반직 계             71                \n                                              \n        고위공무원단        2                 \n                                              \n        3급 또는 4급 이하   69                \n                                              \n      경찰공무원 계         8                 \n                                              \n        총경 이하           8"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "금융위원회에 두는 평가대상 조직(제21조제1항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039141",
+          "pdf": "/LSW/flDownload.do?flSeq=167039143",
+          "image": "/LSW/flDownload.do?flSeq=167039145"
+        },
+        "files": {
+          "hwp": "law0106742026072136514KC_000300E_20260721.hwp",
+          "pdf": "law0106742026072136514KC_000300E_20260721.pdf"
+        },
+        "rowCount": 2,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "자본시장국 1개 과",
+            "3명"
+          ]
+        ],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 [별표 3] <개정 2026. 3. 31.>   \n                                                                  \n                                                                  \n  금융위원회에 두는 평가대상 조직(제21조제1항 관련)               \n                                                                  \n┌─────────┬─────────────────────┐\n│조직              │정원                                      │\n├─────────┼─────────────────────┤\n│자본시장국 1개 과 │3명                                       │\n└─────────┴─────────────────────┘"
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "금융위원회와 그 소속기관 한시조직에 두는 공무원 정원표(제22조제4항 및 제23조제4항 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039147",
+          "pdf": "/LSW/flDownload.do?flSeq=167039149",
+          "image": "/LSW/flDownload.do?flSeq=167039151"
+        },
+        "files": {
+          "hwp": "law0106742026072136514KC_000400E_20260721.hwp",
+          "pdf": "law0106742026072136514KC_000400E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제  [별표 4]                                                           \n  금융위원회와 그 소속기관 한시조직에 두는 공무원 정원표  \n  (제22조제4항 및 제23조제4항 관련)                       \n                                                          \n  1. 국민성장펀드추진단(존속기한: 2028년 12월 31일)       \n                                                          \n    총계                    34                            \n                                                          \n      일반직 계             34                            \n                                                          \n        고위공무원단        1                             \n                                                          \n        3급 또는 4급 이하   33                            \n                                                          \n  2. 기업구조개선과(존속기한: 2026년 12월 25일)           \n                                                          \n    총계                    5                             \n                                                          \n      일반직 계             5                             \n                                                          \n        4급 이하            5                             \n                          "
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "금융위원회 공무원 한시정원표(제24조 관련)",
+        "key": "000500E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167039153",
+          "pdf": "/LSW/flDownload.do?flSeq=167039155",
+          "image": "/LSW/flDownload.do?flSeq=167039157"
+        },
+        "files": {
+          "hwp": "law0106742026072136514KC_000500E_20260721.hwp",
+          "pdf": "law0106742026072136514KC_000500E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 [별표 5] <신설 2026. 3. 31.>   \n                                                                  \n                                                                  \n  금융위원회 공무원 한시정원표(제24조 관련)                       \n                                                                  \n                                                                  \n  제24조 관련 한시정원(존속기한: 2028년 3월 31일)                 \n                                                                  \n  총계          11                                                \n                                                                  \n    일반직 계   11                                                \n                                                                  \n      5급 이하  11"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "금융위원회 공무원 정원표(제18조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167159431",
+          "pdf": "/LSW/flDownload.do?flSeq=167159433",
+          "image": "/LSW/flDownload.do?flSeq=167159435"
+        },
+        "files": {
+          "hwp": "law0106902026072102140KC_000100E_20260721.hwp",
+          "pdf": "law0106902026072102140KC_000100E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 시행규칙 [별표 1] <개정 2026. 7. 21.>\n                                                                \n  금융위원회 공무원 정원표(제18조제1항 본문 관련)               \n                                                                \n  총계                                                    273   \n                                                                \n   정무직 계                                              2     \n                                                                \n     위원장(장관급)                                       1     \n                                                                \n     부위원장(차관급)                                     1     \n                                                                \n   일반직 계                                              271   \n                                                                \n     고위공무원단                                         9     \n                                                                \n     고위공무원단에 속하는 임기제                         3     \n                                                                \n     부이사관ㆍ서기관 또는 과학기술서기관                 5     \n                                                           "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "금융위원회 공무원 정원표(제18조제1항 단서 관련)",
+        "key": "000102E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167159437",
+          "pdf": "/LSW/flDownload.do?flSeq=167159439",
+          "image": [
+            "/LSW/flDownload.do?flSeq=167159441",
+            "/LSW/flDownload.do?flSeq=167159443"
+          ]
+        },
+        "files": {
+          "hwp": "law0106902026072102140KC_000102E_20260721.hwp",
+          "pdf": "law0106902026072102140KC_000102E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 시행규칙 [별표 1의2] <개정 2026. 7. 21.>\n                                                              \n  금융위원회 공무원 정원표(제18조제1항 단서 관련)             \n                                                              \n  총계                                                  273   \n                                                              \n    정무직 계                                           2     \n                                                              \n      위원장(장관급)                                    1     \n                                                              \n      부위원장(차관급)                                  1     \n                                                              \n    일반직 계                                           271   \n                                                              \n      고위공무원단                                      9     \n                                                              \n      고위공무원단에 속하는 임기제                      3     \n                                                              \n      부이사관ㆍ서기관 또는 과학기술서기관              5     \n                                                              \n      부이사관ㆍ서기관ㆍ과학기술서기관 또는 수석전문"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "삭제 &lt;2016. 5. 19.&gt;",
+        "key": "000103E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167159445",
+          "pdf": "/LSW/flDownload.do?flSeq=167159447",
+          "image": "/LSW/flDownload.do?flSeq=167159449"
+        },
+        "files": {
+          "hwp": "law0106902026072102140KC_000103E_20260721.hwp",
+          "pdf": "law0106902026072102140KC_000103E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 시행규칙 [별표 1의3] 삭제 <2016. 5. 19.>"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "금융정보분석원 공무원 정원표(제19조제1항 본문 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167159451",
+          "pdf": "/LSW/flDownload.do?flSeq=167159453",
+          "image": "/LSW/flDownload.do?flSeq=167159455"
+        },
+        "files": {
+          "hwp": "law0106902026072102140KC_000200E_20260721.hwp",
+          "pdf": "law0106902026072102140KC_000200E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 시행규칙 [별표 2] <개정 2025. 12. 30.>\n                                                              \n  금융정보분석원 공무원 정원표(제19조제1항 본문 관련)         \n                                                              \n  총계                                                    79  \n                                                              \n    일반직 계                                             71  \n                                                              \n      고위공무원단                                        2   \n                                                              \n      부이사관ㆍ서기관 또는 과학기술서기관                1   \n                                                              \n      서기관 또는 과학기술서기관                          3   \n                                                              \n      서기관ㆍ과학기술서기관ㆍ행정사무관 또는 전산사무관  2   \n                                                              \n      행정사무관                                          11  \n                                                              \n      행정사무관 또는 전산사무관                          16  \n                                                              \n      검찰사무관                                          3  "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "금융정보분석원 공무원 정원표(제19조제1항 단서 관련)",
+        "key": "000202E",
+        "effectiveDate": "20260721",
+        "type": "headcount",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167159457",
+          "pdf": "/LSW/flDownload.do?flSeq=167159859",
+          "image": "/LSW/flDownload.do?flSeq=167159861"
+        },
+        "files": {
+          "hwp": "law0106902026072102140KC_000202E_20260721.hwp",
+          "pdf": "law0106902026072102140KC_000202E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 시행규칙 [별표 2의2] <개정 2025. 12. 30.>\n                                                              \n  금융정보분석원 공무원 정원표(제19조제1항 단서 관련)         \n                                                              \n  총계                                                    79  \n                                                              \n    일반직 계                                             71  \n                                                              \n      고위공무원단                                        2   \n                                                              \n      부이사관ㆍ서기관 또는 과학기술서기관                1   \n                                                              \n      서기관 또는 과학기술서기관                          3   \n                                                              \n      서기관ㆍ과학기술서기관ㆍ행정사무관 또는 전산사무관  2   \n                                                              \n      행정사무관                                          11  \n                                                              \n      행정사무관 또는 전산사무관                          17  \n                                                              \n      검찰사무관                                          3"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "삭제 &lt;2014.9.4.&gt;",
+        "key": "000300E",
+        "effectiveDate": "20260721",
+        "type": "deleted",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167159863",
+          "pdf": "/LSW/flDownload.do?flSeq=167159865",
+          "image": "/LSW/flDownload.do?flSeq=167159867"
+        },
+        "files": {
+          "hwp": "law0106902026072102140KC_000300E_20260721.hwp",
+          "pdf": "law0106902026072102140KC_000300E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 시행규칙 [별표 3] 삭제 <2014.9.4.>"
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "금융위원회에 두는 평가대상 조직(제21조 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260721",
+        "type": "evaluation",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167159869",
+          "pdf": "/LSW/flDownload.do?flSeq=167159871",
+          "image": "/LSW/flDownload.do?flSeq=167159873"
+        },
+        "files": {
+          "hwp": "law0106902026072102140KC_000400E_20260721.hwp",
+          "pdf": "law0106902026072102140KC_000400E_20260721.pdf"
+        },
+        "rowCount": 2,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "자본시장국 자본시장 조사과",
+            "3명 (4급 1명, 5급 1명, 6급 1명)",
+            "2027년 9월 30일까지"
+          ]
+        ],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 시행규칙 [별표 4] <개정 2026. 3. 31.>  \n                                                                          \n  금융위원회에 두는 평가대상 조직(제21조 관련)                            \n                                                                          \n┌──────────┬───────┬────────────────┐\n│조직                │정원          │평가기간                        │\n├──────────┼───────┼────────────────┤\n│자본시장국 자본시장 │3명           │2027년 9월 30일까지             │\n│조사과              │(4급 1명, 5급 │                                │\n│                    │1명,          │                                │\n│                    │6급           │                                │\n│                    │1명)          │                                │\n└──────────┴───────┴────────────────┘"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "금융위원회와 그 소속기관 한시조직에 두는 공무원 정원표(제22조제7항 및 제23조제2항 관련)",
+        "key": "000500E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167159875",
+          "pdf": "/LSW/flDownload.do?flSeq=167159877",
+          "image": "/LSW/flDownload.do?flSeq=167159879"
+        },
+        "files": {
+          "hwp": "law0106902026072102140KC_000500E_20260721.hwp",
+          "pdf": "law0106902026072102140KC_000500E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 시행규칙 [별표 5] <개정 2025. 12. 30.>   \n                                                                            \n  금융위원회와 그 소속기관 한시조직에 두는 공무원 정원표                    \n  (제22조제7항 및 제23조제2항 관련)                                         \n                                                                            \n  1. 국민성장펀드추진단(존속기한: 2028년 12월 31일)                         \n                                                                            \n    총계                                                          34        \n                                                                            \n      일반직 계                                                   34        \n                                                                            \n        고위공무원단                                              1         \n                                                                            \n        부이사관ㆍ서기관 또는 과학기술서기관                      1         \n                                                                            \n        서기관 또는 과학기술서기관                                3         \n                                                                            \n       "
+      },
+      {
+        "annex": "별표 6",
+        "number": "6",
+        "title": "금융위원회 공무원 한시정원표(제24조 관련)",
+        "key": "000600E",
+        "effectiveDate": "20260721",
+        "type": "temporary-headcount",
+        "source": "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=167159881",
+          "pdf": "/LSW/flDownload.do?flSeq=167159883",
+          "image": "/LSW/flDownload.do?flSeq=167159885"
+        },
+        "files": {
+          "hwp": "law0106902026072102140KC_000600E_20260721.hwp",
+          "pdf": "law0106902026072102140KC_000600E_20260721.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 금융위원회와 그 소속기관 직제 시행규칙 [별표 6] <신설 2026. 3. 31.>  \n                                                                          \n  금융위원회 공무원 한시정원표(제24조 관련)                               \n                                                                          \n  제24조 관련 한시정원(존속기한: 2028년 3월 31일)                         \n                                                                          \n  총계                            11                                      \n                                                                          \n    일반직 계                     11                                      \n                                                                          \n      행정사무관 또는 전산사무관  1                                       \n                                                                          \n      행정주사 또는 전산주사      4                                       \n                                                                          \n      행정주사보 또는 전산주사보  6"
+      }
+    ]
+  },
+  "rootId": "n-cac33d2a",
+  "nodes": [
+    {
+      "id": "n-cac33d2a",
+      "name": "금융위원회",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-def6fe34",
+      "name": "금융정보분석원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "affiliated",
+        "responsible": false,
+        "unitRole": "affiliated-institution",
+        "grade": "가",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e9f8e82f",
+      "name": "사무처",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8df81214",
+      "name": "위원장",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {
+        "employmentType": "임기제"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-618c7eaf",
+      "name": "기획조정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0e4f6171",
+      "name": "행정인사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-993f77d5",
+      "name": "금융소비자국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-746de82b",
+      "name": "금융정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1b309f58",
+      "name": "금융산업국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-43578de5",
+      "name": "자본시장국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5df6c6af",
+      "name": "제도운영기획관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f5253256",
+      "name": "국민성장펀드추진단",
+      "kind": "temporary",
+      "rank": 4,
+      "metadata": {
+        "temporary": true,
+        "expires": "2028-12-31",
+        "evaluation": true
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-dce815a6",
+      "name": "기업구조개선과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "evaluation": true,
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]",
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-028c06a5",
+      "name": "혁신기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-dadc7298",
+      "name": "규제개혁법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d4a068d1",
+      "name": "의사운영정보팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-5a22b99c",
+      "name": "금융소비자정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-aa2f3f4e",
+      "name": "서민금융과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-f790b672",
+      "name": "가계금융과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0d4526da",
+      "name": "청년정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-0bf6c01d",
+      "name": "구조개선정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-03705c48",
+      "name": "금융정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e35d29be",
+      "name": "금융시장분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-31544a2b",
+      "name": "산업금융과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-eff50109",
+      "name": "구조개선정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-809b2b64",
+      "name": "글로벌금융과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-3058771e",
+      "name": "디지털금융정책관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-80be153a",
+      "name": "은행과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d02bdde7",
+      "name": "보험과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1daf5de1",
+      "name": "중소금융과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-517ac971",
+      "name": "상호금융팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ee61f7eb",
+      "name": "디지털금융총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-e4901418",
+      "name": "금융데이터정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-9f0d6178",
+      "name": "금융공공데이터팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-dd22aea2",
+      "name": "금융안전과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-6d5e2a62",
+      "name": "가상자산과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d2554902",
+      "name": "자본시장과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-8bb371fe",
+      "name": "자산운용과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1c07f4b8",
+      "name": "공정시장과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-9d9fb54f",
+      "name": "회계제도팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-461010d9",
+      "name": "자본시장조사총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-ba075ace",
+      "name": "자본시장조사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-745723b4",
+      "name": "기획행정실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-114c99b6",
+      "name": "제도운영과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-7f925efe",
+      "name": "가상자산검사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-21da498a",
+      "name": "심사분석실",
+      "kind": "assistant",
+      "rank": 3,
+      "metadata": {},
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-960cd687",
+      "name": "심사분석1과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-93debc9c",
+      "name": "심사분석2과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-9a085fa5",
+      "name": "심사분석3과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-441f8d2d",
+      "name": "국민성장펀드총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1635644b",
+      "name": "첨단산업1과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-1439aa60",
+      "name": "첨단산업2과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-29fa5841",
+      "name": "국민지역참여지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ]
+    },
+    {
+      "id": "n-d02ea452",
+      "name": "부위원장",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {
+        "employmentType": "임기제"
+      },
+      "sources": [
+        "inferred",
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-32d09bf2",
+      "parent": "n-cac33d2a",
+      "child": "n-def6fe34",
+      "type": "affiliated",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제2조(소속기관)",
+        "evidenceText": "제2조(소속기관) 「특정금융거래정보의 보고 및 이용 등에 관한 법률」 제3조에 따라 금융위원회 소속으로 금융정보분석원을 둔다",
+        "affiliationType": "affiliated"
+      }
+    },
+    {
+      "id": "e-208f5880",
+      "parent": "n-8df81214",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 위원장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-89192343",
+      "parent": "n-e9f8e82f",
+      "child": "n-618c7eaf",
+      "type": "advisor",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(기획조정관)",
+        "evidenceText": "② 기획조정관은 다음 사항에 관하여 사무처장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d5d3a370",
+      "parent": "n-e9f8e82f",
+      "child": "n-0e4f6171",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(하부조직)",
+        "evidenceText": "① 사무처에 행정인사과ㆍ금융소비자국ㆍ금융정책국ㆍ금융산업국 및 자본시장국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d5277b02",
+      "parent": "n-e9f8e82f",
+      "child": "n-993f77d5",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(하부조직)",
+        "evidenceText": "① 사무처에 행정인사과ㆍ금융소비자국ㆍ금융정책국ㆍ금융산업국 및 자본시장국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2cb4b1c4",
+      "parent": "n-e9f8e82f",
+      "child": "n-746de82b",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(하부조직)",
+        "evidenceText": "① 사무처에 행정인사과ㆍ금융소비자국ㆍ금융정책국ㆍ금융산업국 및 자본시장국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d3b26e8e",
+      "parent": "n-e9f8e82f",
+      "child": "n-1b309f58",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(하부조직)",
+        "evidenceText": "① 사무처에 행정인사과ㆍ금융소비자국ㆍ금융정책국ㆍ금융산업국 및 자본시장국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5a08488f",
+      "parent": "n-e9f8e82f",
+      "child": "n-43578de5",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(하부조직)",
+        "evidenceText": "① 사무처에 행정인사과ㆍ금융소비자국ㆍ금융정책국ㆍ금융산업국 및 자본시장국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9326bbf7",
+      "parent": "n-def6fe34",
+      "child": "n-5df6c6af",
+      "type": "advisor",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제16조(원장)",
+        "evidenceText": "④ 제도운영기획관은 제15조제1호부터 제3호까지, 제6호부터 제10호까지 및 제12호부터 제15호까지의 사항에 관하여 금융정보분석원장을 보좌한다"
+      }
+    },
+    {
+      "id": "e-5e4865ea",
+      "parent": "n-e9f8e82f",
+      "child": "n-f5253256",
+      "type": "temporary",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제22조(국민성장펀드추진단)",
+        "evidenceText": "① 금융위원회 사무처에 「행정기관의 조직과 정원에 관한 통칙」 제17조의3제1항제1호에 따라 2028년 12월 31일까지 존속하는 한시조직으로 국민성장펀드추진단을 둔다"
+      }
+    },
+    {
+      "id": "e-909013e9",
+      "parent": "n-618c7eaf",
+      "child": "n-028c06a5",
+      "type": "advisor",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(기획조정관)",
+        "evidenceText": "③ 혁신기획재정담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-162aca08",
+      "parent": "n-618c7eaf",
+      "child": "n-dadc7298",
+      "type": "advisor",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(기획조정관)",
+        "evidenceText": "④ 규제개혁법무담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-e2a9ee89",
+      "parent": "n-618c7eaf",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(기획조정관)",
+        "evidenceText": "⑤ 감사담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-4a56585e",
+      "parent": "n-618c7eaf",
+      "child": "n-d4a068d1",
+      "type": "advisor",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제7조(기획조정관)",
+        "evidenceText": "⑥ 의사운영정보팀장은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-a49c2fde",
+      "parent": "n-993f77d5",
+      "child": "n-5a22b99c",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조의3(금융소비자국)",
+        "evidenceText": "④ 금융소비자국에 금융소비자정책과ㆍ서민금융과ㆍ가계금융과 및 청년정책과를 두며, 각 과장은 부이사관ㆍ과학기술서기관ㆍ서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4d860101",
+      "parent": "n-993f77d5",
+      "child": "n-aa2f3f4e",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조의3(금융소비자국)",
+        "evidenceText": "④ 금융소비자국에 금융소비자정책과ㆍ서민금융과ㆍ가계금융과 및 청년정책과를 두며, 각 과장은 부이사관ㆍ과학기술서기관ㆍ서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0c1e957a",
+      "parent": "n-993f77d5",
+      "child": "n-f790b672",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조의3(금융소비자국)",
+        "evidenceText": "④ 금융소비자국에 금융소비자정책과ㆍ서민금융과ㆍ가계금융과 및 청년정책과를 두며, 각 과장은 부이사관ㆍ과학기술서기관ㆍ서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-76c9d201",
+      "parent": "n-993f77d5",
+      "child": "n-0d4526da",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제8조의3(금융소비자국)",
+        "evidenceText": "④ 금융소비자국에 금융소비자정책과ㆍ서민금융과ㆍ가계금융과 및 청년정책과를 두며, 각 과장은 부이사관ㆍ과학기술서기관ㆍ서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-97233d0b",
+      "parent": "n-746de82b",
+      "child": "n-0bf6c01d",
+      "type": "advisor",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(금융정책국)",
+        "evidenceText": "③ 구조개선정책관은 「금융위원회와 그 소속기관 직제」 제12조제3항제1호(금융감독원의 업무에 대한 위원회의 지도ㆍ감독에 관한 사항으로 한정한다), 제7호의2, 제8호의2, 제15호부터 제17호까지 및 제32호부터 제40호까지의 사항에 관하여 국장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-8e79f915",
+      "parent": "n-746de82b",
+      "child": "n-03705c48",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(금융정책국)",
+        "evidenceText": "④ 금융정책국에 금융정책과ㆍ금융시장분석과ㆍ산업금융과ㆍ구조개선정책과 및 글로벌금융과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6b3d702e",
+      "parent": "n-746de82b",
+      "child": "n-e35d29be",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(금융정책국)",
+        "evidenceText": "④ 금융정책국에 금융정책과ㆍ금융시장분석과ㆍ산업금융과ㆍ구조개선정책과 및 글로벌금융과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2f89a2f5",
+      "parent": "n-746de82b",
+      "child": "n-31544a2b",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(금융정책국)",
+        "evidenceText": "④ 금융정책국에 금융정책과ㆍ금융시장분석과ㆍ산업금융과ㆍ구조개선정책과 및 글로벌금융과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6df099e5",
+      "parent": "n-746de82b",
+      "child": "n-eff50109",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(금융정책국)",
+        "evidenceText": "④ 금융정책국에 금융정책과ㆍ금융시장분석과ㆍ산업금융과ㆍ구조개선정책과 및 글로벌금융과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-403f6bc6",
+      "parent": "n-746de82b",
+      "child": "n-809b2b64",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제9조(금융정책국)",
+        "evidenceText": "④ 금융정책국에 금융정책과ㆍ금융시장분석과ㆍ산업금융과ㆍ구조개선정책과 및 글로벌금융과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cc013c4f",
+      "parent": "n-1b309f58",
+      "child": "n-3058771e",
+      "type": "advisor",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(금융산업국)",
+        "evidenceText": "③ 디지털금융정책관은 「금융위원회와 그 소속기관 직제」 제13조제3항제12호부터 제24호까지의 사항(금융감독원의 업무에 대한 위원회의 지도ㆍ감독에 관한 사항을 포함한다)에 관하여 국장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-d0924716",
+      "parent": "n-1b309f58",
+      "child": "n-80be153a",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(금융산업국)",
+        "evidenceText": "④ 금융산업국에 은행과ㆍ보험과ㆍ중소금융과ㆍ상호금융팀ㆍ디지털금융총괄과ㆍ금융데이터정책과ㆍ금융공공데이터팀ㆍ금융안전과 및 가상자산과를 두되, 은행과장ㆍ보험과장ㆍ중소금융과장ㆍ디지털금융총괄과장ㆍ금융데이터정책과장ㆍ금융안전과장 및 가상자산과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 상호금융팀장 및 금융공공데이터팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-18126029",
+      "parent": "n-1b309f58",
+      "child": "n-d02bdde7",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(금융산업국)",
+        "evidenceText": "④ 금융산업국에 은행과ㆍ보험과ㆍ중소금융과ㆍ상호금융팀ㆍ디지털금융총괄과ㆍ금융데이터정책과ㆍ금융공공데이터팀ㆍ금융안전과 및 가상자산과를 두되, 은행과장ㆍ보험과장ㆍ중소금융과장ㆍ디지털금융총괄과장ㆍ금융데이터정책과장ㆍ금융안전과장 및 가상자산과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 상호금융팀장 및 금융공공데이터팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d3aba778",
+      "parent": "n-1b309f58",
+      "child": "n-1daf5de1",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(금융산업국)",
+        "evidenceText": "④ 금융산업국에 은행과ㆍ보험과ㆍ중소금융과ㆍ상호금융팀ㆍ디지털금융총괄과ㆍ금융데이터정책과ㆍ금융공공데이터팀ㆍ금융안전과 및 가상자산과를 두되, 은행과장ㆍ보험과장ㆍ중소금융과장ㆍ디지털금융총괄과장ㆍ금융데이터정책과장ㆍ금융안전과장 및 가상자산과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 상호금융팀장 및 금융공공데이터팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6287d4ab",
+      "parent": "n-1b309f58",
+      "child": "n-517ac971",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(금융산업국)",
+        "evidenceText": "④ 금융산업국에 은행과ㆍ보험과ㆍ중소금융과ㆍ상호금융팀ㆍ디지털금융총괄과ㆍ금융데이터정책과ㆍ금융공공데이터팀ㆍ금융안전과 및 가상자산과를 두되, 은행과장ㆍ보험과장ㆍ중소금융과장ㆍ디지털금융총괄과장ㆍ금융데이터정책과장ㆍ금융안전과장 및 가상자산과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 상호금융팀장 및 금융공공데이터팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1287011e",
+      "parent": "n-1b309f58",
+      "child": "n-ee61f7eb",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(금융산업국)",
+        "evidenceText": "④ 금융산업국에 은행과ㆍ보험과ㆍ중소금융과ㆍ상호금융팀ㆍ디지털금융총괄과ㆍ금융데이터정책과ㆍ금융공공데이터팀ㆍ금융안전과 및 가상자산과를 두되, 은행과장ㆍ보험과장ㆍ중소금융과장ㆍ디지털금융총괄과장ㆍ금융데이터정책과장ㆍ금융안전과장 및 가상자산과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 상호금융팀장 및 금융공공데이터팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0c0eecd1",
+      "parent": "n-1b309f58",
+      "child": "n-e4901418",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(금융산업국)",
+        "evidenceText": "④ 금융산업국에 은행과ㆍ보험과ㆍ중소금융과ㆍ상호금융팀ㆍ디지털금융총괄과ㆍ금융데이터정책과ㆍ금융공공데이터팀ㆍ금융안전과 및 가상자산과를 두되, 은행과장ㆍ보험과장ㆍ중소금융과장ㆍ디지털금융총괄과장ㆍ금융데이터정책과장ㆍ금융안전과장 및 가상자산과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 상호금융팀장 및 금융공공데이터팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-be676be8",
+      "parent": "n-1b309f58",
+      "child": "n-9f0d6178",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(금융산업국)",
+        "evidenceText": "④ 금융산업국에 은행과ㆍ보험과ㆍ중소금융과ㆍ상호금융팀ㆍ디지털금융총괄과ㆍ금융데이터정책과ㆍ금융공공데이터팀ㆍ금융안전과 및 가상자산과를 두되, 은행과장ㆍ보험과장ㆍ중소금융과장ㆍ디지털금융총괄과장ㆍ금융데이터정책과장ㆍ금융안전과장 및 가상자산과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 상호금융팀장 및 금융공공데이터팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-034b5db4",
+      "parent": "n-1b309f58",
+      "child": "n-dd22aea2",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(금융산업국)",
+        "evidenceText": "④ 금융산업국에 은행과ㆍ보험과ㆍ중소금융과ㆍ상호금융팀ㆍ디지털금융총괄과ㆍ금융데이터정책과ㆍ금융공공데이터팀ㆍ금융안전과 및 가상자산과를 두되, 은행과장ㆍ보험과장ㆍ중소금융과장ㆍ디지털금융총괄과장ㆍ금융데이터정책과장ㆍ금융안전과장 및 가상자산과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 상호금융팀장 및 금융공공데이터팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-efe55120",
+      "parent": "n-1b309f58",
+      "child": "n-6d5e2a62",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조(금융산업국)",
+        "evidenceText": "④ 금융산업국에 은행과ㆍ보험과ㆍ중소금융과ㆍ상호금융팀ㆍ디지털금융총괄과ㆍ금융데이터정책과ㆍ금융공공데이터팀ㆍ금융안전과 및 가상자산과를 두되, 은행과장ㆍ보험과장ㆍ중소금융과장ㆍ디지털금융총괄과장ㆍ금융데이터정책과장ㆍ금융안전과장 및 가상자산과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 상호금융팀장 및 금융공공데이터팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3a03a753",
+      "parent": "n-43578de5",
+      "child": "n-d2554902",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조의2(자본시장국)",
+        "evidenceText": "② 자본시장국에 자본시장과ㆍ자산운용과ㆍ공정시장과ㆍ회계제도팀ㆍ자본시장조사총괄과 및 자본시장조사과를 두며, 자본시장과장ㆍ자산운용과장 및 공정시장과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 자본시장조사총괄과장 및 자본시장조사과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 회계제도팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-88022176",
+      "parent": "n-43578de5",
+      "child": "n-8bb371fe",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조의2(자본시장국)",
+        "evidenceText": "② 자본시장국에 자본시장과ㆍ자산운용과ㆍ공정시장과ㆍ회계제도팀ㆍ자본시장조사총괄과 및 자본시장조사과를 두며, 자본시장과장ㆍ자산운용과장 및 공정시장과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 자본시장조사총괄과장 및 자본시장조사과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 회계제도팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0a5e961b",
+      "parent": "n-43578de5",
+      "child": "n-1c07f4b8",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조의2(자본시장국)",
+        "evidenceText": "② 자본시장국에 자본시장과ㆍ자산운용과ㆍ공정시장과ㆍ회계제도팀ㆍ자본시장조사총괄과 및 자본시장조사과를 두며, 자본시장과장ㆍ자산운용과장 및 공정시장과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 자본시장조사총괄과장 및 자본시장조사과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 회계제도팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b135ee7b",
+      "parent": "n-43578de5",
+      "child": "n-9d9fb54f",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조의2(자본시장국)",
+        "evidenceText": "② 자본시장국에 자본시장과ㆍ자산운용과ㆍ공정시장과ㆍ회계제도팀ㆍ자본시장조사총괄과 및 자본시장조사과를 두며, 자본시장과장ㆍ자산운용과장 및 공정시장과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 자본시장조사총괄과장 및 자본시장조사과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 회계제도팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1cd3450f",
+      "parent": "n-43578de5",
+      "child": "n-461010d9",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조의2(자본시장국)",
+        "evidenceText": "② 자본시장국에 자본시장과ㆍ자산운용과ㆍ공정시장과ㆍ회계제도팀ㆍ자본시장조사총괄과 및 자본시장조사과를 두며, 자본시장과장ㆍ자산운용과장 및 공정시장과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 자본시장조사총괄과장 및 자본시장조사과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 회계제도팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-868b29b4",
+      "parent": "n-43578de5",
+      "child": "n-ba075ace",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제10조의2(자본시장국)",
+        "evidenceText": "② 자본시장국에 자본시장과ㆍ자산운용과ㆍ공정시장과ㆍ회계제도팀ㆍ자본시장조사총괄과 및 자본시장조사과를 두며, 자본시장과장ㆍ자산운용과장 및 공정시장과장은 부이사관ㆍ과학기술서기관ㆍ서기관 또는 수석전문관으로, 자본시장조사총괄과장 및 자본시장조사과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 회계제도팀장은 과학기술서기관ㆍ서기관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-c9dbd4da",
+      "parent": "n-def6fe34",
+      "child": "n-745723b4",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(금융정보분석원)",
+        "evidenceText": "③ 금융정보분석원에 기획행정실ㆍ제도운영과ㆍ가상자산검사과ㆍ심사분석실ㆍ심사분석1과ㆍ심사분석2과 및 심사분석3과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aa6059ad",
+      "parent": "n-def6fe34",
+      "child": "n-114c99b6",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(금융정보분석원)",
+        "evidenceText": "③ 금융정보분석원에 기획행정실ㆍ제도운영과ㆍ가상자산검사과ㆍ심사분석실ㆍ심사분석1과ㆍ심사분석2과 및 심사분석3과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-306d9959",
+      "parent": "n-def6fe34",
+      "child": "n-7f925efe",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(금융정보분석원)",
+        "evidenceText": "③ 금융정보분석원에 기획행정실ㆍ제도운영과ㆍ가상자산검사과ㆍ심사분석실ㆍ심사분석1과ㆍ심사분석2과 및 심사분석3과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a8b2682a",
+      "parent": "n-def6fe34",
+      "child": "n-21da498a",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(금융정보분석원)",
+        "evidenceText": "③ 금융정보분석원에 기획행정실ㆍ제도운영과ㆍ가상자산검사과ㆍ심사분석실ㆍ심사분석1과ㆍ심사분석2과 및 심사분석3과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-60403cc1",
+      "parent": "n-def6fe34",
+      "child": "n-960cd687",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(금융정보분석원)",
+        "evidenceText": "③ 금융정보분석원에 기획행정실ㆍ제도운영과ㆍ가상자산검사과ㆍ심사분석실ㆍ심사분석1과ㆍ심사분석2과 및 심사분석3과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8b31f818",
+      "parent": "n-def6fe34",
+      "child": "n-93debc9c",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(금융정보분석원)",
+        "evidenceText": "③ 금융정보분석원에 기획행정실ㆍ제도운영과ㆍ가상자산검사과ㆍ심사분석실ㆍ심사분석1과ㆍ심사분석2과 및 심사분석3과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f691c013",
+      "parent": "n-def6fe34",
+      "child": "n-9a085fa5",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제11조(금융정보분석원)",
+        "evidenceText": "③ 금융정보분석원에 기획행정실ㆍ제도운영과ㆍ가상자산검사과ㆍ심사분석실ㆍ심사분석1과ㆍ심사분석2과 및 심사분석3과를 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-039d32d0",
+      "parent": "n-f5253256",
+      "child": "n-441f8d2d",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제22조(국민성장펀드추진단)",
+        "evidenceText": "② 국민성장펀드추진단에 국민성장펀드총괄과ㆍ첨단산업1과ㆍ첨단산업2과 및 국민지역참여지원과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7d58a1f2",
+      "parent": "n-f5253256",
+      "child": "n-1635644b",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제22조(국민성장펀드추진단)",
+        "evidenceText": "② 국민성장펀드추진단에 국민성장펀드총괄과ㆍ첨단산업1과ㆍ첨단산업2과 및 국민지역참여지원과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-51003264",
+      "parent": "n-f5253256",
+      "child": "n-1439aa60",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제22조(국민성장펀드추진단)",
+        "evidenceText": "② 국민성장펀드추진단에 국민성장펀드총괄과ㆍ첨단산업1과ㆍ첨단산업2과 및 국민지역참여지원과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8704edf3",
+      "parent": "n-f5253256",
+      "child": "n-29fa5841",
+      "type": "assistant",
+      "sources": [
+        "금융위원회와 그 소속기관 직제 시행규칙 [시행 20260721]"
+      ],
+      "metadata": {
+        "article": "제22조(국민성장펀드추진단)",
+        "evidenceText": "② 국민성장펀드추진단에 국민성장펀드총괄과ㆍ첨단산업1과ㆍ첨단산업2과 및 국민지역참여지원과를 두며, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7b78b9c7",
+      "parent": "n-cac33d2a",
+      "child": "n-8df81214",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-44257cc0",
+      "parent": "n-8df81214",
+      "child": "n-d02ea452",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-6d7b1393",
+      "parent": "n-d02ea452",
+      "child": "n-e9f8e82f",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-e551ca47",
+      "parent": "n-d02ea452",
+      "child": "n-dce815a6",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

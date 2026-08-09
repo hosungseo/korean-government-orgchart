@@ -1,0 +1,2668 @@
+{
+  "meta": {
+    "institution": "국민권익위원회",
+    "title": "국민권익위원회",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+      "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "role": "decree"
+      },
+      {
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]",
+        "role": "rule"
+      }
+    ],
+    "temporaryHeadcounts": [
+      {
+        "target": "국민권익위원회",
+        "expires": "2026-12-31",
+        "source": "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      }
+    ],
+    "annexRequirements": [
+      {
+        "type": "headcount",
+        "annex": "별표 3의2",
+        "description": "직급별 정원 집계는 별표를 읽어야 확정됩니다",
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      }
+    ],
+    "spanDiagnostics": [
+      {
+        "node": "고충처리국",
+        "directUnits": 10,
+        "status": "split-candidate",
+        "message": "직속 과·팀이 9개를 초과합니다."
+      }
+    ],
+    "laws": [
+      {
+        "name": "국민권익위원회와 그 소속기관 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260127",
+        "mst": "283027",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=283027&efYd=20260127&BD=on",
+        "annexCount": 6
+      },
+      {
+        "name": "국민권익위원회와 그 소속기관 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260127",
+        "mst": "283097",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=283097&efYd=20260127&BD=on",
+        "annexCount": 11
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "국민권익위원회 공무원 정원표(제15조제1항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260127",
+        "type": "headcount",
+        "source": "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161064485",
+          "pdf": "/LSW/flDownload.do?flSeq=161064487",
+          "image": "/LSW/flDownload.do?flSeq=161064489"
+        },
+        "files": {
+          "hwp": "law0106842026012736057KC_000100E_20260127.hwp",
+          "pdf": "law0106842026012736057KC_000100E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 [별표 1] <개정 2026. 1. 27.>\n                                                  \n  국민권익위원회 공무원 정원표(제15조제1항 관련)  \n                                                  \n    총계                              505         \n                                                  \n      정무직 계                       4           \n                                                  \n        위원장(장관급)                1           \n                                                  \n        부위원장(차관급)              3           \n                                                  \n      별정직 계                       1           \n                                                  \n        5급 상당 이하                 1           \n                                                  \n      일반직 계                       497         \n                                                  \n        고위공무원단                  10          \n                                                  \n        고위공무원단에 속하는 임기제  6           \n                                                  \n        3급 또는 4급 이하             470         \n                                                  \n        전문경력관                    11          \n           "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "삭제 &lt;2025. 12. 30.&gt;",
+        "key": "000102E",
+        "effectiveDate": "20260127",
+        "type": "deleted",
+        "source": "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161064491",
+          "pdf": "/LSW/flDownload.do?flSeq=161064493",
+          "image": "/LSW/flDownload.do?flSeq=161064495"
+        },
+        "files": {
+          "hwp": "law0106842026012736057KC_000102E_20260127.hwp",
+          "pdf": "law0106842026012736057KC_000102E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 [별표 1의2] 삭제 <2025. 12. 30.>"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "국민권익위원회 소속기관 공무원 정원표(제15조의2제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260127",
+        "type": "headcount",
+        "source": "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161064497",
+          "pdf": "/LSW/flDownload.do?flSeq=161064499",
+          "image": "/LSW/flDownload.do?flSeq=161064501"
+        },
+        "files": {
+          "hwp": "law0106842026012736057KC_000200E_20260127.hwp",
+          "pdf": "law0106842026012736057KC_000200E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 [별표 2] <개정 2024. 12. 3.>\n                                                              \n  국민권익위원회 소속기관 공무원 정원표(제15조의2제1항 관련)  \n                                                              \n    총계                    77                                \n                                                              \n      일반직 계             77                                \n                                                              \n        고위공무원단        2                                 \n                                                              \n        3급 또는 4급 이하   74                                \n                                                              \n        전문경력관          1"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "국민권익위원회에 두는 평가대상 조직(제17조제1항 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260127",
+        "type": "evaluation",
+        "source": "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161064503",
+          "pdf": "/LSW/flDownload.do?flSeq=161064505",
+          "image": "/LSW/flDownload.do?flSeq=161064507"
+        },
+        "files": {
+          "hwp": "law0106842026012736057KC_000300E_20260127.hwp",
+          "pdf": "law0106842026012736057KC_000300E_20260127.pdf"
+        },
+        "rowCount": 4,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "1. 심사보호국 1개 과",
+            "6명"
+          ],
+          [
+            "2. 집단갈등조정국",
+            "1명"
+          ],
+          [
+            "3. 집단갈등조정국 4개 과",
+            "18명"
+          ]
+        ],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 [별표 3] <개정 2026. 1. 27.>   \n  국민권익위원회에 두는 평가대상 조직(제17조제1항 관련)               \n┌────────────┬────────────────────┐\n│조직                    │정원                                    │\n├────────────┼────────────────────┤\n│1. 심사보호국 1개 과    │6명                                     │\n├────────────┼────────────────────┤\n│2. 집단갈등조정국       │1명                                     │\n├────────────┼────────────────────┤\n│3. 집단갈등조정국 4개 과│18명                                    │\n└────────────┴────────────────────┘"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "삭제 &lt;2023. 4. 11.&gt;",
+        "key": "000302E",
+        "effectiveDate": "20260127",
+        "type": "deleted",
+        "source": "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161064509",
+          "pdf": "/LSW/flDownload.do?flSeq=161064511",
+          "image": "/LSW/flDownload.do?flSeq=161064513"
+        },
+        "files": {
+          "hwp": "law0106842026012736057KC_000302E_20260127.hwp",
+          "pdf": "law0106842026012736057KC_000302E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 [별표 3의2] 삭제 <2023. 4. 11.>"
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "국민권익위원회 공무원 한시정원표(제18조 관련)",
+        "key": "000400E",
+        "effectiveDate": "20260127",
+        "type": "temporary-headcount",
+        "source": "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161064515",
+          "pdf": "/LSW/flDownload.do?flSeq=161064517",
+          "image": "/LSW/flDownload.do?flSeq=161064519"
+        },
+        "files": {
+          "hwp": "law0106842026012736057KC_000400E_20260127.hwp",
+          "pdf": "law0106842026012736057KC_000400E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 [별표 4]                                                         \n  국민권익위원회 공무원 한시정원표(제18조 관련)         \n                                                        \n                                                        \n  제18조 관련 한시정원(존속기한: 2026년 12월 31일)      \n                                                        \n    총계                                            1   \n                                                        \n      일반직 계                                     1   \n                                                        \n        5급 이하                                    1   \n                                                        \n<개정 2025. 12. 30.>"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "국민권익위원회 공무원 정원표(제10조제1항 본문 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260127",
+        "type": "headcount",
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161167593",
+          "pdf": "/LSW/flDownload.do?flSeq=161167595",
+          "image": [
+            "/LSW/flDownload.do?flSeq=161167597",
+            "/LSW/flDownload.do?flSeq=161167599"
+          ]
+        },
+        "files": {
+          "hwp": "law0106952026012702089KC_000100E_20260127.hwp",
+          "pdf": "law0106952026012702089KC_000100E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 시행규칙 [별표 1] <개정 2026. 1. 27.>  \n                                                                              \n  국민권익위원회 공무원 정원표(제10조제1항 본문 관련)                         \n                                                                              \n  총계                                                                  505   \n                                                                              \n    정무직 계                                                           4     \n                                                                              \n      위원장(장관급)                                                    1     \n                                                                              \n      부위원장(차관급)                                                  3     \n                                                                              \n    별정직 계                                                           1     \n                                                                              \n      비서(6급 상당)                                                    1     \n                                                                              \n    일반직 계  "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "국민권익위원회 공무원 정원표(제10조제1항 단서 관련)",
+        "key": "000102E",
+        "effectiveDate": "20260127",
+        "type": "headcount",
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161167601",
+          "pdf": "/LSW/flDownload.do?flSeq=161167603",
+          "image": [
+            "/LSW/flDownload.do?flSeq=161167605",
+            "/LSW/flDownload.do?flSeq=161167607"
+          ]
+        },
+        "files": {
+          "hwp": "law0106952026012702089KC_000102E_20260127.hwp",
+          "pdf": "law0106952026012702089KC_000102E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 시행규칙 [별표 1의2] <개정 2026. 1. 27.>   \n                                                                                  \n  국민권익위원회 공무원 정원표(제10조제1항 단서 관련)                             \n                                                                                  \n  총계                                                                    508     \n                                                                                  \n    정무직 계                                                             4       \n                                                                                  \n      위원장(장관급)                                                      1       \n                                                                                  \n      부위원장(차관급)                                                    3       \n                                                                                  \n    별정직 계                                                             1       \n                                                                                  \n      비서(6급 상당)                                                      1       \n                               "
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "삭제 &lt;2025. 12. 30.&gt;",
+        "key": "000104E",
+        "effectiveDate": "20260127",
+        "type": "deleted",
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161167615",
+          "pdf": "/LSW/flDownload.do?flSeq=161167617",
+          "image": "/LSW/flDownload.do?flSeq=161167619"
+        },
+        "files": {
+          "hwp": "law0106952026012702089KC_000104E_20260127.hwp",
+          "pdf": "law0106952026012702089KC_000104E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 시행규칙 [별표 1의4] 삭제 <2025. 12. 30.>"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "정부합동민원센터 공무원 정원표(제11조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260127",
+        "type": "headcount",
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161167621",
+          "pdf": "/LSW/flDownload.do?flSeq=161167623",
+          "image": [
+            "/LSW/flDownload.do?flSeq=161167625",
+            "/LSW/flDownload.do?flSeq=161167627"
+          ]
+        },
+        "files": {
+          "hwp": "law0106952026012702089KC_000200E_20260127.hwp",
+          "pdf": "law0106952026012702089KC_000200E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 시행규칙 [별표 2]                                                                            \n  정부합동민원센터 공무원 정원표(제11조제1항 관련)                          \n                                                                            \n  총계                                                                  54  \n                                                                            \n    일반직 계                                                           54  \n                                                                            \n      고위공무원단                                                      2   \n                                                                            \n      서기관                                                            2   \n                                                                            \n      서기관 또는 과학기술서기관                                        4   \n                                                                            \n      서기관 또는 행정사무관                                            2   \n                                                                            \n      행정사무관                                                        2  "
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "국가청렴권익교육원 공무원 정원표(제11조제2항 본문 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260127",
+        "type": "headcount",
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161167629",
+          "pdf": "/LSW/flDownload.do?flSeq=161167631",
+          "image": "/LSW/flDownload.do?flSeq=161167633"
+        },
+        "files": {
+          "hwp": "law0106952026012702089KC_000300E_20260127.hwp",
+          "pdf": "law0106952026012702089KC_000300E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 시행규칙 [별표 3]                                                                                \n  국가청렴권익교육원 공무원 정원표(제11조제2항 본문 관련)                       \n                                                                                \n  총계                                                                      23  \n                                                                                \n    일반직 계                                                               23  \n                                                                                \n      부이사관ㆍ서기관 또는 과학기술서기관                                  1   \n                                                                                \n      행정사무관ㆍ공업사무관ㆍ보건사무관ㆍ환경사무관ㆍ시설사무관 또는 전        \n  산사무관                                                                  3   \n                                                                                \n      행정주사ㆍ세무주사ㆍ관세주사ㆍ공업주사ㆍ시설주사 또는 전산주사            \n                                                                            6   \n                                                                                \n      행정주사 또는 전산주사                                               "
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "국가청렴권익교육원 공무원 정원표(제11조제2항 단서 관련)",
+        "key": "000302E",
+        "effectiveDate": "20260127",
+        "type": "headcount",
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161167635",
+          "pdf": "/LSW/flDownload.do?flSeq=161167637",
+          "image": "/LSW/flDownload.do?flSeq=161167639"
+        },
+        "files": {
+          "hwp": "law0106952026012702089KC_000302E_20260127.hwp",
+          "pdf": "law0106952026012702089KC_000302E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 시행규칙 [별표 3의2]                                                                              \n  국가청렴권익교육원 공무원 정원표(제11조제2항 단서 관련)                     \n                                                                              \n  총계                                                                    24  \n                                                                              \n    일반직 계                                                             24  \n                                                                              \n      부이사관ㆍ서기관 또는 과학기술서기관                                1   \n                                                                              \n      행정사무관                                                          1   \n                                                                              \n      행정사무관ㆍ공업사무관ㆍ보건사무관ㆍ환경사무관ㆍ시설사무관 또는         \n  전산사무관                                                              3   \n                                                                              \n      행정주사ㆍ세무주사ㆍ관세주사ㆍ공업주사ㆍ시설주사 또는 전산주사          \n                                                                          6   \n                   "
+      },
+      {
+        "annex": "별표 4",
+        "number": "4",
+        "title": "삭제 &lt;2016. 5. 19.&gt;",
+        "key": "000400E",
+        "effectiveDate": "20260127",
+        "type": "deleted",
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161167641",
+          "pdf": "/LSW/flDownload.do?flSeq=161167643",
+          "image": "/LSW/flDownload.do?flSeq=161167645"
+        },
+        "files": {
+          "hwp": "law0106952026012702089KC_000400E_20260127.hwp",
+          "pdf": "law0106952026012702089KC_000400E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 시행규칙 [별표 4] 삭제 <2016.5.19.>"
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "국민권익위원회에 두는 평가대상 조직(제14조 관련)",
+        "key": "000500E",
+        "effectiveDate": "20260127",
+        "type": "evaluation",
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161167647",
+          "pdf": "/LSW/flDownload.do?flSeq=161167649",
+          "image": "/LSW/flDownload.do?flSeq=161167651"
+        },
+        "files": {
+          "hwp": "law0106952026012702089KC_000500E_20260127.hwp",
+          "pdf": "law0106952026012702089KC_000500E_20260127.pdf"
+        },
+        "rowCount": 7,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "1. 심사보호국 공익신고자보호과",
+            "6명 (4급 1명, 5급 2명, 6급 3명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "2. 집단갈등조정국",
+            "1명 (고위공무원단 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "3. 집단갈등조정국 집단갈등조정기획과",
+            "2명 (4급 1명, 전문경력관 가군 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "4. 집단갈등조정국 경제민원갈등조정과",
+            "8명 (4급 1명, 4급 또는 5급 1명, 5급 3명, 6급 2명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "5. 집단갈등조정국 사회민원갈등조정과",
+            "2명 (4급 1명, 7급 1명)",
+            "2028년 12월 31일까지"
+          ],
+          [
+            "6. 집단갈등조정국 민원갈등소통과",
+            "6명 (4급 1명, 5급 2명, 6급 3명)",
+            "2028년 9월 30일까지"
+          ]
+        ],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 시행규칙 [별표 5] <개정 2026. 1. 27.>          \n  국민권익위원회에 두는 평가대상 조직(제14조 관련)                                    \n                                                                                      \n┌──────────────────┬───────────┬──────────┐\n│조직                                │정원                  │평가기간            │\n├──────────────────┼───────────┼──────────┤\n│1. 심사보호국 공익신고자보호과      │6명                   │2028년 9월 30일까지 │\n│                                    │(4급 1명,             │                    │\n│                                    │5급 2명, 6급 3명)     │                    │\n├──────────────────┼───────────┼──────────┤\n│2. 집단갈등조정국                   │1명                   │2028년 12월 31일까지│\n│                                    │(고위공무원단 1명)    │                    │\n├──────────────────┼───────────┼──────────┤\n│3. 집단갈등조정국 집단갈등조정기획과│2명                   │2028년 12월 31일까지│\n│                                    │(4급 1명, 전문경력관  │                    │\n│                                    │가군 1명)             │                    │\n├──────────────────┼───────────┼──────────┤\n│4. 집단갈등조정국 경제민원갈등조정과│8명                   │2028년 12월 31일까지│\n│                                    │(4급 "
+      },
+      {
+        "annex": "별표 5",
+        "number": "5",
+        "title": "삭제 &lt;2023. 4. 11.&gt;",
+        "key": "000502E",
+        "effectiveDate": "20260127",
+        "type": "deleted",
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161167653",
+          "pdf": "/LSW/flDownload.do?flSeq=161167655",
+          "image": "/LSW/flDownload.do?flSeq=161167657"
+        },
+        "files": {
+          "hwp": "law0106952026012702089KC_000502E_20260127.hwp",
+          "pdf": "law0106952026012702089KC_000502E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 시행규칙 [별표 5의2] 삭제 <2023. 4. 11.>"
+      },
+      {
+        "annex": "별표 6",
+        "number": "6",
+        "title": "국민권익위원회 공무원 한시정원표(제15조 관련)",
+        "key": "000600E",
+        "effectiveDate": "20260127",
+        "type": "temporary-headcount",
+        "source": "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=161167659",
+          "pdf": "/LSW/flDownload.do?flSeq=161167661",
+          "image": "/LSW/flDownload.do?flSeq=161167663"
+        },
+        "files": {
+          "hwp": "law0106952026012702089KC_000600E_20260127.hwp",
+          "pdf": "law0106952026012702089KC_000600E_20260127.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 국민권익위원회와 그 소속기관 직제 시행규칙 [별표 6] <개정 2025. 12. 30.>\n                                                                  \n                                                                  \n  국민권익위원회 공무원 한시정원표(제15조 관련)                   \n                                                                  \n                                                                  \n  제15조 관련 한시정원(존속기한: 2026년 12월 31일)                \n                                                                  \n  총계                                                        1   \n                                                                  \n    일반직 계                                                 1   \n                                                                  \n      행정사무관ㆍ검찰사무관ㆍ사회복지사무관ㆍ통계사무관ㆍ부      \n  감사관ㆍ공업사무관ㆍ농업사무관ㆍ해양수산사무관ㆍ보건            \n  사무관ㆍ식품위생사무관ㆍ시설사무관ㆍ임업사무관ㆍ전산            \n  사무관ㆍ방송통신사무관 또는 환경사무관                      1"
+      }
+    ]
+  },
+  "rootId": "n-6afa4eed",
+  "nodes": [
+    {
+      "id": "n-6afa4eed",
+      "name": "국민권익위원회",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "inferred",
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-0b4f6766",
+      "name": "정부합동민원센터",
+      "kind": "affiliated",
+      "rank": 5,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-90289f9b",
+      "name": "국가청렴권익교육원",
+      "kind": "affiliated",
+      "rank": 3,
+      "metadata": {
+        "affiliationType": "subsidiary",
+        "responsible": false,
+        "unitRole": "affiliated-institution"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-e9f8e82f",
+      "name": "사무처",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "concurrentWith": "부위원장",
+        "concurrentOffice": true
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-8df81214",
+      "name": "위원장",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-7da5dac3",
+      "name": "기획조정실",
+      "kind": "advisor",
+      "rank": 3,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-0b1f935e",
+      "name": "감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-3a036723",
+      "name": "부패방지국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-bdcc3724",
+      "name": "심사보호국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true,
+        "grade": "나"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-98ca17b1",
+      "name": "고충처리국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-7e826247",
+      "name": "집단갈등조정국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true,
+        "grade": "나"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-a91705ae",
+      "name": "행정심판국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-300cbcfb",
+      "name": "권익개선정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]",
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-39a702cc",
+      "name": "상임위원",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {},
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-67f14651",
+      "name": "홍보담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-79f6b9b6",
+      "name": "기획재정담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-cea046f7",
+      "name": "혁신행정데이터담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-fbd46cf9",
+      "name": "법무담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-d0745191",
+      "name": "국제교류담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-96058c0c",
+      "name": "민간협력담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-ce663fa5",
+      "name": "청렴정책총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-ea15cfa7",
+      "name": "청렴조사평가과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-cdbdb764",
+      "name": "부패영향분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-884372ad",
+      "name": "청탁금지제도과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-82cb5e13",
+      "name": "행동강령과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-a8e1b51c",
+      "name": "채용비리통합신고센터",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-de2b7d2b",
+      "name": "이해충돌방지팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-0b0b66ee",
+      "name": "심사기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-958d362b",
+      "name": "부패심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-adada3a4",
+      "name": "공공재정환수관리과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-c457318c",
+      "name": "보호보상정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-02b3bf7d",
+      "name": "부패신고자보호과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-0203cd47",
+      "name": "공익신고자보호과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "evaluation": true
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-8ded6b8c",
+      "name": "신고자보상과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-04ea55cd",
+      "name": "공익심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-13e364de",
+      "name": "고충민원심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-289825c6",
+      "name": "민원조사기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-12dc9b3c",
+      "name": "행정문화교육민원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-2fe41d2d",
+      "name": "국방보훈민원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-38dc7708",
+      "name": "경찰민원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-8c8f87c2",
+      "name": "재정세무민원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-cd3358b1",
+      "name": "복지노동민원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-856d26d8",
+      "name": "산업농림환경민원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-624343b7",
+      "name": "주택건축민원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-8fd00f7d",
+      "name": "도시수자원민원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-889d7fb2",
+      "name": "교통도로민원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-8700d371",
+      "name": "집단갈등조정기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "evaluation": true
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-14ac5fd0",
+      "name": "경제민원갈등조정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "evaluation": true
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-2ff968e3",
+      "name": "사회민원갈등조정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "evaluation": true
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-885f7c1f",
+      "name": "민원갈등소통과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급",
+        "evaluation": true
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-3d63a1c1",
+      "name": "행정심판심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-4f355f56",
+      "name": "행정심판총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-45efb7e8",
+      "name": "행정교육심판과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-7e71d3d9",
+      "name": "재정경제심판과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-f9faf045",
+      "name": "국토해양심판과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-f9646090",
+      "name": "사회복지심판과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-dee79eb6",
+      "name": "환경문화심판과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-1c03ceab",
+      "name": "운전면허심판과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-8adee2ec",
+      "name": "제도개선총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-eac198a4",
+      "name": "경제제도개선과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-a539a2bf",
+      "name": "사회제도개선과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-b987dec0",
+      "name": "국민신문고과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-6b16f2c5",
+      "name": "민원정보분석과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-7384af91",
+      "name": "적극행정국민신청팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-6e09afb4",
+      "name": "특별제안심사팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-dc25a818",
+      "name": "민원상담심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-24affccc",
+      "name": "고충상담기획과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-d4c8b11f",
+      "name": "민원신고심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-a87b0ab8",
+      "name": "특별민원심사과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-677d5db3",
+      "name": "일반상담총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-f4703ccb",
+      "name": "경제민원상담과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-086242b0",
+      "name": "사회민원상담과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-6624a182",
+      "name": "교육지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-7603ebe7",
+      "name": "교육운영과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4
+        ],
+        "gradeRange": "4급"
+      },
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ]
+    },
+    {
+      "id": "n-d02ea452",
+      "name": "부위원장",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-96b32d42",
+      "parent": "n-6afa4eed",
+      "child": "n-0b4f6766",
+      "type": "affiliated",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제1조의2(소속기관)",
+        "evidenceText": "제1조의2(소속기관) 국민권익위원회(이하 \"위원회\"라 한다)의 관장사무를 지원하기 위하여 위원회 소속으로 정부합동민원센터 및 국가청렴권익교육원을 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-45fc017a",
+      "parent": "n-6afa4eed",
+      "child": "n-90289f9b",
+      "type": "affiliated",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제1조의2(소속기관)",
+        "evidenceText": "제1조의2(소속기관) 국민권익위원회(이하 \"위원회\"라 한다)의 관장사무를 지원하기 위하여 위원회 소속으로 정부합동민원센터 및 국가청렴권익교육원을 둔다",
+        "affiliationType": "subsidiary"
+      }
+    },
+    {
+      "id": "e-208f5880",
+      "parent": "n-8df81214",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 위원장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-2c83ca84",
+      "parent": "n-e9f8e82f",
+      "child": "n-7da5dac3",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조의2(기획조정실장)",
+        "evidenceText": "② 기획조정실장은 다음 사항에 관하여 사무처장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-c7808abf",
+      "parent": "n-e9f8e82f",
+      "child": "n-0b1f935e",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조의3(감사담당관)",
+        "evidenceText": "② 감사담당관은 다음 사항에 관하여 사무처장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-09ba5bde",
+      "parent": "n-e9f8e82f",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제5조(하부조직)",
+        "evidenceText": "① 사무처에 운영지원과ㆍ부패방지국ㆍ심사보호국ㆍ고충처리국ㆍ집단갈등조정국ㆍ행정심판국ㆍ권익개선정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1a3f35e1",
+      "parent": "n-e9f8e82f",
+      "child": "n-3a036723",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제5조(하부조직)",
+        "evidenceText": "① 사무처에 운영지원과ㆍ부패방지국ㆍ심사보호국ㆍ고충처리국ㆍ집단갈등조정국ㆍ행정심판국ㆍ권익개선정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6e0123d4",
+      "parent": "n-e9f8e82f",
+      "child": "n-bdcc3724",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제5조(하부조직)",
+        "evidenceText": "① 사무처에 운영지원과ㆍ부패방지국ㆍ심사보호국ㆍ고충처리국ㆍ집단갈등조정국ㆍ행정심판국ㆍ권익개선정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-789f792c",
+      "parent": "n-e9f8e82f",
+      "child": "n-98ca17b1",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제5조(하부조직)",
+        "evidenceText": "① 사무처에 운영지원과ㆍ부패방지국ㆍ심사보호국ㆍ고충처리국ㆍ집단갈등조정국ㆍ행정심판국ㆍ권익개선정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-02eb8727",
+      "parent": "n-e9f8e82f",
+      "child": "n-7e826247",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제5조(하부조직)",
+        "evidenceText": "① 사무처에 운영지원과ㆍ부패방지국ㆍ심사보호국ㆍ고충처리국ㆍ집단갈등조정국ㆍ행정심판국ㆍ권익개선정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-41375d7f",
+      "parent": "n-e9f8e82f",
+      "child": "n-a91705ae",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제5조(하부조직)",
+        "evidenceText": "① 사무처에 운영지원과ㆍ부패방지국ㆍ심사보호국ㆍ고충처리국ㆍ집단갈등조정국ㆍ행정심판국ㆍ권익개선정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-71875bd5",
+      "parent": "n-e9f8e82f",
+      "child": "n-300cbcfb",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제5조(하부조직)",
+        "evidenceText": "① 사무처에 운영지원과ㆍ부패방지국ㆍ심사보호국ㆍ고충처리국ㆍ집단갈등조정국ㆍ행정심판국ㆍ권익개선정책국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-011be0c0",
+      "parent": "n-e618142f",
+      "child": "n-67f14651",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제4조(대변인)",
+        "evidenceText": "③ 홍보담당관은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-b5600516",
+      "parent": "n-7da5dac3",
+      "child": "n-79f6b9b6",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "③ 기획재정담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-34786a43",
+      "parent": "n-7da5dac3",
+      "child": "n-cea046f7",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "④ 혁신행정데이터담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-399f02ed",
+      "parent": "n-7da5dac3",
+      "child": "n-fbd46cf9",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑤ 법무담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-d8386a38",
+      "parent": "n-7da5dac3",
+      "child": "n-d0745191",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑥ 국제교류담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-e994c50b",
+      "parent": "n-7da5dac3",
+      "child": "n-96058c0c",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제4조의2(기획조정실장)",
+        "evidenceText": "⑦ 민간협력담당관은 다음 사항에 관하여 기획조정실장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-90be3cf7",
+      "parent": "n-3a036723",
+      "child": "n-ce663fa5",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조(부패방지국)",
+        "evidenceText": "② 부패방지국에 청렴정책총괄과, 청렴조사평가과, 부패영향분석과, 청탁금지제도과, 행동강령과, 채용비리통합신고센터 및 이해충돌방지팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 센터장 및 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-bf970381",
+      "parent": "n-3a036723",
+      "child": "n-ea15cfa7",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조(부패방지국)",
+        "evidenceText": "② 부패방지국에 청렴정책총괄과, 청렴조사평가과, 부패영향분석과, 청탁금지제도과, 행동강령과, 채용비리통합신고센터 및 이해충돌방지팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 센터장 및 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-364c92c4",
+      "parent": "n-3a036723",
+      "child": "n-cdbdb764",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조(부패방지국)",
+        "evidenceText": "② 부패방지국에 청렴정책총괄과, 청렴조사평가과, 부패영향분석과, 청탁금지제도과, 행동강령과, 채용비리통합신고센터 및 이해충돌방지팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 센터장 및 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-99cd8ea5",
+      "parent": "n-3a036723",
+      "child": "n-884372ad",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조(부패방지국)",
+        "evidenceText": "② 부패방지국에 청렴정책총괄과, 청렴조사평가과, 부패영향분석과, 청탁금지제도과, 행동강령과, 채용비리통합신고센터 및 이해충돌방지팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 센터장 및 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e68ee685",
+      "parent": "n-3a036723",
+      "child": "n-82cb5e13",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조(부패방지국)",
+        "evidenceText": "② 부패방지국에 청렴정책총괄과, 청렴조사평가과, 부패영향분석과, 청탁금지제도과, 행동강령과, 채용비리통합신고센터 및 이해충돌방지팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 센터장 및 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-0a923506",
+      "parent": "n-3a036723",
+      "child": "n-a8e1b51c",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조(부패방지국)",
+        "evidenceText": "② 부패방지국에 청렴정책총괄과, 청렴조사평가과, 부패영향분석과, 청탁금지제도과, 행동강령과, 채용비리통합신고센터 및 이해충돌방지팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 센터장 및 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-8f95c128",
+      "parent": "n-3a036723",
+      "child": "n-de2b7d2b",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조(부패방지국)",
+        "evidenceText": "② 부패방지국에 청렴정책총괄과, 청렴조사평가과, 부패영향분석과, 청탁금지제도과, 행동강령과, 채용비리통합신고센터 및 이해충돌방지팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 센터장 및 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ef06d791",
+      "parent": "n-bdcc3724",
+      "child": "n-0b0b66ee",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조의2(심사보호국)",
+        "evidenceText": "② 심사보호국에 심사기획과, 부패심사과, 공공재정환수관리과, 보호보상정책과, 부패신고자보호과, 공익신고자보호과, 신고자보상과 및 공익심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 공익심사팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e6812f6c",
+      "parent": "n-bdcc3724",
+      "child": "n-958d362b",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조의2(심사보호국)",
+        "evidenceText": "② 심사보호국에 심사기획과, 부패심사과, 공공재정환수관리과, 보호보상정책과, 부패신고자보호과, 공익신고자보호과, 신고자보상과 및 공익심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 공익심사팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-5b471d56",
+      "parent": "n-bdcc3724",
+      "child": "n-adada3a4",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조의2(심사보호국)",
+        "evidenceText": "② 심사보호국에 심사기획과, 부패심사과, 공공재정환수관리과, 보호보상정책과, 부패신고자보호과, 공익신고자보호과, 신고자보상과 및 공익심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 공익심사팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-22fac129",
+      "parent": "n-bdcc3724",
+      "child": "n-c457318c",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조의2(심사보호국)",
+        "evidenceText": "② 심사보호국에 심사기획과, 부패심사과, 공공재정환수관리과, 보호보상정책과, 부패신고자보호과, 공익신고자보호과, 신고자보상과 및 공익심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 공익심사팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-25cf93f1",
+      "parent": "n-bdcc3724",
+      "child": "n-02b3bf7d",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조의2(심사보호국)",
+        "evidenceText": "② 심사보호국에 심사기획과, 부패심사과, 공공재정환수관리과, 보호보상정책과, 부패신고자보호과, 공익신고자보호과, 신고자보상과 및 공익심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 공익심사팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f30fb4d6",
+      "parent": "n-bdcc3724",
+      "child": "n-0203cd47",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조의2(심사보호국)",
+        "evidenceText": "② 심사보호국에 심사기획과, 부패심사과, 공공재정환수관리과, 보호보상정책과, 부패신고자보호과, 공익신고자보호과, 신고자보상과 및 공익심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 공익심사팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f4741507",
+      "parent": "n-bdcc3724",
+      "child": "n-8ded6b8c",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조의2(심사보호국)",
+        "evidenceText": "② 심사보호국에 심사기획과, 부패심사과, 공공재정환수관리과, 보호보상정책과, 부패신고자보호과, 공익신고자보호과, 신고자보상과 및 공익심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 공익심사팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aae84b5c",
+      "parent": "n-bdcc3724",
+      "child": "n-04ea55cd",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제6조의2(심사보호국)",
+        "evidenceText": "② 심사보호국에 심사기획과, 부패심사과, 공공재정환수관리과, 보호보상정책과, 부패신고자보호과, 공익신고자보호과, 신고자보상과 및 공익심사팀을 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 공익심사팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-33fa2646",
+      "parent": "n-98ca17b1",
+      "child": "n-13e364de",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조(고충처리국)",
+        "evidenceText": "③ 고충민원심의관은 「국민권익위원회와 그 소속기관 직제」 제10조제3항제14호부터 제18호까지의 사항에 관하여 고충처리국장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-275b1fa4",
+      "parent": "n-98ca17b1",
+      "child": "n-289825c6",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조(고충처리국)",
+        "evidenceText": "④ 고충처리국에 민원조사기획과ㆍ행정문화교육민원과ㆍ국방보훈민원과ㆍ경찰민원과ㆍ재정세무민원과ㆍ복지노동민원과ㆍ산업농림환경민원과ㆍ주택건축민원과ㆍ도시수자원민원과 및 교통도로민원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-250f6170",
+      "parent": "n-98ca17b1",
+      "child": "n-12dc9b3c",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조(고충처리국)",
+        "evidenceText": "④ 고충처리국에 민원조사기획과ㆍ행정문화교육민원과ㆍ국방보훈민원과ㆍ경찰민원과ㆍ재정세무민원과ㆍ복지노동민원과ㆍ산업농림환경민원과ㆍ주택건축민원과ㆍ도시수자원민원과 및 교통도로민원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-260f74a1",
+      "parent": "n-98ca17b1",
+      "child": "n-2fe41d2d",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조(고충처리국)",
+        "evidenceText": "④ 고충처리국에 민원조사기획과ㆍ행정문화교육민원과ㆍ국방보훈민원과ㆍ경찰민원과ㆍ재정세무민원과ㆍ복지노동민원과ㆍ산업농림환경민원과ㆍ주택건축민원과ㆍ도시수자원민원과 및 교통도로민원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-53ef55f7",
+      "parent": "n-98ca17b1",
+      "child": "n-38dc7708",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조(고충처리국)",
+        "evidenceText": "④ 고충처리국에 민원조사기획과ㆍ행정문화교육민원과ㆍ국방보훈민원과ㆍ경찰민원과ㆍ재정세무민원과ㆍ복지노동민원과ㆍ산업농림환경민원과ㆍ주택건축민원과ㆍ도시수자원민원과 및 교통도로민원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-00ba7690",
+      "parent": "n-98ca17b1",
+      "child": "n-8c8f87c2",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조(고충처리국)",
+        "evidenceText": "④ 고충처리국에 민원조사기획과ㆍ행정문화교육민원과ㆍ국방보훈민원과ㆍ경찰민원과ㆍ재정세무민원과ㆍ복지노동민원과ㆍ산업농림환경민원과ㆍ주택건축민원과ㆍ도시수자원민원과 및 교통도로민원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b909f9de",
+      "parent": "n-98ca17b1",
+      "child": "n-cd3358b1",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조(고충처리국)",
+        "evidenceText": "④ 고충처리국에 민원조사기획과ㆍ행정문화교육민원과ㆍ국방보훈민원과ㆍ경찰민원과ㆍ재정세무민원과ㆍ복지노동민원과ㆍ산업농림환경민원과ㆍ주택건축민원과ㆍ도시수자원민원과 및 교통도로민원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f453d01e",
+      "parent": "n-98ca17b1",
+      "child": "n-856d26d8",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조(고충처리국)",
+        "evidenceText": "④ 고충처리국에 민원조사기획과ㆍ행정문화교육민원과ㆍ국방보훈민원과ㆍ경찰민원과ㆍ재정세무민원과ㆍ복지노동민원과ㆍ산업농림환경민원과ㆍ주택건축민원과ㆍ도시수자원민원과 및 교통도로민원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-23a05224",
+      "parent": "n-98ca17b1",
+      "child": "n-624343b7",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조(고충처리국)",
+        "evidenceText": "④ 고충처리국에 민원조사기획과ㆍ행정문화교육민원과ㆍ국방보훈민원과ㆍ경찰민원과ㆍ재정세무민원과ㆍ복지노동민원과ㆍ산업농림환경민원과ㆍ주택건축민원과ㆍ도시수자원민원과 및 교통도로민원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6e08a770",
+      "parent": "n-98ca17b1",
+      "child": "n-8fd00f7d",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조(고충처리국)",
+        "evidenceText": "④ 고충처리국에 민원조사기획과ㆍ행정문화교육민원과ㆍ국방보훈민원과ㆍ경찰민원과ㆍ재정세무민원과ㆍ복지노동민원과ㆍ산업농림환경민원과ㆍ주택건축민원과ㆍ도시수자원민원과 및 교통도로민원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-fb5360a3",
+      "parent": "n-98ca17b1",
+      "child": "n-889d7fb2",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조(고충처리국)",
+        "evidenceText": "④ 고충처리국에 민원조사기획과ㆍ행정문화교육민원과ㆍ국방보훈민원과ㆍ경찰민원과ㆍ재정세무민원과ㆍ복지노동민원과ㆍ산업농림환경민원과ㆍ주택건축민원과ㆍ도시수자원민원과 및 교통도로민원과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2e817666",
+      "parent": "n-7e826247",
+      "child": "n-8700d371",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조의2(집단갈등조정국)",
+        "evidenceText": "② 집단갈등조정국에 집단갈등조정기획과ㆍ경제민원갈등조정과ㆍ사회민원갈등조정과 및 민원갈등소통과를 두되, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-cb86c41c",
+      "parent": "n-7e826247",
+      "child": "n-14ac5fd0",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조의2(집단갈등조정국)",
+        "evidenceText": "② 집단갈등조정국에 집단갈등조정기획과ㆍ경제민원갈등조정과ㆍ사회민원갈등조정과 및 민원갈등소통과를 두되, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aac31dd9",
+      "parent": "n-7e826247",
+      "child": "n-2ff968e3",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조의2(집단갈등조정국)",
+        "evidenceText": "② 집단갈등조정국에 집단갈등조정기획과ㆍ경제민원갈등조정과ㆍ사회민원갈등조정과 및 민원갈등소통과를 두되, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2e6a4dbc",
+      "parent": "n-7e826247",
+      "child": "n-885f7c1f",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제7조의2(집단갈등조정국)",
+        "evidenceText": "② 집단갈등조정국에 집단갈등조정기획과ㆍ경제민원갈등조정과ㆍ사회민원갈등조정과 및 민원갈등소통과를 두되, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7f8ebfb8",
+      "parent": "n-a91705ae",
+      "child": "n-3d63a1c1",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제8조(행정심판국)",
+        "evidenceText": "③ 행정심판심의관은 중앙행정심판위원회의 운영에 관하여 행정심판국장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-a10fb540",
+      "parent": "n-a91705ae",
+      "child": "n-4f355f56",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제8조(행정심판국)",
+        "evidenceText": "④ 행정심판국에 행정심판총괄과ㆍ행정교육심판과ㆍ재정경제심판과ㆍ국토해양심판과ㆍ사회복지심판과ㆍ환경문화심판과 및 운전면허심판과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e0498d04",
+      "parent": "n-a91705ae",
+      "child": "n-45efb7e8",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제8조(행정심판국)",
+        "evidenceText": "④ 행정심판국에 행정심판총괄과ㆍ행정교육심판과ㆍ재정경제심판과ㆍ국토해양심판과ㆍ사회복지심판과ㆍ환경문화심판과 및 운전면허심판과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b1a65914",
+      "parent": "n-a91705ae",
+      "child": "n-7e71d3d9",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제8조(행정심판국)",
+        "evidenceText": "④ 행정심판국에 행정심판총괄과ㆍ행정교육심판과ㆍ재정경제심판과ㆍ국토해양심판과ㆍ사회복지심판과ㆍ환경문화심판과 및 운전면허심판과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a49fa277",
+      "parent": "n-a91705ae",
+      "child": "n-f9faf045",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제8조(행정심판국)",
+        "evidenceText": "④ 행정심판국에 행정심판총괄과ㆍ행정교육심판과ㆍ재정경제심판과ㆍ국토해양심판과ㆍ사회복지심판과ㆍ환경문화심판과 및 운전면허심판과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-3699aaf6",
+      "parent": "n-a91705ae",
+      "child": "n-f9646090",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제8조(행정심판국)",
+        "evidenceText": "④ 행정심판국에 행정심판총괄과ㆍ행정교육심판과ㆍ재정경제심판과ㆍ국토해양심판과ㆍ사회복지심판과ㆍ환경문화심판과 및 운전면허심판과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-35b88edb",
+      "parent": "n-a91705ae",
+      "child": "n-dee79eb6",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제8조(행정심판국)",
+        "evidenceText": "④ 행정심판국에 행정심판총괄과ㆍ행정교육심판과ㆍ재정경제심판과ㆍ국토해양심판과ㆍ사회복지심판과ㆍ환경문화심판과 및 운전면허심판과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9b809cd4",
+      "parent": "n-a91705ae",
+      "child": "n-1c03ceab",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제8조(행정심판국)",
+        "evidenceText": "④ 행정심판국에 행정심판총괄과ㆍ행정교육심판과ㆍ재정경제심판과ㆍ국토해양심판과ㆍ사회복지심판과ㆍ환경문화심판과 및 운전면허심판과를 두되, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2ca63867",
+      "parent": "n-300cbcfb",
+      "child": "n-8adee2ec",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조(권익개선정책국)",
+        "evidenceText": "② 권익개선정책국에 제도개선총괄과ㆍ경제제도개선과ㆍ사회제도개선과ㆍ국민신문고과ㆍ민원정보분석과ㆍ적극행정국민신청팀 및 특별제안심사팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-af2a8dc2",
+      "parent": "n-300cbcfb",
+      "child": "n-eac198a4",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조(권익개선정책국)",
+        "evidenceText": "② 권익개선정책국에 제도개선총괄과ㆍ경제제도개선과ㆍ사회제도개선과ㆍ국민신문고과ㆍ민원정보분석과ㆍ적극행정국민신청팀 및 특별제안심사팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-d0d62891",
+      "parent": "n-300cbcfb",
+      "child": "n-a539a2bf",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조(권익개선정책국)",
+        "evidenceText": "② 권익개선정책국에 제도개선총괄과ㆍ경제제도개선과ㆍ사회제도개선과ㆍ국민신문고과ㆍ민원정보분석과ㆍ적극행정국민신청팀 및 특별제안심사팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-24c569f0",
+      "parent": "n-300cbcfb",
+      "child": "n-b987dec0",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조(권익개선정책국)",
+        "evidenceText": "② 권익개선정책국에 제도개선총괄과ㆍ경제제도개선과ㆍ사회제도개선과ㆍ국민신문고과ㆍ민원정보분석과ㆍ적극행정국민신청팀 및 특별제안심사팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-6f5e3dd7",
+      "parent": "n-300cbcfb",
+      "child": "n-6b16f2c5",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조(권익개선정책국)",
+        "evidenceText": "② 권익개선정책국에 제도개선총괄과ㆍ경제제도개선과ㆍ사회제도개선과ㆍ국민신문고과ㆍ민원정보분석과ㆍ적극행정국민신청팀 및 특별제안심사팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-225811fb",
+      "parent": "n-300cbcfb",
+      "child": "n-7384af91",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조(권익개선정책국)",
+        "evidenceText": "② 권익개선정책국에 제도개선총괄과ㆍ경제제도개선과ㆍ사회제도개선과ㆍ국민신문고과ㆍ민원정보분석과ㆍ적극행정국민신청팀 및 특별제안심사팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-2b10169b",
+      "parent": "n-300cbcfb",
+      "child": "n-6e09afb4",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조(권익개선정책국)",
+        "evidenceText": "② 권익개선정책국에 제도개선총괄과ㆍ경제제도개선과ㆍ사회제도개선과ㆍ국민신문고과ㆍ민원정보분석과ㆍ적극행정국민신청팀 및 특별제안심사팀을 두고, 각 과장은 부이사관ㆍ과학기술서기관 또는 서기관으로, 각 팀장은 과학기술서기관ㆍ서기관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-ba148e62",
+      "parent": "n-0b4f6766",
+      "child": "n-dc25a818",
+      "type": "advisor",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조의2(정부합동민원센터)",
+        "evidenceText": "③ 민원상담심의관은 「국민권익위원회와 그 소속기관 직제」 제14조의2제1호부터 제4호까지의 사항(고충민원에 관한 사항은 제외한다)에 관하여 센터장을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-30510fca",
+      "parent": "n-0b4f6766",
+      "child": "n-24affccc",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조의2(정부합동민원센터)",
+        "evidenceText": "④ 합동민원센터에 고충상담기획과, 민원신고심사과, 특별민원심사과, 일반상담총괄과, 경제민원상담과 및 사회민원상담과를 두며, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9ed98e8f",
+      "parent": "n-0b4f6766",
+      "child": "n-d4c8b11f",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조의2(정부합동민원센터)",
+        "evidenceText": "④ 합동민원센터에 고충상담기획과, 민원신고심사과, 특별민원심사과, 일반상담총괄과, 경제민원상담과 및 사회민원상담과를 두며, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-7ed26dd7",
+      "parent": "n-0b4f6766",
+      "child": "n-a87b0ab8",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조의2(정부합동민원센터)",
+        "evidenceText": "④ 합동민원센터에 고충상담기획과, 민원신고심사과, 특별민원심사과, 일반상담총괄과, 경제민원상담과 및 사회민원상담과를 두며, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-19822688",
+      "parent": "n-0b4f6766",
+      "child": "n-677d5db3",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조의2(정부합동민원센터)",
+        "evidenceText": "④ 합동민원센터에 고충상담기획과, 민원신고심사과, 특별민원심사과, 일반상담총괄과, 경제민원상담과 및 사회민원상담과를 두며, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b1bb2e20",
+      "parent": "n-0b4f6766",
+      "child": "n-f4703ccb",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조의2(정부합동민원센터)",
+        "evidenceText": "④ 합동민원센터에 고충상담기획과, 민원신고심사과, 특별민원심사과, 일반상담총괄과, 경제민원상담과 및 사회민원상담과를 두며, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9201e13a",
+      "parent": "n-0b4f6766",
+      "child": "n-086242b0",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조의2(정부합동민원센터)",
+        "evidenceText": "④ 합동민원센터에 고충상담기획과, 민원신고심사과, 특별민원심사과, 일반상담총괄과, 경제민원상담과 및 사회민원상담과를 두며, 각 과장은 과학기술서기관 또는 서기관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-b09761fc",
+      "parent": "n-90289f9b",
+      "child": "n-6624a182",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조의3(국가청렴권익교육원)",
+        "evidenceText": "② 교육원에 교육지원과 및 교육운영과를 두며, 교육지원과장 및 교육운영과장은 공업사무관ㆍ보건사무관ㆍ환경사무관ㆍ시설사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e1aba8a5",
+      "parent": "n-90289f9b",
+      "child": "n-7603ebe7",
+      "type": "assistant",
+      "sources": [
+        "국민권익위원회와 그 소속기관 직제 시행규칙 [시행 20260127]"
+      ],
+      "metadata": {
+        "article": "제9조의3(국가청렴권익교육원)",
+        "evidenceText": "② 교육원에 교육지원과 및 교육운영과를 두며, 교육지원과장 및 교육운영과장은 공업사무관ㆍ보건사무관ㆍ환경사무관ㆍ시설사무관ㆍ전산사무관 또는 행정사무관으로 보한다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1b15d269",
+      "parent": "n-6afa4eed",
+      "child": "n-8df81214",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-44257cc0",
+      "parent": "n-8df81214",
+      "child": "n-d02ea452",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-6d7b1393",
+      "parent": "n-d02ea452",
+      "child": "n-e9f8e82f",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-610405d7",
+      "parent": "n-8df81214",
+      "child": "n-39a702cc",
+      "type": "advisor",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

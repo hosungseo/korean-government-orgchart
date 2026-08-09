@@ -1,0 +1,1005 @@
+{
+  "meta": {
+    "institution": "행정기관",
+    "title": "행정기관",
+    "asOf": "20260809",
+    "warnings": [],
+    "validation": [],
+    "sources": [
+      "개인정보 보호위원회 직제 [시행 20260324]",
+      "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+    ],
+    "sourceInventory": [
+      {
+        "source": "개인정보 보호위원회 직제 [시행 20260324]",
+        "role": "decree"
+      },
+      {
+        "source": "개인정보 보호위원회 직제 시행규칙 [시행 20260529]",
+        "role": "rule"
+      }
+    ],
+    "temporaryHeadcounts": [
+      {
+        "target": "위원회",
+        "expires": "2028-12-31",
+        "source": "개인정보 보호위원회 직제 [시행 20260324]"
+      }
+    ],
+    "spanDiagnostics": [],
+    "laws": [
+      {
+        "name": "개인정보 보호위원회 직제",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260324",
+        "mst": "284641",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=284641&efYd=20260324&BD=on",
+        "annexCount": 3
+      },
+      {
+        "name": "개인정보 보호위원회 직제 시행규칙",
+        "requestedDate": "20260809",
+        "effectiveDate": "20260529",
+        "mst": "286655",
+        "sourceUrl": "https://www.law.go.kr/DRF/lawService.do?OC=test&target=eflaw&type=JSON&MST=286655&efYd=20260529&BD=on",
+        "annexCount": 3
+      }
+    ],
+    "annexes": [
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "개인정보 보호위원회 공무원 정원표(제12조제1항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260324",
+        "type": "headcount",
+        "source": "개인정보 보호위원회 직제 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162439049",
+          "pdf": "/LSW/flDownload.do?flSeq=162439051",
+          "image": "/LSW/flDownload.do?flSeq=162439053"
+        },
+        "files": {
+          "hwp": "law0138212026032436212KC_000100E_20260324.hwp",
+          "pdf": "law0138212026032436212KC_000100E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 개인정보 보호위원회 직제 [별표 1] <개정 2026. 3. 24.>  \n                                                            \n  개인정보 보호위원회 공무원 정원표(제12조제1항 관련)       \n                                                            \n                                                            \n    총계                    192                             \n                                                            \n      정무직 계             2                               \n                                                            \n        위원장(장관급)      1                               \n                                                            \n        부위원장(차관급)    1                               \n                                                            \n      일반직 계             189                             \n                                                            \n        고위공무원단        6                               \n                                                            \n        3급 또는 4급 이하   181                             \n                                                            \n        전문경력관          2                               \n                                                           "
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "개인정보 보호위원회에 두는 평가대상 조직(제13조제1항 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260324",
+        "type": "evaluation",
+        "source": "개인정보 보호위원회 직제 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162439055",
+          "pdf": "/LSW/flDownload.do?flSeq=162439057",
+          "image": "/LSW/flDownload.do?flSeq=162439059"
+        },
+        "files": {
+          "hwp": "law0138212026032436212KC_000200E_20260324.hwp",
+          "pdf": "law0138212026032436212KC_000200E_20260324.pdf"
+        },
+        "rowCount": 3,
+        "rows": [
+          [
+            "조직",
+            "정원"
+          ],
+          [
+            "1. 조사조정국 1개 정책관등",
+            "1명"
+          ],
+          [
+            "2. 조사조정국 1개 과",
+            "8명"
+          ]
+        ],
+        "textPreview": "■ 개인정보 보호위원회 직제 [별표 2] <개정 2026. 3. 24.>    \n  개인정보 보호위원회에 두는 평가대상 조직(제13조제1항 관련)  \n                                                              \n┌──────────────┬──────────────┐\n│조직                        │정원                        │\n├──────────────┼──────────────┤\n│ 1. 조사조정국 1개 정책관등 │1명                         │\n├──────────────┼──────────────┤\n│ 2. 조사조정국 1개 과       │8명                         │\n└──────────────┴──────────────┘"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "개인정보 보호위원회 공무원 한시정원표(제14조 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260324",
+        "type": "temporary-headcount",
+        "source": "개인정보 보호위원회 직제 [시행 20260324]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=162439061",
+          "pdf": "/LSW/flDownload.do?flSeq=162439063",
+          "image": "/LSW/flDownload.do?flSeq=162439065"
+        },
+        "files": {
+          "hwp": "law0138212026032436212KC_000300E_20260324.hwp",
+          "pdf": "law0138212026032436212KC_000300E_20260324.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 개인정보 보호위원회 직제 [별표 3] <개정 2025. 12. 30.>   \n                                                              \n  개인정보 보호위원회 공무원 한시정원표(제14조 관련)          \n                                                              \n                                                              \n                                                              \n  제14조 관련 한시정원(존속기한: 2028년 12월 31일)            \n                                                              \n  총계          3                                             \n                                                              \n    일반직 계   3                                             \n                                                              \n      5급 이하  3"
+      },
+      {
+        "annex": "별표 1",
+        "number": "1",
+        "title": "개인정보 보호위원회 공무원 정원표(제8조제1항 관련)",
+        "key": "000100E",
+        "effectiveDate": "20260529",
+        "type": "headcount",
+        "source": "개인정보 보호위원회 직제 시행규칙 [시행 20260529]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=164568627",
+          "pdf": "/LSW/flDownload.do?flSeq=164568629",
+          "image": [
+            "/LSW/flDownload.do?flSeq=164568631",
+            "/LSW/flDownload.do?flSeq=164568633"
+          ]
+        },
+        "files": {
+          "hwp": "law0138272026052902117KC_000100E_20260529.hwp",
+          "pdf": "law0138272026052902117KC_000100E_20260529.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 개인정보 보호위원회 직제 시행규칙 [별표 1] <개정 2026. 3. 31.>   \n                                                                      \n  개인정보 보호위원회 공무원 정원표(제8조제1항 관련)                  \n                                                                      \n  총계                                                      192       \n                                                                      \n    정무직 계                                               2         \n                                                                      \n      위원장(장관급)                                        1         \n                                                                      \n      부위원장(차관급)                                      1         \n                                                                      \n    일반직 계                                               189       \n                                                                      \n      고위공무원단                                          6         \n                                                                      \n      부이사관ㆍ서기관 또는 과학기술서기관                  3         \n                                                                      \n      서기관 또"
+      },
+      {
+        "annex": "별표 2",
+        "number": "2",
+        "title": "개인정보 보호위원회에 두는 평가대상 조직(제11조 관련)",
+        "key": "000200E",
+        "effectiveDate": "20260529",
+        "type": "evaluation",
+        "source": "개인정보 보호위원회 직제 시행규칙 [시행 20260529]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=164568635",
+          "pdf": "/LSW/flDownload.do?flSeq=164568637",
+          "image": "/LSW/flDownload.do?flSeq=164568639"
+        },
+        "files": {
+          "hwp": "law0138272026052902117KC_000200E_20260529.hwp",
+          "pdf": "law0138272026052902117KC_000200E_20260529.pdf"
+        },
+        "rowCount": 3,
+        "rows": [
+          [
+            "조직",
+            "정원",
+            "평가기간"
+          ],
+          [
+            "1. 조사조정국 예방조정심의관",
+            "1명 (고위공무원단 1명)",
+            "2028년 9월 30일까지"
+          ],
+          [
+            "2. 조사조정국 사전실태점검과",
+            "8명 (4급 1명, 5급 3명, 6급 3명, 7급 1명)",
+            "2028년 9월 30일까지"
+          ]
+        ],
+        "textPreview": "■ 개인정보 보호위원회 직제 시행규칙 [별표 2] <개정 2026. 3. 31.>         \n  개인정보 보호위원회에 두는 평가대상 조직(제11조 관련)                     \n                                                                            \n┌──────────────┬──────────┬──────────┐\n│조직                        │정원                │평가기간            │\n├──────────────┼──────────┼──────────┤\n│1. 조사조정국 예방조정심의관│1명                 │2028년 9월 30일까지 │\n│                            │(고위공무원단 1명)  │                    │\n├──────────────┼──────────┼──────────┤\n│2. 조사조정국 사전실태점검과│8명                 │2028년 9월 30일까지 │\n│                            │(4급 1명, 5급 3명,  │                    │\n│                            │6급 3명, 7급 1명)   │                    │\n└──────────────┴──────────┴──────────┘"
+      },
+      {
+        "annex": "별표 3",
+        "number": "3",
+        "title": "개인정보 보호위원회 공무원 한시정원표(제12조 관련)",
+        "key": "000300E",
+        "effectiveDate": "20260529",
+        "type": "temporary-headcount",
+        "source": "개인정보 보호위원회 직제 시행규칙 [시행 20260529]",
+        "links": {
+          "hwp": "/LSW/flDownload.do?flSeq=164568641",
+          "pdf": "/LSW/flDownload.do?flSeq=164568643",
+          "image": "/LSW/flDownload.do?flSeq=164568645"
+        },
+        "files": {
+          "hwp": "law0138272026052902117KC_000300E_20260529.hwp",
+          "pdf": "law0138272026052902117KC_000300E_20260529.pdf"
+        },
+        "rowCount": 0,
+        "rows": [],
+        "textPreview": "■ 개인정보 보호위원회 직제 시행규칙 [별표 3] <개정 2025. 12. 30.>  \n                                                                      \n  개인정보 보호위원회 공무원 한시정원표(제12조 관련)                  \n                                                                      \n                                                                      \n  제12조 관련 한시정원(존속기한: 2028년 12월 31일)                    \n                                                                      \n  총계                                                            3   \n                                                                      \n    일반직 계                                                     3   \n                                                                      \n      행정사무관ㆍ공업사무관ㆍ통계사무관ㆍ환경사무관ㆍ시설사무관  1   \n  ㆍ전산사무관ㆍ방송통신사무관ㆍ보건사무관ㆍ사회복지사무관            \n  ㆍ공업연구관ㆍ환경연구관ㆍ시설연구관 또는 보건연구관                \n                                                                      \n      행정주사ㆍ공업주사ㆍ통계주사ㆍ환경주사ㆍ시설주사ㆍ전산주사  1   \n  ㆍ방송통신주사ㆍ보건주사ㆍ사회복지주사ㆍ공업연구사ㆍ환경            \n  연구사ㆍ시설연구사 또는 보건연구사                                  \n                                                                      \n      행정주사보ㆍ공업주사보ㆍ통계주사보ㆍ환경주사보ㆍ시설주사보  1   \n  ㆍ전산주사보 또는 방송통신주사보"
+      }
+    ]
+  },
+  "rootId": "n-c84c464b",
+  "nodes": [
+    {
+      "id": "n-c84c464b",
+      "name": "행정기관",
+      "kind": "institution",
+      "rank": 0,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    },
+    {
+      "id": "n-e9f8e82f",
+      "name": "사무처",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "가"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]",
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-8df81214",
+      "name": "위원장",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {
+        "employmentType": "정무직"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]"
+      ]
+    },
+    {
+      "id": "n-e618142f",
+      "name": "대변인",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]",
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-618c7eaf",
+      "name": "기획조정관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "staffCategories": [
+          "일반직"
+        ],
+        "grade": "나"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]",
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-0fe8378e",
+      "name": "운영지원과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]",
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-bf618519",
+      "name": "개인정보정책국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]",
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-7f5a5cd5",
+      "name": "조사조정국",
+      "kind": "assistant",
+      "rank": 4,
+      "metadata": {
+        "evaluation": true,
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ]
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]",
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-ad88cef8",
+      "name": "디지털소통팀",
+      "kind": "advisor",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          4,
+          5
+        ],
+        "gradeRange": "4.5급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-8915bf8c",
+      "name": "혁신기획담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-76357351",
+      "name": "심사총괄담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-db2ce1f5",
+      "name": "법무감사담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-0c663167",
+      "name": "국제협력담당관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4
+        ],
+        "gradeRange": "3.4급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-bc5dae62",
+      "name": "개인정보보호정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-66c6a4f2",
+      "name": "신기술개인정보과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-ac66b457",
+      "name": "데이터안전정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-e29cdf25",
+      "name": "자율보호정책과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-d244ab29",
+      "name": "인공지능프라이버시팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-78c58297",
+      "name": "예방조정심의관",
+      "kind": "advisor",
+      "rank": 4,
+      "metadata": {
+        "grade": "나",
+        "staffCategories": [
+          "일반직"
+        ],
+        "evaluation": true
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-59951f0c",
+      "name": "조사총괄과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-940c8b2c",
+      "name": "조사1과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-95c94d17",
+      "name": "조사2과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-ff5cae53",
+      "name": "사전실태점검과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급",
+        "evaluation": true
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-89503dc4",
+      "name": "침해평가과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-129fe7bb",
+      "name": "분쟁조정과",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {
+        "appointmentLevels": [
+          3,
+          4,
+          5
+        ],
+        "gradeRange": "3.5급"
+      },
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-93a4695a",
+      "name": "조사3팀",
+      "kind": "assistant",
+      "rank": 5,
+      "metadata": {},
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ]
+    },
+    {
+      "id": "n-6d736a60",
+      "name": "장관",
+      "kind": "head",
+      "rank": 1,
+      "metadata": {},
+      "sources": []
+    },
+    {
+      "id": "n-4481f335",
+      "name": "차관",
+      "kind": "deputy",
+      "rank": 2,
+      "metadata": {},
+      "sources": [
+        "inferred"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-208f5880",
+      "parent": "n-8df81214",
+      "child": "n-e618142f",
+      "type": "advisor",
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제6조(대변인)",
+        "evidenceText": "② 대변인은 다음 사항에 관하여 위원장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-89192343",
+      "parent": "n-e9f8e82f",
+      "child": "n-618c7eaf",
+      "type": "advisor",
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제7조(기획조정관)",
+        "evidenceText": "② 기획조정관은 다음 사항에 관하여 사무처장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-09ba5bde",
+      "parent": "n-e9f8e82f",
+      "child": "n-0fe8378e",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제5조(하부조직)",
+        "evidenceText": "① 사무처에 운영지원과ㆍ개인정보정책국ㆍ조사조정국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-35c68e4c",
+      "parent": "n-e9f8e82f",
+      "child": "n-bf618519",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제5조(하부조직)",
+        "evidenceText": "① 사무처에 운영지원과ㆍ개인정보정책국ㆍ조사조정국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-4ae83e98",
+      "parent": "n-e9f8e82f",
+      "child": "n-7f5a5cd5",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 [시행 20260324]"
+      ],
+      "metadata": {
+        "article": "제5조(하부조직)",
+        "evidenceText": "① 사무처에 운영지원과ㆍ개인정보정책국ㆍ조사조정국을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e5da7c49",
+      "parent": "n-e618142f",
+      "child": "n-ad88cef8",
+      "type": "advisor",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제3조(대변인)",
+        "evidenceText": "③ 디지털소통팀장은 다음 사항에 관하여 대변인을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-de692a4a",
+      "parent": "n-618c7eaf",
+      "child": "n-8915bf8c",
+      "type": "advisor",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정관)",
+        "evidenceText": "③ 혁신기획담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-1df96cbf",
+      "parent": "n-618c7eaf",
+      "child": "n-76357351",
+      "type": "advisor",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정관)",
+        "evidenceText": "④ 심사총괄담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-aceb102c",
+      "parent": "n-618c7eaf",
+      "child": "n-db2ce1f5",
+      "type": "advisor",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정관)",
+        "evidenceText": "⑤ 법무감사담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-2a16499c",
+      "parent": "n-618c7eaf",
+      "child": "n-0c663167",
+      "type": "advisor",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제4조(기획조정관)",
+        "evidenceText": "⑥ 국제협력담당관은 다음 사항에 관하여 기획조정관을 보좌한다",
+        "legalBasis": "밑에 둔다"
+      }
+    },
+    {
+      "id": "e-fd776307",
+      "parent": "n-bf618519",
+      "child": "n-bc5dae62",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제6조(개인정보정책국)",
+        "evidenceText": "② 개인정보정책국에 개인정보보호정책과, 신기술개인정보과, 데이터안전정책과, 자율보호정책과 및 인공지능프라이버시팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a259af0f",
+      "parent": "n-bf618519",
+      "child": "n-66c6a4f2",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제6조(개인정보정책국)",
+        "evidenceText": "② 개인정보정책국에 개인정보보호정책과, 신기술개인정보과, 데이터안전정책과, 자율보호정책과 및 인공지능프라이버시팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-49b737e5",
+      "parent": "n-bf618519",
+      "child": "n-ac66b457",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제6조(개인정보정책국)",
+        "evidenceText": "② 개인정보정책국에 개인정보보호정책과, 신기술개인정보과, 데이터안전정책과, 자율보호정책과 및 인공지능프라이버시팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-a145c177",
+      "parent": "n-bf618519",
+      "child": "n-e29cdf25",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제6조(개인정보정책국)",
+        "evidenceText": "② 개인정보정책국에 개인정보보호정책과, 신기술개인정보과, 데이터안전정책과, 자율보호정책과 및 인공지능프라이버시팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-9704f107",
+      "parent": "n-bf618519",
+      "child": "n-d244ab29",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제6조(개인정보정책국)",
+        "evidenceText": "② 개인정보정책국에 개인정보보호정책과, 신기술개인정보과, 데이터안전정책과, 자율보호정책과 및 인공지능프라이버시팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-11aa6756",
+      "parent": "n-7f5a5cd5",
+      "child": "n-78c58297",
+      "type": "advisor",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제7조(조사조정국)",
+        "evidenceText": "③ 예방조정심의관은 「개인정보 보호위원회 직제」 제10조제3항제1호ㆍ제2호ㆍ제5호부터 제8호까지의 사항 중 법 제63조의2에 따른 사전 실태점검에 관한 사항(이하 이 조에서 \"사전 실태점검\"이라 한다)과 「개인정보 보호위원회 직제」 제10조제3항제14호부터 제18호까지의 사항에 관하여 조사조정국장을 보좌한다",
+        "legalBasis": "보좌한다",
+        "explicitTarget": true
+      }
+    },
+    {
+      "id": "e-6825fadd",
+      "parent": "n-7f5a5cd5",
+      "child": "n-59951f0c",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제7조(조사조정국)",
+        "evidenceText": "④ 조사조정국에 조사총괄과, 조사1과, 조사2과, 사전실태점검과, 침해평가과, 분쟁조정과 및 조사3팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-005db7a6",
+      "parent": "n-7f5a5cd5",
+      "child": "n-940c8b2c",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제7조(조사조정국)",
+        "evidenceText": "④ 조사조정국에 조사총괄과, 조사1과, 조사2과, 사전실태점검과, 침해평가과, 분쟁조정과 및 조사3팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-aaaf3961",
+      "parent": "n-7f5a5cd5",
+      "child": "n-95c94d17",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제7조(조사조정국)",
+        "evidenceText": "④ 조사조정국에 조사총괄과, 조사1과, 조사2과, 사전실태점검과, 침해평가과, 분쟁조정과 및 조사3팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-04e649c5",
+      "parent": "n-7f5a5cd5",
+      "child": "n-ff5cae53",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제7조(조사조정국)",
+        "evidenceText": "④ 조사조정국에 조사총괄과, 조사1과, 조사2과, 사전실태점검과, 침해평가과, 분쟁조정과 및 조사3팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-f9b07d4d",
+      "parent": "n-7f5a5cd5",
+      "child": "n-89503dc4",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제7조(조사조정국)",
+        "evidenceText": "④ 조사조정국에 조사총괄과, 조사1과, 조사2과, 사전실태점검과, 침해평가과, 분쟁조정과 및 조사3팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-1974333f",
+      "parent": "n-7f5a5cd5",
+      "child": "n-129fe7bb",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제7조(조사조정국)",
+        "evidenceText": "④ 조사조정국에 조사총괄과, 조사1과, 조사2과, 사전실태점검과, 침해평가과, 분쟁조정과 및 조사3팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-62960745",
+      "parent": "n-7f5a5cd5",
+      "child": "n-93a4695a",
+      "type": "assistant",
+      "sources": [
+        "개인정보 보호위원회 직제 시행규칙 [시행 20260529]"
+      ],
+      "metadata": {
+        "article": "제7조(조사조정국)",
+        "evidenceText": "④ 조사조정국에 조사총괄과, 조사1과, 조사2과, 사전실태점검과, 침해평가과, 분쟁조정과 및 조사3팀을 둔다",
+        "legalBasis": "에 둔다"
+      }
+    },
+    {
+      "id": "e-e9e743de",
+      "parent": "n-c84c464b",
+      "child": "n-6d736a60",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-fb6f75f2",
+      "parent": "n-6d736a60",
+      "child": "n-4481f335",
+      "type": "structural",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-9735b51e",
+      "parent": "n-4481f335",
+      "child": "n-e9f8e82f",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "e-4babdfe7",
+      "parent": "n-4481f335",
+      "child": "n-8df81214",
+      "type": "assistant",
+      "sources": [
+        "inferred"
+      ],
+      "metadata": {}
+    }
+  ]
+}

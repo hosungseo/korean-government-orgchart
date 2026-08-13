@@ -49,7 +49,7 @@ jobs:
         run: npm run desktop:prepare
 
       - name: Test Rust command layer
-        run: cargo test --manifest-path desktop/src-tauri/Cargo.toml
+        run: cargo test --release --manifest-path desktop/src-tauri/Cargo.toml
 
       - name: Validate manifest with Windows PowerShell
         shell: powershell

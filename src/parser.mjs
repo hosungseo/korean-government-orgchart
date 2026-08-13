@@ -5,7 +5,7 @@ import {
   normalizeNodeName,
   OrgGraph,
 } from "./model.mjs";
-import { normalizeWhitespace, uniq } from "./utils.mjs";
+import { normalizeWhitespace, uniq } from "./utils-core.mjs";
 
 const STRUCTURAL_SUFFIX =
   /(?:부|처|청|위원회|실|국|본부|단|과|팀|관|원|소|센터|사무국|사무소|학교|박물관|미술관|도서관|극장|전당|세무서|소방서|연구원|기록원|관리원|교육원|개발원|분원|지소)$/;

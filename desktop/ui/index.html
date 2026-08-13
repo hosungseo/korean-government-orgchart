@@ -22,19 +22,22 @@
 
   <main class="app-shell">
     <aside class="control-rail">
-      <div class="eyebrow">WINDOWS NATIVE HWPX · 0.3</div>
+      <div class="eyebrow">LAW TEXT → NATIVE HWPX · 0.4</div>
       <h2 id="manifestTitle">작도 명세를<br>검사하는 중</h2>
       <p id="manifestDescription" class="lead">A4 세로 조직도를 한글 네이티브 객체로 변환합니다.</p>
 
       <div class="manifest-loader">
         <input id="manifestFile" type="file" accept="application/json,.json" hidden>
-        <button id="loadManifestButton" class="manifest-action" type="button">작도 명세 JSON 불러오기</button>
+        <button id="openLawInputButton" class="law-input-action" type="button">
+          <span>직제·시행규칙 붙여넣기</span><b>자동 작도</b>
+        </button>
+        <button id="loadManifestButton" class="manifest-action" type="button">기존 JSON 작도 명세 불러오기</button>
         <div class="loaded-source"><span>현재 명세</span><strong id="loadedSource">불러오는 중</strong></div>
-        <small>JSON 파일을 가운데 A4 영역에 끌어놓아도 됩니다.</small>
+        <small>문언은 PC 안에서만 파싱됩니다. JSON 파일은 A4 영역에 끌어놓아도 됩니다.</small>
       </div>
 
       <ol class="steps" aria-label="생성 절차">
-        <li id="stepManifest"><span>1</span><div><strong>명세 사전검사</strong><small>경계·ID·계선 접합 확인</small></div></li>
+        <li id="stepManifest"><span>1</span><div><strong>문언 파싱·명세 검사</strong><small>조직 추출·경계·계선 접합</small></div></li>
         <li id="stepRuntime"><span>2</span><div><strong>한글 연결</strong><small>Automation 설치 확인</small></div></li>
         <li id="stepVerify"><span>3</span><div><strong>재열기 검증</strong><small>A4 1쪽·객체 수 대조</small></div></li>
       </ol>
@@ -51,7 +54,7 @@
         <span>한글 편집본 만들기</span><b>HWPX</b>
       </button>
       <div class="minor-actions">
-        <button id="reloadButton" class="text-action" type="button">내장 샘플 복원</button>
+        <button id="reloadButton" class="text-action" type="button">행안부 샘플 복원</button>
         <button id="openFolderButton" class="text-action" type="button" hidden>결과 폴더 열기</button>
       </div>
 
@@ -68,7 +71,14 @@
           <span class="eyebrow">A4 PORTRAIT · NATIVE OBJECTS</span>
           <h2>실제 출력 미리보기</h2>
         </div>
-        <div class="legend"><span class="line-swatch"></span>각 계선은 별도 선 객체</div>
+        <div class="workspace-tools">
+          <div id="pageNavigator" class="page-navigator" hidden>
+            <button id="previousPageButton" type="button" aria-label="이전 쪽">‹</button>
+            <select id="pageSelect" aria-label="미리보기 쪽 선택"></select>
+            <button id="nextPageButton" type="button" aria-label="다음 쪽">›</button>
+          </div>
+          <div class="legend"><span class="line-swatch"></span>각 계선은 별도 선 객체</div>
+        </div>
       </div>
 
       <div id="drawingStage" class="drawing-stage">
@@ -94,6 +104,15 @@
         <p>용지 경계와 계선 접합을 확인합니다.</p>
         <ul id="diagnosticList"></ul>
       </div>
+      <div id="parseSummary" class="parse-summary" hidden>
+        <h3>문언 자동분석</h3>
+        <dl>
+          <div><dt>추출 조직</dt><dd id="parsedNodes">—</dd></div>
+          <div><dt>설치 관계</dt><dd id="parsedRelations">—</dd></div>
+          <div><dt>자동 분할</dt><dd id="parsedPages">—</dd></div>
+        </dl>
+        <p id="parseWarning"></p>
+      </div>
       <div class="editability">
         <h3>한글에서 가능한 편집</h3>
         <ul>
@@ -109,6 +128,36 @@
       </div>
     </aside>
   </main>
+
+  <dialog id="lawInputDialog" class="law-dialog">
+    <form id="lawInputForm" method="dialog">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">LOCAL LAW PARSER</span>
+          <h2>직제 문언으로 조직도 만들기</h2>
+          <p>직제는 실·국·소속기관, 시행규칙은 과·담당관·팀을 보강합니다.</p>
+        </div>
+        <button id="closeLawInputButton" class="dialog-close" type="button" aria-label="닫기">×</button>
+      </div>
+
+      <div class="law-meta-grid">
+        <label>기관명 <small>비워두면 문언에서 추론</small><input id="lawInstitution" placeholder="예: 행정안전부"></label>
+        <label>기준일 <small>선택</small><input id="lawAsOf" type="date"></label>
+        <label class="focus-field">작도 범위 <small>쉼표로 여러 실·국 지정, 비우면 전체 자동 분할</small><input id="lawFocus" list="focusOptions" placeholder="예: 인공지능정부실, 참여혁신조직실"><datalist id="focusOptions"></datalist></label>
+      </div>
+
+      <div class="law-text-grid">
+        <label><span><b>직제</b><small>대통령령 원문</small></span><textarea id="decreeText" spellcheck="false" placeholder="○○부와 그 소속기관 직제\n제○조(하부조직) …"></textarea></label>
+        <label><span><b>직제 시행규칙</b><small>부령 원문</small></span><textarea id="ruleText" spellcheck="false" placeholder="○○부와 그 소속기관 직제 시행규칙\n제○조(○○실) …"></textarea></label>
+      </div>
+
+      <div id="lawInputError" class="law-input-error" hidden></div>
+      <div class="dialog-actions">
+        <span>입력 원문은 외부로 전송하거나 HWPX에 넣지 않습니다.</span>
+        <button id="parseLawButton" type="submit">자동 조직도 만들기</button>
+      </div>
+    </form>
+  </dialog>
 
   <script type="module" src="./app.js"></script>
 </body>

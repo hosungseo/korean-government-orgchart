@@ -1,4 +1,4 @@
-import { stableId, uniq } from "./utils.mjs";
+import { stableId, uniq } from "./utils-core.mjs";
 
 const KIND_PRIORITY = {
   institution: 100,

@@ -1,4 +1,5 @@
 import { analyzeNativeManifest } from "./manifest-validation.js";
+import { buildNativeLawWorkflow } from "./engine/native-law-workflow.mjs";
 
 const invoke = window.__TAURI__?.core?.invoke;
 const $ = (id) => document.getElementById(id);
@@ -7,6 +8,8 @@ const MAX_MANIFEST_FILE_BYTES = 5 * 1024 * 1024;
 let manifest = null;
 let validationReport = null;
 let hwpAvailable = false;
+let lawWorkflow = null;
+let activeWorkflowPage = 0;
 
 function setStatus(title, message, state = "idle") {
   const box = $("statusBox");
@@ -154,7 +157,8 @@ async function authoritativePreflight(nextManifest, browserReport) {
   }
 }
 
-async function acceptManifest(nextManifest, sourceLabel) {
+async function acceptManifest(nextManifest, sourceLabel, { preserveWorkflow = false } = {}) {
+  if (!preserveWorkflow) clearLawWorkflow();
   manifest = nextManifest;
   $("loadedSource").textContent = sourceLabel;
   $("manifestTitle").textContent = typeof nextManifest?.title === "string" ? nextManifest.title : "제목 없는 조직도";
@@ -192,6 +196,98 @@ async function loadManifestText(text, sourceLabel) {
     clearPreview("JSON 문법 오류로 미리보기를 만들 수 없습니다.");
     setStatus("JSON 불러오기 실패", String(error), "error");
     refreshGenerateAvailability();
+  }
+}
+
+function clearLawWorkflow() {
+  lawWorkflow = null;
+  activeWorkflowPage = 0;
+  $("pageNavigator").hidden = true;
+  $("pageSelect").replaceChildren();
+  $("parseSummary").hidden = true;
+}
+
+function renderLawWorkflowSummary(summary) {
+  $("parseSummary").hidden = false;
+  $("parsedNodes").textContent = `${summary.nodeCount}개`;
+  $("parsedRelations").textContent = `${summary.relationCount}개`;
+  $("parsedPages").textContent = `${summary.pageCount}쪽`;
+  const warning = (summary.warnings || [])[0];
+  $("parseWarning").textContent = warning || "직제와 시행규칙을 모두 확인했습니다.";
+  $("parseWarning").hidden = !warning;
+
+  const datalist = $("focusOptions");
+  datalist.replaceChildren();
+  for (const option of summary.focusOptions || []) {
+    const element = document.createElement("option");
+    element.value = option.name;
+    element.label = `하위 ${option.descendantCount}개`;
+    datalist.append(element);
+  }
+}
+
+function renderPageNavigator() {
+  const pages = lawWorkflow?.pages || [];
+  const select = $("pageSelect");
+  select.replaceChildren();
+  pages.forEach((page, index) => {
+    const option = document.createElement("option");
+    option.value = String(index);
+    option.textContent = `${index + 1}/${pages.length} · ${page.label} (${page.nodeCount}개)`;
+    select.append(option);
+  });
+  select.value = String(activeWorkflowPage);
+  $("pageNavigator").hidden = pages.length < 2;
+  $("previousPageButton").disabled = activeWorkflowPage <= 0;
+  $("nextPageButton").disabled = activeWorkflowPage >= pages.length - 1;
+}
+
+async function selectWorkflowPage(index) {
+  if (!lawWorkflow?.manifests?.length) return;
+  activeWorkflowPage = Math.max(0, Math.min(lawWorkflow.manifests.length - 1, Number(index) || 0));
+  const page = lawWorkflow.pages[activeWorkflowPage];
+  renderPageNavigator();
+  await acceptManifest(
+    lawWorkflow.manifests[activeWorkflowPage],
+    `문언 자동변환 · ${activeWorkflowPage + 1}/${lawWorkflow.manifests.length}`,
+    { preserveWorkflow: true },
+  );
+  renderLawWorkflowSummary(lawWorkflow.summary);
+  const warningCount = lawWorkflow.summary.warnings?.length || 0;
+  setStatus(
+    warningCount ? "문언 자동분석 완료(확인 필요)" : "문언 자동분석 완료",
+    `조직 ${lawWorkflow.summary.nodeCount}개·관계 ${lawWorkflow.summary.relationCount}개를 ${lawWorkflow.summary.pageCount}쪽으로 작도했습니다. 현재 ${page.label}입니다.`,
+    warningCount ? "warning" : "success",
+  );
+}
+
+async function parseLawInput(event) {
+  event.preventDefault();
+  const button = $("parseLawButton");
+  const errorBox = $("lawInputError");
+  button.disabled = true;
+  button.textContent = "문언 분석 중…";
+  errorBox.hidden = true;
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    lawWorkflow = buildNativeLawWorkflow({
+      decreeText: $("decreeText").value,
+      ruleText: $("ruleText").value,
+      institution: $("lawInstitution").value,
+      asOf: $("lawAsOf").value,
+      focus: $("lawFocus").value,
+    });
+    activeWorkflowPage = 0;
+    renderPageNavigator();
+    renderLawWorkflowSummary(lawWorkflow.summary);
+    await selectWorkflowPage(0);
+    $("lawInputDialog").close();
+  } catch (error) {
+    errorBox.textContent = String(error?.message || error);
+    errorBox.hidden = false;
+  } finally {
+    button.disabled = false;
+    button.textContent = "자동 조직도 만들기";
   }
 }
 
@@ -316,6 +412,15 @@ $("reloadButton").addEventListener("click", loadSample);
 $("loadManifestButton").addEventListener("click", () => $("manifestFile").click());
 $("manifestFile").addEventListener("change", (event) => loadFile(event.target.files?.[0]));
 $("openFolderButton").addEventListener("click", openOutputFolder);
+$("openLawInputButton").addEventListener("click", () => {
+  $("lawInputError").hidden = true;
+  $("lawInputDialog").showModal();
+});
+$("closeLawInputButton").addEventListener("click", () => $("lawInputDialog").close());
+$("lawInputForm").addEventListener("submit", parseLawInput);
+$("pageSelect").addEventListener("change", (event) => selectWorkflowPage(event.target.value));
+$("previousPageButton").addEventListener("click", () => selectWorkflowPage(activeWorkflowPage - 1));
+$("nextPageButton").addEventListener("click", () => selectWorkflowPage(activeWorkflowPage + 1));
 
 const drawingStage = $("drawingStage");
 for (const eventName of ["dragenter", "dragover"]) {

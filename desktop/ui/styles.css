@@ -17,6 +17,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 html, body { min-width: 1000px; min-height: 700px; }
 
@@ -29,7 +30,7 @@ body {
   font-size: 14px;
 }
 
-button, input { font: inherit; }
+button, input, textarea, select { font: inherit; }
 
 .topbar {
   height: 68px;
@@ -76,7 +77,7 @@ button, input { font: inherit; }
 .app-shell {
   height: calc(100vh - 68px);
   display: grid;
-  grid-template-columns: 308px minmax(560px, 1fr) 266px;
+  grid-template-columns: 320px minmax(560px, 1fr) 266px;
   min-height: 0;
 }
 
@@ -89,7 +90,10 @@ button, input { font: inherit; }
 .lead { margin: 12px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
 
 .manifest-loader { margin-top: 18px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--rail); }
-.manifest-action { width: 100%; height: 35px; border: 1px solid var(--action); border-radius: 6px; background: white; color: var(--action); font-size: 10px; font-weight: 800; cursor: pointer; }
+.law-input-action { width: 100%; min-height: 42px; display: flex; align-items: center; justify-content: space-between; padding: 0 11px; border: 0; border-radius: 6px; background: var(--action); color: white; font-size: 10px; font-weight: 800; cursor: pointer; }
+.law-input-action:hover { background: var(--action-hover); }
+.law-input-action b { font-size: 8px; letter-spacing: .08em; opacity: .75; }
+.manifest-action { width: 100%; height: 31px; margin-top: 7px; border: 1px solid var(--line-strong); border-radius: 6px; background: white; color: var(--muted); font-size: 9px; font-weight: 700; cursor: pointer; }
 .manifest-action:hover { background: #edf4fa; }
 .loaded-source { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 10px; }
 .loaded-source span { color: var(--quiet); font-size: 9px; }
@@ -151,8 +155,13 @@ button, input { font: inherit; }
 .workspace { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
 .workspace-head { height: 74px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
 .workspace-head h2 { margin: 4px 0 0; font-size: 16px; letter-spacing: -0.035em; }
+.workspace-tools { display: flex; align-items: center; gap: 15px; }
 .legend { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 10px; }
 .line-swatch { width: 24px; height: 1px; background: #666; }
+.page-navigator { display: flex; align-items: center; height: 31px; overflow: hidden; border: 1px solid var(--line-strong); border-radius: 6px; background: white; }
+.page-navigator button { width: 28px; height: 29px; border: 0; background: white; color: var(--action); font-size: 18px; cursor: pointer; }
+.page-navigator button:disabled { color: #c8ced4; cursor: default; }
+.page-navigator select { width: 142px; height: 29px; padding: 0 5px; border: 0; border-left: 1px solid var(--line); border-right: 1px solid var(--line); color: var(--muted); background: white; font-size: 9px; outline: none; }
 .drawing-stage { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; overflow: auto; padding: 22px 28px 34px; background: linear-gradient(#eff2f4, #e8ecef); transition: background 140ms ease; }
 .drawing-stage.drop-active { background: #dce9f3; }
 .drop-indicator { position: absolute; z-index: 5; inset: 20px; display: none; place-items: center; border: 2px dashed var(--action); border-radius: 12px; background: rgba(239, 247, 252, 0.93); color: var(--action); font-size: 13px; font-weight: 800; pointer-events: none; }
@@ -187,6 +196,13 @@ button, input { font: inherit; }
 .preflight[data-state="error"] { border-color: #e0c5c2; background: #fff7f6; }
 .preflight[data-state="error"] > span { color: var(--danger); }
 .preflight li[data-level="error"]::before { background: var(--danger); }
+.parse-summary { margin-top: 16px; padding: 13px 14px; border: 1px solid #cbd9e5; border-radius: 7px; background: #f5f9fc; }
+.parse-summary h3 { margin: 0 0 9px; color: var(--action); font-size: 10px; }
+.parse-summary dl { margin: 0; }
+.parse-summary dl div { display: flex; justify-content: space-between; padding: 4px 0; }
+.parse-summary dt { color: var(--muted); font-size: 9px; }
+.parse-summary dd { margin: 0; color: var(--ink); font-size: 10px; font-weight: 800; }
+.parse-summary p { margin: 7px 0 0; color: var(--warning); font-size: 8px; line-height: 1.5; }
 .verification { margin-top: 26px; padding: 14px; background: var(--rail); border-left: 3px solid var(--line-strong); }
 .verification span { font-size: 10px; font-weight: 800; }
 .verification p { margin: 6px 0 0; color: var(--muted); font-size: 9px; line-height: 1.6; }
@@ -195,8 +211,33 @@ button, input { font: inherit; }
 .verification[data-state="error"] { border-left-color: var(--danger); background: #fff7f6; }
 .verification[data-state="error"] span { color: var(--danger); }
 
+.law-dialog { width: min(1040px, calc(100vw - 70px)); max-width: none; height: min(780px, calc(100vh - 70px)); max-height: none; padding: 0; overflow: hidden; border: 0; border-radius: 12px; background: white; color: var(--ink); box-shadow: 0 28px 90px rgba(20, 31, 42, .28); }
+.law-dialog::backdrop { background: rgba(25, 35, 45, .48); backdrop-filter: blur(3px); }
+.law-dialog form { height: 100%; display: flex; flex-direction: column; padding: 25px 28px 22px; }
+.dialog-head { display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 17px; border-bottom: 1px solid var(--line); }
+.dialog-head h2 { margin: 6px 0 0; font-size: 23px; letter-spacing: -.045em; }
+.dialog-head p { margin: 7px 0 0; color: var(--muted); font-size: 11px; }
+.dialog-close { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; background: white; color: var(--muted); font-size: 20px; cursor: pointer; }
+.dialog-close:hover { background: var(--rail); color: var(--ink); }
+.law-meta-grid { display: grid; grid-template-columns: 1fr 180px 1.7fr; gap: 12px; padding: 16px 0; }
+.law-meta-grid label, .law-text-grid label { color: var(--ink); font-size: 10px; font-weight: 800; }
+.law-meta-grid small { margin-left: 5px; color: var(--quiet); font-size: 8px; font-weight: 400; }
+.law-meta-grid input { width: 100%; height: 36px; margin-top: 6px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 6px; color: var(--ink); background: white; font-size: 10px; }
+.law-meta-grid input:focus, .law-text-grid textarea:focus { outline: 3px solid #dce8f2; border-color: var(--action); }
+.law-text-grid { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.law-text-grid label { min-height: 0; display: flex; flex-direction: column; }
+.law-text-grid label > span { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 7px; }
+.law-text-grid label small { color: var(--quiet); font-size: 8px; font-weight: 400; }
+.law-text-grid textarea { flex: 1; min-height: 280px; resize: none; padding: 12px 13px; border: 1px solid var(--line-strong); border-radius: 7px; color: #263441; background: #fbfcfd; font-family: "Malgun Gothic", sans-serif; font-size: 10px; line-height: 1.65; }
+.law-input-error { margin-top: 12px; padding: 9px 11px; border: 1px solid #e0c5c2; border-radius: 6px; background: #fff7f6; color: var(--danger); font-size: 10px; }
+.dialog-actions { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-top: 16px; }
+.dialog-actions span { color: var(--quiet); font-size: 9px; }
+.dialog-actions button { min-width: 190px; height: 42px; border: 0; border-radius: 7px; background: var(--action); color: white; font-size: 11px; font-weight: 800; cursor: pointer; }
+.dialog-actions button:hover { background: var(--action-hover); }
+.dialog-actions button:disabled { background: #aab4be; cursor: wait; }
+
 @media (max-width: 1180px) {
-  .app-shell { grid-template-columns: 286px minmax(500px, 1fr) 230px; }
+  .app-shell { grid-template-columns: 296px minmax(500px, 1fr) 230px; }
   .control-rail { padding-left: 20px; padding-right: 20px; }
   .inspector { padding-left: 17px; padding-right: 17px; }
 }

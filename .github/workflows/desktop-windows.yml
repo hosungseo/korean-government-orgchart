@@ -10,11 +10,17 @@ on:
     paths:
       - "desktop/**"
       - "src/hwp-native-manifest.mjs"
+      - "src/native-law-workflow.mjs"
+      - "src/parser.mjs"
+      - "src/model.mjs"
+      - "src/utils-core.mjs"
       - "src/mois-ai-participation-left-spec.mjs"
       - "src/render-original-left-stack.mjs"
       - "scripts/build-mois-ai-participation-native-manifest.mjs"
+      - "scripts/prepare-desktop-law-engine.mjs"
       - "test/desktop-manifest-validation.test.mjs"
       - "test/hwp-native-manifest.test.mjs"
+      - "test/native-law-workflow.test.mjs"
       - ".github/workflows/desktop-windows.yml"
 
 permissions:

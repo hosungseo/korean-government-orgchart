@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import { analyzeNativeManifest } from "../desktop/ui/manifest-validation.js";
 import { buildMoisAiParticipationNativeManifest } from "../src/hwp-native-manifest.mjs";
@@ -50,4 +51,9 @@ test("Windows 앱 사전검사는 한글 Automation에서 처리할 수 없는 �
   assert.equal(report.valid, false);
   assert.ok(report.errors.some((item) => item.code === "invalid-text-color"));
   assert.ok(report.errors.some((item) => item.code === "invalid-font-size"));
+});
+
+test("한글 Automation 스크립트는 Windows PowerShell 5.1용 UTF-8 BOM을 유지한다", () => {
+  const script = readFileSync(new URL("../desktop/src-tauri/resources/hwp-native.ps1", import.meta.url));
+  assert.deepEqual([...script.subarray(0, 3)], [0xef, 0xbb, 0xbf]);
 });

@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [ValidateSet("Probe", "ValidateManifest", "Generate")]
     [string]$Mode = "Probe",

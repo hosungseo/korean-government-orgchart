@@ -59,7 +59,7 @@ npm ci --prefix desktop
 npm run desktop:build
 ```
 
-NSIS와 MSI 산출물은 `desktop/src-tauri/target/release/bundle` 아래에 생성됩니다. GitHub Actions의 `Build Windows native HWPX prototype` 워크플로도 같은 빌드를 수행합니다.
+NSIS 설치본(`*.exe`)은 `desktop/src-tauri/target/release/bundle/nsis` 아래에 생성됩니다. GitHub Actions의 `Build Windows native HWPX studio` 워크플로도 같은 빌드를 수행합니다.
 
 ## 한글 없는 환경에서 가능한 검증
 

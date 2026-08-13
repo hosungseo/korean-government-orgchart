@@ -58,7 +58,8 @@ test("한글 Automation 스크립트는 Windows PowerShell 5.1용 UTF-8 BOM을 �
   assert.deepEqual([...script.subarray(0, 3)], [0xef, 0xbb, 0xbf]);
 });
 
-test("Windows MSI 번들은 생성된 ICO 아이콘을 명시적으로 사용한다", () => {
+test("Windows NSIS 번들은 생성된 ICO 아이콘을 명시적으로 사용한다", () => {
   const config = JSON.parse(readFileSync(new URL("../desktop/src-tauri/tauri.conf.json", import.meta.url), "utf8"));
+  assert.deepEqual(config.bundle.targets, ["nsis"]);
   assert.ok(config.bundle.icon.includes("icons/icon.ico"));
 });

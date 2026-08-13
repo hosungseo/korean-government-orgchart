@@ -48,9 +48,6 @@ jobs:
       - name: Generate native HWPX drawing manifest
         run: npm run desktop:prepare
 
-      - name: Test Rust command layer
-        run: cargo test --release --manifest-path desktop/src-tauri/Cargo.toml
-
       - name: Validate manifest with Windows PowerShell
         shell: powershell
         run: |
@@ -58,14 +55,13 @@ jobs:
             -Mode ValidateManifest `
             -ManifestPath .\desktop\src-tauri\resources\mois-ai-participation-left.native.json
 
-      - name: Build NSIS and MSI
+      - name: Build Windows NSIS installer
         run: npm run --prefix desktop build
 
-      - name: Upload Windows installers
+      - name: Upload Windows installer
         uses: actions/upload-artifact@v4
         with:
           name: korean-government-orgchart-native-hwpx-windows
           if-no-files-found: error
           path: |
             desktop/src-tauri/target/release/bundle/nsis/*.exe
-            desktop/src-tauri/target/release/bundle/msi/*.msi

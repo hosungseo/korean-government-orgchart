@@ -1,9 +1,9 @@
 {
   "name": "korean-government-orgchart-desktop",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
-  "description": "Windows prototype that turns organization-chart manifests into editable native HWPX objects",
+  "description": "Windows studio that turns organization-chart manifests into editable native HWPX objects",
   "scripts": {
     "prepare:icon": "tauri icon src-tauri/icons/source.svg --output src-tauri/icons",
     "prepare:native": "node ../scripts/build-mois-ai-participation-native-manifest.mjs && npm run prepare:icon",

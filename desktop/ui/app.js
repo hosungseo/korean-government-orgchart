@@ -1,7 +1,11 @@
+import { analyzeNativeManifest } from "./manifest-validation.js";
+
 const invoke = window.__TAURI__?.core?.invoke;
 const $ = (id) => document.getElementById(id);
+const MAX_MANIFEST_FILE_BYTES = 5 * 1024 * 1024;
 
 let manifest = null;
+let validationReport = null;
 let hwpAvailable = false;
 
 function setStatus(title, message, state = "idle") {
@@ -23,6 +27,10 @@ function setStep(id, state) {
   if (state) step.classList.add(state);
 }
 
+function refreshGenerateAvailability() {
+  $("generateButton").disabled = !(invoke && hwpAvailable && manifest && validationReport?.valid);
+}
+
 function escapeXml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -31,16 +39,7 @@ function escapeXml(value) {
     .replaceAll('"', "&quot;");
 }
 
-function svgObject(object) {
-  const style = object.style || {};
-  const geometry = object.geometry || {};
-  if (object.type === "line") {
-    return `<line x1="${geometry.x1}" y1="${geometry.y1}" x2="${geometry.x2}" y2="${geometry.y2}" stroke="${style.stroke}" stroke-width="${style.strokeWidthMm}" ${style.dash === "dash" ? 'stroke-dasharray="1 1"' : ""}/>`;
-  }
-  const fill = style.fill === "none" ? "none" : style.fill;
-  const stroke = style.stroke === "none" ? "none" : style.stroke;
-  const rectangle = `<rect x="${geometry.x}" y="${geometry.y}" width="${geometry.width}" height="${geometry.height}" fill="${fill}" stroke="${stroke}" stroke-width="${style.strokeWidthMm || 0}" ${style.dash === "dash" ? 'stroke-dasharray="1 1"' : ""}/>`;
-  if (object.type !== "textbox") return rectangle;
+function svgText(object, geometry, style) {
   const padding = Number(style.paddingMm || 0);
   const fontSize = Number(style.fontSizePt || 6) * 0.352778;
   const anchor = style.align === "right" ? "end" : style.align === "center" ? "middle" : "start";
@@ -49,40 +48,184 @@ function svgObject(object) {
     : style.align === "center"
       ? geometry.x + geometry.width / 2
       : geometry.x + padding;
-  const y = geometry.y + geometry.height / 2;
-  return `${rectangle}<text x="${x}" y="${y}" text-anchor="${anchor}" dominant-baseline="central" fill="${style.textColor || "#202020"}" font-family="Malgun Gothic, sans-serif" font-size="${fontSize}" font-weight="${style.bold ? 700 : 400}">${escapeXml(object.text)}</text>`;
+  const lines = String(object.text ?? "").split(/\r?\n/);
+  const lineHeight = fontSize * 1.22;
+  const centerY = geometry.y + geometry.height / 2;
+  const startY = centerY - ((lines.length - 1) * lineHeight) / 2;
+  const tspans = lines.map((line, index) => (
+    `<tspan x="${x}" y="${startY + index * lineHeight}">${escapeXml(line)}</tspan>`
+  )).join("");
+  return `<text text-anchor="${anchor}" dominant-baseline="central" fill="${style.textColor || "#202020"}" font-family="${escapeXml(style.fontFamily || "Malgun Gothic")}, sans-serif" font-size="${fontSize}" font-weight="${style.bold ? 700 : 400}">${tspans}</text>`;
+}
+
+function svgObject(object) {
+  const style = object.style || {};
+  const geometry = object.geometry || {};
+  if (object.type === "line") {
+    return `<line x1="${geometry.x1}" y1="${geometry.y1}" x2="${geometry.x2}" y2="${geometry.y2}" stroke="${style.stroke}" stroke-width="${style.strokeWidthMm}" stroke-linecap="square" ${style.dash === "dash" ? 'stroke-dasharray="1 1"' : ""}/>`;
+  }
+  const fill = style.fill === "none" ? "none" : style.fill;
+  const stroke = style.stroke === "none" ? "none" : style.stroke;
+  const rectangle = `<rect x="${geometry.x}" y="${geometry.y}" width="${geometry.width}" height="${geometry.height}" fill="${fill}" stroke="${stroke}" stroke-width="${style.strokeWidthMm || 0}" ${style.dash === "dash" ? 'stroke-dasharray="1 1"' : ""}/>`;
+  if (object.type !== "textbox") return rectangle;
+  return `${rectangle}${svgText(object, geometry, style)}`;
 }
 
 function renderManifest(nextManifest) {
   manifest = nextManifest;
   const objects = Array.isArray(manifest.objects) ? manifest.objects : [];
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297" shape-rendering="geometricPrecision"><rect width="210" height="297" fill="#fff"/>${objects.map(svgObject).join("")}</svg>`;
+  const pageWidth = Number(manifest.page?.widthMm || 210);
+  const pageHeight = Number(manifest.page?.heightMm || 297);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${pageWidth}mm" height="${pageHeight}mm" viewBox="0 0 ${pageWidth} ${pageHeight}" shape-rendering="geometricPrecision"><rect width="${pageWidth}" height="${pageHeight}" fill="#fff"/>${objects.map(svgObject).join("")}</svg>`;
+  $("paper").style.aspectRatio = `${pageWidth} / ${pageHeight}`;
   $("paper").innerHTML = svg;
-  $("metricObjects").textContent = objects.length;
-  $("metricTextboxes").textContent = objects.filter((object) => object.type === "textbox").length;
-  $("metricLines").textContent = objects.filter((object) => object.type === "line").length;
-  $("metricRectangles").textContent = objects.filter((object) => object.type === "rectangle").length;
-  if (manifest.fileName) $("fileName").value = manifest.fileName;
+}
+
+function clearPreview(message) {
+  $("paper").innerHTML = `<div class="paper-loading paper-error">${escapeXml(message)}</div>`;
+}
+
+function manifestDescription(nextManifest) {
+  const source = nextManifest?.source || {};
+  const parts = [source.institution, source.asOf ? `기준 ${source.asOf}` : ""].filter(Boolean);
+  return parts.join(" · ") || "외부 네이티브 작도 명세";
+}
+
+function diagnosticItems(report) {
+  return [...(report.errors || []), ...(report.warnings || [])].slice(0, 6);
+}
+
+function renderPreflight(report) {
+  const errors = report.errors || [];
+  const warnings = report.warnings || [];
+  const summary = report.summary || {};
+  const box = $("preflight");
+  const state = errors.length ? "error" : warnings.length ? "warning" : "success";
+  box.dataset.state = state;
+  box.querySelector("span").textContent = errors.length
+    ? `사전검사 오류 ${errors.length}건`
+    : warnings.length
+      ? `통과 · 주의 ${warnings.length}건`
+      : "사전검사 통과";
+  box.querySelector("p").textContent = errors.length
+    ? "오류를 바로잡기 전에는 한글 생성을 시작하지 않습니다."
+    : `${summary.connectionChecks || 0}개 자식 계선의 상자 접합과 A4 경계를 확인했습니다.`;
+  const list = $("diagnosticList");
+  list.replaceChildren();
+  for (const item of diagnosticItems(report)) {
+    const li = document.createElement("li");
+    li.dataset.level = errors.includes(item) ? "error" : "warning";
+    li.textContent = `${item.objectId ? `${item.objectId} · ` : ""}${item.message}`;
+    list.append(li);
+  }
+  if (!errors.length && !warnings.length) {
+    const li = document.createElement("li");
+    li.dataset.level = "success";
+    li.textContent = "용지 밖 객체·중복 ID·객체 수 불일치·끊어진 자식 계선이 없습니다.";
+    list.append(li);
+  }
+  $("metricObjects").textContent = summary.objectCount ?? "—";
+  $("metricTextboxes").textContent = summary.textBoxCount ?? "—";
+  $("metricLines").textContent = summary.lineCount ?? "—";
+  $("metricRectangles").textContent = summary.rectangleCount ?? "—";
+  $("metricWarnings").textContent = warnings.length;
+  setStep("stepManifest", report.valid ? "done" : "failed");
+}
+
+async function authoritativePreflight(nextManifest, browserReport) {
+  if (!invoke || !browserReport.valid) return browserReport;
+  try {
+    const nativeReport = await invoke("validate_native_manifest", {
+      request: { manifestJson: JSON.stringify(nextManifest) },
+    });
+    const seen = new Set((browserReport.warnings || []).map((item) => `${item.code}:${item.objectId || ""}`));
+    const nativeWarnings = (nativeReport.warnings || []).filter((item) => !seen.has(`${item.code}:${item.objectId || ""}`));
+    return {
+      ...browserReport,
+      warnings: [...(browserReport.warnings || []), ...nativeWarnings],
+      summary: { ...browserReport.summary, ...(nativeReport.summary || {}) },
+    };
+  } catch (error) {
+    return {
+      ...browserReport,
+      valid: false,
+      errors: [...(browserReport.errors || []), { code: "native-preflight", message: String(error) }],
+    };
+  }
+}
+
+async function acceptManifest(nextManifest, sourceLabel) {
+  manifest = nextManifest;
+  $("loadedSource").textContent = sourceLabel;
+  $("manifestTitle").textContent = typeof nextManifest?.title === "string" ? nextManifest.title : "제목 없는 조직도";
+  $("manifestDescription").textContent = manifestDescription(nextManifest);
+  if (typeof nextManifest?.fileName === "string" && nextManifest.fileName.trim()) {
+    $("fileName").value = nextManifest.fileName;
+  }
+  $("verification").dataset.state = "";
+  $("verification").querySelector("span").textContent = "생성 후 검증 대기";
+  $("verification").querySelector("p").textContent = "저장 파일을 한글로 다시 열어 실제 객체 수와 쪽수를 확인합니다.";
+  $("openFolderButton").hidden = true;
+
+  const browserReport = analyzeNativeManifest(nextManifest);
+  validationReport = await authoritativePreflight(nextManifest, browserReport);
+  renderPreflight(validationReport);
+  if (validationReport.valid) {
+    renderManifest(nextManifest);
+    const warningMessage = validationReport.warnings.length
+      ? `생성은 가능하지만 주의 ${validationReport.warnings.length}건을 먼저 확인하는 편이 좋습니다.`
+      : "A4 경계·객체 수·ID·자식 계선 접합 검사를 통과했습니다.";
+    setStatus(validationReport.warnings.length ? "명세 검사 통과(주의 있음)" : "명세 검사 통과", warningMessage, validationReport.warnings.length ? "warning" : "success");
+  } else {
+    clearPreview("명세 오류를 바로잡으면 미리보기가 표시됩니다.");
+    setStatus("작도 명세 오류", validationReport.errors[0]?.message || "JSON 명세를 확인하세요.", "error");
+  }
+  refreshGenerateAvailability();
+}
+
+async function loadManifestText(text, sourceLabel) {
+  try {
+    await acceptManifest(JSON.parse(text), sourceLabel);
+  } catch (error) {
+    validationReport = { valid: false, errors: [{ code: "invalid-json", message: String(error) }], warnings: [], summary: {} };
+    renderPreflight(validationReport);
+    clearPreview("JSON 문법 오류로 미리보기를 만들 수 없습니다.");
+    setStatus("JSON 불러오기 실패", String(error), "error");
+    refreshGenerateAvailability();
+  }
+}
+
+async function loadFile(file) {
+  if (!file) return;
+  if (file.size > MAX_MANIFEST_FILE_BYTES) {
+    setStatus("파일이 너무 큼", "작도 명세 JSON은 5MB 이하만 불러올 수 있습니다.", "error");
+    return;
+  }
+  if (!file.name.toLowerCase().endsWith(".json")) {
+    setStatus("지원하지 않는 파일", ".json 작도 명세를 선택하세요.", "error");
+    return;
+  }
+  setStep("stepManifest", "active");
+  setStatus("명세 읽는 중", `${file.name}을 검사하고 있습니다.`, "working");
+  await loadManifestText(await file.text(), file.name);
 }
 
 async function loadSample() {
-  if (!invoke) {
-    try {
+  setStep("stepManifest", "active");
+  try {
+    let text;
+    if (invoke) {
+      text = await invoke("sample_native_manifest");
+    } else {
       const response = await fetch("../src-tauri/resources/mois-ai-participation-left.native.json");
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      renderManifest(await response.json());
-      setStatus("브라우저 미리보기", "작도 명세는 확인할 수 있지만 한글 출력은 Windows 앱에서 실행됩니다.", "idle");
-    } catch {
-      setStatus("Windows 앱 필요", "Tauri Windows 앱에서 네이티브 한글 출력을 사용할 수 있습니다.", "error");
+      text = await response.text();
     }
-    return;
-  }
-  try {
-    const text = await invoke("sample_native_manifest");
-    renderManifest(JSON.parse(text));
-    setStatus("작도 명세 준비됨", "두 실의 상자·계선·평가대상 테두리를 개별 객체로 준비했습니다.", "idle");
+    await loadManifestText(text, "내장 샘플 · 행안부 두 실");
+    if (!invoke) setStatus("브라우저 미리보기", "명세 검사는 가능하지만 한글 출력은 Windows 앱에서 실행됩니다.", "idle");
   } catch (error) {
-    setStatus("명세 오류", String(error), "error");
+    setStep("stepManifest", "failed");
+    setStatus("샘플 명세 오류", String(error), "error");
   }
 }
 
@@ -90,6 +233,7 @@ async function checkRuntime() {
   if (!invoke) {
     setRuntime("unavailable", "브라우저 미리보기");
     setStep("stepRuntime", "failed");
+    refreshGenerateAvailability();
     return;
   }
   try {
@@ -98,10 +242,9 @@ async function checkRuntime() {
     if (hwpAvailable) {
       setRuntime("ready", runtime.version ? `한글 ${runtime.version} 연결됨` : "Windows 한글 연결됨");
       setStep("stepRuntime", "done");
-      $("generateButton").disabled = false;
       const securityNote = runtime.securityModuleRegistered
-        ? "파일 접근 보안모듈까지 확인했습니다."
-        : "첫 저장 시 한글의 파일 접근 승인창이 나타날 수 있습니다.";
+        ? "한글 연결과 파일 접근 보안모듈을 확인했습니다."
+        : "한글은 연결됐으며 첫 저장 시 파일 접근 승인창이 나타날 수 있습니다.";
       setStatus("한글 연결 완료", securityNote, "success");
     } else {
       setRuntime("unavailable", "Windows 한글 미연결");
@@ -113,14 +256,15 @@ async function checkRuntime() {
     setStep("stepRuntime", "failed");
     setStatus("한글 연결 오류", String(error), "error");
   }
+  refreshGenerateAvailability();
 }
 
 async function generate() {
-  if (!invoke || !manifest || !hwpAvailable) return;
+  if (!invoke || !manifest || !hwpAvailable || !validationReport?.valid) return;
   const button = $("generateButton");
   button.disabled = true;
   setStep("stepVerify", "active");
-  setStatus("네이티브 객체 작도 중", "한글이 잠깐 열립니다. 상자와 계선을 만들고 저장본을 다시 검사합니다.", "working");
+  setStatus("네이티브 객체 작도 중", "한글에서 상자와 계선을 만들고 저장본을 다시 검사합니다.", "working");
   $("verification").dataset.state = "";
   $("verification").querySelector("span").textContent = "검증 중";
   $("verification").querySelector("p").textContent = "저장된 HWPX를 한글로 다시 여는 중입니다.";
@@ -132,12 +276,13 @@ async function generate() {
         openAfter: $("openAfter").checked,
       },
     });
+    $("openFolderButton").hidden = false;
     if (result.verified) {
       setStep("stepVerify", "done");
-      setStatus("편집형 HWPX 검증 완료", `${result.pageCount}쪽 · 네이티브 객체 ${result.nativeObjectCount}개 · ${result.outputPath}`, "success");
+      setStatus("편집형 HWPX 검증 완료", `${result.pageCount}쪽 · 네이티브 객체 ${result.nativeObjectCount}개 · 검증 리포트 저장 완료`, "success");
       $("verification").dataset.state = "success";
       $("verification").querySelector("span").textContent = "재열기 검증 통과";
-      $("verification").querySelector("p").textContent = `A4 ${result.pageCount}쪽, 객체 ${result.nativeObjectCount}/${result.expectedNativeObjectCount}개가 저장본에서 확인됐습니다.`;
+      $("verification").querySelector("p").textContent = `A4 ${result.pageCount}쪽, 객체 ${result.nativeObjectCount}/${result.expectedNativeObjectCount}개를 확인했습니다. 같은 폴더에 .native.json과 .verification.json을 남겼습니다.`;
     } else {
       setStep("stepVerify", "failed");
       setStatus("HWPX는 생성됐지만 검증 불일치", `${result.outputPath} · 쪽수 또는 객체 수를 확인해야 합니다.`, "error");
@@ -152,12 +297,40 @@ async function generate() {
     $("verification").querySelector("span").textContent = "생성 또는 검증 실패";
     $("verification").querySelector("p").textContent = String(error);
   } finally {
-    button.disabled = !hwpAvailable;
+    refreshGenerateAvailability();
+  }
+}
+
+async function openOutputFolder() {
+  if (!invoke) return;
+  try {
+    const result = await invoke("open_output_directory");
+    if (!result.opened) setStatus("결과 폴더", result.path, "idle");
+  } catch (error) {
+    setStatus("폴더 열기 실패", String(error), "error");
   }
 }
 
 $("generateButton").addEventListener("click", generate);
 $("reloadButton").addEventListener("click", loadSample);
+$("loadManifestButton").addEventListener("click", () => $("manifestFile").click());
+$("manifestFile").addEventListener("change", (event) => loadFile(event.target.files?.[0]));
+$("openFolderButton").addEventListener("click", openOutputFolder);
+
+const drawingStage = $("drawingStage");
+for (const eventName of ["dragenter", "dragover"]) {
+  drawingStage.addEventListener(eventName, (event) => {
+    event.preventDefault();
+    drawingStage.classList.add("drop-active");
+  });
+}
+for (const eventName of ["dragleave", "drop"]) {
+  drawingStage.addEventListener(eventName, (event) => {
+    event.preventDefault();
+    drawingStage.classList.remove("drop-active");
+  });
+}
+drawingStage.addEventListener("drop", (event) => loadFile(event.dataTransfer?.files?.[0]));
 
 await loadSample();
 await checkRuntime();

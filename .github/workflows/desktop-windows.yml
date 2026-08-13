@@ -1,10 +1,21 @@
-name: Build Windows native HWPX prototype
+name: Build Windows native HWPX studio
 
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
     tags:
       - "native-hwpx-v*"
+    paths:
+      - "desktop/**"
+      - "src/hwp-native-manifest.mjs"
+      - "src/mois-ai-participation-left-spec.mjs"
+      - "src/render-original-left-stack.mjs"
+      - "scripts/build-mois-ai-participation-native-manifest.mjs"
+      - "test/desktop-manifest-validation.test.mjs"
+      - "test/hwp-native-manifest.test.mjs"
+      - ".github/workflows/desktop-windows.yml"
 
 permissions:
   contents: read
@@ -36,6 +47,9 @@ jobs:
 
       - name: Generate native HWPX drawing manifest
         run: npm run desktop:prepare
+
+      - name: Test Rust command layer
+        run: cargo test --manifest-path desktop/src-tauri/Cargo.toml
 
       - name: Validate manifest with Windows PowerShell
         shell: powershell

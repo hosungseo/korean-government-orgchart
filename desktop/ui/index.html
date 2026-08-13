@@ -22,12 +22,19 @@
 
   <main class="app-shell">
     <aside class="control-rail">
-      <div class="eyebrow">WINDOWS PROTOTYPE 01</div>
-      <h2>행안부 두 실<br>왼쪽면 편집본</h2>
-      <p class="lead">인공지능정부실과 참여혁신조직실을 원형복원 작도 그대로 한글 네이티브 객체로 변환합니다.</p>
+      <div class="eyebrow">WINDOWS NATIVE HWPX · 0.3</div>
+      <h2 id="manifestTitle">작도 명세를<br>검사하는 중</h2>
+      <p id="manifestDescription" class="lead">A4 세로 조직도를 한글 네이티브 객체로 변환합니다.</p>
+
+      <div class="manifest-loader">
+        <input id="manifestFile" type="file" accept="application/json,.json" hidden>
+        <button id="loadManifestButton" class="manifest-action" type="button">작도 명세 JSON 불러오기</button>
+        <div class="loaded-source"><span>현재 명세</span><strong id="loadedSource">불러오는 중</strong></div>
+        <small>JSON 파일을 가운데 A4 영역에 끌어놓아도 됩니다.</small>
+      </div>
 
       <ol class="steps" aria-label="생성 절차">
-        <li class="done"><span>1</span><div><strong>작도 명세</strong><small>좌표·계선·서식 준비</small></div></li>
+        <li id="stepManifest"><span>1</span><div><strong>명세 사전검사</strong><small>경계·ID·계선 접합 확인</small></div></li>
         <li id="stepRuntime"><span>2</span><div><strong>한글 연결</strong><small>Automation 설치 확인</small></div></li>
         <li id="stepVerify"><span>3</span><div><strong>재열기 검증</strong><small>A4 1쪽·객체 수 대조</small></div></li>
       </ol>
@@ -43,13 +50,16 @@
       <button id="generateButton" class="primary-action" type="button" disabled>
         <span>한글 편집본 만들기</span><b>HWPX</b>
       </button>
-      <button id="reloadButton" class="text-action" type="button">샘플 명세 다시 불러오기</button>
+      <div class="minor-actions">
+        <button id="reloadButton" class="text-action" type="button">내장 샘플 복원</button>
+        <button id="openFolderButton" class="text-action" type="button" hidden>결과 폴더 열기</button>
+      </div>
 
       <div id="statusBox" class="status-box" data-state="idle" aria-live="polite">
         <strong>준비 중</strong>
         <p>한글 Automation 연결 상태를 확인하고 있습니다.</p>
       </div>
-      <p class="license-note">개인·비상업 용도 시제품입니다. 상업 배포에는 한컴 Automation 별도 승인이 필요합니다.</p>
+      <p class="license-note">명세는 로컬에서만 처리합니다. 상업 배포에는 한컴 Automation 별도 승인이 필요합니다.</p>
     </aside>
 
     <section class="workspace">
@@ -61,7 +71,8 @@
         <div class="legend"><span class="line-swatch"></span>각 계선은 별도 선 객체</div>
       </div>
 
-      <div class="drawing-stage">
+      <div id="drawingStage" class="drawing-stage">
+        <div class="drop-indicator">JSON 작도 명세 놓기</div>
         <div id="paper" class="paper" aria-label="A4 세로 조직도 미리보기">
           <div class="paper-loading">작도 명세를 읽는 중입니다.</div>
         </div>
@@ -76,7 +87,13 @@
         <div><dt>글상자</dt><dd id="metricTextboxes">—</dd></div>
         <div><dt>선</dt><dd id="metricLines">—</dd></div>
         <div><dt>강조 사각형</dt><dd id="metricRectangles">—</dd></div>
+        <div><dt>사전검사 주의</dt><dd id="metricWarnings">—</dd></div>
       </dl>
+      <div id="preflight" class="preflight" data-state="idle">
+        <span>사전검사 대기</span>
+        <p>용지 경계와 계선 접합을 확인합니다.</p>
+        <ul id="diagnosticList"></ul>
+      </div>
       <div class="editability">
         <h3>한글에서 가능한 편집</h3>
         <ul>
@@ -88,7 +105,7 @@
       </div>
       <div id="verification" class="verification">
         <span>검증 대기</span>
-        <p>생성 파일을 한글로 다시 열어 실제 객체 수와 쪽수를 확인합니다.</p>
+        <p>생성 파일을 한글로 다시 열어 실제 객체 수와 쪽수를 확인하고 JSON 리포트를 남깁니다.</p>
       </div>
     </aside>
   </main>

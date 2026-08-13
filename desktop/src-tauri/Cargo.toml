@@ -1,7 +1,7 @@
 [package]
 name = "korean-government-orgchart"
-version = "0.2.0"
-description = "Windows native editable HWPX prototype for Korean government organization charts"
+version = "0.3.0"
+description = "Windows native editable HWPX studio for Korean government organization charts"
 authors = ["Seo Hosung"]
 edition = "2021"
 

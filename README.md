@@ -126,6 +126,18 @@ node src/cli.mjs render-json \
 
 HOP는 결과를 열어 육안검수·인쇄·PDF 출력하는 도구이고, 생성 자체는 이 프로젝트의 HWPX 직렬화기가 담당합니다. 공개 웹 데모도 출력 형식에서 `HWPX 보고서 (HOP·한글)`를 고르면 같은 방식으로 조직도와 편집 가능한 관계표를 내려받습니다.
 
+### Windows 한글 네이티브 편집본
+
+조직도 상자·문자·계선을 한글에서 각각 선택해 편집해야 할 때는 [`desktop/`](desktop/)의 Windows 앱을 사용합니다. 앱은 내장 샘플뿐 아니라 `kr.go.mois.orgchart.hwp-native/v1` 형식의 `*.native.json`을 불러올 수 있고, 생성 전에 A4 경계·객체 ID·서식·객체 수·자식 계선 접합을 검사합니다. 생성 뒤에는 한글로 HWPX를 다시 열어 쪽수와 객체 수를 대조하며, 재현용 명세와 검증 리포트를 HWPX 옆에 함께 저장합니다.
+
+```powershell
+npm ci
+npm ci --prefix desktop
+npm run desktop:dev
+```
+
+실제 네이티브 HWPX 생성과 재열기 검증에는 Windows 10/11과 한컴오피스 한글이 필요합니다. 자세한 절차와 Automation 라이선스 유의사항은 [`desktop/README.md`](desktop/README.md)를 따릅니다.
+
 `--source-dir`를 쓰면 조회한 법령 평문과 함께 `*.annexes.json`도 저장합니다. 별표 인벤토리에는 별표 번호·제목·시행일·HWP/PDF 링크·간단한 표 행 추출 결과가 들어갑니다. 현재 `지방국세청의 명칭·위치 및 소속세무서`형 별표는 7개 지방청과 소속 세무서 트리로 자동 승격하고, `지방국세청의 관할구역`형 별표는 지방청 노드의 위치·관할 메타데이터로 반영합니다. `세무서의 명칭·위치 및 관할구역`형 별표는 이미 생성된 세무서 노드의 위치·관할구역을 보강하고, `지서의 명칭·위치 및 관할구역`형 별표는 지서를 해당 세무서 하위 소속기관으로 붙입니다. `세무서에 두는 과 단위 기구`형 별표는 같은 `징세과`가 여러 세무서 아래 반복되는 구조를 scoped node로 분리해 세무서별 과 조직으로 붙입니다.
 
 ### 이미 만든 JSON 다시 그리기
@@ -466,6 +478,7 @@ src/trace.mjs         관계별 근거 추적 CSV 출력
 src/cli.mjs           build/from-law/fetch/inspect/audit/batch/review-pack 명령
 docs/index.html       GitHub Pages 인터랙티브 데모
 docs/hwpx-browser.mjs 브라우저용 HWPX 패키지 생성기
+desktop/              Windows 한글 네이티브 객체 생성·사전검사·재열기 검증 앱
 ```
 
 ## 라이선스

@@ -33,6 +33,45 @@ function Convert-HexColor {
     return $script:Hwp.RGBColor($red, $green, $blue)
 }
 
+function Test-HexColorValue {
+    param([object]$Value, [switch]$AllowNone)
+    $text = [string]$Value
+    if ($AllowNone -and $text -eq "none") { return $true }
+    return $text -match '^#[0-9A-Fa-f]{6}$'
+}
+
+function Get-NativeNumber {
+    param([object]$Value, [string]$Label)
+    if ($null -eq $Value) { throw "$Label 값이 없습니다." }
+    try { $number = [double]$Value } catch { throw "$Label 값은 숫자여야 합니다." }
+    if ([double]::IsNaN($number) -or [double]::IsInfinity($number)) { throw "$Label 값은 유한한 숫자여야 합니다." }
+    return $number
+}
+
+function Assert-NativeStyle {
+    param($Object)
+    $id = [string]$Object.id
+    $style = $Object.style
+    if ($null -eq $style) { throw "$id 객체의 서식(style) 정보가 없습니다." }
+    if (-not (Test-HexColorValue $style.stroke -AllowNone)) { throw "$id 객체의 선 색상은 #RRGGBB 또는 none이어야 합니다." }
+    $strokeWidth = Get-NativeNumber $style.strokeWidthMm "$id 선 굵기"
+    if ($strokeWidth -lt 0 -or $strokeWidth -gt 10) { throw "$id 객체의 선 굵기는 0~10mm여야 합니다." }
+    if (@("solid", "dash") -notcontains [string]$style.dash) { throw "$id 객체의 선 종류는 solid 또는 dash여야 합니다." }
+    if ($Object.type -eq "line") {
+        if ($style.stroke -eq "none" -or $strokeWidth -eq 0) { throw "$id 선 객체가 보이지 않는 서식입니다." }
+        return
+    }
+    if (-not (Test-HexColorValue $style.fill -AllowNone)) { throw "$id 객체의 채우기 색상은 #RRGGBB 또는 none이어야 합니다." }
+    if ($Object.type -ne "textbox") { return }
+    if (-not (Test-HexColorValue $style.textColor)) { throw "$id 글상자의 문자 색상은 #RRGGBB여야 합니다." }
+    $fontSize = Get-NativeNumber $style.fontSizePt "$id 글자 크기"
+    if ($fontSize -lt 2 -or $fontSize -gt 72) { throw "$id 글상자의 글자 크기는 2~72pt여야 합니다." }
+    if (@("left", "center", "right") -notcontains [string]$style.align) { throw "$id 글상자의 가로 정렬 값이 올바르지 않습니다." }
+    if (@("top", "center", "bottom") -notcontains [string]$style.verticalAlign) { throw "$id 글상자의 세로 정렬 값이 올바르지 않습니다." }
+    $padding = Get-NativeNumber $style.paddingMm "$id 안쪽 여백"
+    if ($padding -lt 0) { throw "$id 글상자의 안쪽 여백은 0 이상이어야 합니다." }
+}
+
 function Read-NativeManifest {
     param([string]$Path)
     if ([string]::IsNullOrWhiteSpace($Path)) { throw "-ManifestPath 값이 필요합니다." }
@@ -41,11 +80,19 @@ function Read-NativeManifest {
     if ($manifest.schema -ne "kr.go.mois.orgchart.hwp-native/v1") {
         throw "지원하지 않는 네이티브 작도 명세입니다: $($manifest.schema)"
     }
-    if ($manifest.page.paper -ne "A4" -or $manifest.page.orientation -ne "portrait") {
-        throw "시제품은 A4 세로 명세만 지원합니다."
-    }
+    if ($manifest.page.paper -ne "A4" -or $manifest.page.orientation -ne "portrait") { throw "현재 앱은 A4 세로 명세만 지원합니다." }
+    $pageWidth = Get-NativeNumber $manifest.page.widthMm "용지 너비"
+    $pageHeight = Get-NativeNumber $manifest.page.heightMm "용지 높이"
+    if ([Math]::Abs($pageWidth - 210) -gt 0.02 -or [Math]::Abs($pageHeight - 297) -gt 0.02) { throw "A4 세로 크기는 210×297mm여야 합니다." }
+    $marginLeft = Get-NativeNumber $manifest.page.marginMm.left "왼쪽 여백"
+    $marginRight = Get-NativeNumber $manifest.page.marginMm.right "오른쪽 여백"
+    $marginTop = Get-NativeNumber $manifest.page.marginMm.top "위쪽 여백"
+    $marginBottom = Get-NativeNumber $manifest.page.marginMm.bottom "아래쪽 여백"
+    if ($marginLeft -lt 0 -or $marginRight -lt 0 -or $marginTop -lt 0 -or $marginBottom -lt 0) { throw "용지 여백은 0 이상이어야 합니다." }
+    if ($marginLeft + $marginRight -ge $pageWidth -or $marginTop + $marginBottom -ge $pageHeight) { throw "용지 여백 값이 본문 영역보다 큽니다." }
     $objects = @($manifest.objects)
     if ($objects.Count -eq 0) { throw "네이티브 작도 객체가 없습니다." }
+    if ($objects.Count -gt 5000) { throw "네이티브 객체는 최대 5000개까지 지원합니다." }
     $ids = @{}
     foreach ($object in $objects) {
         if ([string]::IsNullOrWhiteSpace([string]$object.id)) { throw "ID가 없는 네이티브 객체가 있습니다." }
@@ -54,12 +101,42 @@ function Read-NativeManifest {
         if (@("line", "rectangle", "textbox") -notcontains [string]$object.type) {
             throw "지원하지 않는 네이티브 객체 유형입니다: $($object.type)"
         }
+        if ($null -eq $object.geometry) { throw "$($object.id) 객체의 좌표가 없습니다." }
+        if ($object.type -eq "line") {
+            $x1 = Get-NativeNumber $object.geometry.x1 "$($object.id) x1"
+            $y1 = Get-NativeNumber $object.geometry.y1 "$($object.id) y1"
+            $x2 = Get-NativeNumber $object.geometry.x2 "$($object.id) x2"
+            $y2 = Get-NativeNumber $object.geometry.y2 "$($object.id) y2"
+            if ($x1 -lt 0 -or $y1 -lt 0 -or $x2 -lt 0 -or $y2 -lt 0 -or $x1 -gt ($pageWidth + 0.02) -or $x2 -gt ($pageWidth + 0.02) -or $y1 -gt ($pageHeight + 0.02) -or $y2 -gt ($pageHeight + 0.02)) {
+                throw "$($object.id) 선이 A4 용지 밖으로 나갑니다."
+            }
+            if ([Math]::Sqrt([Math]::Pow($x2 - $x1, 2) + [Math]::Pow($y2 - $y1, 2)) -lt 0.01) { throw "$($object.id) 선의 길이가 0입니다." }
+        } else {
+            $x = Get-NativeNumber $object.geometry.x "$($object.id) x"
+            $y = Get-NativeNumber $object.geometry.y "$($object.id) y"
+            $width = Get-NativeNumber $object.geometry.width "$($object.id) width"
+            $height = Get-NativeNumber $object.geometry.height "$($object.id) height"
+            if ($width -le 0 -or $height -le 0 -or $x -lt 0 -or $y -lt 0 -or $x + $width -gt ($pageWidth + 0.02) -or $y + $height -gt ($pageHeight + 0.02)) {
+                throw "$($object.id) 객체가 A4 용지 밖으로 나갑니다."
+            }
+            if ($object.type -eq "textbox" -and $null -eq $object.text) { throw "$($object.id) 글상자의 text 값이 없습니다." }
+        }
+        Assert-NativeStyle $object
     }
     $lineCount = @($objects | Where-Object { $_.type -eq "line" }).Count
     $rectangleCount = @($objects | Where-Object { $_.type -eq "rectangle" }).Count
     $textBoxCount = @($objects | Where-Object { $_.type -eq "textbox" }).Count
-    if ([int]$manifest.verification.expectedNativeObjectCount -ne $objects.Count) {
-        throw "작도 명세의 예상 객체 수가 실제 객체 수와 다릅니다."
+    $expected = @{
+        expectedPageCount = 1
+        expectedNativeObjectCount = $objects.Count
+        expectedLineObjectCount = $lineCount
+        expectedRectangleObjectCount = $rectangleCount
+        expectedTextBoxObjectCount = $textBoxCount
+        expectedEditableTextObjectCount = $textBoxCount
+    }
+    foreach ($entry in $expected.GetEnumerator()) {
+        $property = $manifest.verification.PSObject.Properties[$entry.Key]
+        if ($null -eq $property -or [int]$property.Value -ne [int]$entry.Value) { throw "검증 예상값 $($entry.Key)가 실제값 $($entry.Value)와 다릅니다." }
     }
     return @{
         Manifest = $manifest

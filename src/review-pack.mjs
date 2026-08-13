@@ -23,7 +23,7 @@ export async function runReviewPack(args = {}) {
   const deckPath = stringArg(args, "deck")
     ? path.resolve(stringArg(args, "deck"))
     : path.join(artifactDir, "review-deck.pptx");
-  const outputs = stringArg(args, "outputs") || "svg,html,json,audit,trace,pptx,deck";
+  const outputs = stringArg(args, "outputs") || "svg,html,hwpx,json,audit,trace,pptx,deck";
 
   const audit = await runBatchAudit(common);
   const build = await runBatchBuild({
@@ -575,15 +575,15 @@ function htmlCasesSection(result) {
     <thead><tr><th>기관</th><th>기준일</th><th>대상</th><th>상태</th><th>선택유형</th><th>확인</th><th>배치</th><th>품질</th><th>근거 표시</th><th>산출물</th></tr></thead>
     <tbody>${rows.join("")}</tbody>
   </table>
-  <p class="muted">` + "html" + ` 링크는 한글/HWPX 붙여넣기용 검토시트입니다.</p>
+  <p class="muted">` + "hwpx" + ` 링크는 HOP·한글에서 바로 여는 편집 가능한 검토보고서이고, ` + "html" + ` 링크는 한글/HWPX 붙여넣기·브라우저 인쇄용 검토시트입니다.</p>
 </section>`;
 }
 
 function outputLinksHtml(baseDir, outputs) {
-  const order = ["html", "pptx", "svg", "json", "audit", "trace"];
+  const order = ["hwpx", "html", "pptx", "svg", "json", "audit", "trace"];
   return order
     .filter((kind) => outputs[kind])
-    .map((kind) => `<a class="${kind === "html" ? "primary" : ""}" href="${htmlAttr(hrefPath(baseDir, outputs[kind]))}">${htmlEscape(kind)}</a>`)
+    .map((kind) => `<a class="${kind === "hwpx" ? "primary" : ""}" href="${htmlAttr(hrefPath(baseDir, outputs[kind]))}">${htmlEscape(kind)}</a>`)
     .join(" ");
 }
 
@@ -718,6 +718,7 @@ export function formatReviewTriageCsv(result) {
     "소관법령_미매칭",
     "소관법령_중복후보",
     "첫확인사항",
+    "HWPX",
     "HTML",
     "PPTX",
     "감사MD",
@@ -745,6 +746,7 @@ export function formatReviewTriageCsv(result) {
     row.lawMapUnmatched,
     row.lawMapAmbiguous,
     row.firstAction,
+    row.hwpx,
     row.html,
     row.pptx,
     row.audit,
@@ -782,6 +784,7 @@ function reviewTriageRows(result) {
       lawMapUnmatched: metrics.lawMapUnmatched,
       lawMapAmbiguous: metrics.lawMapAmbiguous,
       firstAction,
+      hwpx: relativeFilePath(result.outDir, built?.outputs?.hwpx),
       html: relativeFilePath(result.outDir, built?.outputs?.html),
       pptx: relativeFilePath(result.outDir, built?.outputs?.pptx),
       audit: relativeFilePath(result.outDir, built?.outputs?.audit),
@@ -856,7 +859,7 @@ async function runAcceptedBuild(result, args, sharedLawFetchCache) {
   }
   const acceptedOutDir = path.resolve(stringArg(args, "accepted-out-dir") || path.join(result.outDir, "accepted"));
   const acceptedDeck = path.resolve(stringArg(args, "accepted-deck") || path.join(acceptedOutDir, "accepted-deck.pptx"));
-  const acceptedOutputs = stringArg(args, "accepted-outputs") || stringArg(args, "outputs") || "svg,html,json,audit,trace,pptx,deck";
+  const acceptedOutputs = stringArg(args, "accepted-outputs") || stringArg(args, "outputs") || "svg,html,hwpx,json,audit,trace,pptx,deck";
   const build = await runBatchBuild({
     ...args,
     caseSpecs: accepted.cases,

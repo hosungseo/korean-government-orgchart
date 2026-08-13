@@ -20,20 +20,23 @@ export function nodeLabelMetrics(_node, position, lines) {
       fontSize: Math.min(10.8, Math.max(6.4, lineHeight - 0.2)),
     };
   }
-  const lineHeight = Math.min(14, Math.max(8.6, (position.height - 4) / lineCount));
+  const lineHeight = Math.min(13.2, Math.max(9, (position.height - 4) / lineCount));
   const longest = Math.max(1, ...lines.map((line) => [...line].length));
   const widthFit = (position.width - 10) / longest / 0.86;
   return {
     lineHeight,
-    fontSize: Math.min(lineCount > 1 ? 10.8 : 12.5, Math.max(7.2, Math.min(lineHeight - 0.6, widthFit))),
+    fontSize: Math.min(
+      lineCount > 1 ? 10.4 : 11.8,
+      Math.max(7.6, Math.min(lineHeight - 0.6, widthFit)),
+    ),
   };
 }
 
 export function wrapHorizontalLabel(label, position = {}) {
   const text = String(label ?? "").trim();
   if (!text) return [""];
-  const maxChars = Math.max(4, Math.floor(((position.width || 80) - 10) / 8.5));
-  const maxLines = Math.max(1, Math.min(3, Math.floor(((position.height || 32) - 5) / 10)));
+  const maxChars = Math.max(4, Math.floor(((position.width || 80) - 12) / 8.3));
+  const maxLines = Math.max(1, Math.min(3, Math.floor(((position.height || 34) - 5) / 10)));
   if ([...text].length <= maxChars) return [text];
 
   const chunks = tokenAwareChunks(text, maxChars);

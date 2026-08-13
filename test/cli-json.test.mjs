@@ -29,6 +29,7 @@ test("render-json은 기존 조직도 JSON을 다시 배치해 SVG와 JSON을 �
   const graphPath = path.join(dir, "graph.json");
   const svgPath = path.join(dir, "relayout.svg");
   const jsonPath = path.join(dir, "relayout.json");
+  const hwpxPath = path.join(dir, "relayout.hwpx");
   await writeFile(graphPath, JSON.stringify(graph.toJSON(), null, 2), "utf8");
 
   const { stdout } = await run(process.execPath, [
@@ -48,6 +49,8 @@ test("render-json은 기존 조직도 JSON을 다시 배치해 SVG와 JSON을 �
     svgPath,
     "--json",
     jsonPath,
+    "--hwpx",
+    hwpxPath,
   ]);
   const summary = JSON.parse(stdout);
   const outputJson = JSON.parse(await readFile(jsonPath, "utf8"));
@@ -60,6 +63,7 @@ test("render-json은 기존 조직도 JSON을 다시 배치해 SVG와 JSON을 �
   assert.equal(outputJson.nodes.length, graph.nodes.size);
   assert.ok(outputJson.nodes.some((node) => node.name === "산업정책관"));
   assert.ok((await stat(svgPath)).size > 0);
+  assert.ok((await stat(hwpxPath)).size > 10_000);
   assert.match(svg, /시험부 재배치/);
   assert.match(svg, /stroke-dasharray="5 4"/);
 });

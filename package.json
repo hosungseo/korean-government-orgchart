@@ -3,15 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "대한민국 행정기관 직제 문언을 조직도 PPTX/SVG로 변환하는 도구",
+  "description": "대한민국 행정기관 직제 문언을 조직도 PPTX/SVG/HWPX로 변환하는 도구",
   "bin": {
     "orgchart": "./src/cli.mjs"
   },
   "scripts": {
     "test": "node --test",
-    "demo": "node src/cli.mjs build --input examples/sample-law.txt --out outputs/sample-orgchart.pptx --svg outputs/sample-orgchart.svg --html outputs/sample-orgchart.html --json outputs/sample-orgchart.json --preview-dir outputs/sample-preview"
+    "demo": "node src/cli.mjs build --input examples/sample-law.txt --out outputs/sample-orgchart.pptx --svg outputs/sample-orgchart.svg --hwpx outputs/sample-orgchart.hwpx --html outputs/sample-orgchart.html --json outputs/sample-orgchart.json --preview-dir outputs/sample-preview",
+    "desktop:prepare": "npm run --prefix desktop prepare:native",
+    "desktop:dev": "npm run --prefix desktop dev",
+    "desktop:build": "npm run --prefix desktop build"
   },
   "dependencies": {
-    "pptxgenjs": "^4.0.1"
+    "@ssabrojs/hwpxjs": "^0.4.0",
+    "jszip": "^3.10.1",
+    "pptxgenjs": "^4.0.1",
+    "sharp": "^0.35.3"
   }
 }

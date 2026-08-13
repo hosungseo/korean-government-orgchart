@@ -2,10 +2,11 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { nodeLabelLines, nodeLabelMetrics } from "./label.mjs";
 import { displayDate } from "./utils.mjs";
-import { layoutPage, nodeStyle, resolvePageSize } from "./layout.mjs";
+import { layoutPage, nodeStyle, ORG_CHART_THEME, resolvePageSize } from "./layout.mjs";
 
 const TYPEFACE = "맑은 고딕";
 const PT_PER_IN = 72;
+const CHART_COLORS = ORG_CHART_THEME.colors;
 
 export async function renderPptx(
   graph,
@@ -288,7 +289,7 @@ function addNode(slide, node, position, { showLawCounts, pageSize }) {
     },
     fill: style.fill,
     line: { style: style.lineStyle, fill: style.line, width: 1.15 },
-    borderRadius: position.vertical ? 1 : 4,
+    borderRadius: position.vertical ? 1 : ORG_CHART_THEME.geometry.cardRadius,
   });
   shape.text = labelLines.join("\n");
   shape.text.style = {
@@ -359,7 +360,13 @@ function addVerticalLawCount(slide, lawCount, position, pageSize) {
 function edgePaint(edge) {
   return {
     color:
-      edge.type === "affiliated" || edge.type === "temporary" ? "#3D8B3D" : edge.type === "jurisdiction" ? "#4F7EA8" : edge.type === "advisor" ? "#8B8B8B" : "#6B7280",
+      edge.type === "affiliated" || edge.type === "temporary"
+        ? CHART_COLORS.edgeAffiliate
+        : edge.type === "jurisdiction"
+          ? CHART_COLORS.edgeJurisdiction
+          : edge.type === "advisor"
+            ? CHART_COLORS.edgeStaff
+            : CHART_COLORS.edge,
     style: edge.type === "advisor" || edge.type === "temporary" || edge.type === "jurisdiction" ? "dashed" : "solid",
   };
 }
@@ -368,8 +375,10 @@ function addRoutedEdge(slide, edge) {
   if (!edge.routePoints?.length || edge.routePoints.length < 2) return null;
   const { color, style } = edgePaint(edge);
   for (let index = 0; index < edge.routePoints.length - 1; index += 1) {
-    const start = edge.routePoints[index];
-    const end = edge.routePoints[index + 1];
+    const { start, end } = overlappedRouteSegment(
+      edge.routePoints[index],
+      edge.routePoints[index + 1],
+    );
     if (!start || !end) continue;
     addLine(slide, start.x, start.y, end.x, end.y, color, style, 1.1);
   }
@@ -463,16 +472,16 @@ function addLegend(slide, { showLawCounts, operational, pageSize }) {
     const half = pageSize.width < 400;
     const margin = half ? 17 : 28;
     const fontSize = half ? 6.4 : 8.2;
-    addLine(slide, margin, pageSize.height - 31, margin + 17, pageSize.height - 31, "#6B7280", "solid", 1);
+    addLine(slide, margin, pageSize.height - 31, margin + 17, pageSize.height - 31, CHART_COLORS.edge, "solid", 1);
     addText(slide, "계선", { left: margin + 21, top: pageSize.height - 39, width: 25, height: 14 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-계선");
-    addLine(slide, margin + 59, pageSize.height - 31, margin + 76, pageSize.height - 31, "#8B8B8B", "dashed", 1);
+    addLine(slide, margin + 59, pageSize.height - 31, margin + 76, pageSize.height - 31, CHART_COLORS.edgeStaff, "dashed", 1);
     addText(slide, "보좌", { left: margin + 80, top: pageSize.height - 39, width: 25, height: 14 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-보좌");
     const affiliate = slide.shapes.add({
       geometry: "rect",
       name: "범례-소속기관-색",
       position: { left: margin + 115, top: pageSize.height - 38, width: 12, height: 9 },
-      fill: "#55B947",
-      line: { style: "solid", fill: "#2D7D2D", width: 0.8 },
+      fill: CHART_COLORS.affiliateFill,
+      line: { style: "solid", fill: CHART_COLORS.affiliateLine, width: 0.8 },
     });
     affiliate.text = "";
     addText(slide, "소속기관", { left: margin + 132, top: pageSize.height - 39, width: 42, height: 14 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-소속");
@@ -483,12 +492,12 @@ function addLegend(slide, { showLawCounts, operational, pageSize }) {
   const legendY = pageSize.height - 23;
   const textTop = legendY - 9;
   const fontSize = compact ? 7.2 : 9.5;
-  addLine(slide, 42, legendY, 62, legendY, "#6B7280", "solid", 1);
+  addLine(slide, 42, legendY, 62, legendY, CHART_COLORS.edge, "solid", 1);
   addText(slide, "보조·지휘", { left: 67, top: textTop, width: 58, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-보조");
-  addLine(slide, 135, legendY, 155, legendY, "#8B8B8B", "dashed", 1);
+  addLine(slide, 135, legendY, 155, legendY, CHART_COLORS.edgeStaff, "dashed", 1);
   addText(slide, "보좌", { left: 160, top: textTop, width: 38, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-보좌");
   if (operational) {
-    addLine(slide, 201, legendY, 221, legendY, "#4F7EA8", "dashed", 1);
+    addLine(slide, 201, legendY, 221, legendY, CHART_COLORS.edgeJurisdiction, "dashed", 1);
     addText(slide, "소관 묶음", { left: 226, top: textTop, width: 58, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-소관");
   }
   const affiliateLeft = operational ? 294 : 208;
@@ -496,8 +505,8 @@ function addLegend(slide, { showLawCounts, operational, pageSize }) {
     geometry: "rect",
     name: "범례-소속기관-색",
     position: { left: affiliateLeft, top: legendY - 6, width: 14, height: 10 },
-    fill: "#55B947",
-    line: { style: "solid", fill: "#2D7D2D", width: 0.8 },
+    fill: CHART_COLORS.affiliateFill,
+    line: { style: "solid", fill: CHART_COLORS.affiliateLine, width: 0.8 },
   });
   affiliate.text = "";
   addText(slide, "소속기관", { left: affiliateLeft + 19, top: textTop, width: 60, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" }, "범례-소속");
@@ -852,7 +861,13 @@ function addPptxGroupBox(slide, pptx, group) {
 
 function addPptxEdge(slide, pptx, edge) {
   const color =
-    edge.type === "affiliated" || edge.type === "temporary" ? "#3D8B3D" : edge.type === "jurisdiction" ? "#4F7EA8" : edge.type === "advisor" ? "#8B8B8B" : "#6B7280";
+    edge.type === "affiliated" || edge.type === "temporary"
+      ? CHART_COLORS.edgeAffiliate
+      : edge.type === "jurisdiction"
+        ? CHART_COLORS.edgeJurisdiction
+        : edge.type === "advisor"
+          ? CHART_COLORS.edgeStaff
+          : CHART_COLORS.edge;
   const style = edge.type === "advisor" || edge.type === "temporary" || edge.type === "jurisdiction" ? "dashed" : "solid";
   const from = edge.from;
   const to = edge.to;
@@ -899,8 +914,7 @@ function addPptxEdge(slide, pptx, edge) {
 
 function addPptxRoute(slide, pptx, points, color, style, orientation) {
   for (let index = 0; index < points.length - 1; index += 1) {
-    const start = points[index];
-    const end = points[index + 1];
+    const { start, end } = overlappedRouteSegment(points[index], points[index + 1]);
     if (!start || !end) continue;
     addPptxLine(slide, pptx, start.x, start.y, end.x, end.y, color, style, 1.1);
   }
@@ -910,6 +924,24 @@ function addPptxRoute(slide, pptx, points, color, style, orientation) {
     const direction = before && end && before.x > end.x ? "left" : "right";
     if (end) addPptxArrowHead(slide, pptx, end.x, end.y, direction, color);
   }
+}
+
+function overlappedRouteSegment(start, end, overlap = 0.7) {
+  if (!start || !end) return { start, end };
+  const dx = end.x - start.x;
+  const dy = end.y - start.y;
+  if (Math.abs(dx) >= Math.abs(dy)) {
+    const direction = dx < 0 ? -1 : 1;
+    return {
+      start: { x: start.x - direction * overlap, y: start.y },
+      end: { x: end.x + direction * overlap, y: end.y },
+    };
+  }
+  const direction = dy < 0 ? -1 : 1;
+  return {
+    start: { x: start.x, y: start.y - direction * overlap },
+    end: { x: end.x, y: end.y + direction * overlap },
+  };
 }
 
 function signOrOne(value) {
@@ -932,17 +964,17 @@ function addPptxLegend(slide, pptx, { showLawCounts, operational, pageSize }) {
     const half = pageSize.width < 400;
     const margin = half ? 17 : 28;
     const fontSize = half ? 6.4 : 8.2;
-    addPptxLine(slide, pptx, margin, pageSize.height - 31, margin + 17, pageSize.height - 31, "#6B7280", "solid", 1);
+    addPptxLine(slide, pptx, margin, pageSize.height - 31, margin + 17, pageSize.height - 31, CHART_COLORS.edge, "solid", 1);
     addPptxText(slide, "계선", { left: margin + 21, top: pageSize.height - 39, width: 25, height: 14 }, { fontSize, color: "#4B5563", alignment: "left" });
-    addPptxLine(slide, pptx, margin + 59, pageSize.height - 31, margin + 76, pageSize.height - 31, "#8B8B8B", "dashed", 1);
+    addPptxLine(slide, pptx, margin + 59, pageSize.height - 31, margin + 76, pageSize.height - 31, CHART_COLORS.edgeStaff, "dashed", 1);
     addPptxText(slide, "보좌", { left: margin + 80, top: pageSize.height - 39, width: 25, height: 14 }, { fontSize, color: "#4B5563", alignment: "left" });
     slide.addShape(pptx.ShapeType.rect, {
       x: pt(margin + 115),
       y: pt(pageSize.height - 38),
       w: pt(12),
       h: pt(9),
-      fill: { color: "55B947" },
-      line: { color: "2D7D2D", width: 0.8 },
+      fill: { color: CHART_COLORS.affiliateFill.slice(1) },
+      line: { color: CHART_COLORS.affiliateLine.slice(1), width: 0.8 },
     });
     addPptxText(slide, "소속기관", { left: margin + 132, top: pageSize.height - 39, width: 42, height: 14 }, { fontSize, color: "#4B5563", alignment: "left" });
     addPptxText(slide, half ? "(가/나) · (책) · (한) · (임)" : "(가/나) 직무등급 · (책) 책임운영 · (한) 한시 · (임) 임기제", { left: half ? margin : 198, top: pageSize.height - (half ? 24 : 39), width: half ? pageSize.width - margin * 2 : pageSize.width - 226, height: 14 }, { fontSize, color: "#4B5563", alignment: "left" });
@@ -952,12 +984,12 @@ function addPptxLegend(slide, pptx, { showLawCounts, operational, pageSize }) {
   const legendY = pageSize.height - 23;
   const textTop = legendY - 9;
   const fontSize = compact ? 7.2 : 9.5;
-  addPptxLine(slide, pptx, 42, legendY, 62, legendY, "#6B7280", "solid", 1);
+  addPptxLine(slide, pptx, 42, legendY, 62, legendY, CHART_COLORS.edge, "solid", 1);
   addPptxText(slide, "보조·지휘", { left: 67, top: textTop, width: 58, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" });
-  addPptxLine(slide, pptx, 135, legendY, 155, legendY, "#8B8B8B", "dashed", 1);
+  addPptxLine(slide, pptx, 135, legendY, 155, legendY, CHART_COLORS.edgeStaff, "dashed", 1);
   addPptxText(slide, "보좌", { left: 160, top: textTop, width: 38, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" });
   if (operational) {
-    addPptxLine(slide, pptx, 201, legendY, 221, legendY, "#4F7EA8", "dashed", 1);
+    addPptxLine(slide, pptx, 201, legendY, 221, legendY, CHART_COLORS.edgeJurisdiction, "dashed", 1);
     addPptxText(slide, "소관 묶음", { left: 226, top: textTop, width: 58, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" });
   }
   const affiliateLeft = operational ? 294 : 208;
@@ -966,8 +998,8 @@ function addPptxLegend(slide, pptx, { showLawCounts, operational, pageSize }) {
     y: pt(legendY - 6),
     w: pt(14),
     h: pt(10),
-    fill: { color: "55B947" },
-    line: { color: "2D7D2D", width: 0.8 },
+    fill: { color: CHART_COLORS.affiliateFill.slice(1) },
+    line: { color: CHART_COLORS.affiliateLine.slice(1), width: 0.8 },
   });
   addPptxText(slide, "소속기관", { left: affiliateLeft + 19, top: textTop, width: 60, height: 16 }, { fontSize, color: "#4B5563", alignment: "left" });
   const markerLeft = operational ? 386 : 300;

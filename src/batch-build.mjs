@@ -30,8 +30,12 @@ export async function runBatchBuild(args = {}) {
   const deckItems = [];
   const lawMapCache = new Map();
   let pptxRenderer = null;
+  let hwpxRenderer = null;
   if (outputs.includes("pptx") || outputs.includes("deck")) {
     pptxRenderer = await import("./render-pptx.mjs");
+  }
+  if (outputs.includes("hwpx")) {
+    hwpxRenderer = await import("./render-hwpx.mjs");
   }
 
   for (let index = 0; index < context.caseSpecs.length; index += 1) {
@@ -64,6 +68,14 @@ export async function runBatchBuild(args = {}) {
           `${stem}.html`,
           renderReviewHtml(displayGraph, pages, { showLawCounts, sourceGraph: graph, artifactLinks: plannedLinks }),
         );
+      }
+      if (outputs.includes("hwpx")) {
+        const hwpxPath = path.join(outDir, `${stem}.hwpx`);
+        await hwpxRenderer.renderHwpx(displayGraph, pages, hwpxPath, {
+          showLawCounts,
+          sourceGraph: graph,
+        });
+        written.hwpx = hwpxPath;
       }
       if (outputs.includes("audit")) {
         written.audit = await writeCaseOutput(outDir, `${stem}.audit.md`, formatAuditMarkdown(report));
@@ -198,7 +210,7 @@ export function parseOutputFormats(value) {
     "pptx-deck": "deck",
     pptxdeck: "deck",
   };
-  const perCaseOutputs = ["svg", "html", "json", "audit", "trace", "pptx"];
+  const perCaseOutputs = ["svg", "html", "hwpx", "json", "audit", "trace", "pptx"];
   const allowed = new Set([...perCaseOutputs, "deck"]);
   const result = [];
   for (const raw of String(value || "").split(",")) {
@@ -217,10 +229,11 @@ export function parseOutputFormats(value) {
 
 function plannedArtifactLinks(outputs, stem) {
   const links = {};
-  for (const kind of ["svg", "json", "audit", "trace", "pptx"]) {
+  for (const kind of ["svg", "hwpx", "json", "audit", "trace", "pptx"]) {
     if (!outputs.includes(kind)) continue;
     const ext = {
       svg: ".svg",
+      hwpx: ".hwpx",
       json: ".json",
       audit: ".audit.md",
       trace: ".trace.csv",

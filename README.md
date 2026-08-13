@@ -10,7 +10,7 @@
   <a href="#무엇을-다르게-읽나"><strong>모델 보기</strong></a>
 </p>
 
-> **법령에 적힌 조직 설치 문언을 읽어, 편집 가능한 기구도(PPTX)·검토용 SVG·분석용 JSON으로 만듭니다.**
+> **법령에 적힌 조직 설치 문언을 읽어, 편집 가능한 기구도(PPTX)·회람용 HWPX 보고서·검토용 SVG·분석용 JSON으로 만듭니다.**
 >
 > 조직도는 직함의 목록이 아니라, 행정의 의사결정이 어디서 보좌되고 어떤 계선을 통해 집행되는지를 읽는 지도입니다.
 
@@ -34,7 +34,7 @@
 
 | 입력 | 해석 | 결과 |
 | --- | --- | --- |
-| 직제·시행규칙 원문 또는 법제처 기준일 연혁 | 설치 문형, 기관 유형, 소관관계, 보직·한시 표식 | **PPTX**(편집) · **SVG**(검토·웹) · **HTML**(한글/HWPX 붙여넣기) · **JSON**(재사용) |
+| 직제·시행규칙 원문 또는 법제처 기준일 연혁 | 설치 문형, 기관 유형, 소관관계, 보직·한시 표식 | **HWPX**(HOP·한글 회람) · **PPTX**(편집) · **SVG**(검토·웹) · **HTML**(인쇄) · **JSON**(재사용) |
 
 ```text
 “장관 소속으로 A를 둔다”        → 소속기관
@@ -77,7 +77,8 @@ npm run demo
 ```text
 outputs/sample-orgchart.pptx  # 편집 가능한 PowerPoint
 outputs/sample-orgchart.svg   # 검토·웹 삽입용 SVG
-outputs/sample-orgchart.html  # 한글/HWPX 붙여넣기·인쇄용 검토시트
+outputs/sample-orgchart.hwpx  # HOP·한글에서 여는 조직도 검토보고서
+outputs/sample-orgchart.html  # 브라우저 인쇄용 검토시트
 outputs/sample-orgchart.json  # 노드·관계·법적 메타데이터
 ```
 
@@ -91,6 +92,7 @@ node src/cli.mjs from-law \
   --source-dir work/legal-snapshots/mois \
   --out outputs/행정안전부.pptx \
   --svg outputs/행정안전부.svg \
+  --hwpx outputs/행정안전부-검토보고서.hwpx \
   --html outputs/행정안전부-검토시트.html \
   --json outputs/행정안전부.json
 ```
@@ -109,6 +111,20 @@ node src/cli.mjs from-law \
 ```
 
 기준일 이전에 시행된 연혁 가운데 가장 최근 시행본을 직제와 시행규칙별로 선택합니다. 운영 환경에서는 `--oc` 또는 `LAW_API_OC`에 국가법령정보 공동활용 인증값을 지정하세요.
+
+### HWPX 검토보고서
+
+`--hwpx <파일.hwpx>`를 지정하면 조직도 쪽, 자동점검 요약, 사람 검토 체크리스트, 관계별 근거표, 출처·검토자 확인란을 하나의 HWPX로 만듭니다. 조직도는 SVG 렌더링을 고해상도 PNG로 보존하고, 요약·근거·확인란은 HWPX 문단과 표로 작성하므로 HOP 또는 한글에서 직접 고칠 수 있습니다.
+
+```bash
+node src/cli.mjs render-json \
+  --graph outputs/행정안전부-20251125.json \
+  --paper a4-landscape \
+  --layout best \
+  --hwpx outputs/행정안전부-조직도-검토보고서.hwpx
+```
+
+HOP는 결과를 열어 육안검수·인쇄·PDF 출력하는 도구이고, 생성 자체는 이 프로젝트의 HWPX 직렬화기가 담당합니다. 공개 웹 데모도 출력 형식에서 `HWPX 보고서 (HOP·한글)`를 고르면 같은 방식으로 조직도와 편집 가능한 관계표를 내려받습니다.
 
 `--source-dir`를 쓰면 조회한 법령 평문과 함께 `*.annexes.json`도 저장합니다. 별표 인벤토리에는 별표 번호·제목·시행일·HWP/PDF 링크·간단한 표 행 추출 결과가 들어갑니다. 현재 `지방국세청의 명칭·위치 및 소속세무서`형 별표는 7개 지방청과 소속 세무서 트리로 자동 승격하고, `지방국세청의 관할구역`형 별표는 지방청 노드의 위치·관할 메타데이터로 반영합니다. `세무서의 명칭·위치 및 관할구역`형 별표는 이미 생성된 세무서 노드의 위치·관할구역을 보강하고, `지서의 명칭·위치 및 관할구역`형 별표는 지서를 해당 세무서 하위 소속기관으로 붙입니다. `세무서에 두는 과 단위 기구`형 별표는 같은 `징세과`가 여러 세무서 아래 반복되는 구조를 scoped node로 분리해 세무서별 과 조직으로 붙입니다.
 
@@ -359,13 +375,13 @@ node src/cli.mjs batch-audit \
 출력 표의 핵심 열은 `높은 확인`, `소관 후보`, `배치 문제`, `별표`입니다. `--strict`를 붙이면 오류 또는 수정 필요 케이스가 있을 때 종료코드 2로 끝나므로, 기관 전체 회귀 테스트나 GitHub Actions 품질 게이트로 사용할 수 있습니다.
 `선택유형` 열에는 `--layout best`가 실제로 고른 레이아웃이 표시되고, 상세에는 후보별 점수·문제 수·페이지 수가 남습니다.
 
-감사 후 바로 산출물까지 만들려면 같은 케이스 파일을 `batch-build`에 넘깁니다. 기본 출력은 `svg,json,audit`이고, 한글/HWPX에 붙일 검토시트가 필요하면 `html`, 관계별 근거 추적표까지 필요하면 `trace`, 케이스별 편집 가능한 PPTX까지 필요하면 `--outputs svg,html,json,audit,trace,pptx` 또는 `--outputs all`을 지정합니다. 여러 기관·여러 레이아웃을 한 검토 파일로 넘겨야 할 때는 `--outputs deck` 또는 `--deck review.pptx`를 사용합니다. PPTX는 공개 패키지 `pptxgenjs` 기반 fallback으로 생성되며, Codex Artifact Tool 런타임이 있는 환경에서는 기존 고급 렌더러를 우선 사용합니다.
+감사 후 바로 산출물까지 만들려면 같은 케이스 파일을 `batch-build`에 넘깁니다. 기본 출력은 `svg,json,audit`이고, HOP·한글 회람본이 필요하면 `hwpx`, 브라우저 인쇄용 검토시트는 `html`, 관계별 근거 추적표는 `trace`, 케이스별 편집 가능한 PPTX는 `pptx`를 지정합니다. `--outputs all`은 `svg,html,hwpx,json,audit,trace,pptx`를 모두 만듭니다. 여러 기관·여러 레이아웃을 한 PowerPoint 검토 파일로 넘겨야 할 때는 `--outputs deck` 또는 `--deck review.pptx`를 사용합니다.
 
 ```bash
 node src/cli.mjs batch-build \
   --cases work/core-agencies.cases.json \
   --out-dir outputs/core-agencies \
-  --outputs svg,html,json,audit,trace,deck \
+  --outputs svg,html,hwpx,json,audit,trace,deck \
   --deck outputs/core-agencies/review-deck.pptx \
   --out outputs/core-agencies-manifest.md
 ```
@@ -373,7 +389,7 @@ node src/cli.mjs batch-build \
 생성 매니페스트도 `선택유형`, 페이지 수, 배치 문제 수, 파일명, 통합 PPTX deck 경로를 함께 기록합니다. `--layout best`를 쓴 경우에는 후보 점수뿐 아니라 hard issue·품질 issue·페이지 수 중 무엇 때문에 선택됐는지도 `best-fit 선택 사유`로 남깁니다. 통합 deck은 모든 성공 케이스의 페이지를 순서대로 묶습니다. PowerPoint deck 하나는 슬라이드 크기가 하나라서 `a4-half`와 `a4-landscape`처럼 용지 크기가 섞이면 `review-a4-half.pptx`, `review-a4-landscape.pptx`처럼 자동 분리합니다. 이 흐름은 `make-cases → batch-audit → batch-build`로 이어지므로, 기관 목록만 있으면 검토용 품질표와 실제 조직도 파일을 같은 해석 경로에서 반복 생성할 수 있습니다.
 동일 실행 안에서 같은 법령명·기준일·인증값 조합은 한 번만 조회하도록 캐시하므로, 같은 기관을 여러 레이아웃으로 반복 검사해도 법제처 API 호출이 중복되지 않습니다. `--source-dir`을 지정하면 조회 원문과 함께 `.law-cache/*.json`도 저장하고 다음 실행에서 같은 법령명·기준일을 API 없이 재사용합니다.
 
-검토자가 매번 세 명령을 나누어 실행하지 않게 하려면 `review-pack`을 사용합니다. 기관명 목록이나 기존 `cases.json`을 넣으면 케이스 파일, 감사 리포트, 산출물 매니페스트, 케이스별 SVG/HTML 검토시트/JSON/trace CSV/PPTX, 통합 PPTX deck을 한 폴더에 한 번에 만듭니다.
+검토자가 매번 세 명령을 나누어 실행하지 않게 하려면 `review-pack`을 사용합니다. 기관명 목록이나 기존 `cases.json`을 넣으면 케이스 파일, 감사 리포트, 산출물 매니페스트, 케이스별 HWPX/SVG/HTML/JSON/trace CSV/PPTX, 통합 PPTX deck을 한 폴더에 한 번에 만듭니다.
 
 ```bash
 node src/cli.mjs review-pack \
@@ -435,7 +451,7 @@ src/law-api.mjs       법제처 기준일 연혁 조회
 src/annex.mjs         법제처 별표 인벤토리·선그리기 표 행 추출·확정 명단형 별표의 조직 트리 반영
 src/audit.mjs         파싱·소관·별표·배치 품질 감사 리포트
 src/batch-audit.mjs   여러 기관·기준일·레이아웃을 반복 감사하는 품질 매트릭스
-src/batch-build.mjs   여러 케이스의 SVG·JSON·PPTX·감사리포트 일괄 산출
+src/batch-build.mjs   여러 케이스의 HWPX·SVG·JSON·PPTX·감사리포트 일괄 산출
 src/case-scaffold.mjs 기관명 목록에서 batch-audit/build 케이스 생성
 src/review-pack.mjs   기관 목록·케이스 파일에서 감사표와 산출물 묶음을 한 번에 생성
 src/parser.mjs        직제·시행규칙 문언 파싱
@@ -445,11 +461,15 @@ src/evidence.mjs      입력 자료·관계 근거·소관법령·별표 점검 
 src/layout.mjs        작도 프리셋·한 장형·분할형 페이지 계획
 src/render-pptx.mjs   편집 가능한 PowerPoint 도형 출력
 src/render-svg.mjs    SVG 검토 출력
+src/render-hwpx.mjs   조직도·점검요약·편집 가능한 근거표 HWPX 출력
 src/trace.mjs         관계별 근거 추적 CSV 출력
 src/cli.mjs           build/from-law/fetch/inspect/audit/batch/review-pack 명령
 docs/index.html       GitHub Pages 인터랙티브 데모
+docs/hwpx-browser.mjs 브라우저용 HWPX 패키지 생성기
 ```
 
 ## 라이선스
 
 공개 라이선스는 정리 중입니다. 법령 원문과 정부 기구도 원본의 저작권·이용 조건은 각 제공기관의 안내를 따릅니다.
+
+HWPX 출력에 사용한 오픈소스 및 템플릿 고지는 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)에 정리했습니다.

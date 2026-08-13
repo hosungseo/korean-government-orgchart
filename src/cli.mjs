@@ -460,6 +460,13 @@ async function emitOutputs(graph, args) {
       artifactLinks: cliArtifactLinks(args),
     }));
   }
+  if (args.hwpx) {
+    const { renderHwpx } = await import("./render-hwpx.mjs");
+    await renderHwpx(displayGraph, pages, path.resolve(args.hwpx), {
+      showLawCounts,
+      sourceGraph: graph,
+    });
+  }
   if (args.out) {
     await ensureParent(args.out);
     const { renderPptx } = await import("./render-pptx.mjs");
@@ -469,7 +476,7 @@ async function emitOutputs(graph, args) {
       routedConnectors: routedPptxEnabled(args),
     });
   }
-  if (!args.out && !args.svg && !args.json && !args.html) {
+  if (!args.out && !args.svg && !args.json && !args.html && !args.hwpx) {
     console.log(JSON.stringify(graph.toJSON(), jsonReplacer, 2));
   }
   console.log(JSON.stringify({ ...summarize(graph, pages), view }, null, 2));
@@ -479,6 +486,7 @@ function cliArtifactLinks(args) {
   const links = {};
   if (args.svg) links.svg = path.basename(path.resolve(args.svg));
   if (args.json) links.json = path.basename(path.resolve(args.json));
+  if (args.hwpx) links.hwpx = path.basename(path.resolve(args.hwpx));
   if (args.out) links.pptx = path.basename(path.resolve(args.out));
   return links;
 }
@@ -583,6 +591,7 @@ function printHelp() {
     --date 2025-11-25 \\
     --out outputs/조직도.pptx \\
     --svg outputs/조직도.svg \\
+    --hwpx outputs/조직도-검토보고서.hwpx \\
     --html outputs/조직도.html \\
     --json outputs/조직도.json
 
@@ -626,8 +635,8 @@ function printHelp() {
     --source-dir work/law-sources
 
 명령
-  build      로컬 텍스트를 파싱하여 PPTX/SVG/JSON 생성
-  render-json 기존 조직도 JSON을 다시 배치하여 PPTX/SVG/JSON 생성
+  build      로컬 텍스트를 파싱하여 HWPX/PPTX/SVG/JSON 생성
+  render-json 기존 조직도 JSON을 다시 배치하여 HWPX/PPTX/SVG/JSON 생성
   compare-json 기존·개정 조직도 JSON을 비교해 신설·폐지·명칭변경·이체 표식 생성
   compare-law 개정 전·후 직제 문언 또는 법제처 기준일을 바로 비교해 변경 도표 생성
   from-law   법제처 OPEN API에서 기준일 연혁을 찾아 바로 생성
@@ -635,7 +644,7 @@ function printHelp() {
   inspect    파싱 결과 요약 출력
   audit      파싱·소관·별표·배치 품질 감사 리포트 출력
   batch-audit 여러 기관·기준일·레이아웃을 한 번에 감사하여 품질 매트릭스 출력
-  batch-build 여러 기관·기준일·레이아웃의 SVG/JSON/PPTX/감사리포트·통합 deck 일괄 생성
+  batch-build 여러 기관·기준일·레이아웃의 HWPX/SVG/JSON/PPTX/감사리포트·통합 deck 일괄 생성
   review-pack 기관 목록 또는 cases.json에서 감사 리포트·산출물·통합 deck을 한 번에 생성
   make-cases 기관명 목록에서 batch-audit 케이스 JSON 생성
 
@@ -644,6 +653,7 @@ function printHelp() {
   --layouts vertical,horizontal,two-column,matrix,flow,change-lanes,affiliate-strip,catalog  같은 문언을 여러 유형으로 한 번에 출력
   --expand-layouts <list>|all  batch/review-pack 케이스를 레이아웃별 별도 산출물로 자동 확장
   --paper slide|a4-portrait|a4-landscape|a4-half  출력 용지와 방향
+  --hwpx <file.hwpx>       조직도·자동점검·편집 가능한 근거표를 담은 HWPX 보고서 저장
   --html <file.html>       한글/HWPX 붙여넣기·인쇄용 A4 HTML 검토시트 저장
   --focus <조직명>  해당 조직과 하위조직만 한 장으로 출력
   --view legal|operational  법정 설치형(기본) 또는 확인된 정책관·국 소관 묶음형
@@ -669,7 +679,7 @@ function printHelp() {
   --cases <cases.json>      batch-audit/build/review-pack 케이스 목록
   cases.json graph/jsonFile 저장된 조직도 JSON을 법령 재조회 없이 케이스 입력으로 사용
   --out-dir <dir>           batch-build 산출물 폴더
-  --outputs svg,html,json,audit,trace,pptx,deck|all  batch-build/review-pack 산출 형식(all은 케이스별 svg/html/json/audit/trace/pptx)
+  --outputs svg,html,hwpx,json,audit,trace,pptx,deck|all  batch-build/review-pack 산출 형식(all은 케이스별 svg/html/hwpx/json/audit/trace/pptx)
   --deck <file.pptx>        batch-build 통합 PPTX deck 경로(--outputs deck 없이도 활성화)
   --artifact-dir <dir>      review-pack 내부 산출물 폴더(기본: <out-dir>/artifacts)
   --index-html-out <file>   review-pack HTML 첫 화면 파일명(기본: index.html)

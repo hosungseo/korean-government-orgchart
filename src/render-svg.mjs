@@ -1,6 +1,8 @@
 import { displayDate, xmlEscape } from "./utils.mjs";
 import { nodeLabelLines, nodeLabelMetrics } from "./label.mjs";
-import { layoutPage, nodeStyle, resolvePageSize } from "./layout.mjs";
+import { layoutPage, nodeStyle, ORG_CHART_THEME, resolvePageSize } from "./layout.mjs";
+
+const CHART_COLORS = ORG_CHART_THEME.colors;
 
 export function renderSvg(graph, pages, { showLawCounts = false, paper } = {}) {
   const gap = 24;
@@ -14,12 +16,12 @@ export function renderSvg(graph, pages, { showLawCounts = false, paper } = {}) {
   ));
   return [
     `<?xml version="1.0" encoding="UTF-8"?>`,
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${pageSize.width}" height="${totalHeight}" viewBox="0 0 ${pageSize.width} ${totalHeight}">`,
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${pageSize.width}" height="${totalHeight}" viewBox="0 0 ${pageSize.width} ${totalHeight}" shape-rendering="geometricPrecision">`,
     `<defs>
-      <marker id="org-arrow-gray" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#6B7280"/></marker>
-      <marker id="org-arrow-blue" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#4F7EA8"/></marker>
-      <marker id="org-arrow-green" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#3D8B3D"/></marker>
-      <marker id="org-arrow-staff" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#8B8B8B"/></marker>
+      <marker id="org-arrow-gray" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="${CHART_COLORS.edge}"/></marker>
+      <marker id="org-arrow-blue" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="${CHART_COLORS.edgeJurisdiction}"/></marker>
+      <marker id="org-arrow-green" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="${CHART_COLORS.edgeAffiliate}"/></marker>
+      <marker id="org-arrow-staff" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="${CHART_COLORS.edgeStaff}"/></marker>
     </defs>`,
     `<rect width="100%" height="100%" fill="#E5E7EB"/>`,
     ...groups,
@@ -89,16 +91,22 @@ function renderPage(graph, page, offsetY, { showLawCounts, pageSize }) {
 
 function svgEdge(edge) {
   const color =
-    edge.type === "affiliated" || edge.type === "temporary" ? "#3D8B3D" : edge.type === "jurisdiction" ? "#4F7EA8" : edge.type === "advisor" ? "#8B8B8B" : "#6B7280";
+    edge.type === "affiliated" || edge.type === "temporary"
+      ? CHART_COLORS.edgeAffiliate
+      : edge.type === "jurisdiction"
+        ? CHART_COLORS.edgeJurisdiction
+        : edge.type === "advisor"
+          ? CHART_COLORS.edgeStaff
+          : CHART_COLORS.edge;
   const dash = edge.type === "advisor" || edge.type === "temporary" || edge.type === "jurisdiction" ? ` stroke-dasharray="5 4"` : "";
   const route = edgeRoute(edge);
-  const common = `stroke="${color}" stroke-width="1.15" fill="none" stroke-linecap="round" stroke-linejoin="round"${dash}`;
+  const common = `stroke="${color}" stroke-width="1.15" fill="none" stroke-linecap="square" stroke-linejoin="round" vector-effect="non-scaling-stroke"${dash}`;
   const marker = edge.orientation === "horizontal" ? ` marker-end="url(#${markerIdForEdge(edge)})"` : "";
   return [`<path d="${route}" ${common}${marker}/>`];
 }
 
 function svgImplicitConnector(connector) {
-  return `<line x1="${coordinate(connector.x1)}" y1="${coordinate(connector.y1)}" x2="${coordinate(connector.x2)}" y2="${coordinate(connector.y2)}" stroke="#94A3B8" stroke-width="0.9" stroke-linecap="round"/>`;
+  return `<line x1="${coordinate(connector.x1)}" y1="${coordinate(connector.y1)}" x2="${coordinate(connector.x2)}" y2="${coordinate(connector.y2)}" stroke="${CHART_COLORS.cardSoftLine}" stroke-width="0.9" stroke-linecap="square" vector-effect="non-scaling-stroke"/>`;
 }
 
 /**
@@ -109,7 +117,7 @@ function svgImplicitConnector(connector) {
  */
 export function edgeRoute(edge) {
   if (edge.routePoints?.length >= 2) return routePointsPath(routePointsWithEndpointOverlap(edge));
-  const overlap = 0.65;
+  const overlap = 0.8;
   const f = edge.from;
   const t = edge.to;
   if (edge.orientation === "horizontal") {
@@ -128,7 +136,7 @@ export function edgeRoute(edge) {
   return `M ${coordinate(startX)} ${coordinate(startY)} V ${coordinate(midY)} H ${coordinate(endX)} V ${coordinate(endY)}`;
 }
 
-function routePointsWithEndpointOverlap(edge, overlap = 0.65) {
+function routePointsWithEndpointOverlap(edge, overlap = 0.8) {
   const points = (edge.routePoints || []).map((point) => ({ x: point.x, y: point.y }));
   if (points.length < 2) return points;
   const first = points[0];
@@ -216,7 +224,7 @@ function svgNode(node, position, { showLawCounts, pageSize }) {
     : "";
   return [
     `<g>`,
-    `<rect x="${position.left}" y="${position.top}" width="${position.width}" height="${position.height}" rx="${position.vertical ? 1 : 4}" fill="${style.fill}" stroke="${style.line}" stroke-width="1.2"${dash}/>`,
+    `<rect x="${position.left}" y="${position.top}" width="${position.width}" height="${position.height}" rx="${position.vertical ? 1 : ORG_CHART_THEME.geometry.cardRadius}" fill="${style.fill}" stroke="${style.line}" stroke-width="1.2"${dash}/>`,
     `<text text-anchor="middle" font-family="Malgun Gothic, sans-serif" font-size="${fontSize}" font-weight="${style.bold ? 700 : 400}" fill="${style.text}">${text}</text>`,
     verticalLawCount,
     `</g>`,
@@ -236,9 +244,9 @@ function svgLegend({ showLawCounts, operational, pageSize }) {
     const half = pageSize.width < 400;
     return [
       `<g transform="translate(${half ? 17 : 28} ${pageSize.height - 31})" font-family="Malgun Gothic, sans-serif" font-size="${half ? 6.4 : 8.2}" fill="#4B5563">`,
-      `<line x1="0" y1="-3" x2="17" y2="-3" stroke="#6B7280"/><text x="21" y="0">계선</text>`,
-      `<line x1="48" y1="-3" x2="65" y2="-3" stroke="#8B8B8B" stroke-dasharray="4 3"/><text x="69" y="0">보좌</text>`,
-      `<rect x="104" y="-10" width="12" height="9" fill="#55B947"/><text x="121" y="0">소속기관</text>`,
+      `<line x1="0" y1="-3" x2="17" y2="-3" stroke="${CHART_COLORS.edge}"/><text x="21" y="0">계선</text>`,
+      `<line x1="48" y1="-3" x2="65" y2="-3" stroke="${CHART_COLORS.edgeStaff}" stroke-dasharray="4 3"/><text x="69" y="0">보좌</text>`,
+      `<rect x="104" y="-10" width="12" height="9" fill="${CHART_COLORS.affiliateFill}" stroke="${CHART_COLORS.affiliateLine}" stroke-width="0.7"/><text x="121" y="0">소속기관</text>`,
       `<text x="${half ? 17 : 185}" y="${half ? 15 : 0}">${half ? "(가/나) · (책) · (한) · (임)" : "(가/나) 직무등급 · (책) 책임운영 · (한) 한시 · (임) 임기제"}</text>`,
       `</g>`,
     ].join("");
@@ -247,15 +255,15 @@ function svgLegend({ showLawCounts, operational, pageSize }) {
   const affiliateLabelX = affiliateX + 19;
   const markerX = operational ? 346 : 260;
   const jurisdiction = operational
-    ? `<line x1="159" y1="-3" x2="179" y2="-3" stroke="#4F7EA8" stroke-dasharray="4 3"/><text x="184" y="0">소관 묶음</text>`
+    ? `<line x1="159" y1="-3" x2="179" y2="-3" stroke="${CHART_COLORS.edgeJurisdiction}" stroke-dasharray="4 3"/><text x="184" y="0">소관 묶음</text>`
     : "";
   const legendY = pageSize.height - 24;
   return [
     `<g transform="translate(42 ${legendY})" font-family="Malgun Gothic, sans-serif" font-size="${pageSize.width < 1000 ? 7.2 : 9.5}" fill="#4B5563">`,
-    `<line x1="0" y1="-3" x2="20" y2="-3" stroke="#6B7280"/><text x="25" y="0">보조·지휘</text>`,
-    `<line x1="92" y1="-3" x2="112" y2="-3" stroke="#8B8B8B" stroke-dasharray="4 3"/><text x="117" y="0">보좌</text>`,
+    `<line x1="0" y1="-3" x2="20" y2="-3" stroke="${CHART_COLORS.edge}"/><text x="25" y="0">보조·지휘</text>`,
+    `<line x1="92" y1="-3" x2="112" y2="-3" stroke="${CHART_COLORS.edgeStaff}" stroke-dasharray="4 3"/><text x="117" y="0">보좌</text>`,
     jurisdiction,
-    `<rect x="${affiliateX}" y="-11" width="14" height="10" fill="#55B947"/><text x="${affiliateLabelX}" y="0">소속기관</text>`,
+    `<rect x="${affiliateX}" y="-11" width="14" height="10" fill="${CHART_COLORS.affiliateFill}" stroke="${CHART_COLORS.affiliateLine}" stroke-width="0.7"/><text x="${affiliateLabelX}" y="0">소속기관</text>`,
     `<text x="${markerX}" y="0">${showLawCounts ? "법령수: (법 n)·회색 숫자 · " : ""}(가/나) 직무등급 · (연) 연구직 · (지) 지도직 · (전) 전문직·전문경력관 · (임) 임기제 · (별) 별정직 · (특) 특정직 · (책) 책임운영 · (총) 총액 · (자) 자율 · (평) 평가 · (한) 한시</text>`,
     `</g>`,
   ].join("");

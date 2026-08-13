@@ -211,6 +211,7 @@ function layoutReviewSection(graph, pages, artifactLinks = {}) {
 
 function artifactLinksHtml(artifactLinks = {}) {
   const entries = [
+    ["hwpx", "HWPX 검토보고서"],
     ["json", "JSON 구조"],
     ["audit", "감사 리포트"],
     ["trace", "근거 trace"],

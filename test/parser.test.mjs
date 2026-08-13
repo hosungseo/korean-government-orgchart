@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { diagnoseLayout, displayNodeName, layoutPage, nodeStyle, parseLayoutStyles, planBestPages, planLayoutVariants, planPages, resolvePageSize, routeLayoutEdges, scoreLayoutPages } from "../src/layout.mjs";
+import { automaticReadableNodeLimit, diagnoseLayout, displayNodeName, layoutPage, nodeStyle, parseLayoutStyles, planBestPages, planLayoutVariants, planPages, resolvePageSize, routeLayoutEdges, scoreLayoutPages } from "../src/layout.mjs";
 import { OrgGraph, projectOperationalView, summarizeStructure } from "../src/model.mjs";
 import { parseNameList, parseOrganizationTexts } from "../src/parser.mjs";
 import { edgeRoute, renderSvg } from "../src/render-svg.mjs";
@@ -50,6 +50,45 @@ test("자동 레이아웃은 페이지 계획을 만든다", () => {
   assert.ok(pages.length >= 2);
   assert.equal(pages[0].pageNumber, 1);
   assert.equal(pages.at(-1).pageCount, pages.length);
+});
+
+test("대형 기관 자동 모드는 읽기 한계에서 개요를 나누고 명시적 한 장 모드는 보존한다", () => {
+  const graph = new OrgGraph({ institution: "대형시험부" });
+  const head = graph.addNode("장관", { kind: "head", rank: 1 });
+  const deputy = graph.addNode("차관", { kind: "deputy", rank: 2 });
+  graph.addEdge(graph.rootId, head.id, { type: "structural" });
+  graph.addEdge(head.id, deputy.id, { type: "structural" });
+  const branches = [];
+  for (let index = 1; index <= 28; index += 1) {
+    const branch = graph.addNode(`제${index}정책국`, { kind: "assistant", rank: 3 });
+    graph.addEdge(deputy.id, branch.id, { type: "assistant" });
+    branches.push(branch);
+  }
+
+  const readableLimit = automaticReadableNodeLimit({
+    paper: "a4-landscape",
+    layoutStyle: "horizontal-bus",
+  });
+  const automatic = planPages(graph, {
+    paper: "a4-landscape",
+    layoutStyle: "horizontal-bus",
+  });
+  const overview = automatic.filter((page) => page.kind === "overview");
+  const covered = new Set(overview.flatMap((page) => page.nodeIds));
+
+  assert.equal(readableLimit, 22);
+  assert.equal(overview.length, 2);
+  assert.ok(overview.every((page) => page.nodeIds.length <= readableLimit));
+  assert.ok(overview.every((page) => page.nodeIds.includes(head.id) && page.nodeIds.includes(deputy.id)));
+  assert.ok(branches.every((branch) => covered.has(branch.id)));
+  assert.deepEqual(overview.map((page) => page.subtitle), ["본부 기구 개요 (1)", "본부 기구 개요 (2)"]);
+
+  const explicitCompact = planPages(graph, {
+    paper: "a4-landscape",
+    mode: "compact",
+  });
+  assert.equal(explicitCompact.length, 1);
+  assert.equal(explicitCompact[0].nodeIds.length, 30);
 });
 
 test("A4 세로 형식은 반쪽 면에 맞는 세로 스택 레이아웃을 선택한다", () => {
@@ -216,8 +255,10 @@ test("작도 연결선은 상자 좌표에 붙고 SVG에서는 연속 경로로 
   }
   assert.deepEqual(layout.diagnostics.edgeIssues, []);
   const svg = renderSvg(graph, [page]);
-  assert.equal((svg.match(/stroke-linecap="round"/g) || []).length, layout.edges.length);
-  assert.match(svg, /<path d="M [^"]+" stroke="#(?:6B7280|8B8B8B|3D8B3D|4F7EA8)"/);
+  assert.equal((svg.match(/stroke-linecap="square"/g) || []).length >= layout.edges.length, true);
+  assert.equal((svg.match(/vector-effect="non-scaling-stroke"/g) || []).length >= layout.edges.length, true);
+  assert.match(svg, /<svg[^>]+shape-rendering="geometricPrecision"/);
+  assert.match(svg, /<path d="M [^"]+" stroke="#(?:64748B|7C8797|4F7D52|4F789F)"/);
   assert.equal(
     edgeRoute({
       orientation: "horizontal",
@@ -226,7 +267,7 @@ test("작도 연결선은 상자 좌표에 붙고 SVG에서는 연속 경로로 
         { x: 150, y: 50 },
       ],
     }),
-    "M 99.35 50 H 100 H 150 H 150.65",
+    "M 99.2 50 H 100 H 150 H 150.8",
   );
   assert.equal(
     edgeRoute({
@@ -238,7 +279,7 @@ test("작도 연결선은 상자 좌표에 붙고 SVG에서는 연속 경로로 
         { x: 50, y: 80 },
       ],
     }),
-    "M 50 39.35 V 40 H 120 V 80 H 50 V 80.65",
+    "M 50 39.2 V 40 H 120 V 80 H 50 V 80.8",
   );
 });
 
@@ -296,6 +337,21 @@ test("배치 진단은 너무 짧거나 역방향인 연결선을 잡는다", ()
   assert.equal(detached.ok, false);
   assert.equal(detached.edgeIssues[0].reason, "detached-route-endpoint");
   assert.equal(detached.edgeIssues[0].endpoint, "start");
+});
+
+test("배치 진단은 가로 카드에서 실제로 잘리는 긴 조직명을 잡는다", () => {
+  const diagnostics = diagnoseLayout({
+    frame: { left: 0, top: 0, width: 200, height: 120 },
+    nodes: [{
+      node: { id: "long", name: "디지털정부혁신협력담당관", kind: "advisor", metadata: {} },
+      position: { left: 10, top: 10, width: 52, height: 34, vertical: false },
+    }],
+    edges: [],
+  });
+
+  assert.equal(diagnostics.ok, true);
+  assert.equal(diagnostics.qualityOk, false);
+  assert.ok(diagnostics.readabilityIssues.some((issue) => issue.reason === "horizontal-label-truncation"));
 });
 
 test("배치 진단은 상자 간격과 부모 중심축 품질 문제를 별도로 잡는다", () => {

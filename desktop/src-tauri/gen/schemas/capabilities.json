@@ -1,0 +1,1 @@
+{"main-capability":{"identifier":"main-capability","description":"Main window permissions for the native editable HWPX prototype","local":true,"windows":["main"],"permissions":["core:default"]}}

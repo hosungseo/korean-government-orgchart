@@ -20,6 +20,45 @@ export const PAGE_FORMATS = {
   "a4-half": A4_HALF,
 };
 
+/**
+ * Shared visual tokens for every export surface.  The palette deliberately
+ * stays quiet enough for government review documents: hierarchy is carried by
+ * value, border weight, and typography before colour saturation.
+ */
+export const ORG_CHART_THEME = Object.freeze({
+  colors: Object.freeze({
+    ink: "#17263A",
+    muted: "#64748B",
+    headFill: "#DCE7F4",
+    headLine: "#244C7A",
+    headText: "#102A43",
+    headquartersFill: "#EAF1F8",
+    headquartersLine: "#3B648D",
+    headquartersText: "#173A5E",
+    affiliateFill: "#E1EFDF",
+    affiliateLine: "#4B7A4E",
+    affiliateText: "#234528",
+    cardFill: "#FFFFFF",
+    cardSoftFill: "#F8FAFC",
+    cardLine: "#66758A",
+    cardSoftLine: "#8793A3",
+    advisorFill: "#F5F7FA",
+    advisorLine: "#8390A1",
+    edge: "#64748B",
+    edgeStaff: "#7C8797",
+    edgeAffiliate: "#4F7D52",
+    edgeJurisdiction: "#4F789F",
+  }),
+  geometry: Object.freeze({
+    cardHeight: 34,
+    cardMaxWidth: 172,
+    cardBaseWidth: 92,
+    cardCharacterWidth: 4.7,
+    horizontalSiblingGutter: 20,
+    cardRadius: 4,
+  }),
+});
+
 export const LAYOUT_PRESETS = Object.freeze({
   "horizontal-bus": {
     label: "가로 버스형",
@@ -76,12 +115,11 @@ export function normalizePaper(value) {
 export function inferLayoutStyle(graph, { paper = "slide", mode } = {}) {
   if (VISUAL_LAYOUTS.has(mode)) return normalizeLayoutStyle(mode);
   const format = normalizePaper(paper);
-  if (format === "a4-portrait" || format === "a4-half") return "vertical-stack";
-  if (format === "a4-landscape") return "horizontal-bus";
-
   const ordinary = [...graph.nodes.values()].filter(
     (node) => node.kind !== "institution" && node.kind !== "affiliated",
   );
+  if (format === "a4-portrait" || format === "a4-half") return "vertical-stack";
+  if (format === "a4-landscape") return ordinary.length > 24 ? "two-column" : "horizontal-bus";
   const affiliated = graph.childrenOf(graph.rootId).filter(
     ({ edge, node }) => edge.type === "affiliated" || node.kind === "affiliated",
   );
@@ -321,6 +359,61 @@ function layoutFitAwareMaxNodes({ paper, layoutStyle, maxNodes }) {
   return maxNodes;
 }
 
+/**
+ * A node-count ceiling is a coarse but reliable first guard against charts
+ * that are technically inside the page while already too small to review.
+ * It applies only to automatic planning; explicit compact/focus requests keep
+ * their caller-controlled behaviour (subject to the hard geometry clamps
+ * above for narrow paper and catalog/matrix layouts).
+ */
+export function automaticReadableNodeLimit({ paper = "slide", layoutStyle = "horizontal-bus" } = {}) {
+  const format = normalizePaper(paper);
+  const style = normalizeLayoutStyle(layoutStyle);
+  const limits = {
+    slide: {
+      "horizontal-bus": 26,
+      "vertical-stack": 24,
+      "two-column": 28,
+      matrix: 30,
+      flow: 24,
+      "change-lanes": 28,
+      "affiliate-strip": 26,
+      catalog: 30,
+    },
+    "a4-landscape": {
+      "horizontal-bus": 22,
+      "vertical-stack": 20,
+      "two-column": 24,
+      matrix: 26,
+      flow: 20,
+      "change-lanes": 24,
+      "affiliate-strip": 22,
+      catalog: 26,
+    },
+    "a4-portrait": {
+      "horizontal-bus": 18,
+      "vertical-stack": 18,
+      "two-column": 20,
+      matrix: 20,
+      flow: 18,
+      "change-lanes": 20,
+      "affiliate-strip": 18,
+      catalog: 22,
+    },
+    "a4-half": {
+      "horizontal-bus": 10,
+      "vertical-stack": a4HalfVerticalStackMaxNodes(),
+      "two-column": twoColumnListMaxNodes("a4-half"),
+      matrix: matrixLeafPageCapacity("a4-half"),
+      flow: 10,
+      "change-lanes": 12,
+      "affiliate-strip": 10,
+      catalog: catalogMaxNodes("a4-half"),
+    },
+  };
+  return limits[format]?.[style] || limits[format]?.["horizontal-bus"] || 22;
+}
+
 function a4HalfVerticalStackMaxNodes() {
   const pageSize = resolvePageSize("a4-half");
   const pageMargin = 17;
@@ -437,6 +530,13 @@ export function planPages(
     maxNodes: effectiveMaxNodes,
   });
   const planningMode = requestedVisual ? "auto" : mode;
+  const readableMaxNodes =
+    planningMode === "auto"
+      ? Math.min(
+          layoutMaxNodes,
+          automaticReadableNodeLimit({ paper: format, layoutStyle: visual }),
+        )
+      : layoutMaxNodes;
   const head = graph.findHead() || graph.nodes.get(graph.rootId);
   const deputy = graph.findDeputy();
   const affiliates = graph
@@ -446,7 +546,7 @@ export function planPages(
   const ordinaryCount = [...graph.nodes.values()].filter(
     (node) => node.kind !== "institution" && node.kind !== "affiliated",
   ).length;
-  const compactLimit = Math.min(layoutMaxNodes, 32);
+  const compactLimit = Math.min(readableMaxNodes, 32);
   const selectedMode =
     planningMode === "auto"
       ? ordinaryCount <= compactLimit
@@ -527,20 +627,7 @@ export function planPages(
       layoutStyle: visual,
     });
   } else {
-    const overviewNodes = new Set([
-      head.id,
-      ...graph.descendantsOf(head.id, { depth: 2 }).map((node) => node.id),
-    ]);
-    pages.push({
-      kind: "overview",
-      title: graph.meta.title,
-      subtitle: "본부 기구 개요",
-      rootIds: [head.id],
-      nodeIds: [...overviewNodes],
-      breadcrumb: [],
-      paper: format,
-      layoutStyle: visual,
-    });
+    pages.push(...overviewPageSpecs(graph, head, readableMaxNodes, format, visual));
 
     const branchParent = deputy || head;
     const branchCandidates = graph
@@ -563,9 +650,9 @@ export function planPages(
       .map(({ node }) => node);
     const branchMap = new Map([...branchCandidates, ...headBranches].map((node) => [node.id, node]));
     for (const branch of branchMap.values()) {
-      mainDetails.push(...splitBranchPages(graph, branch, layoutMaxNodes, [graph.meta.institution], format, visual));
+      mainDetails.push(...splitBranchPages(graph, branch, readableMaxNodes, [graph.meta.institution], format, visual));
     }
-    pages.push(...packDetailPages(mainDetails, layoutMaxNodes, "본부 하부조직", format, visual));
+    pages.push(...packDetailPages(mainDetails, readableMaxNodes, "본부 하부조직", format, visual));
   }
 
   if (visual === "affiliate-strip") {
@@ -602,20 +689,78 @@ export function planPages(
           descendantCount: descendants.length,
           paper: format,
         });
-        const affiliateMaxNodes = layoutFitAwareMaxNodes({
+        const layoutAwareAffiliateMaxNodes = layoutFitAwareMaxNodes({
           paper: format,
           layoutStyle: layoutStyleForAffiliate,
           maxNodes: effectiveMaxNodes,
         });
+        const affiliateMaxNodes =
+          planningMode === "auto"
+            ? Math.min(
+                layoutAwareAffiliateMaxNodes,
+                automaticReadableNodeLimit({ paper: format, layoutStyle: layoutStyleForAffiliate }),
+              )
+            : layoutAwareAffiliateMaxNodes;
         affiliateDetails.push(
           ...splitBranchPages(graph, affiliate, affiliateMaxNodes, ["소속기관"], format, layoutStyleForAffiliate),
         );
       }
     }
-    pages.push(...packDetailPages(affiliateDetails, layoutMaxNodes, "소속기관", format, visual));
+    pages.push(...packDetailPages(affiliateDetails, readableMaxNodes, "소속기관", format, visual));
   }
 
   return pages.map((page, index) => ({ ...page, pageNumber: index + 1, pageCount: pages.length }));
+}
+
+function overviewPageSpecs(graph, head, maxNodes, paper, layoutStyle) {
+  const depthOne = graph
+    .childrenOf(head.id)
+    .map(({ node }) => node)
+    .filter((node) => node.kind !== "affiliated");
+  const frontier = [];
+  for (const parent of depthOne) {
+    const children = graph
+      .childrenOf(parent.id)
+      .map(({ node }) => node)
+      .filter((node) => node.kind !== "affiliated");
+    if (!children.length) {
+      frontier.push([parent]);
+      continue;
+    }
+    for (const child of children) frontier.push([parent, child]);
+  }
+
+  const complete = new Set([head.id, ...frontier.flat().map((node) => node.id)]);
+  const pageLimit = Math.max(3, maxNodes);
+  const chunks = [];
+  if (complete.size <= pageLimit || !frontier.length) {
+    chunks.push(complete);
+  } else {
+    let current = new Set([head.id]);
+    for (const path of frontier) {
+      const candidate = new Set([...current, ...path.map((node) => node.id)]);
+      if (candidate.size > pageLimit && current.size > 1) {
+        chunks.push(current);
+        current = new Set([head.id, ...path.map((node) => node.id)]);
+      } else {
+        current = candidate;
+      }
+    }
+    if (current.size > 1) chunks.push(current);
+  }
+
+  return chunks.map((nodeIds, index) => ({
+    kind: "overview",
+    title: graph.meta.title,
+    subtitle: chunks.length > 1 ? `본부 기구 개요 (${index + 1})` : "본부 기구 개요",
+    rootIds: [head.id],
+    nodeIds: [...nodeIds],
+    breadcrumb: [],
+    paper,
+    layoutStyle,
+    overviewPart: index + 1,
+    overviewPartCount: chunks.length,
+  }));
 }
 
 function packDetailPages(specs, maxNodes, label, paper, layoutStyle) {
@@ -875,7 +1020,7 @@ export function layoutPage(graph, page, options = {}) {
     ? layoutStyle === "vertical-stack" && portrait
       ? 112
       : 132
-    : 34;
+    : ORG_CHART_THEME.geometry.cardHeight;
   // The old layout expanded a shallow tree until it filled the entire page.
   // That left a visually awkward amount of white space between a minister
   // and the first row of bureaux (and made the connectors look fragmented).
@@ -889,7 +1034,9 @@ export function layoutPage(graph, page, options = {}) {
   const levelGap = maxDepth ? Math.min(preferredLevelGap, usableHeight / maxDepth) : 0;
   const contentHeight = maxDepth * levelGap + leafHeight;
   const topInset = Math.min(narrowHalf ? 28 : 24, Math.max(0, (frame.height - contentHeight) * 0.18));
-  const siblingGutter = verticalLeaves ? (narrowHalf ? 6 : 12) : 18;
+  const siblingGutter = verticalLeaves
+    ? (narrowHalf ? 6 : 12)
+    : ORG_CHART_THEME.geometry.horizontalSiblingGutter;
   const positions = new Map();
 
   let cursor = frame.left;
@@ -921,13 +1068,17 @@ export function layoutPage(graph, page, options = {}) {
     } else {
       const availableWidth = Math.max(18, spanWidth - siblingGutter);
       width = Math.min(
-        168,
+        ORG_CHART_THEME.geometry.cardMaxWidth,
         Math.max(
           Math.min(28, availableWidth),
-          Math.min(availableWidth, 88 + node.name.length * 4.6),
+          Math.min(
+            availableWidth,
+            ORG_CHART_THEME.geometry.cardBaseWidth +
+              node.name.length * ORG_CHART_THEME.geometry.cardCharacterWidth,
+          ),
         ),
       );
-      height = 32;
+      height = ORG_CHART_THEME.geometry.cardHeight;
     }
     const centerX = spanLeft + spanWidth / 2;
     const top = frame.top + topInset + level * levelGap;
@@ -1135,15 +1286,24 @@ export function diagnoseLayout(
       ...issue,
     });
   }
-  const spacingIssues = diagnoseSiblingSpacing(layout.edges || [], {
-    nodeNames,
-    minimumSiblingGap,
-    maximumSiblingGapRatio,
-  });
-  const alignmentIssues = diagnoseParentAlignment(layout.edges || [], {
-    nodeNames,
-    maximumAlignmentOffset,
-  });
+  // Two-column layouts intentionally balance complete subtrees between two
+  // lanes.  A parent therefore need not sit over the midpoint of all children,
+  // and the inter-lane gap is intentionally larger than an intra-lane gap.
+  // The generic bus-layout heuristics would report both as false positives.
+  const laneBalanced = layout.edgeMode === "two-column-lanes";
+  const spacingIssues = laneBalanced
+    ? []
+    : diagnoseSiblingSpacing(layout.edges || [], {
+        nodeNames,
+        minimumSiblingGap,
+        maximumSiblingGapRatio,
+      });
+  const alignmentIssues = laneBalanced
+    ? []
+    : diagnoseParentAlignment(layout.edges || [], {
+        nodeNames,
+        maximumAlignmentOffset,
+      });
   const crossingIssues = diagnoseEdgeCrossings(layout.edges || [], {
     nodeNames,
     tolerance,
@@ -1644,21 +1804,45 @@ function diagnoseGroupBoxOverlaps(groupBoxes, { tolerance }) {
 }
 
 function diagnoseReadability(nodes, { minimumVerticalLabelWidth }) {
+  const issues = [];
   const narrow = (nodes || [])
     .map((entry) => ({
       name: entry.node?.name || entry.node?.id || "(이름 없음)",
       position: normalizePosition(entry.position),
     }))
     .filter((entry) => entry.position?.vertical && entry.position.width < minimumVerticalLabelWidth);
-  if (!narrow.length) return [];
-  const minWidth = Math.min(...narrow.map((entry) => entry.position.width));
-  return [{
-    reason: "narrow-vertical-labels",
-    count: narrow.length,
-    minWidth: Number(minWidth.toFixed(2)),
-    threshold: minimumVerticalLabelWidth,
-    nodes: narrow.slice(0, 10).map((entry) => entry.name),
-  }];
+  if (narrow.length) {
+    const minWidth = Math.min(...narrow.map((entry) => entry.position.width));
+    issues.push({
+      reason: "narrow-vertical-labels",
+      count: narrow.length,
+      minWidth: Number(minWidth.toFixed(2)),
+      threshold: minimumVerticalLabelWidth,
+      nodes: narrow.slice(0, 10).map((entry) => entry.name),
+    });
+  }
+
+  const truncated = (nodes || [])
+    .map((entry) => {
+      const position = normalizePosition(entry.position);
+      if (!position || position.vertical || !entry.node) return null;
+      const label = displayNodeName(entry.node, false);
+      const maxChars = Math.max(4, Math.floor((position.width - 12) / 8.3));
+      const maxLines = Math.max(1, Math.min(3, Math.floor((position.height - 5) / 10)));
+      const characters = [...label].length;
+      return characters > maxChars * maxLines
+        ? { name: entry.node.name, characters, capacity: maxChars * maxLines }
+        : null;
+    })
+    .filter(Boolean);
+  if (truncated.length) {
+    issues.push({
+      reason: "horizontal-label-truncation",
+      count: truncated.length,
+      nodes: truncated.slice(0, 10),
+    });
+  }
+  return issues;
 }
 
 function edgeSegments(edge) {
@@ -2305,19 +2489,54 @@ function layoutTwoColumnPage({ graph, pageSize, frame, parentEdge, children, roo
       spanWidth,
     });
   };
+  const headerDimensions = (node, width) => {
+    const charactersPerLine = Math.max(4, Math.floor((width - 12) / 8.3));
+    const lineCount = Math.ceil([...displayNodeName(node, false)].length / charactersPerLine);
+    return {
+      width,
+      height: lineCount > 2 ? 44 : ORG_CHART_THEME.geometry.cardHeight,
+    };
+  };
 
   const headerIds = roots.filter((id) => selected.has(id));
   const primary = headerIds[0];
   if (primary && headerIds.length === 1) {
     const root = graph.nodes.get(primary);
-    if (root) put(primary, frame.left + frame.width / 2, frame.top, Math.min(180, Math.max(100, root.name.length * 5.4 + 54)), 34, false, 0, frame.left, frame.width);
+    if (root) {
+      const dimensions = headerDimensions(
+        root,
+        Math.min(180, Math.max(100, root.name.length * 5.4 + 54)),
+      );
+      put(
+        primary,
+        frame.left + frame.width / 2,
+        frame.top,
+        dimensions.width,
+        dimensions.height,
+        false,
+        0,
+        frame.left,
+        frame.width,
+      );
+    }
   } else {
     const headerWidth = Math.min(170, Math.max(72, frame.width / Math.max(1, headerIds.length) * 0.72));
     headerIds.forEach((id, index) => {
       const root = graph.nodes.get(id);
       if (!root) return;
       const centerX = frame.left + frame.width * ((index + 0.5) / headerIds.length);
-      put(id, centerX, frame.top, headerWidth, 34, false, 0, centerX - headerWidth / 2, headerWidth);
+      const dimensions = headerDimensions(root, headerWidth);
+      put(
+        id,
+        centerX,
+        frame.top,
+        dimensions.width,
+        dimensions.height,
+        false,
+        0,
+        centerX - dimensions.width / 2,
+        dimensions.width,
+      );
     });
   }
 
@@ -2350,7 +2569,14 @@ function layoutTwoColumnPage({ graph, pageSize, frame, parentEdge, children, roo
     const width = vertical
       ? Math.min(34, Math.max(27, spanWidth * 0.46))
       : Math.min(172, Math.max(56, Math.min(spanWidth * 0.82, 96 + node.name.length * 4.2)));
-    const height = vertical ? 76 : 31;
+    const displayLength = [...displayNodeName(node, false)].length;
+    const horizontalCharactersPerLine = Math.max(4, Math.floor((width - 12) / 8.3));
+    const horizontalLineCount = Math.ceil(displayLength / horizontalCharactersPerLine);
+    const height = vertical
+      ? Math.min(104, Math.max(54, levelGap - 8))
+      : horizontalLineCount > 2
+        ? 44
+        : ORG_CHART_THEME.geometry.cardHeight;
     const centerX = spanLeft + spanWidth / 2;
     put(id, centerX, frame.top + level * levelGap, width, height, vertical, level, spanLeft, spanWidth);
     const total = Math.max(1, childIds.reduce((sum, childId) => sum + Math.max(1, leafWeight(childId)), 0));
@@ -2386,7 +2612,15 @@ function layoutTwoColumnPage({ graph, pageSize, frame, parentEdge, children, roo
     .map((edge) => ({ ...edge, from: positions.get(edge.parent), to: positions.get(edge.child) }))
     .filter((edge) => edge.from && edge.to);
   const nodes = [...positions.entries()].map(([id, position]) => ({ node: graph.nodes.get(id), position }));
-  return { frame, nodes, edges, roots, maxDepth: Math.max(0, ...depth.values()), verticalLeaves: false };
+  return {
+    frame,
+    nodes,
+    edges,
+    roots,
+    maxDepth: Math.max(0, ...depth.values()),
+    verticalLeaves: false,
+    edgeMode: "two-column-lanes",
+  };
 }
 
 function layoutNarrowTwoColumnPage({ graph, frame, children, roots, selected, depth }) {
@@ -2559,6 +2793,7 @@ function buildNarrowLaneConnectors({ frame, laneLefts, laneEntries, positions, h
 
 export function nodeStyle(node) {
   const metadata = node.metadata || {};
+  const colors = ORG_CHART_THEME.colors;
   const changeStyles = {
     신설: { fill: "#FFF4A3", line: "#B8860B", text: "#5B4600", lineStyle: "solid", bold: true },
     폐지: { fill: "#FDE2E2", line: "#B4362A", text: "#7F1D1D", lineStyle: "dashed", bold: false },
@@ -2568,35 +2803,63 @@ export function nodeStyle(node) {
   };
   if (metadata.change && changeStyles[metadata.change]) return changeStyles[metadata.change];
   if (node.kind === "head" || node.kind === "deputy") {
-    return { fill: "#AEC6F0", line: "#00004E", text: "#111827", lineStyle: "solid", bold: true };
+    return {
+      fill: colors.headFill,
+      line: colors.headLine,
+      text: colors.headText,
+      lineStyle: "solid",
+      bold: true,
+    };
   }
   if (node.kind === "affiliated") {
     const affiliationStyles = {
-      responsible: { fill: "#55B947", line: "#2D7D2D", text: "#FFFFFF" },
-      "special-local": { fill: "#E7F4D7", line: "#4F8A3D", text: "#23451D" },
-      subsidiary: { fill: "#ECF8E8", line: "#398041", text: "#1F5A27" },
-      affiliated: { fill: "#DFF3D8", line: "#398041", text: "#245C2A" },
+      responsible: { fill: "#D9EAD7", line: "#416F45", text: "#1D3E23" },
+      "special-local": { fill: "#E8F2E5", line: "#5B805B", text: "#29472C" },
+      subsidiary: { fill: "#EDF5EB", line: "#5A835C", text: "#284B2D" },
+      affiliated: {
+        fill: colors.affiliateFill,
+        line: colors.affiliateLine,
+        text: colors.affiliateText,
+      },
     };
     const affiliation = affiliationStyles[metadata.affiliationType] || affiliationStyles.affiliated;
     return { ...affiliation, lineStyle: "solid", bold: true };
   }
   if (metadata.unitRole === "headquarters") {
-    return { fill: "#E7F0FF", line: "#315A8A", text: "#17345D", lineStyle: "solid", bold: true };
+    return {
+      fill: colors.headquartersFill,
+      line: colors.headquartersLine,
+      text: colors.headquartersText,
+      lineStyle: "solid",
+      bold: true,
+    };
   }
   if (metadata.unitRole === "affiliated-institution") {
-    return { fill: "#55B947", line: "#2D7D2D", text: "#FFFFFF", lineStyle: "solid", bold: true };
+    return {
+      fill: "#D9EAD7",
+      line: "#416F45",
+      text: "#1D3E23",
+      lineStyle: "solid",
+      bold: true,
+    };
   }
   if (node.kind === "temporary" || metadata.temporary || metadata.autonomous) {
-    return { fill: "#DDF4D7", line: "#2F8F2F", text: "#154D15", lineStyle: "dashed", bold: false };
+    return { fill: "#EDF5E9", line: "#5C875D", text: "#29492C", lineStyle: "dashed", bold: false };
   }
   if (node.kind === "advisor") {
-    return { fill: "#F5F5F5", line: "#8B8B8B", text: "#1F2937", lineStyle: "dashed", bold: false };
+    return {
+      fill: colors.advisorFill,
+      line: colors.advisorLine,
+      text: colors.ink,
+      lineStyle: "dashed",
+      bold: false,
+    };
   }
   const rank = node.rank ?? inferRank(node.name, node.kind);
   return {
-    fill: rank <= 3 ? "#FFFFFF" : "#FAFAFA",
-    line: "#7A7A7A",
-    text: "#111827",
+    fill: rank <= 3 ? colors.cardFill : colors.cardSoftFill,
+    line: rank <= 3 ? colors.cardLine : colors.cardSoftLine,
+    text: colors.ink,
     lineStyle: "solid",
     bold: rank <= 3,
   };

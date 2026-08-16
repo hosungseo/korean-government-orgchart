@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { analyzeNativeManifest } from "../desktop/ui/manifest-validation.js";
-import { buildNativeLawWorkflow } from "../src/native-law-workflow.mjs";
+import { buildNativeComparisonWorkflow, buildNativeLawWorkflow } from "../src/native-law-workflow.mjs";
 
 const decree = `
 시험행정부와 그 소속기관 직제
@@ -126,6 +126,83 @@ test("좌우 2단 대비표는 조직 상자를 좌측 열에 제한하고 우�
   assert.equal(divider.geometry.x1, 104);
   assert.equal(divider.geometry.x2, 104);
   assert.equal(header.text, "개편 전·후 대비");
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+const afterDecree = `
+시험행정부와 그 소속기관 직제
+제2조(소속기관) 시험행정부장관 소속으로 국가시험연구원을 둔다.
+제4조(하부조직) 시험행정부에 인공지능정부실 및 참여혁신조직실을 둔다.
+제5조(인공지능정부실) 인공지능정부실에 인공지능정책국 및 공공데이터국을 둔다.
+제6조(참여혁신조직실) 참여혁신조직실에 참여혁신국 및 조직국을 둔다.
+`;
+
+const afterRule = `
+시험행정부와 그 소속기관 직제 시행규칙
+제3조(인공지능정부실) 인공지능정책국에 인공지능정책과ㆍ공공서비스혁신과를 두고, 공공데이터국에 데이터정책과ㆍ데이터분석과를 둔다.
+제4조(참여혁신조직실) 참여혁신국에 혁신기획과ㆍ국민참여정책과를 두고, 조직국에 조직기획과ㆍ조직진단과를 둔다.
+`;
+
+test("두 시점 조직도를 좌우에 각각 그린다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    before: { decreeText: decree, ruleText: rule, asOf: "2024-12-31" },
+    after: { decreeText: afterDecree, ruleText: afterRule, asOf: "2026-07-21" },
+  });
+  const manifest = workflow.manifests[0];
+  const beforeBoxes = manifest.objects.filter((object) => object.metadata?.role === "organization-node" && object.metadata?.side === "before");
+  const afterBoxes = manifest.objects.filter((object) => object.metadata?.role === "organization-node" && object.metadata?.side === "after");
+  const divider = manifest.objects.find((object) => object.id === "comparison-divider");
+
+  assert.equal(workflow.summary.layout, "comparison-two-column");
+  assert.equal(workflow.summary.comparison, "dual-outline");
+  assert.ok(beforeBoxes.some((object) => object.text === "디지털정부실"));
+  assert.ok(afterBoxes.some((object) => object.text === "인공지능정부실"));
+  assert.ok(beforeBoxes.every((object) => object.geometry.x + object.geometry.width <= 99.001));
+  assert.ok(afterBoxes.every((object) => object.geometry.x >= 109));
+  assert.equal(divider.geometry.x1, 104);
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("저장된 스냅샷 두 개로도 좌우 조직도를 복원한다", () => {
+  const before = buildNativeLawWorkflow({ decreeText: decree, ruleText: rule, asOf: "2024-12-31" });
+  const after = buildNativeLawWorkflow({ decreeText: afterDecree, ruleText: afterRule, asOf: "2026-07-21" });
+  const workflow = buildNativeComparisonWorkflow({
+    beforeSnapshot: before.snapshot,
+    afterSnapshot: after.snapshot,
+    focus: "디지털정부실, 인공지능정부실",
+  });
+  const manifest = workflow.manifests[0];
+  const texts = manifest.objects
+    .filter((object) => object.metadata?.role === "organization-node")
+    .map((object) => object.text);
+
+  assert.ok(texts.includes("디지털정부실"));
+  assert.ok(texts.includes("인공지능정부실"));
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("좌우 조직도 아래 호 분할은 갈라진 과를 모두 표시한다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    before: {
+      decreeText: `시험부와 그 소속기관 직제\n제2조(하부조직) 시험부에 디지털정부실을 둔다.\n디지털정부실에 디지털정책과를 둔다.`,
+      ruleText: `시험부와 그 소속기관 직제 시행규칙\n제3조(디지털정부실)\n① 디지털정책과장은 직제 제10조제3항제1호부터 제10호까지의 사항을 분장한다.`,
+      asOf: "2024-12-31",
+    },
+    after: {
+      decreeText: `시험부와 그 소속기관 직제\n제2조(하부조직) 시험부에 인공지능정부실을 둔다.\n인공지능정부실에 인공지능정책과ㆍ데이터정책과를 둔다.`,
+      ruleText: `시험부와 그 소속기관 직제 시행규칙\n제3조(인공지능정부실)\n① 인공지능정책과장은 직제 제10조제3항제1호부터 제4호까지의 사항을 분장한다.\n② 데이터정책과장은 직제 제10조제3항제5호부터 제10호까지의 사항을 분장한다.`,
+      asOf: "2026-07-21",
+    },
+  });
+  const manifest = workflow.manifests[0];
+  const line = manifest.objects.find((object) => object.metadata?.role === "allocation-line");
+  const badge = manifest.objects.find((object) => object.metadata?.role === "allocation-badge");
+  assert.equal(workflow.summary.dutyAllocation.notable.length, 1);
+  assert.match(line.text, /40% → 인공지능정책과/);
+  assert.match(line.text, /60% → 데이터정책과/);
+  assert.match(badge.text, /40%→인공지능정책과/);
+  assert.match(badge.text, /60%→데이터정책과/);
+  assert.ok(badge.geometry.x >= 70);
   assert.equal(analyzeNativeManifest(manifest).valid, true);
 });
 

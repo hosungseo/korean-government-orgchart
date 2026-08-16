@@ -1,5 +1,11 @@
 import { parseOrganizationTexts } from "./parser.mjs";
-import { projectOperationalView } from "./model.mjs";
+import { OrgGraph, projectOperationalView } from "./model.mjs";
+import {
+  compareDutyAllocations,
+  formatAllocationLine,
+  formatCompactShares,
+  notableAllocations,
+} from "./duty-allocation.mjs";
 import { normalizeWhitespace, stableId, uniq } from "./utils-core.mjs";
 
 export const NATIVE_LAW_SCHEMA = "kr.go.mois.orgchart.hwp-native/v1";
@@ -57,27 +63,170 @@ const COLORS = Object.freeze({
 
 export function buildNativeLawWorkflow(options = {}) {
   const layout = normalizeLayout(options.layout);
-  const decreeText = normalizeWhitespace(options.decreeText);
-  const ruleText = normalizeWhitespace(options.ruleText);
+  const side = compileLawSide(options, { focusStrict: true });
+  const manifests = side.plans.map((plan, index) => buildOutlineManifest(side.graph, side.tree, plan, {
+    index,
+    pageCount: side.plans.length,
+    asOf: side.asOf,
+    lawNames: side.lawNames,
+    fingerprints: side.fingerprints,
+    warnings: side.warnings,
+    layout,
+  }));
+  return assembleWorkflow(side, manifests, {
+    layout,
+    legalGraph: side.legalGraph,
+    decreeText: side.decreeText,
+    ruleText: side.ruleText,
+    lawSources: options.lawSources,
+  });
+}
+
+export function buildNativeComparisonWorkflow(options = {}) {
+  const before = compileLawSide(options.beforeSnapshot || options.before || {}, {
+    focus: options.focus,
+    maxRows: options.maxRows,
+    focusStrict: false,
+    label: "현행",
+  });
+  const after = compileLawSide(options.afterSnapshot || options.after || {}, {
+    focus: options.focus,
+    maxRows: options.maxRows,
+    focusStrict: false,
+    label: "개정",
+  });
+  if (before.institution && after.institution && before.institution !== after.institution) {
+    throw new Error("서로 다른 기관의 조직도는 나란히 그릴 수 없습니다.");
+  }
+
+  const dutyAllocation = compareDutyAllocations(before.graph, after.graph);
+  const pageCount = Math.max(before.plans.length, after.plans.length, 1);
+  const institution = after.institution || before.institution;
+  const warnings = uniq([
+    ...before.warnings.map((warning) => `현행: ${warning}`),
+    ...after.warnings.map((warning) => `개정: ${warning}`),
+    ...(pageCount > 1 ? [`가독성을 지키기 위해 A4 ${pageCount}쪽으로 자동 분할했습니다.`] : []),
+  ]);
+  const manifests = Array.from({ length: pageCount }, (_, index) => buildComparisonManifest({
+    before,
+    after,
+    beforePlan: before.plans[index] || null,
+    afterPlan: after.plans[index] || null,
+    index,
+    pageCount,
+    institution,
+    warnings,
+    dutyAllocation,
+  }));
+
+  return {
+    manifests,
+    pages: manifests.map((manifest, index) => ({
+      index,
+      label: manifest.source.pageLabel,
+      nodeCount: (before.plans[index]?.nodeIds.length || 0) + (after.plans[index]?.nodeIds.length || 0),
+      objectCount: manifest.objects.length,
+      fileName: manifest.fileName,
+    })),
+    summary: {
+      institution,
+      asOf: after.asOf || before.asOf || null,
+      beforeAsOf: before.asOf || null,
+      afterAsOf: after.asOf || null,
+      nodeCount: before.visualNodes.length + after.visualNodes.length,
+      relationCount: before.graph.edges.size + after.graph.edges.size,
+      pageCount,
+      decreePresent: before.decreePresent || after.decreePresent,
+      rulePresent: before.rulePresent || after.rulePresent,
+      focusOptions: mergeFocusOptions(before.focusOptions, after.focusOptions),
+      layout: NATIVE_LAW_LAYOUTS.COMPARISON_TWO_COLUMN,
+      comparison: "dual-outline",
+      dutyAllocation,
+      warnings,
+    },
+    snapshot: after.snapshotBase,
+    beforeSnapshot: before.snapshotBase,
+    afterSnapshot: after.snapshotBase,
+  };
+}
+
+function compileLawSide(input = {}, options = {}) {
+  if (input.graph || input.schema === "kr.go.mois.orgchart.history/v1") {
+    return compileGraphSide(input.snapshot || input, options);
+  }
+
+  const decreeText = normalizeWhitespace(input.decreeText);
+  const ruleText = normalizeWhitespace(input.ruleText);
   const documents = [];
   const sources = [];
   if (decreeText) {
     documents.push(decreeText);
-    sources.push("직제 입력문");
+    sources.push(options.label ? `${options.label} 직제 입력문` : "직제 입력문");
   }
   if (ruleText) {
     documents.push(ruleText);
-    sources.push("직제 시행규칙 입력문");
+    sources.push(options.label ? `${options.label} 직제 시행규칙 입력문` : "직제 시행규칙 입력문");
   }
   if (!documents.length) throw new Error("직제 또는 직제 시행규칙 문언을 하나 이상 입력하세요.");
   if (documents.join("\n").length < 30) throw new Error("입력 문언이 너무 짧습니다. 조직 설치 조문을 함께 붙여넣으세요.");
 
   const legalGraph = parseOrganizationTexts(documents, {
     sources,
-    institution: cleanOptional(options.institution),
-    asOf: normalizeDate(options.asOf),
+    institution: cleanOptional(input.institution || options.institution),
+    asOf: normalizeDate(input.asOf || options.asOf),
   });
   const graph = projectOperationalView(legalGraph);
+  return finishLawSide(graph, {
+    ...options,
+    focus: input.focus ?? options.focus,
+    maxRows: input.maxRows ?? options.maxRows,
+    asOf: input.asOf || options.asOf,
+    institution: input.institution || options.institution,
+    legalGraph,
+    decreeText,
+    ruleText,
+    decreePresent: Boolean(decreeText),
+    rulePresent: Boolean(ruleText),
+    lawNames: uniq([
+      decreeText ? inferLawName(decreeText, `${graph.meta.institution} 직제`) : "",
+      ruleText ? inferLawName(ruleText, `${graph.meta.institution} 직제 시행규칙`) : "",
+    ]),
+    fingerprints: {
+      ...(decreeText ? { decree: stableId(decreeText) } : {}),
+      ...(ruleText ? { rule: stableId(ruleText) } : {}),
+    },
+    extraWarnings: [
+      ...(!decreeText ? ["직제 본문이 없어 실·국·소속기관이 누락될 수 있습니다."] : []),
+      ...(!ruleText ? ["직제 시행규칙이 없어 과·담당관·팀이 누락될 수 있습니다."] : []),
+    ],
+    lawSources: input.lawSources,
+  });
+}
+
+function compileGraphSide(snapshot, options = {}) {
+  if (!snapshot?.graph) throw new Error("조직 스냅샷에 그래프가 없습니다.");
+  const graph = OrgGraph.fromJSON(snapshot.graph);
+  const laws = Array.isArray(snapshot.laws) ? snapshot.laws : [];
+  return finishLawSide(graph, {
+    ...options,
+    focus: options.focus,
+    maxRows: options.maxRows,
+    legalGraph: snapshot.legalGraph ? OrgGraph.fromJSON(snapshot.legalGraph) : null,
+    decreeText: laws.find((law) => law.role === "decree")?.text || "",
+    ruleText: laws.find((law) => law.role === "rule")?.text || "",
+    decreePresent: laws.some((law) => law.role === "decree") || Boolean(snapshot.decreePresent),
+    rulePresent: laws.some((law) => law.role === "rule") || Boolean(snapshot.rulePresent),
+    lawNames: laws.map((law) => law?.name).filter(Boolean),
+    fingerprints: Object.fromEntries(
+      laws.filter((law) => law?.role && law?.fingerprint).map((law) => [law.role, law.fingerprint]),
+    ),
+    extraWarnings: snapshot.summary?.warnings || [],
+    asOfOverride: snapshot.asOf || null,
+    institutionOverride: snapshot.institution || null,
+  });
+}
+
+function finishLawSide(graph, options = {}) {
   const visualNodes = [...graph.nodes.values()].filter((node) => node.id !== graph.rootId);
   if (!visualNodes.length) {
     throw new Error("문언에서 조직을 찾지 못했습니다. ‘○○에 △△실·국·과를 둔다’ 문장이 포함됐는지 확인하세요.");
@@ -87,36 +236,21 @@ export function buildNativeLawWorkflow(options = {}) {
   const focusNames = parseFocusNames(options.focus);
   const focusResult = resolveFocusNodes(graph, focusNames);
   if (focusNames.length && !focusResult.nodes.length) {
-    throw new Error(`작도 범위를 찾지 못했습니다: ${focusNames.join(", ")}`);
+    if (options.focusStrict) throw new Error(`작도 범위를 찾지 못했습니다: ${focusNames.join(", ")}`);
   }
 
   const maxRows = clampInteger(options.maxRows, 20, 48, DEFAULT_MAX_ROWS);
-  const plans = buildPagePlans(graph, tree, focusResult.nodes, maxRows);
+  const focused = focusResult.nodes;
+  const plans = buildPagePlans(graph, tree, focused, maxRows);
+  const asOf = options.asOfOverride || graph.meta.asOf || (options.asOf ? normalizeDate(options.asOf) : null);
+  const institution = options.institutionOverride || graph.meta.institution;
   const warnings = uniq([
-    ...(!decreeText ? ["직제 본문이 없어 실·국·소속기관이 누락될 수 있습니다."] : []),
-    ...(!ruleText ? ["직제 시행규칙이 없어 과·담당관·팀이 누락될 수 있습니다."] : []),
+    ...(options.extraWarnings || []),
     ...focusResult.missing.map((name) => `작도 범위를 찾지 못해 제외했습니다: ${name}`),
+    ...(focusNames.length && !focused.length ? [`작도 범위(${focusNames.join(", ")})를 이 시점에서 찾지 못해 전체 조직도를 그립니다.`] : []),
     ...(graph.meta.warnings || []),
     ...(plans.length > 1 ? [`가독성을 지키기 위해 A4 ${plans.length}쪽으로 자동 분할했습니다.`] : []),
   ]);
-  const lawNames = uniq([
-    decreeText ? inferLawName(decreeText, `${graph.meta.institution} 직제`) : "",
-    ruleText ? inferLawName(ruleText, `${graph.meta.institution} 직제 시행규칙`) : "",
-  ]);
-  const fingerprints = {
-    ...(decreeText ? { decree: stableId(decreeText) } : {}),
-    ...(ruleText ? { rule: stableId(ruleText) } : {}),
-  };
-
-  const manifests = plans.map((plan, index) => buildOutlineManifest(graph, tree, plan, {
-    index,
-    pageCount: plans.length,
-    asOf: graph.meta.asOf || normalizeDate(options.asOf),
-    lawNames,
-    fingerprints,
-    warnings,
-    layout,
-  }));
   const focusOptions = [...graph.nodes.values()]
     .filter((node) => node.id !== graph.rootId && (tree.children.get(node.id)?.length || 0) > 0)
     .sort(compareNodes)
@@ -128,58 +262,109 @@ export function buildNativeLawWorkflow(options = {}) {
     }));
 
   return {
-    manifests,
-    pages: manifests.map((manifest, index) => ({
-      index,
-      label: plans[index].subtitle,
-      nodeCount: plans[index].nodeIds.length,
-      objectCount: manifest.objects.length,
-      fileName: manifest.fileName,
-    })),
-    summary: {
-      institution: graph.meta.institution,
-      asOf: graph.meta.asOf || null,
-      nodeCount: visualNodes.length,
-      relationCount: graph.edges.size,
-      pageCount: manifests.length,
-      decreePresent: Boolean(decreeText),
-      rulePresent: Boolean(ruleText),
-      focusOptions,
-      layout,
-      warnings,
-    },
-    snapshot: {
+    graph,
+    tree,
+    plans,
+    visualNodes,
+    warnings,
+    lawNames: uniq(options.lawNames || []),
+    fingerprints: options.fingerprints || {},
+    asOf,
+    institution,
+    decreePresent: Boolean(options.decreePresent),
+    rulePresent: Boolean(options.rulePresent),
+    decreeText: options.decreeText || "",
+    ruleText: options.ruleText || "",
+    legalGraph: options.legalGraph || null,
+    focusOptions,
+    snapshotBase: {
       schema: "kr.go.mois.orgchart.history/v1",
-      institution: graph.meta.institution,
-      asOf: graph.meta.asOf || null,
+      institution,
+      asOf,
       laws: [
-        ...(decreeText ? [{
+        ...(options.decreeText ? [{
           role: "decree",
-          name: lawNames.find((name) => /시행규칙/.test(name) === false) || `${graph.meta.institution} 직제`,
-          effectiveDate: options.lawSources?.decree?.effectiveDate || graph.meta.asOf || null,
+          name: (options.lawNames || []).find((name) => /시행규칙/.test(name) === false) || `${institution} 직제`,
+          effectiveDate: options.lawSources?.decree?.effectiveDate || asOf,
           promulgatedDate: options.lawSources?.decree?.promulgatedDate || null,
-          fingerprint: fingerprints.decree || null,
-          text: decreeText,
+          fingerprint: options.fingerprints?.decree || null,
+          text: options.decreeText,
         }] : []),
-        ...(ruleText ? [{
+        ...(options.ruleText ? [{
           role: "rule",
-          name: lawNames.find((name) => /시행규칙/.test(name)) || `${graph.meta.institution} 직제 시행규칙`,
-          effectiveDate: options.lawSources?.rule?.effectiveDate || graph.meta.asOf || null,
+          name: (options.lawNames || []).find((name) => /시행규칙/.test(name)) || `${institution} 직제 시행규칙`,
+          effectiveDate: options.lawSources?.rule?.effectiveDate || asOf,
           promulgatedDate: options.lawSources?.rule?.promulgatedDate || null,
-          fingerprint: fingerprints.rule || null,
-          text: ruleText,
+          fingerprint: options.fingerprints?.rule || null,
+          text: options.ruleText,
         }] : []),
       ],
       graph: graph.toJSON(),
-      legalGraph: legalGraph.toJSON(),
+      legalGraph: options.legalGraph?.toJSON?.() || options.legalGraph || null,
       summary: {
         nodeCount: visualNodes.length,
         relationCount: graph.edges.size,
-        pageCount: manifests.length,
+        pageCount: plans.length,
         warnings,
       },
     },
   };
+}
+
+function assembleWorkflow(side, manifests, extras = {}) {
+  return {
+    manifests,
+    pages: manifests.map((manifest, index) => ({
+      index,
+      label: side.plans[index].subtitle,
+      nodeCount: side.plans[index].nodeIds.length,
+      objectCount: manifest.objects.length,
+      fileName: manifest.fileName,
+    })),
+    summary: {
+      institution: side.institution,
+      asOf: side.asOf,
+      nodeCount: side.visualNodes.length,
+      relationCount: side.graph.edges.size,
+      pageCount: manifests.length,
+      decreePresent: side.decreePresent,
+      rulePresent: side.rulePresent,
+      focusOptions: side.focusOptions,
+      layout: extras.layout,
+      warnings: side.warnings,
+    },
+    snapshot: {
+      ...side.snapshotBase,
+      laws: [
+        ...(side.decreeText ? [{
+          role: "decree",
+          name: side.lawNames.find((name) => /시행규칙/.test(name) === false) || `${side.institution} 직제`,
+          effectiveDate: extras.lawSources?.decree?.effectiveDate || side.asOf,
+          promulgatedDate: extras.lawSources?.decree?.promulgatedDate || null,
+          fingerprint: side.fingerprints.decree || null,
+          text: side.decreeText,
+        }] : []),
+        ...(side.ruleText ? [{
+          role: "rule",
+          name: side.lawNames.find((name) => /시행규칙/.test(name)) || `${side.institution} 직제 시행규칙`,
+          effectiveDate: extras.lawSources?.rule?.effectiveDate || side.asOf,
+          promulgatedDate: extras.lawSources?.rule?.promulgatedDate || null,
+          fingerprint: side.fingerprints.rule || null,
+          text: side.ruleText,
+        }] : []),
+      ],
+      legalGraph: extras.legalGraph?.toJSON?.() || extras.legalGraph || side.snapshotBase.legalGraph,
+    },
+  };
+}
+
+function mergeFocusOptions(left = [], right = []) {
+  const byName = new Map();
+  for (const option of [...left, ...right]) {
+    const existing = byName.get(option.name);
+    if (!existing || option.descendantCount > existing.descendantCount) byName.set(option.name, option);
+  }
+  return [...byName.values()].sort((leftOption, rightOption) => leftOption.name.localeCompare(rightOption.name, "ko"));
 }
 
 function buildPrimaryTree(graph) {
@@ -349,7 +534,7 @@ function splitSubtreePlan(graph, tree, rootId, maxRows, prefix = "") {
   }));
 }
 
-function buildOutlineManifest(graph, tree, plan, context) {
+function layoutTreeInFrame(graph, tree, plan, frame, prefix = "") {
   const selected = new Set(plan.nodeIds);
   const roots = uniq([
     ...plan.rootIds.filter((id) => selected.has(id)),
@@ -366,15 +551,12 @@ function buildOutlineManifest(graph, tree, plan, context) {
   for (const id of roots) visit(id, 0);
   for (const id of plan.nodeIds) visit(id, 0);
 
-  const contentTop = 31;
-  const contentBottom = 279.5;
-  const pitch = Math.min(8.35, Math.max(5.35, (contentBottom - contentTop) / Math.max(rows.length, 1)));
+  const columnWidth = Math.max(24, frame.right - frame.left);
+  const pitch = Math.min(8.35, Math.max(5.35, (frame.bottom - frame.top) / Math.max(rows.length, 1)));
   const boxHeight = Math.min(7.2, Math.max(4.35, pitch - 1.05));
   const maxDepth = Math.max(0, ...rows.map((row) => row.depth));
-  const indent = Math.min(11.5, Math.max(7.2, 34 / Math.max(1, maxDepth)));
-  const comparison = context.layout === NATIVE_LAW_LAYOUTS.COMPARISON_TWO_COLUMN;
-  const comparisonDividerX = 104;
-  const comparisonColumnRight = comparisonDividerX - 7;
+  const indent = Math.min(columnWidth > 120 ? 11.5 : 7.2, Math.max(5.4, (columnWidth * 0.36) / Math.max(1, maxDepth)));
+  const idPrefix = prefix ? `${prefix}-` : "";
   const positions = new Map();
   const boxes = [];
   rows.forEach((row, index) => {
@@ -383,14 +565,12 @@ function buildOutlineManifest(graph, tree, plan, context) {
       && (tree.children.get(row.id) || []).some((childId) => (
         selected.has(childId) && tree.parentEdge.get(childId)?.type === "jurisdiction"
       ));
-    const x = round(14 + row.depth * indent);
-    const y = round(contentTop + index * pitch);
-    const width = round(comparison
-      ? Math.max(38, comparisonColumnRight - x)
-      : Math.max(42, 196 - x));
+    const x = round(frame.left + row.depth * indent);
+    const y = round(frame.top + index * pitch);
+    const width = round(Math.max(columnWidth > 120 ? 42 : 28, frame.right - x));
     const style = styleForNode(node, row.depth, roots.includes(row.id), { jurisdictionContainer });
     const fontSizePt = round(Math.min(style.root ? 8.4 : 7.2, Math.max(5.25, boxHeight * 1.28)));
-    const objectId = `node-${node.id}`;
+    const objectId = `${idPrefix}node-${node.id}`;
     const geometry = { x, y, width, height: round(boxHeight) };
     positions.set(row.id, { ...geometry, objectId, centerY: round(y + boxHeight / 2), bottom: round(y + boxHeight) });
     boxes.push({
@@ -413,7 +593,9 @@ function buildOutlineManifest(graph, tree, plan, context) {
       },
       metadata: {
         role: "organization-node",
+        side: prefix || "single",
         nodeId: node.id,
+        nodeName: node.name,
         kind: node.kind,
         rank: node.rank,
         ...(jurisdictionContainer ? { renderRole: "jurisdiction-container" } : {}),
@@ -432,19 +614,19 @@ function buildOutlineManifest(graph, tree, plan, context) {
     const lastChild = childPositions.at(-1);
     if (lastChild.centerY > parent.bottom + 0.05) {
       lines.push(lineObject(
-        `trunk-${parentId}-${context.index + 1}`,
+        `${idPrefix}trunk-${parentId}`,
         trunkX,
         parent.bottom,
         trunkX,
         lastChild.centerY,
-        { role: "child-trunk", parentId: parent.objectId },
+        { role: "child-trunk", parentId: parent.objectId, side: prefix || "single" },
       ));
     }
     childIds.forEach((childId) => {
       const child = positions.get(childId);
       const edge = tree.parentEdge.get(childId);
       lines.push(lineObject(
-        `link-${parentId}-${childId}-${context.index + 1}`,
+        `${idPrefix}link-${parentId}-${childId}`,
         trunkX,
         child.centerY,
         round(child.x + 0.35),
@@ -454,10 +636,28 @@ function buildOutlineManifest(graph, tree, plan, context) {
           parentId: parent.objectId,
           childId: child.objectId,
           dash: edge?.type === "advisor" ? "dash" : "solid",
+          side: prefix || "single",
         },
       ));
     });
   }
+  return { boxes, lines };
+}
+
+function buildOutlineManifest(graph, tree, plan, context) {
+  const comparison = context.layout === NATIVE_LAW_LAYOUTS.COMPARISON_TWO_COLUMN;
+  const comparisonDividerX = 104;
+  const treeLayout = layoutTreeInFrame(graph, tree, plan, {
+    left: 14,
+    right: comparison ? comparisonDividerX - 7 : 196,
+    top: 31,
+    bottom: 279.5,
+  });
+  const boxes = treeLayout.boxes;
+  const lines = treeLayout.lines.map((line) => ({
+    ...line,
+    id: `${line.id}-${context.index + 1}`,
+  }));
 
   const title = `${graph.meta.institution} 조직도`;
   const asOf = context.asOf ? `직제 기준 ${displayDateLoose(context.asOf)}` : "직제·시행규칙 문언 기준";
@@ -549,6 +749,202 @@ function styleForNode(node, depth, isRoot, options = {}) {
   return { fill: COLORS.leafFill, stroke: COLORS.leafLine, text: COLORS.ink, dash: "solid", bold: false, root: false };
 }
 
+function buildComparisonManifest({
+  before,
+  after,
+  beforePlan,
+  afterPlan,
+  index,
+  pageCount,
+  institution,
+  warnings,
+  dutyAllocation,
+}) {
+  const dividerX = 104;
+  const frameTop = 40;
+  const notable = pickDisplayedAllocations(dutyAllocation);
+  const frameBottom = notable.length ? 248 : 279.5;
+  const beforeTree = beforePlan
+    ? layoutTreeInFrame(before.graph, before.tree, beforePlan, {
+      left: 14,
+      right: notable.length ? 70 : dividerX - 6,
+      top: frameTop,
+      bottom: frameBottom,
+    }, "before")
+    : { boxes: [], lines: [] };
+  const afterTree = afterPlan
+    ? layoutTreeInFrame(after.graph, after.tree, afterPlan, {
+      left: dividerX + 6,
+      right: 198,
+      top: frameTop,
+      bottom: frameBottom,
+    }, "after")
+    : { boxes: [], lines: [] };
+
+  const beforeAsOf = before.asOf ? `현행 ${displayDateLoose(before.asOf)}` : "현행";
+  const afterAsOf = after.asOf ? `개정 ${displayDateLoose(after.asOf)}` : "개정";
+  const pageLabel = [beforePlan?.subtitle, afterPlan?.subtitle].filter(Boolean).join(" · ") || "좌우 조직도";
+  const labels = [
+    textObject("document-title", 12, 7, 128, 7.6, `${institution} 조직 대비`, { fontSizePt: 12.2, bold: true }),
+    textObject("document-asof", 142, 7, 56, 7.6, `${beforeAsOf} · ${afterAsOf}`, {
+      fontSizePt: 6.4,
+      bold: true,
+      align: "right",
+      color: COLORS.muted,
+    }),
+    textObject("document-subtitle", 12, 16.4, 146, 6.2, pageLabel, { fontSizePt: 7.2, bold: true, color: COLORS.muted }),
+    textObject("document-page", 160, 16.4, 38, 6.2, `${index + 1} / ${pageCount}`, {
+      fontSizePt: 6.4,
+      bold: true,
+      align: "right",
+      color: COLORS.quiet,
+    }),
+    textObject("before-header", 12, 31, 86, 7, beforeAsOf, {
+      fontSizePt: 7.4,
+      bold: true,
+      color: COLORS.muted,
+      role: "comparison-header",
+    }),
+    textObject("after-header", 110, 31, 88, 7, afterAsOf, {
+      fontSizePt: 7.4,
+      bold: true,
+      color: COLORS.muted,
+      role: "comparison-header",
+    }),
+    textObject("footer-source", 12, 286.1, 150, 5.8, notable.length
+      ? "좌우 조직도 + 재인용된 직제 호가 어느 과로 갈라졌는지 표시 · 다수결로 한 과만 찍지 않음"
+      : "두 시점 조직도를 좌우로 나란히 작도 · 재인용된 직제 호가 있으면 분할 비율을 표시", {
+      fontSizePt: 5.3,
+      color: COLORS.quiet,
+    }),
+    textObject("footer-format", 164, 286.1, 34, 5.8, "A4 세로 · 편집형", {
+      fontSizePt: 5.3,
+      bold: true,
+      align: "right",
+      color: COLORS.muted,
+    }),
+  ];
+  if (!beforePlan) {
+    labels.push(textObject("before-empty", 14, 48, 82, 12, "이 쪽에는 더 그릴 조직이 없습니다.", {
+      fontSizePt: 6.2,
+      color: COLORS.quiet,
+      role: "comparison-empty",
+    }));
+  }
+  if (!afterPlan) {
+    labels.push(textObject("after-empty", 112, 48, 82, 12, "이 쪽에는 더 그릴 조직이 없습니다.", {
+      fontSizePt: 6.2,
+      color: COLORS.quiet,
+      role: "comparison-empty",
+    }));
+  }
+  labels.push(...allocationBadgeObjects(beforeTree, notable));
+  labels.push(...allocationLabelObjects(notable));
+
+  const objects = [
+    lineObject("header-rule", 12, 25.7, 198, 25.7, { role: "header-rule", color: "#AAB3BC", widthMm: 0.3 }),
+    lineObject("footer-rule", 12, 283.5, 198, 283.5, { role: "footer-rule", color: "#D4DAE0", widthMm: 0.24 }),
+    lineObject("comparison-divider", dividerX, 31, dividerX, 279.5, {
+      role: "comparison-divider",
+      color: "#D4DAE0",
+      widthMm: 0.35,
+    }),
+    ...beforeTree.lines,
+    ...afterTree.lines,
+    ...beforeTree.boxes,
+    ...afterTree.boxes,
+    ...labels,
+  ];
+  const suffix = pageCount > 1 ? `-${index + 1}` : "";
+  return {
+    schema: NATIVE_LAW_SCHEMA,
+    version: 1,
+    title: `${institution} 조직 대비 · ${pageLabel}`,
+    fileName: `${safeFilePart(institution)}-좌우조직도${suffix}-편집형.hwpx`,
+    source: {
+      institution,
+      asOf: after.asOf || before.asOf || "",
+      beforeAsOf: before.asOf || "",
+      afterAsOf: after.asOf || "",
+      laws: uniq([...before.lawNames, ...after.lawNames]),
+      fingerprints: { ...before.fingerprints, ...after.fingerprints },
+      layout: NATIVE_LAW_LAYOUTS.COMPARISON_TWO_COLUMN,
+      comparison: "dual-outline",
+      dutyAllocation,
+      pageLabel,
+      renderView: "comparison",
+      inputRoles: ["decree", "rule"].filter((role) => before.fingerprints[role] || after.fingerprints[role]),
+      parserWarnings: warnings,
+      note: notable.length
+        ? "두 시점 조직도와 재인용 호 분할 비율을 함께 작도한 한글 네이티브 객체 명세"
+        : "두 시점의 직제 조직도를 좌우로 나란히 작도한 한글 네이티브 객체 명세",
+    },
+    page: PAGE,
+    objects,
+    verification: countObjects(objects),
+  };
+}
+
+function pickDisplayedAllocations(dutyAllocation) {
+  const department = notableAllocations(dutyAllocation?.units || []);
+  if (department.length) return department.slice(0, 4);
+  return notableAllocations(dutyAllocation?.parentUnits || []).slice(0, 4);
+}
+
+function allocationBadgeObjects(tree, units) {
+  const byName = new Map(units.map((unit) => [unit.unit, unit]));
+  const objects = [];
+  for (const box of tree.boxes || []) {
+    const unit = byName.get(box.metadata?.nodeName);
+    if (!unit) continue;
+    const compact = formatCompactShares(unit);
+    if (!compact) continue;
+    objects.push(textObject(
+      `allocation-badge-${box.metadata.nodeId}`,
+      71,
+      box.geometry.y,
+      31,
+      Math.max(box.geometry.height, 6.2),
+      compact,
+      {
+        fontSizePt: 5.2,
+        color: COLORS.muted,
+        role: "allocation-badge",
+      },
+    ));
+  }
+  return objects;
+}
+
+function allocationLabelObjects(units) {
+  if (!units.length) return [];
+  const objects = [
+    lineObject("allocation-rule", 12, 250.5, 198, 250.5, { role: "allocation-rule", color: "#D4DAE0", widthMm: 0.24 }),
+    textObject("allocation-title", 12, 252.2, 186, 6, "호 분할 · 재인용된 직제 호가 어느 과로 갔는지", {
+      fontSizePt: 6.6,
+      bold: true,
+      color: COLORS.muted,
+      role: "allocation-title",
+    }),
+  ];
+  units.forEach((unit, index) => {
+    objects.push(textObject(
+      `allocation-line-${index + 1}`,
+      12,
+      258.4 + index * 6.2,
+      186,
+      6,
+      formatAllocationLine(unit),
+      {
+        fontSizePt: 5.8,
+        color: COLORS.ink,
+        role: "allocation-line",
+      },
+    ));
+  });
+  return objects;
+}
+
 function lineObject(id, x1, y1, x2, y2, options = {}) {
   return {
     id,
@@ -560,7 +956,7 @@ function lineObject(id, x1, y1, x2, y2, options = {}) {
       dash: options.dash || "solid",
     },
     metadata: Object.fromEntries(
-      ["role", "parentId", "childId"].map((key) => [key, options[key]]).filter(([, value]) => value),
+      ["role", "parentId", "childId", "side"].map((key) => [key, options[key]]).filter(([, value]) => value),
     ),
   };
 }

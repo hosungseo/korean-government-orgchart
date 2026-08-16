@@ -159,6 +159,7 @@ function parseDocumentIntoGraph(graph, text, source) {
       parseAdvisorDefinitions(graph, body, source, context);
       parseAdvisorySentences(graph, body, source, context);
       collectJurisdictionRelations(graph, body, source);
+      collectDecreeDutyCatalog(graph, article, body, source);
       markSpecialMetadata(graph, body, source);
     } finally {
       graph._currentArticleRef = previousArticleRef;
@@ -244,6 +245,7 @@ function collectJurisdictionRelations(graph, body, source) {
       evidenceText: compactEvidenceText(`${paragraph.departmentName}장은${paragraph.text}`),
     });
   }
+  collectDutyItemAssignments(graph, source, paragraphs);
   collectJurisdictionRangeRelations(graph, body, source, paragraphs);
 }
 
@@ -260,6 +262,115 @@ function extractDepartmentDutyParagraphs(body) {
     });
   }
   return paragraphs;
+}
+
+const CIRCLE_CLAUSES = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑";
+
+function collectDecreeDutyCatalog(graph, article, body, source) {
+  const role = (graph.meta.sourceInventory || []).find((item) => item.source === source)?.role;
+  if (role === "rule") return;
+  const articleKey = String(article?.articleRef || article?.lead || "").replace(/\s+/g, "").match(/제\d+조(?:의\d+)?/)?.[0];
+  if (!articleKey) return;
+  graph.meta.dutyItemCatalog ||= [];
+  const clausePattern = new RegExp(`([${CIRCLE_CLAUSES}]|<\\d+>)\\s*([\\s\\S]*?)(?=(?:[${CIRCLE_CLAUSES}]|<\\d+>)|$)`, "g");
+  let matched = false;
+  for (const match of body.matchAll(clausePattern)) {
+    const clauseNo = circleClauseNumber(match[1]);
+    const text = match[2] || "";
+    if (!clauseNo || !/분장한다/.test(text)) continue;
+    if (/(?:과|팀)장(?:은|는)/.test(text.split("분장한다")[0] || "")) continue;
+    matched = true;
+    storeCatalogItems(graph, `${articleKey}제${clauseNo}항`, extractNumberedDutyTexts(text), source);
+  }
+  if (matched) return;
+  if (!/분장한다/.test(body)) return;
+  if (/(?:과|팀)장(?:은|는)/.test(body.split("분장한다")[0] || "")) return;
+  storeCatalogItems(graph, articleKey, extractNumberedDutyTexts(body), source);
+}
+
+function storeCatalogItems(graph, refKey, items, source) {
+  for (const item of items) {
+    upsertByKey(graph.meta.dutyItemCatalog, {
+      refKey,
+      number: item.number,
+      text: item.text,
+      residual: /그\s*밖에/.test(item.text),
+      source,
+    }, ["refKey", "number", "source"]);
+  }
+}
+
+function circleClauseNumber(mark) {
+  const circle = CIRCLE_CLAUSES.indexOf(mark);
+  if (circle >= 0) return circle + 1;
+  const tagged = String(mark).match(/<(\d+)>/);
+  return tagged ? Number(tagged[1]) : null;
+}
+
+function extractNumberedDutyTexts(text) {
+  const items = [];
+  const pattern = /(?:^|\n)\s*(\d+)\.\s*([^\n]+)/g;
+  for (const match of String(text || "").matchAll(pattern)) {
+    const number = Number(match[1]);
+    const body = normalizeWhitespace(match[2]).replace(/[.;。]$/, "");
+    if (!Number.isFinite(number) || !body) continue;
+    items.push({ number, text: body });
+  }
+  return items;
+}
+
+function collectDutyItemAssignments(graph, source, paragraphs) {
+  graph.meta.dutyItemAssignments ||= [];
+  for (const paragraph of paragraphs) {
+    const departmentName = normalizeNodeName(paragraph.departmentName);
+    if (!departmentName) continue;
+    const department = graph.addNode(departmentName, { kind: "assistant", source });
+    if (!department) continue;
+    const refs = extractDecreeItemReferences(paragraph.text);
+    if (!refs.length) continue;
+    const items = expandDutyItemRefs(refs);
+    if (!items.length) continue;
+    const residual = /그\s*밖에/.test(paragraph.text);
+    const assignment = {
+      department: department.name,
+      items,
+      reference: formatDutyReferences(refs),
+      residual,
+      source,
+    };
+    upsertByKey(graph.meta.dutyItemAssignments, assignment, ["department", "source", "reference"]);
+    const existing = department.metadata.dutyItems;
+    department.metadata.dutyItems = {
+      items: mergeDutyItems(existing?.items, items),
+      reference: existing?.reference && existing.reference !== assignment.reference
+        ? `${existing.reference} · ${assignment.reference}`
+        : assignment.reference,
+      residual: Boolean(existing?.residual || residual),
+      source,
+    };
+  }
+}
+
+export function expandDutyItemRefs(refs) {
+  const items = [];
+  const seen = new Set();
+  for (const ref of refs || []) {
+    if (!Number.isFinite(ref.start) || !Number.isFinite(ref.end)) continue;
+    for (let number = ref.start; number <= ref.end; number += 1) {
+      const key = `${ref.refKey || ""}:${number}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      items.push({ refKey: ref.refKey || "", number });
+    }
+  }
+  return items;
+}
+
+function mergeDutyItems(left = [], right = []) {
+  return expandDutyItemRefs([
+    ...left.map((item) => ({ refKey: item.refKey, start: item.number, end: item.number })),
+    ...right.map((item) => ({ refKey: item.refKey, start: item.number, end: item.number })),
+  ]);
 }
 
 function collectJurisdictionRangeRelations(graph, body, source, paragraphs) {

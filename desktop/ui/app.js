@@ -1,5 +1,5 @@
 import { analyzeNativeManifest } from "./manifest-validation.js";
-import { buildNativeLawWorkflow } from "./engine/native-law-workflow.mjs";
+import { buildNativeComparisonWorkflow, buildNativeLawWorkflow } from "./engine/native-law-workflow.mjs";
 import { flattenLawJson } from "./engine/law-json-core.mjs";
 import { compareLawSnapshots, createLawSnapshot, summarizeLawSnapshot } from "./engine/law-history.mjs";
 
@@ -307,6 +307,23 @@ async function compareHistory() {
     const left = await invoke("load_law_snapshot", { request: { id: $("historyLeft").value } });
     const right = await invoke("load_law_snapshot", { request: { id: $("historyRight").value } });
     renderHistoryDiff(compareLawSnapshots(left, right));
+    lawWorkflow = buildNativeComparisonWorkflow({
+      beforeSnapshot: left,
+      afterSnapshot: right,
+      focus: $("lawFocus")?.value,
+    });
+    currentLawSnapshot = createLawSnapshot(lawWorkflow, {
+      label: `${lawWorkflow.summary.institution} · ${lawWorkflow.summary.beforeAsOf || "현행"} → ${lawWorkflow.summary.afterAsOf || "개정"}`,
+    });
+    activeWorkflowPage = 0;
+    renderPageNavigator();
+    renderLawWorkflowSummary(lawWorkflow.summary);
+    await selectWorkflowPage(0);
+    setStatus(
+      "두 조직도 작도 완료",
+      `${lawWorkflow.summary.beforeAsOf || "현행"}과 ${lawWorkflow.summary.afterAsOf || "개정"} 조직도를 좌우로 그렸습니다. 호 분할 비율은 다음 단계입니다.`,
+      "success",
+    );
   } catch (error) {
     setStatus("개편 내역 비교 실패", String(error), "error");
   } finally {

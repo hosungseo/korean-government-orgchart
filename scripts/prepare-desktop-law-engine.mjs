@@ -9,6 +9,7 @@ const modules = [
   "model.mjs",
   "parser.mjs",
   "native-law-workflow.mjs",
+  "duty-allocation.mjs",
   "law-json-core.mjs",
   "law-history.mjs",
 ];

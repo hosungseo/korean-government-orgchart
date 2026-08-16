@@ -320,7 +320,7 @@ node src/cli.mjs compare-law \
   --change-appendix
 ```
 
-HWPX 취합본에서 확인한 유형과 대표 표본은 [HWPX 취합본 분석](docs/hwpx-corpus-analysis.md)에 정리했습니다.
+작도 유형과 용지 프리셋은 [작도 규칙집](docs/drafting-rulebook.md)에 정리했습니다.
 
 ### 검토 전 감사 리포트 만들기
 
@@ -466,10 +466,10 @@ node src/cli.mjs review-pack \
 
 ## 근거와 한계
 
-행정안전부·문화체육관광부·공정거래위원회 기구도, 2026년 중앙행정기관 취합본 66개 파일(195면), 정부기구도 범례를 대조했습니다.
+기준은 직제·직제 시행규칙과 「행정기관의 조직과 정원에 관한 통칙」이다.
 
 - [직제 문언 → 기구도 작도 규칙집](docs/drafting-rulebook.md) — 시점 대비표는 §7의4
-- [참조 PPT 분석과 법적 조직 모델](docs/reference-and-legal-model.md)
+- [법적 조직 모델](docs/reference-and-legal-model.md)
 
 별표 매트릭스가 필요한 지방관서의 실제 편성은 원문 확보 전까지 추정하지 않습니다. 생성 결과는 조직도 초안과 분석 도구이며, 법률 자문·인사 발령의 근거가 아닙니다.
 
@@ -500,6 +500,6 @@ desktop/              Windows 한글 네이티브 객체 생성·사전검사·�
 
 ## 라이선스
 
-공개 라이선스는 정리 중입니다. 법령 원문과 정부 기구도 원본의 저작권·이용 조건은 각 제공기관의 안내를 따릅니다.
+공개 라이선스는 정리 중입니다. 법령 원문의 저작권·이용 조건은 각 제공기관의 안내를 따릅니다.
 
 HWPX 출력에 사용한 오픈소스 및 템플릿 고지는 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)에 정리했습니다.

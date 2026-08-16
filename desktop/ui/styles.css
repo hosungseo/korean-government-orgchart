@@ -167,6 +167,7 @@ button, input, textarea, select { font: inherit; }
 .drop-indicator { position: absolute; z-index: 5; inset: 20px; display: none; place-items: center; border: 2px dashed var(--action); border-radius: 12px; background: rgba(239, 247, 252, 0.93); color: var(--action); font-size: 13px; font-weight: 800; pointer-events: none; }
 .drawing-stage.drop-active .drop-indicator { display: grid; }
 .paper { width: min(510px, calc((100vh - 190px) * 0.7067)); aspect-ratio: 210 / 297; position: relative; flex: none; background: white; box-shadow: var(--shadow); animation: paper-in 260ms ease-out both; }
+.paper.is-landscape { width: min(920px, calc(100% - 8px), calc((100vh - 190px) * 1.414)); }
 .paper svg { display: block; width: 100%; height: 100%; }
 .paper-loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--quiet); font-size: 11px; }
 .paper-error { padding: 30px; color: var(--danger); text-align: center; line-height: 1.7; }
@@ -211,6 +212,7 @@ button, input, textarea, select { font: inherit; }
 .history-buttons button:hover, .history-compare:hover { background: #fff7df; }
 .history-buttons button:disabled, .history-compare:disabled { color: var(--quiet); cursor: wait; }
 .history-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 9px; }
+.history-select-grid small { margin-left: 3px; color: #9aa3ad; }
 .history-select-grid label { color: var(--muted); font-size: 8px; }
 .history-select-grid select { width: 100%; height: 28px; margin-top: 4px; padding: 0 4px; border: 1px solid var(--line-strong); border-radius: 4px; background: white; color: var(--ink); font-size: 8px; }
 .history-compare { width: 100%; margin-top: 8px; }

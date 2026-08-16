@@ -38,6 +38,7 @@ export class OrgGraph {
     this.nodes = new Map();
     this.edges = new Map();
     this.aliases = new Map();
+    this._nextSourceOrder = 0;
     this.rootId = this.addNode(institution, {
       kind: "institution",
       rank: 0,
@@ -75,6 +76,7 @@ export class OrgGraph {
       name: cleanName,
       kind: incomingKind,
       rank: attrs.rank ?? inferRank(cleanName, incomingKind),
+      sourceOrder: Number.isFinite(attrs.sourceOrder) ? attrs.sourceOrder : this._nextSourceOrder++,
       metadata: normalizeNodeMetadata(incomingKind, attrs.metadata),
       sources: attrs.source ? [attrs.source] : [],
     };
@@ -156,7 +158,10 @@ export class OrgGraph {
       .filter((edge) => edge.parent === node.id && (!types || types.includes(edge.type)))
       .map((edge) => ({ edge, node: this.nodes.get(edge.child) }))
       .filter((entry) => entry.node)
-      .sort((a, b) => a.node.rank - b.node.rank || a.node.name.localeCompare(b.node.name, "ko"));
+      .sort((a, b) => (
+        (a.node.rank ?? 99) - (b.node.rank ?? 99)
+        || (a.node.sourceOrder ?? 0) - (b.node.sourceOrder ?? 0)
+      ));
   }
 
   parentsOf(nodeOrId) {
@@ -397,9 +402,13 @@ export function orgGraphFromJSON(value) {
       name: rawNode.name,
       kind,
       rank: rawNode.rank ?? inferRank(rawNode.name, kind),
+      sourceOrder: Number.isFinite(rawNode.sourceOrder) ? rawNode.sourceOrder : graph._nextSourceOrder++,
       metadata: normalizeNodeMetadata(kind, rawNode.metadata),
       sources: Array.isArray(rawNode.sources) ? [...rawNode.sources] : [],
     });
+    if (Number.isFinite(rawNode.sourceOrder)) {
+      graph._nextSourceOrder = Math.max(graph._nextSourceOrder, rawNode.sourceOrder + 1);
+    }
   }
 
   let rootId = value.rootId && graph.nodes.has(value.rootId) ? value.rootId : null;

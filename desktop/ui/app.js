@@ -66,15 +66,21 @@ function svgText(object, geometry, style) {
   return `<text text-anchor="${anchor}" dominant-baseline="central" fill="${style.textColor || "#202020"}" font-family="${escapeXml(style.fontFamily || "Malgun Gothic")}, sans-serif" font-size="${fontSize}" font-weight="${style.bold ? 700 : 400}">${tspans}</text>`;
 }
 
+function dashAttr(style) {
+  if (style.dashArray) return `stroke-dasharray="${style.dashArray}"`;
+  if (style.dash === "dash") return `stroke-dasharray="2.6 1.4"`;
+  return "";
+}
+
 function svgObject(object) {
   const style = object.style || {};
   const geometry = object.geometry || {};
   if (object.type === "line") {
-    return `<line x1="${geometry.x1}" y1="${geometry.y1}" x2="${geometry.x2}" y2="${geometry.y2}" stroke="${style.stroke}" stroke-width="${style.strokeWidthMm}" stroke-linecap="square" ${style.dash === "dash" ? 'stroke-dasharray="1 1"' : ""}/>`;
+    return `<line x1="${geometry.x1}" y1="${geometry.y1}" x2="${geometry.x2}" y2="${geometry.y2}" stroke="${style.stroke}" stroke-width="${style.strokeWidthMm}" stroke-linecap="square" ${dashAttr(style)}/>`;
   }
   const fill = style.fill === "none" ? "none" : style.fill;
   const stroke = style.stroke === "none" ? "none" : style.stroke;
-  const rectangle = `<rect x="${geometry.x}" y="${geometry.y}" width="${geometry.width}" height="${geometry.height}" fill="${fill}" stroke="${stroke}" stroke-width="${style.strokeWidthMm || 0}" ${style.dash === "dash" ? 'stroke-dasharray="1 1"' : ""}/>`;
+  const rectangle = `<rect x="${geometry.x}" y="${geometry.y}" width="${geometry.width}" height="${geometry.height}" fill="${fill}" stroke="${stroke}" stroke-width="${style.strokeWidthMm || 0}" ${dashAttr(style)}/>`;
   if (object.type !== "textbox") return rectangle;
   return `${rectangle}${svgText(object, geometry, style)}`;
 }
@@ -86,6 +92,8 @@ function renderManifest(nextManifest) {
   const pageHeight = Number(manifest.page?.heightMm || 297);
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${pageWidth}mm" height="${pageHeight}mm" viewBox="0 0 ${pageWidth} ${pageHeight}" shape-rendering="geometricPrecision"><rect width="${pageWidth}" height="${pageHeight}" fill="#fff"/>${objects.map(svgObject).join("")}</svg>`;
   $("paper").style.aspectRatio = `${pageWidth} / ${pageHeight}`;
+  $("paper").classList.toggle("is-landscape", pageWidth > pageHeight);
+  $("paper").setAttribute("aria-label", pageWidth > pageHeight ? "A3 가로 조직도 미리보기" : "A4 세로 조직도 미리보기");
   $("paper").innerHTML = svg;
 }
 
@@ -117,7 +125,7 @@ function renderPreflight(report) {
       : "사전검사 통과";
   box.querySelector("p").textContent = errors.length
     ? "오류를 바로잡기 전에는 한글 생성을 시작하지 않습니다."
-    : `${summary.connectionChecks || 0}개 자식 계선의 상자 접합과 A4 경계를 확인했습니다.`;
+    : `${summary.connectionChecks || 0}개 자식 계선의 상자 접합과 용지 경계를 확인했습니다.`;
   const list = $("diagnosticList");
   list.replaceChildren();
   for (const item of diagnosticItems(report)) {
@@ -183,7 +191,7 @@ async function acceptManifest(nextManifest, sourceLabel, { preserveWorkflow = fa
     renderManifest(nextManifest);
     const warningMessage = validationReport.warnings.length
       ? `생성은 가능하지만 주의 ${validationReport.warnings.length}건을 먼저 확인하는 편이 좋습니다.`
-      : "A4 경계·객체 수·ID·자식 계선 접합 검사를 통과했습니다.";
+      : "용지 경계·객체 수·ID·자식 계선 접합 검사를 통과했습니다.";
     setStatus(validationReport.warnings.length ? "명세 검사 통과(주의 있음)" : "명세 검사 통과", warningMessage, validationReport.warnings.length ? "warning" : "success");
   } else {
     clearPreview("명세 오류를 바로잡으면 미리보기가 표시됩니다.");
@@ -226,24 +234,34 @@ function historyOptionLabel(snapshot) {
 }
 
 function renderHistorySelectors() {
-  const left = $("historyLeft");
-  const right = $("historyRight");
-  const previousLeft = left.value;
-  const previousRight = right.value;
-  left.replaceChildren();
-  right.replaceChildren();
-  for (const snapshot of historySnapshots) {
-    const label = historyOptionLabel(snapshot);
-    for (const select of [left, right]) {
+  const required = [$("historyLeft"), $("historyRight")];
+  const optional = [$("historyMid"), $("historyFourth")].filter(Boolean);
+  const previous = Object.fromEntries([...required, ...optional].map((select) => [select.id, select.value]));
+  for (const select of [...required, ...optional]) {
+    select.replaceChildren();
+    if (optional.includes(select)) {
+      const empty = document.createElement("option");
+      empty.value = "";
+      empty.textContent = "없음";
+      select.append(empty);
+    }
+    for (const snapshot of historySnapshots) {
       const option = document.createElement("option");
       option.value = snapshot.id;
-      option.textContent = label;
+      option.textContent = historyOptionLabel(snapshot);
       select.append(option);
     }
   }
   if (historySnapshots.length) {
-    left.value = historySnapshots.some((item) => item.id === previousLeft) ? previousLeft : historySnapshots.at(-1).id;
-    right.value = historySnapshots.some((item) => item.id === previousRight) ? previousRight : historySnapshots[0].id;
+    $("historyLeft").value = historySnapshots.some((item) => item.id === previous.historyLeft)
+      ? previous.historyLeft
+      : historySnapshots.at(-1).id;
+    $("historyRight").value = historySnapshots.some((item) => item.id === previous.historyRight)
+      ? previous.historyRight
+      : historySnapshots[0].id;
+    for (const select of optional) {
+      select.value = historySnapshots.some((item) => item.id === previous[select.id]) ? previous[select.id] : "";
+    }
   }
   $("compareHistoryButton").disabled = historySnapshots.length < 2;
 }
@@ -304,24 +322,40 @@ async function compareHistory() {
   const button = $("compareHistoryButton");
   button.disabled = true;
   try {
-    const left = await invoke("load_law_snapshot", { request: { id: $("historyLeft").value } });
-    const right = await invoke("load_law_snapshot", { request: { id: $("historyRight").value } });
-    renderHistoryDiff(compareLawSnapshots(left, right));
+    const selectedIds = [...new Set([
+      $("historyLeft").value,
+      $("historyRight").value,
+      $("historyMid")?.value,
+      $("historyFourth")?.value,
+    ].filter(Boolean))];
+    if (selectedIds.length < 2) throw new Error("서로 다른 기준일을 두 개 이상 고르세요.");
+    const loaded = [];
+    for (const id of selectedIds) {
+      loaded.push(await invoke("load_law_snapshot", { request: { id } }));
+    }
+    loaded.sort((left, right) => String(left.asOf || "").localeCompare(String(right.asOf || "")));
+    if (loaded.length === 2) {
+      renderHistoryDiff(compareLawSnapshots(loaded[0], loaded[1]));
+    } else {
+      $("historyDiff").innerHTML = `<strong>${escapeXml(loaded.map((item) => item.asOf || "기준일 없음").join(" → "))}</strong> · ${loaded.length}단 대비`;
+      $("historyDiff").hidden = false;
+    }
     lawWorkflow = buildNativeComparisonWorkflow({
-      beforeSnapshot: left,
-      afterSnapshot: right,
+      stages: loaded,
       focus: $("lawFocus")?.value,
+      onePage: true,
     });
     currentLawSnapshot = createLawSnapshot(lawWorkflow, {
-      label: `${lawWorkflow.summary.institution} · ${lawWorkflow.summary.beforeAsOf || "현행"} → ${lawWorkflow.summary.afterAsOf || "개정"}`,
+      label: `${lawWorkflow.summary.institution} · ${loaded.map((item) => item.asOf || "?").join(" → ")}`,
     });
     activeWorkflowPage = 0;
     renderPageNavigator();
     renderLawWorkflowSummary(lawWorkflow.summary);
     await selectWorkflowPage(0);
+    const paper = lawWorkflow.manifests[0]?.page?.paper || "A4";
     setStatus(
-      "두 조직도 작도 완료",
-      `${lawWorkflow.summary.beforeAsOf || "현행"}과 ${lawWorkflow.summary.afterAsOf || "개정"} 조직도를 좌우로 그렸습니다. 호 분할 비율은 다음 단계입니다.`,
+      "대비 조직도 작도 완료",
+      `${loaded.map((item) => item.asOf || "기준일 없음").join(" · ")}을 ${paper} ${loaded.length}단으로 그렸습니다. 바뀐 과만 점선, 신설·폐지는 글자입니다.`,
       "success",
     );
   } catch (error) {

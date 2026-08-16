@@ -24,7 +24,7 @@
     <aside class="control-rail">
       <div class="eyebrow">LAW TEXT → NATIVE HWPX · 0.4</div>
       <h2 id="manifestTitle">작도 명세를<br>검사하는 중</h2>
-      <p id="manifestDescription" class="lead">A4 세로 조직도를 한글 네이티브 객체로 변환합니다.</p>
+      <p id="manifestDescription" class="lead">A4 세로·A3 가로 조직도를 한글 네이티브 객체로 변환합니다.</p>
 
       <div class="manifest-loader">
         <input id="manifestFile" type="file" accept="application/json,.json" hidden>
@@ -83,7 +83,7 @@
 
       <div id="drawingStage" class="drawing-stage">
         <div class="drop-indicator">JSON 작도 명세 놓기</div>
-        <div id="paper" class="paper" aria-label="A4 세로 조직도 미리보기">
+        <div id="paper" class="paper" aria-label="조직도 미리보기">
           <div class="paper-loading">작도 명세를 읽는 중입니다.</div>
         </div>
       </div>
@@ -115,16 +115,18 @@
       </div>
       <div id="historyControls" class="history-controls" hidden>
         <h3>법령·조직 이력</h3>
-        <p class="history-help">두 기준일을 고르면 현행·개정 조직도를 좌우로 그립니다. 호가 어느 과로 몇 % 갔는지는 다음 단계입니다.</p>
+        <p class="history-help">2~4개 기준일을 고르면 기구도 대비표를 그립니다. 2단은 A4, 3단 이상은 A3 가로입니다. 바뀐 과만 점선, 신설·폐지는 글자입니다.</p>
         <div class="history-buttons">
           <button id="saveSnapshotButton" type="button">현재 조직도 이력 저장</button>
           <button id="refreshHistoryButton" type="button">저장 이력 새로고침</button>
         </div>
         <div class="history-select-grid">
-          <label>이전 기준일<select id="historyLeft" aria-label="이전 기준일"></select></label>
-          <label>현재 기준일<select id="historyRight" aria-label="현재 기준일"></select></label>
+          <label>1열<select id="historyLeft" aria-label="첫 기준일"></select></label>
+          <label>2열<select id="historyRight" aria-label="둘째 기준일"></select></label>
+          <label>3열<small>선택</small><select id="historyMid" aria-label="셋째 기준일"></select></label>
+          <label>4열<small>선택</small><select id="historyFourth" aria-label="넷째 기준일"></select></label>
         </div>
-        <button id="compareHistoryButton" class="history-compare" type="button">두 조직도 보기</button>
+        <button id="compareHistoryButton" class="history-compare" type="button">대비 조직도 보기</button>
         <div id="historyDiff" class="history-diff" hidden></div>
       </div>
       <div class="editability">

@@ -291,6 +291,21 @@ node src/cli.mjs compare-law \
   --change-appendix
 ```
 
+직제 기구도 자체로 전후를 나란히 보려면 `compare-native`를 씁니다. 규칙집 [§7의4](docs/drafting-rulebook.md)대로 **2단은 A4 세로, 3단 이상은 A3 가로**이고, 점선은 바뀐 과만, 신설·폐지는 상자 안 글자입니다. `compare-json`/`compare-law`의 변경 레인형과는 다른 출력입니다.
+
+```bash
+node src/cli.mjs compare-native \
+  --stage work/legal-snapshots/mois-20251001 \
+  --stage work/legal-snapshots/mois \
+  --stage work/legal-snapshots/mois-2026 \
+  --focus "디지털정부혁신실, 인공지능정부실, 참여혁신국, 조직국, 참여혁신조직실" \
+  --svg outputs/행정안전부-3단-대비.svg \
+  --png outputs/행정안전부-3단-대비.png \
+  --json outputs/행정안전부-3단-대비.native.json
+```
+
+문언 파일 두 시점이면 `--before-input`/`--after-input`도 됩니다. Windows 데스크톱은 같은 명세를 한글로 만듭니다. 2단은 A4, 3단 이상은 A3 가로입니다.
+
 법제처 기준일 두 개를 직접 비교할 때는 원문 파일 대신 기관명과 날짜를 지정합니다.
 
 ```bash
@@ -453,7 +468,7 @@ node src/cli.mjs review-pack \
 
 행정안전부·문화체육관광부·공정거래위원회 기구도, 2026년 중앙행정기관 취합본 66개 파일(195면), 정부기구도 범례를 대조했습니다.
 
-- [직제 문언 → 기구도 작도 규칙집](docs/drafting-rulebook.md)
+- [직제 문언 → 기구도 작도 규칙집](docs/drafting-rulebook.md) — 시점 대비표는 §7의4
 - [참조 PPT 분석과 법적 조직 모델](docs/reference-and-legal-model.md)
 
 별표 매트릭스가 필요한 지방관서의 실제 편성은 원문 확보 전까지 추정하지 않습니다. 생성 결과는 조직도 초안과 분석 도구이며, 법률 자문·인사 발령의 근거가 아닙니다.

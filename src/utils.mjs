@@ -20,7 +20,16 @@ export async function writeText(filePath, text) {
 }
 
 export function parseArgs(argv) {
-  const repeatedKeys = new Set(["input", "law", "before-input", "after-input", "before-law", "after-law"]);
+  const repeatedKeys = new Set([
+    "input",
+    "law",
+    "before-input",
+    "after-input",
+    "before-law",
+    "after-law",
+    "stage",
+    "stage-date",
+  ]);
   const args = {
     _: [],
     input: [],
@@ -29,6 +38,8 @@ export function parseArgs(argv) {
     "after-input": [],
     "before-law": [],
     "after-law": [],
+    stage: [],
+    "stage-date": [],
   };
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index];

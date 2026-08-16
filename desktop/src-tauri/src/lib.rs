@@ -410,17 +410,23 @@ fn analyze_manifest(manifest: &Value) -> Result<Value, String> {
     let page = manifest
         .get("page")
         .ok_or_else(|| "용지(page) 정보가 없습니다.".to_string())?;
-    if page.get("paper").and_then(Value::as_str) != Some("A4")
-        || page.get("orientation").and_then(Value::as_str) != Some("portrait")
-    {
-        return Err("현재 앱은 A4 세로 명세만 지원합니다.".to_string());
-    }
     let page_width = required_number(page, "widthMm", "용지")?;
     let page_height = required_number(page, "heightMm", "용지")?;
-    if (page_width - 210.0).abs() > PAGE_TOLERANCE_MM
-        || (page_height - 297.0).abs() > PAGE_TOLERANCE_MM
-    {
-        return Err("A4 세로 크기는 210×297mm여야 합니다.".to_string());
+    let paper = page.get("paper").and_then(Value::as_str).unwrap_or("");
+    let orientation = page
+        .get("orientation")
+        .and_then(Value::as_str)
+        .unwrap_or("");
+    let a4_portrait = paper == "A4"
+        && orientation == "portrait"
+        && (page_width - 210.0).abs() <= PAGE_TOLERANCE_MM
+        && (page_height - 297.0).abs() <= PAGE_TOLERANCE_MM;
+    let a3_landscape = paper == "A3"
+        && orientation == "landscape"
+        && (page_width - 420.0).abs() <= PAGE_TOLERANCE_MM
+        && (page_height - 297.0).abs() <= PAGE_TOLERANCE_MM;
+    if !a4_portrait && !a3_landscape {
+        return Err("현재 앱은 A4 세로 또는 A3 가로 명세를 지원합니다.".to_string());
     }
     let margin = page
         .get("marginMm")
@@ -491,7 +497,7 @@ fn analyze_manifest(manifest: &Value) -> Result<Value, String> {
                     || point[0] > page_width + PAGE_TOLERANCE_MM
                     || point[1] > page_height + PAGE_TOLERANCE_MM
             }) {
-                return Err(format!("{object_id} 선이 A4 용지 밖으로 나갑니다."));
+                return Err(format!("{object_id} 선이 용지 밖으로 나갑니다."));
             }
             let dx = (x2 - x1).abs();
             let dy = (y2 - y1).abs();
@@ -525,7 +531,7 @@ fn analyze_manifest(manifest: &Value) -> Result<Value, String> {
                 || x + width > page_width + PAGE_TOLERANCE_MM
                 || y + height > page_height + PAGE_TOLERANCE_MM
             {
-                return Err(format!("{object_id} 객체가 A4 용지 밖으로 나갑니다."));
+                return Err(format!("{object_id} 객체가 용지 밖으로 나갑니다."));
             }
         }
         validate_style(object, object_id, object_type)?;
@@ -1034,7 +1040,7 @@ mod tests {
             .map(|value| *value = json!(10.0));
         assert!(analyze_manifest(&manifest)
             .unwrap_err()
-            .contains("A4 용지 밖"));
+            .contains("용지 밖"));
     }
 
     #[test]

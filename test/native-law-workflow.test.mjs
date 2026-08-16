@@ -163,6 +163,240 @@ test("두 시점 조직도를 좌우에 각각 그린다", () => {
   assert.equal(analyzeNativeManifest(manifest).valid, true);
 });
 
+test("두 개편을 한 장의 위아래 대역으로 합친다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    before: { decreeText: decree, ruleText: rule, asOf: "2024-12-31" },
+    after: { decreeText: afterDecree, ruleText: afterRule, asOf: "2026-07-21" },
+    focus: "디지털정부실, 참여혁신실, 인공지능정부실, 참여혁신조직실",
+    onePage: true,
+  });
+  const manifest = workflow.manifests[0];
+  const boxes = Object.fromEntries(
+    manifest.objects
+      .filter((object) => object.metadata?.role === "organization-node")
+      .map((object) => [object.metadata.nodeName, object]),
+  );
+  const bands = manifest.objects.filter((object) => object.metadata?.role === "comparison-band");
+
+  assert.equal(workflow.summary.pageCount, 1);
+  assert.equal(workflow.summary.comparison, "dual-outline-bands");
+  assert.equal(workflow.manifests.length, 1);
+  assert.ok(boxes["디지털정부실"]);
+  assert.ok(boxes["참여혁신실"]);
+  assert.ok(boxes["인공지능정부실"]);
+  assert.ok(boxes["참여혁신조직실"]);
+  assert.ok(boxes["디지털정부실"].geometry.y < boxes["참여혁신실"].geometry.y);
+  assert.ok(boxes["인공지능정부실"].geometry.y < boxes["참여혁신조직실"].geometry.y);
+  assert.ok(Math.abs(boxes["디지털정부실"].geometry.y - boxes["인공지능정부실"].geometry.y) < 8);
+  assert.ok(Math.abs(boxes["참여혁신실"].geometry.y - boxes["참여혁신조직실"].geometry.y) < 20);
+  assert.equal(bands.length, 2);
+  assert.equal(boxes["디지털정부실"].style.fill, "#FFF4A3");
+  assert.equal(boxes["참여혁신조직실"].style.fill, "#FFF4A3");
+  assert.equal(boxes["조직국"].style.fill, "#DFF2E3");
+  assert.ok(
+    manifest.objects
+      .filter((object) => object.metadata?.role === "organization-node" && /과$/.test(object.metadata.nodeName))
+      .every((object) => object.style.fill === "#FFFFFF"),
+  );
+  const beforeByName = Object.fromEntries(
+    manifest.objects
+      .filter((object) => object.metadata?.role === "organization-node" && object.metadata.side === "before")
+      .map((object) => [object.metadata.nodeName, object]),
+  );
+  assert.ok(beforeByName["인공지능정책과"].geometry.y < beforeByName["공공서비스혁신과"].geometry.y);
+  assert.ok(beforeByName["조직기획과"].geometry.y < beforeByName["조직진단과"].geometry.y);
+  const links = manifest.objects.filter((object) => object.metadata?.role === "correspondence-link");
+  const wraps = manifest.objects.filter((object) => object.metadata?.role === "correspondence-wrap");
+  assert.equal(wraps.some((object) => object.metadata.unit === "디지털정부실"), false);
+  assert.equal(wraps.some((object) => object.metadata.unit === "조직국"), false);
+  assert.ok(links.every((object) => object.style.color !== "#64748B"));
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("좌우 대비 연결선은 변화한 과만 다른 색으로 잇는다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    before: {
+      institution: "시험부",
+      asOf: "2025-10-01",
+      decreeText: `시험부와 그 소속기관 직제
+제2조(하부조직) 시험부에 디지털정부혁신실 및 조직국을 둔다.
+제3조(디지털정부혁신실) 디지털정부혁신실에 정부혁신국을 둔다.`,
+      ruleText: `시험부와 그 소속기관 직제 시행규칙
+제3조(디지털정부혁신실) 정부혁신국에 혁신기획과 및 정보공개과를 둔다.
+제4조(조직국) 조직국에 조직기획과를 둔다.`,
+    },
+    after: {
+      institution: "시험부",
+      asOf: "2026-07-21",
+      decreeText: `시험부와 그 소속기관 직제
+제2조(하부조직) 시험부에 인공지능정부실 및 참여혁신조직실을 둔다.
+제3조(참여혁신조직실) 참여혁신조직실에 참여혁신국 및 조직국을 둔다.`,
+      ruleText: `시험부와 그 소속기관 직제 시행규칙
+제3조(참여혁신조직실) 참여혁신국에 혁신기획과 및 정보공개제도과를 두고, 조직국에 조직기획과를 둔다.`,
+    },
+    focus: "디지털정부혁신실, 조직국, 인공지능정부실, 참여혁신조직실",
+    onePage: true,
+  });
+  const manifest = workflow.manifests[0];
+  const wraps = manifest.objects.filter((object) => object.metadata?.role === "correspondence-wrap");
+  const linkColors = [...new Set(
+    manifest.objects
+      .filter((object) => object.metadata?.role === "correspondence-link")
+      .map((object) => object.style.color),
+  )];
+  assert.equal(wraps.some((object) => object.metadata.unit === "혁신기획과"), false);
+  assert.ok(wraps.some((object) => object.metadata.unit === "정보공개과"));
+  assert.ok(wraps.some((object) => object.metadata.unit === "정보공개제도과"));
+  assert.equal(wraps.some((object) => object.metadata.unit === "조직기획과"), false);
+  assert.equal(wraps.some((object) => object.metadata.unit === "조직국"), false);
+  const strokes = [...new Set(
+    manifest.objects
+      .filter((object) => object.metadata?.role === "correspondence-link")
+      .map((object) => object.style.stroke),
+  )];
+  const spines = manifest.objects.filter((object) => /spine$/.test(object.id));
+  assert.ok(linkColors.length >= 1);
+  assert.ok(linkColors.every((color) => color !== "#64748B" && color !== "#4A6F8C"));
+  assert.ok(strokes.length >= 1);
+  assert.ok(strokes.every((color) => color !== "#64748B"));
+  assert.ok(spines.length >= 1);
+  assert.ok(manifest.objects.some((object) => object.metadata?.role === "correspondence-underlay"));
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+const midDecree = `
+시험행정부와 그 소속기관 직제
+제4조(하부조직) 시험행정부에 인공지능정부실 및 참여혁신실을 둔다.
+제5조(인공지능정부실) 인공지능정부실에 인공지능정책국을 둔다.
+제6조(참여혁신실) 참여혁신실에 참여혁신국 및 조직국을 둔다.
+`;
+
+const midRule = `
+시험행정부와 그 소속기관 직제 시행규칙
+제3조(인공지능정부실) 인공지능정책국에 인공지능정책과를 둔다.
+제4조(참여혁신실) 참여혁신국에 혁신기획과를 두고, 조직국에 조직기획과를 둔다.
+`;
+
+test("세 시점은 A3 가로 3단으로 작도한다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    stages: [
+      { decreeText: decree, ruleText: rule, asOf: "2025-10-01" },
+      { decreeText: midDecree, ruleText: midRule, asOf: "2025-11-25" },
+      { decreeText: afterDecree, ruleText: afterRule, asOf: "2026-07-21" },
+    ],
+    focus: "디지털정부실, 인공지능정부실, 참여혁신실, 참여혁신조직실, 조직국",
+    onePage: true,
+  });
+  const manifest = workflow.manifests[0];
+  const headers = manifest.objects.filter((object) => object.metadata?.role === "comparison-header");
+  assert.equal(workflow.summary.columns, 3);
+  assert.equal(workflow.summary.paper, "A3");
+  assert.equal(workflow.summary.layout, "comparison-multi-column");
+  assert.equal(manifest.page.paper, "A3");
+  assert.equal(manifest.page.orientation, "landscape");
+  assert.equal(manifest.page.widthMm, 420);
+  assert.equal(manifest.page.heightMm, 297);
+  assert.equal(headers.length, 3);
+  assert.ok(manifest.objects.some((object) => object.metadata?.nodeName === "디지털정부실"));
+  assert.ok(manifest.objects.some((object) => object.metadata?.nodeName === "인공지능정부실"));
+  assert.ok(manifest.objects.filter((object) => object.metadata?.role === "comparison-divider").length >= 2);
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+const lateRule = `
+시험행정부와 그 소속기관 직제 시행규칙
+제3조(인공지능정부실) 인공지능정책국에 인공지능정책과ㆍ공공서비스혁신과를 두고, 공공데이터국에 데이터정책과ㆍ데이터분석과를 둔다.
+제4조(참여혁신조직실) 참여혁신국에 혁신기획과ㆍ국민참여정책과를 두고, 조직국에 조직기획과ㆍ조직진단과ㆍ법사조직과를 둔다.
+`;
+
+test("네 시점은 A3 가로 4단으로 작도한다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    stages: [
+      { decreeText: decree, ruleText: rule, asOf: "2025-10-01" },
+      { decreeText: midDecree, ruleText: midRule, asOf: "2025-11-25" },
+      { decreeText: afterDecree, ruleText: afterRule, asOf: "2026-01-01" },
+      { decreeText: afterDecree, ruleText: lateRule, asOf: "2026-07-21" },
+    ],
+    focus: "디지털정부실, 인공지능정부실, 참여혁신실, 참여혁신조직실, 조직국",
+    onePage: true,
+  });
+  const manifest = workflow.manifests[0];
+  const headers = manifest.objects.filter((object) => object.metadata?.role === "comparison-header");
+  const boxes = manifest.objects.filter((object) => object.metadata?.role === "organization-node");
+  assert.equal(workflow.summary.columns, 4);
+  assert.equal(workflow.summary.paper, "A3");
+  assert.equal(manifest.page.paper, "A3");
+  assert.equal(manifest.page.widthMm, 420);
+  assert.equal(headers.length, 4);
+  assert.ok(boxes.some((object) => object.text === "디지털정부실"));
+  assert.ok(boxes.some((object) => object.text === "참여혁신조직실"));
+  assert.ok(boxes.some((object) => object.text === "법사조직과"));
+  assert.equal(manifest.objects.filter((object) => object.metadata?.role === "comparison-divider").length, 3);
+  assert.ok(boxes.every((object) => object.geometry.x + object.geometry.width <= 408.001));
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("대응 없는 과는 처음 나타난 열에 신설, 사라진 열에 폐지로 표시한다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    before: {
+      institution: "시험부",
+      asOf: "2025-10-01",
+      decreeText: `시험부와 그 소속기관 직제
+제2조(하부조직) 시험부에 조직국을 둔다.`,
+      ruleText: `시험부와 그 소속기관 직제 시행규칙
+제3조(조직국) 조직국에 조직기획과ㆍ조직진단과 및 정보공개과를 둔다.`,
+    },
+    after: {
+      institution: "시험부",
+      asOf: "2026-01-01",
+      decreeText: `시험부와 그 소속기관 직제
+제2조(하부조직) 시험부에 조직국을 둔다.`,
+      ruleText: `시험부와 그 소속기관 직제 시행규칙
+제3조(조직국) 조직국에 조직기획과ㆍ정보공개제도과 및 법사조직과를 둔다.`,
+    },
+    focus: "조직국",
+    onePage: true,
+  });
+  const manifest = workflow.manifests[0];
+  const labels = manifest.objects.filter((object) => object.metadata?.role === "status-label");
+  const created = labels.filter((object) => object.metadata.status === "신설");
+  const abolished = labels.filter((object) => object.metadata.status === "폐지");
+  const boxes = Object.fromEntries(
+    manifest.objects
+      .filter((object) => object.metadata?.role === "organization-node")
+      .map((object) => [object.metadata.nodeName, object]),
+  );
+  assert.deepEqual(created.map((object) => object.metadata.unit).sort(), ["법사조직과"]);
+  assert.deepEqual(abolished.map((object) => object.metadata.unit).sort(), ["조직진단과"]);
+  assert.equal(labels.some((object) => object.metadata.unit === "정보공개과"), false);
+  assert.equal(labels.some((object) => object.metadata.unit === "정보공개제도과"), false);
+  assert.equal(labels.some((object) => object.metadata.unit === "조직기획과"), false);
+  assert.equal(created[0].style.textColor, "#9A3412");
+  assert.equal(abolished[0].style.textColor, "#7B8794");
+  assert.equal(boxes["법사조직과"].style.fill, "#FFFFFF");
+  assert.ok(created[0].geometry.x > boxes["법사조직과"].geometry.x);
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("4단에서 신설은 처음 나타난 열에만 찍는다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    stages: [
+      { decreeText: decree, ruleText: rule, asOf: "2025-10-01" },
+      { decreeText: midDecree, ruleText: midRule, asOf: "2025-11-25" },
+      { decreeText: afterDecree, ruleText: afterRule, asOf: "2026-01-01" },
+      { decreeText: afterDecree, ruleText: lateRule, asOf: "2026-07-21" },
+    ],
+    focus: "디지털정부실, 인공지능정부실, 참여혁신실, 참여혁신조직실, 조직국",
+    onePage: true,
+  });
+  const labels = workflow.manifests[0].objects.filter((object) => (
+    object.metadata?.role === "status-label" && object.metadata.unit === "법사조직과"
+  ));
+  assert.equal(labels.length, 1);
+  assert.equal(labels[0].metadata.status, "신설");
+  assert.equal(labels[0].metadata.side, "c4");
+});
+
 test("저장된 스냅샷 두 개로도 좌우 조직도를 복원한다", () => {
   const before = buildNativeLawWorkflow({ decreeText: decree, ruleText: rule, asOf: "2024-12-31" });
   const after = buildNativeLawWorkflow({ decreeText: afterDecree, ruleText: afterRule, asOf: "2026-07-21" });
@@ -196,15 +430,44 @@ test("좌우 조직도 아래 호 분할은 갈라진 과를 모두 표시한다
   });
   const manifest = workflow.manifests[0];
   const line = manifest.objects.find((object) => object.metadata?.role === "allocation-line");
-  const badge = manifest.objects.find((object) => object.metadata?.role === "allocation-badge");
+  const wraps = manifest.objects.filter((object) => object.metadata?.role === "allocation-wrap");
+  const links = manifest.objects.filter((object) => object.metadata?.role === "allocation-link");
+  const labels = manifest.objects.filter((object) => object.metadata?.role === "allocation-link-label");
   assert.equal(workflow.summary.dutyAllocation.notable.length, 1);
   assert.match(line.text, /40% → 인공지능정책과/);
   assert.match(line.text, /60% → 데이터정책과/);
-  assert.match(badge.text, /40%→인공지능정책과/);
-  assert.match(badge.text, /60%→데이터정책과/);
-  assert.ok(badge.geometry.x >= 70);
+  assert.ok(wraps.some((object) => object.metadata.side === "before" && object.metadata.unit === "디지털정책과"));
+  assert.ok(wraps.some((object) => object.metadata.side === "after" && object.metadata.unit === "인공지능정책과"));
+  assert.ok(wraps.some((object) => object.metadata.side === "after" && object.metadata.unit === "데이터정책과"));
+  assert.ok(wraps.every((object) => object.type === "rectangle" && object.style.dash === "dash"));
+  assert.ok(links.length >= 4);
+  assert.ok(links.every((object) => (
+    object.geometry.x1 === object.geometry.x2 || object.geometry.y1 === object.geometry.y2
+  )));
+  assert.deepEqual(labels.map((object) => object.text).sort(), ["40%", "60%"]);
+  const nodes = manifest.objects.filter((object) => object.metadata?.role === "organization-node");
+  for (const wrap of wraps) {
+    for (const node of nodes) {
+      if (node.metadata.nodeName === wrap.metadata.unit) continue;
+      assert.equal(boxesOverlap(wrap.geometry, node.geometry, 0.08), false, `${wrap.metadata.unit} 점선이 ${node.text}와 겹치면 안 됩니다`);
+    }
+  }
+  const destWraps = wraps.filter((object) => object.metadata.side === "after");
+  for (let index = 0; index < destWraps.length; index += 1) {
+    for (let next = index + 1; next < destWraps.length; next += 1) {
+      assert.equal(boxesOverlap(destWraps[index].geometry, destWraps[next].geometry, 0.08), false);
+    }
+  }
+  assert.ok(labels.every((label) => label.geometry.x + label.geometry.width <= 124.5));
   assert.equal(analyzeNativeManifest(manifest).valid, true);
 });
+
+function boxesOverlap(left, right, slack = 0.05) {
+  return left.x < right.x + right.width - slack
+    && left.x + left.width > right.x + slack
+    && left.y < right.y + right.height - slack
+    && left.y + left.height > right.y + slack;
+}
 
 test("시행규칙에서 소관 과가 확인된 관은 국처럼 과를 하위 계선으로 묶는다", () => {
   const workflow = buildNativeLawWorkflow({

@@ -58,6 +58,40 @@ test("한글 Automation 스크립트는 Windows PowerShell 5.1용 UTF-8 BOM을 �
   assert.deepEqual([...script.subarray(0, 3)], [0xef, 0xbb, 0xbf]);
 });
 
+test("Windows 실기 검증 스크립트는 PowerShell 5.1용 UTF-8 BOM을 유지한다", () => {
+  const script = readFileSync(new URL("../desktop/verify-windows.ps1", import.meta.url));
+  assert.deepEqual([...script.subarray(0, 3)], [0xef, 0xbb, 0xbf]);
+});
+
+test("쪽 설정은 한글 버전 간 호환되는 HSet 파라미터 API를 사용한다", () => {
+  const script = readFileSync(
+    new URL("../desktop/src-tauri/resources/hwp-native.ps1", import.meta.url),
+    "utf8",
+  );
+  assert.match(script, /HSet\.SetItem\("ApplyClass", 24\)/);
+  assert.match(script, /HSet\.SetItem\("ApplyTo", 3\)/);
+  assert.match(script, /HSet\.SetItem\("ShapeCreationMode", 0\)/);
+  assert.match(script, /HSet\.SetItem\("FlowWithText", 0\)/);
+  assert.match(script, /TextWrapType\("BehindText"\)/);
+  assert.doesNotMatch(script, /TextWrapType\("TopAndBottom"\)/);
+  assert.match(script, /HSet\.SetItem\("ShapeCreationType", 0\)/);
+  assert.match(script, /HSet\.SetItem\("ShapeCreationType", 1\)/);
+  assert.match(script, /CreatePt\.Item\(0\)\s*=/);
+  assert.doesNotMatch(script, /\$section\.Apply(?:Class|To)\s*=/);
+  assert.doesNotMatch(script, /\$shape\.ShapeCreation(?:Mode|Type)\s*=/i);
+  assert.doesNotMatch(script, /\$points\s*=\s*\$layout\.CreateItemArray/);
+});
+
+test("파일 접근 보안모듈이 없으면 한글 생성을 즉시 중단한다", () => {
+  const script = readFileSync(
+    new URL("../desktop/src-tauri/resources/hwp-native.ps1", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(script, /if \(-not \$holder\.SecurityModuleRegistered\)/);
+  assert.match(script, /파일 접근 보안모듈이 등록되어 있지 않습니다/);
+});
+
 test("Windows NSIS 번들은 생성된 ICO 아이콘을 명시적으로 사용한다", () => {
   const config = JSON.parse(readFileSync(new URL("../desktop/src-tauri/tauri.conf.json", import.meta.url), "utf8"));
   assert.deepEqual(config.bundle.targets, ["nsis"]);

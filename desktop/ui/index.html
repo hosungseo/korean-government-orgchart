@@ -113,6 +113,20 @@
         </dl>
         <p id="parseWarning"></p>
       </div>
+      <div id="historyControls" class="history-controls" hidden>
+        <h3>법령·조직 이력</h3>
+        <p class="history-help">현재 문언을 기준일별 조직 스냅샷으로 저장하고 두 시점을 비교합니다.</p>
+        <div class="history-buttons">
+          <button id="saveSnapshotButton" type="button">현재 조직도 이력 저장</button>
+          <button id="refreshHistoryButton" type="button">저장 이력 새로고침</button>
+        </div>
+        <div class="history-select-grid">
+          <label>이전 기준일<select id="historyLeft" aria-label="이전 기준일"></select></label>
+          <label>현재 기준일<select id="historyRight" aria-label="현재 기준일"></select></label>
+        </div>
+        <button id="compareHistoryButton" class="history-compare" type="button">개편 내역 비교</button>
+        <div id="historyDiff" class="history-diff" hidden></div>
+      </div>
       <div class="editability">
         <h3>한글에서 가능한 편집</h3>
         <ul>
@@ -143,7 +157,17 @@
       <div class="law-meta-grid">
         <label>기관명 <small>비워두면 문언에서 추론</small><input id="lawInstitution" placeholder="예: 행정안전부"></label>
         <label>기준일 <small>선택</small><input id="lawAsOf" type="date"></label>
+        <label>Open API OC <small>조회 후 즉시 지움</small><input id="lawApiOc" type="password" autocomplete="off" placeholder="국가법령정보센터 OC"></label>
         <label class="focus-field">작도 범위 <small>쉼표로 여러 실·국 지정, 비우면 전체 자동 분할</small><input id="lawFocus" list="focusOptions" placeholder="예: 인공지능정부실, 참여혁신조직실"><datalist id="focusOptions"></datalist></label>
+        <label class="layout-field">표현 방식 <small>조직도 또는 좌우 대비표</small><select id="lawLayout" aria-label="표현 방식"><option value="outline">세로 조직도</option><option value="comparison-two-column">좌우 2단 대비표</option></select></label>
+      </div>
+
+      <div class="law-api-row">
+        <span id="lawApiStatus">기관명과 OC를 넣으면 직제·시행규칙 현행본을 한 번에 채웁니다.</span>
+        <div class="law-api-actions">
+          <button id="fetchLawApiButton" type="button">공식 API에서 두 법령 불러오기</button>
+          <button id="collectHistoryButton" class="secondary-api-button" type="button">최근 5년 이력 수집</button>
+        </div>
       </div>
 
       <div class="law-text-grid">

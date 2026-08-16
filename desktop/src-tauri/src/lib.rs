@@ -10,11 +10,13 @@ use std::time::{SystemTime, UNIX_EPOCH};
 use tauri::Manager;
 
 const HWP_NATIVE_SCRIPT: &str = include_str!("../resources/hwp-native.ps1");
+const LAW_OPEN_API_SCRIPT: &str = include_str!("../resources/law-open-api.ps1");
 const SAMPLE_NATIVE_MANIFEST: &str =
     include_str!("../resources/mois-ai-participation-left.native.json");
 const HWP_NATIVE_MANIFEST_SCHEMA: &str = "kr.go.mois.orgchart.hwp-native/v1";
 const MAX_MANIFEST_BYTES: usize = 10 * 1024 * 1024;
 const MAX_NATIVE_OBJECTS: usize = 5_000;
+const MAX_LAW_HISTORY_BYTES: usize = 64 * 1024 * 1024;
 const PAGE_TOLERANCE_MM: f64 = 0.02;
 const CONNECTION_TOLERANCE_MM: f64 = 1.05;
 
@@ -34,6 +36,26 @@ struct ValidateManifestRequest {
     manifest_json: String,
 }
 
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct LawApiRequest {
+    oc: String,
+    institution: String,
+    as_of: String,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct LawSnapshotRequest {
+    snapshot_json: String,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct LawHistoryItemRequest {
+    id: String,
+}
+
 fn unique_run_dir(app: &tauri::AppHandle, label: &str) -> Result<PathBuf, String> {
     let cache = app
         .path()
@@ -51,7 +73,7 @@ fn unique_run_dir(app: &tauri::AppHandle, label: &str) -> Result<PathBuf, String
 
 fn write_utf8_bom(path: &Path, contents: &str) -> Result<(), String> {
     let mut bytes = vec![0xEF, 0xBB, 0xBF];
-    bytes.extend_from_slice(contents.as_bytes());
+    bytes.extend_from_slice(contents.trim_start_matches('\u{feff}').as_bytes());
     fs::write(path, bytes)
         .map_err(|error| format!("PowerShell 모듈을 준비하지 못했습니다: {error}"))
 }
@@ -121,6 +143,29 @@ fn parse_json_output(output: &Output) -> Result<Value, String> {
         })
 }
 
+fn validate_law_api_request(request: &LawApiRequest) -> Result<(), String> {
+    let oc = request.oc.trim();
+    if oc.len() < 3 || oc.len() > 200 || oc.chars().any(char::is_control) {
+        return Err("Open API OC 값을 확인해 주세요.".to_string());
+    }
+    let institution = request.institution.trim();
+    if institution.len() < 2
+        || institution.len() > 100
+        || institution.chars().any(char::is_control)
+    {
+        return Err("기관명을 정확히 입력해 주세요.".to_string());
+    }
+    let date_digits: String = request
+        .as_of
+        .chars()
+        .filter(|character| character.is_ascii_digit())
+        .collect();
+    if date_digits.len() != 8 {
+        return Err("기준일은 YYYY-MM-DD 형식이어야 합니다.".to_string());
+    }
+    Ok(())
+}
+
 fn sanitize_file_name(value: &str) -> String {
     let source = if value.trim().is_empty() {
         "행정안전부-인공지능정부실-참여혁신조직실-편집형.hwpx"
@@ -183,6 +228,51 @@ fn output_directory(app: &tauri::AppHandle) -> Result<PathBuf, String> {
     fs::create_dir_all(&directory)
         .map_err(|error| format!("출력 폴더를 만들지 못했습니다: {error}"))?;
     Ok(directory)
+}
+
+fn law_history_file(app: &tauri::AppHandle) -> Result<PathBuf, String> {
+    let directory = app
+        .path()
+        .app_data_dir()
+        .map_err(|error| format!("법령 이력 폴더를 찾지 못했습니다: {error}"))?
+        .join("law-history");
+    fs::create_dir_all(&directory)
+        .map_err(|error| format!("법령 이력 폴더를 만들지 못했습니다: {error}"))?;
+    Ok(directory.join("law-history.json"))
+}
+
+fn read_law_history(app: &tauri::AppHandle) -> Result<Value, String> {
+    let path = law_history_file(app)?;
+    if !path.exists() {
+        return Ok(json!({
+            "schema": "kr.go.mois.orgchart.history-db/v1",
+            "updatedAtUnixMs": unix_time_millis(),
+            "snapshots": [],
+        }));
+    }
+    let bytes = fs::read(&path).map_err(|error| format!("법령 이력을 읽지 못했습니다: {error}"))?;
+    if bytes.len() > MAX_LAW_HISTORY_BYTES {
+        return Err("법령 이력 DB가 64MB를 초과했습니다. 오래된 이력을 정리해 주세요.".to_string());
+    }
+    let history: Value = serde_json::from_slice(&bytes)
+        .map_err(|error| format!("법령 이력 DB가 손상되었습니다: {error}"))?;
+    if !history.is_object() {
+        return Err("법령 이력 DB 형식이 올바르지 않습니다.".to_string());
+    }
+    Ok(history)
+}
+
+fn write_law_history(app: &tauri::AppHandle, history: &Value) -> Result<PathBuf, String> {
+    let path = law_history_file(app)?;
+    let contents = serde_json::to_vec_pretty(history)
+        .map_err(|error| format!("법령 이력을 직렬화하지 못했습니다: {error}"))?;
+    if contents.len() > MAX_LAW_HISTORY_BYTES {
+        return Err("법령 이력 DB가 64MB를 초과합니다. 오래된 이력을 정리해 주세요.".to_string());
+    }
+    let temporary = path.with_extension("json.tmp");
+    fs::write(&temporary, &contents).map_err(|error| format!("법령 이력을 저장하지 못했습니다: {error}"))?;
+    fs::rename(&temporary, &path).map_err(|error| format!("법령 이력 DB를 교체하지 못했습니다: {error}"))?;
+    Ok(path)
 }
 
 fn companion_path(output_path: &Path, suffix: &str) -> PathBuf {
@@ -618,6 +708,167 @@ async fn hwp_runtime_info(app: tauri::AppHandle) -> Result<Value, String> {
 }
 
 #[tauri::command]
+async fn fetch_official_laws(
+    app: tauri::AppHandle,
+    request: LawApiRequest,
+) -> Result<Value, String> {
+    validate_law_api_request(&request)?;
+    if env::consts::OS != "windows" {
+        return Err("공식 법령 자동조회는 Windows 앱에서 사용할 수 있습니다.".to_string());
+    }
+    let run_dir = unique_run_dir(&app, "law-api")?;
+    let script_path = run_dir.join("law-open-api.ps1");
+    write_utf8_bom(&script_path, LAW_OPEN_API_SCRIPT)?;
+    let oc = request.oc.trim().to_string();
+    let institution = request.institution.trim().to_string();
+    let as_of = request.as_of.trim().to_string();
+    let script_for_task = script_path.clone();
+    let output = tauri::async_runtime::spawn_blocking(move || {
+        run_powershell(
+            &script_for_task,
+            [
+                OsStr::new("-Oc"),
+                OsStr::new(&oc),
+                OsStr::new("-Institution"),
+                OsStr::new(&institution),
+                OsStr::new("-AsOf"),
+                OsStr::new(&as_of),
+            ],
+        )
+    })
+    .await
+    .map_err(|error| format!("공식 법령 조회 작업이 중단되었습니다: {error}"))??;
+    let result = parse_json_output(&output);
+    let _ = fs::remove_dir_all(&run_dir);
+    result
+}
+
+#[tauri::command]
+fn list_law_snapshots(app: tauri::AppHandle) -> Result<Value, String> {
+    let history = read_law_history(&app)?;
+    let snapshots = history
+        .get("snapshots")
+        .and_then(Value::as_array)
+        .cloned()
+        .unwrap_or_default();
+    let summaries: Vec<Value> = snapshots
+        .iter()
+        .map(|snapshot| {
+            let graph = snapshot.get("graph");
+            let node_count = graph
+                .and_then(|value| value.get("nodes"))
+                .and_then(Value::as_array)
+                .map(|nodes| {
+                    nodes
+                        .iter()
+                        .filter(|node| node.get("kind").and_then(Value::as_str) != Some("institution"))
+                        .count()
+                })
+                .unwrap_or_default();
+            let relation_count = graph
+                .and_then(|value| value.get("edges"))
+                .and_then(Value::as_array)
+                .map(Vec::len)
+                .unwrap_or_default();
+            json!({
+                "id": snapshot.get("id"),
+                "label": snapshot.get("label"),
+                "institution": snapshot.get("institution"),
+                "asOf": snapshot.get("asOf"),
+                "capturedAt": snapshot.get("capturedAt"),
+                "nodeCount": node_count,
+                "relationCount": relation_count,
+                "lawNames": snapshot.get("laws").and_then(Value::as_array).map(|laws| laws.iter().filter_map(|law| law.get("name")).collect::<Vec<_>>()).unwrap_or_default(),
+            })
+        })
+        .collect();
+    Ok(json!({
+        "schema": "kr.go.mois.orgchart.history-db/v1",
+        "path": law_history_file(&app)?.display().to_string(),
+        "snapshots": summaries,
+    }))
+}
+
+#[tauri::command]
+fn save_law_snapshot(
+    app: tauri::AppHandle,
+    request: LawSnapshotRequest,
+) -> Result<Value, String> {
+    if request.snapshot_json.len() > MAX_LAW_HISTORY_BYTES {
+        return Err("저장할 법령 스냅샷이 너무 큽니다.".to_string());
+    }
+    let mut snapshot: Value = serde_json::from_str(&request.snapshot_json)
+        .map_err(|error| format!("법령 스냅샷 JSON이 올바르지 않습니다: {error}"))?;
+    if snapshot.get("schema").and_then(Value::as_str) != Some("kr.go.mois.orgchart.history/v1") {
+        return Err("지원하지 않는 법령 스냅샷 형식입니다.".to_string());
+    }
+    let institution = snapshot.get("institution").and_then(Value::as_str).unwrap_or("").trim().to_string();
+    let as_of = snapshot.get("asOf").and_then(Value::as_str).unwrap_or("기준일 없음").to_string();
+    if institution.is_empty() || snapshot.get("graph").and_then(Value::as_object).is_none() {
+        return Err("기관명과 조직 그래프가 있는 스냅샷만 저장할 수 있습니다.".to_string());
+    }
+    let id = snapshot
+        .get("id")
+        .and_then(Value::as_str)
+        .filter(|value| !value.trim().is_empty())
+        .map(str::to_string)
+        .unwrap_or_else(|| format!("snapshot-{}", unix_time_millis()));
+    let captured_at = snapshot
+        .get("capturedAt")
+        .and_then(Value::as_str)
+        .filter(|value| !value.trim().is_empty())
+        .map(str::to_string)
+        .unwrap_or_else(|| format!("{}", unix_time_millis()));
+    if let Some(object) = snapshot.as_object_mut() {
+        object.insert("id".to_string(), Value::String(id.clone()));
+        object.insert("capturedAt".to_string(), Value::String(captured_at));
+        if !object.contains_key("label") {
+            object.insert("label".to_string(), Value::String(format!("{} · {}", institution, as_of)));
+        }
+    }
+    let mut history = read_law_history(&app)?;
+    let snapshots = history
+        .get_mut("snapshots")
+        .and_then(Value::as_array_mut)
+        .ok_or_else(|| "법령 이력 DB의 snapshots 배열을 찾지 못했습니다.".to_string())?;
+    snapshots.retain(|item| item.get("id").and_then(Value::as_str) != Some(id.as_str()));
+    snapshots.push(snapshot.clone());
+    snapshots.sort_by(|left, right| {
+        right
+            .get("asOf")
+            .and_then(Value::as_str)
+            .unwrap_or("")
+            .cmp(left.get("asOf").and_then(Value::as_str).unwrap_or(""))
+            .then_with(|| right.get("capturedAt").and_then(Value::as_str).unwrap_or("").cmp(left.get("capturedAt").and_then(Value::as_str).unwrap_or("")))
+    });
+    if let Some(object) = history.as_object_mut() {
+        object.insert("schema".to_string(), Value::String("kr.go.mois.orgchart.history-db/v1".to_string()));
+        object.insert("updatedAtUnixMs".to_string(), json!(unix_time_millis()));
+    }
+    let path = write_law_history(&app, &history)?;
+    Ok(json!({
+        "saved": true,
+        "id": id,
+        "path": path.display().to_string(),
+        "snapshot": snapshot,
+    }))
+}
+
+#[tauri::command]
+fn load_law_snapshot(
+    app: tauri::AppHandle,
+    request: LawHistoryItemRequest,
+) -> Result<Value, String> {
+    let history = read_law_history(&app)?;
+    history
+        .get("snapshots")
+        .and_then(Value::as_array)
+        .and_then(|snapshots| snapshots.iter().find(|snapshot| snapshot.get("id").and_then(Value::as_str) == Some(request.id.trim())))
+        .cloned()
+        .ok_or_else(|| "선택한 법령 스냅샷을 찾지 못했습니다.".to_string())
+}
+
+#[tauri::command]
 async fn generate_native_hwpx(
     app: tauri::AppHandle,
     request: NativeHwpxRequest,
@@ -722,6 +973,10 @@ pub fn run() {
             sample_native_manifest,
             validate_native_manifest,
             hwp_runtime_info,
+            fetch_official_laws,
+            list_law_snapshots,
+            save_law_snapshot,
+            load_law_snapshot,
             generate_native_hwpx,
             open_output_directory,
         ])
@@ -732,6 +987,18 @@ pub fn run() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn powershell_writer_keeps_exactly_one_utf8_bom() {
+        let directory = env::temp_dir().join(format!("orgchart-bom-test-{}", unix_time_millis()));
+        fs::create_dir_all(&directory).unwrap();
+        let path = directory.join("probe.ps1");
+        write_utf8_bom(&path, "\u{feff}[CmdletBinding()]\nparam()").unwrap();
+        let bytes = fs::read(&path).unwrap();
+        assert_eq!(&bytes[..3], &[0xEF, 0xBB, 0xBF]);
+        assert_ne!(&bytes[3..6], &[0xEF, 0xBB, 0xBF]);
+        let _ = fs::remove_dir_all(directory);
+    }
 
     #[test]
     fn bundled_manifest_passes_native_preflight() {

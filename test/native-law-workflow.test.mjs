@@ -85,3 +85,100 @@ test("대형 조직은 작은 글씨로 압축하지 않고 읽을 수 있는 A4
   assert.ok(workflow.summary.warnings.some((warning) => warning.includes("자동 분할")));
   assert.ok(workflow.manifests.every((manifest) => analyzeNativeManifest(manifest).valid));
 });
+
+test("24개 전체 조직은 개요·소속기관과 본부 하부조직 두 쪽으로 나뉜다", () => {
+  const departmentClauses = Array.from(
+    { length: 20 },
+    (_, index) => `대형정책실장 밑에 제${index + 1}정책과를 둔다.`,
+  ).join("\n");
+  const workflow = buildNativeLawWorkflow({
+    decreeText: `대형시험부와 그 소속기관 직제
+제1조(하부조직) 대형시험부에 대형정책실을 둔다.
+제2조(소속기관) 대형시험부 소속으로 지역사무소를 둔다.
+${departmentClauses}`,
+    institution: "대형시험부",
+  });
+
+  assert.equal(workflow.summary.nodeCount, 24);
+  assert.equal(workflow.summary.pageCount, 2);
+  assert.deepEqual(workflow.pages.map((page) => page.label), ["본부 기구 개요 · 소속기관", "본부 하부조직"]);
+  assert.deepEqual(
+    workflow.manifests.map((manifest) => manifest.objects.find((object) => object.id === "document-page")?.text),
+    ["1 / 2", "2 / 2"],
+  );
+  assert.ok(workflow.manifests.every((manifest) => analyzeNativeManifest(manifest).valid));
+});
+test("좌우 2단 대비표는 조직 상자를 좌측 열에 제한하고 우측 대비 영역을 예약한다", () => {
+  const workflow = buildNativeLawWorkflow({
+    decreeText: decree,
+    ruleText: rule,
+    layout: "comparison-two-column",
+  });
+  const manifest = workflow.manifests[0];
+  const nodeBoxes = manifest.objects.filter((object) => object.metadata?.role === "organization-node");
+  const divider = manifest.objects.find((object) => object.id === "comparison-divider");
+  const header = manifest.objects.find((object) => object.id === "comparison-header");
+
+  assert.equal(manifest.source.layout, "comparison-two-column");
+  assert.ok(nodeBoxes.length > 0);
+  assert.ok(nodeBoxes.every((object) => object.geometry.x + object.geometry.width <= 97.001));
+  assert.ok(Math.max(...nodeBoxes.map((object) => object.geometry.width)) < 90);
+  assert.equal(divider.geometry.x1, 104);
+  assert.equal(divider.geometry.x2, 104);
+  assert.equal(header.text, "개편 전·후 대비");
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("시행규칙에서 소관 과가 확인된 관은 국처럼 과를 하위 계선으로 묶는다", () => {
+  const workflow = buildNativeLawWorkflow({
+    decreeText: `
+과학기술정보통신부와 그 소속기관 직제
+제10조(연구개발정책실) 연구개발정책실장 밑에 기초원천연구정책관ㆍ미래인재정책관 및 공공융합연구정책관을 둔다.
+`,
+    ruleText: `
+과학기술정보통신부와 그 소속기관 직제 시행규칙
+제8조(연구개발정책실) 연구개발정책실에 기초연구진흥과ㆍ원천기술과ㆍ미래인재정책과 및 공공기술과를 둔다.
+① 기초연구진흥과장은 다음 사항을 분장한다.
+1. 기초연구 정책 총괄
+2. 그 밖에 기초원천연구정책관 내 다른 과의 주관에 속하지 않는 사항
+② 원천기술과장은 다음 사항을 분장한다.
+1. 원천기술 개발 지원
+③ 미래인재정책과장은 다음 사항을 분장한다.
+1. 그 밖에 미래인재정책관 내 다른 과의 주관에 속하지 않는 사항
+④ 공공기술과장은 다음 사항을 분장한다.
+1. 그 밖에 공공융합연구정책관 내 다른 과의 주관에 속하지 않는 사항
+`,
+    institution: "과학기술정보통신부",
+  });
+  const manifest = workflow.manifests[0];
+  const boxes = new Map(
+    manifest.objects
+      .filter((object) => object.metadata?.role === "organization-node")
+      .map((object) => [object.text, object]),
+  );
+  const policyOfficer = boxes.get("기초원천연구정책관");
+  const firstDepartment = boxes.get("기초연구진흥과");
+  const inferredDepartment = boxes.get("원천기술과");
+  const nextPolicyOfficer = boxes.get("미래인재정책관");
+  const links = manifest.objects.filter((object) => object.metadata?.role === "child-link");
+
+  assert.equal(manifest.source.renderView, "operational");
+  assert.equal(policyOfficer.metadata.renderRole, "jurisdiction-container");
+  assert.equal(policyOfficer.style.fill, "#E3F1EF");
+  assert.equal(policyOfficer.style.stroke, "#477D78");
+  assert.equal(policyOfficer.style.dash, "solid");
+  assert.ok(policyOfficer.geometry.y < firstDepartment.geometry.y);
+  assert.ok(firstDepartment.geometry.y < inferredDepartment.geometry.y);
+  assert.ok(inferredDepartment.geometry.y < nextPolicyOfficer.geometry.y);
+  assert.ok(links.some((line) => (
+    line.metadata.parentId === policyOfficer.id
+      && line.metadata.childId === firstDepartment.id
+      && line.style.dash === "solid"
+  )));
+  assert.ok(links.some((line) => (
+    line.metadata.parentId === policyOfficer.id
+      && line.metadata.childId === inferredDepartment.id
+      && line.style.dash === "solid"
+  )));
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});

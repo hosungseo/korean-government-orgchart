@@ -161,8 +161,11 @@ function Set-PageSetup {
     $section.PageDef.HeaderLen = 0
     $section.PageDef.FooterLen = 0
     $section.PageDef.GutterLen = 0
-    $section.ApplyClass = 24
-    $section.ApplyTo = 3
+    # Some Hancom Office releases do not expose these action parameters as
+    # COM properties. HSet.SetItem works across both the old and new type
+    # libraries and is the native way to populate action-only parameters.
+    $section.HSet.SetItem("ApplyClass", 24)
+    $section.HSet.SetItem("ApplyTo", 3)
     if (-not $script:Hwp.HAction.Execute("PageSetup", $section.HSet)) {
         throw "A4 세로 쪽 설정을 적용하지 못했습니다."
     }
@@ -171,7 +174,9 @@ function Set-PageSetup {
 function Set-ShapePosition {
     param($Shape, [double]$X, [double]$Y, [double]$Width, [double]$Height)
     $Shape.TreatAsChar = 0
-    $Shape.TextWrap = $script:Hwp.TextWrapType("TopAndBottom")
+    $Shape.HSet.SetItem("FlowWithText", 0)
+    # 종이 기준 절대 배치 도형이 빈 본문 문단을 다음 쪽으로 밀어내지 않도록 한다.
+    $Shape.TextWrap = $script:Hwp.TextWrapType("BehindText")
     $Shape.TextFlow = $script:Hwp.TextFlowType("BothSides")
     $Shape.VertOffset = Convert-ToHwpUnit $Y
     $Shape.VertAlign = $script:Hwp.VAlign("Top")
@@ -184,7 +189,7 @@ function Set-ShapePosition {
     $Shape.WidthRelTo = $script:Hwp.WidthRel("Absolute")
     $Shape.Width = Convert-ToHwpUnit ([Math]::Max($Width, 0.01))
     $Shape.NumberingType = $script:Hwp.Numbering("Figure")
-    $Shape.ShapeCreationMode = 0
+    $Shape.HSet.SetItem("ShapeCreationMode", 0)
 }
 
 function Set-LineAttributes {
@@ -227,15 +232,15 @@ function Set-RectanglePoints {
     $heightUnit = Convert-ToHwpUnit $Height
     $layout = $Shape.ShapeDrawLayOut
     $layout.CreateNumPt = 4
-    $points = $layout.CreateItemArray("CreatePt", 8)
-    $points.SetItem(0, 0) | Out-Null
-    $points.SetItem(1, 0) | Out-Null
-    $points.SetItem(2, $widthUnit) | Out-Null
-    $points.SetItem(3, 0) | Out-Null
-    $points.SetItem(4, $widthUnit) | Out-Null
-    $points.SetItem(5, $heightUnit) | Out-Null
-    $points.SetItem(6, 0) | Out-Null
-    $points.SetItem(7, $heightUnit) | Out-Null
+    $layout.CreateItemArray("CreatePt", 8)
+    $layout.CreatePt.Item(0) = 0
+    $layout.CreatePt.Item(1) = 0
+    $layout.CreatePt.Item(2) = $widthUnit
+    $layout.CreatePt.Item(3) = 0
+    $layout.CreatePt.Item(4) = $widthUnit
+    $layout.CreatePt.Item(5) = $heightUnit
+    $layout.CreatePt.Item(6) = 0
+    $layout.CreatePt.Item(7) = $heightUnit
 }
 
 function Add-NativeLine {
@@ -259,12 +264,12 @@ function Add-NativeLine {
     Set-LineAttributes $shape $Object.style
     $layout = $shape.ShapeDrawLayOut
     $layout.CreateNumPt = 2
-    $points = $layout.CreateItemArray("CreatePt", 4)
-    $points.SetItem(0, $localX1) | Out-Null
-    $points.SetItem(1, $localY1) | Out-Null
-    $points.SetItem(2, $localX2) | Out-Null
-    $points.SetItem(3, $localY2) | Out-Null
-    $shape.ShapeCreationType = 0
+    $layout.CreateItemArray("CreatePt", 4)
+    $layout.CreatePt.Item(0) = $localX1
+    $layout.CreatePt.Item(1) = $localY1
+    $layout.CreatePt.Item(2) = $localX2
+    $layout.CreatePt.Item(3) = $localY2
+    $shape.HSet.SetItem("ShapeCreationType", 0)
     if (-not $script:Hwp.HAction.Execute("DrawObjCreatorLine", $shape.HSet)) {
         throw "선 객체를 만들지 못했습니다: $($Object.id)"
     }
@@ -306,7 +311,7 @@ function Add-NativeRectangle {
     Set-LineAttributes $shape $style
     Set-FillAttributes $shape $style
     $shape.AdjustTextbox = $(if ($WithText) { 1 } else { 0 })
-    $shape.ShapeCreationType = 1
+    $shape.HSet.SetItem("ShapeCreationType", 1)
 
     if ($WithText) {
         $padding = Convert-ToHwpUnit ([double]$style.paddingMm)
@@ -414,21 +419,36 @@ function Invoke-Generate {
 
     $holder = $null
     try {
+        Write-Verbose "한글 Automation 객체를 초기화합니다."
         $holder = New-HwpObject
+        if (-not $holder.SecurityModuleRegistered) {
+            throw "한글 파일 접근 보안모듈이 등록되어 있지 않습니다. 한컴 개발자센터의 Automation 보안모듈을 설치·등록한 뒤 다시 시도하세요."
+        }
         $script:Hwp = $holder.Hwp
+        Write-Verbose "새 문서를 만듭니다."
         $script:Hwp.HAction.Run("FileNew") | Out-Null
+        Write-Verbose "새 문서 생성 완료. 쪽 설정을 적용합니다."
         Set-PageSetup $manifest.page
+        Write-Verbose "쪽 설정 적용 완료."
 
+        $createdIndex = 0
         foreach ($object in @($manifest.objects | Where-Object { $_.type -eq "line" })) {
             Add-NativeLine $object
+            $createdIndex += 1
+            Write-Verbose "네이티브 객체 $createdIndex/$($validated.ObjectCount) 생성: $($object.id)"
         }
         foreach ($object in @($manifest.objects | Where-Object { $_.type -eq "rectangle" })) {
             Add-NativeRectangle $object
+            $createdIndex += 1
+            Write-Verbose "네이티브 객체 $createdIndex/$($validated.ObjectCount) 생성: $($object.id)"
         }
         foreach ($object in @($manifest.objects | Where-Object { $_.type -eq "textbox" })) {
             Add-NativeRectangle $object -WithText
+            $createdIndex += 1
+            Write-Verbose "네이티브 객체 $createdIndex/$($validated.ObjectCount) 생성: $($object.id)"
         }
 
+        Write-Verbose "생성된 객체를 집계하고 HWPX로 저장합니다."
         $createdCount = Get-NativeObjectCount $script:Hwp
         $saved = [bool]$script:Hwp.SaveAs($resolvedOutput, "HWPX", "")
         if (-not $saved -or -not (Test-Path -LiteralPath $resolvedOutput -PathType Leaf)) {
@@ -438,6 +458,7 @@ function Invoke-Generate {
         $script:Hwp = $null
         $holder = $null
 
+        Write-Verbose "저장한 HWPX를 다시 열어 객체 수와 쪽 수를 검증합니다."
         $verifyHolder = New-HwpObject
         $script:Hwp = $verifyHolder.Hwp
         $opened = [bool]$script:Hwp.Open($resolvedOutput, "", "lock:false;forceopen:true;versionwarning:false;")

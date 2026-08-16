@@ -1,5 +1,7 @@
 import { analyzeNativeManifest } from "./manifest-validation.js";
 import { buildNativeLawWorkflow } from "./engine/native-law-workflow.mjs";
+import { flattenLawJson } from "./engine/law-json-core.mjs";
+import { compareLawSnapshots, createLawSnapshot, summarizeLawSnapshot } from "./engine/law-history.mjs";
 
 const invoke = window.__TAURI__?.core?.invoke;
 const $ = (id) => document.getElementById(id);
@@ -10,6 +12,9 @@ let validationReport = null;
 let hwpAvailable = false;
 let lawWorkflow = null;
 let activeWorkflowPage = 0;
+let lawSourceInfo = {};
+let currentLawSnapshot = null;
+let historySnapshots = [];
 
 function setStatus(title, message, state = "idle") {
   const box = $("statusBox");
@@ -201,10 +206,167 @@ async function loadManifestText(text, sourceLabel) {
 
 function clearLawWorkflow() {
   lawWorkflow = null;
+  currentLawSnapshot = null;
   activeWorkflowPage = 0;
   $("pageNavigator").hidden = true;
   $("pageSelect").replaceChildren();
   $("parseSummary").hidden = true;
+  $("historyControls").hidden = true;
+  $("historyDiff").hidden = true;
+}
+
+function setHistoryControlsVisible(visible) {
+  $("historyControls").hidden = !visible || !invoke;
+}
+
+function historyOptionLabel(snapshot) {
+  const summary = summarizeLawSnapshot(snapshot);
+  const date = summary.asOf || "기준일 없음";
+  return `${date} · ${summary.nodeCount}개 조직 · ${summary.capturedAt ? summary.capturedAt.slice(0, 10) : ""}`;
+}
+
+function renderHistorySelectors() {
+  const left = $("historyLeft");
+  const right = $("historyRight");
+  const previousLeft = left.value;
+  const previousRight = right.value;
+  left.replaceChildren();
+  right.replaceChildren();
+  for (const snapshot of historySnapshots) {
+    const label = historyOptionLabel(snapshot);
+    for (const select of [left, right]) {
+      const option = document.createElement("option");
+      option.value = snapshot.id;
+      option.textContent = label;
+      select.append(option);
+    }
+  }
+  if (historySnapshots.length) {
+    left.value = historySnapshots.some((item) => item.id === previousLeft) ? previousLeft : historySnapshots.at(-1).id;
+    right.value = historySnapshots.some((item) => item.id === previousRight) ? previousRight : historySnapshots[0].id;
+  }
+  $("compareHistoryButton").disabled = historySnapshots.length < 2;
+}
+
+async function refreshHistory() {
+  if (!invoke) return;
+  try {
+    const result = await invoke("list_law_snapshots");
+    const institution = currentLawSnapshot?.institution || manifest?.source?.institution || "";
+    historySnapshots = (result.snapshots || []).filter((snapshot) => !institution || snapshot.institution === institution);
+    renderHistorySelectors();
+  } catch (error) {
+    setStatus("법령 이력 읽기 실패", String(error), "error");
+  }
+}
+
+async function saveCurrentSnapshot() {
+  if (!invoke || !currentLawSnapshot) return;
+  const button = $("saveSnapshotButton");
+  button.disabled = true;
+  try {
+    const saved = await invoke("save_law_snapshot", {
+      request: { snapshotJson: JSON.stringify(currentLawSnapshot) },
+    });
+    currentLawSnapshot = saved.snapshot || currentLawSnapshot;
+    await refreshHistory();
+    setStatus("법령 이력 저장 완료", `${currentLawSnapshot.asOf || "기준일 없음"} 조직 스냅샷을 로컬 이력 DB에 저장했습니다.`, "success");
+  } catch (error) {
+    setStatus("법령 이력 저장 실패", String(error), "error");
+  } finally {
+    button.disabled = false;
+  }
+}
+
+function diffLine(label, entries, formatter) {
+  if (!entries.length) return "";
+  const items = entries.slice(0, 30).map((entry) => `<li>${escapeXml(formatter(entry))}</li>`).join("");
+  return `<strong>${escapeXml(label)} ${entries.length}건</strong><ul>${items}</ul>`;
+}
+
+function renderHistoryDiff(diff) {
+  const box = $("historyDiff");
+  const summary = diff.summary;
+  const parts = [
+    `<strong>${escapeXml(diff.previous.asOf || "이전")} → ${escapeXml(diff.current.asOf || "현재")}</strong> · 총 ${summary.totalChanges}건`,
+    diffLine("신설", diff.added, (entry) => `+ ${entry.path.join(" › ")}`),
+    diffLine("폐지", diff.removed, (entry) => `− ${entry.path.join(" › ")}`),
+    diffLine("명칭 변경", diff.renamed, (entry) => `${entry.before.name} → ${entry.after.name}`),
+    diffLine("소속 이동", diff.moved, (entry) => `${entry.node.name}: ${entry.beforePath.join(" › ")} → ${entry.afterPath.join(" › ")}`),
+    diffLine("속성 변경", diff.changed, (entry) => `${entry.node.name}: ${entry.before.kind} → ${entry.after.kind}`),
+  ].filter(Boolean);
+  box.innerHTML = parts.join("");
+  box.hidden = false;
+}
+
+async function compareHistory() {
+  if (!invoke || historySnapshots.length < 2) return;
+  const button = $("compareHistoryButton");
+  button.disabled = true;
+  try {
+    const left = await invoke("load_law_snapshot", { request: { id: $("historyLeft").value } });
+    const right = await invoke("load_law_snapshot", { request: { id: $("historyRight").value } });
+    renderHistoryDiff(compareLawSnapshots(left, right));
+  } catch (error) {
+    setStatus("개편 내역 비교 실패", String(error), "error");
+  } finally {
+    button.disabled = false;
+  }
+}
+
+function dateYearsAgo(dateText, yearsAgo) {
+  const [year, month, day] = String(dateText).split("-").map(Number);
+  const yearValue = Math.max(1900, year - yearsAgo);
+  const lastDay = new Date(yearValue, month, 0).getDate();
+  return `${yearValue}-${String(month).padStart(2, "0")}-${String(Math.min(day, lastDay)).padStart(2, "0")}`;
+}
+
+async function collectRecentHistory() {
+  const button = $("collectHistoryButton");
+  const institution = $("lawInstitution").value.trim();
+  const oc = $("lawApiOc").value.trim();
+  const asOf = $("lawAsOf").value;
+  const errorBox = $("lawInputError");
+  if (!invoke) return;
+  if (!institution || !oc || !asOf) {
+    errorBox.textContent = "기관명, 기준일, Open API OC를 모두 입력해 주세요.";
+    errorBox.hidden = false;
+    return;
+  }
+  button.disabled = true;
+  const dates = Array.from({ length: 5 }, (_, index) => dateYearsAgo(asOf, index));
+  let successCount = 0;
+  const failures = [];
+  try {
+    for (const [index, date] of dates.entries()) {
+      $("lawApiStatus").textContent = `최근 5년 이력 수집 중… ${index + 1}/${dates.length} · ${date}`;
+      try {
+        const result = await invoke("fetch_official_laws", { request: { oc, institution, asOf: date } });
+        const workflow = buildNativeLawWorkflow({
+          decreeText: flattenLawJson(result.decree?.json),
+          ruleText: flattenLawJson(result.rule?.json),
+          institution,
+          asOf: date,
+          layout: $("lawLayout").value,
+          lawSources: { decree: result.decree, rule: result.rule },
+        });
+        const snapshot = createLawSnapshot(workflow, { label: `${institution} · ${date}` });
+        await invoke("save_law_snapshot", { request: { snapshotJson: JSON.stringify(snapshot) } });
+        successCount += 1;
+      } catch (error) {
+        failures.push(`${date}: ${String(error?.message || error)}`);
+      }
+    }
+    await refreshHistory();
+    $("lawApiOc").value = "";
+    $("lawApiStatus").textContent = `${successCount}개 기준일의 법령·조직 스냅샷을 저장했습니다.`;
+    if (failures.length) {
+      errorBox.textContent = `일부 기준일은 수집하지 못했습니다. ${failures.join(" · ")}`;
+      errorBox.hidden = false;
+    }
+  } finally {
+    button.disabled = false;
+  }
 }
 
 function renderLawWorkflowSummary(summary) {
@@ -276,11 +438,16 @@ async function parseLawInput(event) {
       institution: $("lawInstitution").value,
       asOf: $("lawAsOf").value,
       focus: $("lawFocus").value,
+      layout: $("lawLayout").value,
+      lawSources: lawSourceInfo,
     });
+    currentLawSnapshot = createLawSnapshot(lawWorkflow, { label: `${lawWorkflow.summary.institution} · ${lawWorkflow.summary.asOf || "기준일 없음"}` });
     activeWorkflowPage = 0;
     renderPageNavigator();
     renderLawWorkflowSummary(lawWorkflow.summary);
     await selectWorkflowPage(0);
+    setHistoryControlsVisible(true);
+    await refreshHistory();
     $("lawInputDialog").close();
   } catch (error) {
     errorBox.textContent = String(error?.message || error);
@@ -288,6 +455,51 @@ async function parseLawInput(event) {
   } finally {
     button.disabled = false;
     button.textContent = "자동 조직도 만들기";
+  }
+}
+
+async function fetchOfficialLawInput() {
+  const button = $("fetchLawApiButton");
+  const errorBox = $("lawInputError");
+  const status = $("lawApiStatus");
+  errorBox.hidden = true;
+  if (!invoke) {
+    errorBox.textContent = "공식 법령 자동조회는 Windows 앱에서 사용할 수 있습니다.";
+    errorBox.hidden = false;
+    return;
+  }
+  const institution = $("lawInstitution").value.trim();
+  const oc = $("lawApiOc").value.trim();
+  const asOf = $("lawAsOf").value;
+  if (!institution || !oc || !asOf) {
+    errorBox.textContent = "기관명, 기준일, Open API OC를 모두 입력해 주세요.";
+    errorBox.hidden = false;
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "공식 법령 조회 중…";
+  status.textContent = "국가법령정보센터에서 기준일에 유효한 두 법령을 확인하고 있습니다.";
+  try {
+    const result = await invoke("fetch_official_laws", {
+      request: { oc, institution, asOf },
+    });
+    $("decreeText").value = flattenLawJson(result.decree?.json);
+    $("ruleText").value = flattenLawJson(result.rule?.json);
+    lawSourceInfo = { decree: result.decree, rule: result.rule };
+    $("lawApiOc").value = "";
+    const displayDate = (value) => {
+      const digits = String(value || "").replace(/\D/g, "");
+      return digits.length === 8 ? `${digits.slice(0, 4)}-${digits.slice(4, 6)}-${digits.slice(6, 8)}` : value;
+    };
+    status.textContent = `불러오기 완료 · 직제 ${displayDate(result.decree?.effectiveDate)} 시행본 · 시행규칙 ${displayDate(result.rule?.effectiveDate)} 시행본`;
+  } catch (error) {
+    errorBox.textContent = String(error?.message || error);
+    errorBox.hidden = false;
+    status.textContent = "공식 법령을 불러오지 못했습니다.";
+  } finally {
+    button.disabled = false;
+    button.textContent = "공식 API에서 두 법령 불러오기";
   }
 }
 
@@ -334,14 +546,19 @@ async function checkRuntime() {
   }
   try {
     const runtime = await invoke("hwp_runtime_info");
-    hwpAvailable = Boolean(runtime.available);
+    hwpAvailable = Boolean(runtime.available && runtime.securityModuleRegistered);
     if (hwpAvailable) {
       setRuntime("ready", runtime.version ? `한글 ${runtime.version} 연결됨` : "Windows 한글 연결됨");
       setStep("stepRuntime", "done");
-      const securityNote = runtime.securityModuleRegistered
-        ? "한글 연결과 파일 접근 보안모듈을 확인했습니다."
-        : "한글은 연결됐으며 첫 저장 시 파일 접근 승인창이 나타날 수 있습니다.";
-      setStatus("한글 연결 완료", securityNote, "success");
+      setStatus("한글 연결 완료", "한글 연결과 파일 접근 보안모듈을 확인했습니다.", "success");
+    } else if (runtime.available) {
+      setRuntime("unavailable", "한글 보안모듈 미등록");
+      setStep("stepRuntime", "failed");
+      setStatus(
+        "파일 접근 보안모듈 필요",
+        "한컴 개발자센터의 Automation 보안모듈을 설치·등록한 뒤 연결 상태를 다시 확인하세요.",
+        "error",
+      );
     } else {
       setRuntime("unavailable", "Windows 한글 미연결");
       setStep("stepRuntime", "failed");
@@ -418,6 +635,11 @@ $("openLawInputButton").addEventListener("click", () => {
 });
 $("closeLawInputButton").addEventListener("click", () => $("lawInputDialog").close());
 $("lawInputForm").addEventListener("submit", parseLawInput);
+$("fetchLawApiButton").addEventListener("click", fetchOfficialLawInput);
+$("collectHistoryButton").addEventListener("click", collectRecentHistory);
+$("saveSnapshotButton").addEventListener("click", saveCurrentSnapshot);
+$("refreshHistoryButton").addEventListener("click", refreshHistory);
+$("compareHistoryButton").addEventListener("click", compareHistory);
 $("pageSelect").addEventListener("change", (event) => selectWorkflowPage(event.target.value));
 $("previousPageButton").addEventListener("click", () => selectWorkflowPage(activeWorkflowPage - 1));
 $("nextPageButton").addEventListener("click", () => selectWorkflowPage(activeWorkflowPage + 1));
@@ -436,6 +658,12 @@ for (const eventName of ["dragleave", "drop"]) {
   });
 }
 drawingStage.addEventListener("drop", (event) => loadFile(event.dataTransfer?.files?.[0]));
+
+if (!$("lawAsOf").value) {
+  const now = new Date();
+  const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60_000).toISOString().slice(0, 10);
+  $("lawAsOf").value = localDate;
+}
 
 await loadSample();
 await checkRuntime();

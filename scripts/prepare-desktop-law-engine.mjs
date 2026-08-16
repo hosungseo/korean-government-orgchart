@@ -9,6 +9,8 @@ const modules = [
   "model.mjs",
   "parser.mjs",
   "native-law-workflow.mjs",
+  "law-json-core.mjs",
+  "law-history.mjs",
 ];
 
 await fs.mkdir(target, { recursive: true });

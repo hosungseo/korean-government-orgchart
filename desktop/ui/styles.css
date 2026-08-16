@@ -203,6 +203,20 @@ button, input, textarea, select { font: inherit; }
 .parse-summary dt { color: var(--muted); font-size: 9px; }
 .parse-summary dd { margin: 0; color: var(--ink); font-size: 10px; font-weight: 800; }
 .parse-summary p { margin: 7px 0 0; color: var(--warning); font-size: 8px; line-height: 1.5; }
+.history-controls { margin-top: 16px; padding: 13px 14px; border: 1px solid #d8d0bd; border-radius: 7px; background: #fffcf4; }
+.history-controls h3 { margin: 0; color: var(--warning); font-size: 10px; }
+.history-help { margin: 7px 0 10px; color: var(--muted); font-size: 8px; line-height: 1.5; }
+.history-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.history-buttons button, .history-compare { min-height: 30px; padding: 0 7px; border: 1px solid #c9b98f; border-radius: 5px; background: white; color: var(--warning); font-size: 8px; font-weight: 800; cursor: pointer; }
+.history-buttons button:hover, .history-compare:hover { background: #fff7df; }
+.history-buttons button:disabled, .history-compare:disabled { color: var(--quiet); cursor: wait; }
+.history-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 9px; }
+.history-select-grid label { color: var(--muted); font-size: 8px; }
+.history-select-grid select { width: 100%; height: 28px; margin-top: 4px; padding: 0 4px; border: 1px solid var(--line-strong); border-radius: 4px; background: white; color: var(--ink); font-size: 8px; }
+.history-compare { width: 100%; margin-top: 8px; }
+.history-diff { max-height: 170px; overflow: auto; margin-top: 9px; padding: 8px; border: 1px solid #e1d7be; border-radius: 5px; background: white; color: var(--muted); font-size: 8px; line-height: 1.55; }
+.history-diff strong { color: var(--ink); }
+.history-diff ul { margin: 5px 0 0; padding-left: 15px; }
 .verification { margin-top: 26px; padding: 14px; background: var(--rail); border-left: 3px solid var(--line-strong); }
 .verification span { font-size: 10px; font-weight: 800; }
 .verification p { margin: 6px 0 0; color: var(--muted); font-size: 9px; line-height: 1.6; }
@@ -219,11 +233,20 @@ button, input, textarea, select { font: inherit; }
 .dialog-head p { margin: 7px 0 0; color: var(--muted); font-size: 11px; }
 .dialog-close { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; background: white; color: var(--muted); font-size: 20px; cursor: pointer; }
 .dialog-close:hover { background: var(--rail); color: var(--ink); }
-.law-meta-grid { display: grid; grid-template-columns: 1fr 180px 1.7fr; gap: 12px; padding: 16px 0; }
+.law-meta-grid { display: grid; grid-template-columns: 1fr 140px 1fr 1.25fr 1fr; gap: 12px; padding: 16px 0 10px; }
 .law-meta-grid label, .law-text-grid label { color: var(--ink); font-size: 10px; font-weight: 800; }
 .law-meta-grid small { margin-left: 5px; color: var(--quiet); font-size: 8px; font-weight: 400; }
-.law-meta-grid input { width: 100%; height: 36px; margin-top: 6px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 6px; color: var(--ink); background: white; font-size: 10px; }
+.law-meta-grid input, .law-meta-grid select { width: 100%; height: 36px; margin-top: 6px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 6px; color: var(--ink); background: white; font-size: 10px; }
 .law-meta-grid input:focus, .law-text-grid textarea:focus { outline: 3px solid #dce8f2; border-color: var(--action); }
+.law-meta-grid select:focus { outline: 3px solid #dce8f2; border-color: var(--action); }
+.law-api-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; padding: 10px 12px; border: 1px solid #cfdbe5; border-radius: 7px; background: #f5f9fc; }
+.law-api-row span { color: var(--muted); font-size: 9px; }
+.law-api-actions { display: flex; flex: 0 0 auto; gap: 6px; }
+.law-api-row button { flex: 0 0 auto; min-width: 210px; height: 34px; border: 0; border-radius: 6px; background: #315d82; color: white; font-size: 9px; font-weight: 800; cursor: pointer; }
+.law-api-row .secondary-api-button { min-width: 132px; background: white; border: 1px solid #9db4c7; color: #315d82; }
+.law-api-row button:hover { background: #244a69; }
+.law-api-row .secondary-api-button:hover { background: #edf4fa; }
+.law-api-row button:disabled { background: #9aa8b5; cursor: wait; }
 .law-text-grid { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .law-text-grid label { min-height: 0; display: flex; flex-direction: column; }
 .law-text-grid label > span { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 7px; }

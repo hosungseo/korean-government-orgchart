@@ -10,6 +10,10 @@ on:
     paths:
       - "desktop/**"
       - "src/hwp-native-manifest.mjs"
+      - "src/duty-allocation.mjs"
+      - "src/duty-lineage.mjs"
+      - "src/legal-duty.mjs"
+      - "src/law-json-core.mjs"
       - "src/native-law-workflow.mjs"
       - "src/parser.mjs"
       - "src/model.mjs"
@@ -20,6 +24,9 @@ on:
       - "scripts/prepare-desktop-law-engine.mjs"
       - "test/desktop-manifest-validation.test.mjs"
       - "test/hwp-native-manifest.test.mjs"
+      - "test/duty-lineage.test.mjs"
+      - "test/legal-duty.test.mjs"
+      - "test/law-json-core.test.mjs"
       - "test/native-law-workflow.test.mjs"
       - ".github/workflows/desktop-windows.yml"
 
@@ -31,10 +38,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
           cache: npm
@@ -65,7 +72,7 @@ jobs:
         run: npm run --prefix desktop build
 
       - name: Upload Windows installer
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: korean-government-orgchart-native-hwpx-windows
           if-no-files-found: error

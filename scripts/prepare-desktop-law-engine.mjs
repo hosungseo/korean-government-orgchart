@@ -6,9 +6,12 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const target = path.join(root, "desktop", "ui", "engine");
 const modules = [
   "utils-core.mjs",
+  "legal-duty.mjs",
   "model.mjs",
   "parser.mjs",
   "native-law-workflow.mjs",
+  "duty-allocation.mjs",
+  "duty-lineage.mjs",
   "law-json-core.mjs",
   "law-history.mjs",
 ];

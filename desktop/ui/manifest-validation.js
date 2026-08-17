@@ -102,7 +102,7 @@ function analyzeGeometry(object, page, errors, warnings) {
     }
     const points = [[geometry.x1, geometry.y1], [geometry.x2, geometry.y2]];
     if (points.some(([x, y]) => x < 0 || y < 0 || x > widthMm + PAGE_TOLERANCE_MM || y > heightMm + PAGE_TOLERANCE_MM)) {
-      errors.push(diagnostic("line-out-of-page", "선이 A4 용지 경계를 벗어납니다.", object.id));
+      errors.push(diagnostic("line-out-of-page", "선이 용지 경계를 벗어납니다.", object.id));
     }
     const dx = Math.abs(geometry.x2 - geometry.x1);
     const dy = Math.abs(geometry.y2 - geometry.y1);
@@ -125,7 +125,7 @@ function analyzeGeometry(object, page, errors, warnings) {
   if (geometry.x < 0 || geometry.y < 0
       || geometry.x + geometry.width > widthMm + PAGE_TOLERANCE_MM
       || geometry.y + geometry.height > heightMm + PAGE_TOLERANCE_MM) {
-    errors.push(diagnostic("box-out-of-page", "상자가 A4 용지 경계를 벗어납니다.", object.id));
+    errors.push(diagnostic("box-out-of-page", "상자가 용지 경계를 벗어납니다.", object.id));
   }
 }
 
@@ -154,13 +154,14 @@ export function analyzeNativeManifest(manifest) {
   if (!isRecord(page)) {
     errors.push(diagnostic("missing-page", "용지(page) 정보가 없습니다."));
   } else {
-    if (page.paper !== "A4" || page.orientation !== "portrait") {
-      errors.push(diagnostic("unsupported-page", "현재 앱은 A4 세로 명세만 지원합니다."));
-    }
-    if (!finite(page.widthMm) || !finite(page.heightMm)
-        || Math.abs(page.widthMm - 210) > PAGE_TOLERANCE_MM
-        || Math.abs(page.heightMm - 297) > PAGE_TOLERANCE_MM) {
-      errors.push(diagnostic("invalid-page-size", "A4 세로 크기는 210×297mm여야 합니다."));
+    const a4Portrait = page.paper === "A4" && page.orientation === "portrait"
+      && Math.abs(page.widthMm - 210) <= PAGE_TOLERANCE_MM
+      && Math.abs(page.heightMm - 297) <= PAGE_TOLERANCE_MM;
+    const a3Landscape = page.paper === "A3" && page.orientation === "landscape"
+      && Math.abs(page.widthMm - 420) <= PAGE_TOLERANCE_MM
+      && Math.abs(page.heightMm - 297) <= PAGE_TOLERANCE_MM;
+    if (!a4Portrait && !a3Landscape) {
+      errors.push(diagnostic("unsupported-page", "현재 앱은 A4 세로 또는 A3 가로 명세를 지원합니다."));
     }
     const margin = page.marginMm;
     if (!isRecord(margin) || ["left", "right", "top", "bottom"].some((key) => !finite(margin[key]) || margin[key] < 0)) {

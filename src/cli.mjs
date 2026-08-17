@@ -22,6 +22,8 @@ import { parseOrganizationTexts } from "./parser.mjs";
 import { renderReviewHtml } from "./render-html.mjs";
 import { renderSvg } from "./render-svg.mjs";
 import { runReviewPack } from "./review-pack.mjs";
+import { buildNativeComparisonWorkflow } from "./native-law-workflow.mjs";
+import { nativePreviewWidth, renderNativeManifestSvg } from "./render-native-manifest.mjs";
 import { ensureParent, jsonReplacer, parseArgs, readInputs, writeText } from "./utils.mjs";
 
 const [command = "help", ...rest] = process.argv.slice(2);
@@ -32,6 +34,7 @@ try {
   else if (command === "render-json") await renderJsonCommand(args);
   else if (command === "compare-json") await compareJsonCommand(args);
   else if (command === "compare-law") await compareLawCommand(args);
+  else if (command === "compare-native") await compareNativeCommand(args);
   else if (command === "from-law") await fromLawCommand(args);
   else if (command === "fetch") await fetchCommand(args);
   else if (command === "inspect") await inspectCommand(args);
@@ -85,6 +88,134 @@ async function compareLawCommand(args) {
   };
   await emitComparisonReportsIfRequested(graph, args);
   await emitOutputs(graph, outputArgs);
+}
+
+async function compareNativeCommand(args) {
+  const stages = await loadNativeComparisonStages(args);
+  const onePage = args["split-pages"] !== true && args["no-one-page"] !== true;
+  const workflow = buildNativeComparisonWorkflow({
+    stages,
+    institution: stringArg(args, "institution"),
+    focus: stringArg(args, "focus"),
+    onePage,
+  });
+  const manifest = workflow.manifests[0];
+  if (!manifest) throw new Error("대비 조직도를 만들지 못했습니다.");
+  const outputs = {};
+  if (stringArg(args, "json")) {
+    const jsonPath = path.resolve(stringArg(args, "json"));
+    await writeText(jsonPath, `${JSON.stringify(manifest, jsonReplacer, 2)}\n`);
+    outputs.json = jsonPath;
+  }
+  if (stringArg(args, "svg")) {
+    const svgPath = path.resolve(stringArg(args, "svg"));
+    await writeText(svgPath, renderNativeManifestSvg(manifest));
+    outputs.svg = svgPath;
+  }
+  if (stringArg(args, "png")) {
+    const pngPath = path.resolve(stringArg(args, "png"));
+    const { default: sharp } = await import("sharp");
+    await ensureParent(pngPath);
+    await sharp(Buffer.from(renderNativeManifestSvg(manifest)))
+      .png()
+      .resize({ width: nativePreviewWidth(manifest) })
+      .toFile(pngPath);
+    outputs.png = pngPath;
+  }
+  if (stringArg(args, "out")) {
+    throw new Error("compare-native는 PPTX를 만들지 않습니다. --svg, --png, --json을 쓰거나 Windows 데스크톱에서 한글로 생성하세요.");
+  }
+  console.log(JSON.stringify({
+    institution: workflow.summary.institution,
+    paper: workflow.summary.paper || manifest.page.paper,
+    layout: workflow.summary.layout,
+    comparison: workflow.summary.comparison,
+    columns: workflow.summary.columns || 2,
+    pageCount: workflow.summary.pageCount,
+    stageAsOf: workflow.summary.stageAsOf || [workflow.summary.beforeAsOf, workflow.summary.afterAsOf],
+    warnings: workflow.summary.warnings,
+    outputs,
+  }, null, 2));
+}
+
+async function loadNativeComparisonStages(args) {
+  const stagePaths = listArg(args, "stage");
+  const stageDates = listArg(args, "stage-date");
+  if (stagePaths.length) {
+    if (stagePaths.length < 2) throw new Error("대비할 --stage를 두 개 이상 지정하세요.");
+    if (stagePaths.length > 4) throw new Error("대비 시점은 최대 4개까지입니다.");
+    if (stageDates.length && stageDates.length !== stagePaths.length) {
+      throw new Error("--stage-date는 --stage와 같은 개수여야 합니다.");
+    }
+    const stages = [];
+    for (const [index, stagePath] of stagePaths.entries()) {
+      stages.push(await loadNativeStage(stagePath, stageDates[index], stringArg(args, "institution")));
+    }
+    return stages;
+  }
+
+  const beforeInputs = args["before-input"] || [];
+  const afterInputs = args["after-input"] || [];
+  if (beforeInputs.length && afterInputs.length) {
+    return [
+      await stageFromInputFiles(beforeInputs, stringArg(args, "before-date") || stringArg(args, "date"), stringArg(args, "institution")),
+      await stageFromInputFiles(afterInputs, stringArg(args, "after-date") || stringArg(args, "date"), stringArg(args, "institution")),
+    ];
+  }
+  throw new Error("compare-native는 --stage 폴더를 두 개 이상 쓰거나 --before-input과 --after-input을 함께 지정하세요.");
+}
+
+async function loadNativeStage(stagePath, asOf, institution) {
+  const resolved = path.resolve(stagePath);
+  const stat = await fs.stat(resolved);
+  if (stat.isDirectory()) {
+    const files = await fs.readdir(resolved);
+    const decreeName = files.find((name) => /직제/.test(name) && !/시행규칙/.test(name) && name.endsWith(".txt"));
+    const ruleName = files.find((name) => /시행규칙/.test(name) && name.endsWith(".txt"));
+    if (!decreeName && !ruleName) {
+      throw new Error(`${stagePath}에서 직제 또는 시행규칙 텍스트를 찾지 못했습니다.`);
+    }
+    return {
+      institution,
+      asOf: asOf || inferDateFromName(decreeName || ruleName || stagePath),
+      decreeText: decreeName ? await fs.readFile(path.join(resolved, decreeName), "utf8") : "",
+      ruleText: ruleName ? await fs.readFile(path.join(resolved, ruleName), "utf8") : "",
+    };
+  }
+  if (resolved.endsWith(".json")) {
+    const snapshot = JSON.parse(await fs.readFile(resolved, "utf8"));
+    if (snapshot.graph || snapshot.schema === "kr.go.mois.orgchart.history/v1") {
+      return { ...snapshot, asOf: asOf || snapshot.asOf, institution: institution || snapshot.institution };
+    }
+    throw new Error(`${stagePath}는 조직 스냅샷 JSON이 아닙니다.`);
+  }
+  throw new Error(`--stage는 스냅샷 폴더 또는 이력 JSON이어야 합니다: ${stagePath}`);
+}
+
+async function stageFromInputFiles(paths, asOf, institution) {
+  const texts = await readInputs(paths);
+  const split = { decreeText: "", ruleText: "" };
+  paths.forEach((filePath, index) => {
+    if (/시행규칙/.test(filePath)) split.ruleText += texts[index];
+    else if (/직제/.test(filePath)) split.decreeText += texts[index];
+    else if (!split.decreeText) split.decreeText = texts[index];
+    else split.ruleText += texts[index];
+  });
+  return { ...split, asOf, institution };
+}
+
+function inferDateFromName(value) {
+  const iso = String(value || "").match(/(\d{4}-\d{2}-\d{2})/);
+  if (iso) return iso[1];
+  const digits = String(value || "").match(/(\d{8})/);
+  if (!digits) return undefined;
+  return `${digits[1].slice(0, 4)}-${digits[1].slice(4, 6)}-${digits[1].slice(6, 8)}`;
+}
+
+function listArg(args, key) {
+  if (Array.isArray(args[key])) return args[key].filter((value) => typeof value === "string");
+  if (typeof args[key] === "string") return [args[key]];
+  return [];
 }
 
 async function fromLawCommand(args) {
@@ -628,6 +759,14 @@ function printHelp() {
     --change-csv outputs/기관-변경목록.csv \\
     --change-appendix
 
+  node src/cli.mjs compare-native \\
+    --stage work/legal-snapshots/mois-20251001 \\
+    --stage work/legal-snapshots/mois \\
+    --stage work/legal-snapshots/mois-2026 \\
+    --focus "디지털정부혁신실, 인공지능정부실, 참여혁신국, 조직국, 참여혁신조직실" \\
+    --svg outputs/행정안전부-3단-대비.svg \\
+    --png outputs/행정안전부-3단-대비.png
+
   node src/cli.mjs review-pack \\
     --institutions "행정안전부,문화체육관광부,공정거래위원회" \\
     --date 2026-07-24 \\
@@ -639,6 +778,7 @@ function printHelp() {
   render-json 기존 조직도 JSON을 다시 배치하여 HWPX/PPTX/SVG/JSON 생성
   compare-json 기존·개정 조직도 JSON을 비교해 신설·폐지·명칭변경·이체 표식 생성
   compare-law 개정 전·후 직제 문언 또는 법제처 기준일을 바로 비교해 변경 도표 생성
+  compare-native 직제 시점 2~4개를 좌우/다단 기구도로 작도(2단 A4, 3단 이상 A3). 점선·신설·폐지 규칙은 docs/drafting-rulebook.md §7의4
   from-law   법제처 OPEN API에서 기준일 연혁을 찾아 바로 생성
   fetch      법령 문언만 로컬 텍스트로 저장
   inspect    파싱 결과 요약 출력
@@ -669,6 +809,9 @@ function printHelp() {
   --after-input <file>      compare-law의 개정 후 직제/시행규칙 문언(반복 가능)
   --before-date <YYYY-MM-DD> compare-law 법제처 조회 또는 개정 전 문언 기준일
   --after-date <YYYY-MM-DD> compare-law 법제처 조회 또는 개정 후 문언 기준일
+  --stage <dir|snapshot.json> compare-native 시점(반복, 2~4). 폴더는 직제·시행규칙 txt
+  --stage-date <YYYY-MM-DD>   compare-native 각 --stage의 기준일(같은 개수)
+  --png <file.png>            compare-native SVG 미리보기 PNG
   --change-report <file.md> compare-json/compare-law 변경목록 Markdown 표 저장
   --change-csv <file.csv>   compare-json/compare-law 변경목록 CSV 저장
   --change-appendix         compare-json/compare-law SVG·PPTX 뒤에 변경목록 표 페이지 추가

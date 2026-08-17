@@ -663,6 +663,27 @@ test("같은 표시명의 과도 부모별 scoped node로 따로 보존한다", 
   assert.equal(displayNodeName(first), "징세과");
 });
 
+test("법령이 여러 소속기관에 같은 과명을 설치해도 각 부모의 실제 과를 보존한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+@기관: 시험부
+제2조(소속기관) 시험부장관 소속으로 첫째박물관 및 둘째박물관을 둔다.
+제3조(첫째박물관) 첫째박물관에 기획운영과 및 학예연구과를 둔다.
+제4조(둘째박물관) 둘째박물관에 기획운영과 및 전시과를 둔다.
+`,
+  ]);
+  const first = graph.nodeByName("첫째박물관");
+  const second = graph.nodeByName("둘째박물관");
+  const firstPlanning = graph.childrenOf(first).find(({ node }) => node.name === "기획운영과")?.node;
+  const secondPlanning = graph.childrenOf(second).find(({ node }) => node.name === "기획운영과")?.node;
+
+  assert.ok(firstPlanning);
+  assert.ok(secondPlanning);
+  assert.notEqual(firstPlanning.id, secondPlanning.id);
+  assert.equal(firstPlanning.name, "기획운영과");
+  assert.equal(secondPlanning.name, "기획운영과");
+});
+
 test("본부와 소속기관은 작도 색·표식으로 구분한다", () => {
   const graph = parseOrganizationTexts([
     `
@@ -937,6 +958,29 @@ test("직무등급·특정직 보직·겸직·합의제 구성을 메타데이�
   assert.equal(graph.nodeByName("위원장").metadata.specificRank, "소방총감");
 });
 
+test("한 문장의 복수 직위·등급은 각 직위에 대응하고 장 문맥의 원장에게 귀속한다", () => {
+  const graph = parseOrganizationTexts([
+    `
+시험부와 그 소속기관 직제
+제7장 해외문화홍보원
+제50조(직무) 해외문화홍보원은 해외문화홍보 사무를 관장한다.
+제53조(해외문화홍보기획관) ① 원장 밑에 해외문화홍보기획관 1명을 두되, 해외문화홍보기획관은 고위공무원단에 속하는 일반직공무원으로 보한다.
+`,
+    `
+시험부와 그 소속기관 직제 시행규칙
+제35조(해외문화홍보원) ① 해외문화홍보원장 및 해외문화홍보기획관은 고위공무원단에 속하는 일반직공무원으로 보하되, 해외문화홍보원장의 직무등급은 가등급으로, 해외문화홍보기획관의 직무등급은 나등급으로 한다.
+`,
+  ], { institution: "시험부" });
+
+  const office = graph.nodeByName("해외문화홍보원");
+  const advisor = graph.nodeByName("해외문화홍보기획관");
+  const advisorParents = graph.parentsOf(advisor).map(({ edge, node }) => [node.name, edge.type]);
+
+  assert.equal(office.metadata.grade, "가");
+  assert.equal(advisor.metadata.grade, "나");
+  assert.deepEqual(advisorParents, [["해외문화홍보원", "advisor"]]);
+});
+
 test("조직통칙 위반 가능성을 검증 결과로 남긴다", () => {
   const graph = parseOrganizationTexts([
     `
@@ -1009,6 +1053,28 @@ test("시행규칙의 정책관 소관 과는 법정 설치 계선과 별도로 
   ]);
   // 인접한 과는 문언만으로 추정해 붙이지 않는다.
   assert.equal(graph.nodeByName("지역진흥과").metadata.jurisdiction, undefined);
+});
+
+test("과장 분장문단은 뒤따르는 실장·부장 문단의 기능을 삼키지 않는다", () => {
+  const graph = parseOrganizationTexts([`
+시험부 직제 시행규칙
+제23조(지방박물관)
+① 기획운영과장은 다음 사항을 분장한다.
+1. 보안 및 관인 관리
+2. 예산ㆍ회계 및 결산
+② 학예연구실장 및 경주박물관 학예연구과장은 다음 사항을 분장한다.
+1. 소장유물 및 유물수장고의 관리
+2. 문화재의 연구ㆍ조사
+③ 삭제 <2025. 1. 1.>
+④ 교육과장은 다음 사항을 분장한다.
+1. 박물관 교육 프로그램의 개발ㆍ운영
+`], { institution: "시험부" });
+
+  const planning = graph.meta.departmentDutyCatalog.find((entry) => entry.department === "기획운영과");
+  const education = graph.meta.departmentDutyCatalog.find((entry) => entry.department === "교육과");
+  assert.deepEqual(planning.items.map((item) => item.text), ["보안 및 관인 관리", "예산ㆍ회계 및 결산"]);
+  assert.deepEqual(education.items.map((item) => item.text), ["박물관 교육 프로그램의 개발ㆍ운영"]);
+  assert.equal(planning.items.some((item) => /소장유물|문화재의 연구/.test(item.text)), false);
 });
 
 test("정책관에 과를 직접 두는 문형은 법정 설치와 운영상 소관을 함께 보존한다", () => {
@@ -1098,6 +1164,66 @@ test("직제 호 번호 범위가 과 분장 조문에 재인용되면 보좌기
       ["산업정책관", "제10조제3항 제5호부터 제9호까지"],
     ],
   );
+});
+
+test("시행규칙의 관별 직제 호 범위와 과 분장사무를 대조해 관을 과의 운영상 부모로 묶는다", () => {
+  const graph = parseOrganizationTexts([
+    `
+시험부와 그 소속기관 직제
+제10조(시험실)
+① 시험실에 실장 1명을 두고, 실장 밑에 정책관등 2명을 둔다.
+③ 실장은 다음 사항을 분장한다.
+1. 디지털산업 정책 종합계획의 수립
+2. 게임산업 진흥
+3. 미디어정책 종합계획의 수립
+4. 출판산업 진흥
+`,
+    `
+시험부와 그 소속기관 직제 시행규칙
+제5조(시험실)
+① 시험실장은 고위공무원단에 속하는 일반직공무원으로 보한다.
+② 「시험부와 그 소속기관 직제」 제10조제1항에 따라 시험실장 밑에 두는 보좌기관은 디지털산업정책관 및 미디어산업관으로 한다.
+③ 디지털산업정책관은 「시험부와 그 소속기관 직제」 제10조제3항제1호부터 제2호까지의 사항에 관하여 실장을 보좌한다.
+④ 미디어산업관은 「시험부와 그 소속기관 직제」 제10조의제3항제3호부터 제4호까지의 사항에 관하여 실장을 보좌한다.
+⑤ 시험실에 디지털산업정책과ㆍ게임산업과ㆍ미디어정책과 및 출판정책과를 둔다.
+⑥ 디지털산업정책과장은 다음 사항을 분장한다.
+1. 디지털산업 정책 종합계획의 수립
+⑦ 게임산업과장은 다음 사항을 분장한다.
+1. 게임 제작기업 지원
+⑧ 미디어정책과장은 다음 사항을 분장한다.
+1. 미디어정책 종합계획의 수립
+⑨ 출판정책과장은 다음 사항을 분장한다.
+1. 출판 생태계 지원
+`,
+  ], {
+    sources: ["시험부와 그 소속기관 직제", "시험부와 그 소속기관 직제 시행규칙"],
+  });
+
+  assert.deepEqual(
+    graph.meta.jurisdictionRangeHints.map((item) => item.advisor),
+    ["디지털산업정책관", "미디어산업관"],
+  );
+  assert.deepEqual(
+    graph.meta.jurisdictionRelations.map((item) => [item.parent, item.child]),
+    [
+      ["디지털산업정책관", "디지털산업정책과"],
+      ["미디어산업관", "미디어정책과"],
+      ["디지털산업정책관", "게임산업과"],
+      ["미디어산업관", "출판정책과"],
+    ],
+  );
+  assert.equal(graph.nodeByName("게임산업과").metadata.jurisdiction.evidence, "duty-text-order-run");
+  assert.ok(graph.parentsOf("게임산업과").some(({ edge, node }) => (
+    edge.type === "assistant" && node.name === "시험실"
+  )));
+
+  const operational = projectOperationalView(graph);
+  assert.ok(operational.parentsOf("게임산업과").some(({ edge, node }) => (
+    edge.type === "jurisdiction" && node.name === "디지털산업정책관"
+  )));
+  assert.ok(operational.parentsOf("출판정책과").some(({ edge, node }) => (
+    edge.type === "jurisdiction" && node.name === "미디어산업관"
+  )));
 });
 
 test("직제 호 번호 범위가 둘 이상에 걸치면 보좌기관 소관을 추정하지 않는다", () => {

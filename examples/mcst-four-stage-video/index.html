@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1680, height=1188" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Apple SD Gothic Neo"; src: local("Apple SD Gothic Neo"); }
+      @font-face { font-family: "Malgun Gothic"; src: local("Malgun Gothic"); }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1680px;
+        height: 1188px;
+        overflow: hidden;
+        background: #000;
+      }
+      body { font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="14"
+      data-fps="30"
+      data-width="1680"
+      data-height="1188"
+    >
+      <div
+        id="mcst-shot"
+        class="clip"
+        data-composition-id="mcst-four-stage"
+        data-composition-src="compositions/index.html"
+        data-start="0"
+        data-duration="14"
+        data-track-index="0"
+        data-width="1680"
+        data-height="1188"
+      ></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

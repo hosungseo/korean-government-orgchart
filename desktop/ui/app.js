@@ -1,7 +1,16 @@
 import { analyzeNativeManifest } from "./manifest-validation.js";
-import { buildNativeLawWorkflow } from "./engine/native-law-workflow.mjs";
+import { buildNativeComparisonWorkflow, buildNativeLawWorkflow } from "./engine/native-law-workflow.mjs";
 import { flattenLawJson } from "./engine/law-json-core.mjs";
 import { compareLawSnapshots, createLawSnapshot, summarizeLawSnapshot } from "./engine/law-history.mjs";
+import {
+  COMPARISON_VIDEO_SCHEMA,
+  blobToBase64,
+  buildComparisonVideoPlan,
+  comparisonVideoCapability,
+  comparisonVideoFileName,
+  recordComparisonVideo,
+  supportedRecordingFormat,
+} from "./comparison-video.js";
 
 const invoke = window.__TAURI__?.core?.invoke;
 const $ = (id) => document.getElementById(id);
@@ -15,6 +24,7 @@ let activeWorkflowPage = 0;
 let lawSourceInfo = {};
 let currentLawSnapshot = null;
 let historySnapshots = [];
+let videoExportController = null;
 
 function setStatus(title, message, state = "idle") {
   const box = $("statusBox");
@@ -37,6 +47,21 @@ function setStep(id, state) {
 
 function refreshGenerateAvailability() {
   $("generateButton").disabled = !(invoke && hwpAvailable && manifest && validationReport?.valid);
+}
+
+function refreshVideoExportAvailability() {
+  const button = $("exportHistoryVideoButton");
+  const hint = $("videoFormatHint");
+  if (!button || !hint) return;
+  const capability = comparisonVideoCapability(manifest);
+  const format = supportedRecordingFormat();
+  button.disabled = !(invoke && capability.supported && format && !videoExportController);
+  button.textContent = format ? `${format.extension.toUpperCase()} 애니메이션 영상 저장` : "애니메이션 영상 저장";
+  hint.textContent = !capability.supported
+    ? capability.reason
+    : !format
+      ? "WebView2를 최신 버전으로 업데이트해야 영상 코덱을 사용할 수 있습니다."
+      : `${format.label} · A3 고정 · 30fps 프레임 고정 우선 · 조직도 먼저, 시점 간 점선 나중`;
 }
 
 function escapeXml(value) {
@@ -66,15 +91,21 @@ function svgText(object, geometry, style) {
   return `<text text-anchor="${anchor}" dominant-baseline="central" fill="${style.textColor || "#202020"}" font-family="${escapeXml(style.fontFamily || "Malgun Gothic")}, sans-serif" font-size="${fontSize}" font-weight="${style.bold ? 700 : 400}">${tspans}</text>`;
 }
 
+function dashAttr(style) {
+  if (style.dashArray) return `stroke-dasharray="${style.dashArray}"`;
+  if (style.dash === "dash") return `stroke-dasharray="2.6 1.4"`;
+  return "";
+}
+
 function svgObject(object) {
   const style = object.style || {};
   const geometry = object.geometry || {};
   if (object.type === "line") {
-    return `<line x1="${geometry.x1}" y1="${geometry.y1}" x2="${geometry.x2}" y2="${geometry.y2}" stroke="${style.stroke}" stroke-width="${style.strokeWidthMm}" stroke-linecap="square" ${style.dash === "dash" ? 'stroke-dasharray="1 1"' : ""}/>`;
+    return `<line x1="${geometry.x1}" y1="${geometry.y1}" x2="${geometry.x2}" y2="${geometry.y2}" stroke="${style.stroke}" stroke-width="${style.strokeWidthMm}" stroke-linecap="square" ${dashAttr(style)}/>`;
   }
   const fill = style.fill === "none" ? "none" : style.fill;
   const stroke = style.stroke === "none" ? "none" : style.stroke;
-  const rectangle = `<rect x="${geometry.x}" y="${geometry.y}" width="${geometry.width}" height="${geometry.height}" fill="${fill}" stroke="${stroke}" stroke-width="${style.strokeWidthMm || 0}" ${style.dash === "dash" ? 'stroke-dasharray="1 1"' : ""}/>`;
+  const rectangle = `<rect x="${geometry.x}" y="${geometry.y}" width="${geometry.width}" height="${geometry.height}" fill="${fill}" stroke="${stroke}" stroke-width="${style.strokeWidthMm || 0}" ${dashAttr(style)}/>`;
   if (object.type !== "textbox") return rectangle;
   return `${rectangle}${svgText(object, geometry, style)}`;
 }
@@ -86,6 +117,8 @@ function renderManifest(nextManifest) {
   const pageHeight = Number(manifest.page?.heightMm || 297);
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${pageWidth}mm" height="${pageHeight}mm" viewBox="0 0 ${pageWidth} ${pageHeight}" shape-rendering="geometricPrecision"><rect width="${pageWidth}" height="${pageHeight}" fill="#fff"/>${objects.map(svgObject).join("")}</svg>`;
   $("paper").style.aspectRatio = `${pageWidth} / ${pageHeight}`;
+  $("paper").classList.toggle("is-landscape", pageWidth > pageHeight);
+  $("paper").setAttribute("aria-label", pageWidth > pageHeight ? "A3 가로 조직도 미리보기" : "A4 세로 조직도 미리보기");
   $("paper").innerHTML = svg;
 }
 
@@ -117,7 +150,7 @@ function renderPreflight(report) {
       : "사전검사 통과";
   box.querySelector("p").textContent = errors.length
     ? "오류를 바로잡기 전에는 한글 생성을 시작하지 않습니다."
-    : `${summary.connectionChecks || 0}개 자식 계선의 상자 접합과 A4 경계를 확인했습니다.`;
+    : `${summary.connectionChecks || 0}개 자식 계선의 상자 접합과 용지 경계를 확인했습니다.`;
   const list = $("diagnosticList");
   list.replaceChildren();
   for (const item of diagnosticItems(report)) {
@@ -183,13 +216,14 @@ async function acceptManifest(nextManifest, sourceLabel, { preserveWorkflow = fa
     renderManifest(nextManifest);
     const warningMessage = validationReport.warnings.length
       ? `생성은 가능하지만 주의 ${validationReport.warnings.length}건을 먼저 확인하는 편이 좋습니다.`
-      : "A4 경계·객체 수·ID·자식 계선 접합 검사를 통과했습니다.";
+      : "용지 경계·객체 수·ID·자식 계선 접합 검사를 통과했습니다.";
     setStatus(validationReport.warnings.length ? "명세 검사 통과(주의 있음)" : "명세 검사 통과", warningMessage, validationReport.warnings.length ? "warning" : "success");
   } else {
     clearPreview("명세 오류를 바로잡으면 미리보기가 표시됩니다.");
     setStatus("작도 명세 오류", validationReport.errors[0]?.message || "JSON 명세를 확인하세요.", "error");
   }
   refreshGenerateAvailability();
+  refreshVideoExportAvailability();
 }
 
 async function loadManifestText(text, sourceLabel) {
@@ -213,6 +247,7 @@ function clearLawWorkflow() {
   $("parseSummary").hidden = true;
   $("historyControls").hidden = true;
   $("historyDiff").hidden = true;
+  refreshVideoExportAvailability();
 }
 
 function setHistoryControlsVisible(visible) {
@@ -226,24 +261,34 @@ function historyOptionLabel(snapshot) {
 }
 
 function renderHistorySelectors() {
-  const left = $("historyLeft");
-  const right = $("historyRight");
-  const previousLeft = left.value;
-  const previousRight = right.value;
-  left.replaceChildren();
-  right.replaceChildren();
-  for (const snapshot of historySnapshots) {
-    const label = historyOptionLabel(snapshot);
-    for (const select of [left, right]) {
+  const required = [$("historyLeft"), $("historyRight")];
+  const optional = [$("historyMid"), $("historyFourth")].filter(Boolean);
+  const previous = Object.fromEntries([...required, ...optional].map((select) => [select.id, select.value]));
+  for (const select of [...required, ...optional]) {
+    select.replaceChildren();
+    if (optional.includes(select)) {
+      const empty = document.createElement("option");
+      empty.value = "";
+      empty.textContent = "없음";
+      select.append(empty);
+    }
+    for (const snapshot of historySnapshots) {
       const option = document.createElement("option");
       option.value = snapshot.id;
-      option.textContent = label;
+      option.textContent = historyOptionLabel(snapshot);
       select.append(option);
     }
   }
   if (historySnapshots.length) {
-    left.value = historySnapshots.some((item) => item.id === previousLeft) ? previousLeft : historySnapshots.at(-1).id;
-    right.value = historySnapshots.some((item) => item.id === previousRight) ? previousRight : historySnapshots[0].id;
+    $("historyLeft").value = historySnapshots.some((item) => item.id === previous.historyLeft)
+      ? previous.historyLeft
+      : historySnapshots.at(-1).id;
+    $("historyRight").value = historySnapshots.some((item) => item.id === previous.historyRight)
+      ? previous.historyRight
+      : historySnapshots[0].id;
+    for (const select of optional) {
+      select.value = historySnapshots.some((item) => item.id === previous[select.id]) ? previous[select.id] : "";
+    }
   }
   $("compareHistoryButton").disabled = historySnapshots.length < 2;
 }
@@ -299,18 +344,187 @@ function renderHistoryDiff(diff) {
   box.hidden = false;
 }
 
+function appendFunctionLineageEvidence(summary) {
+  const box = $("historyDiff");
+  const lineages = summary?.dutyLineages || (summary?.dutyLineage ? [summary.dutyLineage] : []);
+  const links = lineages.flatMap((lineage, transition) => (
+    (lineage?.links || []).map((link) => ({ ...link, transition: transition + 1 }))
+  )).filter((link) => link.from !== link.to || link.fromParent !== link.toParent);
+  const reviews = lineages.flatMap((lineage) => lineage?.reviews || []);
+  if (!links.length && !reviews.length) return;
+  const items = links.slice(0, 30).map((link) => {
+    const evidence = link.matchedFunctions
+      ? `기능 ${link.matchedFunctions}/${link.sourceFunctions}호`
+      : link.basis;
+    const confidence = Number.isFinite(link.confidence) ? ` · 신뢰 ${Math.round(link.confidence * 100)}%` : "";
+    const citation = link.evidence?.[0]?.beforeCitation && link.evidence?.[0]?.afterCitation
+      ? ` · ${link.evidence[0].beforeCitation} ↔ ${link.evidence[0].afterCitation}`
+      : "";
+    return `<li>${escapeXml(`${link.from} → ${link.to} · ${evidence}${confidence}${citation}`)}</li>`;
+  }).join("");
+  const reviewText = reviews.length ? `<p>자동 연결 보류 ${reviews.length}건 · 사람 확인 필요</p>` : "";
+  box.insertAdjacentHTML(
+    "beforeend",
+    `<section class="lineage-evidence"><strong>개정문·각 호 점선 근거 ${links.length}건</strong>${items ? `<ul>${items}</ul>` : ""}${reviewText}</section>`,
+  );
+  box.hidden = false;
+}
+
 async function compareHistory() {
   if (!invoke || historySnapshots.length < 2) return;
   const button = $("compareHistoryButton");
   button.disabled = true;
   try {
-    const left = await invoke("load_law_snapshot", { request: { id: $("historyLeft").value } });
-    const right = await invoke("load_law_snapshot", { request: { id: $("historyRight").value } });
-    renderHistoryDiff(compareLawSnapshots(left, right));
+    const selectedIds = [...new Set([
+      $("historyLeft").value,
+      $("historyRight").value,
+      $("historyMid")?.value,
+      $("historyFourth")?.value,
+    ].filter(Boolean))];
+    if (selectedIds.length < 2) throw new Error("서로 다른 기준일을 두 개 이상 고르세요.");
+    const loaded = [];
+    for (const id of selectedIds) {
+      loaded.push(await invoke("load_law_snapshot", { request: { id } }));
+    }
+    loaded.sort((left, right) => String(left.asOf || "").localeCompare(String(right.asOf || "")));
+    if (loaded.length === 2) {
+      renderHistoryDiff(compareLawSnapshots(loaded[0], loaded[1]));
+    } else {
+      $("historyDiff").innerHTML = `<strong>${escapeXml(loaded.map((item) => item.asOf || "기준일 없음").join(" → "))}</strong> · ${loaded.length}단 대비`;
+      $("historyDiff").hidden = false;
+    }
+    lawWorkflow = buildNativeComparisonWorkflow({
+      stages: loaded,
+      focus: $("lawFocus")?.value,
+      onePage: true,
+    });
+    appendFunctionLineageEvidence(lawWorkflow.summary);
+    currentLawSnapshot = createLawSnapshot(lawWorkflow, {
+      label: `${lawWorkflow.summary.institution} · ${loaded.map((item) => item.asOf || "?").join(" → ")}`,
+    });
+    activeWorkflowPage = 0;
+    renderPageNavigator();
+    renderLawWorkflowSummary(lawWorkflow.summary);
+    await selectWorkflowPage(0);
+    const paper = lawWorkflow.manifests[0]?.page?.paper || "A4";
+    setStatus(
+      "대비 조직도 작도 완료",
+      `${loaded.map((item) => item.asOf || "기준일 없음").join(" · ")}을 ${paper} ${loaded.length}단으로 그렸습니다. 각 호 기능과 개정 근거로 확인된 변경만 점선으로 표시했습니다.`,
+      "success",
+    );
   } catch (error) {
     setStatus("개편 내역 비교 실패", String(error), "error");
   } finally {
     button.disabled = false;
+  }
+}
+
+function videoStageMessage(plan, seconds) {
+  if (seconds < plan.stageBuildEnd) {
+    const column = Math.min(plan.columns, Math.floor(seconds / plan.columnDuration) + 1);
+    return `${column}/${plan.columns}열 조직도 본체를 그리는 중입니다.`;
+  }
+  if (seconds < plan.holdStart) {
+    const transition = Math.min(plan.columns - 1, Math.floor(Math.max(0, seconds - plan.correspondenceLineStart) / plan.transitionSpacing) + 1);
+    return `${transition}→${transition + 1} 시점의 대응 점선을 연결하는 중입니다.`;
+  }
+  return `완성된 A3 ${plan.columns}단표를 정지 화면으로 확인하는 중입니다.`;
+}
+
+function cancelVideoExport() {
+  videoExportController?.abort();
+}
+
+async function exportComparisonVideo() {
+  if (!invoke || videoExportController) return;
+  const capability = comparisonVideoCapability(manifest);
+  const format = supportedRecordingFormat();
+  if (!capability.supported || !format) {
+    setStatus("영상 내보내기 불가", capability.supported ? "WebView2 영상 코덱을 찾지 못했습니다." : capability.reason, "error");
+    refreshVideoExportAvailability();
+    return;
+  }
+  const dialog = $("videoExportDialog");
+  const canvas = $("videoExportCanvas");
+  const progress = $("videoExportProgress");
+  const plan = buildComparisonVideoPlan(manifest);
+  videoExportController = new AbortController();
+  progress.value = 0;
+  $("videoExportClock").textContent = `0.0 / ${plan.duration.toFixed(1)}초 · 0/${plan.frameCount}f`;
+  $("videoExportFormat").textContent = `${format.label} · 1680×1188 · 30fps · 무음`;
+  $("videoExportStatus").textContent = "A3 용지를 고정한 채 왼쪽 조직도부터 그립니다.";
+  if (!dialog.open) dialog.showModal();
+  refreshVideoExportAvailability();
+  setStatus("조직개편 영상 녹화 중", "A3 조직도를 프레임 단위로 작도하고 있습니다. 앱을 닫지 마세요.", "working");
+  try {
+    const recording = await recordComparisonVideo(manifest, {
+      canvas,
+      signal: videoExportController.signal,
+      onProgress: ({ seconds, duration, ratio, plan, frameNumber, frameCount, captureMode, frameRateLocked }) => {
+        progress.value = Math.round(ratio * 100);
+        $("videoExportClock").textContent = `${seconds.toFixed(1)} / ${duration.toFixed(1)}초 · ${frameNumber}/${frameCount}f`;
+        $("videoExportFormat").textContent = `${format.label} · 1680×1188 · 30fps · ${frameRateLocked ? "프레임 고정" : "호환 녹화"}`;
+        $("videoExportDialog").dataset.captureMode = captureMode;
+        $("videoExportStatus").textContent = videoStageMessage(plan, seconds);
+      },
+    });
+    $("videoExportStatus").textContent = "녹화 데이터를 원자적으로 저장하고 SHA-256을 검증하는 중입니다.";
+    const fileName = comparisonVideoFileName(manifest, recording.extension);
+    const metadata = {
+      schema: COMPARISON_VIDEO_SCHEMA,
+      generatedAt: new Date().toISOString(),
+      source: manifest.source || {},
+      manifest: {
+        schema: manifest.schema,
+        title: manifest.title,
+        page: manifest.page,
+        verification: manifest.verification,
+      },
+      video: {
+        width: recording.plan.width,
+        height: recording.plan.height,
+        fps: recording.plan.fps,
+        durationSeconds: recording.plan.duration,
+        frameCount: recording.frameCount,
+        frameCountKind: "requested-render-frames",
+        captureMode: recording.captureMode,
+        frameRateLocked: recording.frameRateLocked,
+        recordedWallClockSeconds: Number(recording.recordedWallClockSeconds.toFixed(3)),
+        mimeType: recording.mimeType,
+        bytes: recording.blob.size,
+        sequence: {
+          stageBuildEndSeconds: recording.plan.stageBuildEnd,
+          correspondenceStartSeconds: recording.plan.correspondenceStart,
+          holdStartSeconds: recording.plan.holdStart,
+        },
+      },
+    };
+    const result = await invoke("save_comparison_video", {
+      request: {
+        videoBase64: await blobToBase64(recording.blob),
+        mimeType: recording.mimeType,
+        fileName,
+        manifestJson: JSON.stringify(manifest),
+        metadataJson: JSON.stringify(metadata),
+        openAfter: true,
+      },
+    });
+    $("openFolderButton").hidden = false;
+    setStatus(
+      "조직개편 영상 저장 완료",
+      `${result.mediaType} · ${recording.plan.duration.toFixed(1)}초 · ${recording.frameCount} 요청 프레임 · ${(Number(result.bytes || 0) / 1024 / 1024).toFixed(1)}MB · SHA-256 ${String(result.sha256 || "").slice(0, 12)}… 검증`,
+      "success",
+    );
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      setStatus("영상 내보내기 취소", "저장하지 않고 영상 녹화를 끝냈습니다.", "idle");
+    } else {
+      setStatus("영상 내보내기 실패", String(error?.message || error), "error");
+    }
+  } finally {
+    videoExportController = null;
+    if (dialog.open) dialog.close();
+    refreshVideoExportAvailability();
   }
 }
 
@@ -373,6 +587,11 @@ function renderLawWorkflowSummary(summary) {
   $("parseSummary").hidden = false;
   $("parsedNodes").textContent = `${summary.nodeCount}개`;
   $("parsedRelations").textContent = `${summary.relationCount}개`;
+  $("parsedDutyFacts").textContent = `${summary.dutyFactCount || 0}호`;
+  const lineages = summary.dutyLineages || (summary.dutyLineage ? [summary.dutyLineage] : []);
+  const changedLinks = lineages.flatMap((lineage) => lineage?.links || [])
+    .filter((link) => link.from !== link.to || link.fromParent !== link.toParent);
+  $("parsedLineages").textContent = `${changedLinks.length}건`;
   $("parsedPages").textContent = `${summary.pageCount}쪽`;
   const warning = (summary.warnings || [])[0];
   $("parseWarning").textContent = warning || "직제와 시행규칙을 모두 확인했습니다.";
@@ -592,10 +811,10 @@ async function generate() {
     $("openFolderButton").hidden = false;
     if (result.verified) {
       setStep("stepVerify", "done");
-      setStatus("편집형 HWPX 검증 완료", `${result.pageCount}쪽 · 네이티브 객체 ${result.nativeObjectCount}개 · 검증 리포트 저장 완료`, "success");
+      setStatus("편집형 HWPX 검증 완료", `${result.pageCount}쪽 · 네이티브 객체 ${result.nativeObjectCount}개 · SHA-256·법령 근거 묶음 저장 완료`, "success");
       $("verification").dataset.state = "success";
       $("verification").querySelector("span").textContent = "재열기 검증 통과";
-      $("verification").querySelector("p").textContent = `A4 ${result.pageCount}쪽, 객체 ${result.nativeObjectCount}/${result.expectedNativeObjectCount}개를 확인했습니다. 같은 폴더에 .native.json과 .verification.json을 남겼습니다.`;
+      $("verification").querySelector("p").textContent = `${manifest?.page?.paper || "문서"} ${result.pageCount}쪽, 객체 ${result.nativeObjectCount}/${result.expectedNativeObjectCount}개를 확인했습니다. HWPX·작도 명세·법령 근거·검증 리포트를 한 묶음으로 확정했습니다. SHA-256 ${String(result.sha256 || "").slice(0, 12)}…`;
     } else {
       setStep("stepVerify", "failed");
       setStatus("HWPX는 생성됐지만 검증 불일치", `${result.outputPath} · 쪽수 또는 객체 수를 확인해야 합니다.`, "error");
@@ -640,6 +859,13 @@ $("collectHistoryButton").addEventListener("click", collectRecentHistory);
 $("saveSnapshotButton").addEventListener("click", saveCurrentSnapshot);
 $("refreshHistoryButton").addEventListener("click", refreshHistory);
 $("compareHistoryButton").addEventListener("click", compareHistory);
+$("exportHistoryVideoButton").addEventListener("click", exportComparisonVideo);
+$("cancelVideoExportButton").addEventListener("click", cancelVideoExport);
+$("videoExportDialog").addEventListener("cancel", (event) => {
+  if (!videoExportController) return;
+  event.preventDefault();
+  cancelVideoExport();
+});
 $("pageSelect").addEventListener("change", (event) => selectWorkflowPage(event.target.value));
 $("previousPageButton").addEventListener("click", () => selectWorkflowPage(activeWorkflowPage - 1));
 $("nextPageButton").addEventListener("click", () => selectWorkflowPage(activeWorkflowPage + 1));
@@ -667,3 +893,4 @@ if (!$("lawAsOf").value) {
 
 await loadSample();
 await checkRuntime();
+refreshVideoExportAvailability();

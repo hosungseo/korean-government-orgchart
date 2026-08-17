@@ -3,6 +3,35 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { analyzeNativeManifest } from "../desktop/ui/manifest-validation.js";
 import { buildMoisAiParticipationNativeManifest } from "../src/hwp-native-manifest.mjs";
+import { buildNativeComparisonWorkflow } from "../src/native-law-workflow.mjs";
+
+test("Windows 앱 사전검사는 A3 가로 3단 대비 명세를 통과시킨다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    stages: [
+      {
+        decreeText: `시험행정부와 그 소속기관 직제\n제4조(하부조직) 시험행정부에 디지털정부실을 둔다.\n제5조(디지털정부실) 디지털정부실에 인공지능정책국을 둔다.`,
+        ruleText: `시험행정부와 그 소속기관 직제 시행규칙\n제3조(디지털정부실) 인공지능정책국에 인공지능정책과를 둔다.`,
+        asOf: "2025-10-01",
+      },
+      {
+        decreeText: `시험행정부와 그 소속기관 직제\n제4조(하부조직) 시험행정부에 인공지능정부실을 둔다.\n제5조(인공지능정부실) 인공지능정부실에 인공지능정책국을 둔다.`,
+        ruleText: `시험행정부와 그 소속기관 직제 시행규칙\n제3조(인공지능정부실) 인공지능정책국에 인공지능정책과를 둔다.`,
+        asOf: "2025-11-25",
+      },
+      {
+        decreeText: `시험행정부와 그 소속기관 직제\n제4조(하부조직) 시험행정부에 인공지능정부실을 둔다.\n제5조(인공지능정부실) 인공지능정부실에 인공지능정책국을 둔다.`,
+        ruleText: `시험행정부와 그 소속기관 직제 시행규칙\n제3조(인공지능정부실) 인공지능정책국에 인공지능정책과ㆍ법사조직과를 둔다.`,
+        asOf: "2026-07-21",
+      },
+    ],
+    focus: "디지털정부실, 인공지능정부실",
+    onePage: true,
+  });
+  const report = analyzeNativeManifest(workflow.manifests[0]);
+  assert.equal(workflow.summary.paper, "A3");
+  assert.equal(report.valid, true);
+  assert.equal(report.errors.length, 0);
+});
 
 test("Windows 앱 사전검사는 정상 네이티브 명세의 객체와 계선 접합을 집계한다", () => {
   const manifest = buildMoisAiParticipationNativeManifest();
@@ -80,6 +109,8 @@ test("쪽 설정은 한글 버전 간 호환되는 HSet 파라미터 API를 사�
   assert.doesNotMatch(script, /\$section\.Apply(?:Class|To)\s*=/);
   assert.doesNotMatch(script, /\$shape\.ShapeCreation(?:Mode|Type)\s*=/i);
   assert.doesNotMatch(script, /\$points\s*=\s*\$layout\.CreateItemArray/);
+  assert.match(script, /A3 가로/);
+  assert.match(script, /\$pageWidth - 420/);
 });
 
 test("파일 접근 보안모듈이 없으면 한글 생성을 즉시 중단한다", () => {

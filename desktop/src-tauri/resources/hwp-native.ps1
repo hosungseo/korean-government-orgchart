@@ -80,10 +80,11 @@ function Read-NativeManifest {
     if ($manifest.schema -ne "kr.go.mois.orgchart.hwp-native/v1") {
         throw "지원하지 않는 네이티브 작도 명세입니다: $($manifest.schema)"
     }
-    if ($manifest.page.paper -ne "A4" -or $manifest.page.orientation -ne "portrait") { throw "현재 앱은 A4 세로 명세만 지원합니다." }
     $pageWidth = Get-NativeNumber $manifest.page.widthMm "용지 너비"
     $pageHeight = Get-NativeNumber $manifest.page.heightMm "용지 높이"
-    if ([Math]::Abs($pageWidth - 210) -gt 0.02 -or [Math]::Abs($pageHeight - 297) -gt 0.02) { throw "A4 세로 크기는 210×297mm여야 합니다." }
+    $a4Portrait = $manifest.page.paper -eq "A4" -and $manifest.page.orientation -eq "portrait" -and [Math]::Abs($pageWidth - 210) -le 0.02 -and [Math]::Abs($pageHeight - 297) -le 0.02
+    $a3Landscape = $manifest.page.paper -eq "A3" -and $manifest.page.orientation -eq "landscape" -and [Math]::Abs($pageWidth - 420) -le 0.02 -and [Math]::Abs($pageHeight - 297) -le 0.02
+    if (-not $a4Portrait -and -not $a3Landscape) { throw "현재 앱은 A4 세로 또는 A3 가로 명세를 지원합니다." }
     $marginLeft = Get-NativeNumber $manifest.page.marginMm.left "왼쪽 여백"
     $marginRight = Get-NativeNumber $manifest.page.marginMm.right "오른쪽 여백"
     $marginTop = Get-NativeNumber $manifest.page.marginMm.top "위쪽 여백"
@@ -108,7 +109,7 @@ function Read-NativeManifest {
             $x2 = Get-NativeNumber $object.geometry.x2 "$($object.id) x2"
             $y2 = Get-NativeNumber $object.geometry.y2 "$($object.id) y2"
             if ($x1 -lt 0 -or $y1 -lt 0 -or $x2 -lt 0 -or $y2 -lt 0 -or $x1 -gt ($pageWidth + 0.02) -or $x2 -gt ($pageWidth + 0.02) -or $y1 -gt ($pageHeight + 0.02) -or $y2 -gt ($pageHeight + 0.02)) {
-                throw "$($object.id) 선이 A4 용지 밖으로 나갑니다."
+                throw "$($object.id) 선이 용지 밖으로 나갑니다."
             }
             if ([Math]::Sqrt([Math]::Pow($x2 - $x1, 2) + [Math]::Pow($y2 - $y1, 2)) -lt 0.01) { throw "$($object.id) 선의 길이가 0입니다." }
         } else {
@@ -117,7 +118,7 @@ function Read-NativeManifest {
             $width = Get-NativeNumber $object.geometry.width "$($object.id) width"
             $height = Get-NativeNumber $object.geometry.height "$($object.id) height"
             if ($width -le 0 -or $height -le 0 -or $x -lt 0 -or $y -lt 0 -or $x + $width -gt ($pageWidth + 0.02) -or $y + $height -gt ($pageHeight + 0.02)) {
-                throw "$($object.id) 객체가 A4 용지 밖으로 나갑니다."
+                throw "$($object.id) 객체가 용지 밖으로 나갑니다."
             }
             if ($object.type -eq "textbox" -and $null -eq $object.text) { throw "$($object.id) 글상자의 text 값이 없습니다." }
         }
@@ -167,7 +168,7 @@ function Set-PageSetup {
     $section.HSet.SetItem("ApplyClass", 24)
     $section.HSet.SetItem("ApplyTo", 3)
     if (-not $script:Hwp.HAction.Execute("PageSetup", $section.HSet)) {
-        throw "A4 세로 쪽 설정을 적용하지 못했습니다."
+        throw "쪽 설정을 적용하지 못했습니다."
     }
 }
 

@@ -10,6 +10,8 @@ on:
     paths:
       - "desktop/**"
       - "src/hwp-native-manifest.mjs"
+      - "src/annex.mjs"
+      - "src/function-lineage.mjs"
       - "src/duty-allocation.mjs"
       - "src/duty-lineage.mjs"
       - "src/legal-duty.mjs"
@@ -24,6 +26,9 @@ on:
       - "scripts/prepare-desktop-law-engine.mjs"
       - "test/desktop-manifest-validation.test.mjs"
       - "test/hwp-native-manifest.test.mjs"
+      - "test/annex.test.mjs"
+      - "test/function-lineage.test.mjs"
+      - "test/homonym-correspondence.test.mjs"
       - "test/duty-lineage.test.mjs"
       - "test/legal-duty.test.mjs"
       - "test/law-json-core.test.mjs"
@@ -31,7 +36,7 @@ on:
       - ".github/workflows/desktop-windows.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   windows:
@@ -78,3 +83,26 @@ jobs:
           if-no-files-found: error
           path: |
             desktop/src-tauri/target/release/bundle/nsis/*.exe
+
+      - name: Publish rolling desktop release (main)
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          exe=$(ls desktop/src-tauri/target/release/bundle/nsis/*.exe | head -1)
+          echo "installer: $exe"
+          gh release view desktop-latest >/dev/null 2>&1 || gh release create desktop-latest             --prerelease             --title "Windows 데스크톱 최신 빌드"             --notes "main 브랜치 최신 커밋에서 자동 빌드된 NSIS 설치본입니다. 안정판은 native-hwpx-v* 태그 릴리스를 사용하세요."
+          gh release upload desktop-latest "$exe" --clobber
+          gh release edit desktop-latest --notes "main 브랜치 최신 커밋(${GITHUB_SHA::7})에서 자동 빌드된 NSIS 설치본입니다. 안정판은 native-hwpx-v* 태그 릴리스를 사용하세요."
+
+      - name: Publish tagged desktop release
+        if: startsWith(github.ref, 'refs/tags/native-hwpx-v')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          exe=$(ls desktop/src-tauri/target/release/bundle/nsis/*.exe | head -1)
+          tag="${GITHUB_REF#refs/tags/}"
+          gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag"             --title "Windows 데스크톱 $tag"             --generate-notes
+          gh release upload "$tag" "$exe" --clobber

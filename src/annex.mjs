@@ -1,5 +1,5 @@
 import { normalizeNodeName } from "./model.mjs";
-import { normalizeWhitespace, uniq } from "./utils.mjs";
+import { normalizeWhitespace, uniq } from "./utils-core.mjs";
 
 export function extractAnnexesFromLawJson(json, { source } = {}) {
   const law = json?.["법령"];

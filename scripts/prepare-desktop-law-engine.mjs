@@ -10,6 +10,7 @@ const modules = [
   "model.mjs",
   "parser.mjs",
   "native-law-workflow.mjs",
+  "annex.mjs",
   "duty-allocation.mjs",
   "duty-lineage.mjs",
   "function-lineage.mjs",

@@ -1,0 +1,2523 @@
+{
+  "schema": "kr.go.mois.orgchart.function-continuity-audit/v1",
+  "snapshots": [
+    "2024-02-05",
+    "2025-12-30",
+    "2026-07-28"
+  ],
+  "pairs": [
+    {
+      "from": "2024-02-05",
+      "to": "2025-12-30",
+      "verdicts": {
+        "유지": 805,
+        "문언변경": 17,
+        "이관": 148,
+        "통합": 10,
+        "분할": 6,
+        "폐지후보": 84,
+        "신설후보": 91
+      }
+    },
+    {
+      "from": "2025-12-30",
+      "to": "2026-07-28",
+      "verdicts": {
+        "유지": 1019,
+        "문언변경": 7,
+        "이관": 30,
+        "통합": 2,
+        "분할": 0,
+        "폐지후보": 18,
+        "신설후보": 22
+      }
+    }
+  ],
+  "vanished": [
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "관광산업정책과",
+      "citation": "제15조(관광정책국)제9항제12호",
+      "text": "유원시설업, 한옥체험업 육성지원에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "국제문화과",
+      "citation": "제8조(문화예술정책실)제10항제5호",
+      "text": "국가 간 수교 관련 국제문화교류 사업의 추진"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "기획운영과",
+      "citation": "제35조(해외문화홍보원)제3항제1호",
+      "text": "해외문화홍보 기본계획의 수립"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "기획운영과",
+      "citation": "제35조(해외문화홍보원)제3항제3호",
+      "text": "해외문화홍보 관련 정부ㆍ민간협력 네트워크 구축ㆍ운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "기획운영과",
+      "citation": "제35조(해외문화홍보원)제3항제14호",
+      "text": "재외 문화원 신설 및 확충"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "기획운영과",
+      "citation": "제35조(해외문화홍보원)제3항제15호",
+      "text": "재외 문화원 및 문화홍보관 성과 평가의 계획ㆍ시행"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "뉴미디어소통지원과",
+      "citation": "제10조(국민소통실)제16항제2호",
+      "text": "각 중앙행정기관의 디지털소통콘텐츠 협력ㆍ지원"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "뉴미디어소통지원과",
+      "citation": "제10조(국민소통실)제16항제4호",
+      "text": "영상ㆍ그래픽 등 디지털소통콘텐츠 기획ㆍ제작"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "뉴미디어소통지원과",
+      "citation": "제10조(국민소통실)제16항제6호",
+      "text": "소셜 미디어 등 온라인 채널 운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "디지털소통기획과",
+      "citation": "제10조(국민소통실)제14항제1호",
+      "text": "정부 온라인 홍보 전략 및 시행계획 수립"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "디지털소통기획과",
+      "citation": "제10조(국민소통실)제14항제6호",
+      "text": "온라인정책홍보 평가시스템의 운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "디지털소통기획과",
+      "citation": "제10조(국민소통실)제14항제7호",
+      "text": "정책홍보 관련 온라인 캠페인 기획 및 시행"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "문화정책과",
+      "citation": "제8조(문화예술정책실)제7항제21호",
+      "text": "문화재청의 주요업무에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "미디어정책과",
+      "citation": "제13조(미디어정책국)제3항제1호",
+      "text": "문화미디어산업 진흥에 관한 종합발전계획의 수립 및 시행"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "미디어정책과",
+      "citation": "제13조(미디어정책국)제3항제4호",
+      "text": "문화미디어산업의 전문인력 양성 및 기술개발의 종합 조정"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "미디어정책과",
+      "citation": "제13조(미디어정책국)제3항제9호",
+      "text": "문화미디어 관련 교육에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "민속기획과",
+      "citation": "제40조(국립민속박물관)제3항제1호",
+      "text": "민속문화의 진흥에 관한 계획의 수립 및 시행"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "방송영상광고과",
+      "citation": "제13조(미디어정책국)제4항제1호",
+      "text": "방송영상산업ㆍ광고산업 진흥에 관한 종합계획의 수립 및 시행"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "방송영상광고과",
+      "citation": "제13조(미디어정책국)제4항제4호",
+      "text": "방송영상산업ㆍ광고산업의 진흥을 위한 조사ㆍ연구"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "방송영상광고과",
+      "citation": "제13조(미디어정책국)제4항제5호",
+      "text": "방송영상산업ㆍ광고산업의 전문인력 양성 및 기술개발에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "섭외교육과",
+      "citation": "제40조(국립민속박물관)제4항제4호",
+      "text": "국내외 문화기관과의 교류 및 협력"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "섭외교육과",
+      "citation": "제40조(국립민속박물관)제4항제5호",
+      "text": "민속문화에 관한 홍보 및 홍보자료의 발간"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "섭외교육과",
+      "citation": "제40조(국립민속박물관)제4항제8호",
+      "text": "교육관 및 교육시설의 관리ㆍ운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "섭외교육과",
+      "citation": "제40조(국립민속박물관)제4항제9호",
+      "text": "박물관 협력망의 구축 및 관련단체 지원"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "섭외교육과",
+      "citation": "제40조(국립민속박물관)제4항제11호",
+      "text": "민속 관련 박물관 전문인력에 대한 지원 및 양성"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "소통정책과",
+      "citation": "제10조(국민소통실)제7항제4호",
+      "text": "해외문화홍보원과 관련된 업무"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제2호",
+      "text": "어린이 민속관 상설전시실ㆍ특별전시실의 관리 및 운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제3호",
+      "text": "어린이 야외 체험 놀이마당의 관리ㆍ운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제6호",
+      "text": "어린이 관련 자료의 수집에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제13호",
+      "text": "어린이 관련 교육 분야의 국내외 기관과의 교류 및 협력"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "외신분석팀",
+      "citation": "제35조(해외문화홍보원)제8항제2호",
+      "text": "한국 관련 외신 보도 중 오보ㆍ왜곡보도에 대한 대응"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "외신분석팀",
+      "citation": "제35조(해외문화홍보원)제8항제3호",
+      "text": "한국 관련 외신홍보 기획에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "외신분석팀",
+      "citation": "제35조(해외문화홍보원)제8항제5호",
+      "text": "외신 관련 데이터베이스시스템 운영 및 활용"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "외신협력과",
+      "citation": "제35조(해외문화홍보원)제7항제1호",
+      "text": "해외언론의 한국 관련 취재 등에 대한 지원"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "외신협력과",
+      "citation": "제35조(해외문화홍보원)제7항제4호",
+      "text": "중앙행정기관 등의 외신홍보에 대한 지원 및 협력"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "외신협력과",
+      "citation": "제35조(해외문화홍보원)제7항제5호",
+      "text": "중앙행정기관 등의 외신홍보 관련 역량 강화 지원"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "전시과",
+      "citation": "제22조(교육문화교류단)제4항제1호",
+      "text": "국내외 문화재의 특별전 기획 및 전시"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "특수언어진흥과",
+      "citation": "제25조(어문연구실)제6항제1호",
+      "text": "특수언어(한국수화언어 및 점자를 말한다. 이하 같다)에 관한 중장기계획 및 조사ㆍ연구에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "특수언어진흥과",
+      "citation": "제25조(어문연구실)제6항제4호",
+      "text": "특수언어와 관련된 상담에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "특수언어진흥과",
+      "citation": "제25조(어문연구실)제6항제6호",
+      "text": "특수언어 관련 문헌과 자료의 관리에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보콘텐츠과",
+      "citation": "제35조(해외문화홍보원)제6항제6호",
+      "text": "한국소개자료의 해외 출판 지원"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보콘텐츠과",
+      "citation": "제35조(해외문화홍보원)제6항제12호",
+      "text": "국내외 방송과 해외홍보 프로그램 공동제작 및 교류지원"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "국제문화과",
+      "citation": "제8조(문화예술정책실)제10항제2호",
+      "text": "국가브랜드 제고를 위한 문화 분야 전략 수립 및 조정"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "국제문화과",
+      "citation": "제8조(문화예술정책실)제10항제11호",
+      "text": "한국 소개 문화행사의 계획 수립 및 지원"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "기획운영과",
+      "citation": "제35조(해외문화홍보원)제3항제2호",
+      "text": "주요 계기 및 국정현안에 대한 해외홍보계획 수립"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "기획운영과",
+      "citation": "제35조(해외문화홍보원)제3항제4호",
+      "text": "해외문화홍보 관련 정보의 수집ㆍ관리ㆍ조사 및 평가"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "기획운영과",
+      "citation": "제35조(해외문화홍보원)제3항제10호",
+      "text": "문서, 정보공개, 민원 관리에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "뉴미디어소통지원과",
+      "citation": "제10조(국민소통실)제16항제5호",
+      "text": "디지털 매체 활용을 통한 민간협력"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "데이터정책팀",
+      "citation": "제7조(기획조정실)제12항제1호",
+      "text": "문화체육관광부와 그 소속기관ㆍ공공기관의 통계ㆍ공공데이터ㆍ빅데이터에 관한 기획, 예산 검토ㆍ조정ㆍ작성, 활용 기반 구축 및 관리 총괄"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "데이터정책팀",
+      "citation": "제7조(기획조정실)제12항제2호",
+      "text": "문화체육관광부와 그 소속기관ㆍ공공기관의 통계ㆍ공공데이터ㆍ빅데이터에 관한 품질관리 총괄"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "데이터정책팀",
+      "citation": "제7조(기획조정실)제12항제2의2호",
+      "text": "부 내 공공데이터의 제공 및 이용 활성화에 관한 계획의 수립ㆍ추진 및 평가 등 총괄"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "데이터정책팀",
+      "citation": "제7조(기획조정실)제12항제2의3호",
+      "text": "부 내 데이터기반행정 활성화를 위한 계획의 수립ㆍ추진 및 데이터 관리 등 총괄"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "데이터정책팀",
+      "citation": "제7조(기획조정실)제12항제3호",
+      "text": "통계 및 수치자료가 활용된 연구결과물의 정확성 검토 등 문화체육관광부 통계기반 정책평가의 운영계획 수립 및 시행"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "데이터정책팀",
+      "citation": "제7조(기획조정실)제12항제4호",
+      "text": "국내외 다른 기관과의 통계ㆍ공공데이터ㆍ빅데이터에 관한 협력ㆍ지원에 관한 사항 총괄"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "민속기획과",
+      "citation": "제40조(국립민속박물관)제3항제10호",
+      "text": "관람사항(관람안내에 관한 사항은 제외한다)에 관한 관리"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "민속연구과",
+      "citation": "제40조(국립민속박물관)제6항제5호",
+      "text": "동ㆍ서양의 민속 및 역사민속학의 비교연구"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "섭외교육과",
+      "citation": "제40조(국립민속박물관)제4항제1호",
+      "text": "민속문화교육프로그램의 개발ㆍ운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "섭외교육과",
+      "citation": "제40조(국립민속박물관)제4항제2호",
+      "text": "민속문화에 관한 사회교육 및 보급"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "섭외교육과",
+      "citation": "제40조(국립민속박물관)제4항제6호",
+      "text": "관람안내"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "섭외교육과",
+      "citation": "제40조(국립민속박물관)제4항제10호",
+      "text": "장애인ㆍ다문화가정 등 소외계층 대상 교육프로그램 개발 및 운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제1호",
+      "text": "어린이 관련 전시 및 교류에 관한 기본계획의 수립ㆍ시행"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제4호",
+      "text": "어린이 관련 기획전시ㆍ특별전시 및 교류전시 등에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제5호",
+      "text": "어린이 관련 국외전시 및 외국 문화재의 국내 전시 등에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제7호",
+      "text": "어린이 관련 민속문화에 대한 교육 기본계획의 수립ㆍ시행"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제8호",
+      "text": "어린이 관련 민속문화에 대한 교육 및 보급"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제9호",
+      "text": "어린이 체험 교육관의 관리ㆍ운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제11호",
+      "text": "소외계층ㆍ장애인ㆍ다문화 가족 어린이 대상 교육 운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "어린이박물관과",
+      "citation": "제40조(국립민속박물관)제8항제12호",
+      "text": "어린이 관련 민속문화에 관한 교육교재 개발 및 보급"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "외신분석팀",
+      "citation": "제35조(해외문화홍보원)제8항제6호",
+      "text": "해외 연구기관 정책자료 분석 및 활용 지원 제8장 국립국악원"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "외신협력과",
+      "citation": "제35조(해외문화홍보원)제7항제2호",
+      "text": "외국언론인 방한 초청"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "외신협력과",
+      "citation": "제35조(해외문화홍보원)제7항제3호",
+      "text": "상주 외신 지원에 관한 사항"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "외신협력과",
+      "citation": "제35조(해외문화홍보원)제7항제7호",
+      "text": "대통령ㆍ국무총리의 정상외교 및 국빈방한 행사 홍보 지원"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "외신협력과",
+      "citation": "제35조(해외문화홍보원)제7항제8호",
+      "text": "해외언론에 한국 관련 정보의 제공"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보사업과",
+      "citation": "제35조(해외문화홍보원)제5항제2호",
+      "text": "국가이미지 홍보사업 추진"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보사업과",
+      "citation": "제35조(해외문화홍보원)제5항제9호",
+      "text": "주한 외국기관 및 외국인에 대한 문화홍보 사업 추진"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보콘텐츠과",
+      "citation": "제35조(해외문화홍보원)제6항제1호",
+      "text": "해외홍보용 정부대표 인터넷 홈페이지 운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보콘텐츠과",
+      "citation": "제35조(해외문화홍보원)제6항제2호",
+      "text": "한국관련 해외홍보자료 데이터베이스 구축"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보콘텐츠과",
+      "citation": "제35조(해외문화홍보원)제6항제4호",
+      "text": "해외 정책고객서비스 운영"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보콘텐츠과",
+      "citation": "제35조(해외문화홍보원)제6항제5호",
+      "text": "해외홍보자료의 제작ㆍ배포"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보콘텐츠과",
+      "citation": "제35조(해외문화홍보원)제6항제7호",
+      "text": "재외공관의 홍보자료 제작 지원"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보콘텐츠과",
+      "citation": "제35조(해외문화홍보원)제6항제8호",
+      "text": "주요 국제행사의 한국소개자료 지원"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보콘텐츠과",
+      "citation": "제35조(해외문화홍보원)제6항제9호",
+      "text": "온라인을 활용한 해외홍보 사업"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보콘텐츠과",
+      "citation": "제35조(해외문화홍보원)제6항제10호",
+      "text": "해외홍보용 영상자료의 제작 및 배포"
+    },
+    {
+      "lastSeen": "2024-02-05",
+      "goneSince": "2025-12-30",
+      "department": "해외문화홍보콘텐츠과",
+      "citation": "제35조(해외문화홍보원)제6항제11호",
+      "text": "국내외 외국어 방송을 통한 국가이미지 홍보"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "문화산업기반과",
+      "citation": "제8조의2(문화미디어산업실)제9항제5호",
+      "text": "문화 콘텐츠의 선순환 창업 생태계 구축 관련 사항"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "문화산업기반과",
+      "citation": "제8조의2(문화미디어산업실)제9항제8호",
+      "text": "문화상품 및 문화콘텐츠의 지식재산 확보를 위한 생태계 조성 및 지원에 관한 사항"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "문화산업기반과",
+      "citation": "제8조의2(문화미디어산업실)제9항제10호",
+      "text": "캐릭터 및 이야기 산업 진흥을 위한 조사ㆍ연구 및 정책개발"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "문화산업기반과",
+      "citation": "제8조의2(문화미디어산업실)제9항제11호",
+      "text": "캐릭터 및 이야기 산업 분야의 전문 인력 양성에 관한 사항"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "문화산업기반과",
+      "citation": "제8조의2(문화미디어산업실)제9항제12호",
+      "text": "캐릭터 및 이야기 산업의 창작ㆍ제작활동 및 관련 단체에 대한 지원"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "문화산업기반과",
+      "citation": "제8조의2(문화미디어산업실)제9항제13호",
+      "text": "캐릭터 및 이야기 산업 분야의 제작ㆍ배급ㆍ상영 활동 및 관련 단체 지원"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "문화산업기반과",
+      "citation": "제8조의2(문화미디어산업실)제9항제14호",
+      "text": "캐릭터 및 이야기 산업의 유통구조 개선ㆍ정보화ㆍ투자활성화에 관한 사항"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "문화산업기반과",
+      "citation": "제8조의2(문화미디어산업실)제9항제15호",
+      "text": "캐릭터 및 이야기 산업 관련 콘텐츠 판매 촉진 활동의 지원"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "문화산업정책과",
+      "citation": "제8조의2(문화미디어산업실)제8항제2호",
+      "text": "문화산업진흥을 위한 조사ㆍ연구"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "미디어정책과",
+      "citation": "제8조의2(문화미디어산업실)제11항제4호",
+      "text": "문화콘텐츠미디어산업의 전문인력 양성 및 기술개발에 관한 사항"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "미디어정책과",
+      "citation": "제8조의2(문화미디어산업실)제11항제7호",
+      "text": "문화콘텐츠미디어산업의 지원 기반 확충과 법ㆍ제도의 정비"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "미디어정책과",
+      "citation": "제8조의2(문화미디어산업실)제11항제19호",
+      "text": "광고산업의 진흥을 위한 조사ㆍ연구"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "미디어정책과",
+      "citation": "제8조의2(문화미디어산업실)제11항제20호",
+      "text": "광고산업의 전문인력 양성 및 기술개발에 관한 사항"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "저작권보호과",
+      "citation": "제8조의2(문화미디어산업실)제18항제2호",
+      "text": "불법 복제물(불법 컴퓨터프로그램을 포함하며, 이하 이 항에서 같다) 단속에 관한 사항"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "문화산업기반과",
+      "citation": "제8조의2(문화미디어산업실)제9항제2호",
+      "text": "지역 콘텐츠산업 관련 연구개발 사업 지원"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "미디어정책과",
+      "citation": "제8조의2(문화미디어산업실)제11항제24호",
+      "text": "새로운 광고기법의 개발 및 지원"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "미디어정책과",
+      "citation": "제8조의2(문화미디어산업실)제11항제25호",
+      "text": "광고 표준화의 개발 및 지원"
+    },
+    {
+      "lastSeen": "2025-12-30",
+      "goneSince": "2026-07-28",
+      "department": "저작권보호과",
+      "citation": "제8조의2(문화미디어산업실)제18항제3호",
+      "text": "저작권의 특별사법경찰권 수행에 관한 사항"
+    }
+  ],
+  "duplicates": {
+    "threshold": 0.9,
+    "asOf": "2026-07-28",
+    "count": 16,
+    "items": [
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 기록물 관리",
+          "normalizedText": "문서의접수발송통제발간기록물관리"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제3호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 기록물 관리",
+          "normalizedText": "문서의접수발송통제발간기록물관리"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제5호",
+          "text": "회계 및 결산",
+          "normalizedText": "회계결산"
+        },
+        "right": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제5호",
+          "text": "회계 및 결산",
+          "normalizedText": "회계결산"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제7호",
+          "text": "감사에 관한 업무",
+          "normalizedText": "감사"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제7호",
+          "text": "감사 관련 업무",
+          "normalizedText": "감사"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "문화교류홍보과",
+          "citation": "제22조(교육문화교류실)제3항제7호",
+          "text": "박물관 홍보ㆍ마케팅 종합계획의 수립ㆍ시행",
+          "normalizedText": "박물관홍보마케팅종합계획수립시행"
+        },
+        "right": {
+          "department": "교류홍보과",
+          "citation": "제40조의2(대한민국역사박물관)제8항제3호",
+          "text": "박물관 홍보ㆍ마케팅 종합계획의 수립ㆍ시행",
+          "normalizedText": "박물관홍보마케팅종합계획수립시행"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제6호",
+          "text": "국유재산 및 물품의 관리",
+          "normalizedText": "국유재산물품관리"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제5호",
+          "text": "국유재산 및 물품관리",
+          "normalizedText": "국유재산물품관리"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "교육연수과",
+          "citation": "제24조의2(기획연수부)제5항제5호",
+          "text": "자료실 운영에 관한 사항",
+          "normalizedText": "자료실운영"
+        },
+        "right": {
+          "department": "정보서비스과",
+          "citation": "제31조(국립어린이청소년도서관)제5항제5호",
+          "text": "자료실의 운영에 관한 사항",
+          "normalizedText": "자료실운영"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "국제교류홍보팀",
+          "citation": "제29조(기획연수부)제8항제9호",
+          "text": "도서관 견학에 관한 사항",
+          "normalizedText": "도서관견학"
+        },
+        "right": {
+          "department": "서비스이용과",
+          "citation": "제33조의2(국립세종도서관)제5항제4호",
+          "text": "도서관 견학에 관한 사항",
+          "normalizedText": "도서관견학"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제5호",
+          "text": "국유재산 및 물품관리",
+          "normalizedText": "국유재산물품관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의2(대한민국역사박물관)제3항제4호",
+          "text": "국유재산 및 물품의 관리",
+          "normalizedText": "국유재산물품관리"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제5호",
+          "text": "국유재산 및 물품관리",
+          "normalizedText": "국유재산물품관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의4(국립한글박물관)제3항제6호",
+          "text": "국유재산 및 물품의 관리",
+          "normalizedText": "국유재산물품관리"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제2호",
+          "text": "보안 및 관인관수",
+          "normalizedText": "보안관인관수"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제2호",
+          "text": "보안 및 관인관수",
+          "normalizedText": "보안관인관수"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제10호",
+          "text": "박물관 홈페이지 등 정보시스템 구축ㆍ관리에 관한 사항",
+          "normalizedText": "박물관홈페이지등정보시스템구축관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의4(국립한글박물관)제3항제11호",
+          "text": "박물관 홈페이지 등 정보시스템 구축ㆍ관리에 관한 사항",
+          "normalizedText": "박물관홈페이지등정보시스템구축관리"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "유물과학과",
+          "citation": "제40조(국립민속박물관)제4항제4호",
+          "text": "자료의 과학적 보존처리 및 연구",
+          "normalizedText": "자료의과학적보존처리연구"
+        },
+        "right": {
+          "department": "자료관리과",
+          "citation": "제40조의2(대한민국역사박물관)제5항제2호",
+          "text": "자료의 과학적 보존처리 및 연구",
+          "normalizedText": "자료의과학적보존처리연구"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "조사연구과",
+          "citation": "제40조의2(대한민국역사박물관)제4항제1호",
+          "text": "박물관 발전을 위한 실행계획의 수립ㆍ추진",
+          "normalizedText": "박물관발전을위한실행계획수립추진"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의4(국립한글박물관)제3항제1호",
+          "text": "박물관 발전을 위한 실행 계획의 수립ㆍ추진",
+          "normalizedText": "박물관발전을위한실행계획수립추진"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "조사연구과",
+          "citation": "제40조의2(대한민국역사박물관)제4항제6호",
+          "text": "학술ㆍ연구자료 등의 발간 및 배포",
+          "normalizedText": "학술연구자료등의발간배포"
+        },
+        "right": {
+          "department": "연구교육과",
+          "citation": "제40조의4(국립한글박물관)제5항제5호",
+          "text": "학술ㆍ연구 자료 등의 발간 및 배포",
+          "normalizedText": "학술연구자료등의발간배포"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "자료관리과",
+          "citation": "제40조의2(대한민국역사박물관)제5항제1호",
+          "text": "자료의 수집ㆍ수탁ㆍ등록 및 관리",
+          "normalizedText": "자료수집수탁등록관리"
+        },
+        "right": {
+          "department": "전시운영과",
+          "citation": "제40조의4(국립한글박물관)제4항제7호",
+          "text": "자료의 수집ㆍ수탁ㆍ등록 및 관리",
+          "normalizedText": "자료수집수탁등록관리"
+        },
+        "score": 1,
+        "spread": 2
+      },
+      {
+        "left": {
+          "department": "교육과",
+          "citation": "제40조의2(대한민국역사박물관)제7항제2호",
+          "text": "박물관 교육 및 체험프로그램 개발ㆍ운영",
+          "normalizedText": "박물관교육체험프로그램개발운영"
+        },
+        "right": {
+          "department": "연구교육과",
+          "citation": "제40조의4(국립한글박물관)제5항제8호",
+          "text": "박물관 교육 및 체험 프로그램 개발ㆍ운영",
+          "normalizedText": "박물관교육체험프로그램개발운영"
+        },
+        "score": 1,
+        "spread": 2
+      }
+    ],
+    "boilerplateCount": 94,
+    "boilerplate": [
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제4호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제6호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제4호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제6호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제4호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제9호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제4호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제7호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "right": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제7호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제3호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제6호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제6호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제6호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제5호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제6호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제9호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제6호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제7호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제7호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제7호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제7호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제3호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제6호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제5호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제6호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제9호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제6호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제7호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제7호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의2(대한민국역사박물관)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의4(국립한글박물관)제3항제10호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제7호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제2호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제3호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제5호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제9호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제5호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제7호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제7호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제7호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제7호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의2(대한민국역사박물관)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제7호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의4(국립한글박물관)제3항제10호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제7호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제3호",
+          "text": "문서의 접수ㆍ발송ㆍ통제ㆍ발간 및 보존",
+          "normalizedText": "문서의접수발송통제발간보존"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의2(대한민국역사박물관)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의4(국립한글박물관)제3항제10호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제9호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제7호",
+          "text": "물품 및 국유재산의 관리",
+          "normalizedText": "물품국유재산관리"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의2(대한민국역사박물관)제3항제8호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제9호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의4(국립한글박물관)제3항제10호",
+          "text": "청사와 시설의 관리 및 방호",
+          "normalizedText": "청사와시설관리방호"
+        },
+        "score": 1,
+        "spread": 5
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제6호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의2(대한민국역사박물관)제3항제6호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제20조(행정운영실)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의4(국립한글박물관)제3항제8호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제6호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제4호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "right": {
+          "department": "기획총괄과",
+          "citation": "제29조(기획연수부)제4항제6호",
+          "text": "주요 사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제4호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "right": {
+          "department": "기획협력과",
+          "citation": "제31조(국립어린이청소년도서관)제4항제9호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제4호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제5호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제5호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제4호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제5호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제4호",
+          "text": "예산, 회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제5호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제8호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제5호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제6호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제7호",
+          "text": "감사 및 사정업무",
+          "normalizedText": "감사사정업무"
+        },
+        "right": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제7호",
+          "text": "감사 및 사정업무",
+          "normalizedText": "감사사정업무"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제7호",
+          "text": "감사 및 사정업무",
+          "normalizedText": "감사사정업무"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제6호",
+          "text": "감사 및 사정 업무",
+          "normalizedText": "감사사정업무"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제23조(지방박물관)제4항제7호",
+          "text": "감사 및 사정업무",
+          "normalizedText": "감사사정업무"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제10호",
+          "text": "감사 및 사정업무",
+          "normalizedText": "감사사정업무"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제6호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제4호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "right": {
+          "department": "기획총괄과",
+          "citation": "제29조(기획연수부)제4항제6호",
+          "text": "주요 사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제4호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "right": {
+          "department": "기획협력과",
+          "citation": "제31조(국립어린이청소년도서관)제4항제9호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획운영과",
+          "citation": "제24조의2(기획연수부)제3항제4호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제5호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제6호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의2(대한민국역사박물관)제3항제6호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의4(국립한글박물관)제3항제8호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제7호",
+          "text": "감사 및 사정업무",
+          "normalizedText": "감사사정업무"
+        },
+        "right": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제6호",
+          "text": "감사 및 사정 업무",
+          "normalizedText": "감사사정업무"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "운영지원과",
+          "citation": "제29조(기획연수부)제3항제7호",
+          "text": "감사 및 사정업무",
+          "normalizedText": "감사사정업무"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제10호",
+          "text": "감사 및 사정업무",
+          "normalizedText": "감사사정업무"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획총괄과",
+          "citation": "제29조(기획연수부)제4항제6호",
+          "text": "주요 사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "right": {
+          "department": "기획협력과",
+          "citation": "제31조(국립어린이청소년도서관)제4항제9호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획총괄과",
+          "citation": "제29조(기획연수부)제4항제6호",
+          "text": "주요 사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제5호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제6호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의2(대한민국역사박물관)제3항제6호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제1호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의4(국립한글박물관)제3항제8호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제4호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제4호",
+          "text": "예산, 회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제4호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제8호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제4호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제6호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "행정지원과",
+          "citation": "제31조(국립어린이청소년도서관)제3항제6호",
+          "text": "감사 및 사정 업무",
+          "normalizedText": "감사사정업무"
+        },
+        "right": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제10호",
+          "text": "감사 및 사정업무",
+          "normalizedText": "감사사정업무"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획협력과",
+          "citation": "제31조(국립어린이청소년도서관)제4항제9호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제5호",
+          "text": "주요사업계획의 수립ㆍ조정과 심사ㆍ분석",
+          "normalizedText": "주요사업계획수립조정과심사분석"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제4호",
+          "text": "예산, 회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제6호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제6호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의2(대한민국역사박물관)제3항제6호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제33조의2(국립세종도서관)제3항제6호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "right": {
+          "department": "기획운영과",
+          "citation": "제40조의4(국립한글박물관)제3항제8호",
+          "text": "보안 및 관인 관리",
+          "normalizedText": "보안관인관리"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "기획관리과",
+          "citation": "제36조의2(기획운영단)제3항제8호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "right": {
+          "department": "민속기획과",
+          "citation": "제40조(국립민속박물관)제3항제6호",
+          "text": "예산ㆍ회계 및 결산",
+          "normalizedText": "예산회계결산"
+        },
+        "score": 1,
+        "spread": 4
+      },
+      {
+        "left": {
+          "department": "문화교류홍보과",
+          "citation": "제22조(교육문화교류실)제3항제8호",
+          "text": "국내외 언론 취재 및 홍보활동 지원",
+          "normalizedText": "국내외언론취재홍보활동지원"
+        },
+        "right": {
+          "department": "국제교류홍보팀",
+          "citation": "제29조(기획연수부)제8항제6호",
+          "text": "국내외 언론취재 및 홍보활동 지원",
+          "normalizedText": "국내외언론취재홍보활동지원"
+        },
+        "score": 1,
+        "spread": 3
+      },
+      {
+        "left": {
+          "department": "문화교류홍보과",
+          "citation": "제22조(교육문화교류실)제3항제8호",
+          "text": "국내외 언론 취재 및 홍보활동 지원",
+          "normalizedText": "국내외언론취재홍보활동지원"
+        },
+        "right": {
+          "department": "교류홍보과",
+          "citation": "제40조의2(대한민국역사박물관)제8항제5호",
+          "text": "국내외 언론취재 및 홍보활동 지원",
+          "normalizedText": "국내외언론취재홍보활동지원"
+        },
+        "score": 1,
+        "spread": 3
+      },
+      {
+        "left": {
+          "department": "국제교류홍보팀",
+          "citation": "제29조(기획연수부)제8항제6호",
+          "text": "국내외 언론취재 및 홍보활동 지원",
+          "normalizedText": "국내외언론취재홍보활동지원"
+        },
+        "right": {
+          "department": "교류홍보과",
+          "citation": "제40조의2(대한민국역사박물관)제8항제5호",
+          "text": "국내외 언론취재 및 홍보활동 지원",
+          "normalizedText": "국내외언론취재홍보활동지원"
+        },
+        "score": 1,
+        "spread": 3
+      }
+    ]
+  },
+  "orphanLaws": null
+}

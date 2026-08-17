@@ -70,8 +70,14 @@ export function buildFunctionLineage(beforeGraphLike, afterGraphLike, options = 
     }
     const from = direct ? match.from : match.to;
     const to = direct ? match.to : match.from;
+    const fromIdentity = (direct ? match.fromIdentity : match.toIdentity) || from;
+    const toIdentity = (direct ? match.toIdentity : match.fromIdentity) || to;
     const afterEvidence = direct ? match.after : match.before;
-    const sameDepartment = from === to;
+    // 동명이과 분리: 매처가 판정한 정체성 기반 동일부서 여부를 그대로 쓴다
+    // (스냅샷별 충돌 상태 비대칭에 안전).
+    const sameDepartment = typeof match.sameDepartment === "boolean"
+      ? match.sameDepartment
+      : fromIdentity === toIdentity;
     let verdict;
     if (sameDepartment) verdict = match.score >= 0.999 ? "유지" : "문언변경";
     else verdict = "이관";
@@ -79,15 +85,16 @@ export function buildFunctionLineage(beforeGraphLike, afterGraphLike, options = 
     const splitInto = (splitCounts.get(item.id) || 0) >= 2;
     if (mergedWith) verdict = "통합";
     if (splitInto) verdict = "분할";
-    // 동명이과 의심: 부서명은 같은데 조문 괄호의 소속기관 명칭이 다르면
-    // (예: 해외문화홍보원 기획운영과 → 지방박물관 기획운영과) 검수 대상으로 표시
-    const suspect = sameDepartment
-      && articleContext(item.citation) !== articleContext(afterEvidence.citation)
-      && Boolean(articleContext(item.citation))
-      && Boolean(articleContext(afterEvidence.citation));
+    // 동명이과 이동: 부서명은 같지만 정체성이 다른 이관은 검수 표시를 남긴다.
+    const suspect = from === to && !sameDepartment;
+    const fromContext = (direct ? match.fromContext : match.toContext) || "";
+    const toContext = (direct ? match.toContext : match.fromContext) || "";
+    // 표시명: 동일 표기 이관(소속만 변경)은 컨텍스트를 붙여 읽히게 한다.
+    const fromLabel = suspect && fromContext ? `${from}(${fromContext})` : fromIdentity;
+    const toLabel = suspect && toContext ? `${to}(${toContext})` : toIdentity;
     entries.push(verdictEntry(item, afterEvidence, verdict, {
-      from,
-      to,
+      from: fromLabel,
+      to: toLabel,
       score: match.score,
       margin: match.margin,
       match: match.match,

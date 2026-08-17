@@ -9,14 +9,37 @@ import { stableId } from "./utils-core.mjs";
 
 export const DUTY_LINEAGE_SCHEMA = "kr.go.mois.orgchart.duty-lineage/v1";
 
+function articleContextOf(article) {
+  const match = String(article || "").match(/\(([^)]+)\)/);
+  return match ? match[1].trim() : "";
+}
+
 export function listDepartmentDutyFunctions(graphLike) {
   const graph = asGraph(graphLike);
+  // 동명이과 분리: 같은 과명이 서로 다른 조문 괄호(실·소속기관) 아래에
+  // 등장하면 별도 정체성으로 매칭한다. 표시·링크용 원명(department)은 유지.
+  const contextsByName = new Map();
+  for (const entry of graph.meta?.departmentDutyCatalog || []) {
+    const name = String(entry?.department || "").trim();
+    if (!name) continue;
+    if (!contextsByName.has(name)) contextsByName.set(name, new Set());
+    contextsByName.get(name).add(articleContextOf(entry.article));
+  }
+  const collidingNames = new Set(
+    [...contextsByName.entries()].filter(([, set]) => set.size >= 2).map(([name]) => name),
+  );
   const byDepartment = new Map();
   for (const entry of graph.meta?.departmentDutyCatalog || []) {
     const department = String(entry?.department || "").trim();
     if (!department) continue;
-    const current = byDepartment.get(department) || {
+    const context = articleContextOf(entry.article);
+    const identity = collidingNames.has(department) && context && context !== department
+      ? `${department}(${context})`
+      : department;
+    const current = byDepartment.get(identity) || {
       department,
+      identity,
+      context,
       parent: parentNameFor(graph, department),
       articles: [],
       sources: [],
@@ -46,7 +69,7 @@ export function listDepartmentDutyFunctions(graphLike) {
         deleted: Boolean(item.deleted || /^삭제/u.test(text)),
       });
     }
-    byDepartment.set(department, current);
+    byDepartment.set(identity, current);
   }
   return [...byDepartment.values()]
     .map((entry) => ({
@@ -74,6 +97,11 @@ export function compareDepartmentDutyFunctions(beforeGraphLike, afterGraphLike, 
         after: functionEvidence(result.afterFunction),
         from: before.department,
         to: result.afterDepartment.department,
+        fromIdentity: identityOf(before),
+        toIdentity: identityOf(result.afterDepartment),
+        fromContext: before.context || "",
+        toContext: result.afterDepartment.context || "",
+        sameDepartment: Boolean(result.sameDepartment),
         score: result.score,
         margin: result.margin,
         match: result.match,
@@ -152,16 +180,18 @@ function matchDutyFunction(beforeFunction, beforeDepartment, index) {
   const exact = index.exact.get(beforeFunction.normalizedText) || [];
   if (exact.length) {
     const byDepartment = bestByDepartment(exact.map((entry) => ({ ...entry, score: 1 })));
-    const preferred = byDepartment.find((entry) => entry.department.department === beforeDepartment.department)
+    const preferred = byDepartment.find((entry) => sameDepartmentIdentity(entry.department, beforeDepartment))
       || uniqueTopDepartment(byDepartment, 0.03);
     if (preferred) {
+      const sameIdentity = sameDepartmentIdentity(preferred.department, beforeDepartment);
       return {
         afterFunction: preferred.item,
         afterDepartment: preferred.department,
         score: 1,
-        margin: preferred.department.department === beforeDepartment.department ? 1 : topMargin(byDepartment),
+        margin: sameIdentity ? 1 : topMargin(byDepartment),
         match: "exact-text",
-        accepted: preferred.department.department === beforeDepartment.department || topMargin(byDepartment) >= 0.03,
+        accepted: sameIdentity || topMargin(byDepartment) >= 0.03,
+        sameDepartment: sameIdentity,
       };
     }
   }
@@ -179,16 +209,27 @@ function matchDutyFunction(beforeFunction, beforeDepartment, index) {
     return rightRank - leftRank || right.score - left.score;
   });
   const best = scored[0];
-  const second = scored.find((entry) => entry.department.department !== best.department.department);
+  const second = scored.find((entry) => identityOf(entry.department) !== identityOf(best.department));
   const margin = roundScore(best.score - (second?.score || 0));
-  const sameDepartment = beforeDepartment.department === best.department.department;
-  const nameScore = departmentNameSimilarity(beforeDepartment.department, best.department.department);
+  const sameDepartment = sameDepartmentIdentity(beforeDepartment, best.department);
+  // 동명이과 패널티: 원명이 같아도 소속기관 정체성이 다르면 이름 일치를
+  // 근거로 승계를 수용하지 않는다(문언 유사도 사다리로만 판정).
+  const homonymPenalty = !sameDepartment
+    && beforeDepartment.department === best.department.department ? 0.5 : 1;
+  const nameScore = departmentNameSimilarity(beforeDepartment.department, best.department.department)
+    * homonymPenalty;
+  // 동명이과(원명 같고 정체성 다름) 간 승계는 준-완전일치 문언일 때만 인정한다.
+  const homonym = homonymPenalty < 1;
   const accepted = Boolean(
     (sameDepartment && best.score >= 0.60)
-    || (best.score >= 0.92 && margin >= 0.02)
-    || (best.score >= 0.80 && margin >= 0.07)
-    || (best.score >= 0.72 && margin >= 0.12)
-    || (nameScore >= 0.72 && best.score >= 0.62 && margin >= 0.04)
+    || (homonym
+      ? (best.score >= 0.92 && margin >= 0.02)
+      : (
+        (best.score >= 0.92 && margin >= 0.02)
+        || (best.score >= 0.80 && margin >= 0.07)
+        || (best.score >= 0.72 && margin >= 0.12)
+        || (nameScore >= 0.72 && best.score >= 0.62 && margin >= 0.04)
+      ))
   );
   return {
     afterFunction: best.item,
@@ -197,6 +238,7 @@ function matchDutyFunction(beforeFunction, beforeDepartment, index) {
     margin,
     match: sameDepartment ? "same-department-text" : "duty-text",
     accepted,
+    sameDepartment,
   };
 }
 
@@ -214,11 +256,11 @@ function candidateFunctions(beforeFunction, index) {
 
 function aggregateDepartmentLinks(beforeDepartments, afterDepartments, matches, options = {}) {
   const afterByName = new Map(afterDepartments.map((entry) => [entry.department, entry]));
-  const matchesBySource = groupBy(matches, (match) => match.from);
+  const matchesBySource = groupBy(matches, (match) => match.fromIdentity || match.from);
   const links = [];
   for (const before of beforeDepartments) {
     const functions = usableFunctions(before.functions);
-    const sourceMatches = matchesBySource.get(before.department) || [];
+    const sourceMatches = matchesBySource.get(identityOf(before)) || [];
     const byDestination = groupBy(sourceMatches, (match) => match.to);
     for (const [destination, destinationMatches] of byDestination) {
       const after = afterByName.get(destination);
@@ -269,7 +311,33 @@ function aggregateDepartmentLinks(beforeDepartments, afterDepartments, matches, 
       });
     }
   }
-  return links.sort(compareLinks);
+  return mergeDuplicateLinks(links).sort(compareLinks);
+}
+
+// 동명이과 분리로 같은 원명 쌍(from>to)의 링크가 둘 이상 생기면 작도용으로 병합한다.
+function mergeDuplicateLinks(links) {
+  const byPair = new Map();
+  for (const link of links) {
+    const key = `${link.from}>${link.to}`;
+    const existing = byPair.get(key);
+    if (!existing) {
+      byPair.set(key, { ...link });
+      continue;
+    }
+    existing.matchedFunctions += link.matchedFunctions;
+    existing.sourceFunctions += link.sourceFunctions;
+    existing.destinationFunctions = Math.max(existing.destinationFunctions, link.destinationFunctions);
+    existing.coverage = roundScore(existing.sourceFunctions
+      ? existing.matchedFunctions / existing.sourceFunctions
+      : 0);
+    existing.sharePercent = Math.round(existing.coverage * 100);
+    existing.confidence = Math.max(existing.confidence, link.confidence);
+    existing.accepted = existing.accepted || link.accepted;
+    existing.evidence = [...existing.evidence, ...link.evidence]
+      .sort((left, right) => right.score - left.score)
+      .slice(0, 12);
+  }
+  return [...byPair.values()];
 }
 
 function aggregateReviewLinks(beforeDepartments, afterDepartments, rejected, acceptedKeys) {
@@ -311,10 +379,22 @@ function aggregateReviewLinks(beforeDepartments, afterDepartments, rejected, acc
   return reviews;
 }
 
+const identityOf = (group) => group.identity || group.department;
+
+// 스냅샷별 충돌 상태가 달라도 안전한 동일부서 판정:
+// 원명이 같고, 양쪽 모두 컨텍스트가 붙어 있으면서 서로 다를 때만 다른 부서로 본다.
+function sameDepartmentIdentity(a, b) {
+  if (!a || !b) return false;
+  if (a.department !== b.department) return false;
+  const contextA = String(a.context || "");
+  const contextB = String(b.context || "");
+  return !contextA || !contextB || contextA === contextB;
+}
+
 function bestByDepartment(entries) {
   const map = new Map();
   for (const entry of entries) {
-    const key = entry.department.department;
+    const key = entry.department.identity || entry.department.department;
     const existing = map.get(key);
     if (!existing || entry.score > existing.score) map.set(key, entry);
   }
@@ -333,7 +413,7 @@ function topMargin(entries) {
 }
 
 function rankedFunctionScore(beforeDepartment, entry) {
-  const same = beforeDepartment.department === entry.department.department ? 0.08 : 0;
+  const same = sameDepartmentIdentity(beforeDepartment, entry.department) ? 0.08 : 0;
   const name = departmentNameSimilarity(beforeDepartment.department, entry.department.department) * 0.025;
   const parent = beforeDepartment.parent && beforeDepartment.parent === entry.department.parent ? 0.015 : 0;
   return entry.score + same + name + parent;

@@ -1055,6 +1055,28 @@ test("시행규칙의 정책관 소관 과는 법정 설치 계선과 별도로 
   assert.equal(graph.nodeByName("지역진흥과").metadata.jurisdiction, undefined);
 });
 
+test("과장 분장문단은 뒤따르는 실장·부장 문단의 기능을 삼키지 않는다", () => {
+  const graph = parseOrganizationTexts([`
+시험부 직제 시행규칙
+제23조(지방박물관)
+① 기획운영과장은 다음 사항을 분장한다.
+1. 보안 및 관인 관리
+2. 예산ㆍ회계 및 결산
+② 학예연구실장 및 경주박물관 학예연구과장은 다음 사항을 분장한다.
+1. 소장유물 및 유물수장고의 관리
+2. 문화재의 연구ㆍ조사
+③ 삭제 <2025. 1. 1.>
+④ 교육과장은 다음 사항을 분장한다.
+1. 박물관 교육 프로그램의 개발ㆍ운영
+`], { institution: "시험부" });
+
+  const planning = graph.meta.departmentDutyCatalog.find((entry) => entry.department === "기획운영과");
+  const education = graph.meta.departmentDutyCatalog.find((entry) => entry.department === "교육과");
+  assert.deepEqual(planning.items.map((item) => item.text), ["보안 및 관인 관리", "예산ㆍ회계 및 결산"]);
+  assert.deepEqual(education.items.map((item) => item.text), ["박물관 교육 프로그램의 개발ㆍ운영"]);
+  assert.equal(planning.items.some((item) => /소장유물|문화재의 연구/.test(item.text)), false);
+});
+
 test("정책관에 과를 직접 두는 문형은 법정 설치와 운영상 소관을 함께 보존한다", () => {
   const graph = parseOrganizationTexts([
     `

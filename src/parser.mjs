@@ -5,6 +5,12 @@ import {
   normalizeNodeName,
   OrgGraph,
 } from "./model.mjs";
+import {
+  createLegalDutyFact,
+  extractLegalDutyItems,
+  isValidDutyNumber,
+  normalizeDutyNumber,
+} from "./legal-duty.mjs";
 import { normalizeWhitespace, uniq } from "./utils-core.mjs";
 
 const STRUCTURAL_SUFFIX =
@@ -14,6 +20,7 @@ const JURISDICTION_ADVISOR_SUFFIX =
 const JURISDICTION_ADVISOR_NAME = new RegExp(`${JURISDICTION_ADVISOR_SUFFIX}$`);
 const DUTY_PARAGRAPH_MARKER =
   "(?:[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑]|<\\d+>)";
+const DUTY_DEPARTMENT_SUFFIX = "(?:과|팀|담당관)";
 const DEPARTMENT_SUFFIX = /(?:과|팀|담당관)$/;
 const GENERIC_NAMES = new Set([
   "보조기관",
@@ -47,6 +54,8 @@ const GENERIC_NAMES = new Set([
   "부위원",
 ]);
 
+export const PARSER_VERSION = "2026.08.legal-duty-v2";
+
 export function parseOrganizationTexts(texts, options = {}) {
   const documents = texts.map((text, index) => ({
     text: normalizeWhitespace(text),
@@ -63,6 +72,7 @@ export function parseOrganizationTexts(texts, options = {}) {
     asOf: options.asOf || directives.asOf,
     title: options.title || institution,
   });
+  graph.meta.parserVersion = PARSER_VERSION;
   graph.meta.sourceInventory = documents.map((document) => ({
     source: document.source,
     role: inferDocumentRole(document.text, document.source),
@@ -260,14 +270,17 @@ function collectJurisdictionRelations(graph, body, source) {
 
 function extractDepartmentDutyParagraphs(body) {
   const paragraphs = [];
+  const paragraphMarker = `([${CIRCLE_CLAUSES}]|<\\d+>)`;
   const paragraphPattern = new RegExp(
-    `(?:^|\\n|\\s)${DUTY_PARAGRAPH_MARKER}\\s*([가-힣A-Za-z0-9]+(?:과|팀))장은([\\s\\S]*?)(?=(?:\\n|\\s)${DUTY_PARAGRAPH_MARKER}\\s*[가-힣A-Za-z0-9]+(?:과|팀)장은|\\n제\\d+조|$)`,
+    `(?:^|\\n|\\s)${paragraphMarker}\\s*([가-힣A-Za-z0-9]+${DUTY_DEPARTMENT_SUFFIX})장은([\\s\\S]*?)(?=(?:\\n|\\s)${DUTY_PARAGRAPH_MARKER}\\s*|\\n제\\d+조|$)`,
     "g",
   );
   for (const match of body.matchAll(paragraphPattern)) {
     paragraphs.push({
-      departmentName: match[1],
-      text: match[2] || "",
+      marker: match[1],
+      paragraph: circleClauseNumber(match[1]),
+      departmentName: match[2],
+      text: match[3] || "",
     });
   }
   return paragraphs;
@@ -287,25 +300,65 @@ function collectDecreeDutyCatalog(graph, article, body, source) {
     const clauseNo = circleClauseNumber(match[1]);
     const text = match[2] || "";
     if (!clauseNo || !/분장한다/.test(text)) continue;
-    if (/(?:과|팀)장(?:은|는)/.test(text.split("분장한다")[0] || "")) continue;
+    if (/(?:과|팀|담당관)장(?:은|는)/.test(text.split("분장한다")[0] || "")) continue;
     matched = true;
-    storeCatalogItems(graph, `${articleKey}제${clauseNo}항`, extractNumberedDutyTexts(text), source);
+    storeCatalogItems(
+      graph,
+      `${articleKey}제${clauseNo}항`,
+      extractLegalDutyItems(text, {
+        article: article?.articleRef || articleKey,
+        paragraph: clauseNo,
+        source,
+        role: role || "decree",
+      }),
+      source,
+      {
+        owner: normalizeNodeName(article?.heading),
+        ownerKind: "decree-holder",
+        article: article?.articleRef || articleKey,
+        paragraph: clauseNo,
+        role: role || "decree",
+      },
+    );
   }
   if (matched) return;
   if (!/분장한다/.test(body)) return;
-  if (/(?:과|팀)장(?:은|는)/.test(body.split("분장한다")[0] || "")) return;
-  storeCatalogItems(graph, articleKey, extractNumberedDutyTexts(body), source);
+  if (/(?:과|팀|담당관)장(?:은|는)/.test(body.split("분장한다")[0] || "")) return;
+  storeCatalogItems(
+    graph,
+    articleKey,
+    extractLegalDutyItems(body, {
+      article: article?.articleRef || articleKey,
+      source,
+      role: role || "decree",
+    }),
+    source,
+    {
+      owner: normalizeNodeName(article?.heading),
+      ownerKind: "decree-holder",
+      article: article?.articleRef || articleKey,
+      role: role || "decree",
+    },
+  );
 }
 
-function storeCatalogItems(graph, refKey, items, source) {
+function storeCatalogItems(graph, refKey, items, source, context = {}) {
   for (const item of items) {
     upsertByKey(graph.meta.dutyItemCatalog, {
       refKey,
       number: item.number,
       text: item.text,
-      residual: /그\s*밖에/.test(item.text),
+      subparagraph: item.subparagraph,
+      citation: item.citation,
+      article: item.article,
+      paragraph: item.paragraph,
+      normalizedText: item.normalizedText,
+      fingerprint: item.fingerprint,
+      residual: item.residual,
+      deleted: item.deleted,
       source,
     }, ["refKey", "number", "source"]);
+    recordDutyFact(graph, item, { ...context, source });
   }
 }
 
@@ -316,23 +369,17 @@ function circleClauseNumber(mark) {
   return tagged ? Number(tagged[1]) : null;
 }
 
-function extractNumberedDutyTexts(text) {
-  const items = [];
-  const pattern = /(?:^|\n)\s*(\d+)\.\s*([^\n]+)/g;
-  for (const match of String(text || "").matchAll(pattern)) {
-    const number = Number(match[1]);
-    const body = normalizeWhitespace(match[2]).replace(/[.;。]$/, "");
-    if (!Number.isFinite(number) || !body) continue;
-    items.push({ number, text: body });
-  }
-  return items;
-}
-
 function collectDepartmentDutyCatalog(graph, source, paragraphs) {
   graph.meta.departmentDutyCatalog ||= [];
+  const role = (graph.meta.sourceInventory || []).find((item) => item.source === source)?.role || "rule";
   for (const paragraph of paragraphs) {
     const department = normalizeNodeName(paragraph.departmentName);
-    const items = extractNumberedDutyTexts(paragraph.text);
+    const items = extractLegalDutyItems(paragraph.text, {
+      article: graph._currentArticleRef,
+      paragraph: paragraph.paragraph,
+      source,
+      role,
+    });
     if (!department || !items.length) continue;
     upsertByKey(
       graph.meta.departmentDutyCatalog,
@@ -341,10 +388,27 @@ function collectDepartmentDutyCatalog(graph, source, paragraphs) {
         items,
         source,
         ...(graph._currentArticleRef ? { article: graph._currentArticleRef } : {}),
+        ...(paragraph.paragraph ? { paragraph: paragraph.paragraph } : {}),
       },
-      ["department", "source", "article"],
+      ["department", "source", "article", "paragraph"],
     );
+    for (const item of items) {
+      recordDutyFact(graph, item, {
+        owner: department,
+        ownerKind: "department",
+        source,
+        role,
+        article: graph._currentArticleRef,
+        paragraph: paragraph.paragraph,
+      });
+    }
   }
+}
+
+function recordDutyFact(graph, item, context) {
+  graph.meta.dutyFacts ||= [];
+  const fact = createLegalDutyFact(item, context);
+  upsertByKey(graph.meta.dutyFacts, fact, ["id"]);
 }
 
 function collectDutyItemAssignments(graph, source, paragraphs) {
@@ -365,6 +429,9 @@ function collectDutyItemAssignments(graph, source, paragraphs) {
       reference: formatDutyReferences(refs),
       residual,
       source,
+      ...(graph._currentArticleRef ? { article: graph._currentArticleRef } : {}),
+      ...(paragraph.paragraph ? { paragraph: paragraph.paragraph } : {}),
+      evidenceText: compactEvidenceText(`${paragraph.departmentName}장은${paragraph.text}`),
     };
     upsertByKey(graph.meta.dutyItemAssignments, assignment, ["department", "source", "reference"]);
     const existing = department.metadata.dutyItems;
@@ -383,13 +450,23 @@ export function expandDutyItemRefs(refs) {
   const items = [];
   const seen = new Set();
   for (const ref of refs || []) {
-    if (!Number.isFinite(ref.start) || !Number.isFinite(ref.end)) continue;
-    for (let number = ref.start; number <= ref.end; number += 1) {
-      const key = `${ref.refKey || ""}:${number}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      items.push({ refKey: ref.refKey || "", number });
+    const start = normalizedItemNumber(ref.start);
+    const end = normalizedItemNumber(ref.end);
+    if (start == null || end == null) continue;
+    if (Number.isFinite(start) && Number.isFinite(end)) {
+      for (let number = Math.min(start, end); number <= Math.max(start, end); number += 1) {
+        const key = `${ref.refKey || ""}:${number}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        items.push({ refKey: ref.refKey || "", number });
+      }
+      continue;
     }
+    if (String(start) !== String(end)) continue;
+    const key = `${ref.refKey || ""}:${start}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    items.push({ refKey: ref.refKey || "", number: start });
   }
   return items;
 }
@@ -812,11 +889,11 @@ function extractItemRanges(text) {
     if (Number.isFinite(start) && Number.isFinite(end)) ranges.push(normalizeItemRange(start, end));
     rangeSpans.push([match.index, match.index + match[0].length]);
   }
-  const singlePattern = /제\s*(\d+)\s*호/g;
+  const singlePattern = /제\s*(\d+(?:\s*의\s*\d+)?)\s*호/g;
   for (const match of source.matchAll(singlePattern)) {
     if (rangeSpans.some(([start, end]) => match.index >= start && match.index < end)) continue;
-    const item = Number(match[1]);
-    if (Number.isFinite(item)) ranges.push({ start: item, end: item });
+    const item = normalizedItemNumber(match[1]);
+    if (item != null) ranges.push({ start: item, end: item });
   }
   return uniqReferences(ranges);
 }
@@ -835,17 +912,19 @@ function uniqReferences(refs) {
   const seen = new Set();
   const result = [];
   for (const ref of refs) {
-    if (!Number.isFinite(ref.start) || !Number.isFinite(ref.end)) continue;
+    const start = normalizedItemNumber(ref.start);
+    const end = normalizedItemNumber(ref.end);
+    if (start == null || end == null) continue;
     const key = `${ref.refKey || ""}:${ref.start}-${ref.end}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    result.push(ref);
+    result.push({ ...ref, start, end });
   }
   return result.sort(
     (a, b) =>
       String(a.refKey || "").localeCompare(String(b.refKey || ""), "ko") ||
-      a.start - b.start ||
-      a.end - b.end,
+      compareItemNumber(a.start, b.start) ||
+      compareItemNumber(a.end, b.end),
   );
 }
 
@@ -863,9 +942,23 @@ function formatDutyReferences(refs) {
   for (const ref of refs) {
     const key = ref.refKey || "직제";
     if (!grouped.has(key)) grouped.set(key, []);
-    grouped.get(key).push(ref.start === ref.end ? `제${ref.start}호` : `제${ref.start}호부터 제${ref.end}호까지`);
+    grouped.get(key).push(String(ref.start) === String(ref.end)
+      ? `제${ref.start}호`
+      : `제${ref.start}호부터 제${ref.end}호까지`);
   }
   return [...grouped.entries()].map(([key, items]) => `${key} ${uniq(items).join("ㆍ")}`).join(", ");
+}
+
+function normalizedItemNumber(value) {
+  const normalized = normalizeDutyNumber(value);
+  if (!normalized || !isValidDutyNumber(normalized)) return null;
+  return /^\d+$/.test(normalized) ? Number(normalized) : normalized;
+}
+
+function compareItemNumber(left, right) {
+  const [leftBase, leftSuffix = "0"] = String(left).split("의");
+  const [rightBase, rightSuffix = "0"] = String(right).split("의");
+  return Number(leftBase) - Number(rightBase) || Number(leftSuffix) - Number(rightSuffix);
 }
 
 function upsertByKey(collection, entry, keys) {

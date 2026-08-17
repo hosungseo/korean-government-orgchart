@@ -1,10 +1,12 @@
-import { parseOrganizationTexts } from "./parser.mjs";
+import { PARSER_VERSION, parseOrganizationTexts } from "./parser.mjs";
 import { OrgGraph, projectOperationalView } from "./model.mjs";
 import {
   compareDutyAllocations,
   formatAllocationLine,
   notableAllocations,
 } from "./duty-allocation.mjs";
+import { compareDepartmentDutyFunctions } from "./duty-lineage.mjs";
+import { auditLegalDutyFacts, createLegalDutyFact } from "./legal-duty.mjs";
 import { normalizeWhitespace, stableId, uniq } from "./utils-core.mjs";
 
 export const NATIVE_LAW_SCHEMA = "kr.go.mois.orgchart.hwp-native/v1";
@@ -86,6 +88,7 @@ export function buildNativeLawWorkflow(options = {}) {
     lawNames: side.lawNames,
     fingerprints: side.fingerprints,
     warnings: side.warnings,
+    dutyAudit: side.dutyAudit,
     layout,
   }));
   return assembleWorkflow(side, manifests, {
@@ -119,6 +122,7 @@ export function buildNativeComparisonWorkflow(options = {}) {
   const before = sides[0];
   const after = sides[1];
   const dutyAllocation = compareDutyAllocations(before.graph, after.graph);
+  const dutyLineage = compactDutyLineage(compareDepartmentDutyFunctions(before.graph, after.graph));
   const institution = after.institution || before.institution;
   const stacked = onePage && Math.max(before.plans.length, after.plans.length) > 1;
   const pageCount = stacked ? 1 : Math.max(before.plans.length, after.plans.length, 1);
@@ -129,7 +133,7 @@ export function buildNativeComparisonWorkflow(options = {}) {
     ...(stacked ? ["두 개편을 한 장의 위·아래 대역으로 합쳤습니다."] : []),
   ]);
   const manifests = stacked
-    ? [buildBandedComparisonManifest({ before, after, institution, warnings, dutyAllocation })]
+    ? [buildBandedComparisonManifest({ before, after, institution, warnings, dutyAllocation, dutyLineage })]
     : Array.from({ length: pageCount }, (_, index) => buildComparisonManifest({
       before,
       after,
@@ -140,6 +144,7 @@ export function buildNativeComparisonWorkflow(options = {}) {
       institution,
       warnings,
       dutyAllocation,
+      dutyLineage,
     }));
 
   return {
@@ -165,6 +170,9 @@ export function buildNativeComparisonWorkflow(options = {}) {
       layout: NATIVE_LAW_LAYOUTS.COMPARISON_TWO_COLUMN,
       comparison: stacked ? "dual-outline-bands" : "dual-outline",
       dutyAllocation,
+      dutyLineage,
+      dutyFactCount: (before.graph.meta?.dutyFacts?.length || 0) + (after.graph.meta?.dutyFacts?.length || 0),
+      legalReadingAudits: [before.dutyAudit, after.dutyAudit],
       warnings,
     },
     snapshot: after.snapshotBase,
@@ -188,11 +196,15 @@ function assembleMultiColumnComparison(sides, options = {}) {
     `${sides.length}개 시점을 A3 가로 ${sides.length}단으로 작도했습니다.`,
   ]);
   const page = PAGE_A3_LANDSCAPE;
+  const dutyLineages = sides.slice(0, -1).map((side, index) => (
+    compactDutyLineage(compareDepartmentDutyFunctions(side.graph, sides[index + 1].graph))
+  ));
   const manifest = buildMultiColumnBandedManifest({
     sides,
     institution,
     warnings,
     page,
+    dutyLineages,
   });
   return {
     manifests: [manifest],
@@ -220,6 +232,9 @@ function assembleMultiColumnComparison(sides, options = {}) {
       columns: sides.length,
       paper: "A3",
       dutyAllocation: null,
+      dutyLineages,
+      dutyFactCount: sides.reduce((sum, side) => sum + (side.graph.meta?.dutyFacts?.length || 0), 0),
+      legalReadingAudits: sides.map((side) => side.dutyAudit),
       warnings,
     },
     snapshot: sides.at(-1).snapshotBase,
@@ -271,7 +286,7 @@ function uniqueBandCaption(row, bandKey) {
   return "대역";
 }
 
-function buildMultiColumnBandedManifest({ sides, institution, warnings, page }) {
+function buildMultiColumnBandedManifest({ sides, institution, warnings, page, dutyLineages = [] }) {
   const columnCount = sides.length;
   const frameTop = 40;
   const frameBottom = 279.5;
@@ -336,9 +351,16 @@ function buildMultiColumnBandedManifest({ sides, institution, warnings, page }) 
       left,
       right,
       frames[index].nextDividerX,
-      { idPrefix: `col${index + 1}`, gutterMm: frames[index].gutterMm },
+      {
+        idPrefix: `col${index + 1}`,
+        gutterMm: frames[index].gutterMm,
+        dutyLineage: dutyLineages[index],
+      },
     ));
-    transfers.push(...lifecycleLabelObjects(left, right, { idPrefix: `col${index + 1}` }));
+    transfers.push(...lifecycleLabelObjects(left, right, {
+      idPrefix: `col${index + 1}`,
+      dutyLineage: dutyLineages[index],
+    }));
   }
   const transferObjects = coalesceStatusLabels(transfers);
 
@@ -414,6 +436,13 @@ function buildMultiColumnBandedManifest({ sides, institution, warnings, page }) 
       layout: NATIVE_LAW_LAYOUTS.COMPARISON_MULTI_COLUMN,
       comparison: `outline-${columnCount}-column`,
       columns: columnCount,
+      dutyLineages,
+      dutyFactCount: sides.reduce((sum, side) => sum + (side.graph.meta?.dutyFacts?.length || 0), 0),
+      dutyFactStages: sides.map((side) => ({
+        asOf: side.asOf,
+        count: side.graph.meta?.dutyFacts?.length || 0,
+      })),
+      legalReadingAudits: sides.map((side) => ({ asOf: side.asOf, audit: side.dutyAudit })),
       pageLabel,
       renderView: "comparison",
       inputRoles: ["decree", "rule"].filter((role) => sides.some((side) => side.fingerprints[role])),
@@ -500,6 +529,7 @@ function compileGraphSide(snapshot, options = {}) {
   if (!snapshot?.graph) throw new Error("조직 스냅샷에 그래프가 없습니다.");
   const graph = OrgGraph.fromJSON(snapshot.graph);
   const laws = Array.isArray(snapshot.laws) ? snapshot.laws : [];
+  const evidenceUpgrade = refreshSnapshotLawEvidence(graph, laws, snapshot);
   return finishLawSide(graph, {
     ...options,
     focus: options.focus,
@@ -513,13 +543,59 @@ function compileGraphSide(snapshot, options = {}) {
     fingerprints: Object.fromEntries(
       laws.filter((law) => law?.role && law?.fingerprint).map((law) => [law.role, law.fingerprint]),
     ),
-    extraWarnings: snapshot.summary?.warnings || [],
+    extraWarnings: [
+      ...(snapshot.summary?.warnings || []),
+      ...(evidenceUpgrade ? ["저장 이력의 조직 배치는 보존하고 직제·시행규칙의 기능 근거는 최신 파서로 다시 읽었습니다."] : []),
+    ],
     asOfOverride: snapshot.asOf || null,
     institutionOverride: snapshot.institution || null,
   });
 }
 
+function refreshSnapshotLawEvidence(graph, laws, snapshot) {
+  if (graph.meta?.parserVersion === PARSER_VERSION) return false;
+  const usable = laws.filter((law) => law?.text && ["decree", "rule"].includes(law.role));
+  if (!usable.length) return false;
+  const reparsed = parseOrganizationTexts(
+    usable.map((law) => law.text),
+    {
+      sources: usable.map((law) => law.name || (law.role === "rule" ? "직제 시행규칙" : "직제")),
+      institution: snapshot.institution || graph.meta.institution,
+      asOf: snapshot.asOf || graph.meta.asOf,
+    },
+  );
+  const evidenceKeys = [
+    "sourceInventory",
+    "departmentDutyCatalog",
+    "dutyItemCatalog",
+    "dutyItemAssignments",
+    "dutyFacts",
+    "jurisdictionRelations",
+    "jurisdictionRangeHints",
+    "jurisdictionRangeCandidates",
+    "jurisdictionDutyCrosswalks",
+    "jurisdictionRunInferences",
+  ];
+  for (const key of evidenceKeys) {
+    if (reparsed.meta[key] !== undefined) graph.meta[key] = structuredClone(reparsed.meta[key]);
+  }
+  for (const node of graph.nodes.values()) {
+    const refreshed = reparsed.nodeByName(node.name);
+    if (!refreshed) continue;
+    for (const key of ["dutyItems", "jurisdiction"]) {
+      if (refreshed.metadata?.[key] !== undefined) {
+        node.metadata[key] = structuredClone(refreshed.metadata[key]);
+      }
+    }
+  }
+  graph.meta.parserVersion = PARSER_VERSION;
+  graph.meta.evidenceReparsedFromSnapshot = true;
+  return true;
+}
+
 function finishLawSide(graph, options = {}) {
+  ensureDutyFacts(graph);
+  const dutyAudit = auditLegalDutyFacts(graph);
   const visualNodes = [...graph.nodes.values()].filter((node) => node.id !== graph.rootId);
   if (!visualNodes.length) {
     throw new Error("문언에서 조직을 찾지 못했습니다. ‘○○에 △△실·국·과를 둔다’ 문장이 포함됐는지 확인하세요.");
@@ -544,6 +620,7 @@ function finishLawSide(graph, options = {}) {
     ...focusResult.missing.map((name) => `작도 범위를 찾지 못해 제외했습니다: ${name}`),
     ...(focusNames.length && !focused.length ? [`작도 범위(${focusNames.join(", ")})를 이 시점에서 찾지 못해 전체 조직도를 그립니다.`] : []),
     ...(graph.meta.warnings || []),
+    ...dutyAudit.issues.map((issue) => `법령 기능 검수: ${issue}`),
     ...(!options.splitFocusRoots && plans.length > 1 ? [`가독성을 지키기 위해 A4 ${plans.length}쪽으로 자동 분할했습니다.`] : []),
   ]);
   const focusOptions = [...graph.nodes.values()]
@@ -571,6 +648,7 @@ function finishLawSide(graph, options = {}) {
     decreeText: options.decreeText || "",
     ruleText: options.ruleText || "",
     legalGraph: options.legalGraph || null,
+    dutyAudit,
     focusOptions,
     snapshotBase: {
       schema: "kr.go.mois.orgchart.history/v1",
@@ -599,6 +677,8 @@ function finishLawSide(graph, options = {}) {
       summary: {
         nodeCount: visualNodes.length,
         relationCount: graph.edges.size,
+        dutyFactCount: graph.meta?.dutyFacts?.length || 0,
+        legalReadingAudit: dutyAudit,
         pageCount: plans.length,
         warnings,
       },
@@ -621,6 +701,8 @@ function assembleWorkflow(side, manifests, extras = {}) {
       asOf: side.asOf,
       nodeCount: side.visualNodes.length,
       relationCount: side.graph.edges.size,
+      dutyFactCount: side.graph.meta?.dutyFacts?.length || 0,
+      legalReadingAudit: side.dutyAudit,
       pageCount: manifests.length,
       decreePresent: side.decreePresent,
       rulePresent: side.rulePresent,
@@ -651,6 +733,68 @@ function assembleWorkflow(side, manifests, extras = {}) {
       legalGraph: extras.legalGraph?.toJSON?.() || extras.legalGraph || side.snapshotBase.legalGraph,
     },
   };
+}
+
+function compactDutyLineage(lineage) {
+  if (!lineage) return null;
+  return {
+    schema: lineage.schema,
+    before: lineage.before,
+    after: lineage.after,
+    automaticEligible: lineage.automaticEligible,
+    links: (lineage.links || []).filter((link) => (
+      link.from !== link.to || link.fromParent !== link.toParent
+    )),
+    reviews: lineage.reviews || [],
+    stats: lineage.stats || {},
+  };
+}
+
+function ensureDutyFacts(graph) {
+  graph.meta.dutyEvidenceQuality ||= graph.meta?.parserVersion === PARSER_VERSION
+    ? "structured-law-text"
+    : "legacy-synthesized";
+  if (Array.isArray(graph.meta?.dutyFacts) && graph.meta.dutyFacts.length) return;
+  graph.meta.dutyFacts = [];
+  const sourceRoles = new Map((graph.meta.sourceInventory || []).map((item) => [item.source, item.role]));
+  const seen = new Set();
+  const push = (item, context) => {
+    const fact = createLegalDutyFact(item, context);
+    if (seen.has(fact.id)) return;
+    seen.add(fact.id);
+    graph.meta.dutyFacts.push(fact);
+  };
+  for (const entry of graph.meta.departmentDutyCatalog || []) {
+    for (const item of entry.items || []) {
+      const article = item.article || entry.article || null;
+      const paragraph = item.paragraph ?? entry.paragraph ?? null;
+      push({
+        ...item,
+        article,
+        paragraph,
+        citation: item.citation || `${article || "조문 미상"}${paragraph ? `제${paragraph}항` : ""}제${item.subparagraph || item.number}호`,
+      }, {
+        owner: entry.department,
+        ownerKind: "department",
+        source: item.source || entry.source || "",
+        role: item.role || sourceRoles.get(entry.source) || "rule",
+        article,
+        paragraph,
+      });
+    }
+  }
+  for (const item of graph.meta.dutyItemCatalog || []) {
+    const source = item.source || "";
+    const citation = item.citation || `${item.refKey || "직제"}제${item.subparagraph || item.number}호`;
+    push({ ...item, citation }, {
+      owner: item.owner || "직제 사무분장",
+      ownerKind: "decree-holder",
+      source,
+      role: item.role || sourceRoles.get(source) || "decree",
+      article: item.article || item.refKey || null,
+      paragraph: item.paragraph ?? null,
+    });
+  }
 }
 
 function mergeFocusOptions(left = [], right = []) {
@@ -854,8 +998,12 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
   for (const id of plan.nodeIds) visit(id, 0);
 
   const columnWidth = Math.max(24, frame.right - frame.left);
-  const pitch = Math.min(8.35, Math.max(5.35, (frame.bottom - frame.top) / Math.max(rows.length, 1)));
-  const boxHeight = Math.min(7.2, Math.max(4.35, pitch - 1.05));
+  const frameHeight = Math.max(1, frame.bottom - frame.top);
+  // A3 3~4단표에서는 여러 실·국을 한 대역에 합칠 수 있다. 고정 최솟값을
+  // 강제하면 마지막 행이 대역과 용지 밖으로 밀려난다. 행 간격과 상자 높이를
+  // 실제 대역 높이에 맞춰 함께 축소해, 좁더라도 항상 편집 가능한 용지 안에 둔다.
+  const pitch = Math.min(8.35, frameHeight / Math.max(rows.length, 1));
+  const boxHeight = Math.min(7.2, Math.max(1.8, pitch - Math.min(1.05, pitch * 0.22)), pitch);
   const maxDepth = Math.max(0, ...rows.map((row) => row.depth));
   const indent = Math.min(columnWidth > 120 ? 11.5 : 7.2, Math.max(5.4, (columnWidth * 0.36) / Math.max(1, maxDepth)));
   const idPrefix = idKey ? `${idKey}-` : "";
@@ -885,7 +1033,7 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
     const width = round(options.compactWidth
       ? Math.min(availableWidth, Math.max(compactMinWidth, Math.min(compactMaxWidth, compactContentWidth)))
       : Math.max(columnWidth > 120 ? 42 : 28, availableWidth));
-    const fontSizePt = round(Math.min(style.root ? 8.4 : 7.2, Math.max(5.25, boxHeight * 1.28)));
+    const fontSizePt = round(Math.min(style.root ? 8.4 : 7.2, Math.max(3.6, boxHeight * 1.28)));
     const objectId = `${idPrefix}node-${node.id}`;
     const geometry = { x, y, width, height: round(boxHeight) };
     positions.set(row.id, { ...geometry, objectId, centerY: round(y + boxHeight / 2), bottom: round(y + boxHeight) });
@@ -1031,6 +1179,8 @@ function buildOutlineManifest(graph, tree, plan, context) {
       fingerprints: context.fingerprints,
       layout: context.layout,
       renderView: graph.meta.renderView || "legal",
+      dutyFactCount: graph.meta?.dutyFacts?.length || 0,
+      legalReadingAudit: context.dutyAudit,
       inputRoles: ["decree", "rule"].filter((role) => context.fingerprints[role]),
       parserWarnings: context.warnings,
       note: "직제·시행규칙 문언을 로컬 파싱하여 생성한 한글 네이티브 객체 명세",
@@ -1106,6 +1256,7 @@ function buildBandedComparisonManifest({
   institution,
   warnings,
   dutyAllocation,
+  dutyLineage,
 }) {
   const dividerX = 104;
   const notable = pickDisplayedAllocations(dutyAllocation);
@@ -1231,10 +1382,12 @@ function buildBandedComparisonManifest({
       mergeTrees(trees.map((tree) => tree.beforeTree)),
       mergeTrees(trees.map((tree) => tree.afterTree)),
       dividerX,
+      { dutyLineage },
     ),
     ...lifecycleLabelObjects(
       mergeTrees(trees.map((tree) => tree.beforeTree)),
       mergeTrees(trees.map((tree) => tree.afterTree)),
+      { dutyLineage },
     ),
     ...allocationTransferObjects(
       mergeTrees(trees.map((tree) => tree.beforeTree)),
@@ -1259,6 +1412,16 @@ function buildBandedComparisonManifest({
       layout: NATIVE_LAW_LAYOUTS.COMPARISON_TWO_COLUMN,
       comparison: "dual-outline-bands",
       dutyAllocation,
+      dutyLineage,
+      dutyFactCount: (before.graph.meta?.dutyFacts?.length || 0) + (after.graph.meta?.dutyFacts?.length || 0),
+      dutyFactStages: [
+        { asOf: before.asOf, count: before.graph.meta?.dutyFacts?.length || 0 },
+        { asOf: after.asOf, count: after.graph.meta?.dutyFacts?.length || 0 },
+      ],
+      legalReadingAudits: [
+        { asOf: before.asOf, audit: before.dutyAudit },
+        { asOf: after.asOf, audit: after.dutyAudit },
+      ],
       pageLabel,
       renderView: "comparison",
       inputRoles: ["decree", "rule"].filter((role) => before.fingerprints[role] || after.fingerprints[role]),
@@ -1281,6 +1444,7 @@ function buildComparisonManifest({
   institution,
   warnings,
   dutyAllocation,
+  dutyLineage,
 }) {
   const dividerX = 104;
   const frameTop = 40;
@@ -1362,8 +1526,8 @@ function buildComparisonManifest({
     }));
   }
   const transfers = [
-    ...correspondenceTransferObjects(beforeTree, afterTree, dividerX),
-    ...lifecycleLabelObjects(beforeTree, afterTree),
+    ...correspondenceTransferObjects(beforeTree, afterTree, dividerX, { dutyLineage }),
+    ...lifecycleLabelObjects(beforeTree, afterTree, { dutyLineage }),
     ...allocationTransferObjects(beforeTree, afterTree, notable, dividerX),
   ];
   labels.push(...allocationLabelObjects(notable));
@@ -1399,6 +1563,16 @@ function buildComparisonManifest({
       layout: NATIVE_LAW_LAYOUTS.COMPARISON_TWO_COLUMN,
       comparison: "dual-outline",
       dutyAllocation,
+      dutyLineage,
+      dutyFactCount: (before.graph.meta?.dutyFacts?.length || 0) + (after.graph.meta?.dutyFacts?.length || 0),
+      dutyFactStages: [
+        { asOf: before.asOf, count: before.graph.meta?.dutyFacts?.length || 0 },
+        { asOf: after.asOf, count: after.graph.meta?.dutyFacts?.length || 0 },
+      ],
+      legalReadingAudits: [
+        { asOf: before.asOf, audit: before.dutyAudit },
+        { asOf: after.asOf, audit: after.dutyAudit },
+      ],
       pageLabel,
       renderView: "comparison",
       inputRoles: ["decree", "rule"].filter((role) => before.fingerprints[role] || after.fingerprints[role]),
@@ -1455,13 +1629,11 @@ const CONTEXTUAL_TRANSITIONS = Object.freeze([
   }),
   Object.freeze({
     sourceName: "문화산업정책과",
-    sourceParent: "문화산업정책관",
     requiresAfter: Object.freeze(["콘텐츠산업정책과", "문화산업정책과"]),
     destinations: Object.freeze(["콘텐츠산업정책과"]),
   }),
   Object.freeze({
     sourceName: "문화산업기반과",
-    sourceParent: "문화산업정책관",
     requiresAfter: Object.freeze(["콘텐츠산업정책과", "문화산업정책과"]),
     destinations: Object.freeze(["문화산업정책과"]),
   }),
@@ -1474,7 +1646,7 @@ function mergeTrees(trees) {
   };
 }
 
-function correspondencePairs(beforeTree, afterTree) {
+function correspondencePairs(beforeTree, afterTree, options = {}) {
   const afterByName = new Map();
   for (const box of afterTree.boxes || []) {
     const name = box.metadata?.nodeName;
@@ -1484,33 +1656,90 @@ function correspondencePairs(beforeTree, afterTree) {
   for (const source of beforeTree.boxes || []) {
     const name = source.metadata?.nodeName;
     if (!name || !isDepartmentBox(source)) continue;
-    const destNames = correspondenceDestinationNames(source, afterByName);
-    for (const destName of destNames) {
+    const destinations = correspondenceDestinations(source, afterByName, options.dutyLineage);
+    for (const destination of destinations) {
+      const destName = destination.name;
       const dest = afterByName.get(destName);
       if (!dest || !isDepartmentBox(dest)) continue;
-      const pair = { source, dest, sourceName: name, destName };
+      const pair = {
+        source,
+        dest,
+        sourceName: name,
+        destName,
+        basis: destination.basis,
+        confidence: destination.confidence,
+        matchedFunctions: destination.matchedFunctions,
+        sourceFunctions: destination.sourceFunctions,
+        evidence: destination.evidence || [],
+        reason: destination.reason || "",
+      };
       if (departmentPairChanged(pair)) pairs.push(pair);
     }
   }
   return pairs;
 }
 
-function correspondenceDestinationNames(source, afterByName) {
+function correspondenceDestinations(source, afterByName, dutyLineage) {
   const name = source?.metadata?.nodeName || source?.name || "";
   const sourceParent = source?.metadata?.parentName || "";
   const contextual = CONTEXTUAL_TRANSITIONS.find((rule) => (
     rule.sourceName === name
-    && rule.sourceParent === sourceParent
+    && (!rule.sourceParent || rule.sourceParent === sourceParent)
     && rule.requiresAfter.every((candidate) => afterByName.has(candidate))
   ));
   if (contextual) {
-    return contextual.destinations.filter((candidate) => afterByName.has(candidate));
+    return contextual.destinations
+      .filter((candidate) => afterByName.has(candidate))
+      .map((candidate) => ({
+        name: candidate,
+        basis: "explicit-amendment-map",
+        confidence: 1,
+        matchedFunctions: null,
+        sourceFunctions: null,
+        evidence: [],
+        reason: "개정문·인사발령으로 확인한 명칭 승계",
+      }));
   }
+  const functionLinks = (dutyLineage?.automaticEligible === false ? [] : (dutyLineage?.links || []))
+    .filter((link) => link.accepted && link.from === name && afterByName.has(link.to));
   // 같은 이름의 과가 다음 시점에도 있으면 그 조직의 존속을 우선한다.
   // 이후 개편용 분할·개명 사전을 함께 적용하면, 존속한 과가 다른 과로
   // 이동한 것처럼 앞선 시점에 거짓 연결선이 생긴다.
-  if (afterByName.has(name)) return [name];
-  return (STRUCTURAL_RENAMES[name] || []).filter((mapped) => afterByName.has(mapped));
+  if (afterByName.has(name)) {
+    return [{
+      name,
+      basis: "exact-name",
+      confidence: 1,
+      matchedFunctions: null,
+      sourceFunctions: null,
+      evidence: [],
+      reason: "동일 명칭 조직 존속",
+    }];
+  }
+  if (functionLinks.length) return functionLinks.map(lineageDestination);
+  return (STRUCTURAL_RENAMES[name] || [])
+    .filter((mapped) => afterByName.has(mapped))
+    .map((mapped) => ({
+      name: mapped,
+      basis: "curated-name-map",
+      confidence: 0.8,
+      matchedFunctions: null,
+      sourceFunctions: null,
+      evidence: [],
+      reason: "검증된 개편 명칭 사전",
+    }));
+}
+
+function lineageDestination(link) {
+  return {
+    name: link.to,
+    basis: link.basis || "duty-function",
+    confidence: link.confidence,
+    matchedFunctions: link.matchedFunctions,
+    sourceFunctions: link.sourceFunctions,
+    evidence: link.evidence || [],
+    reason: link.reason || "각 호 분장사무 승계",
+  };
 }
 
 function isDepartmentBox(box) {
@@ -1546,7 +1775,7 @@ function departmentBoxes(tree) {
   return (tree.boxes || []).filter(isDepartmentBox);
 }
 
-function departmentLineage(beforeTree, afterTree) {
+function departmentLineage(beforeTree, afterTree, options = {}) {
   const beforeDepts = departmentBoxes(beforeTree);
   const afterDepts = departmentBoxes(afterTree);
   const afterByName = new Map();
@@ -1559,11 +1788,17 @@ function departmentLineage(beforeTree, afterTree) {
   for (const source of beforeDepts) {
     const name = source.metadata?.nodeName;
     if (!name) continue;
-    const destNames = correspondenceDestinationNames(source, afterByName);
-    if (!destNames.length) continue;
+    // 기능 승계 점선은 사무의 이동 근거이고, 조직 자체의 존속 근거는 아니다.
+    // 따라서 기능을 넘겨준 폐지 과와 기능을 받은 신설 과의 상태 표시는 유지한다.
+    const destinations = correspondenceDestinations(source, afterByName, options.dutyLineage)
+      .filter((destination) => (
+        destination.basis !== "duty-function"
+        || (STRUCTURAL_RENAMES[name] || []).includes(destination.name)
+      ));
+    if (!destinations.length) continue;
     linkedBefore.add(source.id);
-    for (const destName of destNames) {
-      const dest = afterByName.get(destName);
+    for (const destination of destinations) {
+      const dest = afterByName.get(destination.name);
       if (dest) linkedAfter.add(dest.id);
     }
   }
@@ -1575,7 +1810,7 @@ function departmentLineage(beforeTree, afterTree) {
 
 function lifecycleLabelObjects(beforeTree, afterTree, options = {}) {
   const idPrefix = options.idPrefix ? `${options.idPrefix}-` : "";
-  const { created, abolished } = departmentLineage(beforeTree, afterTree);
+  const { created, abolished } = departmentLineage(beforeTree, afterTree, options);
   const objects = [];
   const push = (box, status, color) => {
     const geometry = box.geometry;
@@ -1630,24 +1865,18 @@ function coalesceStatusLabels(objects) {
 
 function correspondenceTransferObjects(beforeTree, afterTree, dividerX, options = {}) {
   const idPrefix = options.idPrefix ? `${options.idPrefix}-` : "";
-  const pairs = correspondencePairs(beforeTree, afterTree);
+  const pairs = correspondencePairs(beforeTree, afterTree, options);
   if (!pairs.length) return [];
-  const groups = new Map();
-  for (const pair of pairs) {
-    const key = pair.dest.metadata?.parentName || pair.destName;
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key).push(pair);
-  }
-  const groupKeys = [...groups.keys()].sort((left, right) => {
-    const leftY = Math.min(...groups.get(left).map((pair) => pair.source.geometry.y));
-    const rightY = Math.min(...groups.get(right).map((pair) => pair.source.geometry.y));
+  const groups = correspondencePairGroups(pairs).sort((left, right) => {
+    const leftY = Math.min(...left.map((pair) => pair.source.geometry.y));
+    const rightY = Math.min(...right.map((pair) => pair.source.geometry.y));
     return leftY - rightY;
   });
-  const midXs = spreadGutterX(dividerX, groupKeys.length, options.gutterMm);
+  const midXs = spreadGutterX(dividerX, groups.length, options.gutterMm);
   const objects = [];
   const colorMap = new Map();
   const wrapped = new Set();
-  const wrapBox = (box, roleSide, from, color) => {
+  const wrapBox = (box, roleSide, from, color, pair) => {
     if (wrapped.has(box.id)) return;
     wrapped.add(box.id);
     objects.push(rectangleObject(
@@ -1658,13 +1887,18 @@ function correspondenceTransferObjects(beforeTree, afterTree, dividerX, options 
         side: roleSide,
         unit: box.metadata.nodeName,
         from,
+        to: pair?.destName,
+        basis: pair?.basis,
+        confidence: pair?.confidence,
+        matchedFunctions: pair?.matchedFunctions,
+        sourceFunctions: pair?.sourceFunctions,
         color,
         widthMm: 0.38,
         dashArray: CHANGE_WRAP_DASH,
       },
     ));
   };
-  const pushSegment = (id, x1, y1, x2, y2, color) => {
+  const pushSegment = (id, x1, y1, x2, y2, color, pair) => {
     objects.push(lineObject(`${idPrefix}${id}-under`, x1, y1, x2, y2, {
       role: "correspondence-underlay",
       color: "#FFFFFF",
@@ -1673,6 +1907,14 @@ function correspondenceTransferObjects(beforeTree, afterTree, dividerX, options 
     }));
     objects.push(lineObject(`${idPrefix}${id}`, x1, y1, x2, y2, {
       role: "correspondence-link",
+      from: pair?.sourceName,
+      to: pair?.destName,
+      basis: pair?.basis,
+      confidence: pair?.confidence,
+      matchedFunctions: pair?.matchedFunctions,
+      sourceFunctions: pair?.sourceFunctions,
+      evidence: pair?.evidence,
+      reason: pair?.reason,
       color,
       widthMm: 0.44,
       dash: "dash",
@@ -1680,29 +1922,64 @@ function correspondenceTransferObjects(beforeTree, afterTree, dividerX, options 
     }));
   };
 
-  groupKeys.forEach((key, groupIndex) => {
-    const color = changeLinkColor(key, colorMap);
+  groups.forEach((group, groupIndex) => {
+    const colorKey = uniq(group.map((pair) => pair.dest.metadata?.parentName || pair.destName)).join("|");
+    const color = changeLinkColor(colorKey, colorMap);
     const midX = midXs[groupIndex];
-    const group = groups.get(key);
     const joints = [];
     group.forEach((pair, pairIndex) => {
-      wrapBox(pair.source, "before", undefined, color);
-      wrapBox(pair.dest, "after", pair.sourceName, color);
+      wrapBox(pair.source, "before", undefined, color, pair);
+      wrapBox(pair.dest, "after", pair.sourceName, color, pair);
       const sourceWrap = huggingWrap(pair.source, beforeTree.boxes);
       const destWrap = huggingWrap(pair.dest, afterTree.boxes);
       const start = { x: sourceWrap.x + sourceWrap.width, y: sourceWrap.y + sourceWrap.height / 2 };
       const end = { x: destWrap.x, y: destWrap.y + destWrap.height / 2 };
       joints.push(start.y, end.y);
-      pushSegment(`correspondence-link-${groupIndex + 1}-${pairIndex + 1}-h1`, start.x, start.y, midX, start.y, color);
-      pushSegment(`correspondence-link-${groupIndex + 1}-${pairIndex + 1}-h2`, midX, end.y, end.x, end.y, color);
+      pushSegment(`correspondence-link-${groupIndex + 1}-${pairIndex + 1}-h1`, start.x, start.y, midX, start.y, color, pair);
+      pushSegment(`correspondence-link-${groupIndex + 1}-${pairIndex + 1}-h2`, midX, end.y, end.x, end.y, color, pair);
     });
     const yMin = Math.min(...joints);
     const yMax = Math.max(...joints);
     if (yMax - yMin > 0.05) {
-      pushSegment(`correspondence-link-${groupIndex + 1}-spine`, midX, yMin, midX, yMax, color);
+      const groupPair = group.length === 1 ? group[0] : null;
+      pushSegment(`correspondence-link-${groupIndex + 1}-spine`, midX, yMin, midX, yMax, color, groupPair);
     }
   });
   return objects;
+}
+
+function correspondencePairGroups(pairs) {
+  const parent = pairs.map((_, index) => index);
+  const find = (index) => {
+    let cursor = index;
+    while (parent[cursor] !== cursor) {
+      parent[cursor] = parent[parent[cursor]];
+      cursor = parent[cursor];
+    }
+    return cursor;
+  };
+  const unite = (left, right) => {
+    const leftRoot = find(left);
+    const rightRoot = find(right);
+    if (leftRoot !== rightRoot) parent[rightRoot] = leftRoot;
+  };
+  for (let index = 0; index < pairs.length; index += 1) {
+    for (let next = index + 1; next < pairs.length; next += 1) {
+      if (
+        pairs[index].sourceName === pairs[next].sourceName
+        || pairs[index].destName === pairs[next].destName
+      ) {
+        unite(index, next);
+      }
+    }
+  }
+  const groups = new Map();
+  pairs.forEach((pair, index) => {
+    const root = find(index);
+    if (!groups.has(root)) groups.set(root, []);
+    groups.get(root).push(pair);
+  });
+  return [...groups.values()];
 }
 
 function spreadGutterX(dividerX, count, gutterMm = COMPARISON_GUTTER) {
@@ -1879,7 +2156,17 @@ function rectangleObject(id, geometry, options = {}) {
       ...(options.dashArray ? { dashArray: options.dashArray } : {}),
     },
     metadata: Object.fromEntries(
-      ["role", "side", "unit", "from"].map((key) => [key, options[key]]).filter(([, value]) => value),
+      [
+        "role",
+        "side",
+        "unit",
+        "from",
+        "to",
+        "basis",
+        "confidence",
+        "matchedFunctions",
+        "sourceFunctions",
+      ].map((key) => [key, options[key]]).filter(([, value]) => value !== undefined && value !== null && value !== ""),
     ),
   };
 }
@@ -1896,7 +2183,20 @@ function lineObject(id, x1, y1, x2, y2, options = {}) {
       ...(options.dashArray ? { dashArray: options.dashArray } : {}),
     },
     metadata: Object.fromEntries(
-      ["role", "parentId", "childId", "side"].map((key) => [key, options[key]]).filter(([, value]) => value),
+      [
+        "role",
+        "parentId",
+        "childId",
+        "side",
+        "from",
+        "to",
+        "basis",
+        "confidence",
+        "matchedFunctions",
+        "sourceFunctions",
+        "evidence",
+        "reason",
+      ].map((key) => [key, options[key]]).filter(([, value]) => value !== undefined && value !== null && value !== ""),
     ),
   };
 }

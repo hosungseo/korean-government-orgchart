@@ -344,6 +344,32 @@ function renderHistoryDiff(diff) {
   box.hidden = false;
 }
 
+function appendFunctionLineageEvidence(summary) {
+  const box = $("historyDiff");
+  const lineages = summary?.dutyLineages || (summary?.dutyLineage ? [summary.dutyLineage] : []);
+  const links = lineages.flatMap((lineage, transition) => (
+    (lineage?.links || []).map((link) => ({ ...link, transition: transition + 1 }))
+  )).filter((link) => link.from !== link.to || link.fromParent !== link.toParent);
+  const reviews = lineages.flatMap((lineage) => lineage?.reviews || []);
+  if (!links.length && !reviews.length) return;
+  const items = links.slice(0, 30).map((link) => {
+    const evidence = link.matchedFunctions
+      ? `기능 ${link.matchedFunctions}/${link.sourceFunctions}호`
+      : link.basis;
+    const confidence = Number.isFinite(link.confidence) ? ` · 신뢰 ${Math.round(link.confidence * 100)}%` : "";
+    const citation = link.evidence?.[0]?.beforeCitation && link.evidence?.[0]?.afterCitation
+      ? ` · ${link.evidence[0].beforeCitation} ↔ ${link.evidence[0].afterCitation}`
+      : "";
+    return `<li>${escapeXml(`${link.from} → ${link.to} · ${evidence}${confidence}${citation}`)}</li>`;
+  }).join("");
+  const reviewText = reviews.length ? `<p>자동 연결 보류 ${reviews.length}건 · 사람 확인 필요</p>` : "";
+  box.insertAdjacentHTML(
+    "beforeend",
+    `<section class="lineage-evidence"><strong>개정문·각 호 점선 근거 ${links.length}건</strong>${items ? `<ul>${items}</ul>` : ""}${reviewText}</section>`,
+  );
+  box.hidden = false;
+}
+
 async function compareHistory() {
   if (!invoke || historySnapshots.length < 2) return;
   const button = $("compareHistoryButton");
@@ -372,6 +398,7 @@ async function compareHistory() {
       focus: $("lawFocus")?.value,
       onePage: true,
     });
+    appendFunctionLineageEvidence(lawWorkflow.summary);
     currentLawSnapshot = createLawSnapshot(lawWorkflow, {
       label: `${lawWorkflow.summary.institution} · ${loaded.map((item) => item.asOf || "?").join(" → ")}`,
     });
@@ -382,7 +409,7 @@ async function compareHistory() {
     const paper = lawWorkflow.manifests[0]?.page?.paper || "A4";
     setStatus(
       "대비 조직도 작도 완료",
-      `${loaded.map((item) => item.asOf || "기준일 없음").join(" · ")}을 ${paper} ${loaded.length}단으로 그렸습니다. 바뀐 과만 점선, 신설·폐지는 글자입니다.`,
+      `${loaded.map((item) => item.asOf || "기준일 없음").join(" · ")}을 ${paper} ${loaded.length}단으로 그렸습니다. 각 호 기능과 개정 근거로 확인된 변경만 점선으로 표시했습니다.`,
       "success",
     );
   } catch (error) {
@@ -560,6 +587,11 @@ function renderLawWorkflowSummary(summary) {
   $("parseSummary").hidden = false;
   $("parsedNodes").textContent = `${summary.nodeCount}개`;
   $("parsedRelations").textContent = `${summary.relationCount}개`;
+  $("parsedDutyFacts").textContent = `${summary.dutyFactCount || 0}호`;
+  const lineages = summary.dutyLineages || (summary.dutyLineage ? [summary.dutyLineage] : []);
+  const changedLinks = lineages.flatMap((lineage) => lineage?.links || [])
+    .filter((link) => link.from !== link.to || link.fromParent !== link.toParent);
+  $("parsedLineages").textContent = `${changedLinks.length}건`;
   $("parsedPages").textContent = `${summary.pageCount}쪽`;
   const warning = (summary.warnings || [])[0];
   $("parseWarning").textContent = warning || "직제와 시행규칙을 모두 확인했습니다.";
@@ -779,10 +811,10 @@ async function generate() {
     $("openFolderButton").hidden = false;
     if (result.verified) {
       setStep("stepVerify", "done");
-      setStatus("편집형 HWPX 검증 완료", `${result.pageCount}쪽 · 네이티브 객체 ${result.nativeObjectCount}개 · 검증 리포트 저장 완료`, "success");
+      setStatus("편집형 HWPX 검증 완료", `${result.pageCount}쪽 · 네이티브 객체 ${result.nativeObjectCount}개 · SHA-256·법령 근거 묶음 저장 완료`, "success");
       $("verification").dataset.state = "success";
       $("verification").querySelector("span").textContent = "재열기 검증 통과";
-      $("verification").querySelector("p").textContent = `A4 ${result.pageCount}쪽, 객체 ${result.nativeObjectCount}/${result.expectedNativeObjectCount}개를 확인했습니다. 같은 폴더에 .native.json과 .verification.json을 남겼습니다.`;
+      $("verification").querySelector("p").textContent = `${manifest?.page?.paper || "문서"} ${result.pageCount}쪽, 객체 ${result.nativeObjectCount}/${result.expectedNativeObjectCount}개를 확인했습니다. HWPX·작도 명세·법령 근거·검증 리포트를 한 묶음으로 확정했습니다. SHA-256 ${String(result.sha256 || "").slice(0, 12)}…`;
     } else {
       setStep("stepVerify", "failed");
       setStatus("HWPX는 생성됐지만 검증 불일치", `${result.outputPath} · 쪽수 또는 객체 수를 확인해야 합니다.`, "error");

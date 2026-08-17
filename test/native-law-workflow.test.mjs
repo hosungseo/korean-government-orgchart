@@ -265,16 +265,34 @@ test("좌우 대비 연결선은 변화한 과만 다른 색으로 잇는다", (
 });
 
 test("같은 이름의 과가 존속하면 이후 개편용 분할 매핑보다 exact-name을 우선한다", () => {
-  const side = {
+  const before = {
     institution: "시험문화부",
+    asOf: "2024-02-05",
     decreeText: `시험문화부와 그 소속기관 직제
 제2조(하부조직) 시험문화부에 미디어정책국을 둔다.`,
     ruleText: `시험문화부와 그 소속기관 직제 시행규칙
-제3조(미디어정책국) 미디어정책국에 미디어정책과ㆍ방송영상광고과 및 출판인쇄독서진흥과를 둔다.`,
+제3조(미디어정책국) 미디어정책국에 미디어정책과ㆍ방송영상광고과 및 출판인쇄독서진흥과를 둔다.
+① 미디어정책과장은 다음 사항을 분장한다.
+1. 미디어 정책 총괄
+② 방송영상광고과장은 다음 사항을 분장한다.
+1. 방송영상 산업 지원
+2. 광고 산업 진흥`,
+  };
+  const after = {
+    ...before,
+    asOf: "2024-02-06",
+    ruleText: `시험문화부와 그 소속기관 직제 시행규칙
+제3조(미디어정책국) 미디어정책국에 미디어정책과ㆍ방송영상광고과 및 출판인쇄독서진흥과를 둔다.
+① 미디어정책과장은 다음 사항을 분장한다.
+1. 미디어 정책 총괄
+2. 방송영상 산업 지원
+3. 광고 산업 진흥
+② 방송영상광고과장은 다음 사항을 분장한다.
+1. 방송광고 유통질서 조사`,
   };
   const workflow = buildNativeComparisonWorkflow({
-    before: { ...side, asOf: "2024-02-05" },
-    after: { ...side, asOf: "2024-02-06" },
+    before,
+    after,
     focus: "미디어정책국",
     onePage: true,
   });
@@ -290,6 +308,44 @@ test("같은 이름의 과가 존속하면 이후 개편용 분할 매핑보다 
   assert.equal(links.length, 0);
   assert.equal(status.length, 0);
   assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("구버전 기능 카탈로그만 남은 이력은 자동 기능 점선을 만들지 않는다", () => {
+  const originalBefore = buildNativeLawWorkflow({
+    ruleText: `시험부 직제 시행규칙
+제5조(녹색문화실) 녹색문화실에 기후문화정책과를 둔다.
+① 기후문화정책과장은 다음 사항을 분장한다.
+1. 녹색문화 종합계획 수립
+2. 녹색문화 사업 지원`,
+    institution: "시험부",
+    asOf: "2025-01-01",
+  }).snapshot;
+  const originalAfter = buildNativeLawWorkflow({
+    ruleText: `시험부 직제 시행규칙
+제5조(녹색문화실) 녹색문화실에 녹색문화기획과를 둔다.
+① 녹색문화기획과장은 다음 사항을 분장한다.
+1. 녹색문화 종합계획 수립
+2. 녹색문화 사업 지원`,
+    institution: "시험부",
+    asOf: "2026-01-01",
+  }).snapshot;
+  for (const snapshot of [originalBefore, originalAfter]) {
+    snapshot.laws = [];
+    delete snapshot.graph.meta.parserVersion;
+    delete snapshot.graph.meta.dutyEvidenceQuality;
+  }
+
+  const workflow = buildNativeComparisonWorkflow({
+    beforeSnapshot: originalBefore,
+    afterSnapshot: originalAfter,
+    focus: "녹색문화실",
+  });
+  const functionLinks = workflow.manifests[0].objects.filter((object) => (
+    object.metadata?.role === "correspondence-link"
+      && object.metadata?.basis === "duty-function"
+  ));
+  assert.equal(workflow.summary.dutyLineage.automaticEligible, false);
+  assert.equal(functionLinks.length, 0);
 });
 
 test("개정문이 같은 과명을 다른 전신에 재사용하면 문체부 명시 개명을 우선한다", () => {
@@ -561,6 +617,37 @@ test("4단에서 신설은 처음 나타난 열에만 찍는다", () => {
   assert.equal(labels[0].metadata.side, "c4");
 });
 
+test("여러 대역을 빽빽하게 선택해도 A3 4단의 상자와 선은 용지 안에 맞춘다", () => {
+  const departmentList = (prefix) => Array.from(
+    { length: 18 },
+    (_, index) => `${prefix}${index + 1}과`,
+  ).join("ㆍ");
+  const stage = (asOf) => ({
+    institution: "시험부",
+    asOf,
+    decreeText: `시험부 직제
+제2조(하부조직) 시험부에 문화미디어산업실ㆍ관광정책실 및 지원행정실을 둔다.`,
+    ruleText: `시험부 직제 시행규칙
+제3조(문화미디어산업실) 문화미디어산업실에 ${departmentList("문화정책")}를 둔다.
+제4조(관광정책실) 관광정책실에 ${departmentList("관광정책")}를 둔다.
+제5조(지원행정실) 지원행정실에 ${departmentList("지원행정")}를 둔다.`,
+  });
+  const workflow = buildNativeComparisonWorkflow({
+    stages: [stage("2024-01-01"), stage("2025-01-01"), stage("2026-01-01"), stage("2027-01-01")],
+    focus: "문화미디어산업실, 관광정책실, 지원행정실",
+    onePage: true,
+  });
+  const manifest = workflow.manifests[0];
+  const report = analyzeNativeManifest(manifest);
+  const boxes = manifest.objects.filter((object) => object.metadata?.role === "organization-node");
+
+  assert.equal(report.valid, true);
+  assert.equal(report.errors.length, 0);
+  assert.ok(boxes.length >= 200);
+  assert.ok(boxes.every((box) => box.geometry.y >= 0));
+  assert.ok(boxes.every((box) => box.geometry.y + box.geometry.height <= manifest.page.heightMm));
+});
+
 test("저장된 스냅샷 두 개로도 좌우 조직도를 복원한다", () => {
   const before = buildNativeLawWorkflow({ decreeText: decree, ruleText: rule, asOf: "2024-12-31" });
   const after = buildNativeLawWorkflow({ decreeText: afterDecree, ruleText: afterRule, asOf: "2026-07-21" });
@@ -577,6 +664,31 @@ test("저장된 스냅샷 두 개로도 좌우 조직도를 복원한다", () =>
   assert.ok(texts.includes("디지털정부실"));
   assert.ok(texts.includes("인공지능정부실"));
   assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("구버전 저장 이력은 조직 배치를 보존하고 원문 기능만 최신 파서로 다시 읽는다", () => {
+  const original = buildNativeLawWorkflow({
+    ruleText: `시험부 직제 시행규칙
+제23조(지방박물관)
+① 기획운영과장은 다음 사항을 분장한다.
+1. 보안 및 관인 관리
+② 학예연구실장은 다음 사항을 분장한다.
+1. 소장유물의 관리
+③ 교육과장은 다음 사항을 분장한다.
+1. 교육 프로그램 운영`,
+    institution: "시험부",
+    asOf: "2025-01-01",
+  });
+  const snapshot = structuredClone(original.snapshot);
+  delete snapshot.graph.meta.parserVersion;
+  snapshot.graph.meta.departmentDutyCatalog[0].items.push({ number: 1, text: "소장유물의 관리" });
+
+  const refreshed = buildNativeLawWorkflow(snapshot);
+  const planning = refreshed.snapshot.graph.meta.departmentDutyCatalog
+    .find((entry) => entry.department === "기획운영과");
+  assert.deepEqual(planning.items.map((item) => item.text), ["보안 및 관인 관리"]);
+  assert.equal(refreshed.snapshot.graph.meta.evidenceReparsedFromSnapshot, true);
+  assert.equal(refreshed.summary.legalReadingAudit.conflictingCitations.length, 0);
 });
 
 test("좌우 조직도 아래 호 분할은 갈라진 과를 모두 표시한다", () => {
@@ -624,6 +736,83 @@ test("좌우 조직도 아래 호 분할은 갈라진 과를 모두 표시한다
   }
   assert.ok(labels.every((label) => label.geometry.x + label.geometry.width <= 124.5));
   assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("수동 명칭 사전에 없는 개편도 각 호 기능 근거로 점선을 만든다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    before: {
+      ruleText: `시험부 직제 시행규칙
+제5조(녹색문화실) 녹색문화실에 기후문화정책과를 둔다.
+① 기후문화정책과장은 다음 사항을 분장한다.
+1. 녹색문화 종합계획의 수립
+2. 기후문화 조사 및 연구
+3. 녹색문화 사업의 지원
+4. 지역 기후문화 확산`,
+      institution: "시험부",
+      asOf: "2025-01-01",
+    },
+    after: {
+      ruleText: `시험부 직제 시행규칙
+제5조(녹색문화실) 녹색문화실에 녹색문화기획과ㆍ문화확산과를 둔다.
+① 녹색문화기획과장은 다음 사항을 분장한다.
+1. 녹색문화 종합계획의 수립
+2. 기후문화 조사 및 연구
+② 문화확산과장은 다음 사항을 분장한다.
+1. 녹색문화 사업의 지원
+2. 지역 기후문화 확산`,
+      institution: "시험부",
+      asOf: "2026-01-01",
+    },
+  });
+  const manifest = workflow.manifests[0];
+  const links = manifest.objects.filter((object) => (
+    object.metadata?.role === "correspondence-link"
+      && object.metadata.from === "기후문화정책과"
+  ));
+  assert.ok(links.some((object) => object.metadata.to === "녹색문화기획과"));
+  assert.ok(links.some((object) => object.metadata.to === "문화확산과"));
+  assert.ok(links.every((object) => object.metadata.basis === "duty-function"));
+  assert.ok(links.every((object) => object.metadata.matchedFunctions === 2));
+  assert.equal(workflow.summary.dutyLineage.links.length, 2);
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("같은 상위조직의 독립적인 1대1 변경은 점선 세로축을 공유하지 않는다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    before: {
+      ruleText: `시험부 직제 시행규칙
+제5조(시험실) 시험실에 기존가과ㆍ기존나과를 둔다.
+① 기존가과장은 다음 사항을 분장한다.
+1. 고유 가 기능의 수립 및 시행
+2. 고유 가 사업의 평가 및 관리
+② 기존나과장은 다음 사항을 분장한다.
+1. 고유 나 기능의 조사 및 지원
+2. 고유 나 사업의 운영 및 조정`,
+      institution: "시험부",
+    },
+    after: {
+      ruleText: `시험부 직제 시행규칙
+제5조(시험실) 시험실에 개정나과ㆍ개정가과를 둔다.
+① 개정나과장은 다음 사항을 분장한다.
+1. 고유 나 기능의 조사 및 지원
+2. 고유 나 사업의 운영 및 조정
+② 개정가과장은 다음 사항을 분장한다.
+1. 고유 가 기능의 수립 및 시행
+2. 고유 가 사업의 평가 및 관리`,
+      institution: "시험부",
+    },
+  });
+  const vertical = workflow.manifests[0].objects.filter((object) => (
+    object.metadata?.role === "correspondence-link"
+      && object.geometry.x1 === object.geometry.x2
+      && object.metadata.from
+  ));
+  assert.equal(vertical.length, 2);
+  assert.equal(new Set(vertical.map((object) => object.geometry.x1)).size, 2);
+  assert.deepEqual(
+    vertical.map((object) => [object.metadata.from, object.metadata.to]).sort(),
+    [["기존가과", "개정가과"], ["기존나과", "개정나과"]],
+  );
 });
 
 function boxesOverlap(left, right, slack = 0.05) {

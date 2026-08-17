@@ -273,19 +273,23 @@ function uniqueItems(items) {
   const seen = new Set();
   const result = [];
   for (const item of items || []) {
-    if (!Number.isFinite(item?.number)) continue;
+    const number = normalizeItemNumber(item?.number ?? item?.subparagraph);
+    if (number == null) continue;
     const key = itemKey(item);
     if (seen.has(key)) continue;
     seen.add(key);
     result.push({
       refKey: item.refKey || "",
-      number: item.number,
+      number,
       ...(item.text ? { text: item.text } : {}),
+      ...(item.citation ? { citation: item.citation } : {}),
       ...(item.residual ? { residual: true } : {}),
       ...(item.match ? { match: item.match } : {}),
     });
   }
-  return result.sort((left, right) => left.refKey.localeCompare(right.refKey, "ko") || left.number - right.number);
+  return result.sort((left, right) => (
+    left.refKey.localeCompare(right.refKey, "ko") || compareItemNumber(left.number, right.number)
+  ));
 }
 
 export function formatItemList(items) {
@@ -297,25 +301,38 @@ export function formatItemList(items) {
     grouped.get(item.refKey).push(item.number);
   }
   return [...grouped.entries()].map(([refKey, numbers]) => {
+    numbers.sort(compareItemNumber);
     const ranges = [];
     let start = numbers[0];
     let prev = numbers[0];
     for (const number of numbers.slice(1)) {
-      if (number === prev + 1) {
+      if (Number.isFinite(number) && Number.isFinite(prev) && number === prev + 1) {
         prev = number;
         continue;
       }
-      ranges.push(start === prev ? `제${start}호` : `제${start}~${prev}호`);
+      ranges.push(String(start) === String(prev) ? `제${start}호` : `제${start}~${prev}호`);
       start = number;
       prev = number;
     }
-    ranges.push(start === prev ? `제${start}호` : `제${start}~${prev}호`);
+    ranges.push(String(start) === String(prev) ? `제${start}호` : `제${start}~${prev}호`);
     return `${refKey ? `${refKey} ` : ""}${ranges.join("ㆍ")}`;
   }).join(", ");
 }
 
 function itemKey(item) {
-  return `${item.refKey || ""}:${item.number}`;
+  return `${item.refKey || ""}:${normalizeItemNumber(item?.number ?? item?.subparagraph) ?? ""}`;
+}
+
+function normalizeItemNumber(value) {
+  const normalized = String(value ?? "").replace(/\s+/g, "");
+  if (!/^\d+(?:의\d+)?$/.test(normalized)) return null;
+  return /^\d+$/.test(normalized) ? Number(normalized) : normalized;
+}
+
+function compareItemNumber(left, right) {
+  const [leftBase, leftSuffix = "0"] = String(left).split("의");
+  const [rightBase, rightSuffix = "0"] = String(right).split("의");
+  return Number(leftBase) - Number(rightBase) || Number(leftSuffix) - Number(rightSuffix);
 }
 
 function asGraph(value) {

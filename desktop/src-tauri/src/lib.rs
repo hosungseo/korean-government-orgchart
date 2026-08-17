@@ -362,6 +362,14 @@ struct VideoBundlePaths {
     metadata: PathBuf,
 }
 
+#[derive(Debug)]
+struct HwpxBundlePaths {
+    hwpx: PathBuf,
+    native_manifest: PathBuf,
+    verification: PathBuf,
+    legal_evidence: PathBuf,
+}
+
 fn temporary_bundle_path(path: &Path, token: &str) -> PathBuf {
     let name = path.file_name().and_then(OsStr::to_str).unwrap_or("video");
     path.with_file_name(format!(".{name}.{token}.part"))
@@ -458,6 +466,106 @@ fn write_atomic_video_bundle(
     result
 }
 
+fn temporary_hwpx_path(path: &Path, token: &str) -> PathBuf {
+    let stem = path
+        .file_stem()
+        .and_then(OsStr::to_str)
+        .unwrap_or("편집형-조직도");
+    path.with_file_name(format!(".{stem}.{token}.partial.hwpx"))
+}
+
+fn hwpx_bundle_path_available(path: &Path) -> bool {
+    !path.exists()
+        && !companion_path(path, "native.json").exists()
+        && !companion_path(path, "verification.json").exists()
+        && !companion_path(path, "legal-evidence.json").exists()
+}
+
+fn write_atomic_hwpx_bundle(
+    staged_hwpx: &Path,
+    output_path: &Path,
+    native_manifest: &str,
+    verification: &str,
+    legal_evidence: &str,
+) -> Result<(HwpxBundlePaths, String), String> {
+    let native_manifest_path = companion_path(output_path, "native.json");
+    let verification_path = companion_path(output_path, "verification.json");
+    let legal_evidence_path = companion_path(output_path, "legal-evidence.json");
+    if !staged_hwpx.is_file() {
+        return Err("검증할 임시 HWPX 파일이 없습니다.".to_string());
+    }
+    if !hwpx_bundle_path_available(output_path) {
+        return Err("같은 이름의 HWPX 검증 묶음이 이미 존재합니다.".to_string());
+    }
+    let bytes = fs::read(staged_hwpx)
+        .map_err(|error| format!("임시 HWPX를 다시 읽지 못했습니다: {error}"))?;
+    if bytes.is_empty() {
+        return Err("한글이 저장한 HWPX가 비어 있습니다.".to_string());
+    }
+    let expected_sha256 = sha256_hex(&bytes);
+    let token = format!("{}-{}", std::process::id(), unix_time_millis());
+    let temporary_manifest = temporary_bundle_path(&native_manifest_path, &token);
+    let temporary_verification = temporary_bundle_path(&verification_path, &token);
+    let temporary_evidence = temporary_bundle_path(&legal_evidence_path, &token);
+    let temporary_paths = [
+        staged_hwpx,
+        temporary_manifest.as_path(),
+        temporary_verification.as_path(),
+        temporary_evidence.as_path(),
+    ];
+    let result = (|| {
+        write_new_synced(&temporary_manifest, native_manifest.as_bytes())?;
+        write_new_synced(&temporary_verification, verification.as_bytes())?;
+        write_new_synced(&temporary_evidence, legal_evidence.as_bytes())?;
+
+        let read_back = fs::read(staged_hwpx)
+            .map_err(|error| format!("임시 HWPX를 무결성 검사하지 못했습니다: {error}"))?;
+        if read_back.len() != bytes.len() || sha256_hex(&read_back) != expected_sha256 {
+            return Err("저장한 HWPX의 SHA-256 무결성 검증에 실패했습니다.".to_string());
+        }
+
+        let promotions = [
+            (staged_hwpx, output_path),
+            (temporary_manifest.as_path(), native_manifest_path.as_path()),
+            (
+                temporary_verification.as_path(),
+                verification_path.as_path(),
+            ),
+            (temporary_evidence.as_path(), legal_evidence_path.as_path()),
+        ];
+        let mut promoted: Vec<&Path> = Vec::new();
+        for (temporary, final_path) in promotions {
+            if let Err(error) = fs::rename(temporary, final_path) {
+                remove_files(&promoted);
+                return Err(format!(
+                    "HWPX 검증 묶음을 최종 경로로 확정하지 못했습니다: {error}"
+                ));
+            }
+            promoted.push(final_path);
+        }
+        Ok((
+            HwpxBundlePaths {
+                hwpx: output_path.to_path_buf(),
+                native_manifest: native_manifest_path.clone(),
+                verification: verification_path.clone(),
+                legal_evidence: legal_evidence_path.clone(),
+            },
+            expected_sha256,
+        ))
+    })();
+    if result.is_err() {
+        remove_files(&temporary_paths);
+        remove_files(&[
+            output_path,
+            native_manifest_path.as_path(),
+            verification_path.as_path(),
+            legal_evidence_path.as_path(),
+        ]);
+    }
+    result
+}
+
+#[cfg(test)]
 fn unique_output_path(directory: &Path, file_name: &str) -> PathBuf {
     let desired = directory.join(file_name);
     if !desired.exists() {
@@ -493,6 +601,30 @@ fn unique_output_path(directory: &Path, file_name: &str) -> PathBuf {
         Some(extension) => directory.join(format!("{stem}-{timestamp}-overflow.{extension}")),
         None => directory.join(format!("{stem}-{timestamp}-overflow")),
     }
+}
+
+fn unique_hwpx_output_path(directory: &Path, file_name: &str) -> PathBuf {
+    let desired = directory.join(file_name);
+    if hwpx_bundle_path_available(&desired) {
+        return desired;
+    }
+    let timestamp = unix_time_millis();
+    let stem = desired
+        .file_stem()
+        .and_then(OsStr::to_str)
+        .unwrap_or("편집형-조직도");
+    for attempt in 0..1_000_u16 {
+        let suffix = if attempt == 0 {
+            timestamp.to_string()
+        } else {
+            format!("{timestamp}-{attempt}")
+        };
+        let candidate = directory.join(format!("{stem}-{suffix}.hwpx"));
+        if hwpx_bundle_path_available(&candidate) {
+            return candidate;
+        }
+    }
+    directory.join(format!("{stem}-{timestamp}-overflow.hwpx"))
 }
 
 fn video_bundle_path_available(path: &Path) -> bool {
@@ -599,6 +731,72 @@ fn companion_path(output_path: &Path, suffix: &str) -> PathBuf {
         .and_then(OsStr::to_str)
         .unwrap_or("편집형-조직도");
     output_path.with_file_name(format!("{stem}.{suffix}"))
+}
+
+fn legal_evidence_document(manifest: &Value) -> Value {
+    let source = manifest.get("source").cloned().unwrap_or(Value::Null);
+    let mut seen = HashSet::new();
+    let mut line_evidence = Vec::new();
+    for object in manifest
+        .get("objects")
+        .and_then(Value::as_array)
+        .into_iter()
+        .flatten()
+    {
+        let Some(metadata) = object.get("metadata").and_then(Value::as_object) else {
+            continue;
+        };
+        if metadata.get("role").and_then(Value::as_str) != Some("correspondence-link") {
+            continue;
+        }
+        let from = metadata.get("from").and_then(Value::as_str).unwrap_or("");
+        let to = metadata.get("to").and_then(Value::as_str).unwrap_or("");
+        let basis = metadata.get("basis").and_then(Value::as_str).unwrap_or("");
+        if from.is_empty() || to.is_empty() {
+            continue;
+        }
+        let key = format!("{from}>{to}|{basis}");
+        if !seen.insert(key) {
+            continue;
+        }
+        line_evidence.push(Value::Object(metadata.clone()));
+    }
+    let duty_fact_count = source
+        .get("dutyFactCount")
+        .and_then(Value::as_u64)
+        .map(|count| count as usize)
+        .or_else(|| {
+            source
+                .get("dutyFacts")
+                .and_then(Value::as_array)
+                .map(|items| {
+                    if items.iter().any(|item| item.get("facts").is_some()) {
+                        items
+                            .iter()
+                            .filter_map(|stage| stage.get("facts").and_then(Value::as_array))
+                            .map(Vec::len)
+                            .sum()
+                    } else {
+                        items.len()
+                    }
+                })
+        })
+        .unwrap_or_default();
+    json!({
+        "schema": "kr.go.mois.orgchart.legal-evidence/v1",
+        "generatedAtUnixMs": unix_time_millis(),
+        "manifest": {
+            "schema": manifest.get("schema"),
+            "title": manifest.get("title"),
+            "fileName": manifest.get("fileName"),
+        },
+        "source": source,
+        "lineEvidence": line_evidence,
+        "stats": {
+            "dutyFactCount": duty_fact_count,
+            "lineEvidenceCount": seen.len(),
+        },
+    })
 }
 
 fn unix_time_millis() -> u128 {
@@ -1334,7 +1532,9 @@ async fn generate_native_hwpx(
         &request.file_name
     });
     let output_dir = output_directory(&app)?;
-    let output_path = unique_output_path(&output_dir, &file_name);
+    let output_path = unique_hwpx_output_path(&output_dir, &file_name);
+    let staging_token = format!("{}-{}", std::process::id(), unix_time_millis());
+    let staged_output_path = temporary_hwpx_path(&output_path, &staging_token);
 
     let run_dir = unique_run_dir(&app, "generate")?;
     let script_path = run_dir.join("hwp-native.ps1");
@@ -1345,7 +1545,7 @@ async fn generate_native_hwpx(
 
     let script_for_task = script_path.clone();
     let manifest_for_task = manifest_path.clone();
-    let output_for_task = output_path.clone();
+    let output_for_task = staged_output_path.clone();
     let output = tauri::async_runtime::spawn_blocking(move || {
         run_powershell(
             &script_for_task,
@@ -1363,15 +1563,20 @@ async fn generate_native_hwpx(
     .map_err(|error| format!("한글 생성 작업이 중단되었습니다: {error}"))??;
 
     let mut result = parse_json_output(&output)?;
+    if result.get("verified").and_then(Value::as_bool) != Some(true) {
+        let _ = fs::remove_file(&staged_output_path);
+        let _ = fs::remove_dir_all(&run_dir);
+        return Err("저장한 HWPX의 쪽수 또는 네이티브 객체 수가 명세와 일치하지 않아 최종 파일로 확정하지 않았습니다.".to_string());
+    }
     let native_manifest_path = companion_path(&output_path, "native.json");
     let verification_report_path = companion_path(&output_path, "verification.json");
+    let legal_evidence_path = companion_path(&output_path, "legal-evidence.json");
     let pretty_manifest = serde_json::to_string_pretty(&manifest)
         .map_err(|error| format!("재현용 작도 명세를 직렬화하지 못했습니다: {error}"))?;
-    fs::write(&native_manifest_path, format!("{pretty_manifest}\n"))
-        .map_err(|error| format!("재현용 작도 명세를 저장하지 못했습니다: {error}"))?;
-    let opened = request.open_after && launch_output(&output_path);
+    let staged_hwpx_bytes = fs::read(&staged_output_path)
+        .map_err(|error| format!("검증된 임시 HWPX를 읽지 못했습니다: {error}"))?;
+    let expected_sha256 = sha256_hex(&staged_hwpx_bytes);
     if let Some(object) = result.as_object_mut() {
-        object.insert("opened".to_string(), Value::Bool(opened));
         object.insert(
             "outputPath".to_string(),
             Value::String(output_path.display().to_string()),
@@ -1384,7 +1589,17 @@ async fn generate_native_hwpx(
             "verificationReportPath".to_string(),
             Value::String(verification_report_path.display().to_string()),
         );
+        object.insert(
+            "legalEvidencePath".to_string(),
+            Value::String(legal_evidence_path.display().to_string()),
+        );
+        object.insert("sha256".to_string(), Value::String(expected_sha256.clone()));
+        object.insert("integrityVerified".to_string(), Value::Bool(true));
+        object.insert("atomicBundle".to_string(), Value::Bool(true));
     }
+    let evidence_document = legal_evidence_document(&manifest);
+    let pretty_evidence = serde_json::to_string_pretty(&evidence_document)
+        .map_err(|error| format!("법령 근거 리포트를 직렬화하지 못했습니다: {error}"))?;
     let verification_document = json!({
         "schema": "kr.go.mois.orgchart.hwp-native-verification/v1",
         "generatedAtUnixMs": unix_time_millis(),
@@ -1396,16 +1611,37 @@ async fn generate_native_hwpx(
             "page": manifest.get("page"),
             "verification": manifest.get("verification"),
         },
+        "integrity": {
+            "sha256": expected_sha256,
+            "readBackVerified": true,
+            "atomicBundle": true,
+        },
         "preflight": preflight,
         "result": result.clone(),
     });
     let pretty_verification = serde_json::to_string_pretty(&verification_document)
         .map_err(|error| format!("검증 리포트를 직렬화하지 못했습니다: {error}"))?;
-    fs::write(
-        &verification_report_path,
-        format!("{pretty_verification}\n"),
-    )
-    .map_err(|error| format!("검증 리포트를 저장하지 못했습니다: {error}"))?;
+    let (bundle_paths, verified_sha256) = write_atomic_hwpx_bundle(
+        &staged_output_path,
+        &output_path,
+        &format!("{pretty_manifest}\n"),
+        &format!("{pretty_verification}\n"),
+        &format!("{pretty_evidence}\n"),
+    )?;
+    if verified_sha256 != sha256_hex(&staged_hwpx_bytes) {
+        remove_files(&[
+            bundle_paths.hwpx.as_path(),
+            bundle_paths.native_manifest.as_path(),
+            bundle_paths.verification.as_path(),
+            bundle_paths.legal_evidence.as_path(),
+        ]);
+        let _ = fs::remove_dir_all(&run_dir);
+        return Err("HWPX 최종 확정 전후의 SHA-256이 일치하지 않습니다.".to_string());
+    }
+    let opened = request.open_after && launch_output(&bundle_paths.hwpx);
+    if let Some(object) = result.as_object_mut() {
+        object.insert("opened".to_string(), Value::Bool(opened));
+    }
     let _ = fs::remove_dir_all(&run_dir);
     Ok(result)
 }
@@ -1584,6 +1820,93 @@ mod tests {
             .contains("이미 존재"));
 
         let _ = fs::remove_dir_all(directory);
+    }
+
+    #[test]
+    fn hwpx_bundle_is_read_back_hashed_and_promoted_with_legal_evidence() {
+        let directory =
+            env::temp_dir().join(format!("orgchart-hwpx-bundle-test-{}", unix_time_millis()));
+        fs::create_dir_all(&directory).unwrap();
+        let output = directory.join("comparison.hwpx");
+        let staged = temporary_hwpx_path(&output, "test");
+        let bytes = b"deterministic-hwpx-package-bytes";
+        fs::write(&staged, bytes).unwrap();
+
+        let (paths, digest) = write_atomic_hwpx_bundle(
+            &staged,
+            &output,
+            "{\"manifest\":true}\n",
+            "{\"verified\":true}\n",
+            "{\"evidence\":true}\n",
+        )
+        .unwrap();
+        assert_eq!(digest, sha256_hex(bytes));
+        assert_eq!(fs::read(&paths.hwpx).unwrap(), bytes);
+        assert!(paths.native_manifest.exists());
+        assert!(paths.verification.exists());
+        assert!(paths.legal_evidence.exists());
+        assert!(!staged.exists());
+        assert_eq!(
+            fs::read_dir(&directory)
+                .unwrap()
+                .filter_map(Result::ok)
+                .filter(|entry| entry.file_name().to_string_lossy().ends_with(".part"))
+                .count(),
+            0
+        );
+
+        let orphan = directory.join("orphan.hwpx");
+        fs::write(companion_path(&orphan, "legal-evidence.json"), b"{}").unwrap();
+        assert_ne!(unique_hwpx_output_path(&directory, "orphan.hwpx"), orphan);
+        let _ = fs::remove_dir_all(directory);
+    }
+
+    #[test]
+    fn legal_evidence_report_deduplicates_line_segments_and_counts_stage_facts() {
+        let metadata = json!({
+            "role": "correspondence-link",
+            "from": "기후문화정책과",
+            "to": "녹색문화기획과",
+            "basis": "duty-function",
+            "confidence": 0.94,
+            "matchedFunctions": 2,
+            "sourceFunctions": 4,
+        });
+        let manifest = json!({
+            "schema": HWP_NATIVE_MANIFEST_SCHEMA,
+            "title": "기능 근거 대비",
+            "source": {
+                "dutyFactCount": 2,
+                "dutyFacts": [
+                    { "asOf": "2025-01-01", "facts": [{"id":"a"}] },
+                    { "asOf": "2026-01-01", "facts": [{"id":"b"}] }
+                ]
+            },
+            "objects": [
+                { "type": "line", "metadata": metadata.clone() },
+                { "type": "line", "metadata": metadata }
+            ]
+        });
+        let report = legal_evidence_document(&manifest);
+        assert_eq!(
+            report
+                .pointer("/stats/dutyFactCount")
+                .and_then(Value::as_u64),
+            Some(2)
+        );
+        assert_eq!(
+            report
+                .pointer("/stats/lineEvidenceCount")
+                .and_then(Value::as_u64),
+            Some(1)
+        );
+        assert_eq!(
+            report
+                .get("lineEvidence")
+                .and_then(Value::as_array)
+                .map(Vec::len),
+            Some(1)
+        );
     }
 
     #[test]

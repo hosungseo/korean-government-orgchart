@@ -233,7 +233,17 @@ function comparisonBandKey(plan, graph) {
   const names = (plan.rootIds || []).map((id) => graph.nodes.get(id)?.name || "").join(" ");
   if (/디지털정부|인공지능정부/.test(names)) return "digital";
   if (/조직|참여혁신/.test(names)) return "organization";
+  if (/콘텐츠|미디어|저작권|국제문화|문화산업|해외(?:.*홍보|미디어|뉴스)/.test(names)) return "culture-media";
+  if (/관광/.test(names)) return "tourism";
   return "other";
+}
+
+function comparisonBandKeys(sides) {
+  const present = new Set(sides.flatMap((side) => (
+    (side.plans || []).map((plan) => comparisonBandKey(plan, side.graph))
+  )));
+  return ["digital", "organization", "culture-media", "tourism", "other"]
+    .filter((key) => present.has(key));
 }
 
 function mergePlans(plans) {
@@ -253,9 +263,11 @@ function sidePlanForBand(side, bandKey) {
 
 function uniqueBandCaption(row, bandKey) {
   const names = uniq(row.flatMap((plan) => String(plan?.subtitle || "").split(/\s*·\s*/)).filter(Boolean));
-  if (names.length) return names.join(" · ");
   if (bandKey === "digital") return "디지털·인공지능정부";
   if (bandKey === "organization") return "참여혁신·조직";
+  if (bandKey === "culture-media") return "문화·미디어·저작권·국제홍보";
+  if (bandKey === "tourism") return "관광";
+  if (names.length) return names.join(" · ");
   return "대역";
 }
 
@@ -263,7 +275,7 @@ function buildMultiColumnBandedManifest({ sides, institution, warnings, page }) 
   const columnCount = sides.length;
   const frameTop = 40;
   const frameBottom = 279.5;
-  const bandKeys = ["digital", "organization"];
+  const bandKeys = comparisonBandKeys(sides);
   const bandPlans = bandKeys.map((key) => sides.map((side) => sidePlanForBand(side, key)));
   const gap = 6.4;
   const caption = 5.4;
@@ -290,7 +302,11 @@ function buildMultiColumnBandedManifest({ sides, institution, warnings, page }) 
           right: frame.right,
           top: treeTop,
           bottom: treeBottom,
-        }, prefix, { idPrefix: `${prefix}-b${bandIndex + 1}`, side: prefix })
+        }, prefix, {
+          idPrefix: `${prefix}-b${bandIndex + 1}`,
+          side: prefix,
+          compactWidth: columnCount >= 4,
+        })
         : { boxes: [], lines: [] });
     });
     const captionText = uniqueBandCaption(row, bandKeys[bandIndex]);
@@ -324,6 +340,7 @@ function buildMultiColumnBandedManifest({ sides, institution, warnings, page }) 
     ));
     transfers.push(...lifecycleLabelObjects(left, right, { idPrefix: `col${index + 1}` }));
   }
+  const transferObjects = coalesceStatusLabels(transfers);
 
   const dates = sides.map((side) => (side.asOf ? displayDateLoose(side.asOf) : "기준일 없음"));
   const pageLabel = `${columnCount}단 대비`;
@@ -378,7 +395,7 @@ function buildMultiColumnBandedManifest({ sides, institution, warnings, page }) 
     )),
     ...columnTrees.flatMap((trees) => trees.flatMap((tree) => tree.lines)),
     ...columnTrees.flatMap((trees) => trees.flatMap((tree) => tree.boxes)),
-    ...transfers,
+    ...transferObjects,
     ...labels,
   ];
   return {
@@ -846,14 +863,28 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
   const boxes = [];
   rows.forEach((row, index) => {
     const node = graph.nodes.get(row.id);
+    const parentName = graph.nodes.get(tree.parentEdge.get(row.id)?.parent)?.name || "";
+    const officeName = officeNameFor(row.id, graph, tree);
     const jurisdictionContainer = node.kind === "advisor"
       && (tree.children.get(row.id) || []).some((childId) => (
         selected.has(childId) && tree.parentEdge.get(childId)?.type === "jurisdiction"
       ));
     const x = round(frame.left + row.depth * indent);
     const y = round(frame.top + index * pitch);
-    const width = round(Math.max(columnWidth > 120 ? 42 : 28, frame.right - x));
     const style = styleForNode(node, row.depth, roots.includes(row.id), { jurisdictionContainer });
+    const displayLabel = contextualNodeLabel(node, {
+      isRoot: roots.includes(row.id),
+      parentName,
+      officeName,
+    });
+    const availableWidth = frame.right - x;
+    const compactMaxWidth = columnWidth * 0.72;
+    const labelLength = Array.from(displayLabel).length;
+    const compactContentWidth = 10 + labelLength * 2.45;
+    const compactMinWidth = style.root ? 54 : 46;
+    const width = round(options.compactWidth
+      ? Math.min(availableWidth, Math.max(compactMinWidth, Math.min(compactMaxWidth, compactContentWidth)))
+      : Math.max(columnWidth > 120 ? 42 : 28, availableWidth));
     const fontSizePt = round(Math.min(style.root ? 8.4 : 7.2, Math.max(5.25, boxHeight * 1.28)));
     const objectId = `${idPrefix}node-${node.id}`;
     const geometry = { x, y, width, height: round(boxHeight) };
@@ -861,7 +892,7 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
     boxes.push({
       id: objectId,
       type: "textbox",
-      text: nodeLabel(node),
+      text: displayLabel,
       geometry,
       style: {
         fill: style.fill,
@@ -883,8 +914,9 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
         nodeName: node.name,
         kind: node.kind,
         rank: node.rank,
-        parentName: graph.nodes.get(tree.parentEdge.get(row.id)?.parent)?.name || "",
-        officeName: officeNameFor(row.id, graph, tree),
+        parentName,
+        officeName,
+        ...(displayLabel !== nodeLabel(node) ? { contextualLabel: displayLabel } : {}),
         ...(jurisdictionContainer ? { renderRole: "jurisdiction-container" } : {}),
       },
     });
@@ -1392,7 +1424,48 @@ const STRUCTURAL_RENAMES = Object.freeze({
   정보공개과: ["정보공개제도과"],
   공공지능데이터정책과: ["공공데이터정책과"],
   공공지능데이터분석과: ["공공데이터분석관리과"],
+  해외문화홍보기획관: ["해외홍보정책관"],
+  해외문화홍보사업과: ["국제문화사업과"],
+  해외문화홍보콘텐츠과: ["해외홍보콘텐츠과"],
+  외신협력과: ["해외미디어협력과"],
+  외신분석팀: ["해외뉴스분석팀"],
+  국제문화과: ["국제문화정책과", "국제문화사업과"],
+  영상콘텐츠산업과: ["영상방송콘텐츠산업과"],
+  방송영상광고과: ["미디어정책과", "영상방송콘텐츠산업과"],
+  문화통상협력과: ["문화수출통상과"],
+  관광산업정책과: ["관광산업진흥과"],
+  관광개발과: ["지역관광개발과"],
+  국내관광진흥과: ["국민관광진흥과"],
+  국제관광과: ["국제관광정책과"],
+  관광기반과: ["국제관광서비스과"],
+  융합관광산업과: ["융복합관광과"],
 });
+
+// Some amendments reuse an old displayed name for a different predecessor.
+// These cases must be resolved before the normal exact-name rule.  The
+// 2026-07-28 MCST amendment explicitly renamed 문화산업정책과 to
+// 콘텐츠산업정책과 and 문화산업기반과 to 문화산업정책과.  Likewise, the
+// 2024-02-06 personnel order confirms 기획운영과장 -> 해외홍보기획과장.
+const CONTEXTUAL_TRANSITIONS = Object.freeze([
+  Object.freeze({
+    sourceName: "기획운영과",
+    sourceParent: "해외문화홍보원",
+    requiresAfter: Object.freeze(["해외홍보기획과"]),
+    destinations: Object.freeze(["해외홍보기획과"]),
+  }),
+  Object.freeze({
+    sourceName: "문화산업정책과",
+    sourceParent: "문화산업정책관",
+    requiresAfter: Object.freeze(["콘텐츠산업정책과", "문화산업정책과"]),
+    destinations: Object.freeze(["콘텐츠산업정책과"]),
+  }),
+  Object.freeze({
+    sourceName: "문화산업기반과",
+    sourceParent: "문화산업정책관",
+    requiresAfter: Object.freeze(["콘텐츠산업정책과", "문화산업정책과"]),
+    destinations: Object.freeze(["문화산업정책과"]),
+  }),
+]);
 
 function mergeTrees(trees) {
   return {
@@ -1411,11 +1484,7 @@ function correspondencePairs(beforeTree, afterTree) {
   for (const source of beforeTree.boxes || []) {
     const name = source.metadata?.nodeName;
     if (!name || !isDepartmentBox(source)) continue;
-    const destNames = [];
-    if (afterByName.has(name)) destNames.push(name);
-    for (const mapped of STRUCTURAL_RENAMES[name] || []) {
-      if (afterByName.has(mapped) && !destNames.includes(mapped)) destNames.push(mapped);
-    }
+    const destNames = correspondenceDestinationNames(source, afterByName);
     for (const destName of destNames) {
       const dest = afterByName.get(destName);
       if (!dest || !isDepartmentBox(dest)) continue;
@@ -1424,6 +1493,24 @@ function correspondencePairs(beforeTree, afterTree) {
     }
   }
   return pairs;
+}
+
+function correspondenceDestinationNames(source, afterByName) {
+  const name = source?.metadata?.nodeName || source?.name || "";
+  const sourceParent = source?.metadata?.parentName || "";
+  const contextual = CONTEXTUAL_TRANSITIONS.find((rule) => (
+    rule.sourceName === name
+    && rule.sourceParent === sourceParent
+    && rule.requiresAfter.every((candidate) => afterByName.has(candidate))
+  ));
+  if (contextual) {
+    return contextual.destinations.filter((candidate) => afterByName.has(candidate));
+  }
+  // 같은 이름의 과가 다음 시점에도 있으면 그 조직의 존속을 우선한다.
+  // 이후 개편용 분할·개명 사전을 함께 적용하면, 존속한 과가 다른 과로
+  // 이동한 것처럼 앞선 시점에 거짓 연결선이 생긴다.
+  if (afterByName.has(name)) return [name];
+  return (STRUCTURAL_RENAMES[name] || []).filter((mapped) => afterByName.has(mapped));
 }
 
 function isDepartmentBox(box) {
@@ -1472,11 +1559,7 @@ function departmentLineage(beforeTree, afterTree) {
   for (const source of beforeDepts) {
     const name = source.metadata?.nodeName;
     if (!name) continue;
-    const destNames = [];
-    if (afterByName.has(name)) destNames.push(name);
-    for (const mapped of STRUCTURAL_RENAMES[name] || []) {
-      if (afterByName.has(mapped) && !destNames.includes(mapped)) destNames.push(mapped);
-    }
+    const destNames = correspondenceDestinationNames(source, afterByName);
     if (!destNames.length) continue;
     linkedBefore.add(source.id);
     for (const destName of destNames) {
@@ -1518,6 +1601,31 @@ function lifecycleLabelObjects(beforeTree, afterTree, options = {}) {
   for (const box of created) push(box, "신설", STATUS_NEW_COLOR);
   for (const box of abolished) push(box, "폐지", STATUS_GONE_COLOR);
   return objects;
+}
+
+function coalesceStatusLabels(objects) {
+  const result = [];
+  const byUnit = new Map();
+  for (const object of objects) {
+    if (object.metadata?.role !== "status-label") {
+      result.push(object);
+      continue;
+    }
+    const key = `${object.metadata.side || ""}:${object.metadata.unit || object.id}`;
+    const existing = byUnit.get(key);
+    if (!existing) {
+      byUnit.set(key, object);
+      result.push(object);
+      continue;
+    }
+    if (existing.metadata.status === object.metadata.status) continue;
+    existing.text = "신설·폐지";
+    existing.metadata.status = "신설·폐지";
+    existing.style.textColor = "#7C3AED";
+    existing.geometry.x = round(existing.geometry.x - 5.2);
+    existing.geometry.width = round(existing.geometry.width + 5.2);
+  }
+  return result;
 }
 
 function correspondenceTransferObjects(beforeTree, afterTree, dividerX, options = {}) {
@@ -1910,6 +2018,20 @@ function nodeLabel(node) {
   if (node.metadata?.temporary || node.kind === "temporary") markers.push("한시");
   const prefix = markers.length ? `(${markers.join("·")})  ` : "";
   return `${prefix}${node.name}`;
+}
+
+function contextualNodeLabel(node, options = {}) {
+  const base = nodeLabel(node);
+  if (!options.isRoot) return base;
+  if (isDepartmentNode(node) && options.officeName && options.officeName !== node.name) {
+    return `${options.officeName} › ${base}`;
+  }
+  if (node.kind !== "advisor") return base;
+  if (options.officeName && options.officeName !== node.name) {
+    return `${options.officeName} › ${base}`;
+  }
+  if (options.parentName === "장관") return `장관 보좌 › ${base}`;
+  return base;
 }
 
 function inferLawName(text, fallback) {

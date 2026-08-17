@@ -264,6 +264,108 @@ test("좌우 대비 연결선은 변화한 과만 다른 색으로 잇는다", (
   assert.equal(analyzeNativeManifest(manifest).valid, true);
 });
 
+test("같은 이름의 과가 존속하면 이후 개편용 분할 매핑보다 exact-name을 우선한다", () => {
+  const side = {
+    institution: "시험문화부",
+    decreeText: `시험문화부와 그 소속기관 직제
+제2조(하부조직) 시험문화부에 미디어정책국을 둔다.`,
+    ruleText: `시험문화부와 그 소속기관 직제 시행규칙
+제3조(미디어정책국) 미디어정책국에 미디어정책과ㆍ방송영상광고과 및 출판인쇄독서진흥과를 둔다.`,
+  };
+  const workflow = buildNativeComparisonWorkflow({
+    before: { ...side, asOf: "2024-02-05" },
+    after: { ...side, asOf: "2024-02-06" },
+    focus: "미디어정책국",
+    onePage: true,
+  });
+  const manifest = workflow.manifests[0];
+  const boxes = manifest.objects.filter((object) => object.metadata?.role === "organization-node");
+  const wraps = manifest.objects.filter((object) => object.metadata?.role === "correspondence-wrap");
+  const links = manifest.objects.filter((object) => object.metadata?.role === "correspondence-link");
+  const status = manifest.objects.filter((object) => object.metadata?.role === "status-label");
+
+  assert.equal(boxes.filter((object) => object.metadata.nodeName === "방송영상광고과").length, 2);
+  assert.equal(wraps.some((object) => object.metadata.unit === "방송영상광고과"), false);
+  assert.equal(wraps.some((object) => object.metadata.unit === "미디어정책과"), false);
+  assert.equal(links.length, 0);
+  assert.equal(status.length, 0);
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("개정문이 같은 과명을 다른 전신에 재사용하면 문체부 명시 개명을 우선한다", () => {
+  const before = {
+    institution: "시험문화부",
+    asOf: "2025-12-30",
+    decreeText: `시험문화부와 그 소속기관 직제
+제2조(하부조직) 시험문화부에 문화미디어산업실을 둔다.
+제3조(문화미디어산업실) 문화미디어산업실 밑에 문화산업정책관을 둔다.`,
+    ruleText: `시험문화부와 그 소속기관 직제 시행규칙
+제3조(문화미디어산업실) 문화산업정책관에 문화산업정책과 및 문화산업기반과를 둔다.`,
+  };
+  const after = {
+    institution: "시험문화부",
+    asOf: "2026-07-28",
+    decreeText: `시험문화부와 그 소속기관 직제
+제2조(하부조직) 시험문화부에 문화미디어산업실을 둔다.
+제3조(문화미디어산업실) 문화미디어산업실 밑에 콘텐츠산업정책관 및 문화산업미디어정책관을 둔다.`,
+    ruleText: `시험문화부와 그 소속기관 직제 시행규칙
+제3조(문화미디어산업실) 콘텐츠산업정책관에 콘텐츠산업정책과를 두고, 문화산업미디어정책관에 문화산업정책과를 둔다.`,
+  };
+  const workflow = buildNativeComparisonWorkflow({
+    before,
+    after,
+    focus: "문화미디어산업실",
+    onePage: true,
+  });
+  const manifest = workflow.manifests[0];
+  const afterWraps = manifest.objects.filter(
+    (object) => object.metadata?.role === "correspondence-wrap" && object.metadata.side === "after",
+  );
+  const byUnit = new Map(afterWraps.map((object) => [object.metadata.unit, object.metadata.from]));
+  const status = manifest.objects.filter((object) => object.metadata?.role === "status-label");
+
+  assert.equal(byUnit.get("콘텐츠산업정책과"), "문화산업정책과");
+  assert.equal(byUnit.get("문화산업정책과"), "문화산업기반과");
+  assert.equal(status.some((object) => object.metadata.unit === "콘텐츠산업정책과"), false);
+  assert.equal(status.some((object) => object.metadata.unit === "문화산업정책과"), false);
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("해외문화홍보원 기획운영과는 해외홍보기획과의 전신으로 연결한다", () => {
+  const workflow = buildNativeComparisonWorkflow({
+    before: {
+      institution: "시험문화부",
+      asOf: "2024-02-05",
+      decreeText: `시험문화부와 그 소속기관 직제
+제2조(소속기관) 시험문화부장관 소속으로 해외문화홍보원을 둔다.`,
+      ruleText: `시험문화부와 그 소속기관 직제 시행규칙
+제3조(해외문화홍보원) 해외문화홍보원에 기획운영과 및 해외문화홍보콘텐츠과를 둔다.`,
+    },
+    after: {
+      institution: "시험문화부",
+      asOf: "2024-02-06",
+      decreeText: `시험문화부와 그 소속기관 직제
+제2조(하부조직) 시험문화부에 국제문화홍보정책실을 둔다.
+제3조(국제문화홍보정책실) 국제문화홍보정책실 밑에 해외홍보정책관을 둔다.`,
+      ruleText: `시험문화부와 그 소속기관 직제 시행규칙
+제3조(국제문화홍보정책실) 해외홍보정책관에 해외홍보기획과 및 해외홍보콘텐츠과를 둔다.`,
+    },
+    focus: "해외문화홍보원, 국제문화홍보정책실",
+    onePage: true,
+  });
+  const manifest = workflow.manifests[0];
+  const afterWrap = manifest.objects.find(
+    (object) => object.metadata?.role === "correspondence-wrap"
+      && object.metadata.side === "after"
+      && object.metadata.unit === "해외홍보기획과",
+  );
+  const status = manifest.objects.filter((object) => object.metadata?.role === "status-label");
+
+  assert.equal(afterWrap?.metadata.from, "기획운영과");
+  assert.equal(status.some((object) => object.metadata.unit === "해외홍보기획과"), false);
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
 const midDecree = `
 시험행정부와 그 소속기관 직제
 제4조(하부조직) 시험행정부에 인공지능정부실 및 참여혁신실을 둔다.
@@ -333,6 +435,68 @@ test("네 시점은 A3 가로 4단으로 작도한다", () => {
   assert.ok(boxes.some((object) => object.text === "법사조직과"));
   assert.equal(manifest.objects.filter((object) => object.metadata?.role === "comparison-divider").length, 3);
   assert.ok(boxes.every((object) => object.geometry.x + object.geometry.width <= 408.001));
+  assert.equal(analyzeNativeManifest(manifest).valid, true);
+});
+
+test("범용 4단 비교는 문화·미디어와 관광 대역을 자동 구성한다", () => {
+  const stages = [
+    {
+      asOf: "2024-02-05",
+      decreeText: `시험문화부와 그 소속기관 직제
+제2조(하부조직) 시험문화부에 콘텐츠정책국ㆍ미디어정책국ㆍ저작권국 및 관광정책국을 둔다.`,
+      ruleText: `시험문화부와 그 소속기관 직제 시행규칙
+제3조(콘텐츠정책국) 콘텐츠정책국에 콘텐츠정책과를 둔다.
+제4조(미디어정책국) 미디어정책국에 미디어정책과를 둔다.
+제5조(저작권국) 저작권국에 저작권정책과를 둔다.
+제6조(관광정책국) 관광정책국에 관광정책과를 둔다.`,
+    },
+    {
+      asOf: "2024-02-06",
+      decreeText: `시험문화부와 그 소속기관 직제
+제2조(하부조직) 시험문화부에 국제문화홍보정책실ㆍ콘텐츠정책국ㆍ미디어정책국ㆍ저작권국 및 관광정책국을 둔다.
+제3조(국제문화홍보정책실) 국제문화홍보정책실에 국제문화정책관을 둔다.`,
+      ruleText: `시험문화부와 그 소속기관 직제 시행규칙
+제3조(국제문화홍보정책실) 국제문화정책관에 국제문화정책과를 둔다.
+제4조(콘텐츠정책국) 콘텐츠정책국에 콘텐츠정책과를 둔다.
+제5조(미디어정책국) 미디어정책국에 미디어정책과를 둔다.
+제6조(저작권국) 저작권국에 저작권정책과를 둔다.
+제7조(관광정책국) 관광정책국에 관광정책과를 둔다.`,
+    },
+    {
+      asOf: "2025-12-30",
+      decreeText: `시험문화부와 그 소속기관 직제
+제2조(하부조직) 시험문화부에 문화미디어산업실 및 관광정책실을 둔다.
+제3조(문화미디어산업실) 문화미디어산업실에 콘텐츠산업정책관 및 저작권정책관을 둔다.
+제4조(관광정책실) 관광정책실에 관광정책관을 둔다.`,
+      ruleText: `시험문화부와 그 소속기관 직제 시행규칙
+제3조(문화미디어산업실) 콘텐츠산업정책관에 콘텐츠산업정책과를 두고, 저작권정책관에 저작권정책과를 둔다.
+제4조(관광정책실) 관광정책관에 관광정책과를 둔다.`,
+    },
+    {
+      asOf: "2026-07-28",
+      decreeText: `시험문화부와 그 소속기관 직제
+제2조(하부조직) 시험문화부에 문화미디어산업실 및 관광정책실을 둔다.
+제3조(문화미디어산업실) 문화미디어산업실에 콘텐츠산업정책관ㆍ문화산업미디어정책관 및 저작권정책관을 둔다.
+제4조(관광정책실) 관광정책실에 관광정책관을 둔다.`,
+      ruleText: `시험문화부와 그 소속기관 직제 시행규칙
+제3조(문화미디어산업실) 콘텐츠산업정책관에 콘텐츠산업정책과를 두고, 문화산업미디어정책관에 미디어정책과를 두며, 저작권정책관에 저작권정책과ㆍ저작권특별사법경찰과를 둔다.
+제4조(관광정책실) 관광정책관에 관광정책과를 둔다.`,
+    },
+  ];
+  const workflow = buildNativeComparisonWorkflow({
+    stages,
+    focus: "콘텐츠정책국, 미디어정책국, 저작권국, 국제문화홍보정책실, 문화미디어산업실, 관광정책국, 관광정책실",
+    onePage: true,
+  });
+  const manifest = workflow.manifests[0];
+  const boxes = manifest.objects.filter((object) => object.metadata?.role === "organization-node");
+  const bands = manifest.objects.filter((object) => object.metadata?.role === "comparison-band");
+  assert.equal(bands.length, 2);
+  assert.ok(boxes.some((object) => object.text === "국제문화홍보정책실"));
+  assert.ok(boxes.some((object) => object.text === "문화미디어산업실"));
+  assert.ok(boxes.some((object) => object.text === "관광정책국"));
+  assert.ok(boxes.some((object) => object.text === "관광정책실"));
+  assert.ok(Math.max(...boxes.map((object) => object.geometry.width)) < 66);
   assert.equal(analyzeNativeManifest(manifest).valid, true);
 });
 

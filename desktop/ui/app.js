@@ -252,6 +252,9 @@ async function loadManifestText(text, sourceLabel) {
 
 function clearLawWorkflow() {
   lawWorkflow = null;
+  $("viewTabRelation").disabled = true;
+  $("relationStage").innerHTML = `<div class="relation-empty">대비표(2~4단)를 만들면 사무 승계 근거 기반 관계도가 여기에 그려집니다.</div>`;
+  setActiveView("preview");
   currentLawSnapshot = null;
   activeWorkflowPage = 0;
   $("pageNavigator").hidden = true;
@@ -356,6 +359,22 @@ function renderHistoryDiff(diff) {
   box.hidden = false;
 }
 
+let activeView = "preview";
+
+function setActiveView(view) {
+  activeView = view;
+  const relationReady = !$("viewTabRelation").disabled;
+  if (view === "relation" && !relationReady) view = "preview";
+  $("drawingStage").hidden = view !== "preview";
+  $("relationStage").hidden = view !== "relation";
+  $("pageNavigator").style.visibility = view === "preview" ? "" : "hidden";
+  $("viewTabPreview").setAttribute("aria-selected", String(view === "preview"));
+  $("viewTabRelation").setAttribute("aria-selected", String(view === "relation"));
+  $("workspaceEyebrow").textContent = view === "relation"
+    ? "DUTY LINEAGE · FUNCTION FLOW"
+    : "NATIVE OBJECTS";
+}
+
 function renderLineageSankey(links) {
   // 과·관 연관 관계도: 사무 승계 근거가 있는 부서 이동만 리본으로 그린다.
   const flows = links
@@ -427,9 +446,14 @@ function appendFunctionLineageEvidence(summary) {
   const reviewText = reviews.length ? `<p>자동 연결 보류 ${reviews.length}건 · 사람 확인 필요</p>` : "";
   box.insertAdjacentHTML(
     "beforeend",
-    `${renderLineageSankey(links)}<section class="lineage-evidence"><strong>개정문·각 호 점선 근거 ${links.length}건</strong>${items ? `<ul>${items}</ul>` : ""}${reviewText}</section>`,
+    `<section class="lineage-evidence"><strong>개정문·각 호 점선 근거 ${links.length}건</strong>${items ? `<ul>${items}</ul>` : ""}${reviewText}</section>`,
   );
   box.hidden = false;
+  const stage = $("relationStage");
+  stage.innerHTML = renderLineageSankey(links)
+    || `<div class="relation-empty">근거가 확인된 부서 이동이 없어 관계도를 그릴 항목이 없습니다.</div>`;
+  $("viewTabRelation").disabled = false;
+  setActiveView("relation");
 }
 
 async function compareHistory() {
@@ -858,7 +882,12 @@ async function generate() {
   const button = $("generateButton");
   button.disabled = true;
   setStep("stepVerify", "active");
-  setStatus("네이티브 객체 작도 중", "한글에서 상자와 계선을 만들고 저장본을 다시 검사합니다.", "working");
+  const objectTotal = Array.isArray(manifest.objects) ? manifest.objects.length : 0;
+  setStatus(
+    "네이티브 객체 작도 중",
+    `한글이 숨김 창에서 객체 ${objectTotal.toLocaleString()}개를 만들고 저장본을 다시 검사합니다. 규모에 따라 수 분이 걸릴 수 있으며, 그동안 한글 창을 열거나 조작하지 마세요.`,
+    "working",
+  );
   $("verification").dataset.state = "";
   $("verification").querySelector("span").textContent = "검증 중";
   $("verification").querySelector("p").textContent = "저장된 HWPX를 한글로 다시 여는 중입니다.";
@@ -928,6 +957,8 @@ $("videoExportDialog").addEventListener("cancel", (event) => {
   event.preventDefault();
   cancelVideoExport();
 });
+$("viewTabPreview").addEventListener("click", () => setActiveView("preview"));
+$("viewTabRelation").addEventListener("click", () => setActiveView("relation"));
 $("pageSelect").addEventListener("change", (event) => selectWorkflowPage(event.target.value));
 $("previousPageButton").addEventListener("click", () => selectWorkflowPage(activeWorkflowPage - 1));
 $("nextPageButton").addEventListener("click", () => selectWorkflowPage(activeWorkflowPage + 1));

@@ -1030,9 +1030,12 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
     const labelLength = Array.from(displayLabel).length;
     const compactContentWidth = 10 + labelLength * 2.45;
     const compactMinWidth = style.root ? 54 : 46;
+    // 세로 조직도(1단)처럼 프레임이 넓을 때 상자가 프레임 전체 폭으로 늘어나지
+    // 않도록 상한을 둘 수 있다. 좌우 2단 대비표의 열폭(약 83mm)이 기준이다.
+    const wideCap = Number.isFinite(options.maxBoxWidthMm) ? options.maxBoxWidthMm : Infinity;
     const width = round(options.compactWidth
       ? Math.min(availableWidth, Math.max(compactMinWidth, Math.min(compactMaxWidth, compactContentWidth)))
-      : Math.max(columnWidth > 120 ? 42 : 28, availableWidth));
+      : Math.max(columnWidth > 120 ? 42 : 28, Math.min(availableWidth, wideCap)));
     const fontSizePt = round(Math.min(style.root ? 8.4 : 7.2, Math.max(3.6, boxHeight * 1.28)));
     const objectId = `${idPrefix}node-${node.id}`;
     const geometry = { x, y, width, height: round(boxHeight) };
@@ -1119,7 +1122,7 @@ function buildOutlineManifest(graph, tree, plan, context) {
     right: comparison ? comparisonDividerX - 7 : 196,
     top: 31,
     bottom: 279.5,
-  });
+  }, "", comparison ? {} : { maxBoxWidthMm: 83 });
   const boxes = treeLayout.boxes;
   const lines = treeLayout.lines.map((line) => ({
     ...line,

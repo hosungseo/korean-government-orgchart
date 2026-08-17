@@ -24,7 +24,7 @@
     <aside class="control-rail">
       <div class="eyebrow">LAW TEXT → NATIVE HWPX · 0.6</div>
       <h2 id="manifestTitle">작도 명세를<br>검사하는 중</h2>
-      <p id="manifestDescription" class="lead">A4 세로·A3 가로 조직도를 한글 네이티브 객체로 변환합니다.</p>
+      <p id="manifestDescription" class="lead">기준일 1~4개로 대비표를 그립니다. 1~2단은 A4 세로, 3~4단은 A3 가로가 자동 선택됩니다.</p>
 
       <div class="manifest-loader">
         <input id="manifestFile" type="file" accept="application/json,.json" hidden>
@@ -116,17 +116,17 @@
         <p id="parseWarning"></p>
       </div>
       <div id="historyControls" class="history-controls" hidden>
-        <h3>법령·조직 이력</h3>
-        <p class="history-help">2~4개 기준일을 고르면 기구도 대비표를 그립니다. 직제·시행규칙의 각 호 기능 승계를 우선 대조하고, 근거가 충분한 변경만 점선으로 표시합니다.</p>
+        <h3>대비표 단 수 (1~4단)</h3>
+        <p class="history-help">지금 보이는 조직도가 곧 1단입니다. 기준일을 2~4개 고르면 그 수만큼의 단으로 대비표를 다시 그립니다(용지 자동: 1~2단 A4 세로 · 3~4단 A3 가로). 각 호 기능 승계를 대조해 근거 있는 변경만 점선으로 표시합니다.</p>
         <div class="history-buttons">
           <button id="saveSnapshotButton" type="button">현재 조직도 이력 저장</button>
           <button id="refreshHistoryButton" type="button">저장 이력 새로고침</button>
         </div>
         <div class="history-select-grid">
-          <label>1열<select id="historyLeft" aria-label="첫 기준일"></select></label>
-          <label>2열<select id="historyRight" aria-label="둘째 기준일"></select></label>
-          <label>3열<small>선택</small><select id="historyMid" aria-label="셋째 기준일"></select></label>
-          <label>4열<small>선택</small><select id="historyFourth" aria-label="넷째 기준일"></select></label>
+          <label>1단<select id="historyLeft" aria-label="첫 기준일"></select></label>
+          <label>2단<select id="historyRight" aria-label="둘째 기준일"></select></label>
+          <label>3단<small>선택</small><select id="historyMid" aria-label="셋째 기준일"></select></label>
+          <label>4단<small>선택</small><select id="historyFourth" aria-label="넷째 기준일"></select></label>
         </div>
         <button id="compareHistoryButton" class="history-compare" type="button">대비 조직도 보기</button>
         <button id="exportHistoryVideoButton" class="history-video" type="button" disabled hidden>애니메이션 영상 저장</button>
@@ -155,7 +155,7 @@
         <div>
           <span class="eyebrow">LOCAL LAW PARSER</span>
           <h2>직제 문언으로 조직도 만들기</h2>
-          <p>직제는 실·국·소속기관, 시행규칙은 과·담당관·팀을 보강합니다.</p>
+          <p>직제는 실·국·소속기관, 시행규칙은 과·담당관·팀을 보강합니다. 만들어진 조직도가 대비표의 1단이 됩니다.</p>
         </div>
         <button id="closeLawInputButton" class="dialog-close" type="button" aria-label="닫기">×</button>
       </div>
@@ -165,7 +165,6 @@
         <label>기준일 <small>선택</small><input id="lawAsOf" type="date"></label>
         <label>Open API OC <small>조회 후 즉시 지움</small><input id="lawApiOc" type="password" autocomplete="off" placeholder="국가법령정보센터 OC"></label>
         <label class="focus-field">작도 범위 <small>쉼표로 여러 실·국 지정, 비우면 전체 자동 분할</small><input id="lawFocus" list="focusOptions" placeholder="예: 인공지능정부실, 참여혁신조직실"><datalist id="focusOptions"></datalist></label>
-        <label class="layout-field">표현 방식 <small>조직도 또는 좌우 대비표</small><select id="lawLayout" aria-label="표현 방식"><option value="outline">세로 조직도</option><option value="comparison-two-column">좌우 2단 대비표</option></select></label>
       </div>
 
       <div class="law-api-row">

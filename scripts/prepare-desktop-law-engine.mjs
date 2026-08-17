@@ -12,6 +12,7 @@ const modules = [
   "native-law-workflow.mjs",
   "duty-allocation.mjs",
   "duty-lineage.mjs",
+  "function-lineage.mjs",
   "law-json-core.mjs",
   "law-history.mjs",
 ];

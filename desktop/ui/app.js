@@ -1,4 +1,4 @@
-import { analyzeNativeManifest } from "./manifest-validation.js";
+import { analyzeNativeManifest, healNativeManifest } from "./manifest-validation.js";
 import { buildNativeComparisonWorkflow, buildNativeLawWorkflow } from "./engine/native-law-workflow.mjs";
 import { flattenLawJson } from "./engine/law-json-core.mjs";
 import { compareLawSnapshots, createLawSnapshot, summarizeLawSnapshot } from "./engine/law-history.mjs";
@@ -195,8 +195,10 @@ async function authoritativePreflight(nextManifest, browserReport) {
   }
 }
 
-async function acceptManifest(nextManifest, sourceLabel, { preserveWorkflow = false } = {}) {
+async function acceptManifest(rawManifest, sourceLabel, { preserveWorkflow = false } = {}) {
   if (!preserveWorkflow) clearLawWorkflow();
+  // 검증 예상값 불일치는 사람이 고칠 대상이 아니므로 실측값으로 자동 보정한다.
+  const { manifest: nextManifest, healed } = healNativeManifest(rawManifest);
   manifest = nextManifest;
   $("loadedSource").textContent = sourceLabel;
   $("manifestTitle").textContent = typeof nextManifest?.title === "string" ? nextManifest.title : "제목 없는 조직도";
@@ -210,17 +212,27 @@ async function acceptManifest(nextManifest, sourceLabel, { preserveWorkflow = fa
   $("openFolderButton").hidden = true;
 
   const browserReport = analyzeNativeManifest(nextManifest);
+  if (healed.length) {
+    browserReport.warnings = [
+      { code: "verification-healed", message: `검증 예상값 ${healed.length}건을 실측값으로 자동 보정했습니다 (${healed.map((item) => item.key.replace("expected", "")).join(", ")}).` },
+      ...(browserReport.warnings || []),
+    ];
+  }
   validationReport = await authoritativePreflight(nextManifest, browserReport);
   renderPreflight(validationReport);
-  if (validationReport.valid) {
+  // 미리보기는 오류가 있어도 그린다(진단용). 한글 생성만 오류 시 차단한다.
+  try {
     renderManifest(nextManifest);
+  } catch {
+    clearPreview("객체 좌표가 깨져 미리보기를 그릴 수 없습니다.");
+  }
+  if (validationReport.valid) {
     const warningMessage = validationReport.warnings.length
       ? `생성은 가능하지만 주의 ${validationReport.warnings.length}건을 먼저 확인하는 편이 좋습니다.`
       : "용지 경계·객체 수·ID·자식 계선 접합 검사를 통과했습니다.";
     setStatus(validationReport.warnings.length ? "명세 검사 통과(주의 있음)" : "명세 검사 통과", warningMessage, validationReport.warnings.length ? "warning" : "success");
   } else {
-    clearPreview("명세 오류를 바로잡으면 미리보기가 표시됩니다.");
-    setStatus("작도 명세 오류", validationReport.errors[0]?.message || "JSON 명세를 확인하세요.", "error");
+    setStatus("작도 명세 오류(미리보기는 표시)", `${validationReport.errors[0]?.message || "JSON 명세를 확인하세요."} — 한글 생성은 오류 해소 후 가능합니다.`, "error");
   }
   refreshGenerateAvailability();
   refreshVideoExportAvailability();
@@ -344,6 +356,56 @@ function renderHistoryDiff(diff) {
   box.hidden = false;
 }
 
+function renderLineageSankey(links) {
+  // 과·관 연관 관계도: 사무 승계 근거가 있는 부서 이동만 리본으로 그린다.
+  const flows = links
+    .map((link) => ({ from: link.from, to: link.to, weight: Math.max(1, Number(link.matchedFunctions) || 1) }))
+    .sort((a, b) => b.weight - a.weight)
+    .slice(0, 40);
+  if (!flows.length) return "";
+  const H_PER = 6;
+  const GAP = 6;
+  const leftTotals = new Map();
+  const rightTotals = new Map();
+  for (const flow of flows) {
+    leftTotals.set(flow.from, (leftTotals.get(flow.from) || 0) + flow.weight);
+    rightTotals.set(flow.to, (rightTotals.get(flow.to) || 0) + flow.weight);
+  }
+  const layout = (totals) => {
+    let y = 8;
+    const map = new Map();
+    for (const [name, total] of [...totals.entries()].sort((a, b) => b[1] - a[1])) {
+      map.set(name, { y, height: total * H_PER, cursor: y });
+      y += total * H_PER + GAP;
+    }
+    return { map, bottom: y };
+  };
+  const left = layout(leftTotals);
+  const right = layout(rightTotals);
+  const height = Math.max(left.bottom, right.bottom) + 4;
+  const X0 = 118;
+  const X1 = 212;
+  const parts = [];
+  for (const flow of flows) {
+    const l = left.map.get(flow.from);
+    const r = right.map.get(flow.to);
+    const width = flow.weight * H_PER;
+    const y0 = l.cursor + width / 2;
+    const y1 = r.cursor + width / 2;
+    l.cursor += width;
+    r.cursor += width;
+    const mid = (X0 + X1) / 2;
+    parts.push(`<path d="M${X0},${y0} C${mid},${y0} ${mid},${y1} ${X1},${y1}" stroke="#0d8160" stroke-width="${Math.max(1.5, width)}" fill="none" opacity="0.55"><title>${escapeXml(`${flow.from} → ${flow.to} · 기능 ${flow.weight}호`)}</title></path>`);
+  }
+  for (const [name, pos] of left.map) {
+    parts.push(`<rect x="${X0 - 5}" y="${pos.y}" width="5" height="${pos.height}" fill="#17573f"/><text x="${X0 - 9}" y="${pos.y + pos.height / 2 + 3}" text-anchor="end" font-size="8">${escapeXml(name)}</text>`);
+  }
+  for (const [name, pos] of right.map) {
+    parts.push(`<rect x="${X1}" y="${pos.y}" width="5" height="${pos.height}" fill="#17573f"/><text x="${X1 + 9}" y="${pos.y + pos.height / 2 + 3}" font-size="8">${escapeXml(name)}</text>`);
+  }
+  return `<section class="lineage-sankey"><strong>과·관 연관 관계도</strong><svg viewBox="0 0 330 ${height}" role="img" aria-label="사무 승계 기반 부서 연관 관계도">${parts.join("")}</svg><small>리본 굵기 = 승계가 확인된 기능(호) 수 · 마우스를 올리면 건수가 보입니다.</small></section>`;
+}
+
 function appendFunctionLineageEvidence(summary) {
   const box = $("historyDiff");
   const lineages = summary?.dutyLineages || (summary?.dutyLineage ? [summary.dutyLineage] : []);
@@ -365,7 +427,7 @@ function appendFunctionLineageEvidence(summary) {
   const reviewText = reviews.length ? `<p>자동 연결 보류 ${reviews.length}건 · 사람 확인 필요</p>` : "";
   box.insertAdjacentHTML(
     "beforeend",
-    `<section class="lineage-evidence"><strong>개정문·각 호 점선 근거 ${links.length}건</strong>${items ? `<ul>${items}</ul>` : ""}${reviewText}</section>`,
+    `${renderLineageSankey(links)}<section class="lineage-evidence"><strong>개정문·각 호 점선 근거 ${links.length}건</strong>${items ? `<ul>${items}</ul>` : ""}${reviewText}</section>`,
   );
   box.hidden = false;
 }
@@ -561,7 +623,7 @@ async function collectRecentHistory() {
           ruleText: flattenLawJson(result.rule?.json),
           institution,
           asOf: date,
-          layout: $("lawLayout").value,
+          layout: "outline",
           lawSources: { decree: result.decree, rule: result.rule },
         });
         const snapshot = createLawSnapshot(workflow, { label: `${institution} · ${date}` });
@@ -657,7 +719,7 @@ async function parseLawInput(event) {
       institution: $("lawInstitution").value,
       asOf: $("lawAsOf").value,
       focus: $("lawFocus").value,
-      layout: $("lawLayout").value,
+      layout: "outline",
       lawSources: lawSourceInfo,
     });
     currentLawSnapshot = createLawSnapshot(lawWorkflow, { label: `${lawWorkflow.summary.institution} · ${lawWorkflow.summary.asOf || "기준일 없음"}` });

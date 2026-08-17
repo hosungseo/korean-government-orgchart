@@ -1,10 +1,12 @@
 use base64::{engine::general_purpose::STANDARD as BASE64_STANDARD, Engine as _};
 use serde::Deserialize;
 use serde_json::{json, Value};
+use sha2::{Digest, Sha256};
 use std::collections::{HashMap, HashSet};
 use std::env;
 use std::ffi::OsStr;
-use std::fs;
+use std::fs::{self, OpenOptions};
+use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::process::{Command, Output};
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -277,6 +279,185 @@ fn decode_comparison_video(
     Ok((bytes, extension, media_type))
 }
 
+fn sha256_hex(bytes: &[u8]) -> String {
+    format!("{:x}", Sha256::digest(bytes))
+}
+
+fn validate_comparison_video_metadata(
+    metadata: &Value,
+    columns: u64,
+    mime_type: &str,
+) -> Result<(), String> {
+    let video = metadata
+        .get("video")
+        .and_then(Value::as_object)
+        .ok_or_else(|| "영상 메타데이터에 video 정보가 없습니다.".to_string())?;
+    let width = video
+        .get("width")
+        .and_then(Value::as_u64)
+        .unwrap_or_default();
+    let height = video
+        .get("height")
+        .and_then(Value::as_u64)
+        .unwrap_or_default();
+    let fps = video.get("fps").and_then(Value::as_u64).unwrap_or_default();
+    if width != 1680 || height != 1188 || fps != 30 {
+        return Err("영상 메타데이터는 1680×1188·30fps여야 합니다.".to_string());
+    }
+    let duration = video
+        .get("durationSeconds")
+        .and_then(Value::as_f64)
+        .filter(|value| value.is_finite() && (5.0..=60.0).contains(value))
+        .ok_or_else(|| "영상 길이 메타데이터가 올바르지 않습니다.".to_string())?;
+    let frame_count = video
+        .get("frameCount")
+        .and_then(Value::as_u64)
+        .ok_or_else(|| "영상 프레임 수 메타데이터가 없습니다.".to_string())?;
+    if frame_count != (duration * fps as f64).round() as u64 {
+        return Err("영상 길이와 30fps 프레임 수가 일치하지 않습니다.".to_string());
+    }
+    if video.get("frameCountKind").and_then(Value::as_str) != Some("requested-render-frames") {
+        return Err("영상 프레임 수의 의미가 명시되지 않았습니다.".to_string());
+    }
+    let expected_duration = if columns == 4 { 14.0 } else { 10.8 };
+    if (duration - expected_duration).abs() > 0.01 {
+        return Err(format!(
+            "{columns}단 영상 길이는 {expected_duration:.1}초여야 합니다."
+        ));
+    }
+    let capture_mode = video
+        .get("captureMode")
+        .and_then(Value::as_str)
+        .unwrap_or("");
+    if !matches!(
+        capture_mode,
+        "manual-request-frame" | "automatic-canvas-stream"
+    ) {
+        return Err("지원하지 않는 영상 프레임 캡처 방식입니다.".to_string());
+    }
+    let frame_rate_locked = video
+        .get("frameRateLocked")
+        .and_then(Value::as_bool)
+        .ok_or_else(|| "프레임 고정 여부 메타데이터가 없습니다.".to_string())?;
+    if frame_rate_locked != (capture_mode == "manual-request-frame") {
+        return Err("프레임 캡처 방식과 고정 여부가 일치하지 않습니다.".to_string());
+    }
+    let recorded_wall_clock = video
+        .get("recordedWallClockSeconds")
+        .and_then(Value::as_f64)
+        .filter(|value| value.is_finite() && *value > 0.0 && *value <= 120.0);
+    if recorded_wall_clock.is_none() {
+        return Err("실제 녹화 시간 메타데이터가 올바르지 않습니다.".to_string());
+    }
+    if video.get("mimeType").and_then(Value::as_str) != Some(mime_type) {
+        return Err("영상 코덱과 메타데이터의 MIME 형식이 일치하지 않습니다.".to_string());
+    }
+    Ok(())
+}
+
+#[derive(Debug)]
+struct VideoBundlePaths {
+    video: PathBuf,
+    native_manifest: PathBuf,
+    metadata: PathBuf,
+}
+
+fn temporary_bundle_path(path: &Path, token: &str) -> PathBuf {
+    let name = path.file_name().and_then(OsStr::to_str).unwrap_or("video");
+    path.with_file_name(format!(".{name}.{token}.part"))
+}
+
+fn write_new_synced(path: &Path, bytes: &[u8]) -> Result<(), String> {
+    let mut file = OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(path)
+        .map_err(|error| format!("임시 저장 파일을 만들지 못했습니다: {error}"))?;
+    file.write_all(bytes)
+        .map_err(|error| format!("임시 저장 파일을 쓰지 못했습니다: {error}"))?;
+    file.sync_all()
+        .map_err(|error| format!("임시 저장 파일을 디스크에 반영하지 못했습니다: {error}"))
+}
+
+fn remove_files(paths: &[&Path]) {
+    for path in paths {
+        let _ = fs::remove_file(path);
+    }
+}
+
+fn write_atomic_video_bundle(
+    output_path: &Path,
+    bytes: &[u8],
+    native_manifest: &str,
+    metadata: &str,
+) -> Result<(VideoBundlePaths, String), String> {
+    let native_manifest_path = companion_path(output_path, "video.native.json");
+    let metadata_path = companion_path(output_path, "video.json");
+    if [
+        output_path,
+        native_manifest_path.as_path(),
+        metadata_path.as_path(),
+    ]
+    .iter()
+    .any(|path| path.exists())
+    {
+        return Err("같은 이름의 영상 묶음이 이미 존재합니다.".to_string());
+    }
+    let token = format!("{}-{}", std::process::id(), unix_time_millis());
+    let temporary_video = temporary_bundle_path(output_path, &token);
+    let temporary_manifest = temporary_bundle_path(&native_manifest_path, &token);
+    let temporary_metadata = temporary_bundle_path(&metadata_path, &token);
+    let temporary_paths = [
+        temporary_video.as_path(),
+        temporary_manifest.as_path(),
+        temporary_metadata.as_path(),
+    ];
+    let result = (|| {
+        write_new_synced(&temporary_video, bytes)?;
+        let read_back = fs::read(&temporary_video)
+            .map_err(|error| format!("임시 영상 파일을 다시 읽지 못했습니다: {error}"))?;
+        let expected_sha256 = sha256_hex(bytes);
+        if read_back.len() != bytes.len() || sha256_hex(&read_back) != expected_sha256 {
+            return Err("저장한 영상의 SHA-256 무결성 검증에 실패했습니다.".to_string());
+        }
+        write_new_synced(&temporary_manifest, native_manifest.as_bytes())?;
+        write_new_synced(&temporary_metadata, metadata.as_bytes())?;
+
+        let promotions = [
+            (temporary_video.as_path(), output_path),
+            (temporary_manifest.as_path(), native_manifest_path.as_path()),
+            (temporary_metadata.as_path(), metadata_path.as_path()),
+        ];
+        let mut promoted: Vec<&Path> = Vec::new();
+        for (temporary, final_path) in promotions {
+            if let Err(error) = fs::rename(temporary, final_path) {
+                remove_files(&promoted);
+                return Err(format!(
+                    "영상 묶음을 최종 경로로 확정하지 못했습니다: {error}"
+                ));
+            }
+            promoted.push(final_path);
+        }
+        Ok((
+            VideoBundlePaths {
+                video: output_path.to_path_buf(),
+                native_manifest: native_manifest_path.clone(),
+                metadata: metadata_path.clone(),
+            },
+            expected_sha256,
+        ))
+    })();
+    if result.is_err() {
+        remove_files(&temporary_paths);
+        remove_files(&[
+            output_path,
+            native_manifest_path.as_path(),
+            metadata_path.as_path(),
+        ]);
+    }
+    result
+}
+
 fn unique_output_path(directory: &Path, file_name: &str) -> PathBuf {
     let desired = directory.join(file_name);
     if !desired.exists() {
@@ -305,6 +486,46 @@ fn unique_output_path(directory: &Path, file_name: &str) -> PathBuf {
             None => directory.join(format!("{stem}-{suffix}")),
         };
         if !candidate.exists() {
+            return candidate;
+        }
+    }
+    match extension {
+        Some(extension) => directory.join(format!("{stem}-{timestamp}-overflow.{extension}")),
+        None => directory.join(format!("{stem}-{timestamp}-overflow")),
+    }
+}
+
+fn video_bundle_path_available(path: &Path) -> bool {
+    !path.exists()
+        && !companion_path(path, "video.native.json").exists()
+        && !companion_path(path, "video.json").exists()
+}
+
+fn unique_video_output_path(directory: &Path, file_name: &str) -> PathBuf {
+    let desired = directory.join(file_name);
+    if video_bundle_path_available(&desired) {
+        return desired;
+    }
+    let timestamp = unix_time_millis();
+    let stem = desired
+        .file_stem()
+        .and_then(OsStr::to_str)
+        .unwrap_or("정부조직-조직개편-애니메이션");
+    let extension = desired
+        .extension()
+        .and_then(OsStr::to_str)
+        .filter(|value| !value.trim().is_empty());
+    for attempt in 0..1_000_u16 {
+        let suffix = if attempt == 0 {
+            timestamp.to_string()
+        } else {
+            format!("{timestamp}-{attempt}")
+        };
+        let candidate = match extension {
+            Some(extension) => directory.join(format!("{stem}-{suffix}.{extension}")),
+            None => directory.join(format!("{stem}-{suffix}")),
+        };
+        if video_bundle_path_available(&candidate) {
             return candidate;
         }
     }
@@ -1027,6 +1248,8 @@ fn save_comparison_video(
     {
         return Err("지원하지 않는 영상 메타데이터 형식입니다.".to_string());
     }
+    validate_comparison_video_metadata(&metadata, columns, &request.mime_type)?;
+    let expected_sha256 = sha256_hex(&bytes);
     if let Some(object) = metadata.as_object_mut() {
         object.insert("savedAtUnixMs".to_string(), json!(unix_time_millis()));
         object.insert("preflight".to_string(), preflight);
@@ -1035,39 +1258,58 @@ fn save_comparison_video(
             Value::String(media_type.to_string()),
         );
         object.insert("bytes".to_string(), json!(bytes.len()));
+        object.insert(
+            "integrity".to_string(),
+            json!({
+                "algorithm": "SHA-256",
+                "sha256": expected_sha256.clone(),
+                "verified": true,
+                "readBack": true,
+            }),
+        );
+        object.insert(
+            "storage".to_string(),
+            json!({
+                "atomicBundle": true,
+                "files": 3,
+            }),
+        );
     }
     let file_name = sanitize_video_file_name(&request.file_name, extension);
     let output_dir = output_directory(&app)?;
-    let output_path = unique_output_path(&output_dir, &file_name);
-    let native_manifest_path = companion_path(&output_path, "video.native.json");
-    let metadata_path = companion_path(&output_path, "video.json");
+    let output_path = unique_video_output_path(&output_dir, &file_name);
     let pretty_manifest = serde_json::to_string_pretty(&manifest)
         .map_err(|error| format!("영상 원본 명세를 직렬화하지 못했습니다: {error}"))?;
     let pretty_metadata = serde_json::to_string_pretty(&metadata)
         .map_err(|error| format!("영상 메타데이터를 직렬화하지 못했습니다: {error}"))?;
-
-    fs::write(&output_path, &bytes)
-        .map_err(|error| format!("영상 파일을 저장하지 못했습니다: {error}"))?;
-    if let Err(error) = fs::write(&native_manifest_path, format!("{pretty_manifest}\n")) {
-        let _ = fs::remove_file(&output_path);
-        return Err(format!("영상 재현용 명세를 저장하지 못했습니다: {error}"));
+    let (paths, verified_sha256) = write_atomic_video_bundle(
+        &output_path,
+        &bytes,
+        &format!("{pretty_manifest}\n"),
+        &format!("{pretty_metadata}\n"),
+    )?;
+    if verified_sha256 != expected_sha256 {
+        remove_files(&[
+            paths.video.as_path(),
+            paths.native_manifest.as_path(),
+            paths.metadata.as_path(),
+        ]);
+        return Err("최종 영상 해시가 예상값과 일치하지 않습니다.".to_string());
     }
-    if let Err(error) = fs::write(&metadata_path, format!("{pretty_metadata}\n")) {
-        let _ = fs::remove_file(&output_path);
-        let _ = fs::remove_file(&native_manifest_path);
-        return Err(format!("영상 메타데이터를 저장하지 못했습니다: {error}"));
-    }
-    let opened = request.open_after && launch_output(&output_path);
+    let opened = request.open_after && launch_output(&paths.video);
     Ok(json!({
         "saved": true,
         "opened": opened,
-        "outputPath": output_path.display().to_string(),
-        "nativeManifestPath": native_manifest_path.display().to_string(),
-        "metadataPath": metadata_path.display().to_string(),
+        "outputPath": paths.video.display().to_string(),
+        "nativeManifestPath": paths.native_manifest.display().to_string(),
+        "metadataPath": paths.metadata.display().to_string(),
         "mediaType": media_type,
         "mimeType": request.mime_type,
         "bytes": bytes.len(),
         "columns": columns,
+        "sha256": verified_sha256,
+        "verified": true,
+        "atomicBundle": true,
     }))
 }
 
@@ -1275,6 +1517,71 @@ mod tests {
         let next = unique_output_path(&directory, "comparison.mp4");
         assert_eq!(next.extension().and_then(OsStr::to_str), Some("mp4"));
         assert_ne!(next, original);
+
+        let orphan_video = directory.join("orphan.mp4");
+        fs::write(companion_path(&orphan_video, "video.json"), b"{}").unwrap();
+        let next_bundle = unique_video_output_path(&directory, "orphan.mp4");
+        assert_ne!(next_bundle, orphan_video);
+        assert_eq!(next_bundle.extension().and_then(OsStr::to_str), Some("mp4"));
+
+        let _ = fs::remove_dir_all(directory);
+    }
+
+    #[test]
+    fn comparison_video_metadata_requires_exact_a3_frame_contract() {
+        let metadata = json!({
+            "video": {
+                "width": 1680,
+                "height": 1188,
+                "fps": 30,
+                "durationSeconds": 14.0,
+                "frameCount": 420,
+                "frameCountKind": "requested-render-frames",
+                "captureMode": "manual-request-frame",
+                "frameRateLocked": true,
+                "recordedWallClockSeconds": 14.02,
+                "mimeType": "video/mp4;codecs=avc1.42E01E"
+            }
+        });
+        validate_comparison_video_metadata(&metadata, 4, "video/mp4;codecs=avc1.42E01E").unwrap();
+
+        let mut invalid = metadata.clone();
+        invalid
+            .pointer_mut("/video/frameCount")
+            .map(|value| *value = json!(419));
+        assert!(
+            validate_comparison_video_metadata(&invalid, 4, "video/mp4;codecs=avc1.42E01E")
+                .unwrap_err()
+                .contains("프레임 수")
+        );
+    }
+
+    #[test]
+    fn comparison_video_bundle_is_read_back_hashed_and_promoted_together() {
+        let directory =
+            env::temp_dir().join(format!("orgchart-video-bundle-test-{}", unix_time_millis()));
+        fs::create_dir_all(&directory).unwrap();
+        let output = directory.join("comparison.mp4");
+        let bytes = b"deterministic-video-bytes";
+
+        let (paths, digest) =
+            write_atomic_video_bundle(&output, bytes, "{\"manifest\":true}\n", "{\"meta\":true}\n")
+                .unwrap();
+        assert_eq!(digest, sha256_hex(bytes));
+        assert_eq!(fs::read(&paths.video).unwrap(), bytes);
+        assert!(paths.native_manifest.exists());
+        assert!(paths.metadata.exists());
+        assert_eq!(
+            fs::read_dir(&directory)
+                .unwrap()
+                .filter_map(Result::ok)
+                .filter(|entry| entry.file_name().to_string_lossy().ends_with(".part"))
+                .count(),
+            0
+        );
+        assert!(write_atomic_video_bundle(&output, bytes, "{}", "{}")
+            .unwrap_err()
+            .contains("이미 존재"));
 
         let _ = fs::remove_dir_all(directory);
     }

@@ -5,6 +5,7 @@ import { compareLawSnapshots, createLawSnapshot, summarizeLawSnapshot } from "./
 import {
   COMPARISON_VIDEO_SCHEMA,
   blobToBase64,
+  buildComparisonVideoPlan,
   comparisonVideoCapability,
   comparisonVideoFileName,
   recordComparisonVideo,
@@ -60,7 +61,7 @@ function refreshVideoExportAvailability() {
     ? capability.reason
     : !format
       ? "WebView2를 최신 버전으로 업데이트해야 영상 코덱을 사용할 수 있습니다."
-      : `${format.label} · A3 고정 · 조직도 먼저, 시점 간 점선 나중`;
+      : `${format.label} · A3 고정 · 30fps 프레임 고정 우선 · 조직도 먼저, 시점 간 점선 나중`;
 }
 
 function escapeXml(value) {
@@ -419,25 +420,28 @@ async function exportComparisonVideo() {
   const dialog = $("videoExportDialog");
   const canvas = $("videoExportCanvas");
   const progress = $("videoExportProgress");
+  const plan = buildComparisonVideoPlan(manifest);
   videoExportController = new AbortController();
   progress.value = 0;
-  $("videoExportClock").textContent = `0.0 / ${capability.columns === 4 ? "14.0" : "10.8"}초`;
+  $("videoExportClock").textContent = `0.0 / ${plan.duration.toFixed(1)}초 · 0/${plan.frameCount}f`;
   $("videoExportFormat").textContent = `${format.label} · 1680×1188 · 30fps · 무음`;
   $("videoExportStatus").textContent = "A3 용지를 고정한 채 왼쪽 조직도부터 그립니다.";
   if (!dialog.open) dialog.showModal();
   refreshVideoExportAvailability();
-  setStatus("조직개편 영상 녹화 중", "A3 조직도를 실시간으로 작도하고 있습니다. 앱을 닫지 마세요.", "working");
+  setStatus("조직개편 영상 녹화 중", "A3 조직도를 프레임 단위로 작도하고 있습니다. 앱을 닫지 마세요.", "working");
   try {
     const recording = await recordComparisonVideo(manifest, {
       canvas,
       signal: videoExportController.signal,
-      onProgress: ({ seconds, duration, ratio, plan }) => {
+      onProgress: ({ seconds, duration, ratio, plan, frameNumber, frameCount, captureMode, frameRateLocked }) => {
         progress.value = Math.round(ratio * 100);
-        $("videoExportClock").textContent = `${seconds.toFixed(1)} / ${duration.toFixed(1)}초`;
+        $("videoExportClock").textContent = `${seconds.toFixed(1)} / ${duration.toFixed(1)}초 · ${frameNumber}/${frameCount}f`;
+        $("videoExportFormat").textContent = `${format.label} · 1680×1188 · 30fps · ${frameRateLocked ? "프레임 고정" : "호환 녹화"}`;
+        $("videoExportDialog").dataset.captureMode = captureMode;
         $("videoExportStatus").textContent = videoStageMessage(plan, seconds);
       },
     });
-    $("videoExportStatus").textContent = "녹화 데이터를 Windows 문서 폴더에 저장하는 중입니다.";
+    $("videoExportStatus").textContent = "녹화 데이터를 원자적으로 저장하고 SHA-256을 검증하는 중입니다.";
     const fileName = comparisonVideoFileName(manifest, recording.extension);
     const metadata = {
       schema: COMPARISON_VIDEO_SCHEMA,
@@ -454,6 +458,11 @@ async function exportComparisonVideo() {
         height: recording.plan.height,
         fps: recording.plan.fps,
         durationSeconds: recording.plan.duration,
+        frameCount: recording.frameCount,
+        frameCountKind: "requested-render-frames",
+        captureMode: recording.captureMode,
+        frameRateLocked: recording.frameRateLocked,
+        recordedWallClockSeconds: Number(recording.recordedWallClockSeconds.toFixed(3)),
         mimeType: recording.mimeType,
         bytes: recording.blob.size,
         sequence: {
@@ -476,7 +485,7 @@ async function exportComparisonVideo() {
     $("openFolderButton").hidden = false;
     setStatus(
       "조직개편 영상 저장 완료",
-      `${result.mediaType} · ${recording.plan.duration.toFixed(1)}초 · ${(Number(result.bytes || 0) / 1024 / 1024).toFixed(1)}MB · 재현용 JSON 저장 완료`,
+      `${result.mediaType} · ${recording.plan.duration.toFixed(1)}초 · ${recording.frameCount} 요청 프레임 · ${(Number(result.bytes || 0) / 1024 / 1024).toFixed(1)}MB · SHA-256 ${String(result.sha256 || "").slice(0, 12)}… 검증`,
       "success",
     );
   } catch (error) {

@@ -3,9 +3,11 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import {
   buildComparisonVideoPlan,
+  comparisonFrameTime,
   comparisonTransition,
   comparisonVideoCapability,
   comparisonVideoFileName,
+  createComparisonCaptureStream,
   revealStateForObject,
   supportedRecordingFormat,
 } from "../desktop/ui/comparison-video.js";
@@ -24,6 +26,9 @@ test("Windows 앱은 A3 4단 명세를 14초 고정 영상 계획으로 만든�
   assert.equal(plan.width, 1680);
   assert.equal(plan.height, 1188);
   assert.equal(plan.fps, 30);
+  assert.equal(plan.frameCount, 420);
+  assert.equal(comparisonFrameTime(plan, 0), 0);
+  assert.equal(comparisonFrameTime(plan, plan.frameCount - 1), 419 / 30);
   assert.equal(plan.stageBuildEnd, 8.8);
   assert.equal(plan.correspondenceStart, 8.9);
   assert.equal(plan.holdStart, 12.4);
@@ -81,4 +86,42 @@ test("Windows WebView2 영상 형식은 H.264 MP4를 우선하고 파일명을 �
     }
   }
   assert.equal(supportedRecordingFormat(WebmOnlyMediaRecorder).extension, "webm");
+});
+
+test("Canvas 녹화는 requestFrame 프레임 고정을 우선하고 구형 WebView2에서는 자동 모드로 폴백한다", () => {
+  const manualRates = [];
+  const manualTrack = { requestFrame() {}, stop() {} };
+  const manualCanvas = {
+    captureStream(rate) {
+      manualRates.push(rate);
+      return {
+        getVideoTracks: () => [manualTrack],
+        getTracks: () => [manualTrack],
+      };
+    },
+  };
+  const manual = createComparisonCaptureStream(manualCanvas, 30);
+  assert.equal(manual.mode, "manual-request-frame");
+  assert.equal(manual.frameRateLocked, true);
+  assert.deepEqual(manualRates, [0]);
+
+  let compatibilityTrackStopped = false;
+  const compatibilityRates = [];
+  const compatibilityCanvas = {
+    captureStream(rate) {
+      compatibilityRates.push(rate);
+      const track = rate === 0
+        ? { stop() { compatibilityTrackStopped = true; } }
+        : { stop() {} };
+      return {
+        getVideoTracks: () => [track],
+        getTracks: () => [track],
+      };
+    },
+  };
+  const compatibility = createComparisonCaptureStream(compatibilityCanvas, 30);
+  assert.equal(compatibility.mode, "automatic-canvas-stream");
+  assert.equal(compatibility.frameRateLocked, false);
+  assert.equal(compatibilityTrackStopped, true);
+  assert.deepEqual(compatibilityRates, [0, 30]);
 });

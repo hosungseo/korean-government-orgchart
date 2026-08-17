@@ -94,6 +94,7 @@ export function buildComparisonVideoPlan(manifest, { fps = 30 } = {}) {
   const capability = comparisonVideoCapability(manifest);
   if (!capability.supported) throw new Error(capability.reason);
   const columns = capability.columns;
+  const normalizedFps = Math.max(1, Math.min(60, Math.round(Number(fps) || 30)));
   const columnDuration = 2.2;
   const stageBuildEnd = rounded(columns * columnDuration, 2);
   const correspondenceStart = rounded(stageBuildEnd + 0.1, 2);
@@ -161,7 +162,8 @@ export function buildComparisonVideoPlan(manifest, { fps = 30 } = {}) {
     objects,
     entries,
     columns,
-    fps,
+    fps: normalizedFps,
+    frameCount: Math.round(duration * normalizedFps),
     width: 1680,
     height: 1188,
     columnDuration,
@@ -172,6 +174,11 @@ export function buildComparisonVideoPlan(manifest, { fps = 30 } = {}) {
     holdStart,
     duration,
   };
+}
+
+export function comparisonFrameTime(plan, frameIndex) {
+  const index = Math.max(0, Math.min(plan.frameCount - 1, Math.floor(Number(frameIndex) || 0)));
+  return index / plan.fps;
 }
 
 export function revealStateForObject(plan, object, seconds) {
@@ -315,15 +322,145 @@ export async function blobToBase64(blob) {
   return btoa(binary);
 }
 
+function abortError() {
+  return new DOMException("영상 내보내기를 취소했습니다.", "AbortError");
+}
+
+function throwIfAborted(signal) {
+  if (signal?.aborted) throw abortError();
+}
+
+function waitForMilliseconds(milliseconds, signal) {
+  throwIfAborted(signal);
+  const delay = Math.max(0, Number(milliseconds) || 0);
+  if (delay <= 0) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const timer = globalThis.setTimeout(() => {
+      signal?.removeEventListener("abort", onAbort);
+      resolve();
+    }, delay);
+    const onAbort = () => {
+      globalThis.clearTimeout(timer);
+      signal?.removeEventListener("abort", onAbort);
+      reject(abortError());
+    };
+    signal?.addEventListener("abort", onAbort, { once: true });
+  });
+}
+
+function nextAnimationFrame(signal) {
+  throwIfAborted(signal);
+  if (typeof globalThis.requestAnimationFrame !== "function") {
+    return waitForMilliseconds(1000 / 60, signal).then(() => performance.now());
+  }
+  return new Promise((resolve, reject) => {
+    let frameRequest = 0;
+    const onAbort = () => {
+      if (frameRequest) globalThis.cancelAnimationFrame(frameRequest);
+      signal?.removeEventListener("abort", onAbort);
+      reject(abortError());
+    };
+    signal?.addEventListener("abort", onAbort, { once: true });
+    frameRequest = globalThis.requestAnimationFrame((now) => {
+      signal?.removeEventListener("abort", onAbort);
+      resolve(now);
+    });
+  });
+}
+
+export function createComparisonCaptureStream(canvas, fps = 30) {
+  if (!canvas || typeof canvas.captureStream !== "function") {
+    throw new Error("이 WebView2에서는 Canvas 영상 녹화를 지원하지 않습니다.");
+  }
+  let manualStream = null;
+  try {
+    manualStream = canvas.captureStream(0);
+    const manualTrack = manualStream.getVideoTracks()[0];
+    if (manualTrack && typeof manualTrack.requestFrame === "function") {
+      return {
+        stream: manualStream,
+        track: manualTrack,
+        mode: "manual-request-frame",
+        frameRateLocked: true,
+      };
+    }
+  } catch {
+    // Older WebView2 builds can reject frameRate 0. The timed stream below is the compatibility path.
+  }
+  manualStream?.getTracks().forEach((track) => track.stop());
+  const stream = canvas.captureStream(fps);
+  const track = stream.getVideoTracks()[0];
+  if (!track) {
+    stream.getTracks().forEach((item) => item.stop());
+    throw new Error("Canvas 영상 트랙을 만들지 못했습니다.");
+  }
+  return {
+    stream,
+    track,
+    mode: "automatic-canvas-stream",
+    frameRateLocked: false,
+  };
+}
+
+function reportFrameProgress(onProgress, plan, format, capture, frameNumber, seconds) {
+  onProgress({
+    seconds,
+    duration: plan.duration,
+    ratio: Math.min(1, frameNumber / plan.frameCount),
+    frameNumber,
+    frameCount: plan.frameCount,
+    format,
+    plan,
+    captureMode: capture.mode,
+    frameRateLocked: capture.frameRateLocked,
+  });
+}
+
+async function pumpManualFrames({ context, plan, capture, format, onProgress, signal, recorderError }) {
+  const frameDurationMs = 1000 / plan.fps;
+  const startedAt = performance.now();
+  let nextDeadline = startedAt;
+  for (let frameIndex = 0; frameIndex < plan.frameCount; frameIndex += 1) {
+    throwIfAborted(signal);
+    if (recorderError.current) throw recorderError.current;
+    if (frameIndex > 0) {
+      nextDeadline += frameDurationMs;
+      const now = performance.now();
+      if (now - nextDeadline > frameDurationMs) nextDeadline = now;
+      await waitForMilliseconds(nextDeadline - now, signal);
+    }
+    const frameTime = comparisonFrameTime(plan, frameIndex);
+    renderComparisonVideoFrame(context, plan, frameTime);
+    capture.track.requestFrame();
+    reportFrameProgress(onProgress, plan, format, capture, frameIndex + 1, (frameIndex + 1) / plan.fps);
+  }
+  const remainingMs = startedAt + plan.duration * 1000 - performance.now();
+  await waitForMilliseconds(remainingMs, signal);
+  return (performance.now() - startedAt) / 1000;
+}
+
+async function pumpAutomaticFrames({ context, plan, capture, format, onProgress, signal, recorderError }) {
+  const startedAt = performance.now();
+  let reportedFrame = 0;
+  while (true) {
+    const now = await nextAnimationFrame(signal);
+    if (recorderError.current) throw recorderError.current;
+    const elapsed = Math.min(plan.duration, (now - startedAt) / 1000);
+    renderComparisonVideoFrame(context, plan, elapsed);
+    const frameNumber = Math.min(plan.frameCount, Math.max(reportedFrame, Math.round(elapsed * plan.fps)));
+    reportedFrame = frameNumber;
+    reportFrameProgress(onProgress, plan, format, capture, frameNumber, elapsed);
+    if (elapsed >= plan.duration) return (performance.now() - startedAt) / 1000;
+  }
+}
+
 export async function recordComparisonVideo(manifest, {
   canvas,
   onProgress = () => {},
   signal,
   videoBitsPerSecond = 7_000_000,
 } = {}) {
-  if (!canvas || typeof canvas.captureStream !== "function") {
-    throw new Error("이 WebView2에서는 Canvas 영상 녹화를 지원하지 않습니다.");
-  }
+  throwIfAborted(signal);
   const format = supportedRecordingFormat();
   if (!format) throw new Error("이 WebView2에서 사용할 수 있는 영상 코덱을 찾지 못했습니다.");
   const plan = buildComparisonVideoPlan(manifest);
@@ -332,56 +469,71 @@ export async function recordComparisonVideo(manifest, {
   const context = canvas.getContext("2d", { alpha: false });
   if (!context) throw new Error("영상 Canvas를 만들지 못했습니다.");
   if (globalThis.document?.fonts?.ready) await globalThis.document.fonts.ready;
+  throwIfAborted(signal);
   renderComparisonVideoFrame(context, plan, 0);
-  const stream = canvas.captureStream(plan.fps);
+  const capture = createComparisonCaptureStream(canvas, plan.fps);
+  const { stream } = capture;
   const chunks = [];
-  const recorder = new MediaRecorder(stream, {
-    mimeType: format.mimeType,
-    videoBitsPerSecond,
-  });
-  const stopped = new Promise((resolve, reject) => {
+  let recorder;
+  try {
+    recorder = new MediaRecorder(stream, {
+      mimeType: format.mimeType,
+      videoBitsPerSecond,
+    });
+  } catch (error) {
+    stream.getTracks().forEach((track) => track.stop());
+    throw error;
+  }
+  const recorderError = { current: null };
+  const stopped = new Promise((resolve) => {
     recorder.addEventListener("dataavailable", (event) => {
       if (event.data?.size) chunks.push(event.data);
     });
     recorder.addEventListener("stop", resolve, { once: true });
-    recorder.addEventListener("error", (event) => reject(event.error || new Error("영상 녹화가 중단되었습니다.")), { once: true });
+    recorder.addEventListener("error", (event) => {
+      recorderError.current = event.error || new Error("영상 녹화가 중단되었습니다.");
+      resolve();
+    }, { once: true });
   });
-  let frameRequest = 0;
-  let aborted = false;
   const onAbort = () => {
-    aborted = true;
-    if (frameRequest) cancelAnimationFrame(frameRequest);
     if (recorder.state !== "inactive") recorder.stop();
   };
   signal?.addEventListener("abort", onAbort, { once: true });
   try {
     recorder.start(1000);
-    const startedAt = performance.now();
-    await new Promise((resolve, reject) => {
-      const tick = (now) => {
-        if (aborted) {
-          reject(new DOMException("영상 내보내기를 취소했습니다.", "AbortError"));
-          return;
-        }
-        const elapsed = Math.min(plan.duration, (now - startedAt) / 1000);
-        renderComparisonVideoFrame(context, plan, elapsed);
-        onProgress({ seconds: elapsed, duration: plan.duration, ratio: elapsed / plan.duration, format, plan });
-        if (elapsed >= plan.duration) {
-          resolve();
-          return;
-        }
-        frameRequest = requestAnimationFrame(tick);
-      };
-      frameRequest = requestAnimationFrame(tick);
+    const pump = capture.frameRateLocked ? pumpManualFrames : pumpAutomaticFrames;
+    const recordedWallClockSeconds = await pump({
+      context,
+      plan,
+      capture,
+      format,
+      onProgress,
+      signal,
+      recorderError,
     });
     if (recorder.state !== "inactive") recorder.stop();
     await stopped;
-    if (aborted) throw new DOMException("영상 내보내기를 취소했습니다.", "AbortError");
+    throwIfAborted(signal);
+    if (recorderError.current) throw recorderError.current;
     const mimeType = recorder.mimeType || format.mimeType;
     const extension = mimeType.startsWith("video/mp4") ? "mp4" : "webm";
     const blob = new Blob(chunks, { type: mimeType });
     if (!blob.size) throw new Error("녹화된 영상 데이터가 비어 있습니다.");
-    return { blob, mimeType, extension, format: { ...format, mimeType }, plan };
+    return {
+      blob,
+      mimeType,
+      extension,
+      format: { ...format, mimeType },
+      plan,
+      captureMode: capture.mode,
+      frameRateLocked: capture.frameRateLocked,
+      frameCount: plan.frameCount,
+      recordedWallClockSeconds,
+    };
+  } catch (error) {
+    if (recorder.state !== "inactive") recorder.stop();
+    await Promise.race([stopped, waitForMilliseconds(1_000)]);
+    throw error;
   } finally {
     signal?.removeEventListener("abort", onAbort);
     stream.getTracks().forEach((track) => track.stop());

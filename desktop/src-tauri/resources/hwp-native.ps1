@@ -342,10 +342,16 @@ function Add-NativeRectangle {
 }
 
 function New-HwpObject {
+    param([switch]$Visible)
     $type = [Type]::GetTypeFromProgID("HWPFrame.HwpObject")
     if ($null -eq $type) { throw "Windows에 한컴오피스 한글 Automation이 등록되어 있지 않습니다." }
     $hwp = New-Object -ComObject HWPFrame.HwpObject
-    $hwp.XHwpWindows.Item(0).Visible = $true
+    # 삽입 중 창이 보이면 사용자가 클릭·이동해 편집모드 포커스가 깨지고,
+    # 모달 대화상자가 뜨면 COM 호출이 영구 대기한다. 생성 작업은 숨겨서 수행하고
+    # KeepVisible일 때만 마지막에 창을 보여준다.
+    try { $hwp.XHwpWindows.Item(0).Visible = [bool]$Visible } catch {}
+    # 한글 메시지박스 자동 응답(지원 버전에서만 동작) — 모달로 인한 영구 대기 방지
+    try { [void]$hwp.SetMessageBoxMode(0x00010001) } catch {}
     $registered = $false
     try { $registered = [bool]$hwp.RegisterModule("FilePathCheckDLL", "FilePathCheckerModuleExample") } catch { $registered = $false }
     return @{ Hwp = $hwp; SecurityModuleRegistered = $registered }

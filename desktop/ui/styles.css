@@ -260,7 +260,15 @@ button, input, textarea, select { font: inherit; }
 .law-text-grid label { min-height: 0; display: flex; flex-direction: column; }
 .law-text-grid label > span { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 7px; }
 .law-text-grid label small { color: var(--quiet); font-size: 8px; font-weight: 400; }
-.law-text-grid textarea { flex: 1; min-height: 280px; resize: none; padding: 12px 13px; border: 1px solid var(--line-strong); border-radius: 7px; color: #263441; background: #fbfcfd; font-family: "Malgun Gothic", sans-serif; font-size: 10px; line-height: 1.65; }
+.law-text-shell { position: relative; flex: 1; min-height: 0; display: flex; }
+.law-text-grid label > span.law-text-shell { align-items: stretch; justify-content: flex-start; margin-bottom: 0; }
+.law-text-grid textarea { flex: 1; min-height: 280px; resize: none; padding: 12px 13px; border: 1px solid var(--line-strong); border-radius: 7px; color: #263441; background: transparent; font-family: "Malgun Gothic", sans-serif; font-size: 10px; line-height: 1.65; position: relative; z-index: 1; }
+.law-backdrop { position: absolute; inset: 0; z-index: 0; overflow: hidden; padding: 12px 13px; border: 1px solid transparent; border-radius: 7px; background: #fbfcfd; color: transparent; font-family: "Malgun Gothic", sans-serif; font-size: 10px; line-height: 1.65; white-space: pre-wrap; word-break: break-all; }
+.law-backdrop mark { color: transparent; border-radius: 2px; padding: 0; }
+.highlight-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 2px 0 6px; }
+.highlight-toggle { display: inline-flex; align-items: center; gap: 5px; color: var(--ink); font-size: 9px; font-weight: 800; cursor: pointer; }
+.highlight-legend { display: inline-flex; align-items: center; gap: 8px; color: var(--quiet); font-size: 8px; }
+.highlight-legend i { display: inline-block; width: 12px; height: 9px; border-radius: 2px; margin-right: 2px; vertical-align: -1px; }
 .law-input-error { margin-top: 12px; padding: 9px 11px; border: 1px solid #e0c5c2; border-radius: 6px; background: #fff7f6; color: var(--danger); font-size: 10px; }
 .dialog-actions { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-top: 16px; }
 .dialog-actions span { color: var(--quiet); font-size: 9px; }

@@ -6,10 +6,11 @@ use std::collections::{HashMap, HashSet};
 use std::env;
 use std::ffi::OsStr;
 use std::fs::{self, OpenOptions};
-use std::io::Write;
+use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
-use std::process::{Command, Output};
-use std::time::{SystemTime, UNIX_EPOCH};
+use std::process::{Command, Output, Stdio};
+use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
+use std::thread;
 use tauri::Manager;
 
 const HWP_NATIVE_SCRIPT: &str = include_str!("../resources/hwp-native.ps1");
@@ -129,9 +130,57 @@ where
         use std::os::windows::process::CommandExt;
         command.creation_flags(0x08000000);
     }
+    // 한글 COM 호출이 모달 대화상자(보안 승인 등)에 걸리면 응답 없이 영구
+    // 대기한다. 타임아웃을 두고 초과 시 프로세스를 종료해 앱이 함께 멈추는
+    // 것을 막는다.
+    const POWERSHELL_TIMEOUT_SECS: u64 = 600;
     command
-        .output()
-        .map_err(|error| format!("한글 Automation 모듈을 실행하지 못했습니다: {error}"))
+        .stdin(Stdio::null())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped());
+    let mut child = command
+        .spawn()
+        .map_err(|error| format!("한글 Automation 모듈을 실행하지 못했습니다: {error}"))?;
+    let mut stdout_pipe = child.stdout.take();
+    let mut stderr_pipe = child.stderr.take();
+    let stdout_thread = thread::spawn(move || {
+        let mut buffer = Vec::new();
+        if let Some(ref mut pipe) = stdout_pipe {
+            let _ = pipe.read_to_end(&mut buffer);
+        }
+        buffer
+    });
+    let stderr_thread = thread::spawn(move || {
+        let mut buffer = Vec::new();
+        if let Some(ref mut pipe) = stderr_pipe {
+            let _ = pipe.read_to_end(&mut buffer);
+        }
+        buffer
+    });
+    let deadline = Instant::now() + Duration::from_secs(POWERSHELL_TIMEOUT_SECS);
+    let status = loop {
+        match child.try_wait() {
+            Ok(Some(status)) => break status,
+            Ok(None) => {
+                if Instant::now() >= deadline {
+                    let _ = child.kill();
+                    let _ = child.wait();
+                    let _ = stdout_thread.join();
+                    let _ = stderr_thread.join();
+                    return Err(format!(
+                        "한글 자동화가 {POWERSHELL_TIMEOUT_SECS}초 안에 끝나지 않아 중단했습니다. 한글 창에 떠 있는 대화상자(파일 접근 승인·보안모듈 등)를 닫고, 생성 중에는 한글 창을 조작하지 말고 다시 시도하세요."
+                    ));
+                }
+                thread::sleep(Duration::from_millis(200));
+            }
+            Err(error) => {
+                return Err(format!("한글 Automation 상태를 확인하지 못했습니다: {error}"));
+            }
+        }
+    };
+    let stdout = stdout_thread.join().unwrap_or_default();
+    let stderr = stderr_thread.join().unwrap_or_default();
+    Ok(Output { status, stdout, stderr })
 }
 
 fn parse_json_output(output: &Output) -> Result<Value, String> {

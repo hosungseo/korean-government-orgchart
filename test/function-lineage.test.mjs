@@ -44,3 +44,35 @@ test("과 분리 개편은 이관으로 추적되고 폐지·신설이 생기지
   const targets = new Set(result.entries.map((entry) => entry.to));
   assert.ok(targets.has("녹색문화기획과") && targets.has("문화확산과"));
 });
+
+const homonymBefore = parseOrganizationTexts([`
+시험부 직제 시행규칙
+제5조(국립시험원)
+① 기획과장은 다음 사항을 분장한다.
+1. 시험원 예산의 편성 및 집행
+2. 시험원 보안 및 관인 관리
+제6조(국립검정원)
+① 기획과장은 다음 사항을 분장한다.
+1. 검정원 예산의 편성 및 집행
+2. 검정원 보안 및 관인 관리
+`], { institution: "시험부", asOf: "2025-01-01" });
+
+const homonymAfter = parseOrganizationTexts([`
+시험부 직제 시행규칙
+제5조(국립시험원)
+① 기획과장은 다음 사항을 분장한다.
+1. 시험원 예산의 편성 및 집행
+2. 시험원 보안 및 관인 관리
+`], { institution: "시험부", asOf: "2026-01-01" });
+
+test("동명이과: 소속기관이 다른 같은 과명은 서로 흡수되지 않는다", () => {
+  const identity = buildFunctionLineage(homonymBefore, homonymBefore);
+  assert.equal(identity.stats.verdicts["유지"], identity.stats.beforeFunctions, "항등성 유지");
+  assert.equal(identity.stats.verdicts["통합"], 0);
+
+  const result = buildFunctionLineage(homonymBefore, homonymAfter);
+  const v = result.stats.verdicts;
+  assert.equal(v["폐지후보"], 2, "검정원 기획과 사무 2건은 폐지후보여야 한다");
+  const absorbed = result.entries.filter((entry) => entry.verdict === "이관" || entry.verdict === "통합");
+  assert.equal(absorbed.length, 0, "검정원 사무가 시험원 기획과로 흡수되면 안 된다");
+});

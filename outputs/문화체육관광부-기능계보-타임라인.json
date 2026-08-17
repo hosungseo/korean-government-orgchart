@@ -15,18 +15,18 @@
         "after": "/Users/seohoseong/orgchart-generator/outputs/문화체육관광부-20251230.json"
       },
       "verdicts": {
-        "유지": 805,
-        "문언변경": 17,
-        "이관": 148,
-        "통합": 10,
-        "분할": 6,
-        "폐지후보": 84,
-        "신설후보": 91
+        "유지": 605,
+        "문언변경": 9,
+        "이관": 344,
+        "통합": 6,
+        "분할": 3,
+        "폐지후보": 103,
+        "신설후보": 109
       },
       "stats": {
         "beforeFunctions": 1070,
         "afterFunctions": 1076,
-        "suspect": 214
+        "suspect": 195
       }
     },
     {

@@ -1,4 +1,5 @@
 import { PARSER_VERSION, parseOrganizationTexts } from "./parser.mjs";
+import { applyAnnexOrganizations, attachAnnexes, extractAnnexesFromLawJson } from "./annex.mjs";
 import { OrgGraph, projectOperationalView } from "./model.mjs";
 import {
   compareDutyAllocations,
@@ -472,6 +473,25 @@ function multiColumnFrames(page, columnCount) {
   });
 }
 
+function collectWorkflowAnnexes(input = {}) {
+  if (Array.isArray(input.annexes) && input.annexes.length) return input.annexes;
+  const sources = input.lawSources || {};
+  const collected = [];
+  for (const key of ["decree", "rule"]) {
+    const item = sources[key];
+    if (!item?.json) continue;
+    const label = item.lawName
+      ? `${item.lawName}${item.effectiveDate ? ` [시행 ${item.effectiveDate}]` : ""}`
+      : undefined;
+    try {
+      collected.push(...extractAnnexesFromLawJson(item.json, { source: label }));
+    } catch {
+      // 별표 추출 실패는 본문 작도를 막지 않는다.
+    }
+  }
+  return collected;
+}
+
 function compileLawSide(input = {}, options = {}) {
   if (input.graph || input.schema === "kr.go.mois.orgchart.history/v1") {
     return compileGraphSide(input.snapshot || input, options);
@@ -497,6 +517,13 @@ function compileLawSide(input = {}, options = {}) {
     institution: cleanOptional(input.institution || options.institution),
     asOf: normalizeDate(input.asOf || options.asOf),
   });
+  // 별표 위임 지방관서: 명시 annexes 또는 공식 API lawSources JSON에서 추출해
+  // 세관·지원센터급 관서를 기관 트리에 편입한 뒤 레이아웃을 계획한다.
+  const annexes = collectWorkflowAnnexes(input);
+  if (annexes.length) {
+    attachAnnexes(legalGraph, annexes);
+    applyAnnexOrganizations(legalGraph);
+  }
   const graph = projectOperationalView(legalGraph);
   return finishLawSide(graph, {
     ...options,

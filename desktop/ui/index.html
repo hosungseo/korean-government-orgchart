@@ -22,7 +22,7 @@
 
   <main class="app-shell">
     <aside class="control-rail">
-      <div class="eyebrow">LAW TEXT → NATIVE HWPX · 0.4</div>
+      <div class="eyebrow">LAW TEXT → NATIVE HWPX · 0.5</div>
       <h2 id="manifestTitle">작도 명세를<br>검사하는 중</h2>
       <p id="manifestDescription" class="lead">A4 세로·A3 가로 조직도를 한글 네이티브 객체로 변환합니다.</p>
 
@@ -127,6 +127,8 @@
           <label>4열<small>선택</small><select id="historyFourth" aria-label="넷째 기준일"></select></label>
         </div>
         <button id="compareHistoryButton" class="history-compare" type="button">대비 조직도 보기</button>
+        <button id="exportHistoryVideoButton" class="history-video" type="button" disabled>애니메이션 영상 저장</button>
+        <small id="videoFormatHint" class="video-format-hint">3~4단 A3 대비표를 만든 뒤 사용할 수 있습니다.</small>
         <div id="historyDiff" class="history-diff" hidden></div>
       </div>
       <div class="editability">
@@ -183,6 +185,23 @@
         <button id="parseLawButton" type="submit">자동 조직도 만들기</button>
       </div>
     </form>
+  </dialog>
+
+  <dialog id="videoExportDialog" class="video-dialog">
+    <div class="video-dialog-head">
+      <div>
+        <span class="eyebrow">A3 FIXED · COMPARISON MOTION</span>
+        <h2>조직개편 애니메이션 저장</h2>
+        <p id="videoExportStatus">네 조직도를 먼저 그리고 시점 간 점선을 나중에 연결합니다.</p>
+      </div>
+      <strong id="videoExportClock">0.0 / 14.0초</strong>
+    </div>
+    <canvas id="videoExportCanvas" width="1680" height="1188" aria-label="조직개편 영상 내보내기 미리보기"></canvas>
+    <progress id="videoExportProgress" max="100" value="0"></progress>
+    <div class="video-dialog-actions">
+      <span id="videoExportFormat">WebView2 영상 코덱 확인 중</span>
+      <button id="cancelVideoExportButton" type="button">내보내기 취소</button>
+    </div>
   </dialog>
 
   <script type="module" src="./app.js"></script>

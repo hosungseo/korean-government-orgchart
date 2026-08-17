@@ -216,6 +216,10 @@ button, input, textarea, select { font: inherit; }
 .history-select-grid label { color: var(--muted); font-size: 8px; }
 .history-select-grid select { width: 100%; height: 28px; margin-top: 4px; padding: 0 4px; border: 1px solid var(--line-strong); border-radius: 4px; background: white; color: var(--ink); font-size: 8px; }
 .history-compare { width: 100%; margin-top: 8px; }
+.history-video { width: 100%; min-height: 32px; margin-top: 6px; border: 0; border-radius: 5px; background: #315d82; color: white; font-size: 8px; font-weight: 800; cursor: pointer; }
+.history-video:hover:not(:disabled) { background: #244a69; }
+.history-video:disabled { background: #aab4be; cursor: not-allowed; }
+.video-format-hint { display: block; margin-top: 6px; color: var(--quiet); font-size: 7px; line-height: 1.45; }
 .history-diff { max-height: 170px; overflow: auto; margin-top: 9px; padding: 8px; border: 1px solid #e1d7be; border-radius: 5px; background: white; color: var(--muted); font-size: 8px; line-height: 1.55; }
 .history-diff strong { color: var(--ink); }
 .history-diff ul { margin: 5px 0 0; padding-left: 15px; }
@@ -260,6 +264,19 @@ button, input, textarea, select { font: inherit; }
 .dialog-actions button { min-width: 190px; height: 42px; border: 0; border-radius: 7px; background: var(--action); color: white; font-size: 11px; font-weight: 800; cursor: pointer; }
 .dialog-actions button:hover { background: var(--action-hover); }
 .dialog-actions button:disabled { background: #aab4be; cursor: wait; }
+
+.video-dialog { width: min(980px, calc(100vw - 70px)); max-width: none; padding: 0; overflow: hidden; border: 0; border-radius: 12px; background: white; color: var(--ink); box-shadow: 0 28px 90px rgba(20, 31, 42, .3); }
+.video-dialog::backdrop { background: rgba(25, 35, 45, .56); backdrop-filter: blur(3px); }
+.video-dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding: 20px 22px 16px; border-bottom: 1px solid var(--line); }
+.video-dialog-head h2 { margin: 6px 0 0; font-size: 20px; letter-spacing: -.04em; }
+.video-dialog-head p { margin: 6px 0 0; color: var(--muted); font-size: 10px; }
+.video-dialog-head > strong { flex: 0 0 auto; color: var(--action); font-size: 12px; }
+.video-dialog canvas { display: block; width: calc(100% - 44px); height: auto; margin: 18px 22px 0; border: 1px solid var(--line); background: white; box-shadow: 0 10px 28px rgba(27, 38, 48, .1); }
+.video-dialog progress { display: block; width: calc(100% - 44px); height: 8px; margin: 14px 22px 0; accent-color: var(--action); }
+.video-dialog-actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 22px 19px; }
+.video-dialog-actions span { color: var(--muted); font-size: 9px; }
+.video-dialog-actions button { min-width: 118px; height: 34px; border: 1px solid var(--line-strong); border-radius: 6px; background: white; color: var(--muted); font-size: 9px; font-weight: 800; cursor: pointer; }
+.video-dialog-actions button:hover { background: var(--rail); color: var(--ink); }
 
 @media (max-width: 1180px) {
   .app-shell { grid-template-columns: 296px minmax(500px, 1fr) 230px; }

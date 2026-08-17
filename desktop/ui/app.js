@@ -2,6 +2,14 @@ import { analyzeNativeManifest } from "./manifest-validation.js";
 import { buildNativeComparisonWorkflow, buildNativeLawWorkflow } from "./engine/native-law-workflow.mjs";
 import { flattenLawJson } from "./engine/law-json-core.mjs";
 import { compareLawSnapshots, createLawSnapshot, summarizeLawSnapshot } from "./engine/law-history.mjs";
+import {
+  COMPARISON_VIDEO_SCHEMA,
+  blobToBase64,
+  comparisonVideoCapability,
+  comparisonVideoFileName,
+  recordComparisonVideo,
+  supportedRecordingFormat,
+} from "./comparison-video.js";
 
 const invoke = window.__TAURI__?.core?.invoke;
 const $ = (id) => document.getElementById(id);
@@ -15,6 +23,7 @@ let activeWorkflowPage = 0;
 let lawSourceInfo = {};
 let currentLawSnapshot = null;
 let historySnapshots = [];
+let videoExportController = null;
 
 function setStatus(title, message, state = "idle") {
   const box = $("statusBox");
@@ -37,6 +46,21 @@ function setStep(id, state) {
 
 function refreshGenerateAvailability() {
   $("generateButton").disabled = !(invoke && hwpAvailable && manifest && validationReport?.valid);
+}
+
+function refreshVideoExportAvailability() {
+  const button = $("exportHistoryVideoButton");
+  const hint = $("videoFormatHint");
+  if (!button || !hint) return;
+  const capability = comparisonVideoCapability(manifest);
+  const format = supportedRecordingFormat();
+  button.disabled = !(invoke && capability.supported && format && !videoExportController);
+  button.textContent = format ? `${format.extension.toUpperCase()} 애니메이션 영상 저장` : "애니메이션 영상 저장";
+  hint.textContent = !capability.supported
+    ? capability.reason
+    : !format
+      ? "WebView2를 최신 버전으로 업데이트해야 영상 코덱을 사용할 수 있습니다."
+      : `${format.label} · A3 고정 · 조직도 먼저, 시점 간 점선 나중`;
 }
 
 function escapeXml(value) {
@@ -198,6 +222,7 @@ async function acceptManifest(nextManifest, sourceLabel, { preserveWorkflow = fa
     setStatus("작도 명세 오류", validationReport.errors[0]?.message || "JSON 명세를 확인하세요.", "error");
   }
   refreshGenerateAvailability();
+  refreshVideoExportAvailability();
 }
 
 async function loadManifestText(text, sourceLabel) {
@@ -221,6 +246,7 @@ function clearLawWorkflow() {
   $("parseSummary").hidden = true;
   $("historyControls").hidden = true;
   $("historyDiff").hidden = true;
+  refreshVideoExportAvailability();
 }
 
 function setHistoryControlsVisible(visible) {
@@ -362,6 +388,107 @@ async function compareHistory() {
     setStatus("개편 내역 비교 실패", String(error), "error");
   } finally {
     button.disabled = false;
+  }
+}
+
+function videoStageMessage(plan, seconds) {
+  if (seconds < plan.stageBuildEnd) {
+    const column = Math.min(plan.columns, Math.floor(seconds / plan.columnDuration) + 1);
+    return `${column}/${plan.columns}열 조직도 본체를 그리는 중입니다.`;
+  }
+  if (seconds < plan.holdStart) {
+    const transition = Math.min(plan.columns - 1, Math.floor(Math.max(0, seconds - plan.correspondenceLineStart) / plan.transitionSpacing) + 1);
+    return `${transition}→${transition + 1} 시점의 대응 점선을 연결하는 중입니다.`;
+  }
+  return `완성된 A3 ${plan.columns}단표를 정지 화면으로 확인하는 중입니다.`;
+}
+
+function cancelVideoExport() {
+  videoExportController?.abort();
+}
+
+async function exportComparisonVideo() {
+  if (!invoke || videoExportController) return;
+  const capability = comparisonVideoCapability(manifest);
+  const format = supportedRecordingFormat();
+  if (!capability.supported || !format) {
+    setStatus("영상 내보내기 불가", capability.supported ? "WebView2 영상 코덱을 찾지 못했습니다." : capability.reason, "error");
+    refreshVideoExportAvailability();
+    return;
+  }
+  const dialog = $("videoExportDialog");
+  const canvas = $("videoExportCanvas");
+  const progress = $("videoExportProgress");
+  videoExportController = new AbortController();
+  progress.value = 0;
+  $("videoExportClock").textContent = `0.0 / ${capability.columns === 4 ? "14.0" : "10.8"}초`;
+  $("videoExportFormat").textContent = `${format.label} · 1680×1188 · 30fps · 무음`;
+  $("videoExportStatus").textContent = "A3 용지를 고정한 채 왼쪽 조직도부터 그립니다.";
+  if (!dialog.open) dialog.showModal();
+  refreshVideoExportAvailability();
+  setStatus("조직개편 영상 녹화 중", "A3 조직도를 실시간으로 작도하고 있습니다. 앱을 닫지 마세요.", "working");
+  try {
+    const recording = await recordComparisonVideo(manifest, {
+      canvas,
+      signal: videoExportController.signal,
+      onProgress: ({ seconds, duration, ratio, plan }) => {
+        progress.value = Math.round(ratio * 100);
+        $("videoExportClock").textContent = `${seconds.toFixed(1)} / ${duration.toFixed(1)}초`;
+        $("videoExportStatus").textContent = videoStageMessage(plan, seconds);
+      },
+    });
+    $("videoExportStatus").textContent = "녹화 데이터를 Windows 문서 폴더에 저장하는 중입니다.";
+    const fileName = comparisonVideoFileName(manifest, recording.extension);
+    const metadata = {
+      schema: COMPARISON_VIDEO_SCHEMA,
+      generatedAt: new Date().toISOString(),
+      source: manifest.source || {},
+      manifest: {
+        schema: manifest.schema,
+        title: manifest.title,
+        page: manifest.page,
+        verification: manifest.verification,
+      },
+      video: {
+        width: recording.plan.width,
+        height: recording.plan.height,
+        fps: recording.plan.fps,
+        durationSeconds: recording.plan.duration,
+        mimeType: recording.mimeType,
+        bytes: recording.blob.size,
+        sequence: {
+          stageBuildEndSeconds: recording.plan.stageBuildEnd,
+          correspondenceStartSeconds: recording.plan.correspondenceStart,
+          holdStartSeconds: recording.plan.holdStart,
+        },
+      },
+    };
+    const result = await invoke("save_comparison_video", {
+      request: {
+        videoBase64: await blobToBase64(recording.blob),
+        mimeType: recording.mimeType,
+        fileName,
+        manifestJson: JSON.stringify(manifest),
+        metadataJson: JSON.stringify(metadata),
+        openAfter: true,
+      },
+    });
+    $("openFolderButton").hidden = false;
+    setStatus(
+      "조직개편 영상 저장 완료",
+      `${result.mediaType} · ${recording.plan.duration.toFixed(1)}초 · ${(Number(result.bytes || 0) / 1024 / 1024).toFixed(1)}MB · 재현용 JSON 저장 완료`,
+      "success",
+    );
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      setStatus("영상 내보내기 취소", "저장하지 않고 영상 녹화를 끝냈습니다.", "idle");
+    } else {
+      setStatus("영상 내보내기 실패", String(error?.message || error), "error");
+    }
+  } finally {
+    videoExportController = null;
+    if (dialog.open) dialog.close();
+    refreshVideoExportAvailability();
   }
 }
 
@@ -691,6 +818,13 @@ $("collectHistoryButton").addEventListener("click", collectRecentHistory);
 $("saveSnapshotButton").addEventListener("click", saveCurrentSnapshot);
 $("refreshHistoryButton").addEventListener("click", refreshHistory);
 $("compareHistoryButton").addEventListener("click", compareHistory);
+$("exportHistoryVideoButton").addEventListener("click", exportComparisonVideo);
+$("cancelVideoExportButton").addEventListener("click", cancelVideoExport);
+$("videoExportDialog").addEventListener("cancel", (event) => {
+  if (!videoExportController) return;
+  event.preventDefault();
+  cancelVideoExport();
+});
 $("pageSelect").addEventListener("change", (event) => selectWorkflowPage(event.target.value));
 $("previousPageButton").addEventListener("click", () => selectWorkflowPage(activeWorkflowPage - 1));
 $("nextPageButton").addEventListener("click", () => selectWorkflowPage(activeWorkflowPage + 1));
@@ -718,3 +852,4 @@ if (!$("lawAsOf").value) {
 
 await loadSample();
 await checkRuntime();
+refreshVideoExportAvailability();

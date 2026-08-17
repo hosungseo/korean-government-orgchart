@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1680, height=1188">
+  <title>Windows comparison video frame fixture</title>
+  <style>
+    html, body { margin: 0; width: 1680px; height: 1188px; overflow: hidden; background: white; }
+    canvas { display: block; width: 1680px; height: 1188px; }
+  </style>
+</head>
+<body>
+  <canvas id="frame" width="1680" height="1188"></canvas>
+  <script type="module">
+    import {
+      buildComparisonVideoPlan,
+      renderComparisonVideoFrame,
+      supportedRecordingFormat,
+    } from "../../desktop/ui/comparison-video.js";
+
+    const manifest = await fetch("../../examples/mcst-four-stage-video/assets/mcst-four-stage-chart.native.json").then((response) => response.json());
+    const plan = buildComparisonVideoPlan(manifest);
+    const time = Number(new URLSearchParams(location.search).get("t") || 13.8);
+    const canvas = document.getElementById("frame");
+    renderComparisonVideoFrame(canvas.getContext("2d", { alpha: false }), plan, time);
+    document.documentElement.dataset.recordingFormat = supportedRecordingFormat()?.mimeType || "unsupported";
+    document.documentElement.dataset.ready = "true";
+  </script>
+</body>
+</html>

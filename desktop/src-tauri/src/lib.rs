@@ -1,3 +1,4 @@
+use base64::{engine::general_purpose::STANDARD as BASE64_STANDARD, Engine as _};
 use serde::Deserialize;
 use serde_json::{json, Value};
 use std::collections::{HashMap, HashSet};
@@ -17,6 +18,7 @@ const HWP_NATIVE_MANIFEST_SCHEMA: &str = "kr.go.mois.orgchart.hwp-native/v1";
 const MAX_MANIFEST_BYTES: usize = 10 * 1024 * 1024;
 const MAX_NATIVE_OBJECTS: usize = 5_000;
 const MAX_LAW_HISTORY_BYTES: usize = 64 * 1024 * 1024;
+const MAX_COMPARISON_VIDEO_BYTES: usize = 100 * 1024 * 1024;
 const PAGE_TOLERANCE_MM: f64 = 0.02;
 const CONNECTION_TOLERANCE_MM: f64 = 1.05;
 
@@ -54,6 +56,19 @@ struct LawSnapshotRequest {
 #[serde(rename_all = "camelCase")]
 struct LawHistoryItemRequest {
     id: String,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct ComparisonVideoRequest {
+    video_base64: String,
+    mime_type: String,
+    #[serde(default)]
+    file_name: String,
+    manifest_json: String,
+    metadata_json: String,
+    #[serde(default)]
+    open_after: bool,
 }
 
 fn unique_run_dir(app: &tauri::AppHandle, label: &str) -> Result<PathBuf, String> {
@@ -149,9 +164,7 @@ fn validate_law_api_request(request: &LawApiRequest) -> Result<(), String> {
         return Err("Open API OC 값을 확인해 주세요.".to_string());
     }
     let institution = request.institution.trim();
-    if institution.len() < 2
-        || institution.len() > 100
-        || institution.chars().any(char::is_control)
+    if institution.len() < 2 || institution.len() > 100 || institution.chars().any(char::is_control)
     {
         return Err("기관명을 정확히 입력해 주세요.".to_string());
     }
@@ -203,6 +216,67 @@ fn sanitize_file_name(value: &str) -> String {
     format!("{shortened}.hwpx")
 }
 
+fn comparison_video_extension(mime_type: &str) -> Result<(&'static str, &'static str), String> {
+    let normalized = mime_type.trim().to_ascii_lowercase();
+    if normalized == "video/mp4" || normalized.starts_with("video/mp4;") {
+        return Ok(("mp4", "MP4"));
+    }
+    if normalized == "video/webm" || normalized.starts_with("video/webm;") {
+        return Ok(("webm", "WebM"));
+    }
+    Err("영상 형식은 MP4 또는 WebM이어야 합니다.".to_string())
+}
+
+fn sanitize_video_file_name(value: &str, extension: &str) -> String {
+    let source = if value.trim().is_empty() {
+        "정부조직-조직개편-애니메이션"
+    } else {
+        value.trim()
+    };
+    let source_stem = Path::new(source)
+        .file_stem()
+        .and_then(OsStr::to_str)
+        .unwrap_or("정부조직-조직개편-애니메이션");
+    let mut stem: String = source_stem
+        .chars()
+        .map(|character| {
+            if matches!(
+                character,
+                '\\' | '/' | ':' | '*' | '?' | '"' | '<' | '>' | '|'
+            ) {
+                '-'
+            } else {
+                character
+            }
+        })
+        .collect();
+    stem = stem.trim_matches([' ', '.']).chars().take(96).collect();
+    if stem.trim().is_empty() {
+        stem = "정부조직-조직개편-애니메이션".to_string();
+    }
+    format!("{stem}.{extension}")
+}
+
+fn decode_comparison_video(
+    request: &ComparisonVideoRequest,
+) -> Result<(Vec<u8>, &'static str, &'static str), String> {
+    let (extension, media_type) = comparison_video_extension(&request.mime_type)?;
+    let encoded_limit = MAX_COMPARISON_VIDEO_BYTES.saturating_mul(4) / 3 + 8;
+    if request.video_base64.len() > encoded_limit {
+        return Err("영상 파일은 100MB를 초과할 수 없습니다.".to_string());
+    }
+    let bytes = BASE64_STANDARD
+        .decode(request.video_base64.trim())
+        .map_err(|error| format!("영상 데이터를 해독하지 못했습니다: {error}"))?;
+    if bytes.is_empty() {
+        return Err("저장할 영상 데이터가 비어 있습니다.".to_string());
+    }
+    if bytes.len() > MAX_COMPARISON_VIDEO_BYTES {
+        return Err("영상 파일은 100MB를 초과할 수 없습니다.".to_string());
+    }
+    Ok((bytes, extension, media_type))
+}
+
 fn unique_output_path(directory: &Path, file_name: &str) -> PathBuf {
     let desired = directory.join(file_name);
     if !desired.exists() {
@@ -210,13 +284,34 @@ fn unique_output_path(directory: &Path, file_name: &str) -> PathBuf {
     }
     let timestamp = SystemTime::now()
         .duration_since(UNIX_EPOCH)
-        .map(|value| value.as_secs())
+        .map(|value| value.as_millis())
         .unwrap_or_default();
     let stem = desired
         .file_stem()
         .and_then(OsStr::to_str)
         .unwrap_or("편집형-조직도");
-    directory.join(format!("{stem}-{timestamp}.hwpx"))
+    let extension = desired
+        .extension()
+        .and_then(OsStr::to_str)
+        .filter(|value| !value.trim().is_empty());
+    for attempt in 0..1_000_u16 {
+        let suffix = if attempt == 0 {
+            timestamp.to_string()
+        } else {
+            format!("{timestamp}-{attempt}")
+        };
+        let candidate = match extension {
+            Some(extension) => directory.join(format!("{stem}-{suffix}.{extension}")),
+            None => directory.join(format!("{stem}-{suffix}")),
+        };
+        if !candidate.exists() {
+            return candidate;
+        }
+    }
+    match extension {
+        Some(extension) => directory.join(format!("{stem}-{timestamp}-overflow.{extension}")),
+        None => directory.join(format!("{stem}-{timestamp}-overflow")),
+    }
 }
 
 fn output_directory(app: &tauri::AppHandle) -> Result<PathBuf, String> {
@@ -270,8 +365,10 @@ fn write_law_history(app: &tauri::AppHandle, history: &Value) -> Result<PathBuf,
         return Err("법령 이력 DB가 64MB를 초과합니다. 오래된 이력을 정리해 주세요.".to_string());
     }
     let temporary = path.with_extension("json.tmp");
-    fs::write(&temporary, &contents).map_err(|error| format!("법령 이력을 저장하지 못했습니다: {error}"))?;
-    fs::rename(&temporary, &path).map_err(|error| format!("법령 이력 DB를 교체하지 못했습니다: {error}"))?;
+    fs::write(&temporary, &contents)
+        .map_err(|error| format!("법령 이력을 저장하지 못했습니다: {error}"))?;
+    fs::rename(&temporary, &path)
+        .map_err(|error| format!("법령 이력 DB를 교체하지 못했습니다: {error}"))?;
     Ok(path)
 }
 
@@ -617,8 +714,8 @@ fn analyze_manifest(manifest: &Value) -> Result<Value, String> {
         "summary": {
             "title": manifest.get("title").and_then(Value::as_str).unwrap_or("제목 없는 조직도"),
             "fileName": manifest.get("fileName").and_then(Value::as_str).unwrap_or(""),
-            "paper": "A4",
-            "orientation": "portrait",
+            "paper": paper,
+            "orientation": orientation,
             "widthMm": page_width,
             "heightMm": page_height,
             "objectCount": objects.len(),
@@ -796,10 +893,7 @@ fn list_law_snapshots(app: tauri::AppHandle) -> Result<Value, String> {
 }
 
 #[tauri::command]
-fn save_law_snapshot(
-    app: tauri::AppHandle,
-    request: LawSnapshotRequest,
-) -> Result<Value, String> {
+fn save_law_snapshot(app: tauri::AppHandle, request: LawSnapshotRequest) -> Result<Value, String> {
     if request.snapshot_json.len() > MAX_LAW_HISTORY_BYTES {
         return Err("저장할 법령 스냅샷이 너무 큽니다.".to_string());
     }
@@ -808,8 +902,17 @@ fn save_law_snapshot(
     if snapshot.get("schema").and_then(Value::as_str) != Some("kr.go.mois.orgchart.history/v1") {
         return Err("지원하지 않는 법령 스냅샷 형식입니다.".to_string());
     }
-    let institution = snapshot.get("institution").and_then(Value::as_str).unwrap_or("").trim().to_string();
-    let as_of = snapshot.get("asOf").and_then(Value::as_str).unwrap_or("기준일 없음").to_string();
+    let institution = snapshot
+        .get("institution")
+        .and_then(Value::as_str)
+        .unwrap_or("")
+        .trim()
+        .to_string();
+    let as_of = snapshot
+        .get("asOf")
+        .and_then(Value::as_str)
+        .unwrap_or("기준일 없음")
+        .to_string();
     if institution.is_empty() || snapshot.get("graph").and_then(Value::as_object).is_none() {
         return Err("기관명과 조직 그래프가 있는 스냅샷만 저장할 수 있습니다.".to_string());
     }
@@ -829,7 +932,10 @@ fn save_law_snapshot(
         object.insert("id".to_string(), Value::String(id.clone()));
         object.insert("capturedAt".to_string(), Value::String(captured_at));
         if !object.contains_key("label") {
-            object.insert("label".to_string(), Value::String(format!("{} · {}", institution, as_of)));
+            object.insert(
+                "label".to_string(),
+                Value::String(format!("{} · {}", institution, as_of)),
+            );
         }
     }
     let mut history = read_law_history(&app)?;
@@ -845,10 +951,19 @@ fn save_law_snapshot(
             .and_then(Value::as_str)
             .unwrap_or("")
             .cmp(left.get("asOf").and_then(Value::as_str).unwrap_or(""))
-            .then_with(|| right.get("capturedAt").and_then(Value::as_str).unwrap_or("").cmp(left.get("capturedAt").and_then(Value::as_str).unwrap_or("")))
+            .then_with(|| {
+                right
+                    .get("capturedAt")
+                    .and_then(Value::as_str)
+                    .unwrap_or("")
+                    .cmp(left.get("capturedAt").and_then(Value::as_str).unwrap_or(""))
+            })
     });
     if let Some(object) = history.as_object_mut() {
-        object.insert("schema".to_string(), Value::String("kr.go.mois.orgchart.history-db/v1".to_string()));
+        object.insert(
+            "schema".to_string(),
+            Value::String("kr.go.mois.orgchart.history-db/v1".to_string()),
+        );
         object.insert("updatedAtUnixMs".to_string(), json!(unix_time_millis()));
     }
     let path = write_law_history(&app, &history)?;
@@ -869,9 +984,91 @@ fn load_law_snapshot(
     history
         .get("snapshots")
         .and_then(Value::as_array)
-        .and_then(|snapshots| snapshots.iter().find(|snapshot| snapshot.get("id").and_then(Value::as_str) == Some(request.id.trim())))
+        .and_then(|snapshots| {
+            snapshots.iter().find(|snapshot| {
+                snapshot.get("id").and_then(Value::as_str) == Some(request.id.trim())
+            })
+        })
         .cloned()
         .ok_or_else(|| "선택한 법령 스냅샷을 찾지 못했습니다.".to_string())
+}
+
+#[tauri::command]
+fn save_comparison_video(
+    app: tauri::AppHandle,
+    request: ComparisonVideoRequest,
+) -> Result<Value, String> {
+    let (bytes, extension, media_type) = decode_comparison_video(&request)?;
+    let (manifest, preflight) = validate_manifest_json(&request.manifest_json)?;
+    let page = manifest
+        .get("page")
+        .and_then(Value::as_object)
+        .ok_or_else(|| "영상 원본의 용지 정보를 찾지 못했습니다.".to_string())?;
+    let columns = manifest
+        .pointer("/source/columns")
+        .and_then(Value::as_u64)
+        .or_else(|| {
+            manifest
+                .pointer("/source/stageAsOf")
+                .and_then(Value::as_array)
+                .map(|items| items.len() as u64)
+        })
+        .unwrap_or_default();
+    if page.get("paper").and_then(Value::as_str) != Some("A3")
+        || page.get("orientation").and_then(Value::as_str) != Some("landscape")
+        || !(3..=4).contains(&columns)
+    {
+        return Err("영상 원본은 3~4단 A3 가로 대비표여야 합니다.".to_string());
+    }
+    let mut metadata: Value = serde_json::from_str(&request.metadata_json)
+        .map_err(|error| format!("영상 메타데이터 JSON이 올바르지 않습니다: {error}"))?;
+    if metadata.get("schema").and_then(Value::as_str)
+        != Some("kr.go.mois.orgchart.comparison-video/v1")
+    {
+        return Err("지원하지 않는 영상 메타데이터 형식입니다.".to_string());
+    }
+    if let Some(object) = metadata.as_object_mut() {
+        object.insert("savedAtUnixMs".to_string(), json!(unix_time_millis()));
+        object.insert("preflight".to_string(), preflight);
+        object.insert(
+            "mediaType".to_string(),
+            Value::String(media_type.to_string()),
+        );
+        object.insert("bytes".to_string(), json!(bytes.len()));
+    }
+    let file_name = sanitize_video_file_name(&request.file_name, extension);
+    let output_dir = output_directory(&app)?;
+    let output_path = unique_output_path(&output_dir, &file_name);
+    let native_manifest_path = companion_path(&output_path, "video.native.json");
+    let metadata_path = companion_path(&output_path, "video.json");
+    let pretty_manifest = serde_json::to_string_pretty(&manifest)
+        .map_err(|error| format!("영상 원본 명세를 직렬화하지 못했습니다: {error}"))?;
+    let pretty_metadata = serde_json::to_string_pretty(&metadata)
+        .map_err(|error| format!("영상 메타데이터를 직렬화하지 못했습니다: {error}"))?;
+
+    fs::write(&output_path, &bytes)
+        .map_err(|error| format!("영상 파일을 저장하지 못했습니다: {error}"))?;
+    if let Err(error) = fs::write(&native_manifest_path, format!("{pretty_manifest}\n")) {
+        let _ = fs::remove_file(&output_path);
+        return Err(format!("영상 재현용 명세를 저장하지 못했습니다: {error}"));
+    }
+    if let Err(error) = fs::write(&metadata_path, format!("{pretty_metadata}\n")) {
+        let _ = fs::remove_file(&output_path);
+        let _ = fs::remove_file(&native_manifest_path);
+        return Err(format!("영상 메타데이터를 저장하지 못했습니다: {error}"));
+    }
+    let opened = request.open_after && launch_output(&output_path);
+    Ok(json!({
+        "saved": true,
+        "opened": opened,
+        "outputPath": output_path.display().to_string(),
+        "nativeManifestPath": native_manifest_path.display().to_string(),
+        "metadataPath": metadata_path.display().to_string(),
+        "mediaType": media_type,
+        "mimeType": request.mime_type,
+        "bytes": bytes.len(),
+        "columns": columns,
+    }))
 }
 
 #[tauri::command]
@@ -983,6 +1180,7 @@ pub fn run() {
             list_law_snapshots,
             save_law_snapshot,
             load_law_snapshot,
+            save_comparison_video,
             generate_native_hwpx,
             open_output_directory,
         ])
@@ -1038,9 +1236,7 @@ mod tests {
         textbox
             .pointer_mut("/geometry/width")
             .map(|value| *value = json!(10.0));
-        assert!(analyze_manifest(&manifest)
-            .unwrap_err()
-            .contains("용지 밖"));
+        assert!(analyze_manifest(&manifest).unwrap_err().contains("용지 밖"));
     }
 
     #[test]
@@ -1048,5 +1244,103 @@ mod tests {
         assert_eq!(sanitize_file_name("조직도:검토본"), "조직도-검토본.hwpx");
         assert!(sanitize_file_name(&"가".repeat(200)).chars().count() <= 101);
         assert_eq!(sanitize_file_name("sample.HWPX"), "sample.hwpx");
+    }
+
+    #[test]
+    fn comparison_video_file_name_forces_supported_extension() {
+        assert_eq!(
+            sanitize_video_file_name("문화체육관광부:4단.mp4", "mp4"),
+            "문화체육관광부-4단.mp4"
+        );
+        assert_eq!(
+            sanitize_video_file_name("..\\위험/경로.webm", "webm"),
+            "경로.webm"
+        );
+        assert!(
+            sanitize_video_file_name(&"가".repeat(200), "mp4")
+                .chars()
+                .count()
+                <= 100
+        );
+    }
+
+    #[test]
+    fn unique_output_path_keeps_the_requested_media_extension() {
+        let directory =
+            env::temp_dir().join(format!("orgchart-video-path-test-{}", unix_time_millis()));
+        fs::create_dir_all(&directory).unwrap();
+        let original = directory.join("comparison.mp4");
+        fs::write(&original, b"first").unwrap();
+
+        let next = unique_output_path(&directory, "comparison.mp4");
+        assert_eq!(next.extension().and_then(OsStr::to_str), Some("mp4"));
+        assert_ne!(next, original);
+
+        let _ = fs::remove_dir_all(directory);
+    }
+
+    #[test]
+    fn native_preflight_reports_a3_landscape_without_relabeling_it_as_a4() {
+        let mut manifest: Value = serde_json::from_str(SAMPLE_NATIVE_MANIFEST).unwrap();
+        manifest
+            .pointer_mut("/page/paper")
+            .map(|value| *value = json!("A3"));
+        manifest
+            .pointer_mut("/page/orientation")
+            .map(|value| *value = json!("landscape"));
+        manifest
+            .pointer_mut("/page/widthMm")
+            .map(|value| *value = json!(420.0));
+        manifest
+            .pointer_mut("/page/heightMm")
+            .map(|value| *value = json!(297.0));
+
+        let report = analyze_manifest(&manifest).unwrap();
+        assert_eq!(
+            report.pointer("/summary/paper").and_then(Value::as_str),
+            Some("A3")
+        );
+        assert_eq!(
+            report
+                .pointer("/summary/orientation")
+                .and_then(Value::as_str),
+            Some("landscape")
+        );
+    }
+
+    #[test]
+    fn comparison_video_payload_accepts_mp4_and_rejects_unknown_media() {
+        let request = ComparisonVideoRequest {
+            video_base64: BASE64_STANDARD.encode(b"video-bytes"),
+            mime_type: "video/mp4;codecs=avc1.42E01E".to_string(),
+            file_name: "sample.mp4".to_string(),
+            manifest_json: "{}".to_string(),
+            metadata_json: "{}".to_string(),
+            open_after: false,
+        };
+        let (bytes, extension, media_type) = decode_comparison_video(&request).unwrap();
+        assert_eq!(bytes, b"video-bytes");
+        assert_eq!(extension, "mp4");
+        assert_eq!(media_type, "MP4");
+
+        let invalid = ComparisonVideoRequest {
+            mime_type: "video/avi".to_string(),
+            ..request
+        };
+        assert!(decode_comparison_video(&invalid)
+            .unwrap_err()
+            .contains("MP4 또는 WebM"));
+
+        let spoofed = ComparisonVideoRequest {
+            video_base64: BASE64_STANDARD.encode(b"video-bytes"),
+            mime_type: "video/mp4-malicious".to_string(),
+            file_name: "sample.mp4".to_string(),
+            manifest_json: "{}".to_string(),
+            metadata_json: "{}".to_string(),
+            open_after: false,
+        };
+        assert!(decode_comparison_video(&spoofed)
+            .unwrap_err()
+            .contains("MP4 또는 WebM"));
     }
 }

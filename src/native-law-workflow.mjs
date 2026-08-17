@@ -1036,7 +1036,11 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
     const width = round(options.compactWidth
       ? Math.min(availableWidth, Math.max(compactMinWidth, Math.min(compactMaxWidth, compactContentWidth)))
       : Math.max(columnWidth > 120 ? 42 : 28, Math.min(availableWidth, wideCap)));
-    const fontSizePt = round(Math.min(style.root ? 8.4 : 7.2, Math.max(3.6, boxHeight * 1.28)));
+    const fontCap = options.fontCapPt || {};
+    const fontSizePt = round(Math.min(
+      style.root ? (fontCap.root ?? 8.4) : (fontCap.node ?? 7.2),
+      Math.max(3.6, boxHeight * 1.28),
+    ));
     const objectId = `${idPrefix}node-${node.id}`;
     const geometry = { x, y, width, height: round(boxHeight) };
     positions.set(row.id, { ...geometry, objectId, centerY: round(y + boxHeight / 2), bottom: round(y + boxHeight) });
@@ -1122,7 +1126,7 @@ function buildOutlineManifest(graph, tree, plan, context) {
     right: comparison ? comparisonDividerX - 7 : 196,
     top: 31,
     bottom: 279.5,
-  }, "", comparison ? {} : { maxBoxWidthMm: 83 });
+  }, "", comparison ? {} : { maxBoxWidthMm: 72, fontCapPt: { root: 9.4, node: 8.2 } });
   const boxes = treeLayout.boxes;
   const lines = treeLayout.lines.map((line) => ({
     ...line,

@@ -257,6 +257,39 @@ export function analyzeNativeManifest(manifest) {
   return { valid: errors.length === 0, errors, warnings, summary };
 }
 
+/**
+ * 검증 예상값(verification.*)은 기계가 만든 파생값이므로, 실측과 다르면
+ * 사람에게 고치라고 요구하지 않고 실측값으로 자동 보정한다.
+ * 반환: { manifest, healed: [{key, from, to}] }
+ */
+export function healNativeManifest(manifest) {
+  if (!isRecord(manifest) || !Array.isArray(manifest.objects)) return { manifest, healed: [] };
+  const objects = manifest.objects;
+  const lineCount = objects.filter((object) => object?.type === "line").length;
+  const rectangleCount = objects.filter((object) => object?.type === "rectangle").length;
+  const textBoxCount = objects.filter((object) => object?.type === "textbox").length;
+  const expected = {
+    expectedPageCount: isRecord(manifest.verification) && finite(manifest.verification.expectedPageCount)
+      ? manifest.verification.expectedPageCount
+      : 1,
+    expectedNativeObjectCount: objects.length,
+    expectedLineObjectCount: lineCount,
+    expectedRectangleObjectCount: rectangleCount,
+    expectedTextBoxObjectCount: textBoxCount,
+    expectedEditableTextObjectCount: textBoxCount,
+  };
+  const current = isRecord(manifest.verification) ? manifest.verification : {};
+  const healed = [];
+  for (const [key, value] of Object.entries(expected)) {
+    if (current[key] !== value) healed.push({ key, from: current[key], to: value });
+  }
+  if (!healed.length) return { manifest, healed };
+  return {
+    manifest: { ...manifest, verification: { ...current, ...expected } },
+    healed,
+  };
+}
+
 export function assertNativeManifest(manifest) {
   const report = analyzeNativeManifest(manifest);
   if (!report.valid) throw new Error(report.errors[0]?.message || "작도 명세 검증에 실패했습니다.");

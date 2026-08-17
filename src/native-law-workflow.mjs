@@ -1653,20 +1653,45 @@ function mergeTrees(trees) {
   };
 }
 
+function parentCompatible(a, b) {
+  return !a || !b || a === b;
+}
+
+// 동명이과: 같은 이름의 after 상자가 여럿이면 소속(부모) 일치를 우선한다.
+function pickAfterBox(candidates, source, destination) {
+  if (!candidates?.length) return null;
+  const sourceParent = source?.metadata?.parentName || "";
+  const byLinkParent = destination.toParent
+    ? candidates.find((box) => box.metadata?.parentName === destination.toParent)
+    : null;
+  if (byLinkParent) return byLinkParent;
+  const bySourceParent = sourceParent
+    ? candidates.find((box) => box.metadata?.parentName === sourceParent)
+    : null;
+  if (bySourceParent) return bySourceParent;
+  return candidates[0];
+}
+
 function correspondencePairs(beforeTree, afterTree, options = {}) {
-  const afterByName = new Map();
+  const afterBoxesByName = new Map();
   for (const box of afterTree.boxes || []) {
     const name = box.metadata?.nodeName;
-    if (name && !afterByName.has(name)) afterByName.set(name, box);
+    if (!name) continue;
+    if (!afterBoxesByName.has(name)) afterBoxesByName.set(name, []);
+    afterBoxesByName.get(name).push(box);
   }
+  const afterView = {
+    has: (name) => afterBoxesByName.has(name),
+    list: (name) => afterBoxesByName.get(name) || [],
+  };
   const pairs = [];
   for (const source of beforeTree.boxes || []) {
     const name = source.metadata?.nodeName;
     if (!name || !isDepartmentBox(source)) continue;
-    const destinations = correspondenceDestinations(source, afterByName, options.dutyLineage);
+    const destinations = correspondenceDestinations(source, afterView, options.dutyLineage);
     for (const destination of destinations) {
       const destName = destination.name;
-      const dest = afterByName.get(destName);
+      const dest = pickAfterBox(afterBoxesByName.get(destName), source, destination);
       if (!dest || !isDepartmentBox(dest)) continue;
       const pair = {
         source,
@@ -1710,11 +1735,14 @@ function correspondenceDestinations(source, afterByName, dutyLineage) {
   const functionLinks = (dutyLineage?.automaticEligible === false ? [] : (dutyLineage?.links || []))
     .filter((link) => link.accepted && link.from === name && afterByName.has(link.to));
   // 같은 이름의 과가 다음 시점에도 있으면 그 조직의 존속을 우선한다.
-  // 이후 개편용 분할·개명 사전을 함께 적용하면, 존속한 과가 다른 과로
-  // 이동한 것처럼 앞선 시점에 거짓 연결선이 생긴다.
-  if (afterByName.has(name)) {
+  // 단, 동명이과가 있으므로 소속(부모)이 호환되는 상자가 있을 때만
+  // 존속으로 본다. 소속이 전부 다르면 각 호 승계 근거로 넘어간다.
+  const survivors = typeof afterByName.list === "function" ? afterByName.list(name) : [];
+  const compatibleSurvivor = survivors.find((box) => parentCompatible(box.metadata?.parentName || "", sourceParent));
+  if (compatibleSurvivor) {
     return [{
       name,
+      toParent: compatibleSurvivor.metadata?.parentName || "",
       basis: "exact-name",
       confidence: 1,
       matchedFunctions: null,
@@ -1740,6 +1768,7 @@ function correspondenceDestinations(source, afterByName, dutyLineage) {
 function lineageDestination(link) {
   return {
     name: link.to,
+    toParent: link.toParent || "",
     basis: link.basis || "duty-function",
     confidence: link.confidence,
     matchedFunctions: link.matchedFunctions,
@@ -1785,11 +1814,17 @@ function departmentBoxes(tree) {
 function departmentLineage(beforeTree, afterTree, options = {}) {
   const beforeDepts = departmentBoxes(beforeTree);
   const afterDepts = departmentBoxes(afterTree);
-  const afterByName = new Map();
+  const afterBoxesByName = new Map();
   for (const box of afterDepts) {
     const name = box.metadata?.nodeName;
-    if (name && !afterByName.has(name)) afterByName.set(name, box);
+    if (!name) continue;
+    if (!afterBoxesByName.has(name)) afterBoxesByName.set(name, []);
+    afterBoxesByName.get(name).push(box);
   }
+  const afterView = {
+    has: (name) => afterBoxesByName.has(name),
+    list: (name) => afterBoxesByName.get(name) || [],
+  };
   const linkedBefore = new Set();
   const linkedAfter = new Set();
   for (const source of beforeDepts) {
@@ -1797,7 +1832,7 @@ function departmentLineage(beforeTree, afterTree, options = {}) {
     if (!name) continue;
     // 기능 승계 점선은 사무의 이동 근거이고, 조직 자체의 존속 근거는 아니다.
     // 따라서 기능을 넘겨준 폐지 과와 기능을 받은 신설 과의 상태 표시는 유지한다.
-    const destinations = correspondenceDestinations(source, afterByName, options.dutyLineage)
+    const destinations = correspondenceDestinations(source, afterView, options.dutyLineage)
       .filter((destination) => (
         destination.basis !== "duty-function"
         || (STRUCTURAL_RENAMES[name] || []).includes(destination.name)
@@ -1805,7 +1840,7 @@ function departmentLineage(beforeTree, afterTree, options = {}) {
     if (!destinations.length) continue;
     linkedBefore.add(source.id);
     for (const destination of destinations) {
-      const dest = afterByName.get(destination.name);
+      const dest = pickAfterBox(afterBoxesByName.get(destination.name), source, destination);
       if (dest) linkedAfter.add(dest.id);
     }
   }

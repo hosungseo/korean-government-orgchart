@@ -81,10 +81,130 @@ export function applyAnnexOrganizations(graph, annexes = graph.meta.annexes || [
       if (summary.officeCount || summary.skippedOffices.length) summaries.push(summary);
     }
   }
+  // 범용 지방관서 별표: 상위기관 열이 없는 표(관서 본체)를 먼저 편입한 뒤,
+  // 상위기관 열이 있는 표(지원센터 등)가 그 노드에 매달리게 두 번 돈다.
+  const fieldOfficeAnnexes = annexes.filter((annex) => (
+    isNamedFieldOfficeAnnex(annex)
+    && !isRegionalTaxOfficeAnnex(annex)
+    && !isRegionalJurisdictionAnnex(annex)
+    && !isTaxOfficeJurisdictionAnnex(annex)
+    && !isTaxOfficeBranchAnnex(annex)
+    && !isTaxOfficeDepartmentMatrixAnnex(annex)
+  ));
+  for (const pass of [0, 1]) {
+    for (const annex of fieldOfficeAnnexes) {
+      const hasParentColumn = normalizeAnnexRows(annex)
+        .some((row) => row.filter(Boolean).length >= 4);
+      if ((pass === 0) === hasParentColumn) continue;
+      const summary = applyNamedFieldOfficeAnnex(graph, annex);
+      if (summary.officeCount || summary.childCount) summaries.push(summary);
+    }
+  }
   if (summaries.length) {
     graph.meta.annexOrganizations = mergeAnnexOrganizationSummaries(graph.meta.annexOrganizations || [], summaries);
   }
   return graph;
+}
+
+// ---------------------------------------------------------------------------
+// 범용 지방관서 별표: "○○의 명칭 및 위치(·관할구역)" 표를 기관 트리로 편입한다.
+// 3열형(명칭|위치|관할), 4열형(소속|명칭|위치|관할)을 지원하고,
+// 정원표·평가대상·과 단위 기구표와 국세청 전용 별표는 제외한다.
+const FIELD_OFFICE_TITLE = /명칭.*(위치|소재지|관할)|관할구역/;
+const FIELD_OFFICE_EXCLUDE = /정원|평가대상|공무원|기구|한시조직|계급/;
+
+export function isNamedFieldOfficeAnnex(annex) {
+  const title = normalizeAnnexTitle(annex?.title);
+  if (!FIELD_OFFICE_TITLE.test(title)) return false;
+  if (FIELD_OFFICE_EXCLUDE.test(title)) return false;
+  if (/지방국세청|세무서/.test(title)) return false;
+  return (annex?.rows || []).length > 0;
+}
+
+function fieldOfficeKinds(annexTitle) {
+  const title = normalizeWhitespace(String(annexTitle || "")).replace(/[ㆍ‧∙･]/g, "·");
+  const head = title.split(/의\s*(명칭|관할구역|위치)/)[0] || "";
+  const kinds = head
+    .split(/·|및|,/)
+    .map((token) => token.replace(/^.*\s/, "").trim())
+    .filter((token) => token.length >= 2 && /[가-힣]/.test(token));
+  // "세관관서"처럼 총칭 접미어가 붙은 종별은 본딧말(세관)도 함께 허용한다.
+  for (const kind of [...kinds]) {
+    const stripped = kind.replace(/(관서|기관)$/, "");
+    if (stripped.length >= 2 && stripped !== kind) kinds.push(stripped);
+  }
+  return kinds;
+}
+
+function isFieldOfficeHeaderRow(row) {
+  return row.some((cell) => /명칭|위치|소재지|관할|소속/.test(cell)) && row.every((cell) => cell.length <= 12);
+}
+
+function matchesKind(name, kinds) {
+  if (!name || name.length < 2 || name.length > 24) return false;
+  if (!kinds.length) return true;
+  return kinds.some((kind) => name.endsWith(kind) || (kind.length >= 3 && name.endsWith(kind.slice(-2))));
+}
+
+export function applyNamedFieldOfficeAnnex(graph, annex) {
+  const source = annex.source || annex.title || annex.annex;
+  const kinds = fieldOfficeKinds(annex.title);
+  const summary = {
+    annex: annex.annex,
+    title: annex.title,
+    type: "named-field-office",
+    kinds,
+    officeCount: 0,
+    childCount: 0,
+    skippedRows: 0,
+  };
+  const rows = normalizeAnnexRows(annex).filter((row) => !isFieldOfficeHeaderRow(row));
+  for (const row of rows) {
+    const cells = row.filter(Boolean);
+    if (cells.length < 2) { summary.skippedRows += 1; continue; }
+    // 4열형: [소속 상위기관, 명칭, 위치, 관할] — 첫 칸이 기존 노드명일 때
+    const first = normalizeNodeName(cells[0]).replace(/\s+/g, "");
+    const second = normalizeNodeName(cells[1] || "").replace(/\s+/g, "");
+    const parentNode = cells.length >= 3 ? graph.nodeByName(first) : null;
+    const isChildRow = Boolean(parentNode && matchesKind(second, kinds));
+    const name = isChildRow ? second : first;
+    if (!matchesKind(name, kinds)) { summary.skippedRows += 1; continue; }
+    if (name.length > 20) { summary.skippedRows += 1; continue; }
+    const location = cleanLocation(isChildRow ? cells[2] : cells[1]);
+    const jurisdiction = normalizeWhitespace((isChildRow ? cells[3] : cells[2]) || "");
+    const node = graph.addNode(name, {
+      kind: "affiliated",
+      forceKind: true,
+      source,
+      metadata: {
+        affiliationType: "field-office",
+        annex: annex.annex,
+        annexTitle: annex.title,
+        annexRole: "named-field-office",
+        location,
+        ...(jurisdiction ? { jurisdictionArea: jurisdiction } : {}),
+        unitRole: "affiliated-institution",
+      },
+    });
+    if (!node) { summary.skippedRows += 1; continue; }
+    const parentId = isChildRow ? parentNode.id : graph.rootId;
+    graph.addEdge(parentId, node.id, {
+      type: "affiliated",
+      source,
+      metadata: {
+        affiliationType: "field-office",
+        annex: annex.annex,
+        annexTitle: annex.title,
+        annexRole: "named-field-office",
+      },
+    });
+    if (isChildRow) summary.childCount += 1;
+    else summary.officeCount += 1;
+  }
+  if (summary.officeCount || summary.childCount) {
+    markGenericAffiliatedPlaceholders(graph, kinds);
+  }
+  return summary;
 }
 
 export function findAnnex(graph, annexLabel, { source } = {}) {

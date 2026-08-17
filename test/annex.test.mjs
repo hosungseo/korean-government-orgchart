@@ -221,3 +221,46 @@ test("지방국세청 명칭·위치·소속세무서 별표를 소속기관 트
   assert.match(formatAuditMarkdown(report), /지서 1개/);
   assert.match(formatAuditMarkdown(report), /세무서 2개에 과 6개/);
 });
+
+test("범용 지방관서 별표: 3열(명칭·위치·관할)과 4열(소속·명칭) 표를 트리로 편입한다", () => {
+  const graph = parseOrganizationTexts([
+    `시험청과 그 소속기관 직제\n제2조(하부조직) 시험청에 운영지원과를 둔다.`,
+  ], { institution: "시험청", asOf: "2026-01-01" });
+  attachAnnexes(graph, [
+    {
+      annex: "별표 1",
+      title: "시험소의 관할구역(제30조 관련)",
+      source: "시험청과 그 소속기관 직제 시행규칙",
+      rows: [
+        ["명칭", "위치", "관할구역"],
+        ["동부시험소", "서울특별시", "서울특별시 동부"],
+        ["서부시험소", "인천광역시", "인천광역시 전역"],
+      ],
+    },
+    {
+      annex: "별표 3",
+      title: "지원센터의 명칭ㆍ위치 및 관할구역(제32조 관련)",
+      source: "시험청과 그 소속기관 직제 시행규칙",
+      rows: [
+        ["동부시험소", "강북지원 센터", "서울특별시 강북구", "서울특별시 강북구ㆍ노원구"],
+      ],
+    },
+    {
+      annex: "별표 9",
+      title: "시험청 공무원 정원표(제46조 관련)",
+      source: "시험청과 그 소속기관 직제 시행규칙",
+      rows: [["총계", "100"]],
+    },
+  ]);
+  applyAnnexOrganizations(graph);
+  const offices = [...graph.nodes.values()].filter((node) => node.metadata?.annexRole === "named-field-office");
+  assert.equal(offices.length, 3, "시험소 2 + 지원센터 1");
+  const east = graph.nodeByName("동부시험소");
+  assert.ok(east, "동부시험소 편입");
+  assert.equal(east.metadata.jurisdictionArea, "서울특별시 동부");
+  const center = graph.nodeByName("강북지원센터");
+  assert.ok(center, "지원센터 이름 공백 제거 편입");
+  const parentEdge = [...graph.edges.values()].find((edge) => edge.child === center.id && edge.type === "affiliated");
+  assert.equal(graph.nodes.get(parentEdge.parent)?.name, "동부시험소", "지원센터는 소속 시험소 아래");
+  assert.ok(!graph.nodeByName("총계"), "정원표는 편입하지 않는다");
+});

@@ -178,20 +178,24 @@
         <label>기관명 <small>비워두면 문언에서 추론</small><input id="lawInstitution" placeholder="예: 행정안전부"></label>
         <label>기준일 <small>선택</small><input id="lawAsOf" type="date"></label>
         <label>Open API OC <small>조회 후 즉시 지움</small><input id="lawApiOc" type="password" autocomplete="off" placeholder="국가법령정보센터 OC"></label>
-        <label class="focus-field">작도 범위 <small>쉼표로 여러 실·국 지정, 비우면 전체 자동 분할</small><input id="lawFocus" list="focusOptions" placeholder="예: 인공지능정부실, 참여혁신조직실"><datalist id="focusOptions"></datalist></label>
+        <label class="focus-field">그릴 범위 <small>선택 — 법령은 전문을 읽고, 그림 범위만 좁힙니다. 비우면 전체 자동 분할</small><input id="lawFocus" list="focusOptions" placeholder="예: 인공지능정부실, 참여혁신조직실"><datalist id="focusOptions"></datalist></label>
       </div>
 
       <div class="law-api-row">
-        <span id="lawApiStatus">기관명과 OC를 넣으면 직제·시행규칙 현행본을 한 번에 채웁니다.</span>
+        <span id="lawApiStatus">기관명과 OC를 넣으면 <b>직제·시행규칙 전문(全文)</b>을 한 번에 불러옵니다. 아래 그릴 범위는 그림만 좁힐 뿐, 불러오는 법령은 항상 전문입니다.</span>
         <div class="law-api-actions">
           <button id="fetchLawApiButton" type="button">공식 API에서 두 법령 불러오기</button>
           <button id="collectHistoryButton" class="secondary-api-button" type="button">최근 5년 이력 수집</button>
         </div>
       </div>
 
+      <div class="highlight-bar">
+        <label class="highlight-toggle"><input id="highlightOrgToggle" type="checkbox" checked> 부서명 하이라이트</label>
+        <span class="highlight-legend"><i style="background:#DCE7F4"></i>기관장·차관 <i style="background:#FFF4A3"></i>실·본부 <i style="background:#DFF2E3"></i>국 <i style="background:#EDF0F3"></i>과·팀 <i style="background:#F4F6F8;border:1px dashed #7C8797"></i>보좌 <i style="background:#E1EFDF"></i>소속기관 <i style="background:#EEE9FA"></i>한시</span>
+      </div>
       <div class="law-text-grid">
-        <label><span><b>직제</b><small>대통령령 원문</small></span><textarea id="decreeText" spellcheck="false" placeholder="○○부와 그 소속기관 직제\n제○조(하부조직) …"></textarea></label>
-        <label><span><b>직제 시행규칙</b><small>부령 원문</small></span><textarea id="ruleText" spellcheck="false" placeholder="○○부와 그 소속기관 직제 시행규칙\n제○조(○○실) …"></textarea></label>
+        <label><span><b>직제</b><small>대통령령 원문</small></span><span class="law-text-shell"><div id="decreeBackdrop" class="law-backdrop" aria-hidden="true"></div><textarea id="decreeText" spellcheck="false" placeholder="○○부와 그 소속기관 직제\n제○조(하부조직) …"></textarea></span></label>
+        <label><span><b>직제 시행규칙</b><small>부령 원문</small></span><span class="law-text-shell"><div id="ruleBackdrop" class="law-backdrop" aria-hidden="true"></div><textarea id="ruleText" spellcheck="false" placeholder="○○부와 그 소속기관 직제 시행규칙\n제○조(○○실) …"></textarea></span></label>
       </div>
 
       <div id="lawInputError" class="law-input-error" hidden></div>

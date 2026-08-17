@@ -1,5 +1,6 @@
 import { analyzeNativeManifest, healNativeManifest } from "./manifest-validation.js";
 import { buildNativeComparisonWorkflow, buildNativeLawWorkflow } from "./engine/native-law-workflow.mjs";
+import { parseOrganizationTexts } from "./engine/parser.mjs";
 import { flattenLawJson } from "./engine/law-json-core.mjs";
 import { compareLawSnapshots, createLawSnapshot, summarizeLawSnapshot } from "./engine/law-history.mjs";
 import {
@@ -360,6 +361,93 @@ function renderHistoryDiff(diff) {
   ].filter(Boolean);
   box.innerHTML = parts.join("");
   box.hidden = false;
+}
+
+// ---- 법령 원문 부서명 하이라이트 (조직도 팔레트와 동일) ----
+const ORG_HIGHLIGHT_FILLS = {
+  head: "#DCE7F4",
+  office: "#FFF4A3",
+  bureau: "#DFF2E3",
+  department: "#EDF0F3",
+  advisor: "#F4F6F8",
+  affiliated: "#E1EFDF",
+  temporary: "#EEE9FA",
+};
+
+function highlightKindForNode(node) {
+  if (node.kind === "head" || node.kind === "deputy") return "head";
+  if (node.kind === "affiliated") return "affiliated";
+  if (node.kind === "temporary" || node.metadata?.temporary) return "temporary";
+  if (node.kind === "advisor") return "advisor";
+  const rank = Number.isFinite(node.rank) ? node.rank : 99;
+  if (rank >= 5 || /(?:과|팀|담당관)$/.test(node.name || "")) return "department";
+  if (/(?:실|본부)$/.test(node.name || "") || rank <= 3) return "office";
+  return "bureau";
+}
+
+function computeOrgHighlightMap() {
+  const decreeText = $("decreeText").value;
+  const ruleText = $("ruleText").value;
+  if ((decreeText + ruleText).trim().length < 30) return null;
+  try {
+    const graph = parseOrganizationTexts(
+      [decreeText, ruleText].filter((text) => text.trim()),
+      { institution: $("lawInstitution").value.trim() || undefined },
+    );
+    const fills = new Map();
+    for (const node of graph.nodes.values()) {
+      const name = String(node.name || "").trim();
+      if (name.length < 2 || name.length > 24 || /\s/.test(name)) continue;
+      if (node.kind === "institution") continue;
+      fills.set(name, ORG_HIGHLIGHT_FILLS[highlightKindForNode(node)]);
+    }
+    return fills;
+  } catch {
+    return null;
+  }
+}
+
+function escapeHtml(value) {
+  return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+}
+
+function renderLawBackdrop(textareaId, backdropId, fills) {
+  const backdrop = $(backdropId);
+  const textarea = $(textareaId);
+  if (!fills || !$("highlightOrgToggle").checked) {
+    backdrop.innerHTML = "";
+    return;
+  }
+  const names = [...fills.keys()].sort((left, right) => right.length - left.length);
+  if (!names.length) {
+    backdrop.innerHTML = "";
+    return;
+  }
+  const pattern = new RegExp(names.map((name) => name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"), "g");
+  const text = textarea.value;
+  let html = "";
+  let cursor = 0;
+  for (const match of text.matchAll(pattern)) {
+    html += escapeHtml(text.slice(cursor, match.index));
+    html += `<mark style="background:${fills.get(match[0])}">${escapeHtml(match[0])}</mark>`;
+    cursor = match.index + match[0].length;
+  }
+  html += escapeHtml(text.slice(cursor));
+  backdrop.innerHTML = html;
+  backdrop.scrollTop = textarea.scrollTop;
+  backdrop.scrollLeft = textarea.scrollLeft;
+}
+
+let highlightTimer = null;
+function refreshLawHighlights({ immediate = false } = {}) {
+  clearTimeout(highlightTimer);
+  const run = () => {
+    const fills = computeOrgHighlightMap();
+    renderLawBackdrop("decreeText", "decreeBackdrop", fills);
+    renderLawBackdrop("ruleText", "ruleBackdrop", fills);
+  };
+  if (immediate) run();
+  else highlightTimer = setTimeout(run, 400);
 }
 
 let activeView = "preview";
@@ -841,6 +929,7 @@ async function fetchOfficialLawInput() {
     $("decreeText").value = flattenLawJson(result.decree?.json);
     $("ruleText").value = flattenLawJson(result.rule?.json);
     lawSourceInfo = { decree: result.decree, rule: result.rule };
+    refreshLawHighlights({ immediate: true });
     $("lawApiOc").value = "";
     const displayDate = (value) => {
       const digits = String(value || "").replace(/\D/g, "");
@@ -991,7 +1080,16 @@ $("openFolderButton").addEventListener("click", openOutputFolder);
 $("openLawInputButton").addEventListener("click", () => {
   $("lawInputError").hidden = true;
   $("lawInputDialog").showModal();
+  refreshLawHighlights({ immediate: true });
 });
+$("highlightOrgToggle").addEventListener("change", () => refreshLawHighlights({ immediate: true }));
+for (const [textareaId, backdropId] of [["decreeText", "decreeBackdrop"], ["ruleText", "ruleBackdrop"]]) {
+  $(textareaId).addEventListener("input", () => refreshLawHighlights());
+  $(textareaId).addEventListener("scroll", () => {
+    $(backdropId).scrollTop = $(textareaId).scrollTop;
+    $(backdropId).scrollLeft = $(textareaId).scrollLeft;
+  });
+}
 $("closeLawInputButton").addEventListener("click", () => $("lawInputDialog").close());
 $("lawInputForm").addEventListener("submit", parseLawInput);
 $("fetchLawApiButton").addEventListener("click", fetchOfficialLawInput);

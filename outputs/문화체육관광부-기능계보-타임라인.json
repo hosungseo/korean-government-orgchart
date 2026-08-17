@@ -1,0 +1,55 @@
+{
+  "schema": "kr.go.mois.orgchart.function-lineage-timeline/v1",
+  "institution": "문화체육관광부",
+  "dates": [
+    "2024-02-05",
+    "2025-12-30",
+    "2026-07-28"
+  ],
+  "pairs": [
+    {
+      "from": "2024-02-05",
+      "to": "2025-12-30",
+      "files": {
+        "before": "/Users/seohoseong/orgchart-generator/outputs/문화체육관광부-20240205.json",
+        "after": "/Users/seohoseong/orgchart-generator/outputs/문화체육관광부-20251230.json"
+      },
+      "verdicts": {
+        "유지": 805,
+        "문언변경": 17,
+        "이관": 148,
+        "통합": 10,
+        "분할": 6,
+        "폐지후보": 84,
+        "신설후보": 91
+      },
+      "stats": {
+        "beforeFunctions": 1070,
+        "afterFunctions": 1076,
+        "suspect": 214
+      }
+    },
+    {
+      "from": "2025-12-30",
+      "to": "2026-07-28",
+      "files": {
+        "before": "/Users/seohoseong/orgchart-generator/outputs/문화체육관광부-20251230.json",
+        "after": "/Users/seohoseong/orgchart-generator/outputs/문화체육관광부-20260728.json"
+      },
+      "verdicts": {
+        "유지": 1019,
+        "문언변경": 7,
+        "이관": 30,
+        "통합": 2,
+        "분할": 0,
+        "폐지후보": 18,
+        "신설후보": 22
+      },
+      "stats": {
+        "beforeFunctions": 1076,
+        "afterFunctions": 1079,
+        "suspect": 0
+      }
+    }
+  ]
+}

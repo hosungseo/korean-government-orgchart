@@ -51,6 +51,17 @@
   <a href="outputs/행정안전부-20251125-소관법령.svg">소관법령 결합 예시</a>
 </p>
 
+## 4단 조직개편 모션 예시
+
+[![문화체육관광부 4단 조직개편 애니메이션](docs/media/mcst-four-stage/mcst-four-stage-build.gif)](docs/media/mcst-four-stage/mcst-four-stage-build.mp4)
+
+문화체육관광부의 `2024. 2. 5. → 2024. 2. 6. → 2025. 12. 30. → 2026. 7. 28.` 조직을 A3 가로 한 화면에 고정하고, 네 조직도를 먼저 완성한 뒤 시점 간 대응 점선을 `1→2`, `2→3`, `3→4` 순서로 연결한 14초 예시입니다.
+
+- [H.264 MP4 원본](docs/media/mcst-four-stage/mcst-four-stage-build.mp4)
+- [HyperFrames 재현 소스와 타임라인 명세](examples/mcst-four-stage-video/)
+- [검증된 원본 SVG](examples/mcst-four-stage-video/assets/mcst-four-stage-chart.svg)
+- [편집 객체·관계 명세 JSON](examples/mcst-four-stage-video/assets/mcst-four-stage-chart.native.json)
+
 ## 무엇을 다르게 읽나
 
 법령의 조직 설치관계와 실제 업무의 소관관계를 하나의 선으로 섞으면, “누가 법적으로 설치됐는가”와 “누가 실무를 맡는가”를 동시에 잃게 됩니다. 이 프로젝트는 두 층을 분리해 보존합니다.

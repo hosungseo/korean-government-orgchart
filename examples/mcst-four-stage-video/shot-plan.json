@@ -1,0 +1,194 @@
+{
+  "category": "charts",
+  "duration_s": 14,
+  "fps": 30,
+  "canvas": {
+    "w": 1680,
+    "h": 1188,
+    "aspect": "A3 landscape (420:297)"
+  },
+  "style": "정밀한 법령 부속표와 설계 도면의 중간 톤. 흰 종이, 가는 계선, 원본 좌표와 색을 보존하고 활성 열에만 절제된 청록 스캔 하이라이트를 둔다. 손글씨 흔들림, 임의 지터, 과장된 3D 효과 없이 또렷하고 제도적인 인상을 유지한다.",
+  "palette": [
+    "#FFFFFF",
+    "#17263A",
+    "#64748B",
+    "#D4DAE0",
+    "#0F766E",
+    "#477D78",
+    "#E3F1EF",
+    "#B45309",
+    "#C2410C"
+  ],
+  "font": "Noto Sans JP",
+  "beats": [
+    0,
+    75,
+    150,
+    225,
+    300,
+    360
+  ],
+  "export": "mp4",
+  "block": "flowchart",
+  "customize": {
+    "source_svg": "assets/mcst-four-stage-chart.svg",
+    "source_native_json": "assets/mcst-four-stage-chart.native.json",
+    "secondary_primitives": [
+      "svg-stroke-trace",
+      "light-sweep-pass"
+    ],
+    "reuse": "flowchart의 노드·SVG 계선 draw-on 패턴을 차용하되 원본 4단표의 532개 객체, 좌표, 문구, 색상과 위계를 그대로 사용한다.",
+    "element_classification": {
+      "columns": {
+        "c1": [12, 108.25],
+        "c2": [108.25, 210],
+        "c3": [210, 311.75],
+        "c4": [311.75, 408]
+      },
+      "node_roles": [
+        "organization-node",
+        "comparison-header",
+        "status-label"
+      ],
+      "line_roles": [
+        "child-trunk",
+        "child-link"
+      ],
+      "change_roles": [
+        "correspondence-underlay",
+        "correspondence-link",
+        "correspondence-wrap"
+      ]
+    }
+  },
+  "asset_needs": [],
+  "content": {
+    "block": "flowchart",
+    "customize": {
+      "nodes": "native JSON의 organization-node 136개",
+      "edges": "native JSON의 child-trunk 32개와 child-link 119개",
+      "change_edges": "native JSON의 시점 간 correspondence 객체",
+      "labels": "원본 SVG 문구를 그대로 인라인",
+      "palette": "원본 SVG 색상 유지",
+      "camera": "전체 A3 viewBox를 0~14초 동안 같은 위치와 배율로 고정"
+    },
+    "type": "race",
+    "data": [
+      {
+        "stage": 1,
+        "side": "c1",
+        "date": "2024. 2. 5.",
+        "visible_columns": 1,
+        "organization_nodes": 32,
+        "build_start_s": 0,
+        "build_end_s": 2.2
+      },
+      {
+        "stage": 2,
+        "side": "c2",
+        "date": "2024. 2. 6.",
+        "visible_columns": 2,
+        "organization_nodes": 33,
+        "build_start_s": 2.2,
+        "build_end_s": 4.4
+      },
+      {
+        "stage": 3,
+        "side": "c3",
+        "date": "2025. 12. 30.",
+        "visible_columns": 3,
+        "organization_nodes": 34,
+        "build_start_s": 4.4,
+        "build_end_s": 6.6
+      },
+      {
+        "stage": 4,
+        "side": "c4",
+        "date": "2026. 7. 28.",
+        "visible_columns": 4,
+        "organization_nodes": 37,
+        "build_start_s": 6.6,
+        "build_end_s": 8.8
+      }
+    ],
+    "labels": [
+      "2024. 2. 5.",
+      "2024. 2. 6.",
+      "2025. 12. 30.",
+      "2026. 7. 28."
+    ],
+    "headline": "문화체육관광부 조직 대비 · 4단 대비",
+    "axes": false,
+    "source": {
+      "svg": "assets/mcst-four-stage-chart.svg",
+      "native_json": "assets/mcst-four-stage-chart.native.json",
+      "schema": "kr.go.mois.orgchart.hwp-native/v1",
+      "verified_object_count": 532,
+      "preserve_geometry": true,
+      "preserve_source_colors": true
+    },
+    "assembly_order": [
+      "상위 조직 상자",
+      "하위 과 상자",
+      "계선",
+      "네 조직도 본체 완성",
+      "시점 간 변화선 일괄 연결"
+    ],
+    "camera": {
+      "mode": "fixed",
+      "x": 0,
+      "y": 0,
+      "scale": 1
+    },
+    "final_hold": {
+      "start_s": 12.4,
+      "end_s": 14,
+      "motion": "none"
+    },
+    "layout": {
+      "hero_frame": "처음부터 끝까지 고정된 전체 A3 4단표",
+      "safe_margin_px": 0,
+      "source_viewbox": "0 0 420 297",
+      "fit": "contain",
+      "background": "#F7F8F6",
+      "paper_shadow": "none — A3가 프레임 전체를 채움",
+      "preserve_text_as_svg": true
+    },
+    "motion": {
+      "dominant_motif": "왼쪽에서 오른쪽으로 제도 도면을 조립하는 정밀 draw-on",
+      "per_column_order": [
+        "날짜와 상위 조직 상자 fade-in",
+        "하위 과 상자 18~28ms 간격 stagger",
+        "child-trunk와 child-link stroke draw-on",
+        "얇은 청록 scan highlight 1회 통과"
+      ],
+      "correspondence_phase": {
+        "start_s": 8.9,
+        "end_s": 12.4,
+        "order": ["1→2열 점선", "2→3열 점선", "3→4열 점선"]
+      },
+      "stages": [
+        { "column": "c1", "start_s": 0, "end_s": 2.2, "camera_x": 0 },
+        { "column": "c2", "start_s": 2.2, "end_s": 4.4, "camera_x": 0 },
+        { "column": "c3", "start_s": 4.4, "end_s": 6.6, "camera_x": 0 },
+        { "column": "c4", "start_s": 6.6, "end_s": 8.8, "camera_x": 0 }
+      ],
+      "pattern_interrupt": {
+        "start_s": 8.9,
+        "end_s": 12.4,
+        "change": "네 조직도 본체가 완성된 뒤 시점 간 색 점선을 별도 단계로 연결"
+      },
+      "hold": {
+        "start_s": 12.4,
+        "end_s": 14,
+        "allow_motion": false
+      },
+      "eases": {
+        "nodes": "power2.out",
+        "lines": "sine.inOut",
+        "camera": "none"
+      }
+    },
+    "shot_brief": "영상 프레임을 A3 가로 비율로 맞춰 용지가 테두리 없이 화면 전체를 채우며, 0~14초 동안 위치와 배율은 완전히 고정된다. 0~8.8초에는 왼쪽 2024. 2. 5.부터 오른쪽 2026. 7. 28.까지 네 조직도의 상자·글자·내부 계선만 차례로 조립한다. 네 조직도 본체가 모두 완성된 뒤 8.9~12.4초에만 1→2열, 2→3열, 3→4열의 색 점선과 점선 테두리를 순차 연결하고, 이후 완성 화면을 정지한다. 모든 좌표·문구·위계는 native JSON과 원본 SVG를 그대로 따른다."
+  }
+}

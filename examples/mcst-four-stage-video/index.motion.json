@@ -1,0 +1,10 @@
+{
+  "duration": 14,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#source-chart", "bySec": 0.5 },
+    { "kind": "staysInFrame", "selector": "#paper-camera" },
+    { "kind": "appearsBy", "selector": "#hf-org-proof", "bySec": 8.8 },
+    { "kind": "appearsBy", "selector": "#hf-change-proof", "bySec": 9.8 },
+    { "kind": "before", "a": "#hf-org-proof", "b": "#hf-change-proof" }
+  ]
+}

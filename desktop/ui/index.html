@@ -29,9 +29,9 @@
       <div class="manifest-loader">
         <input id="manifestFile" type="file" accept="application/json,.json" hidden>
         <button id="openLawInputButton" class="law-input-action" type="button">
-          <span>직제·시행규칙 붙여넣기</span><b>자동 작도</b>
+          <span>기관명·기준일로 시작</span><b>법령 자동 작도</b>
         </button>
-        <button id="loadManifestButton" class="manifest-action" type="button">기존 JSON 작도 명세 불러오기</button>
+        <button id="loadManifestButton" class="manifest-action" type="button">JSON 작도 명세 직접 불러오기 (고급)</button>
         <div class="loaded-source"><span>현재 명세</span><strong id="loadedSource">불러오는 중</strong></div>
         <small>문언은 PC 안에서만 파싱됩니다. JSON 파일은 A4 영역에 끌어놓아도 됩니다.</small>
       </div>
@@ -68,8 +68,11 @@
     <section class="workspace">
       <div class="workspace-head">
         <div>
-          <span class="eyebrow">A4 PORTRAIT · NATIVE OBJECTS</span>
-          <h2>실제 출력 미리보기</h2>
+          <span class="eyebrow" id="workspaceEyebrow">NATIVE OBJECTS</span>
+          <div class="view-tabs" role="tablist" aria-label="작업 화면 전환">
+            <button id="viewTabPreview" class="view-tab" role="tab" aria-selected="true" type="button">출력 미리보기</button>
+            <button id="viewTabRelation" class="view-tab" role="tab" aria-selected="false" type="button" disabled>과·관 연관 관계도</button>
+          </div>
         </div>
         <div class="workspace-tools">
           <div id="pageNavigator" class="page-navigator" hidden>
@@ -81,6 +84,9 @@
         </div>
       </div>
 
+      <div id="relationStage" class="relation-stage" hidden>
+        <div class="relation-empty">대비표(2~4단)를 만들면 사무 승계 근거 기반 관계도가 여기에 그려집니다.</div>
+      </div>
       <div id="drawingStage" class="drawing-stage">
         <div class="drop-indicator">JSON 작도 명세 놓기</div>
         <div id="paper" class="paper" aria-label="조직도 미리보기">
@@ -90,6 +96,25 @@
     </section>
 
     <aside class="inspector">
+      <div id="historyControls" class="history-controls" hidden>
+        <div class="eyebrow">COMPARISON · 1–4단</div>
+        <h3>대비표 단 수 (1~4단)</h3>
+        <p class="history-help">지금 보이는 조직도가 곧 1단입니다. 기준일을 2~4개 고르면 그 수만큼의 단으로 대비표를 다시 그립니다(용지 자동: 1~2단 A4 세로 · 3~4단 A3 가로). 각 호 기능 승계를 대조해 근거 있는 변경만 점선으로 표시합니다.</p>
+        <div class="history-buttons">
+          <button id="saveSnapshotButton" type="button">현재 조직도 이력 저장</button>
+          <button id="refreshHistoryButton" type="button">저장 이력 새로고침</button>
+        </div>
+        <div class="history-select-grid">
+          <label>1단<select id="historyLeft" aria-label="첫 기준일"></select></label>
+          <label>2단<select id="historyRight" aria-label="둘째 기준일"></select></label>
+          <label>3단<small>선택</small><select id="historyMid" aria-label="셋째 기준일"></select></label>
+          <label>4단<small>선택</small><select id="historyFourth" aria-label="넷째 기준일"></select></label>
+        </div>
+        <button id="compareHistoryButton" class="history-compare" type="button">대비 조직도 보기</button>
+        <button id="exportHistoryVideoButton" class="history-video" type="button" disabled hidden>애니메이션 영상 저장</button>
+        <small id="videoFormatHint" class="video-format-hint" hidden>영상 기능은 보조 기능으로 유지됩니다.</small>
+        <div id="historyDiff" class="history-diff" hidden></div>
+      </div>
       <div class="eyebrow">OBJECT INSPECTOR</div>
       <h2>편집 단위</h2>
       <dl class="metrics">
@@ -114,24 +139,6 @@
           <div><dt>자동 분할</dt><dd id="parsedPages">—</dd></div>
         </dl>
         <p id="parseWarning"></p>
-      </div>
-      <div id="historyControls" class="history-controls" hidden>
-        <h3>대비표 단 수 (1~4단)</h3>
-        <p class="history-help">지금 보이는 조직도가 곧 1단입니다. 기준일을 2~4개 고르면 그 수만큼의 단으로 대비표를 다시 그립니다(용지 자동: 1~2단 A4 세로 · 3~4단 A3 가로). 각 호 기능 승계를 대조해 근거 있는 변경만 점선으로 표시합니다.</p>
-        <div class="history-buttons">
-          <button id="saveSnapshotButton" type="button">현재 조직도 이력 저장</button>
-          <button id="refreshHistoryButton" type="button">저장 이력 새로고침</button>
-        </div>
-        <div class="history-select-grid">
-          <label>1단<select id="historyLeft" aria-label="첫 기준일"></select></label>
-          <label>2단<select id="historyRight" aria-label="둘째 기준일"></select></label>
-          <label>3단<small>선택</small><select id="historyMid" aria-label="셋째 기준일"></select></label>
-          <label>4단<small>선택</small><select id="historyFourth" aria-label="넷째 기준일"></select></label>
-        </div>
-        <button id="compareHistoryButton" class="history-compare" type="button">대비 조직도 보기</button>
-        <button id="exportHistoryVideoButton" class="history-video" type="button" disabled hidden>애니메이션 영상 저장</button>
-        <small id="videoFormatHint" class="video-format-hint" hidden>영상 기능은 보조 기능으로 유지됩니다.</small>
-        <div id="historyDiff" class="history-diff" hidden></div>
       </div>
       <div class="editability">
         <h3>한글에서 가능한 편집</h3>

@@ -291,3 +291,16 @@ button, input, textarea, select { font: inherit; }
 .lineage-sankey strong { display: block; font-size: 12px; margin-bottom: 4px; }
 .lineage-sankey svg { width: 100%; height: auto; background: #fff; border: 1px solid #d7ded9; border-radius: 4px; }
 .lineage-sankey small { color: #7a887f; font-size: 10px; }
+
+.view-tabs { display: inline-flex; gap: 4px; margin-top: 2px; padding: 3px; background: #eef1f4; border-radius: 8px; }
+.view-tab { border: 0; padding: 6px 14px; border-radius: 6px; background: transparent; color: #5b6570; font-size: 13px; font-weight: 700; cursor: pointer; }
+.view-tab[aria-selected="true"] { background: #fff; color: #17324a; box-shadow: 0 1px 2px rgba(16, 34, 53, 0.14); }
+.view-tab:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.relation-stage { flex: 1; min-height: 0; overflow: auto; background: #fbfcfd; border: 1px solid #dde3e9; border-radius: 10px; padding: 14px; }
+.relation-stage .lineage-sankey svg { width: 100%; height: auto; border: 0; background: transparent; }
+.relation-stage .lineage-sankey strong { font-size: 14px; }
+.relation-empty { display: grid; place-items: center; height: 100%; min-height: 240px; color: #8a96a3; font-size: 13px; text-align: center; padding: 24px; }
+
+.inspector > .history-controls { border: 1px solid #b9c6d2; background: #f4f8fb; border-radius: 10px; padding: 12px; margin: 6px 0 16px; }
+.inspector > .history-controls h3 { margin-top: 0; }

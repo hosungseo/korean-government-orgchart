@@ -306,6 +306,9 @@ function renderHistorySelectors() {
     }
   }
   $("compareHistoryButton").disabled = historySnapshots.length < 2;
+  const empty = historySnapshots.length === 0;
+  $("historyEmpty").hidden = !empty;
+  $("historyCollectShortcut").hidden = !empty;
 }
 
 async function refreshHistory() {
@@ -360,6 +363,18 @@ function renderHistoryDiff(diff) {
 }
 
 let activeView = "preview";
+let paperZoom = 1;
+
+function applyPaperZoom() {
+  document.documentElement.style.setProperty("--paper-zoom", String(paperZoom));
+  $("drawingStage").classList.toggle("zoomed", paperZoom > 1.001);
+  $("zoomResetButton").textContent = `${Math.round(paperZoom * 100)}%`;
+}
+
+function stepPaperZoom(delta) {
+  paperZoom = Math.min(2.4, Math.max(0.5, Math.round((paperZoom + delta) * 10) / 10));
+  applyPaperZoom();
+}
 
 function setActiveView(view) {
   activeView = view;
@@ -414,7 +429,7 @@ function renderLineageSankey(links) {
     l.cursor += width;
     r.cursor += width;
     const mid = (X0 + X1) / 2;
-    parts.push(`<path d="M${X0},${y0} C${mid},${y0} ${mid},${y1} ${X1},${y1}" stroke="#0d8160" stroke-width="${Math.max(1.5, width)}" fill="none" opacity="0.55"><title>${escapeXml(`${flow.from} → ${flow.to} · 기능 ${flow.weight}호`)}</title></path>`);
+    parts.push(`<path data-flow="1" data-from="${escapeXml(flow.from)}" data-to="${escapeXml(flow.to)}" d="M${X0},${y0} C${mid},${y0} ${mid},${y1} ${X1},${y1}" stroke="#0d8160" stroke-width="${Math.max(1.5, width)}" fill="none" opacity="0.55"><title>${escapeXml(`${flow.from} → ${flow.to} · 기능 ${flow.weight}호`)}</title></path>`);
   }
   for (const [name, pos] of left.map) {
     parts.push(`<rect x="${X0 - 5}" y="${pos.y}" width="5" height="${pos.height}" fill="#17573f"/><text x="${X0 - 9}" y="${pos.y + pos.height / 2 + 3}" text-anchor="end" font-size="8">${escapeXml(name)}</text>`);
@@ -450,8 +465,38 @@ function appendFunctionLineageEvidence(summary) {
   );
   box.hidden = false;
   const stage = $("relationStage");
-  stage.innerHTML = renderLineageSankey(links)
-    || `<div class="relation-empty">근거가 확인된 부서 이동이 없어 관계도를 그릴 항목이 없습니다.</div>`;
+  const sankey = renderLineageSankey(links);
+  stage.innerHTML = sankey
+    ? `<div class="relation-head"><div><strong>과·관 연관 관계도</strong> <span class="relation-meta">근거 연결 ${links.length}건 · 보류 ${reviews.length}건</span></div><button id="saveRelationSvgButton" type="button">SVG 저장</button></div>${sankey}`
+    : `<div class="relation-empty">근거가 확인된 부서 이동이 없어 관계도를 그릴 항목이 없습니다.</div>`;
+  const svg = stage.querySelector("svg");
+  if (svg) {
+    svg.addEventListener("pointerover", (event) => {
+      const path = event.target.closest("path[data-flow]");
+      if (!path) return;
+      svg.classList.add("has-focus");
+      for (const item of svg.querySelectorAll("path[data-flow]")) {
+        item.classList.toggle("focused", item.dataset.from === path.dataset.from || item.dataset.to === path.dataset.to);
+      }
+    });
+    svg.addEventListener("pointerleave", () => {
+      svg.classList.remove("has-focus");
+      for (const item of svg.querySelectorAll("path[data-flow]")) item.classList.remove("focused");
+    });
+  }
+  stage.querySelector("#saveRelationSvgButton")?.addEventListener("click", () => {
+    const source = stage.querySelector(".lineage-sankey svg");
+    if (!source) return;
+    const blob = new Blob(
+      [`<?xml version="1.0" encoding="UTF-8"?>\n${source.outerHTML}`],
+      { type: "image/svg+xml;charset=utf-8" },
+    );
+    const anchor = document.createElement("a");
+    anchor.href = URL.createObjectURL(blob);
+    anchor.download = `${(manifest?.source?.institution || "조직")}-과관-관계도.svg`;
+    anchor.click();
+    setTimeout(() => URL.revokeObjectURL(anchor.href), 5000);
+  });
   $("viewTabRelation").disabled = false;
   setActiveView("relation");
 }
@@ -746,6 +791,10 @@ async function parseLawInput(event) {
       layout: "outline",
       lawSources: lawSourceInfo,
     });
+    try {
+      localStorage.setItem("orgchart.lastInstitution", $("lawInstitution").value.trim());
+      localStorage.setItem("orgchart.lastAsOf", $("lawAsOf").value);
+    } catch {}
     currentLawSnapshot = createLawSnapshot(lawWorkflow, { label: `${lawWorkflow.summary.institution} · ${lawWorkflow.summary.asOf || "기준일 없음"}` });
     activeWorkflowPage = 0;
     renderPageNavigator();
@@ -957,6 +1006,13 @@ $("videoExportDialog").addEventListener("cancel", (event) => {
   event.preventDefault();
   cancelVideoExport();
 });
+$("zoomInButton").addEventListener("click", () => stepPaperZoom(0.2));
+$("zoomOutButton").addEventListener("click", () => stepPaperZoom(-0.2));
+$("zoomResetButton").addEventListener("click", () => { paperZoom = 1; applyPaperZoom(); });
+$("historyCollectShortcut").addEventListener("click", () => {
+  $("lawInputError").hidden = true;
+  $("lawInputDialog").showModal();
+});
 $("viewTabPreview").addEventListener("click", () => setActiveView("preview"));
 $("viewTabRelation").addEventListener("click", () => setActiveView("relation"));
 $("pageSelect").addEventListener("change", (event) => selectWorkflowPage(event.target.value));
@@ -978,6 +1034,12 @@ for (const eventName of ["dragleave", "drop"]) {
 }
 drawingStage.addEventListener("drop", (event) => loadFile(event.dataTransfer?.files?.[0]));
 
+try {
+  const savedInstitution = localStorage.getItem("orgchart.lastInstitution");
+  if (savedInstitution && !$("lawInstitution").value) $("lawInstitution").value = savedInstitution;
+  const savedAsOf = localStorage.getItem("orgchart.lastAsOf");
+  if (savedAsOf && !$("lawAsOf").value) $("lawAsOf").value = savedAsOf;
+} catch {}
 if (!$("lawAsOf").value) {
   const now = new Date();
   const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60_000).toISOString().slice(0, 10);

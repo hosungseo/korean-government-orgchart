@@ -434,6 +434,10 @@ function renderLawBackdrop(textareaId, backdropId, fills) {
   }
   html += escapeHtml(text.slice(cursor));
   backdrop.innerHTML = html;
+  // Windows 클래식 스크롤바만큼 textarea 본문 폭이 좁아지므로 백드롭의
+  // 오른쪽 여백을 같은 폭만큼 늘려 줄바꿈 위치를 일치시킨다.
+  const scrollbarWidth = Math.max(0, textarea.offsetWidth - textarea.clientWidth - 2);
+  backdrop.style.paddingRight = `${13 + scrollbarWidth}px`;
   backdrop.scrollTop = textarea.scrollTop;
   backdrop.scrollLeft = textarea.scrollLeft;
 }

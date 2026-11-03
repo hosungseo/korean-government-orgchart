@@ -25,14 +25,15 @@ The government level is detected from the institution name (…시/군/구/도) 
 2. 본청 국별 하부조직 (n/m) — 국 groups, never split across pages, rows balanced
    across pages (e.g. 15·18·13 instead of 20·20·6); the header names the 국 range.
 3. 직속기관·사업소 — each agency with its 과, then its 지소·센터·상담소 (white
-   boxes, regular weight).
+   boxes with the agency's green border, regular weight; the legend calls them
+   "하부 기관(지소·상담소)").
 
 Header: "<기관> 조직도" 15pt, page title 11pt, "YYYY. M. D. 현재".
 Footer: "근거: 「…」, 「…」" and "n / N".
 
 ## Worked example: 군산시 (조례 2025. 11. 17., 시행규칙 2026. 1. 23.)
 
-`examples/gunsan/` holds both texts. Expected result:
+`examples/gunsan/` in this skill folder holds both texts. Expected result:
 
 - 시장 → 새만금정책담당관(보좌) / 부시장 → 감사·인구대응·디지털정보담당관(보좌), 7국
 - 본청 39과: 기획행정국 7 · 안전건설국 6 · 경제산업국 4 · 문화관광국 6 ·
@@ -44,8 +45,9 @@ Footer: "근거: 「…」, 「…」" and "n / N".
 Run it to confirm the skill works:
 
 ```bash
+# run inside the skill folder
 node scripts/orgchart.mjs outline \
-  --input "examples/gunsan/군산시 행정기구 설치 조례.txt" \
-  --input "examples/gunsan/군산시 행정기구 설치 조례 시행규칙.txt" \
+  --decree "examples/gunsan/군산시 행정기구 설치 조례.txt" \
+  --rule "examples/gunsan/군산시 행정기구 설치 조례 시행규칙.txt" \
   --date 2026-01-23 --out /tmp/gunsan
 ```

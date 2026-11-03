@@ -17,39 +17,52 @@ legal hierarchy. Output is a real HWPX document whose boxes are 한글 글상자
 whose connectors are 선 objects, so the user edits it directly in 한글.
 
 Everything runs through one script with plain Node ≥18 (no `npm install`):
-`scripts/orgchart.mjs`.
+`scripts/orgchart.mjs` (`--help` lists the commands). Run it from the user's
+working folder with the script's full path; all file arguments and `--out` are
+relative to the current working directory.
 
 ## Workflow
 
 1. **Get the law text as files.** Ask the user to paste the full text, or copy
    it from 국가법령정보센터(law.go.kr) / 자치법규정보시스템(elis.go.kr) — 본문 전체,
    including article headings like `제5조(기획행정국에 두는 과)`. Save it as UTF-8
-   `.txt`. **File names decide the role**: a name containing `시행규칙` is read as
-   the rule; anything else as the 직제/조례. Both files are needed for a complete
+   `.txt` (files the user already has can be used as they are). Pass the 직제·조례
+   with `--decree` and the 시행규칙 with `--rule`. Both are needed for a complete
    chart — the 조례 installs 국·과, the 시행규칙 adds 담당관 보좌 관계, 직급 and
-   직속기관 하부 과. See `references/inputs.md`.
+   직속기관 하부 과. The script prints which file it read as which (`inputs`) —
+   check it. See `references/inputs.md`.
 
 2. **Draw the vertical chart.**
 
    ```bash
-   node scripts/orgchart.mjs outline \
-     --input "군산시 행정기구 설치 조례.txt" \
-     --input "군산시 행정기구 설치 조례 시행규칙.txt" \
+   node <skill>/scripts/orgchart.mjs outline \
+     --decree "군산시 행정기구 설치 조례.txt" \
+     --rule "군산시 행정기구 설치 조례 시행규칙.txt" \
      --date 2026-01-23 --out out/
    ```
 
    Writes `out/<기관>-조직도.hwpx` and `out/preview/NN.svg` (+ `.png` when
-   `rsvg-convert` exists). `--date` is the 기준일 printed as "2026. 1. 23. 현재".
+   `rsvg-convert` exists). `--date` is the 기준일 printed as "2026. 1. 23. 현재";
+   `2026-01-23` and `2026. 1. 23.` both work. Use the date the user names; if
+   none, the later 시행일 of the two texts (the date the drawn structure is in
+   force). `--input` (twice) also works: a file counts as the rule when its name
+   has `시행규칙` or its text opens with "이 규칙은".
 
 3. **Check before handing it over — always.**
    - Open the preview images and read them.
    - Cross-check against the source text: every 국·과·담당관 the text installs
-     should appear once, under the right parent, in the text's order. Page 1 of
-     a local-government chart prints a count line such as
-     `본청 7국 4담당관 39과 · 직속기관 2 · 사업소 1` — recount from the text and
-     compare. Report any mismatch instead of hiding it.
-   - `node scripts/orgchart.mjs check out/<파일>.hwpx` re-parses the HWPX with
-     rhwp when it is installed (page count, IR round-trip).
+     should appear once, under the right parent, in the text's order. How to
+     recount (local government): 국 = names in the "…국을 둔다" article; 과 = the
+     names in each "○○국에 …과를 둔다"; 담당관 = names in "시장 밑에 / 부시장 밑에
+     …담당관을 둔다"; 직속기관 = what "시에 …를 설치한다" installs in the 직속기관
+     chapter (보건소·농업기술센터 — their 지소·센터·상담소 are not counted);
+     사업소 = names ending in 사업소. Compare with the count line on page 1
+     (e.g. `본청 7국 4담당관 39과 · 직속기관 2 · 사업소 1`). Report any mismatch
+     instead of hiding it.
+   - `node <skill>/scripts/orgchart.mjs check out/<파일>.hwpx` re-parses the HWPX
+     with [rhwp](https://github.com/edwardkim/rhwp) when it is on PATH or in
+     `~/.local/bin` (page count, IR round-trip). Without rhwp, rely on the
+     preview check above and ask the user to open the file in 한글 once.
 
 4. **Reorganization sheets (optional).** Prepare the 개편안 text the same way
    (amended 조례·시행규칙, or the current text edited to the proposal), then:

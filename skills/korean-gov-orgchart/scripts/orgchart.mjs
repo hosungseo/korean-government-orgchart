@@ -18,18 +18,19 @@ import { renderNativeManifestSvg } from "./render-native-manifest.mjs";
 
 const USAGE = `직제·행정기구 설치 조례 → 조직도
 
-  outline  --input <직제|조례.txt> --input <시행규칙.txt> [--date YYYY-MM-DD] [--institution 기관명] --out <폴더>
+  outline  --decree <직제|조례.txt> --rule <시행규칙.txt> [--date 2026-01-23] [--institution 기관명] --out <폴더>
+           (또는 --input을 두 번: 이름에 '시행규칙'이 있거나 본문이 "이 규칙은"으로 시작하는 파일을 시행규칙으로 읽음)
            세로 조직도(1단, A4 세로) 편집형 HWPX + 쪽별 미리보기
-  compare  --stage <조례.txt>[,<시행규칙.txt>] (2~4번) [--stage-date …] [--label …] --out <폴더>
+  compare  --stage <조례.txt>,<시행규칙.txt> (2~4번) [--stage-date …] [--label …] --out <폴더>
            개편 전·후 대비표(2단 A4 세로, 3~4단 A3 가로) HWPX + 미리보기
   check    <파일.hwpx>   생성 결과 점검(rhwp가 있으면 재파싱·쪽 수 검증)
 
-파일 이름에 '시행규칙'이 들어간 파일을 시행규칙으로, 나머지를 직제·조례로 읽습니다.`;
+경로는 현재 작업 폴더 기준입니다. 날짜는 2026-01-23 또는 2026. 1. 23. 형식.`;
 
 export async function main(argv = process.argv.slice(2)) {
   const [command, ...rest] = argv;
   const args = parseArgs(rest);
-  if (!command || command === "help" || args.help) {
+  if (!command || ["help", "--help", "-h"].includes(command) || args.help) {
     console.log(USAGE);
     return 0;
   }
@@ -40,13 +41,15 @@ export async function main(argv = process.argv.slice(2)) {
 }
 
 async function outline(args) {
-  const inputs = list(args.input);
-  if (!inputs.length) throw new Error("--input에 직제(또는 설치 조례)와 시행규칙 텍스트 파일을 지정하세요.");
-  const stage = await readStage(inputs, args.date, args.institution);
+  const decree = list(args.decree).map((file) => ({ file, role: "decree" }));
+  const rule = list(args.rule).map((file) => ({ file, role: "rule" }));
+  const inputs = [...decree, ...rule, ...list(args.input).map((file) => ({ file }))];
+  if (!inputs.length) throw new Error("--decree(직제·설치 조례)와 --rule(시행규칙) 텍스트 파일을 지정하세요.");
+  const stage = await readStage(inputs, normalizeDate(args.date), args.institution);
   const workflow = buildNativeLawWorkflow({ ...stage, focus: args.focus });
   const name = `${safe(workflow.summary.institution)}-조직도`;
   const result = await writeOutputs(workflow, requiredOut(args), name);
-  print({ ...summaryOf(workflow), ...result });
+  print({ ...summaryOf(workflow, stage.roles), ...result });
   return 0;
 }
 
@@ -57,7 +60,8 @@ async function compare(args) {
   const labels = list(args.label);
   const stages = [];
   for (const [index, value] of stageArgs.entries()) {
-    const stage = await readStage(value.split(",").map((item) => item.trim()).filter(Boolean), dates[index], args.institution);
+    const files = value.split(",").map((item) => item.trim()).filter(Boolean).map((file) => ({ file }));
+    const stage = await readStage(files, normalizeDate(dates[index]), args.institution);
     stages.push({ ...stage, ...(labels[index] ? { label: labels[index] } : {}) });
   }
   const workflow = buildNativeComparisonWorkflow({ stages, focus: args.focus, onePage: true });
@@ -106,18 +110,38 @@ async function check(file) {
 }
 
 async function readStage(files, asOf, institution) {
-  const stage = { decreeText: "", ruleText: "", asOf, institution };
-  for (const file of files) {
+  const stage = { decreeText: "", ruleText: "", asOf, institution, roles: [] };
+  for (const { file, role } of files) {
     const text = await fs.readFile(path.resolve(file), "utf8");
-    if (/시행규칙/.test(path.basename(file))) stage.ruleText += `\n${text}`;
+    const resolvedRole = role || roleOf(file, text);
+    if (resolvedRole === "rule") stage.ruleText += `\n${text}`;
     else stage.decreeText += `\n${text}`;
+    stage.roles.push({ file: path.basename(file), role: resolvedRole === "rule" ? "시행규칙" : "직제·조례" });
   }
-  if (!stage.decreeText.trim() && !stage.ruleText.trim()) throw new Error(`읽을 문언이 없습니다: ${files.join(", ")}`);
+  if (!stage.decreeText.trim() && !stage.ruleText.trim()) throw new Error(`읽을 문언이 없습니다: ${files.map(({ file }) => file).join(", ")}`);
   return stage;
 }
 
-function summaryOf(workflow) {
+// 이름에 '시행규칙'이 있거나, 이름이 역할을 말하지 않을 때 본문 첫머리가
+// 「…시행규칙」·"이 규칙은"이면 시행규칙으로 본다.
+function roleOf(file, text) {
+  const name = path.basename(file);
+  if (/시행규칙/.test(name)) return "rule";
+  if (/직제|조례/.test(name)) return "decree";
+  const head = String(text).slice(0, 1500);
+  return /이\s*규칙은|시행규칙/.test(head) && !/이\s*(?:조례|영)은/.test(head) ? "rule" : "decree";
+}
+
+function normalizeDate(value) {
+  if (!value || value === true) return undefined;
+  const parts = String(value).match(/(\d{4})\D+(\d{1,2})\D+(\d{1,2})/);
+  if (!parts) return String(value);
+  return `${parts[1]}-${parts[2].padStart(2, "0")}-${parts[3].padStart(2, "0")}`;
+}
+
+function summaryOf(workflow, roles) {
   return {
+    ...(roles ? { inputs: roles } : {}),
     institution: workflow.summary.institution,
     asOf: workflow.summary.asOf,
     pageCount: workflow.summary.pageCount,

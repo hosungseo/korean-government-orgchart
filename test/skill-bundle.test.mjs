@@ -20,9 +20,9 @@ test("스킬만으로 군산시 예시를 세로 조직도 HWPX로 만든다", (
     const run = spawnSync(process.execPath, [
       path.join(skill, "scripts", "orgchart.mjs"),
       "outline",
-      "--input", path.join(skill, "examples", "gunsan", "군산시 행정기구 설치 조례.txt"),
-      "--input", path.join(skill, "examples", "gunsan", "군산시 행정기구 설치 조례 시행규칙.txt"),
-      "--date", "2026-01-23",
+      "--decree", path.join(skill, "examples", "gunsan", "군산시 행정기구 설치 조례.txt"),
+      "--rule", path.join(skill, "examples", "gunsan", "군산시 행정기구 설치 조례 시행규칙.txt"),
+      "--date", "2026. 1. 23.",
       "--out", out,
     ], { encoding: "utf8", cwd: os.tmpdir() });
     assert.equal(run.status, 0, run.stderr);

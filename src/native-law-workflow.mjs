@@ -1400,6 +1400,7 @@ function outlineLegendObjects(graph, { y }) {
     ["unit", "과", nodes.some((node) => node.kind === "assistant" && /과$/.test(node.name))],
     ["advisor", "보좌기관(점선)", nodes.some((node) => node.kind === "advisor")],
     ["agency", isLocal ? "직속기관·사업소" : "소속기관", nodes.some((node) => node.kind === "affiliated" && node.metadata?.affiliationType !== "branch")],
+    ["branch", "하부 기관(지소·상담소)", nodes.some((node) => node.metadata?.affiliationType === "branch")],
   ].filter(([, , present]) => present);
   const samples = {
     head: { fill: COLORS.headFill, stroke: COLORS.headLine, dash: "solid", strokeWidthMm: 0.55 },
@@ -1407,6 +1408,7 @@ function outlineLegendObjects(graph, { y }) {
     unit: { fill: COLORS.leafFill, stroke: COLORS.leafLine, dash: "solid", strokeWidthMm: 0.3 },
     advisor: { fill: COLORS.advisorFill, stroke: COLORS.advisorLine, dash: "dash", strokeWidthMm: 0.3 },
     agency: { fill: COLORS.affiliateFill, stroke: COLORS.affiliateLine, dash: "solid", strokeWidthMm: 0.42 },
+    branch: { fill: COLORS.leafFill, stroke: COLORS.affiliateLine, dash: "solid", strokeWidthMm: 0.3 },
   };
   const objects = [];
   let x = 12;

@@ -39,15 +39,29 @@ const PAGE_A3_LANDSCAPE = Object.freeze({
 // 개요와 하부조직으로 나누고, 사용자가 지정한 focus 출력은 기존처럼
 // 해당 하위 트리만 독립적으로 분할한다.
 const DEFAULT_MAX_ROWS = 23;
-// 세로 조직도(1단)는 A4 한 장을 혼자 쓴다. 23행 × 9.8mm = 225mm라 본문 틀
-// (248mm) 안에 들어가고, 상자 8.4mm는 한글 줄간격 160%의 10pt 글자와
-// 안쪽 여백 1.2mm×2를 담는다(글자 상한 = 상자 높이 × 1.28).
+// 세로 조직도(1단)는 A4 한 장을 혼자 쓴다. 23행 × 9.8mm = 225mm에 묶음
+// 사이 틈을 더해도 본문 틀 안에 들어간다. 상자 8.4mm에서 위아래 여백
+// 0.6mm를 빼면 7.2mm로, 한글 줄간격 160%의 12pt(6.8mm)까지 담는다.
+// 글자·굵기·폭·선 굵기는 직급 단계(기관장 > 국·소속기관 > 과·보좌기관)로
+// 나눠 흑백 인쇄에서도 단계가 보이게 한다.
 const SINGLE_OUTLINE_SIZING = Object.freeze({
-  maxBoxWidthMm: 80,
   rowPitchMm: 9.8,
   boxHeightMm: 8.4,
-  fontCapPt: Object.freeze({ root: 10.5, node: 10 }),
+  groupGapMm: 3.6,
+  center: true,
+  // 오른쪽 끝을 한 줄로 맞춘다: 가장 깊은 단의 상자 폭이 이 값이고, 한 단
+  // 올라갈 때마다 들여쓰기만큼 넓어진다(기관장이 가장 넓다).
+  alignedLeafWidthMm: 58,
+  paddingXMm: 2.4,
+  paddingYMm: 0.6,
+  tiers: Object.freeze({
+    head: Object.freeze({ fontSizePt: 12, bold: true, widthMm: 70, strokeWidthMm: 0.55 }),
+    bureau: Object.freeze({ fontSizePt: 11, bold: true, widthMm: 64, strokeWidthMm: 0.42 }),
+    unit: Object.freeze({ fontSizePt: 10, bold: false, widthMm: 56, strokeWidthMm: 0.3 }),
+  }),
 });
+const PT_TO_MM = 0.3528;
+const HWP_LINE_SPACING = 1.6;
 const COMPARISON_GUTTER = 18;
 const CHANGE_LINK_COLORS = Object.freeze(["#B45309", "#0F766E", "#5B21B6", "#C2410C", "#155E75"]);
 const CHANGE_LINK_DASH = "2.1 1.35";
@@ -68,7 +82,7 @@ const COLORS = Object.freeze({
   muted: "#64748B",
   quiet: "#7B8794",
   edge: "#64748B",
-  headFill: "#DCE7F4",
+  headFill: "#C9D9EE",
   headLine: "#244C7A",
   headText: "#102A43",
   officeFill: "#FFF4A3",
@@ -82,8 +96,8 @@ const COLORS = Object.freeze({
   transfer: "#4A6F8C",
   advisorFill: "#F4F6F8",
   advisorLine: "#7C8797",
-  affiliateFill: "#E1EFDF",
-  affiliateLine: "#4B7A4E",
+  affiliateFill: "#C8E0C4",
+  affiliateLine: "#3D6B40",
   temporaryFill: "#EEE9FA",
   temporaryLine: "#6D5BB3",
 });
@@ -859,8 +873,17 @@ function buildPrimaryTree(graph) {
     if (!children.has(edge.parent)) children.set(edge.parent, []);
     children.get(edge.parent).push(edge.child);
   }
-  for (const ids of children.values()) {
-    ids.sort((left, right) => compareNodes(graph.nodes.get(left), graph.nodes.get(right)));
+  for (const [parentId, ids] of children) {
+    // 기관장 직속 보좌기관(대변인·새만금정책담당관 등)은 부기관장 계선보다 먼저
+    // 적는다. 뒤에 두면 부기관장 밑 실·국 전체를 지난 맨 끝에 붙어 버린다.
+    const headStaffFirst = graph.nodes.get(parentId)?.kind === "head";
+    const staffOrder = (id) => (
+      headStaffFirst && parentEdge.get(id)?.type === "advisor" ? 0 : 1
+    );
+    ids.sort((left, right) => (
+      staffOrder(left) - staffOrder(right)
+      || compareNodes(graph.nodes.get(left), graph.nodes.get(right))
+    ));
   }
   return { parentEdge, children };
 }
@@ -903,9 +926,10 @@ function buildPagePlans(graph, tree, focusNodes, maxRows) {
   if (!head) return allRoots.flatMap((id) => splitSubtreePlan(graph, tree, id, maxRows));
 
   const deputy = graph.findDeputy();
+  const isLocal = graph.meta?.governmentLevel === "local";
   const overviewIds = breadthFirstIds([head.id], tree.children, Math.min(maxRows, 24), 2);
   const plans = [{
-    subtitle: "본부 기구 개요",
+    subtitle: isLocal ? "본청 기구" : "본부 기구 개요",
     rootIds: [head.id],
     nodeIds: overviewIds,
     kind: "overview",
@@ -914,13 +938,14 @@ function buildPagePlans(graph, tree, focusNodes, maxRows) {
   const branchRoots = uniq(branchParents.flatMap((id) => tree.children.get(id) || []))
     .filter((id) => id !== deputy?.id && (tree.children.get(id)?.length || 0) > 0);
   const detailPlans = branchRoots.flatMap((id) => splitSubtreePlan(graph, tree, id, maxRows));
-  const affiliatePlans = affiliateRoots.flatMap((id) => splitSubtreePlan(graph, tree, id, maxRows, "소속기관"));
-  plans.push(...packSmallPlans(detailPlans, maxRows, "본부 하부조직"));
+  const affiliateLabel = isLocal ? "직속기관·사업소" : "소속기관";
+  const affiliatePlans = affiliateRoots.flatMap((id) => splitSubtreePlan(graph, tree, id, maxRows, affiliateLabel));
+  plans.push(...packSmallPlans(detailPlans, maxRows, isLocal ? "본청 국별 하부조직" : "본부 하부조직", graph));
 
   // 소속기관이 한두 개뿐인 기관은 그것만을 위한 빈약한 셋째 쪽을 만들지
   // 않고 개요 쪽에 함께 표시한다. 원자력안전위원회처럼 본부 상세 한 쪽과
   // 소속기관 1개가 있는 구조는 이 규칙으로 정확히 2쪽이 된다.
-  const packedAffiliates = packSmallPlans(affiliatePlans, maxRows, "소속기관");
+  const packedAffiliates = packSmallPlans(affiliatePlans, maxRows, affiliateLabel, graph);
   if (packedAffiliates.length === 1) {
     const overview = plans[0];
     const affiliate = packedAffiliates[0];
@@ -928,7 +953,7 @@ function buildPagePlans(graph, tree, focusNodes, maxRows) {
     if (combinedIds.length <= maxRows) {
       plans[0] = {
         ...overview,
-        subtitle: `${overview.subtitle} · 소속기관`,
+        subtitle: `${overview.subtitle} · ${affiliateLabel}`,
         rootIds: uniq([...overview.rootIds, ...affiliate.rootIds]),
         nodeIds: combinedIds,
       };
@@ -945,29 +970,51 @@ function buildPagePlans(graph, tree, focusNodes, maxRows) {
   return plans;
 }
 
-function packSmallPlans(plans, maxRows, label) {
+function packSmallPlans(plans, maxRows, label, graph = null) {
   if (!plans.length) return [];
-  const packed = [];
-  let current = null;
-  const flush = () => {
-    if (!current) return;
-    packed.push(current);
-    current = null;
+  const pack = (limit) => {
+    const packed = [];
+    let current = null;
+    const flush = () => {
+      if (!current) return;
+      packed.push(current);
+      current = null;
+    };
+    for (const plan of plans) {
+      const candidateIds = current ? uniq([...current.nodeIds, ...plan.nodeIds]) : plan.nodeIds;
+      const repeatedSplitRoot = current && current.rootIds.some((id) => plan.rootIds.includes(id));
+      if (current && (candidateIds.length > limit || repeatedSplitRoot)) flush();
+      if (!current) {
+        current = { ...plan, rootIds: [...plan.rootIds], nodeIds: [...plan.nodeIds] };
+      } else {
+        current.rootIds = uniq([...current.rootIds, ...plan.rootIds]);
+        current.nodeIds = uniq([...current.nodeIds, ...plan.nodeIds]);
+      }
+    }
+    flush();
+    return packed;
   };
-  for (const plan of plans) {
-    const candidateIds = current ? uniq([...current.nodeIds, ...plan.nodeIds]) : plan.nodeIds;
-    const repeatedSplitRoot = current && current.rootIds.some((id) => plan.rootIds.includes(id));
-    if (current && (candidateIds.length > maxRows || repeatedSplitRoot)) flush();
-    if (!current) {
-      current = { ...plan, rootIds: [...plan.rootIds], nodeIds: [...plan.nodeIds] };
-    } else {
-      current.rootIds = uniq([...current.rootIds, ...plan.rootIds]);
-      current.nodeIds = uniq([...current.nodeIds, ...plan.nodeIds]);
+  // 쪽 수는 줄이지 않고 쪽마다 행 수를 고르게 한다(예: 20·20·6 → 15·18·13).
+  let packed = pack(maxRows);
+  const total = packed.reduce((sum, plan) => sum + plan.nodeIds.length, 0);
+  for (let limit = Math.ceil(total / packed.length); limit < maxRows; limit += 1) {
+    const balanced = pack(limit);
+    if (balanced.length <= packed.length) {
+      packed = balanced;
+      break;
     }
   }
-  flush();
+  const rangeLabel = (plan) => {
+    if (!graph || plan.rootIds.length < 2) return "";
+    const names = plan.rootIds.map((id) => graph.nodes.get(id)?.name).filter(Boolean);
+    return names.length > 1 ? `${names[0]}~${names.at(-1)}` : "";
+  };
   if (packed.length === 1) return packed.map((plan) => ({ ...plan, subtitle: label }));
-  return packed.map((plan, index) => ({ ...plan, subtitle: `${label} (${index + 1}/${packed.length})` }));
+  return packed.map((plan, index) => ({
+    ...plan,
+    subtitle: `${label} (${index + 1}/${packed.length})`,
+    rangeLabel: rangeLabel(plan),
+  }));
 }
 
 function splitSubtreePlan(graph, tree, rootId, maxRows, prefix = "") {
@@ -1044,14 +1091,18 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
   // 강제하면 마지막 행이 대역과 용지 밖으로 밀려난다. 행 간격과 상자 높이를
   // 실제 대역 높이에 맞춰 함께 축소해, 좁더라도 항상 편집 가능한 용지 안에 둔다.
   const maxPitch = options.rowPitchMm ?? 8.35;
-  const pitch = Math.min(maxPitch, frameHeight / Math.max(rows.length, 1));
+  const groupGap = options.groupGapMm || 0;
+  const groupStarts = rows.filter((row, index) => index > 0 && row.depth === 0).length;
+  const pitch = Math.min(maxPitch, (frameHeight - groupGap * groupStarts) / Math.max(rows.length, 1));
   const boxHeight = Math.min(options.boxHeightMm ?? 7.2, Math.max(1.8, pitch - Math.min(1.05, pitch * 0.22)), pitch);
   const maxDepth = Math.max(0, ...rows.map((row) => row.depth));
   const indent = Math.min(columnWidth > 120 ? 11.5 : 7.2, Math.max(5.4, (columnWidth * 0.36) / Math.max(1, maxDepth)));
   const idPrefix = idKey ? `${idKey}-` : "";
   const positions = new Map();
   const boxes = [];
+  let gapOffset = 0;
   rows.forEach((row, index) => {
+    if (index > 0 && row.depth === 0) gapOffset += groupGap;
     const node = graph.nodes.get(row.id);
     const parentName = graph.nodes.get(tree.parentEdge.get(row.id)?.parent)?.name || "";
     const officeName = officeNameFor(row.id, graph, tree);
@@ -1060,8 +1111,9 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
         selected.has(childId) && tree.parentEdge.get(childId)?.type === "jurisdiction"
       ));
     const x = round(frame.left + row.depth * indent);
-    const y = round(frame.top + index * pitch);
+    const y = round(frame.top + gapOffset + index * pitch);
     const style = styleForNode(node, row.depth, roots.includes(row.id), { jurisdictionContainer });
+    const tier = options.tiers?.[sizeTierFor(node, style)];
     const displayLabel = contextualNodeLabel(node, {
       isRoot: roots.includes(row.id),
       parentName,
@@ -1075,14 +1127,23 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
     // 세로 조직도(1단)처럼 프레임이 넓을 때 상자가 프레임 전체 폭으로 늘어나지
     // 않도록 상한을 둘 수 있다. 좌우 2단 대비표의 열폭(약 83mm)이 기준이다.
     const wideCap = Number.isFinite(options.maxBoxWidthMm) ? options.maxBoxWidthMm : Infinity;
-    const width = round(options.compactWidth
-      ? Math.min(availableWidth, Math.max(compactMinWidth, Math.min(compactMaxWidth, compactContentWidth)))
-      : Math.max(columnWidth > 120 ? 42 : 28, Math.min(availableWidth, wideCap)));
+    const alignedRight = options.alignedLeafWidthMm
+      ? frame.left + maxDepth * indent + options.alignedLeafWidthMm
+      : null;
+    const width = round(alignedRight
+      ? Math.min(availableWidth, alignedRight - x)
+      : tier
+        ? Math.min(availableWidth, tier.widthMm)
+      : options.compactWidth
+        ? Math.min(availableWidth, Math.max(compactMinWidth, Math.min(compactMaxWidth, compactContentWidth)))
+        : Math.max(columnWidth > 120 ? 42 : 28, Math.min(availableWidth, wideCap)));
     const fontCap = options.fontCapPt || {};
-    const fontSizePt = round(Math.min(
-      style.root ? (fontCap.root ?? 8.4) : (fontCap.node ?? 7.2),
-      Math.max(3.6, boxHeight * 1.28),
-    ));
+    const fontSizePt = round(tier
+      ? Math.min(tier.fontSizePt, (boxHeight - 2 * (options.paddingYMm ?? 1.2)) / (PT_TO_MM * HWP_LINE_SPACING))
+      : Math.min(
+        style.root ? (fontCap.root ?? 8.4) : (fontCap.node ?? 7.2),
+        Math.max(3.6, boxHeight * 1.28),
+      ));
     const objectId = `${idPrefix}node-${node.id}`;
     const geometry = { x, y, width, height: round(boxHeight) };
     positions.set(row.id, { ...geometry, objectId, centerY: round(y + boxHeight / 2), bottom: round(y + boxHeight) });
@@ -1094,15 +1155,17 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
       style: {
         fill: style.fill,
         stroke: style.stroke,
-        strokeWidthMm: style.root ? 0.42 : 0.3,
+        strokeWidthMm: tier ? tier.strokeWidthMm : style.root ? 0.42 : 0.3,
         dash: style.dash,
         textColor: style.text,
         fontFamily: "맑은 고딕",
         fontSizePt,
-        bold: style.bold,
+        bold: tier ? tier.bold : style.bold,
         align: "left",
         verticalAlign: "center",
-        paddingMm: 1.2,
+        paddingMm: options.paddingXMm ?? 1.2,
+        ...(options.paddingXMm != null ? { paddingXMm: options.paddingXMm } : {}),
+        ...(options.paddingYMm != null ? { paddingYMm: options.paddingYMm } : {}),
       },
       metadata: {
         role: "organization-node",
@@ -1118,6 +1181,17 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
       },
     });
   });
+
+  if (options.center && boxes.length) {
+    // 들여쓴 나무 전체를 본문 틀 가운데로 옮긴다(줄기선은 아래에서 위치로 계산).
+    const minX = Math.min(...boxes.map((box) => box.geometry.x)) - 2.8;
+    const maxX = Math.max(...boxes.map((box) => box.geometry.x + box.geometry.width));
+    const shift = round(Math.max(0, (frame.right - frame.left - (maxX - minX)) / 2 - (minX - frame.left)));
+    if (shift > 0) {
+      for (const box of boxes) box.geometry.x = round(box.geometry.x + shift);
+      for (const position of positions.values()) position.x = round(position.x + shift);
+    }
+  }
 
   const lines = [];
   for (const parentId of plan.nodeIds) {
@@ -1163,11 +1237,13 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
 function buildOutlineManifest(graph, tree, plan, context) {
   const comparison = context.layout === NATIVE_LAW_LAYOUTS.COMPARISON_TWO_COLUMN;
   const comparisonDividerX = 104;
+  const isLocal = graph.meta?.governmentLevel === "local";
+  const legend = !comparison && context.index === 0 ? outlineLegendObjects(graph, { y: 268.4 }) : [];
   const treeLayout = layoutTreeInFrame(graph, tree, plan, {
-    left: 14,
-    right: comparison ? comparisonDividerX - 7 : 196,
+    left: comparison ? 14 : 12,
+    right: comparison ? comparisonDividerX - 7 : 198,
     top: 31,
-    bottom: 279.5,
+    bottom: legend.length ? 264 : 277.5,
   }, "", comparison ? {} : SINGLE_OUTLINE_SIZING);
   const boxes = treeLayout.boxes;
   const lines = treeLayout.lines.map((line) => ({
@@ -1176,19 +1252,27 @@ function buildOutlineManifest(graph, tree, plan, context) {
   }));
 
   const title = `${graph.meta.institution} 조직도`;
-  const basis = (context.lawNames || []).some((name) => /조례/.test(name)) ? "조례" : "직제";
-  const asOf = context.asOf ? `${basis} 기준 ${displayDateLoose(context.asOf)}` : `${basis}·시행규칙 문언 기준`;
+  // 지자체 기구도는 "(2026. 1. 23. 현재)"가 관행이다. 조례와 시행규칙의 시행일이
+  // 달라 "조례 기준 ○○"은 사실과 어긋날 수 있다.
+  const asOf = context.asOf
+    ? isLocal ? `${displayDateLoose(context.asOf)} 현재` : `직제 기준 ${displayDateLoose(context.asOf)}`
+    : isLocal ? "조례·시행규칙 문언 기준" : "직제·시행규칙 문언 기준";
+  const subtitle = [plan.subtitle, plan.rangeLabel].filter(Boolean).join(" · ");
+  const summary = isLocal && context.index === 0 ? localStructureSummary(graph) : "";
+  const sources = (context.lawNames || []).map((name) => `「${name}」`).join(", ");
   const labels = [
-    textObject("document-title", 12, 7, 128, 7.6, title, { fontSizePt: 13, bold: true }),
-    textObject("document-asof", 142, 7, 56, 7.6, asOf, { fontSizePt: 8, bold: true, align: "right", color: COLORS.muted }),
-    textObject("document-subtitle", 12, 16.4, 146, 6.2, plan.subtitle, { fontSizePt: 8.6, bold: true, color: COLORS.muted }),
-    textObject("document-page", 160, 16.4, 38, 6.2, `${context.index + 1} / ${context.pageCount}`, { fontSizePt: 8, bold: true, align: "right", color: COLORS.quiet }),
-    textObject("footer-source", 12, 285.6, 150, 6.2, `${context.lawNames.join(" · ")} · 자동 파싱 후 네이티브 객체 작도`, { fontSizePt: 6.8, color: COLORS.quiet }),
-    textObject("footer-format", 164, 285.6, 34, 6.2, "A4 세로 · 편집형", { fontSizePt: 6.8, bold: true, align: "right", color: COLORS.muted }),
+    textObject("document-title", 12, 6, 128, 9, title, { fontSizePt: 15, bold: true }),
+    textObject("document-asof", 140, 6, 58, 9, asOf, { fontSizePt: 8.5, align: "right", color: COLORS.muted }),
+    textObject("document-subtitle", 12, 16.8, summary ? 92 : 186, 6.6, subtitle, { fontSizePt: 11, bold: true }),
+    ...(summary
+      ? [textObject("document-summary", 104, 16.8, 94, 6.6, summary, { fontSizePt: 8.5, align: "right", color: COLORS.muted })]
+      : []),
+    textObject("footer-source", 12, 281.4, 160, 5, sources ? `근거: ${sources}` : "", { fontSizePt: 7.5, color: "#5A6573" }),
+    textObject("footer-page", 172, 281.4, 26, 5, `${context.index + 1} / ${context.pageCount}`, { fontSizePt: 7.5, align: "right", color: "#5A6573" }),
   ];
   const rules = [
     lineObject("header-rule", 12, 25.7, 198, 25.7, { role: "header-rule", color: "#AAB3BC", widthMm: 0.3 }),
-    lineObject("footer-rule", 12, 283.5, 198, 283.5, { role: "footer-rule", color: "#D4DAE0", widthMm: 0.24 }),
+    lineObject("footer-rule", 12, 280.2, 198, 280.2, { role: "footer-rule", color: "#AAB3BC", widthMm: 0.25 }),
   ];
   const comparisonObjects = comparison
     ? [
@@ -1215,7 +1299,7 @@ function buildOutlineManifest(graph, tree, plan, context) {
       }),
     ]
     : [];
-  const objects = [...rules, ...comparisonObjects, ...lines, ...boxes, ...labels];
+  const objects = [...rules, ...comparisonObjects, ...lines, ...boxes, ...legend, ...labels];
   const suffix = context.pageCount > 1 ? `-${context.index + 1}` : "";
   return {
     schema: NATIVE_LAW_SCHEMA,
@@ -1246,6 +1330,10 @@ function styleForNode(node, depth, isRoot, options = {}) {
   if (node.kind === "head" || node.kind === "deputy") {
     return { fill: COLORS.headFill, stroke: COLORS.headLine, text: COLORS.headText, dash: "solid", bold: true, root: true };
   }
+  if (node.kind === "affiliated" && metadata.affiliationType === "branch") {
+    // 보건지소·농민상담소 같은 소속기관의 하부 기관: 상위 기관과 같은 단으로 보이지 않게 한다.
+    return { fill: COLORS.leafFill, stroke: COLORS.affiliateLine, text: COLORS.ink, dash: "solid", bold: false, root: false };
+  }
   if (node.kind === "affiliated") {
     return { fill: COLORS.affiliateFill, stroke: COLORS.affiliateLine, text: COLORS.ink, dash: "solid", bold: true, root: isRoot };
   }
@@ -1268,6 +1356,79 @@ function styleForNode(node, depth, isRoot, options = {}) {
     return { fill: COLORS.officeFill, stroke: COLORS.officeLine, text: COLORS.ink, dash: "solid", bold: true, root: true };
   }
   return { fill: COLORS.bureauFill, stroke: COLORS.bureauLine, text: COLORS.ink, dash: "solid", bold: true, root: false };
+}
+
+// "본청 7국 4담당관 39과 · 직속기관 2 · 사업소 1" — 지자체 기구도 머리의 기구 수.
+function localStructureSummary(graph) {
+  const nodes = [...graph.nodes.values()];
+  const underAgency = (node) => {
+    const seen = new Set();
+    let current = node;
+    while (current && !seen.has(current.id)) {
+      seen.add(current.id);
+      if (current.kind === "affiliated") return true;
+      const parent = graph.parentsOf(current.id)[0]?.node;
+      current = parent;
+    }
+    return false;
+  };
+  const headquarters = nodes.filter((node) => !underAgency(node));
+  const count = (list, predicate) => list.filter(predicate).length;
+  const parts = [
+    ["국", count(headquarters, (node) => node.kind === "assistant" && /국$/.test(node.name))],
+    ["담당관", count(headquarters, (node) => node.kind === "advisor" && /담당관$/.test(node.name))],
+    ["과", count(headquarters, (node) => node.kind === "assistant" && /과$/.test(node.name))],
+  ].filter(([, value]) => value > 0).map(([label, value]) => `${value}${label}`);
+  const direct = count(nodes, (node) => node.metadata?.affiliationType === "direct");
+  const business = count(nodes, (node) => node.metadata?.affiliationType === "business-office");
+  return [
+    parts.length ? `본청 ${parts.join(" ")}` : "",
+    direct ? `직속기관 ${direct}` : "",
+    business ? `사업소 ${business}` : "",
+  ].filter(Boolean).join(" · ");
+}
+
+// 1쪽 아래 범례: 실제로 쓰인 상자 종류만 견본으로 보인다.
+function outlineLegendObjects(graph, { y }) {
+  const nodes = [...graph.nodes.values()];
+  const isLocal = graph.meta?.governmentLevel === "local";
+  const entries = [
+    ["head", isLocal ? "시장·부시장" : "기관장·차관", nodes.some((node) => node.kind === "head")],
+    ["bureau", nodes.some((node) => /(?:실|본부)$/.test(node.name)) ? "실·국" : "국", nodes.some((node) => node.kind === "assistant" && /(?:실|국|본부)$/.test(node.name))],
+    ["unit", "과", nodes.some((node) => node.kind === "assistant" && /과$/.test(node.name))],
+    ["advisor", "보좌기관(점선)", nodes.some((node) => node.kind === "advisor")],
+    ["agency", isLocal ? "직속기관·사업소" : "소속기관", nodes.some((node) => node.kind === "affiliated" && node.metadata?.affiliationType !== "branch")],
+  ].filter(([, , present]) => present);
+  const samples = {
+    head: { fill: COLORS.headFill, stroke: COLORS.headLine, dash: "solid", strokeWidthMm: 0.55 },
+    bureau: { fill: COLORS.bureauFill, stroke: COLORS.bureauLine, dash: "solid", strokeWidthMm: 0.42 },
+    unit: { fill: COLORS.leafFill, stroke: COLORS.leafLine, dash: "solid", strokeWidthMm: 0.3 },
+    advisor: { fill: COLORS.advisorFill, stroke: COLORS.advisorLine, dash: "dash", strokeWidthMm: 0.3 },
+    agency: { fill: COLORS.affiliateFill, stroke: COLORS.affiliateLine, dash: "solid", strokeWidthMm: 0.42 },
+  };
+  const objects = [];
+  let x = 12;
+  for (const [key, label] of entries) {
+    objects.push({
+      id: `legend-swatch-${key}`,
+      type: "rectangle",
+      geometry: { x, y: y + 0.6, width: 8, height: 4.4 },
+      style: samples[key],
+      metadata: { role: "legend" },
+    });
+    objects.push(textObject(`legend-label-${key}`, x + 9.6, y, 30, 5.6, label, { fontSizePt: 8, color: COLORS.muted, role: "legend" }));
+    x += 12 + Array.from(label).length * 3 + 4;
+  }
+  return objects;
+}
+
+// 1단 세로 조직도의 글자·폭·선 굵기 단계.
+function sizeTierFor(node, style) {
+  if (node.kind === "head" || node.kind === "deputy") return "head";
+  if (node.kind === "advisor" || node.metadata?.affiliationType === "branch") return "unit";
+  if (node.kind === "affiliated") return "bureau";
+  if (isDepartmentNode(node)) return "unit";
+  return style.bold ? "bureau" : "unit";
 }
 
 function gradeLetter(node) {

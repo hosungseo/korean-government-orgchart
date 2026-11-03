@@ -100,7 +100,8 @@ test("지방자치단체 세로 조직도는 조례 순서를 지키고 조례 �
   const workflow = buildNativeLawWorkflow({ decreeText: ordinance, ruleText: rule, asOf: "2026-01-23" });
   assert.equal(workflow.summary.institution, "시험시");
   const texts = workflow.manifests.flatMap((manifest) => manifest.objects.map((object) => object.text || ""));
-  assert.ok(texts.some((text) => text.includes("조례 기준 2026. 1. 23.")));
+  assert.ok(texts.some((text) => text === "2026. 1. 23. 현재"));
+  assert.ok(texts.includes("본청 2국 3담당관 5과 · 직속기관 2 · 사업소 1"));
   assert.ok(texts.some((text) => text.includes("시험시 행정기구 설치 조례")));
   assert.ok(!texts.some((text) => /직제/.test(text)));
   const order = texts.filter((text) => ["기획행정국", "안전건설국"].includes(text));
@@ -132,8 +133,12 @@ test("세로 조직도(1단)는 본문 10pt로 쓰되 글자가 상자 높이 �
   assert.ok(nodes.length > 10);
   for (const node of nodes) {
     assert.ok(node.style.fontSizePt >= 10, `${node.text} ${node.style.fontSizePt}pt`);
-    assert.ok(node.style.fontSizePt <= node.geometry.height * 1.28 + 1e-9, `${node.text} 상자 초과`);
-    assert.ok(node.geometry.y + node.geometry.height <= 279.5, `${node.text} 본문 틀 밖`);
+    if (["시장", "부시장"].includes(node.text)) assert.ok(node.style.fontSizePt >= 12, node.text);
+    if (/(?:과|담당관)$/.test(node.text)) assert.equal(node.style.bold, false, `${node.text} 굵기`);
+    // 한글 줄간격 160%: 글자 높이 = pt × 0.3528mm × 1.6, 위아래 안쪽 여백 포함.
+    const textHeight = node.style.fontSizePt * 0.3528 * 1.6 + 2 * (node.style.paddingYMm ?? node.style.paddingMm);
+    assert.ok(textHeight <= node.geometry.height + 1e-9, `${node.text} 상자 초과`);
+    assert.ok(node.geometry.y + node.geometry.height <= 278, `${node.text} 본문 틀 밖`);
   }
   const footer = workflow.manifests[0].objects.find((object) => object.id?.startsWith("footer-source"));
   assert.ok(footer.style.fontSizePt >= 6.5);

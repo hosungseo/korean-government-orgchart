@@ -70,6 +70,11 @@ function Assert-NativeStyle {
     if (@("top", "center", "bottom") -notcontains [string]$style.verticalAlign) { throw "$id 글상자의 세로 정렬 값이 올바르지 않습니다." }
     $padding = Get-NativeNumber $style.paddingMm "$id 안쪽 여백"
     if ($padding -lt 0) { throw "$id 글상자의 안쪽 여백은 0 이상이어야 합니다." }
+    foreach ($axis in @("paddingXMm", "paddingYMm")) {
+        if ($null -eq $style.PSObject.Properties[$axis]) { continue }
+        $value = Get-NativeNumber $style.$axis "$id $axis"
+        if ($value -lt 0) { throw "$id 글상자의 $axis 값은 0 이상이어야 합니다." }
+    }
 }
 
 function Read-NativeManifest {
@@ -315,12 +320,14 @@ function Add-NativeRectangle {
     $shape.HSet.SetItem("ShapeCreationType", 1)
 
     if ($WithText) {
-        $padding = Convert-ToHwpUnit ([double]$style.paddingMm)
+        # paddingXMm/paddingYMm(선택)는 좌우·위아래 안쪽 여백을 따로 준다. 없으면 paddingMm.
+        $paddingX = Convert-ToHwpUnit ([double]$(if ($null -ne $style.PSObject.Properties["paddingXMm"]) { $style.paddingXMm } else { $style.paddingMm }))
+        $paddingY = Convert-ToHwpUnit ([double]$(if ($null -ne $style.PSObject.Properties["paddingYMm"]) { $style.paddingYMm } else { $style.paddingMm }))
         $shape.ShapeListProperites.VertAlign = $script:Hwp.VAlign($(if ($style.verticalAlign -eq "center") { "Center" } else { "Top" }))
-        $shape.ShapeListProperites.MarginLeft = $padding
-        $shape.ShapeListProperites.MarginRight = $padding
-        $shape.ShapeListProperites.MarginTop = $padding
-        $shape.ShapeListProperites.MarginBottom = $padding
+        $shape.ShapeListProperites.MarginLeft = $paddingX
+        $shape.ShapeListProperites.MarginRight = $paddingX
+        $shape.ShapeListProperites.MarginTop = $paddingY
+        $shape.ShapeListProperites.MarginBottom = $paddingY
     }
 
     if (-not $script:Hwp.HAction.Execute("DrawObjCreatorRectangle", $shape.HSet)) {

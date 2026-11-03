@@ -1287,8 +1287,9 @@ function installLocalAgency(graph, parent, name, affiliationType, source) {
     metadata: { affiliationType, unitRole: "affiliated-institution", localAgency: true },
   });
   if (!node) return null;
-  // Branch offices (보건지소·농민상담소) follow the agency's own 과 in charts.
-  if (affiliationType === "branch") node.rank = 6;
+  // Agencies share one rank so they keep ordinance order (센터 would
+  // otherwise rank like a 과); branch offices follow the agency's own 과.
+  node.rank = affiliationType === "branch" ? 6 : 3;
   node.metadata = { ...node.metadata, affiliationType, unitRole: "affiliated-institution", localAgency: true };
   if (parent?.id === node.id) return node;
   const target = parent || root;

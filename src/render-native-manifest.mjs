@@ -7,7 +7,7 @@ export function escapeXml(value) {
 }
 
 function svgText(object, geometry, style) {
-  const padding = Number(style.paddingMm || 0);
+  const padding = Number(style.paddingXMm ?? style.paddingMm ?? 0);
   const fontSize = Number(style.fontSizePt || 6) * 0.352778;
   const raw = String(object.text ?? "");
   const lines = raw.split(/\r?\n/);

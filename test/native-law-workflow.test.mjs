@@ -103,7 +103,7 @@ ${departmentClauses}`,
   assert.equal(workflow.summary.pageCount, 2);
   assert.deepEqual(workflow.pages.map((page) => page.label), ["본부 기구 개요 · 소속기관", "본부 하부조직"]);
   assert.deepEqual(
-    workflow.manifests.map((manifest) => manifest.objects.find((object) => object.id === "document-page")?.text),
+    workflow.manifests.map((manifest) => manifest.objects.find((object) => object.id === "footer-page")?.text),
     ["1 / 2", "2 / 2"],
   );
   assert.ok(workflow.manifests.every((manifest) => analyzeNativeManifest(manifest).valid));

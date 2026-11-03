@@ -208,6 +208,17 @@ node src/cli.mjs build \
   --json outputs/기관.json
 ```
 
+### 한글 없이 HWPX 세로 조직도 · Agent Skill
+
+`outline` 명령은 세로 조직도(1단)를 **한글 설치 없이** 편집형 HWPX로 바로 씁니다. 상자는 한글 글상자, 연결선은 선 객체라 한글에서 그대로 고칠 수 있습니다. `compare-native --hwpx`는 개편 전·후 대비표(2~4단)를 같은 방식으로 씁니다.
+
+```bash
+node src/cli.mjs outline --input 조례.txt --input 시행규칙.txt --date 2026-01-23 \
+  --hwpx outputs/조직도.hwpx --preview-dir outputs/preview
+```
+
+같은 기능을 Claude Code·Codex용 Agent Skill로도 묶었습니다: [`skills/korean-gov-orgchart`](skills/korean-gov-orgchart/SKILL.md). Node만 있으면 `npm install` 없이 돌아갑니다(`~/.claude/skills/`에 폴더째 복사). 번들은 `node scripts/prepare-skill.mjs`로 `src/`에서 다시 만듭니다.
+
 ### 지방자치단체 (행정기구 설치 조례)
 
 시·군·구·도의 「○○시 행정기구 설치 조례」와 그 시행규칙 문언을 넣으면 지방자치단체 모드로 읽습니다. 데스크톱 앱에서는 조례를 첫째 칸, 시행규칙을 둘째 칸에 붙여 넣으면 됩니다.

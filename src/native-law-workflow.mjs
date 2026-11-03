@@ -862,10 +862,12 @@ function mergeFocusOptions(left = [], right = []) {
 
 function buildPrimaryTree(graph) {
   const parentEdge = new Map();
+  // A parent the user declared (@관계) is the one drawn, ahead of parsed edges.
+  const declared = (edge) => (edge?.sources || []).includes("사용자 지시문");
   for (const edge of graph.edges.values()) {
     const existing = parentEdge.get(edge.child);
-    const score = EDGE_PRIORITY[edge.type] || 0;
-    const existingScore = EDGE_PRIORITY[existing?.type] || -1;
+    const score = (EDGE_PRIORITY[edge.type] || 0) + (declared(edge) ? 100 : 0);
+    const existingScore = existing ? (EDGE_PRIORITY[existing.type] || 0) + (declared(existing) ? 100 : 0) : -1;
     if (!existing || score > existingScore) parentEdge.set(edge.child, edge);
   }
   const children = new Map();

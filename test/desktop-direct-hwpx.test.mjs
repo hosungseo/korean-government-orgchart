@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import JSZip from "jszip";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -17,7 +17,7 @@ test("데스크톱 화면용 HWPX 직접 작성기는 Node 전용 기능 없이 
   const script = `
     globalThis.window = globalThis;
     delete globalThis.Buffer;
-    const { createNativeHwpxBytes } = await import(${JSON.stringify(path.join(root, "desktop", "ui", "engine", "render-native-hwpx.mjs"))});
+    const { createNativeHwpxBytes } = await import(${JSON.stringify(pathToFileURL(path.join(root, "desktop", "ui", "engine", "render-native-hwpx.mjs")).href)});
     const manifest = { title: "시험", page: { paper: "A4", orientation: "portrait", widthMm: 210, heightMm: 297 },
       objects: [{ id: "a", type: "rect", geometry: { x: 20, y: 20, width: 40, height: 12 }, text: "기획과" }] };
     const bytes = await createNativeHwpxBytes(manifest);

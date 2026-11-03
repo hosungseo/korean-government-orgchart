@@ -862,10 +862,12 @@ function mergeFocusOptions(left = [], right = []) {
 
 function buildPrimaryTree(graph) {
   const parentEdge = new Map();
+  // A parent the user declared (@관계) is the one drawn, ahead of parsed edges.
+  const declared = (edge) => (edge?.sources || []).includes("사용자 지시문");
   for (const edge of graph.edges.values()) {
     const existing = parentEdge.get(edge.child);
-    const score = EDGE_PRIORITY[edge.type] || 0;
-    const existingScore = EDGE_PRIORITY[existing?.type] || -1;
+    const score = (EDGE_PRIORITY[edge.type] || 0) + (declared(edge) ? 100 : 0);
+    const existingScore = existing ? (EDGE_PRIORITY[existing.type] || 0) + (declared(existing) ? 100 : 0) : -1;
     if (!existing || score > existingScore) parentEdge.set(edge.child, edge);
   }
   const children = new Map();
@@ -1398,6 +1400,7 @@ function outlineLegendObjects(graph, { y }) {
     ["unit", "과", nodes.some((node) => node.kind === "assistant" && /과$/.test(node.name))],
     ["advisor", "보좌기관(점선)", nodes.some((node) => node.kind === "advisor")],
     ["agency", isLocal ? "직속기관·사업소" : "소속기관", nodes.some((node) => node.kind === "affiliated" && node.metadata?.affiliationType !== "branch")],
+    ["branch", "하부 기관(지소·상담소)", nodes.some((node) => node.metadata?.affiliationType === "branch")],
   ].filter(([, , present]) => present);
   const samples = {
     head: { fill: COLORS.headFill, stroke: COLORS.headLine, dash: "solid", strokeWidthMm: 0.55 },
@@ -1405,6 +1408,7 @@ function outlineLegendObjects(graph, { y }) {
     unit: { fill: COLORS.leafFill, stroke: COLORS.leafLine, dash: "solid", strokeWidthMm: 0.3 },
     advisor: { fill: COLORS.advisorFill, stroke: COLORS.advisorLine, dash: "dash", strokeWidthMm: 0.3 },
     agency: { fill: COLORS.affiliateFill, stroke: COLORS.affiliateLine, dash: "solid", strokeWidthMm: 0.42 },
+    branch: { fill: COLORS.leafFill, stroke: COLORS.affiliateLine, dash: "solid", strokeWidthMm: 0.3 },
   };
   const objects = [];
   let x = 12;

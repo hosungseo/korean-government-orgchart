@@ -143,3 +143,15 @@ test("세로 조직도(1단)는 본문 10pt로 쓰되 글자가 상자 높이 �
   const footer = workflow.manifests[0].objects.find((object) => object.id?.startsWith("footer-source"));
   assert.ok(footer.style.fontSizePt >= 6.5);
 });
+
+test("첫째 파일의 지시문도 적용되고, 세로 조직도는 지시문이 정한 상위 조직 밑에 그린다", () => {
+  const withDirectives = `@관계: 시장 > 디지털정보담당관 [보좌]\n@관계: 시험시 > 상수도사업소 [소속]\n${ordinance}`;
+  const graph = parseOrganizationTexts([withDirectives, rule]);
+  assert.ok(parentNames(graph, "디지털정보담당관").includes("시장"));
+  assert.deepEqual(parentNames(graph, "상수도사업소"), ["시험시"]);
+
+  const workflow = buildNativeLawWorkflow({ decreeText: withDirectives, ruleText: rule, asOf: "2026-01-23" });
+  const node = workflow.manifests.flatMap((manifest) => manifest.objects)
+    .find((object) => object.metadata?.role === "organization-node" && object.text === "디지털정보담당관");
+  assert.equal(node.metadata.parentName, "시장");
+});

@@ -67,7 +67,7 @@ export function parseOrganizationTexts(texts, options = {}) {
     text: normalizeWhitespace(text),
     source: options.sources?.[index] || `입력 ${index + 1}`,
   }));
-  const directives = Object.assign({}, ...documents.map((document) => parseDirectives(document.text)));
+  const directives = mergeDirectives(documents.map((document) => parseDirectives(document.text)));
   const institution =
     options.institution ||
     directives.institution ||
@@ -2122,6 +2122,20 @@ function parseDirectives(text) {
     }
   }
   return result;
+}
+
+// Directive lists from every input file combine; scalar settings (기관명,
+// 기준일 …) take the first file that states them. Object.assign let the last
+// file's empty lists erase directives written in an earlier file.
+function mergeDirectives(parsed) {
+  const merged = { relations: [], kinds: [], jurisdictions: [], changes: [] };
+  for (const item of parsed) {
+    for (const [key, value] of Object.entries(item)) {
+      if (Array.isArray(value)) merged[key] = [...(merged[key] || []), ...value];
+      else if (merged[key] === undefined) merged[key] = value;
+    }
+  }
+  return merged;
 }
 
 function applyDirectives(graph, directives) {

@@ -22,7 +22,8 @@ import { parseOrganizationTexts } from "./parser.mjs";
 import { renderReviewHtml } from "./render-html.mjs";
 import { renderSvg } from "./render-svg.mjs";
 import { runReviewPack } from "./review-pack.mjs";
-import { buildNativeComparisonWorkflow } from "./native-law-workflow.mjs";
+import { buildNativeComparisonWorkflow, buildNativeLawWorkflow } from "./native-law-workflow.mjs";
+import { createNativeHwpxBytes } from "./render-native-hwpx.mjs";
 import { nativePreviewWidth, renderNativeManifestSvg } from "./render-native-manifest.mjs";
 import { ensureParent, jsonReplacer, parseArgs, readInputs, writeText } from "./utils.mjs";
 
@@ -35,6 +36,7 @@ try {
   else if (command === "compare-json") await compareJsonCommand(args);
   else if (command === "compare-law") await compareLawCommand(args);
   else if (command === "compare-native") await compareNativeCommand(args);
+  else if (command === "outline") await outlineCommand(args);
   else if (command === "from-law") await fromLawCommand(args);
   else if (command === "fetch") await fetchCommand(args);
   else if (command === "inspect") await inspectCommand(args);
@@ -122,8 +124,11 @@ async function compareNativeCommand(args) {
       .toFile(pngPath);
     outputs.png = pngPath;
   }
+  if (stringArg(args, "hwpx")) {
+    outputs.hwpx = await writeNativeHwpx(workflow.manifests, stringArg(args, "hwpx"), `${workflow.summary.institution} 조직 대비`);
+  }
   if (stringArg(args, "out")) {
-    throw new Error("compare-native는 PPTX를 만들지 않습니다. --svg, --png, --json을 쓰거나 Windows 데스크톱에서 한글로 생성하세요.");
+    throw new Error("compare-native는 PPTX를 만들지 않습니다. --hwpx, --svg, --png, --json을 쓰세요.");
   }
   console.log(JSON.stringify({
     institution: workflow.summary.institution,
@@ -136,6 +141,60 @@ async function compareNativeCommand(args) {
     warnings: workflow.summary.warnings,
     outputs,
   }, null, 2));
+}
+
+/**
+ * 세로 조직도(1단): 직제·설치 조례와 시행규칙 문언 → 편집형 HWPX(한글 없이 직접 작성)
+ * + 쪽별 SVG/PNG 미리보기.
+ */
+async function outlineCommand(args) {
+  const inputs = args.input || [];
+  if (!inputs.length) throw new Error("outline은 --input에 직제(또는 설치 조례)와 시행규칙 텍스트를 지정하세요.");
+  const stage = await stageFromInputFiles(inputs, stringArg(args, "date"), stringArg(args, "institution"));
+  const workflow = buildNativeLawWorkflow({
+    ...stage,
+    focus: stringArg(args, "focus"),
+    maxRows: args["max-rows"] ? Number(args["max-rows"]) : undefined,
+  });
+  const outputs = {};
+  if (stringArg(args, "hwpx")) {
+    outputs.hwpx = await writeNativeHwpx(workflow.manifests, stringArg(args, "hwpx"), `${workflow.summary.institution} 조직도`);
+  }
+  const previewDir = stringArg(args, "preview-dir");
+  if (previewDir) {
+    const dir = path.resolve(previewDir);
+    await fs.mkdir(dir, { recursive: true });
+    const { default: sharp } = await import("sharp");
+    outputs.previews = [];
+    for (const [index, manifest] of workflow.manifests.entries()) {
+      const svg = renderNativeManifestSvg(manifest);
+      const base = path.join(dir, `${String(index + 1).padStart(2, "0")}`);
+      await writeText(`${base}.svg`, svg);
+      await sharp(Buffer.from(svg)).png().resize({ width: nativePreviewWidth(manifest) }).toFile(`${base}.png`);
+      outputs.previews.push(`${base}.png`);
+    }
+  }
+  if (stringArg(args, "json")) {
+    const jsonPath = path.resolve(stringArg(args, "json"));
+    await writeText(jsonPath, `${JSON.stringify(workflow.manifests, jsonReplacer, 2)}\n`);
+    outputs.json = jsonPath;
+  }
+  console.log(JSON.stringify({
+    institution: workflow.summary.institution,
+    asOf: workflow.summary.asOf,
+    pageCount: workflow.summary.pageCount,
+    pages: workflow.pages.map((page) => page.label),
+    nodeCount: workflow.summary.nodeCount,
+    warnings: workflow.summary.warnings,
+    outputs,
+  }, null, 2));
+}
+
+async function writeNativeHwpx(manifests, outPath, title) {
+  const resolved = path.resolve(outPath);
+  await ensureParent(resolved);
+  await fs.writeFile(resolved, await createNativeHwpxBytes(manifests, { title }));
+  return resolved;
 }
 
 async function loadNativeComparisonStages(args) {
@@ -170,7 +229,7 @@ async function loadNativeStage(stagePath, asOf, institution) {
   const stat = await fs.stat(resolved);
   if (stat.isDirectory()) {
     const files = await fs.readdir(resolved);
-    const decreeName = files.find((name) => /직제/.test(name) && !/시행규칙/.test(name) && name.endsWith(".txt"));
+    const decreeName = files.find((name) => /직제|조례/.test(name) && !/시행규칙/.test(name) && name.endsWith(".txt"));
     const ruleName = files.find((name) => /시행규칙/.test(name) && name.endsWith(".txt"));
     if (!decreeName && !ruleName) {
       throw new Error(`${stagePath}에서 직제 또는 시행규칙 텍스트를 찾지 못했습니다.`);
@@ -197,7 +256,7 @@ async function stageFromInputFiles(paths, asOf, institution) {
   const split = { decreeText: "", ruleText: "" };
   paths.forEach((filePath, index) => {
     if (/시행규칙/.test(filePath)) split.ruleText += texts[index];
-    else if (/직제/.test(filePath)) split.decreeText += texts[index];
+    else if (/직제|조례/.test(filePath)) split.decreeText += texts[index];
     else if (!split.decreeText) split.decreeText = texts[index];
     else split.ruleText += texts[index];
   });
@@ -778,7 +837,8 @@ function printHelp() {
   render-json 기존 조직도 JSON을 다시 배치하여 HWPX/PPTX/SVG/JSON 생성
   compare-json 기존·개정 조직도 JSON을 비교해 신설·폐지·명칭변경·이체 표식 생성
   compare-law 개정 전·후 직제 문언 또는 법제처 기준일을 바로 비교해 변경 도표 생성
-  compare-native 직제 시점 2~4개를 좌우/다단 기구도로 작도(2단 A4, 3단 이상 A3). 점선·신설·폐지 규칙은 docs/drafting-rulebook.md §7의4
+  compare-native 직제 시점 2~4개를 좌우/다단 기구도로 작도(2단 A4, 3단 이상 A3). 점선·신설·폐지 규칙은 docs/drafting-rulebook.md §7의4. --hwpx로 한글 편집본 직접 저장
+  outline    세로 조직도(1단): 직제·설치 조례+시행규칙 → 편집형 HWPX(한글 설치 불필요) + --preview-dir 쪽별 PNG
   from-law   법제처 OPEN API에서 기준일 연혁을 찾아 바로 생성
   fetch      법령 문언만 로컬 텍스트로 저장
   inspect    파싱 결과 요약 출력

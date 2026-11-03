@@ -39,6 +39,15 @@ const PAGE_A3_LANDSCAPE = Object.freeze({
 // 개요와 하부조직으로 나누고, 사용자가 지정한 focus 출력은 기존처럼
 // 해당 하위 트리만 독립적으로 분할한다.
 const DEFAULT_MAX_ROWS = 23;
+// 세로 조직도(1단)는 A4 한 장을 혼자 쓴다. 23행 × 9.8mm = 225mm라 본문 틀
+// (248mm) 안에 들어가고, 상자 8.4mm는 한글 줄간격 160%의 10pt 글자와
+// 안쪽 여백 1.2mm×2를 담는다(글자 상한 = 상자 높이 × 1.28).
+const SINGLE_OUTLINE_SIZING = Object.freeze({
+  maxBoxWidthMm: 80,
+  rowPitchMm: 9.8,
+  boxHeightMm: 8.4,
+  fontCapPt: Object.freeze({ root: 10.5, node: 10 }),
+});
 const COMPARISON_GUTTER = 18;
 const CHANGE_LINK_COLORS = Object.freeze(["#B45309", "#0F766E", "#5B21B6", "#C2410C", "#155E75"]);
 const CHANGE_LINK_DASH = "2.1 1.35";
@@ -1034,8 +1043,9 @@ function layoutTreeInFrame(graph, tree, plan, frame, prefix = "", options = {}) 
   // A3 3~4단표에서는 여러 실·국을 한 대역에 합칠 수 있다. 고정 최솟값을
   // 강제하면 마지막 행이 대역과 용지 밖으로 밀려난다. 행 간격과 상자 높이를
   // 실제 대역 높이에 맞춰 함께 축소해, 좁더라도 항상 편집 가능한 용지 안에 둔다.
-  const pitch = Math.min(8.35, frameHeight / Math.max(rows.length, 1));
-  const boxHeight = Math.min(7.2, Math.max(1.8, pitch - Math.min(1.05, pitch * 0.22)), pitch);
+  const maxPitch = options.rowPitchMm ?? 8.35;
+  const pitch = Math.min(maxPitch, frameHeight / Math.max(rows.length, 1));
+  const boxHeight = Math.min(options.boxHeightMm ?? 7.2, Math.max(1.8, pitch - Math.min(1.05, pitch * 0.22)), pitch);
   const maxDepth = Math.max(0, ...rows.map((row) => row.depth));
   const indent = Math.min(columnWidth > 120 ? 11.5 : 7.2, Math.max(5.4, (columnWidth * 0.36) / Math.max(1, maxDepth)));
   const idPrefix = idKey ? `${idKey}-` : "";
@@ -1158,7 +1168,7 @@ function buildOutlineManifest(graph, tree, plan, context) {
     right: comparison ? comparisonDividerX - 7 : 196,
     top: 31,
     bottom: 279.5,
-  }, "", comparison ? {} : { maxBoxWidthMm: 72, fontCapPt: { root: 9.4, node: 8.2 } });
+  }, "", comparison ? {} : SINGLE_OUTLINE_SIZING);
   const boxes = treeLayout.boxes;
   const lines = treeLayout.lines.map((line) => ({
     ...line,
@@ -1169,12 +1179,12 @@ function buildOutlineManifest(graph, tree, plan, context) {
   const basis = (context.lawNames || []).some((name) => /조례/.test(name)) ? "조례" : "직제";
   const asOf = context.asOf ? `${basis} 기준 ${displayDateLoose(context.asOf)}` : `${basis}·시행규칙 문언 기준`;
   const labels = [
-    textObject("document-title", 12, 7, 128, 7.6, title, { fontSizePt: 12.2, bold: true }),
-    textObject("document-asof", 142, 7, 56, 7.6, asOf, { fontSizePt: 6.7, bold: true, align: "right", color: COLORS.muted }),
-    textObject("document-subtitle", 12, 16.4, 146, 6.2, plan.subtitle, { fontSizePt: 7.2, bold: true, color: COLORS.muted }),
-    textObject("document-page", 160, 16.4, 38, 6.2, `${context.index + 1} / ${context.pageCount}`, { fontSizePt: 6.4, bold: true, align: "right", color: COLORS.quiet }),
-    textObject("footer-source", 12, 286.1, 150, 5.8, `${context.lawNames.join(" · ")} · 자동 파싱 후 네이티브 객체 작도`, { fontSizePt: 5.3, color: COLORS.quiet }),
-    textObject("footer-format", 164, 286.1, 34, 5.8, "A4 세로 · 편집형", { fontSizePt: 5.3, bold: true, align: "right", color: COLORS.muted }),
+    textObject("document-title", 12, 7, 128, 7.6, title, { fontSizePt: 13, bold: true }),
+    textObject("document-asof", 142, 7, 56, 7.6, asOf, { fontSizePt: 8, bold: true, align: "right", color: COLORS.muted }),
+    textObject("document-subtitle", 12, 16.4, 146, 6.2, plan.subtitle, { fontSizePt: 8.6, bold: true, color: COLORS.muted }),
+    textObject("document-page", 160, 16.4, 38, 6.2, `${context.index + 1} / ${context.pageCount}`, { fontSizePt: 8, bold: true, align: "right", color: COLORS.quiet }),
+    textObject("footer-source", 12, 285.6, 150, 6.2, `${context.lawNames.join(" · ")} · 자동 파싱 후 네이티브 객체 작도`, { fontSizePt: 6.8, color: COLORS.quiet }),
+    textObject("footer-format", 164, 285.6, 34, 6.2, "A4 세로 · 편집형", { fontSizePt: 6.8, bold: true, align: "right", color: COLORS.muted }),
   ];
   const rules = [
     lineObject("header-rule", 12, 25.7, 198, 25.7, { role: "header-rule", color: "#AAB3BC", widthMm: 0.3 }),

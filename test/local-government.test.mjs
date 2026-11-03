@@ -123,3 +123,18 @@ test("두 열 배치에서 여러 상위 조직의 하위조직은 각자 상위
   assert.ok(x("기획예산과") < x("행정지원과") && x("행정지원과") < x("회계과"));
   assert.ok(planPages(graph).length >= 1);
 });
+
+test("세로 조직도(1단)는 본문 10pt로 쓰되 글자가 상자 높이 안에 들어간다", () => {
+  const workflow = buildNativeLawWorkflow({ decreeText: ordinance, ruleText: rule, asOf: "2026-01-23" });
+  const nodes = workflow.manifests.flatMap((manifest) => (
+    manifest.objects.filter((object) => object.metadata?.role === "organization-node")
+  ));
+  assert.ok(nodes.length > 10);
+  for (const node of nodes) {
+    assert.ok(node.style.fontSizePt >= 10, `${node.text} ${node.style.fontSizePt}pt`);
+    assert.ok(node.style.fontSizePt <= node.geometry.height * 1.28 + 1e-9, `${node.text} 상자 초과`);
+    assert.ok(node.geometry.y + node.geometry.height <= 279.5, `${node.text} 본문 틀 밖`);
+  }
+  const footer = workflow.manifests[0].objects.find((object) => object.id?.startsWith("footer-source"));
+  assert.ok(footer.style.fontSizePt >= 6.5);
+});

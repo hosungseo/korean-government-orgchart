@@ -500,6 +500,7 @@ export function normalizeNodeName(value) {
   }
   if (/\s/.test(name) && /(?:정원|등의|관한\s+통칙|소속\s+하에)/.test(name)) return "";
   if (/^(?:장관|차관|차장|위원장|부위원장|청장|처장|상임위원|비상임위원)$/.test(name)) return name;
+  if (LOCAL_HEAD_TITLE.test(name) || LOCAL_DEPUTY_TITLE.test(name)) return name;
   name = name
     .replace(/^(?:및|또는|각)\s+/, "")
     .replace(/\s*(?:각\s*)?\d+\s*명.*$/, "")
@@ -516,8 +517,8 @@ export function normalizeNodeName(value) {
 }
 
 export function inferKind(name) {
-  if (/^(?:장관|청장|처장|위원장)$/.test(name)) return "head";
-  if (/^(?:차관|차장|부위원장|제\d+차관)$/.test(name)) return "deputy";
+  if (/^(?:장관|청장|처장|위원장)$/.test(name) || LOCAL_HEAD_TITLE.test(name)) return "head";
+  if (/^(?:차관|차장|부위원장|제\d+차관)$/.test(name) || LOCAL_DEPUTY_TITLE.test(name)) return "deputy";
   if (/(?:정책보좌관|차관보|대변인|감사관|기획관|정책관|심의관|담당관|보좌관|상임위원|비상임위원)$/.test(name)) return "advisor";
   if (name === "사무처") return "assistant";
   if (name === "이북5도") return "affiliated";
@@ -564,7 +565,30 @@ export function inferRank(name, kind = inferKind(name)) {
   return 4;
 }
 
+// Local governments (시·군·구·도) install their organization by ordinance
+// (행정기구 설치 조례) and use different head and deputy titles.
+const LOCAL_HEAD_TITLE = /^(?:시장|군수|구청장|도지사)$/;
+const LOCAL_DEPUTY_TITLE = /^(?:(?:행정|경제|정무|문화|기획)?부(?:시장|지사)|부군수|부구청장)$/;
+const LOCAL_GOVERNMENT_NAME =
+  /^[가-힣]{1,10}(?:특별시|광역시|특별자치시|특별자치도|시|군|구|도)$/;
+
+export function isLocalGovernmentName(name) {
+  return LOCAL_GOVERNMENT_NAME.test(String(name || "").replace(/\s+/g, ""));
+}
+
+export function localGovernmentTitles(institution) {
+  const name = String(institution || "").replace(/\s+/g, "");
+  if (!isLocalGovernmentName(name)) return null;
+  if (/(?:특별자치도|도)$/.test(name)) return { head: "도지사", deputy: "행정부지사" };
+  if (/(?:특별시|광역시|특별자치시)$/.test(name)) return { head: "시장", deputy: "행정부시장" };
+  if (/군$/.test(name)) return { head: "군수", deputy: "부군수" };
+  if (/구$/.test(name)) return { head: "구청장", deputy: "부구청장" };
+  return { head: "시장", deputy: "부시장" };
+}
+
 export function inferHeadTitle(institution) {
+  const local = localGovernmentTitles(institution);
+  if (local) return local.head;
   if (/위원회$/.test(institution)) return "위원장";
   if (/청$/.test(institution)) return "청장";
   if (/처$/.test(institution)) return "처장";
@@ -572,6 +596,8 @@ export function inferHeadTitle(institution) {
 }
 
 export function inferDeputyTitle(institution) {
+  const local = localGovernmentTitles(institution);
+  if (local) return local.deputy;
   if (/위원회$/.test(institution)) return "부위원장";
   if (/(?:청|처)$/.test(institution)) return "차장";
   return "차관";

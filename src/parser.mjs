@@ -2,6 +2,7 @@ import {
   inferHeadTitle,
   inferKind,
   inferRank,
+  isLocalGovernmentName,
   normalizeNodeName,
   OrgGraph,
 } from "./model.mjs";
@@ -52,7 +53,12 @@ const GENERIC_NAMES = new Set([
   "지소",
   "위원",
   "부위원",
+  "사업소",
+  "직속기관",
+  "하부행정기관",
 ]);
+const LOCAL_TITLE_NAME =
+  /^(?:시장|군수|구청장|도지사|(?:행정|경제|정무|문화|기획)?부(?:시장|지사)|부군수|부구청장)$/;
 
 export const PARSER_VERSION = "2026.08.legal-duty-v2";
 
@@ -73,6 +79,12 @@ export function parseOrganizationTexts(texts, options = {}) {
     title: options.title || institution,
   });
   graph.meta.parserVersion = PARSER_VERSION;
+  if (
+    isLocalGovernmentName(institution) &&
+    documents.some((document) => /조례|지방자치법|지방자치단체/.test(document.text))
+  ) {
+    graph.meta.governmentLevel = "local";
+  }
   graph.meta.sourceInventory = documents.map((document) => ({
     source: document.source,
     role: inferDocumentRole(document.text, document.source),
@@ -118,8 +130,13 @@ function extractAliases(text) {
 export function splitArticles(text) {
   const prepared = String(text)
     .replace(/(?<!^)(?=제\d+조(?:의\d+)?\s*\()/g, "\n")
-    .replace(/(?<!^)(?=\s*제\d+장\s)/g, "\n");
+    .replace(/(?<!^)(?=\s*제\d+장\s)/g, "\n")
+    .replace(/(?<!^)(?=\s*제\d+절\s)/g, "\n");
   const chapters = [...prepared.matchAll(/(?:^|\n)\s*제\d+장\s+([^\n]+)/g)].map((match) => ({
+    index: match.index + match[0].indexOf("제"),
+    heading: stripAmendmentNotes(match[1]).trim(),
+  }));
+  const sections = [...prepared.matchAll(/(?:^|\n)\s*제\d+절\s+([^\n]+)/g)].map((match) => ({
     index: match.index + match[0].indexOf("제"),
     heading: stripAmendmentNotes(match[1]).trim(),
   }));
@@ -131,10 +148,14 @@ export function splitArticles(text) {
     const chunk = prepared.slice(start, end).trim();
     const lineEnd = chunk.indexOf("\n");
     const lead = lineEnd >= 0 ? chunk.slice(0, lineEnd) : chunk;
-    const chapterHeading = chapters.findLast((chapter) => chapter.index < start)?.heading || "";
+    const chapter = chapters.findLast((candidate) => candidate.index < start);
+    const chapterHeading = chapter?.heading || "";
+    const section = sections.findLast((candidate) => candidate.index < start);
+    const sectionHeading = section && section.index > (chapter?.index ?? -1) ? section.heading : "";
     return {
       heading: match[2]?.trim() || "",
       chapterHeading,
+      sectionHeading,
       articleRef: articleRefFromLead(match[1]),
       lead,
       body: chunk,
@@ -168,6 +189,9 @@ function parseDocumentIntoGraph(graph, text, source) {
     const previousArticleRef = graph._currentArticleRef;
     graph._currentArticleRef = article.articleRef || article.lead || article.heading || null;
     try {
+      if (graph.meta.governmentLevel === "local") {
+        parseLocalAgencyInstallations(graph, article, body, source);
+      }
       parseTemporaryRelations(graph, body, source, context);
       parseAffiliatedRelations(graph, body, source, context);
       parseDeputyJurisdictions(graph, body, source);
@@ -1120,32 +1144,180 @@ function parseBelowRelations(graph, body, source, context, chapterContextName = 
     for (const match of body.matchAll(pattern)) {
       if (/「|에\s*따른|보좌기관\s*중/.test(match[2])) continue;
       withMatchEvidence(graph, body, match, () => {
-        const parentName = resolveHolderName(match[1], context?.name, chapterContextName);
-        const parent = graph.addNode(parentName, { source });
-        if (!parent) return;
-        for (const childName of parseNameList(match[2])) {
-          const existing = graph.nodeByName(childName);
-          const isAffiliated = existing?.metadata?.unitRole === "affiliated-institution";
-          const inferredKind = inferKind(childName);
-          const isSpine = inferredKind === "head" || inferredKind === "deputy";
-          const child = graph.addNode(childName, {
-            kind: isSpine ? inferredKind : isAffiliated ? "affiliated" : "advisor",
-            source,
-            forceKind: true,
-            metadata: isAffiliated
-              ? { unitRole: "affiliated-institution" }
-              : undefined,
-          });
-          if (!child) continue;
-          graph.addEdge(parent.id, child.id, {
-            type: isSpine ? "structural" : isAffiliated ? "affiliated" : "advisor",
-            source,
-            metadata: { legalBasis: "밑에 둔다" },
-          });
+        for (const segment of splitBelowHolderSegments(match[1], match[2])) {
+          const parentName = resolveHolderName(segment.holder, context?.name, chapterContextName);
+          const parent = graph.addNode(parentName, { source });
+          if (!parent) continue;
+          for (const childName of parseNameList(segment.list)) {
+            const existing = graph.nodeByName(childName);
+            const isAffiliated = existing?.metadata?.unitRole === "affiliated-institution";
+            const inferredKind = inferKind(childName);
+            const isSpine = inferredKind === "head" || inferredKind === "deputy";
+            // Ordinance rules install the line departments of a local agency
+            // with "보건소장 밑에 ○○과를 둔다"; these are not staff offices.
+            const isLocalLine =
+              graph.meta.governmentLevel === "local" && /(?:과|팀)$/.test(childName);
+            const child = graph.addNode(childName, {
+              kind: isSpine ? inferredKind : isAffiliated ? "affiliated" : isLocalLine ? "assistant" : "advisor",
+              source,
+              forceKind: true,
+              metadata: isAffiliated
+                ? { unitRole: "affiliated-institution" }
+                : undefined,
+            });
+            if (!child) continue;
+            graph.addEdge(parent.id, child.id, {
+              type: isSpine ? "structural" : isAffiliated ? "affiliated" : isLocalLine ? "assistant" : "advisor",
+              source,
+              metadata: { legalBasis: "밑에 둔다" },
+            });
+          }
         }
       });
     }
   }
+}
+
+const LOCAL_AGENCY_SUFFIX = "(?:보건소|보건지소|보건진료소|센터|사업소|상담소|사업본부|본부|관리소|지소|연구소|학교|도서관|박물관|미술관|원)";
+
+/**
+ * Local ordinances place 직속기관 and 사업소 in their own chapters and install
+ * them with "시에 보건소를, 읍ㆍ면에 보건지소를 설치한다". The headquarters
+ * parser does not read these forms, so they are handled only in local mode.
+ * A unit installed on the government itself becomes a subordinate agency; a
+ * unit installed on a sub-area (읍ㆍ면, 취약지역) or named after it in the same
+ * section becomes a branch of the section's first agency.
+ */
+function parseLocalAgencyInstallations(graph, article, body, source) {
+  const chapter = String(article.chapterHeading || "").replace(/\s+/g, "");
+  const affiliationType = /직속기관/.test(chapter)
+    ? "direct"
+    : /사업소/.test(chapter)
+      ? "business-office"
+      : null;
+  if (!affiliationType) return;
+
+  const sectionNames = parseNameList(article.sectionHeading || "");
+  let anchor = sectionNames.length ? installLocalAgency(graph, null, sectionNames[0], affiliationType, source) : null;
+  for (const name of sectionNames.slice(1)) installLocalAgency(graph, anchor, name, "branch", source);
+
+  const installPattern = new RegExp(
+    `([가-힣A-Za-z0-9ㆍ·]+)에\\s+([^,.。\\n]+?)(?:\\([^)]*\\))?\\s*(?:을|를)(?=\\s*(?:,|설치|둔다|두고|두며|둘\\s*수))`,
+    "g",
+  );
+  for (const match of body.matchAll(installPattern)) {
+    withMatchEvidence(graph, body, match, () => {
+      const holder = normalizeNodeName(match[1]);
+      // "보건진료소에 보건진료소장을 두고" names the head, not a new unit.
+      const names = parseNameList(match[2]).filter(
+        (name) => name !== holder && new RegExp(`${LOCAL_AGENCY_SUFFIX}$`).test(name),
+      );
+      for (const name of names) {
+        if (isLocalGovernmentHolder(graph, holder)) {
+          const node = installLocalAgency(graph, null, name, affiliationType, source);
+          anchor ||= node;
+        } else {
+          const parent = graph.nodeByName(holder);
+          const isAgency = parent?.metadata?.unitRole === "affiliated-institution";
+          installLocalAgency(graph, isAgency ? parent : anchor, name, "branch", source);
+        }
+      }
+    });
+  }
+
+  // "센터의 소관사무를 분장하기 위하여 농민상담소를 둔다"
+  const branchPattern = new RegExp(
+    `([가-힣A-Za-z0-9]+)의\\s+소관\\s*사무를\\s+분장하기\\s+위하여\\s+([가-힣A-Za-z0-9]+${LOCAL_AGENCY_SUFFIX})(?:\\([^)]*\\))?\\s*(?:을|를)\\s*(?:둔다|둘\\s*수)`,
+    "g",
+  );
+  for (const match of body.matchAll(branchPattern)) {
+    withMatchEvidence(graph, body, match, () => {
+      const parent = graph.nodeByName(normalizeNodeName(match[1]));
+      installLocalAgency(graph, parent || anchor, normalizeNodeName(match[2]), "branch", source);
+    });
+  }
+
+  // "농업기술센터 소장을 보좌하고 … 위하여 농업정책과, …를 둔다"
+  const subunitPattern =
+    /([가-힣A-Za-z0-9]+?)\s*(?:소장|센터장|원장|관장|본부장)(?:을|를)\s*보좌하고[^.。\n]{0,120}?위하여\s+([^.。\n]{1,260}?)\s*(?:을|를)\s*둔다/g;
+  for (const match of body.matchAll(subunitPattern)) {
+    withMatchEvidence(graph, body, match, () => {
+      const parent = graph.nodeByName(normalizeNodeName(match[1])) || anchor;
+      if (!parent) return;
+      for (const childName of parseNameList(match[2])) {
+        const child = addInstalledChildNode(graph, parent, childName, { kind: "assistant", source, forceKind: true });
+        if (child) {
+          graph.addEdge(parent.id, child.id, {
+            type: "assistant",
+            source,
+            metadata: { legalBasis: "소장을 보좌하고 … 둔다" },
+          });
+        }
+      }
+    });
+  }
+
+  // 사업소 chapters usually name each office only in duty clauses or annexes.
+  if (affiliationType === "business-office") {
+    for (const match of body.matchAll(/([가-힣A-Za-z0-9]+사업소)(?![가-힣])/g)) {
+      const name = normalizeNodeName(match[1]);
+      if (isPlausibleNode(name)) {
+        withMatchEvidence(graph, body, match, () => installLocalAgency(graph, null, name, affiliationType, source));
+      }
+    }
+  }
+}
+
+function isLocalGovernmentHolder(graph, holder) {
+  const institution = graph.meta.institution;
+  return (
+    holder === institution ||
+    graph.aliases.get(holder) === institution ||
+    /^(?:시|군|구|도)$/.test(holder)
+  );
+}
+
+function installLocalAgency(graph, parent, name, affiliationType, source) {
+  if (!isPlausibleNode(name)) return null;
+  const root = graph.nodes.get(graph.rootId);
+  const node = graph.addNode(name, {
+    kind: "affiliated",
+    source,
+    forceKind: true,
+    metadata: { affiliationType, unitRole: "affiliated-institution", localAgency: true },
+  });
+  if (!node) return null;
+  // Branch offices (보건지소·농민상담소) follow the agency's own 과 in charts.
+  if (affiliationType === "branch") node.rank = 6;
+  node.metadata = { ...node.metadata, affiliationType, unitRole: "affiliated-institution", localAgency: true };
+  if (parent?.id === node.id) return node;
+  const target = parent || root;
+  const alreadyLinked = graph.parentsOf(node.id).some(({ node: current }) => current.id === target.id);
+  if (!alreadyLinked) {
+    graph.addEdge(target.id, node.id, {
+      type: "affiliated",
+      source,
+      metadata: { affiliationType, legalBasis: "조례 설치" },
+    });
+  }
+  return node;
+}
+
+/**
+ * "시장 밑에 A, 부시장 밑에 B, C를 둔다" installs units under two holders in
+ * one sentence. Split the captured list at every nested "X 밑에".
+ */
+function splitBelowHolderSegments(firstHolder, list) {
+  const segments = [];
+  let holder = firstHolder;
+  let cursor = 0;
+  for (const match of String(list).matchAll(/(?:^|[,，ㆍ·]\s*|\s)([가-힣A-Za-z0-9]+)\s*밑에\s+/g)) {
+    segments.push({ holder, list: list.slice(cursor, match.index) });
+    holder = match[1];
+    cursor = match.index + match[0].length;
+  }
+  segments.push({ holder, list: list.slice(cursor) });
+  return segments.filter((segment) => segment.list.trim());
 }
 
 function parseDeputyJurisdictions(graph, body, source) {
@@ -1174,7 +1346,7 @@ function parseDeputyJurisdictions(graph, body, source) {
 
 function parseInRelations(graph, body, source, context, { articleIsAffiliated = false } = {}) {
   const pattern =
-    /([가-힣A-Za-z0-9ㆍ·]+(?:부|처|청|위원회|실|국|본부|단|관|원|소|센터|사무국|사무소|학교|박물관|미술관|도서관|극장|전당|세무서|소방서|연구원|기록원|관리원|교육원|개발원|분원|지소))에\s+([^.。\n]{1,280}?)\s*(?:을|를)\s*(?:둔다|두고|두며|두되|둔다고 한다)/g;
+    /([가-힣A-Za-z0-9ㆍ·]+(?:부|처|청|위원회|실|국|본부|단|관|원|소|센터|사무국|사무소|학교|박물관|미술관|도서관|극장|전당|세무서|소방서|연구원|기록원|관리원|교육원|개발원|분원|지소))에\s+((?:(?!\)\s*[①-⑳])[^.。\n]){1,280}?)\s*(?:을|를)\s*(?:둔다|두고|두며|두되|둔다고 한다)/g;
   for (const match of body.matchAll(pattern)) {
     withMatchEvidence(graph, body, match, () => {
       const parentName = normalizeNodeName(match[1]);
@@ -1817,6 +1989,10 @@ export function parseNameList(value) {
 
 function isPlausibleNode(name) {
   if (!name || GENERIC_NAMES.has(name)) return false;
+  if (LOCAL_TITLE_NAME.test(name)) return true;
+  if (/[ㆍ·]/.test(name) && name.split(/[ㆍ·]/).every((part) => !part || GENERIC_NAMES.has(part))) {
+    return false;
+  }
   if (
     name.length > 30 ||
     /\s/.test(name) ||
@@ -1849,6 +2025,7 @@ function expandSharedSuffix(parts) {
 function resolveHolderName(holder, contextName, chapterContextName = "") {
   const clean = String(holder ?? "").trim();
   if (/^(?:장관|차관|차장|위원장|부위원장|대변인|부대변인|상임위원)$/.test(clean)) return clean;
+  if (LOCAL_TITLE_NAME.test(clean)) return clean;
   if (/장관$/.test(clean)) return clean.slice(0, -"장관".length);
   if (/위원회위원장$/.test(clean)) return clean.slice(0, -"위원장".length);
   const normalized = normalizeNodeName(clean);
@@ -1903,13 +2080,21 @@ function inferInstitution(text) {
   )?.[1];
   if (title) return title;
   const purpose = text.match(/이\s+(?:영|규칙)은\s+([가-힣A-Za-z0-9]+?)(?:와|과)\s+그\s+소속기관/);
-  return purpose?.[1] || null;
+  if (purpose) return purpose[1];
+  const localOrdinance = text.match(
+    /([가-힣]{1,10}(?:특별시|광역시|특별자치시|특별자치도|시|군|구|도))\s*행정기구\s*설치\s*조례/,
+  )?.[1];
+  if (localOrdinance) return localOrdinance;
+  const localPurpose = text.match(
+    /([가-힣]{1,10}(?:특별시|광역시|특별자치시|특별자치도|시|군|구|도))에\s*두는\s*행정기구/,
+  )?.[1];
+  return localPurpose || null;
 }
 
 function inferDocumentRole(text, source) {
   const haystack = `${source || ""}\n${String(text || "").slice(0, 1200)}`;
   if (/(?:직제\s*)?시행규칙|(?:총리령|부령)|이\s*규칙은/.test(haystack)) return "rule";
-  if (/직제|대통령령|이\s*영은/.test(haystack)) return "decree";
+  if (/직제|대통령령|이\s*영은|이\s*조례는/.test(haystack)) return "decree";
   return "unknown";
 }
 

@@ -525,6 +525,10 @@ function compileLawSide(input = {}, options = {}) {
     applyAnnexOrganizations(legalGraph);
   }
   const graph = projectOperationalView(legalGraph);
+  // Local governments are organized by ordinance, not by 직제.
+  const isLocal = legalGraph.meta?.governmentLevel === "local";
+  const decreeLabel = isLocal ? "행정기구 설치 조례" : "직제";
+  const ruleLabel = isLocal ? "행정기구 설치 조례 시행규칙" : "직제 시행규칙";
   return finishLawSide(graph, {
     ...options,
     focus: input.focus ?? options.focus,
@@ -537,16 +541,16 @@ function compileLawSide(input = {}, options = {}) {
     decreePresent: Boolean(decreeText),
     rulePresent: Boolean(ruleText),
     lawNames: uniq([
-      decreeText ? inferLawName(decreeText, `${graph.meta.institution} 직제`) : "",
-      ruleText ? inferLawName(ruleText, `${graph.meta.institution} 직제 시행규칙`) : "",
+      decreeText ? inferLawName(decreeText, `${graph.meta.institution} ${decreeLabel}`) : "",
+      ruleText ? inferLawName(ruleText, `${graph.meta.institution} ${ruleLabel}`) : "",
     ]),
     fingerprints: {
       ...(decreeText ? { decree: stableId(decreeText) } : {}),
       ...(ruleText ? { rule: stableId(ruleText) } : {}),
     },
     extraWarnings: [
-      ...(!decreeText ? ["직제 본문이 없어 실·국·소속기관이 누락될 수 있습니다."] : []),
-      ...(!ruleText ? ["직제 시행규칙이 없어 과·담당관·팀이 누락될 수 있습니다."] : []),
+      ...(!decreeText ? [`${decreeLabel} 본문이 없어 실·국·소속기관이 누락될 수 있습니다.`] : []),
+      ...(!ruleText ? [`${ruleLabel}이 없어 과·담당관·팀이 누락될 수 있습니다.`] : []),
     ],
     lawSources: input.lawSources,
   });
@@ -883,7 +887,8 @@ function buildPagePlans(graph, tree, focusNodes, maxRows) {
   const allRoots = uniq([...mainRoots, ...affiliateRoots, ...disconnected]);
   const allIds = uniq(allRoots.flatMap((id) => subtreeIds(id, tree.children)));
   if (allIds.length <= maxRows) {
-    return [{ subtitle: "직제 문언 기반 조직도", rootIds: allRoots, nodeIds: allIds, kind: "complete" }];
+    const basis = graph.meta?.governmentLevel === "local" ? "조례" : "직제";
+    return [{ subtitle: `${basis} 문언 기반 조직도`, rootIds: allRoots, nodeIds: allIds, kind: "complete" }];
   }
 
   if (!head) return allRoots.flatMap((id) => splitSubtreePlan(graph, tree, id, maxRows));
@@ -1161,7 +1166,8 @@ function buildOutlineManifest(graph, tree, plan, context) {
   }));
 
   const title = `${graph.meta.institution} 조직도`;
-  const asOf = context.asOf ? `직제 기준 ${displayDateLoose(context.asOf)}` : "직제·시행규칙 문언 기준";
+  const basis = (context.lawNames || []).some((name) => /조례/.test(name)) ? "조례" : "직제";
+  const asOf = context.asOf ? `${basis} 기준 ${displayDateLoose(context.asOf)}` : `${basis}·시행규칙 문언 기준`;
   const labels = [
     textObject("document-title", 12, 7, 128, 7.6, title, { fontSizePt: 12.2, bold: true }),
     textObject("document-asof", 142, 7, 56, 7.6, asOf, { fontSizePt: 6.7, bold: true, align: "right", color: COLORS.muted }),

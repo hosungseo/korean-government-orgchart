@@ -592,7 +592,7 @@ test("대응 없는 과는 처음 나타난 열에 신설, 사라진 열에 폐�
   assert.equal(labels.some((object) => object.metadata.unit === "정보공개제도과"), false);
   assert.equal(labels.some((object) => object.metadata.unit === "조직기획과"), false);
   assert.equal(created[0].style.textColor, "#9A3412");
-  assert.equal(abolished[0].style.textColor, "#7B8794");
+  assert.equal(abolished[0].style.textColor, "#4B5563");
   assert.equal(boxes["법사조직과"].style.fill, "#FFFFFF");
   assert.ok(created[0].geometry.x > boxes["법사조직과"].geometry.x);
   assert.equal(analyzeNativeManifest(manifest).valid, true);

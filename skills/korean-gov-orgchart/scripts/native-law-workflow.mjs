@@ -67,7 +67,9 @@ const CHANGE_LINK_COLORS = Object.freeze(["#B45309", "#0F766E", "#5B21B6", "#C24
 const CHANGE_LINK_DASH = "2.1 1.35";
 const CHANGE_WRAP_DASH = "1.8 1.2";
 const STATUS_NEW_COLOR = "#9A3412";
-const STATUS_GONE_COLOR = "#7B8794";
+const STATUS_GONE_COLOR = "#4B5563";
+const STATUS_RENAMED_COLOR = "#1D4ED8";
+const STATUS_MOVED_COLOR = "#7C3AED";
 const EDGE_PRIORITY = Object.freeze({
   structural: 60,
   assistant: 50,
@@ -109,7 +111,8 @@ export function buildNativeLawWorkflow(options = {}) {
     index,
     pageCount: side.plans.length,
     asOf: side.asOf,
-    lawNames: side.lawNames,
+    asOfLabel: options.asOfLabel,
+    lawNames: options.lawNames || side.lawNames,
     fingerprints: side.fingerprints,
     warnings: side.warnings,
     dutyAudit: side.dutyAudit,
@@ -146,7 +149,7 @@ export function buildNativeComparisonWorkflow(options = {}) {
   const before = sides[0];
   const after = sides[1];
   const dutyAllocation = compareDutyAllocations(before.graph, after.graph);
-  const dutyLineage = compactDutyLineage(compareDepartmentDutyFunctions(before.graph, after.graph));
+  const dutyLineage = withExplicitTransitions(compactDutyLineage(compareDepartmentDutyFunctions(before.graph, after.graph)), options.transitions);
   const institution = after.institution || before.institution;
   const stacked = onePage && Math.max(before.plans.length, after.plans.length) > 1;
   const pageCount = stacked ? 1 : Math.max(before.plans.length, after.plans.length, 1);
@@ -1256,7 +1259,7 @@ function buildOutlineManifest(graph, tree, plan, context) {
   const title = `${graph.meta.institution} 조직도`;
   // 지자체 기구도는 "(2026. 1. 23. 현재)"가 관행이다. 조례와 시행규칙의 시행일이
   // 달라 "조례 기준 ○○"은 사실과 어긋날 수 있다.
-  const asOf = context.asOf
+  const asOf = context.asOfLabel ? context.asOfLabel : context.asOf
     ? isLocal ? `${displayDateLoose(context.asOf)} 현재` : `직제 기준 ${displayDateLoose(context.asOf)}`
     : isLocal ? "조례·시행규칙 문언 기준" : "직제·시행규칙 문언 기준";
   const subtitle = [plan.subtitle, plan.rangeLabel].filter(Boolean).join(" · ");
@@ -1538,7 +1541,7 @@ function buildBandedComparisonManifest({
   const beforeAsOf = before.asOf ? `현행 ${displayDateLoose(before.asOf)}` : "현행";
   const afterAsOf = after.asOf ? `개정 ${displayDateLoose(after.asOf)}` : "개정";
   const pageLabel = before.plans.map((plan, index) => (
-    [plan?.subtitle, after.plans[index]?.subtitle].filter(Boolean).join(" → ")
+    uniq([plan?.subtitle, after.plans[index]?.subtitle].filter(Boolean)).join(" → ")
   )).filter(Boolean).join(" · ") || "두 개편 한 장";
   const labels = [
     textObject("document-title", 12, 7, 128, 7.6, `${institution} 조직 대비`, { fontSizePt: 12.2, bold: true }),
@@ -1685,7 +1688,7 @@ function buildComparisonManifest({
 
   const beforeAsOf = before.asOf ? `현행 ${displayDateLoose(before.asOf)}` : "현행";
   const afterAsOf = after.asOf ? `개정 ${displayDateLoose(after.asOf)}` : "개정";
-  const pageLabel = [beforePlan?.subtitle, afterPlan?.subtitle].filter(Boolean).join(" · ") || "좌우 조직도";
+  const pageLabel = uniq([beforePlan?.subtitle, afterPlan?.subtitle].filter(Boolean)).join(" · ") || "좌우 조직도";
   const labels = [
     textObject("document-title", 12, 7, 128, 7.6, `${institution} 조직 대비`, { fontSizePt: 12.2, bold: true }),
     textObject("document-asof", 142, 7, 56, 7.6, `${beforeAsOf} · ${afterAsOf}`, {
@@ -1742,7 +1745,9 @@ function buildComparisonManifest({
   }
   const transfers = [
     ...correspondenceTransferObjects(beforeTree, afterTree, dividerX, { dutyLineage }),
-    ...lifecycleLabelObjects(beforeTree, afterTree, { dutyLineage }),
+    // Pages pair up by index, so a unit may sit on another page of the other
+    // side: only call it 신설/폐지 when the whole other side lacks it.
+    ...lifecycleLabelObjects(beforeTree, afterTree, { dutyLineage, survivors: { before: unitKeys(before.graph), after: unitKeys(after.graph) } }),
     ...allocationTransferObjects(beforeTree, afterTree, notable, dividerX),
   ];
   labels.push(...allocationLabelObjects(notable));
@@ -1913,15 +1918,39 @@ function correspondencePairs(beforeTree, afterTree, options = {}) {
         evidence: destination.evidence || [],
         reason: destination.reason || "",
       };
-      if (departmentPairChanged(pair)) pairs.push(pair);
+      if (departmentPairChanged(pair) && !onlyParentRenamed(pair, options.dutyLineage)) pairs.push(pair);
     }
   }
   return pairs;
 }
 
+// Renames and moves the user declared (e.g. a 개편안 outline) are drawn as
+// correspondences, ahead of any name or function inference.
+function withExplicitTransitions(dutyLineage, transitions) {
+  const explicit = (transitions || []).filter((item) => item?.from && item?.to);
+  return explicit.length ? { ...(dutyLineage || {}), explicit } : dutyLineage;
+}
+
 function correspondenceDestinations(source, afterByName, dutyLineage) {
   const name = source?.metadata?.nodeName || source?.name || "";
   const sourceParent = source?.metadata?.parentName || "";
+  const declared = (dutyLineage?.explicit || []).filter((item) => (
+    item.from === name
+    && (!item.fromParent || item.fromParent === sourceParent)
+    && afterByName.has(item.to)
+  ));
+  if (declared.length) {
+    return declared.map((item) => ({
+      name: item.to,
+      toParent: item.toParent || "",
+      basis: "explicit-amendment-map",
+      confidence: 1,
+      matchedFunctions: null,
+      sourceFunctions: null,
+      evidence: [],
+      reason: item.reason || "개편안에 적힌 명칭 변경·이동",
+    }));
+  }
   const contextual = CONTEXTUAL_TRANSITIONS.find((rule) => (
     rule.sourceName === name
     && (!rule.sourceParent || rule.sourceParent === sourceParent)
@@ -1946,7 +1975,11 @@ function correspondenceDestinations(source, afterByName, dutyLineage) {
   // 단, 동명이과가 있으므로 소속(부모)이 호환되는 상자가 있을 때만
   // 존속으로 본다. 소속이 전부 다르면 각 호 승계 근거로 넘어간다.
   const survivors = typeof afterByName.list === "function" ? afterByName.list(name) : [];
-  const compatibleSurvivor = survivors.find((box) => parentCompatible(box.metadata?.parentName || "", sourceParent));
+  const renamedParent = (dutyLineage?.explicit || []).find((item) => item.from === sourceParent && !item.fromParent)?.to;
+  const compatibleSurvivor = survivors.find((box) => (
+    parentCompatible(box.metadata?.parentName || "", sourceParent)
+    || (renamedParent && box.metadata?.parentName === renamedParent)
+  ));
   if (compatibleSurvivor) {
     return [{
       name,
@@ -1995,6 +2028,14 @@ function isDepartmentBox(box) {
 function isOneToOneRename(from, to) {
   const dests = STRUCTURAL_RENAMES[from];
   return Array.isArray(dests) && dests.length === 1 && dests[0] === to;
+}
+
+// Same unit, and its 국 only changed name as declared: nothing to connect.
+function onlyParentRenamed(pair, dutyLineage) {
+  if (pair.sourceName !== pair.destName) return false;
+  const from = pair.source.metadata?.parentName || "";
+  const to = pair.dest.metadata?.parentName || "";
+  return (dutyLineage?.explicit || []).some((item) => !item.fromParent && item.from === from && item.to === to);
 }
 
 function departmentPairChanged(pair) {
@@ -2058,13 +2099,38 @@ function departmentLineage(beforeTree, afterTree, options = {}) {
   };
 }
 
+function unitKeys(graph) {
+  const keys = new Set();
+  if (!graph?.edges) return keys;
+  for (const edge of graph.edges.values()) {
+    const parent = graph.nodes.get(edge.parent)?.name || "";
+    const child = graph.nodes.get(edge.child)?.name || "";
+    if (child) keys.add(`${parent}>${child}`);
+  }
+  return keys;
+}
+
 function lifecycleLabelObjects(beforeTree, afterTree, options = {}) {
   const idPrefix = options.idPrefix ? `${options.idPrefix}-` : "";
-  const { created, abolished } = departmentLineage(beforeTree, afterTree, options);
+  const lineage = departmentLineage(beforeTree, afterTree, options);
+  const key = (box) => `${box.metadata?.parentName || ""}>${box.metadata?.nodeName || ""}`;
+  const declared = options.dutyLineage?.explicit || [];
+  const renames = new Map(declared.filter((item) => !item.fromParent && item.from !== item.to).map((item) => [item.from, item.to]));
+  const original = new Map([...renames].map(([from, to]) => [to, from]));
+  const survivors = options.survivors;
+  // A unit under a renamed 국 survives: compare it under the parent's other name.
+  const keyAs = (box, names) => `${names.get(box.metadata?.parentName) || box.metadata?.parentName || ""}>${box.metadata?.nodeName || ""}`;
+  const created = lineage.created.filter((box) => !(
+    survivors?.before?.has(key(box)) || survivors?.before?.has(keyAs(box, original))
+    || declared.some((item) => item.to === box.metadata?.nodeName)
+  ));
+  const abolished = lineage.abolished.filter((box) => !(
+    survivors?.after?.has(key(box)) || survivors?.after?.has(keyAs(box, renames))
+    || declared.some((item) => item.from === box.metadata?.nodeName)
+  ));
   const objects = [];
-  const push = (box, status, color) => {
+  const push = (box, status, color, width = 8.2) => {
     const geometry = box.geometry;
-    const width = 8.2;
     objects.push(textObject(
       `${idPrefix}status-${status}-${safeFilePart(box.metadata.nodeName)}`,
       geometry.x + geometry.width - width - 0.55,
@@ -2085,6 +2151,13 @@ function lifecycleLabelObjects(beforeTree, afterTree, options = {}) {
   };
   for (const box of created) push(box, "신설", STATUS_NEW_COLOR);
   for (const box of abolished) push(box, "폐지", STATUS_GONE_COLOR);
+  // Declared renames and moves: label the new box on the after side.
+  for (const box of afterTree.boxes || []) {
+    const name = box.metadata?.nodeName;
+    if (!name || box.metadata?.side === "before") continue;
+    if (declared.some((item) => !item.fromParent && item.to === name && item.from !== name)) push(box, "명칭변경", STATUS_RENAMED_COLOR, 11.5);
+    else if (declared.some((item) => item.fromParent && item.to === name && item.toParent === box.metadata?.parentName)) push(box, "이동", STATUS_MOVED_COLOR);
+  }
   return objects;
 }
 

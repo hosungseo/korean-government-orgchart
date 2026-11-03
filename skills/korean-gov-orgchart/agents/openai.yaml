@@ -4,5 +4,5 @@ name: korean-gov-orgchart
 entrypoint: SKILL.md
 interface:
   display_name: "korean-gov-orgchart"
-  short_description: "직제·행정기구 설치 조례 → 한글(HWPX) 세로 조직도와 조직개편 대비표"
-  default_prompt: "Use $korean-gov-orgchart: save the user's 직제/설치 조례 and 시행규칙 text as .txt files, run scripts/orgchart.mjs outline --decree <조례> --rule <시행규칙> to write an editable HWPX vertical org chart with previews, read the previews and cross-check every 국·과·담당관 against the source text, and use the compare subcommand for before/after reorganization sheets."
+  short_description: "직제·행정기구 설치 조례 ↔ 한글(HWPX) 세로 조직도, 조직개편 대비표, 개정조례안·신구조문대비표"
+  default_prompt: "Use $korean-gov-orgchart: save the user's 직제/설치 조례 and 시행규칙 text as .txt files, run scripts/orgchart.mjs outline --decree <조례> --rule <시행규칙> to write an editable HWPX vertical org chart with previews, read the previews and cross-check every 국·과·담당관 against the source text, use the compare subcommand for before/after reorganization sheets, and for a 개편안 조직도 run tree, edit the outline to the target chart, then draft to get the 개정조례안·신구조문대비표 HWPX checked by redrawing."

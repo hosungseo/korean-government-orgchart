@@ -104,10 +104,41 @@ test("국 폐지·담당관 폐지·직속기관 과 신설", () => {
   const rule = buildAmendmentDocument({ lawName: "군산시 행정기구 설치 조례 시행규칙", oldText: ruleText, newText: result.amended.ruleText, kind: "규칙" });
   assert.ok(rule.sentences.includes("제5조를 삭제한다."));
   assert.ok(rule.sentences.includes("제2장제8절(제13조)를 삭제한다."));
-  assert.ok(rule.sentences.includes("제15조제1항 중 “위생과”를 “위생과, 치매안심과”로 한다."));
+  assert.ok(rule.sentences.some((line) => line.startsWith("제15조제1항 중 “위생과”를 “위생과, 치매안심과”로 하고, 같은 조 제2항 중")));
   // 같은 직급의 과는 한 구절로 묶는다.
   assert.ok(result.amended.ruleText.includes("기후환경과장ㆍ자원순환과장은 지방행정사무관ㆍ지방공업사무관 또는 지방환경사무관으로"));
   assert.ok(result.todos.some((todo) => todo.includes("상하수도과장")));
+});
+
+test("국 명칭 변경은 절 제목까지, 조문은 부분 개정으로 쓰고 개정문이 모든 변경을 덮는다", () => {
+  const target = edit(currentOutline, [
+    ["      문화관광국\n", "      문화체육관광국 (← 문화관광국)\n"],
+    ["    새만금정책담당관 [보좌]\n", "    새만금정책담당관 [보좌]\n    미래전략담당관 [보좌]\n"],
+    ["        세무과\n", "        세무회계과 (← 세무과)\n"],
+    ["        회계과\n", ""],
+  ]);
+  const result = draftAmendment({ decreeText, ruleText, target });
+  assert.equal(result.verification.ok, true, result.verification.problems.join("\n"));
+  const decree = buildAmendmentDocument({ lawName: "군산시 행정기구 설치 조례", oldText: decreeText, newText: result.amended.decreeText });
+  assert.deepEqual(decree.uncovered, []);
+  assert.ok(decree.sentences.includes("제5조제1항 중 “회계과, 세무과”를 “세무회계과”로 한다."));
+  assert.ok(decree.sentences.includes("제8조의 제목 “문화관광국에 두는 과”를 “문화체육관광국에 두는 과”로 하고, 같은 조 제1항 중 “문화관광국에”를 “문화체육관광국에”로 하고, 같은 조 제2항 각 호 외의 부분 중 “문화관광국장은”을 “문화체육관광국장은”으로 한다."));
+  const rule = buildAmendmentDocument({ lawName: "군산시 행정기구 설치 조례 시행규칙", oldText: ruleText, newText: result.amended.ruleText, kind: "규칙" });
+  assert.deepEqual(rule.uncovered, []);
+  assert.ok(rule.sentences.includes("제2장제5절의 제목 “문화관광국”을 “문화체육관광국”으로 한다."));
+  assert.ok(rule.sentences.includes("제10조의 제목 “문화관광국”을 “문화체육관광국”으로 한다."));
+  // 시장 밑 담당관은 시장 밑 담당관 조문 바로 뒤에 둔다.
+  assert.ok(rule.sentences.includes("제4조의2를 다음과 같이 신설한다."));
+  assert.ok(rule.markdown.includes("제2장제5절") || rule.changes.some((change) => change.kind === "heading"));
+});
+
+test("개정문에 빠진 변경을 찾아낸다", async () => {
+  const { uncoveredLines, compareArticles } = await import("../src/reorg-draft.mjs");
+  const before = "제1장 총칙\n제1조(목적) 가.\n제2장 본청\n제1절 가국\n제2조(가국) 가과를 둔다.\n";
+  const after = "제1장 총칙\n제1조(목적) 가.\n제2장 본청\n제1절 나국\n제2조(가국) 가과를 둔다.\n";
+  const changes = compareArticles(before, after);
+  assert.deepEqual(uncoveredLines(before, after, changes), []);
+  assert.deepEqual(uncoveredLines(before, after, []), ["- 제1절 가국", "+ 제1절 나국"]);
 });
 
 test("개요의 들여쓰기·태그·옛이름을 읽고 오류를 알려준다", () => {
@@ -187,11 +218,13 @@ test("스킬 draft 명령: 개편안 개요 → 개정안 HWPX·대비표·검�
       assert.ok(existsSync(file), file);
     }
     const report = readFileSync(summary.files.report, "utf8");
-    assert.ok(report.includes("개편안 70개 기구와 모두 일치"));
+    assert.ok(report.includes("개편안 70개 기구와 모두 일치하고, 개정문이 바뀐 문언을 모두 담고 있습니다"));
     // 명칭 변경·이동은 대비표에서 점선 대응으로 그리고 폐지·신설로 표시하지 않는다.
     const sheets = summary.files.comparisonPreviews.map((file) => readFileSync(file.replace(/\.png$/, ".svg"), "utf8")).join("\n");
-    const labels = [...sheets.matchAll(/>(신설|폐지)</g)].map((match) => match[1]).sort();
-    assert.deepEqual(labels, ["신설", "신설", "폐지"]);
+    const labels = [...sheets.matchAll(/>(신설|폐지|명칭변경|이동)</g)].map((match) => match[1]).sort();
+    assert.deepEqual(labels, ["명칭변경", "명칭변경", "신설", "신설", "이동", "이동", "이동", "폐지"]);
+    const chartTitle = readFileSync(summary.files.chartPreviews[0].replace(/\.png$/, ".svg"), "utf8");
+    assert.ok(chartTitle.includes("개편안 · 2026. 7. 1. 시행 예정"));
 
     const tree = spawnSync(process.execPath, [
       path.join(root, "skills", "korean-gov-orgchart", "scripts", "orgchart.mjs"),

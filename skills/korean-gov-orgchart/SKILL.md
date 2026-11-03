@@ -93,27 +93,41 @@ the amended ordinance:
    --rule 시행규칙.txt --out 현행.txt` writes the current structure as an indented
    list (2 spaces per level, `[보좌]` 보좌기관, `[소속]` 직속기관·사업소·하부기관).
 2. **Write the 개편안 outline.** Copy `현행.txt` to `개편안.txt` and edit it to the
-   user's chart: delete lines (폐지), add lines (신설), move lines under another
-   parent (이동), reorder siblings (조례 순서), and mark renames as
-   `새이름 (← 옛이름)` — without the arrow a rename reads as 폐지 + 신설. Ask the
-   user whenever the chart is ambiguous (rename or new unit? which 국? order?).
-   Leave parts the chart does not show as they are.
+   user's chart:
+   - 폐지 = delete the line; 신설 = add a line; 이동 = move the line under the new
+     parent; sibling order = 조례 order.
+   - 명칭 변경 = `새이름 (← 옛이름)`. Without the arrow a rename reads as 폐지 + 신설.
+   - 통합 (A + B → C) = rename the unit that keeps its place (`C (← B)`) and delete
+     the other; split = keep or rename one and add the new ones.
+   - Ask the user when the chart is ambiguous (rename or new unit? which 국?
+     order?). If nobody can answer, take the reading closest to the chart, say so
+     in the hand-over, and leave parts the chart does not show unchanged.
 3. **Draft.** `node <skill>/scripts/orgchart.mjs draft --decree 조례.txt --rule
-   시행규칙.txt --target 개편안.txt --date <개편 시행 예정일> --out out/`. It edits
-   the current texts in place (lists in "…에 A, B를 둔다", new 국 as 제N조의2,
-   abolished 국·담당관 as "제N조 삭제", 과장 직급 clauses follow moved 과), parses
-   the result again and compares it with the outline. Exit code 2 = mismatch;
-   the summary lists each one.
+   시행규칙.txt --target 개편안.txt --date <시행 예정일> --effective "2026년 7월
+   1일부터 시행한다" --out out/`. `--date` labels the 개편안 charts; `--effective`
+   is the 부칙 sentence (default "공포한 날부터 시행한다"). The tool edits the
+   current texts in place — the lists in "…에 A, B를 둔다", every mention of a
+   renamed unit (조 제목·절 제목·과장 included), new 국 as 제N조의2 (+ 제N절의2 in
+   the 시행규칙), abolished 국·담당관 as "제N조 삭제", 과장 직급 clauses follow moved
+   과 — then checks two things: the amended texts, parsed again, draw exactly the
+   outline; and the 개정문 covers every changed line. Exit code 2 = a mismatch,
+   listed under `verification.problems`.
 4. **Check and hand over.** Read `out/개정안-검토.md` (개정문, 신구조문대비표,
-   to-do list) and the previews. Outputs:
-   `<조례> 일부개정조례안.hwpx`, `<시행규칙> 일부개정규칙안.hwpx` (개정문 + 부칙 +
-   신구조문대비표 with changed words underlined), `<기관>-개편안-조직도.hwpx`,
-   `<기관>-현행-개편안-대비.hwpx`, and the full amended texts in `out/개정후/`.
-   Red `[분장사무 작성 필요]`·`[직급 작성 필요]` mark what the chart cannot
-   decide: fill them only from what the user tells you, never invent 분장사무 or
-   직급. Tell the user the drafts need their 법무 review, that 별표(사무분장) and
-   the 정원 조례 are not edited, and that 부칙 says "공포한 날부터 시행한다" unless
-   `--effective "2026년 7월 1일부터 시행한다"` is given.
+   to-do list) and look at the page images in `out/preview-개정안/` (made when
+   rhwp is installed), `out/preview-개편안/` and `out/preview-대비/`. Outputs:
+   - `<조례> 일부개정조례안.hwpx`, `<시행규칙> 일부개정규칙안.hwpx`: 개정문 + 부칙 +
+     신구조문대비표 (changed words underlined)
+   - `<기관>-개편안-조직도.hwpx` ("개편안 · … 시행 예정") and
+     `<기관>-현행-개편안-대비.hwpx` (신설·폐지·명칭변경·이동 marked)
+   - the full amended texts in `out/개정후/`
+
+   Red `[분장사무 작성 필요]`·`[직급 작성 필요]` mark what a chart cannot decide.
+   Fill them only from what the user tells you; never invent 분장사무 or 직급.
+   The tool does not touch the 국장 분장사항 (조례 "○○국장은 다음 사항을 분장한다")
+   when a 과 moves — the to-do list names the articles to adjust. Tell the user
+   that the drafts need their 법무 review, and that these are not drafted: 부칙
+   경과조치, 별표 1 사무분장 (HWP attachment), the 정원 조례, other ordinances
+   that cite renamed units, and the 제안이유·주요내용 of the 의안.
 
 Details: `references/reorganization.md`.
 

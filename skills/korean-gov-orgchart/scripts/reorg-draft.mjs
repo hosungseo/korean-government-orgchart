@@ -262,7 +262,10 @@ export function draftAmendment({ decreeText, ruleText, target, institution, effe
 
   // 5. 담당관: new → 시행규칙 article with placeholders; abolished → 삭제.
   for (const node of plan.created.filter((item) => item.type === "advisor")) {
-    const anchor = lastArticleMatching(docs.rule, /담당관\)/);
+    // Right after the 담당관 that precedes it under the same 기관장·부기관장, else after the last 담당관.
+    const siblings = plan.target.get(node.parent)?.children.filter((name) => plan.target.get(name)?.type === "advisor") || [];
+    const previous = siblings.slice(0, siblings.indexOf(node.name)).reverse().find((name) => findArticle(docs.rule, name));
+    const anchor = (previous && findArticle(docs.rule, previous)) || lastArticleMatching(docs.rule, /담당관\)/);
     if (!anchor) {
       if (docs.rule.trim()) todos.push(`시행규칙에 ${node.name}의 직급·보좌 조문을 추가하세요.`);
       continue;
@@ -513,13 +516,14 @@ function stripDeleted(text) {
 
 // ---------------------------------------------------------------- 개정문 · 신구조문대비표
 
-/** Article-level comparison of two texts. */
+/** Article-level comparison of two texts (plus renamed 장·절 headings). */
 export function compareArticles(oldText, newText) {
   const index = (text) => {
     const { lines, blocks } = articleBlocks(String(text || ""));
     return {
       lines,
       blocks: new Map(blocks.map((block) => [block.key, { ...block, lines: lines.slice(block.start, block.end).filter((line) => line.trim()) }])),
+      headings: headingIndex(lines, blocks),
     };
   };
   const before = index(oldText);
@@ -527,6 +531,7 @@ export function compareArticles(oldText, newText) {
   const oldLines = new Set(before.lines.map((line) => line.trim()));
   const keys = [...new Set([...after.blocks.keys(), ...before.blocks.keys()])].sort(compareKeys);
   const changes = [];
+  const claimedHeadings = new Set();
   for (const key of keys) {
     const old = before.blocks.get(key);
     const next = after.blocks.get(key);
@@ -538,82 +543,141 @@ export function compareArticles(oldText, newText) {
     const section = next?.section;
     if (kind === "inserted" && section && !oldLines.has(section.line) && section.index === next.start - 1) {
       change.section = { key: section.key, line: section.line, chapter: next.chapter, change: "inserted" };
+      claimedHeadings.add(`${next.chapter}${section.key}`);
     }
     if (kind === "deleted" && section && /삭제/.test(section.line) && !oldLines.has(section.line)) {
       change.section = { key: section.key, line: section.line, chapter: next.chapter, change: "deleted", before: old?.section?.line };
+      claimedHeadings.add(`${next.chapter}${section.key}`);
     }
     changes.push(change);
   }
-  return changes;
+  // Headings renamed in place (e.g. "제5절 문화관광국" → "제5절 문화체육관광국").
+  for (const [key, heading] of after.headings) {
+    const old = before.headings.get(key);
+    if (!old || old.line === heading.line || claimedHeadings.has(key)) continue;
+    changes.push({ key: heading.ref, kind: "heading", order: heading.next, before: [old.line], after: [heading.line], title: { old: old.title, new: heading.title } });
+  }
+  return changes.sort((a, b) => compareKeys(a.order || a.key, b.order || b.key) || (a.kind === "heading" ? -1 : b.kind === "heading" ? 1 : 0));
+}
+
+function headingIndex(lines, blocks) {
+  const headings = new Map();
+  let chapter = "";
+  lines.forEach((line, index) => {
+    const trimmed = line.trim();
+    const match = trimmed.match(/^(제\d+(장|절)(?:의\d+)?)\s+(.+)$/);
+    if (!match) return;
+    if (match[2] === "장") chapter = match[1];
+    const ref = match[2] === "장" ? match[1] : `${chapter}${match[1]}`;
+    const next = blocks.find((block) => block.start > index)?.key || "제9999조";
+    headings.set(ref, { ref, line: trimmed, title: match[3].trim(), next });
+  });
+  return headings;
 }
 
 function compareKeys(a, b) {
-  const parse = (key) => key.match(/제(\d+)조(?:의(\d+))?/).slice(1).map((value) => Number(value || 0));
+  const parse = (key) => (String(key).match(/제(\d+)조(?:의(\d+))?/) || [null, 9999, 0]).slice(1).map((value) => Number(value || 0));
   const [an, ab] = parse(a);
   const [bn, bb] = parse(b);
   return an - bn || ab - bb;
 }
 
+const HISTORY_TAG = /\s*<(?:개정|신설|전문개정|본조신설)[^>]*>/g;
+
 /** 개정문 lines for one law ("○○ 일부를 다음과 같이 개정한다." 본문). */
 export function amendmentSentences(changes) {
-  const edits = new Map();
   const blocks = [];
+  const whole = (change, verb) => [`${withParticle(change.key, "을", "를")} ${verb}`, ...change.after.map((line) => line.replace(HISTORY_TAG, ""))];
   for (const change of changes) {
+    if (change.kind === "heading") {
+      blocks.push([`${change.key}의 제목 “${change.title.old}”${particle(change.title.old, "을", "를")} “${change.title.new}”${particle(change.title.new, "으로", "로")} 한다.`]);
+      continue;
+    }
     if (change.kind === "inserted" && change.section?.change === "inserted") {
       const ref = `${change.section.key}(${change.key})`;
-      blocks.push({ order: change.key, lines: [`${change.section.chapter ? `${change.section.chapter}에 ` : ""}${withParticle(ref, "을", "를")} 다음과 같이 신설한다.`, change.section.line, ...change.after] });
+      blocks.push([`${change.section.chapter ? `${change.section.chapter}에 ` : ""}${withParticle(ref, "을", "를")} 다음과 같이 신설한다.`, change.section.line, ...change.after]);
       continue;
     }
     if (change.kind === "inserted") {
-      blocks.push({ order: change.key, lines: [`${withParticle(change.key, "을", "를")} 다음과 같이 신설한다.`, ...change.after] });
+      blocks.push(whole(change, "다음과 같이 신설한다."));
       continue;
     }
     if (change.kind === "deleted" && change.section?.change === "deleted") {
-      const ref = `${change.section.chapter}${change.section.key}(${change.key})`;
-      blocks.push({ order: change.key, lines: [`${withParticle(ref, "을", "를")} 삭제한다.`] });
+      blocks.push([`${withParticle(`${change.section.chapter}${change.section.key}(${change.key})`, "을", "를")} 삭제한다.`]);
       continue;
     }
     if (change.kind === "deleted") {
-      blocks.push({ order: change.key, lines: [`${withParticle(change.key, "을", "를")} 삭제한다.`] });
+      blocks.push([`${withParticle(change.key, "을", "를")} 삭제한다.`]);
       continue;
     }
-    const titleChanged = change.before[0] !== change.after[0] && headTitle(change.before[0]) !== headTitle(change.after[0]);
-    const changedLines = change.after.filter((line, i) => line !== change.before[i]).length;
-    if (titleChanged || change.before.length !== change.after.length || changedLines > 2) {
-      blocks.push({ order: change.key, lines: [`${withParticle(change.key, "을", "를")} 다음과 같이 한다.`, ...change.after] });
+    const edits = change.before.length === change.after.length ? lineEdits(change) : null;
+    if (!edits || edits.length > 4) {
+      blocks.push(whole(change, "다음과 같이 한다."));
       continue;
     }
-    change.after.forEach((line, i) => {
-      const old = change.before[i];
-      if (line === old) return;
-      const ref = `${change.key}${paragraphRef(old)}`;
-      // The quoted text must occur once in the 항, or the edit is ambiguous: widen until it does.
-      let span = minimalSpan(stripHead(old), stripHead(line));
-      for (let widen = 1; widen < 12 && occurrences(stripHead(old), span.old) > 1; widen += 1) {
-        span = minimalSpan(stripHead(old), stripHead(line), widen);
-      }
-      const editKey = `${span.old}\u0000${span.new}`;
-      if (!edits.has(editKey)) edits.set(editKey, { ...span, refs: [], order: change.key });
-      edits.get(editKey).refs.push(ref);
+    const parts = edits.map((edit, index) => {
+      const ref = index === 0 ? edit.ref : `같은 조${edit.ref.slice(change.key.length).replace(/^(?=제)/, " ")}`;
+      const quote = edit.title ? `${ref} ` : `${ref} 중 `;
+      return `${quote}“${edit.old}”${particle(edit.old, "을", "를")} “${edit.new}”${particle(edit.new, "으로", "로")}`;
     });
+    blocks.push([`${parts.join(" 하고, ")} 한다.`]);
   }
-  for (const edit of edits.values()) {
-    const each = edit.refs.length > 1 ? "각각 " : "";
-    blocks.push({
-      order: edit.order,
-      lines: [`${edit.refs.join("ㆍ")} 중 “${edit.old}”${particle(edit.old, "을", "를")} ${each}“${edit.new}”${particle(edit.new, "으로", "로")} 한다.`],
-    });
+  return blocks.flat();
+}
+
+// Per-line edits of a modified article with their legal references
+// (제N조의 제목 / 제N조제M항 / 제M항 각 호 외의 부분 / 제M항제K호).
+function lineEdits(change) {
+  const edits = [];
+  let paragraph = 0;
+  const lines = change.before;
+  lines.forEach((old, i) => {
+    const next = change.after[i];
+    const trimmed = old.trim();
+    const mark = trimmed.match(/^([①-⑳])/)?.[1];
+    if (mark) paragraph = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳".indexOf(mark) + 1;
+    if (old === next) return;
+    if (i === 0) {
+      const oldTitle = headTitle(old);
+      const newTitle = headTitle(next);
+      if (oldTitle !== newTitle) edits.push({ ref: `${change.key}의 제목`, old: oldTitle, new: newTitle, title: true });
+      const oldBody = stripHead(old);
+      const newBody = stripHead(next);
+      if (oldBody !== newBody) edits.push({ ref: change.key, ...quotedSpan(oldBody, newBody) });
+      return;
+    }
+    const item = trimmed.match(/^(\d+)\./)?.[1];
+    let ref = change.key;
+    if (mark) {
+      const rest = lines.slice(i + 1);
+      const end = rest.findIndex((line) => /^[①-⑳]/.test(line.trim()));
+      const hasItems = (end < 0 ? rest : rest.slice(0, end)).some((line) => /^\d+\./.test(line.trim()));
+      ref = `${change.key}제${paragraph}항${hasItems ? " 각 호 외의 부분" : ""}`;
+    } else if (item) {
+      ref = `${change.key}${paragraph ? `제${paragraph}항` : ""}제${item}호`;
+    }
+    edits.push({ ref, ...quotedSpan(stripHead(old).replace(/^\d+\.\s*/, ""), stripHead(next).replace(/^\d+\.\s*/, "")) });
+  });
+  return edits;
+}
+
+// The quoted text must occur once in its 항/호, or the edit is ambiguous: widen until it does.
+function quotedSpan(oldText, newText) {
+  let widen = 0;
+  let span = minimalSpan(oldText, newText);
+  // A 직급 clause is quoted from its subject ("하수과장은 …으로"), not from mid-clause.
+  const midClause = (value) => /(?:으로|로)$/.test(value.old) && !/^[가-힣]+장(?:은|는|[ㆍ·])/.test(value.old);
+  while (widen < 12 && (occurrences(oldText, span.old) > 1 || midClause(span))) {
+    widen += 1;
+    const wider = minimalSpan(oldText, newText, widen);
+    if (wider.old === span.old) break;
+    span = wider;
   }
-  return blocks.sort((a, b) => compareKeys(a.order, b.order)).flatMap((block) => block.lines);
+  return span;
 }
 
 function headTitle(line = "") {
   return line.trim().match(/^제\d+조(?:의\d+)?\s*\(([^)]*)\)/)?.[1] ?? null;
-}
-
-function paragraphRef(line = "") {
-  const mark = line.trim().match(/^([①-⑳])/)?.[1];
-  return mark ? `제${"①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳".indexOf(mark) + 1}항` : "";
 }
 
 function stripHead(line = "") {
@@ -720,6 +784,13 @@ function mergeRuns(runs) {
 /** Rows for a 신구조문대비표: unchanged 항 of a changed article collapse to (생 략)/(현행과 같음). */
 export function comparisonRows(changes) {
   return changes.map((change) => {
+    if (change.kind === "heading") {
+      const marks = markedDiff(change.before[0], change.after[0]);
+      return { key: change.key, left: [marks.left], right: [marks.right] };
+    }
+    if (change.kind === "inserted" && change.section) {
+      return { key: change.key, left: [[{ text: "<신 설>", changed: false }]], right: [change.section.line, ...change.after].map((line) => [{ text: line, changed: true }]) };
+    }
     if (change.kind === "inserted") return { key: change.key, left: [[{ text: "<신 설>", changed: false }]], right: change.after.map((line) => [{ text: line, changed: true }]) };
     const length = Math.max(change.before.length, change.after.length);
     const left = [];
@@ -786,6 +857,7 @@ export function buildAmendmentDocument({ lawName, oldText, newText, kind = "조�
   const changes = compareArticles(oldText, newText);
   if (!changes.length) return null;
   const sentences = amendmentSentences(changes);
+  const uncovered = uncoveredLines(oldText, newText, changes);
   const suffix = kind === "규칙" ? "일부개정규칙안" : "일부개정조례안";
   const title = `${lawName} ${suffix}`;
   const subject = kind === "규칙" ? "이 규칙은" : "이 조례는";
@@ -821,7 +893,32 @@ export function buildAmendmentDocument({ lawName, oldText, newText, kind = "조�
     ...rows.map((row) => `| ${row.left.map(markdownLine).join("<br>")} | ${row.right.map(markdownLine).join("<br>")} |`),
     "",
   ].join("\n");
-  return { title, sentences, changes, blocks, markdown };
+  return { title, sentences, changes, blocks, markdown, uncovered };
+}
+
+/**
+ * Lines that differ between the two texts but belong to no listed change —
+ * a 개정문 that would not turn the old text into the new one.
+ */
+export function uncoveredLines(oldText, newText, changes) {
+  const lines = (text) => String(text || "").split("\n").map((line) => line.trim()).filter(Boolean);
+  const a = lines(oldText);
+  const b = lines(newText);
+  const dp = Array.from({ length: a.length + 1 }, () => new Uint16Array(b.length + 1));
+  for (let i = a.length - 1; i >= 0; i -= 1) {
+    for (let j = b.length - 1; j >= 0; j -= 1) dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+  }
+  const removed = [];
+  const added = [];
+  let i = 0;
+  let j = 0;
+  while (i < a.length || j < b.length) {
+    if (i < a.length && j < b.length && a[i] === b[j]) { i += 1; j += 1; }
+    else if (j < b.length && (i >= a.length || dp[i][j + 1] >= dp[i + 1][j])) added.push(b[j++]);
+    else removed.push(a[i++]);
+  }
+  const covered = new Set(changes.flatMap((change) => [...change.before, ...change.after, change.section?.line, change.section?.before].filter(Boolean).map((line) => line.trim())));
+  return [...removed.map((line) => `- ${line}`), ...added.map((line) => `+ ${line}`)].filter((entry) => !covered.has(entry.slice(2)));
 }
 
 function toRuns(line) {

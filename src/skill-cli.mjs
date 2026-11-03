@@ -152,7 +152,11 @@ async function draft(args) {
   // Draw the amended texts: the 개편안 chart and the 현행·개편안 sheet.
   const targetDate = normalizeDate(args.date);
   const proposed = { decreeText: result.amended.decreeText, ruleText: result.amended.ruleText, asOf: targetDate, institution: args.institution };
-  const chart = await writeOutputs(buildNativeLawWorkflow(proposed), dir, `${safe(institution)}-개편안-조직도`, "preview-개편안");
+  const chart = await writeOutputs(buildNativeLawWorkflow({
+    ...proposed,
+    asOfLabel: `개편안${targetDate ? ` · ${displayDate(targetDate)} 시행 예정` : ""}`,
+    lawNames: [decreeName, ...(stage.ruleText.trim() ? [ruleName] : [])].map((name) => `${name} 개정안`),
+  }), dir, `${safe(institution)}-개편안-조직도`, "preview-개편안");
   const sheet = await writeOutputs(
     buildNativeComparisonWorkflow({
       stages: [{ ...stage, label: "현행" }, { ...proposed, label: "개편안" }],
@@ -165,16 +169,25 @@ async function draft(args) {
     `${safe(institution)}-현행-개편안-대비`,
     "preview-대비",
   );
+  files.amendmentPreviews = await renderDocumentPreviews(files.amendments, path.join(dir, "preview-개정안"));
 
+  // The 개정문 must account for every changed line of the amended texts.
+  for (const doc of documents) {
+    for (const line of doc.uncovered) result.verification.problems.push(`${doc.title} 개정문에 빠진 변경: ${line}`);
+  }
+  result.verification.ok = result.verification.problems.length === 0;
+  const todos = [
+    ...result.todos,
+    `부칙의 시행일(${args.effective ? args.effective : "공포한 날부터 시행 — --effective로 지정"})과 경과조치(폐지·통합 기구의 사무·직원 승계, 다른 조례의 기구명 인용)를 확인하세요.`,
+  ];
   const report = [
     `# ${institution} 조직개편 개정안 초안`,
     "",
-    `검증: ${result.verification.ok ? `개정안 문언을 다시 그리면 개편안 ${result.verification.units}개 기구와 모두 일치합니다.` : "개편안과 다른 곳이 있습니다."}`,
+    `검증: ${result.verification.ok ? `개정안 문언을 다시 그리면 개편안 ${result.verification.units}개 기구와 모두 일치하고, 개정문이 바뀐 문언을 모두 담고 있습니다.` : "개편안·개정문과 다른 곳이 있습니다."}`,
     ...result.verification.problems.map((problem) => `- ${problem}`),
     "",
     "## 작성·확인할 것",
-    ...result.todos.map((todo) => `- [ ] ${todo}`),
-    "- [ ] 부칙의 시행일과 경과조치를 확인하세요.",
+    ...todos.map((todo) => `- [ ] ${todo}`),
     "",
     ...documents.map((doc) => doc.markdown),
   ].join("\n");
@@ -185,10 +198,35 @@ async function draft(args) {
     institution,
     changes: result.plan,
     verification: result.verification,
-    todos: result.todos,
+    todos,
     files: { report: reportFile, ...files, chart: chart.hwpx, chartPreviews: chart.previews, comparison: sheet.hwpx, comparisonPreviews: sheet.previews },
   });
   return result.verification.ok ? 0 : 2;
+}
+
+// Page images of text documents need a HWPX renderer; use rhwp when it is installed.
+async function renderDocumentPreviews(files, dir) {
+  const rhwp = findExecutable("rhwp", [path.join(process.env.HOME || "", ".local/bin/rhwp")]);
+  if (!rhwp) return [];
+  const rsvg = findExecutable("rsvg-convert");
+  const previews = [];
+  for (const file of files) {
+    const base = path.join(dir, path.basename(file, ".hwpx"));
+    const run = spawnSync(rhwp, ["export-svg", file, "-o", base], { encoding: "utf8" });
+    if (run.status !== 0) continue;
+    const pages = (await fs.readdir(base).catch(() => [])).filter((name) => name.endsWith(".svg")).sort();
+    for (const page of pages) {
+      const svg = path.join(base, page);
+      if (rsvg && spawnSync(rsvg, ["-w", "1240", svg, "-o", svg.replace(/\.svg$/, ".png")]).status === 0) previews.push(svg.replace(/\.svg$/, ".png"));
+      else previews.push(svg);
+    }
+  }
+  return previews;
+}
+
+function displayDate(iso) {
+  const [year, month, day] = String(iso).split("-").map(Number);
+  return year && month && day ? `${year}. ${month}. ${day}.` : String(iso);
 }
 
 async function check(file) {

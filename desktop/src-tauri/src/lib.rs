@@ -9,9 +9,24 @@ use std::fs::{self, OpenOptions};
 use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 use std::process::{Command, Output, Stdio};
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Mutex;
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 use std::thread;
-use tauri::Manager;
+use tauri::{Emitter, Manager};
+
+/// 사용자가 '중단'을 눌렀는지. 작도 폴링 루프가 매 틱 확인한다.
+static CANCEL_REQUESTED: AtomicBool = AtomicBool::new(false);
+/// 진행 중인 작도의 PowerShell PID 와 한글 PID 파일 — 앱 종료 시 고아를 남기지 않기 위해.
+static ACTIVE_NATIVE_RUN: Mutex<Option<(u32, PathBuf)>> = Mutex::new(None);
+
+fn kill_active_native_run() {
+    let active = ACTIVE_NATIVE_RUN.lock().ok().and_then(|mut guard| guard.take());
+    if let Some((child_pid, pid_file)) = active {
+        kill_process_id(child_pid, None);
+        kill_process_from_pid_file(&pid_file);
+    }
+}
 
 const HWP_NATIVE_SCRIPT: &str = include_str!("../resources/hwp-native.ps1");
 const LAW_OPEN_API_SCRIPT: &str = include_str!("../resources/law-open-api.ps1");
@@ -110,7 +125,156 @@ fn powershell_executable() -> PathBuf {
     PathBuf::from("powershell.exe")
 }
 
+/// PowerShell 실행 옵션. 기본값은 짧은 작업(조회·검증)용이고, 한글 작도처럼 오래 걸리는
+/// 작업은 객체 수에 비례한 타임아웃·진행 파일·한글 PID 파일을 함께 넘긴다.
+#[derive(Default)]
+struct PowershellRun {
+    timeout_secs: Option<u64>,
+    /// 진행 파일·로그가 이 시간 동안 변하지 않으면 '정체'로 본다. 한글이 살아 있는 채 모달·내부
+    /// 교착에 잡히면 COM 호출이 예외 없이 멈추므로, 한글 PID 만 죽여 스크립트의 재개 경로를 깨운다.
+    stall_timeout_secs: Option<u64>,
+    /// hwp-native.ps1 이 자기가 띄운 한글 프로세스 PID를 적는 파일. 타임아웃으로 PowerShell을
+    /// 죽일 때 숨김 한글이 고아로 남지 않도록 같이 종료한다.
+    hwp_pid_file: Option<PathBuf>,
+    /// hwp-native.ps1 이 갱신하는 진행 상태 JSON. 1초마다 읽어 sink 로 넘기고, 실패 시
+    /// 마지막 상태를 오류 메시지에 붙인다.
+    progress_file: Option<PathBuf>,
+    progress_sink: Option<Box<dyn Fn(Value) + Send>>,
+}
+
+const DEFAULT_POWERSHELL_TIMEOUT_SECS: u64 = 600;
+
+fn native_generate_timeout_secs(object_count: usize) -> u64 {
+    // 전체 상한(백스톱). 정체는 stall_timeout 이 따로 잡으므로 넉넉히: 객체당 3초 + 90초, 10분~4시간.
+    let estimate = 90 + (object_count as u64) * 3;
+    estimate.clamp(DEFAULT_POWERSHELL_TIMEOUT_SECS, 14_400)
+}
+
+const NATIVE_STALL_TIMEOUT_SECS: u64 = 300;
+const NATIVE_STALL_KILL_LIMIT: u32 = 4;
+
+fn minutes_text(secs: u64) -> String {
+    format!("{}분", (secs + 59) / 60)
+}
+
+fn read_progress_state(path: &Path) -> Option<Value> {
+    let text = fs::read_to_string(path).ok()?;
+    serde_json::from_str::<Value>(text.trim()).ok()
+}
+
+fn progress_log_tail(path: &Path, lines: usize) -> String {
+    let log_path = PathBuf::from(format!("{}.log", path.display()));
+    let Ok(text) = fs::read_to_string(&log_path) else {
+        return String::new();
+    };
+    let collected: Vec<&str> = text.lines().rev().take(lines).collect();
+    collected.into_iter().rev().collect::<Vec<_>>().join("\n")
+}
+
+fn describe_progress(path: &Path) -> String {
+    let Some(state) = read_progress_state(path) else {
+        return String::new();
+    };
+    let done = state.get("done").and_then(Value::as_u64).unwrap_or(0);
+    let total = state.get("total").and_then(Value::as_u64).unwrap_or(0);
+    let session = state.get("session").and_then(Value::as_u64).unwrap_or(0);
+    let phase = state.get("phase").and_then(Value::as_str).unwrap_or("");
+    let mut text = match state.get("failedIndex").and_then(Value::as_u64) {
+        Some(index) if index > 0 => {
+            let id = state.get("failedId").and_then(Value::as_str).unwrap_or("");
+            let kind = state.get("failedType").and_then(Value::as_str).unwrap_or("");
+            format!(" 실패 객체 {index}/{total} ({id} {kind}) · 저장된 객체 {done}개 · 세션 {session} · 단계 {phase}.")
+        }
+        _ => format!(" 마지막 진행: 객체 {done}/{total} · 세션 {session} · 단계 {phase}."),
+    };
+    if let Ok(meta) = fs::metadata(path) {
+        if let Ok(modified) = meta.modified() {
+            if let Ok(age) = SystemTime::now().duration_since(modified) {
+                if age.as_secs() >= 60 {
+                    text.push_str(&format!(" 마지막 갱신 후 {} 진행 없음.", minutes_text(age.as_secs())));
+                }
+            }
+        }
+    }
+    if let Some(checkpoint) = state.get("checkpointPath").and_then(Value::as_str) {
+        if done > 0 && Path::new(checkpoint).exists() {
+            text.push_str(&format!("\n부분 저장본({done}개, 선→사각형→글상자 순): {checkpoint}"));
+        }
+    }
+    let tail = progress_log_tail(path, 4);
+    if !tail.is_empty() {
+        text.push_str("\n최근 로그:\n");
+        text.push_str(&tail);
+    }
+    text
+}
+
+fn progress_signature(progress_file: Option<&Path>) -> String {
+    // 진행 파일 내용 + 로그 길이. 스크립트가 객체마다 로그를 flush 하므로 심장박동으로 쓴다.
+    let Some(path) = progress_file else {
+        return String::new();
+    };
+    let state = fs::read_to_string(path).unwrap_or_default();
+    let log_len = fs::metadata(format!("{}.log", path.display()))
+        .map(|meta| meta.len())
+        .unwrap_or(0);
+    format!("{log_len}:{state}")
+}
+
+/// PID 하나를 강제 종료한다. image 가 있으면 그 이미지명(예: Hwp.exe)일 때만 죽여 PID 재사용·오인을 막는다.
+fn kill_process_id(pid: u32, image: Option<&str>) {
+    if pid == 0 {
+        return;
+    }
+    #[cfg(target_os = "windows")]
+    {
+        use std::os::windows::process::CommandExt;
+        let mut command = Command::new("taskkill");
+        command.args(["/F", "/T", "/FI", &format!("PID eq {pid}")]);
+        if let Some(image) = image {
+            command.args(["/FI", &format!("IMAGENAME eq {image}")]);
+        }
+        let _ = command
+            .creation_flags(0x08000000)
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .status();
+    }
+    #[cfg(not(target_os = "windows"))]
+    {
+        let _ = image;
+        let _ = Command::new("kill")
+            .args(["-9", &pid.to_string()])
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .status();
+    }
+}
+
+/// hwp-native.ps1 이 기록한 한글 PID 를 읽어 종료한다(이미지명이 Hwp.exe 일 때만).
+fn kill_process_from_pid_file(path: &Path) {
+    let Ok(text) = fs::read_to_string(path) else {
+        return;
+    };
+    let Ok(pid) = text.trim().parse::<u32>() else {
+        return;
+    };
+    kill_process_id(pid, Some("Hwp.exe"));
+}
+
 fn run_powershell<I, S>(script_path: &Path, args: I) -> Result<Output, String>
+where
+    I: IntoIterator<Item = S>,
+    S: AsRef<OsStr>,
+{
+    run_powershell_with(script_path, args, PowershellRun::default())
+}
+
+fn run_powershell_with<I, S>(
+    script_path: &Path,
+    args: I,
+    options: PowershellRun,
+) -> Result<Output, String>
 where
     I: IntoIterator<Item = S>,
     S: AsRef<OsStr>,
@@ -132,8 +296,10 @@ where
     }
     // 한글 COM 호출이 모달 대화상자(보안 승인 등)에 걸리면 응답 없이 영구
     // 대기한다. 타임아웃을 두고 초과 시 프로세스를 종료해 앱이 함께 멈추는
-    // 것을 막는다.
-    const POWERSHELL_TIMEOUT_SECS: u64 = 600;
+    // 것을 막는다. 작도 작업은 객체 수에 비례한 타임아웃을 따로 받는다.
+    let timeout_secs = options
+        .timeout_secs
+        .unwrap_or(DEFAULT_POWERSHELL_TIMEOUT_SECS);
     command
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
@@ -157,20 +323,127 @@ where
         }
         buffer
     });
-    let deadline = Instant::now() + Duration::from_secs(POWERSHELL_TIMEOUT_SECS);
+    if let Some(pid_file) = &options.hwp_pid_file {
+        if let Ok(mut guard) = ACTIVE_NATIVE_RUN.lock() {
+            *guard = Some((child.id(), pid_file.clone()));
+        }
+    }
+    CANCEL_REQUESTED.store(false, Ordering::SeqCst);
+    let deadline = Instant::now() + Duration::from_secs(timeout_secs);
+    let mut last_progress = String::new();
+    let mut tick: u32 = 0;
+    let stall_limit = options.stall_timeout_secs.map(Duration::from_secs);
+    let mut last_signature = progress_signature(options.progress_file.as_deref());
+    let mut last_change = Instant::now();
+    let mut stall_kills: u32 = 0;
+    let mut stall_note = String::new();
+    let mut publish_progress = |force: bool, tick: u32| {
+        let (Some(path), Some(sink)) = (&options.progress_file, &options.progress_sink) else {
+            return;
+        };
+        if !force && tick % 5 != 0 {
+            return;
+        }
+        let Ok(text) = fs::read_to_string(path) else {
+            return;
+        };
+        if text == last_progress {
+            return;
+        }
+        if let Ok(state) = serde_json::from_str::<Value>(text.trim()) {
+            last_progress = text;
+            sink(state);
+        }
+    };
+    let abort = |child: &mut std::process::Child, reason: String| -> String {
+        // PowerShell 을 죽인 직후 한글도 죽인다(리더 스레드 join 전에 — 핸들 상속으로 영구 대기하지 않도록).
+        let _ = child.kill();
+        if let Some(pid_file) = &options.hwp_pid_file {
+            kill_process_from_pid_file(pid_file);
+        }
+        let _ = child.wait();
+        let progress = options
+            .progress_file
+            .as_deref()
+            .map(describe_progress)
+            .unwrap_or_default();
+        let log_hint = options
+            .progress_file
+            .as_deref()
+            .map(|path| format!("\n진단 로그: {}.log", path.display()))
+            .unwrap_or_default();
+        format!("{reason}{progress}{log_hint}")
+    };
     let status = loop {
         match child.try_wait() {
             Ok(Some(status)) => break status,
             Ok(None) => {
-                if Instant::now() >= deadline {
-                    let _ = child.kill();
-                    let _ = child.wait();
+                if CANCEL_REQUESTED.load(Ordering::SeqCst) {
+                    let message = abort(&mut child, "사용자가 한글 편집본 생성을 중단했습니다. 숨김 한글 프로세스를 함께 종료했습니다.".to_string());
                     let _ = stdout_thread.join();
                     let _ = stderr_thread.join();
-                    return Err(format!(
-                        "한글 자동화가 {POWERSHELL_TIMEOUT_SECS}초 안에 끝나지 않아 중단했습니다. 한글 창에 떠 있는 대화상자(파일 접근 승인·보안모듈 등)를 닫고, 생성 중에는 한글 창을 조작하지 말고 다시 시도하세요."
-                    ));
+                    if let Ok(mut guard) = ACTIVE_NATIVE_RUN.lock() {
+                        *guard = None;
+                    }
+                    return Err(message);
                 }
+                if Instant::now() >= deadline {
+                    let message = abort(
+                        &mut child,
+                        format!(
+                            "한글 자동화가 상한 {}을 넘겨 강제 종료했습니다(숨김 한글 프로세스 포함).{}",
+                            minutes_text(timeout_secs),
+                            stall_note
+                        ),
+                    );
+                    let _ = stdout_thread.join();
+                    let _ = stderr_thread.join();
+                    if let Ok(mut guard) = ACTIVE_NATIVE_RUN.lock() {
+                        *guard = None;
+                    }
+                    return Err(message);
+                }
+                tick = tick.wrapping_add(1);
+                if tick % 5 == 0 {
+                    // 1초마다: 진행 심장박동 확인 → 정체 판정
+                    let signature = progress_signature(options.progress_file.as_deref());
+                    if signature != last_signature {
+                        last_signature = signature;
+                        last_change = Instant::now();
+                    } else if let Some(limit) = stall_limit {
+                        if last_change.elapsed() >= limit {
+                            stall_kills += 1;
+                            last_change = Instant::now();
+                            if stall_kills <= NATIVE_STALL_KILL_LIMIT {
+                                // 1차: 한글만 죽인다 → 막혀 있던 COM 호출이 RPC 오류로 돌아오고 스크립트가
+                                // 체크포인트에서 재개한다.
+                                if let Some(pid_file) = &options.hwp_pid_file {
+                                    kill_process_from_pid_file(pid_file);
+                                }
+                                stall_note = format!(" {}간 진행이 없어 한글 프로세스를 {}회 강제 종료했습니다.", minutes_text(limit.as_secs()), stall_kills);
+                                if let Some(sink) = &options.progress_sink {
+                                    sink(json!({ "phase": "stall-kill", "stallKills": stall_kills, "stallSeconds": limit.as_secs() }));
+                                }
+                            } else {
+                                let message = abort(
+                                    &mut child,
+                                    format!(
+                                        "한글이 {}간 진행 없이 멈추기를 {}회 반복해 생성을 중단했습니다. 한글 창의 대화상자(문서 복구·보안 승인 등)가 뜨는지 확인하고, 한글을 모두 닫은 뒤 다시 시도하세요.",
+                                        minutes_text(limit.as_secs()),
+                                        stall_kills - 1
+                                    ),
+                                );
+                                let _ = stdout_thread.join();
+                                let _ = stderr_thread.join();
+                                if let Ok(mut guard) = ACTIVE_NATIVE_RUN.lock() {
+                                    *guard = None;
+                                }
+                                return Err(message);
+                            }
+                        }
+                    }
+                }
+                publish_progress(false, tick);
                 thread::sleep(Duration::from_millis(200));
             }
             Err(error) => {
@@ -178,9 +451,47 @@ where
             }
         }
     };
+    publish_progress(true, tick);
+    if let Ok(mut guard) = ACTIVE_NATIVE_RUN.lock() {
+        *guard = None;
+    }
     let stdout = stdout_thread.join().unwrap_or_default();
     let stderr = stderr_thread.join().unwrap_or_default();
+    if !status.success() {
+        // 스크립트가 실패로 끝났을 때도 숨김 한글이 남아 있으면 정리한다.
+        if let Some(pid_file) = &options.hwp_pid_file {
+            kill_process_from_pid_file(pid_file);
+        }
+    }
     Ok(Output { status, stdout, stderr })
+}
+
+fn sweep_native_run_dirs(app: &tauri::AppHandle) {
+    // 실패한 실행의 진단 폴더(체크포인트 포함, 수 MB)를 무한정 쌓지 않는다: 7일 지난 것과 최신 5개 밖은 삭제.
+    let Ok(cache) = app.path().app_cache_dir() else {
+        return;
+    };
+    let root = cache.join("native-hwpx");
+    let Ok(entries) = fs::read_dir(&root) else {
+        return;
+    };
+    let mut dirs: Vec<(u128, PathBuf)> = entries
+        .flatten()
+        .filter(|entry| entry.path().is_dir())
+        .filter_map(|entry| {
+            let name = entry.file_name().to_string_lossy().to_string();
+            let stamp = name.rsplit('-').next()?.parse::<u128>().ok()?;
+            Some((stamp, entry.path()))
+        })
+        .collect();
+    dirs.sort_by(|a, b| b.0.cmp(&a.0));
+    let now = unix_time_millis();
+    for (index, (stamp, path)) in dirs.iter().enumerate() {
+        let age_days = now.saturating_sub(*stamp) / 86_400_000;
+        if index >= 5 || age_days >= 7 {
+            let _ = fs::remove_dir_all(path);
+        }
+    }
 }
 
 fn parse_json_output(output: &Output) -> Result<Value, String> {
@@ -1244,6 +1555,12 @@ fn validate_native_manifest(request: ValidateManifestRequest) -> Result<Value, S
 }
 
 #[tauri::command]
+fn cancel_native_hwpx() -> Value {
+    CANCEL_REQUESTED.store(true, Ordering::SeqCst);
+    json!({ "requested": true })
+}
+
+#[tauri::command]
 fn open_output_directory(app: tauri::AppHandle) -> Result<Value, String> {
     let directory = output_directory(&app)?;
     #[cfg(target_os = "windows")]
@@ -1585,6 +1902,7 @@ async fn generate_native_hwpx(
     let staging_token = format!("{}-{}", std::process::id(), unix_time_millis());
     let staged_output_path = temporary_hwpx_path(&output_path, &staging_token);
 
+    sweep_native_run_dirs(&app);
     let run_dir = unique_run_dir(&app, "generate")?;
     let script_path = run_dir.join("hwp-native.ps1");
     let manifest_path = run_dir.join("drawing.native.json");
@@ -1592,11 +1910,29 @@ async fn generate_native_hwpx(
     fs::write(&manifest_path, &request.manifest_json)
         .map_err(|error| format!("작도 명세를 준비하지 못했습니다: {error}"))?;
 
+    let object_count = preflight
+        .pointer("/summary/objectCount")
+        .and_then(Value::as_u64)
+        .unwrap_or(0) as usize;
+    let progress_path = run_dir.join("progress.json");
+    let pid_path = run_dir.join("hwp.pid");
     let script_for_task = script_path.clone();
     let manifest_for_task = manifest_path.clone();
     let output_for_task = staged_output_path.clone();
+    let progress_for_task = progress_path.clone();
+    let pid_for_task = pid_path.clone();
+    let app_for_progress = app.clone();
     let output = tauri::async_runtime::spawn_blocking(move || {
-        run_powershell(
+        let options = PowershellRun {
+            timeout_secs: Some(native_generate_timeout_secs(object_count)),
+            stall_timeout_secs: Some(NATIVE_STALL_TIMEOUT_SECS),
+            hwp_pid_file: Some(pid_for_task.clone()),
+            progress_file: Some(progress_for_task.clone()),
+            progress_sink: Some(Box::new(move |state: Value| {
+                let _ = app_for_progress.emit("native-hwpx-progress", state);
+            })),
+        };
+        run_powershell_with(
             &script_for_task,
             [
                 OsStr::new("-Mode"),
@@ -1605,17 +1941,47 @@ async fn generate_native_hwpx(
                 manifest_for_task.as_os_str(),
                 OsStr::new("-OutputPath"),
                 output_for_task.as_os_str(),
+                OsStr::new("-ChunkSize"),
+                OsStr::new("150"),
+                OsStr::new("-ProgressPath"),
+                progress_for_task.as_os_str(),
+                OsStr::new("-PidPath"),
+                pid_for_task.as_os_str(),
             ],
+            options,
         )
     })
     .await
-    .map_err(|error| format!("한글 생성 작업이 중단되었습니다: {error}"))??;
+    .map_err(|error| format!("한글 생성 작업이 중단되었습니다: {error}"))
+    .and_then(|inner| inner)
+    .map_err(|error| {
+        // 어떤 실패 경로든 사용자 문서 폴더의 숨김 임시본은 남기지 않는다. 진단 폴더(로그·부분 저장본)는 남긴다.
+        let _ = fs::remove_file(&staged_output_path);
+        error
+    })?;
 
-    let mut result = parse_json_output(&output)?;
+    // 스크립트가 실패하면 마지막 진행 지점과 로그 꼬리를 붙여 어디서 죽었는지 바로 보이게 한다.
+    // 임시 폴더는 지우지 않고 남겨 진단에 쓴다.
+    let mut result = parse_json_output(&output).map_err(|error| {
+        let _ = fs::remove_file(&staged_output_path);
+        format!(
+            "{error}{}\n진단 로그: {}",
+            describe_progress(&progress_path),
+            PathBuf::from(format!("{}.log", progress_path.display())).display()
+        )
+    })?;
     if result.get("verified").and_then(Value::as_bool) != Some(true) {
         let _ = fs::remove_file(&staged_output_path);
-        let _ = fs::remove_dir_all(&run_dir);
-        return Err("저장한 HWPX의 쪽수 또는 네이티브 객체 수가 명세와 일치하지 않아 최종 파일로 확정하지 않았습니다.".to_string());
+        let pages = result.get("pageCount").and_then(Value::as_i64).unwrap_or(-1);
+        let expected_pages = result.get("expectedPageCount").and_then(Value::as_i64).unwrap_or(-1);
+        let objects = result.get("nativeObjectCount").and_then(Value::as_i64).unwrap_or(-1);
+        let expected_objects = result.get("expectedNativeObjectCount").and_then(Value::as_i64).unwrap_or(-1);
+        let sessions = result.get("sessions").and_then(Value::as_u64).unwrap_or(0);
+        let recoveries = result.get("recoveries").and_then(Value::as_u64).unwrap_or(0);
+        return Err(format!(
+            "저장한 HWPX의 쪽수 또는 네이티브 객체 수가 명세와 일치하지 않아 최종 파일로 확정하지 않았습니다. 객체 {objects}/{expected_objects}(기대) · 쪽 {pages}/{expected_pages} · 세션 {sessions} · 재개 {recoveries}회. 재개 중 같은 객체가 두 번 만들어졌을 수 있습니다. 한글을 모두 닫고 다시 시도하세요.\n진단 로그: {}.log",
+            progress_path.display()
+        ));
     }
     let native_manifest_path = companion_path(&output_path, "native.json");
     let verification_report_path = companion_path(&output_path, "verification.json");
@@ -1709,10 +2075,17 @@ pub fn run() {
             load_law_snapshot,
             save_comparison_video,
             generate_native_hwpx,
+            cancel_native_hwpx,
             open_output_directory,
         ])
-        .run(tauri::generate_context!())
-        .expect("error while running Tauri application");
+        .build(tauri::generate_context!())
+        .expect("error while building Tauri application")
+        .run(|_app, event| {
+            // 앱을 닫아도 PowerShell·숨김 한글이 고아로 남지 않게 한다.
+            if let tauri::RunEvent::Exit = event {
+                kill_active_native_run();
+            }
+        });
 }
 
 #[cfg(test)]

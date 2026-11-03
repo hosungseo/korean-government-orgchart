@@ -14,6 +14,7 @@ import {
 } from "./comparison-video.js";
 
 const invoke = window.__TAURI__?.core?.invoke;
+const listenEvent = window.__TAURI__?.event?.listen;
 const $ = (id) => document.getElementById(id);
 const MAX_MANIFEST_FILE_BYTES = 5 * 1024 * 1024;
 
@@ -1031,8 +1032,48 @@ async function generate() {
     "working",
   );
   $("verification").dataset.state = "";
-  $("verification").querySelector("span").textContent = "검증 중";
-  $("verification").querySelector("p").textContent = "저장된 HWPX를 한글로 다시 여는 중입니다.";
+  $("verification").querySelector("span").textContent = "작도 중";
+  $("verification").querySelector("p").textContent = "작도가 끝나면 저장본을 한글로 다시 열어 검증합니다.";
+  $("cancelButton").hidden = false;
+  $("cancelButton").disabled = false;
+  // 한글 작도 진행 상태(청크 저장·재개·검증)를 실시간으로 보여 준다. 긴 작업이
+  // 멈춘 것처럼 보이지 않게 하고, 재개가 일어나면 그 사실을 바로 알린다.
+  const startedAt = Date.now();
+  let unlistenProgress = null;
+  if (listenEvent) {
+    try {
+      unlistenProgress = await listenEvent("native-hwpx-progress", (event) => {
+        const state = event?.payload || {};
+        const done = Number(state.done || 0);
+        const total = Number(state.total || objectTotal);
+        const elapsedSec = Math.max(1, Math.round((Date.now() - startedAt) / 1000));
+        const pace = done > 0 ? done / elapsedSec : 0;
+        const remainSec = pace > 0 ? Math.round((total - done) / pace) : null;
+        const remain = remainSec === null ? "" : ` · 남은 시간 약 ${Math.max(1, Math.round(remainSec / 60))}분`;
+        const recoveries = Number(state.recoveries || 0);
+        const recoveryNote = recoveries > 0 ? ` · 한글 재기동 ${recoveries}회` : "";
+        const text = {
+          opening: `세션 ${state.session || 1} 시작 · 한글을 띄우는 중 (${done.toLocaleString()}/${total.toLocaleString()})${recoveryNote}`,
+          drawing: `객체 ${done.toLocaleString()}/${total.toLocaleString()} 작도 중 · 세션 ${state.session || 1}${remain}${recoveryNote}`,
+          checkpointing: `세션 ${state.session || 1} 중간 저장 중 (${done.toLocaleString()}/${total.toLocaleString()})${recoveryNote}`,
+          checkpoint: `중간 저장 완료 ${done.toLocaleString()}/${total.toLocaleString()} · 한글을 다시 열어 이어 그립니다${recoveryNote}`,
+          recovering: `한글이 응답을 끊어 ${done.toLocaleString()}개 지점부터 다시 이어 그립니다 (재개 ${recoveries}회, 청크 ${state.chunkSize || ""})`,
+          "stall-kill": `${Math.round(Number(state.stallSeconds || 300) / 60)}분간 진행이 없어 한글 프로세스를 강제 종료하고 재개를 기다립니다 (${state.stallKills || 1}회)`,
+          saving: `작도 완료 · 최종 HWPX 저장 중`,
+          verifying: `저장본을 한글로 다시 열어 객체 수와 쪽수를 검증 중`,
+          failed: `실패 처리 중 · 객체 ${done.toLocaleString()}/${total.toLocaleString()}`,
+          done: `검증 완료`,
+        }[state.phase] || `진행 중 ${done.toLocaleString()}/${total.toLocaleString()}`;
+        const suffix = state.phase === "done" || state.phase === "failed" ? "" : ". 그동안 한글 창을 열거나 조작하지 마세요.";
+        setStatus("네이티브 객체 작도 중", `${text}${suffix}`, "working");
+        if (state.phase === "verifying" || state.phase === "saving") {
+          $("verification").querySelector("p").textContent = text;
+        }
+      });
+    } catch {
+      unlistenProgress = null;
+    }
+  }
   try {
     const result = await invoke("generate_native_hwpx", {
       request: {
@@ -1062,7 +1103,20 @@ async function generate() {
     $("verification").querySelector("span").textContent = "생성 또는 검증 실패";
     $("verification").querySelector("p").textContent = String(error);
   } finally {
+    if (typeof unlistenProgress === "function") unlistenProgress();
+    $("cancelButton").hidden = true;
     refreshGenerateAvailability();
+  }
+}
+
+async function cancelGenerate() {
+  if (!invoke) return;
+  $("cancelButton").disabled = true;
+  setStatus("생성 중단 요청", "진행 중인 한글 작도를 멈추고 숨김 한글 프로세스를 정리합니다.", "working");
+  try {
+    await invoke("cancel_native_hwpx");
+  } catch (error) {
+    setStatus("중단 요청 실패", String(error), "error");
   }
 }
 
@@ -1080,6 +1134,7 @@ $("generateButton").addEventListener("click", generate);
 $("reloadButton").addEventListener("click", loadSample);
 $("loadManifestButton").addEventListener("click", () => $("manifestFile").click());
 $("manifestFile").addEventListener("change", (event) => loadFile(event.target.files?.[0]));
+$("cancelButton").addEventListener("click", cancelGenerate);
 $("openFolderButton").addEventListener("click", openOutputFolder);
 $("openLawInputButton").addEventListener("click", () => {
   $("lawInputError").hidden = true;

@@ -59,6 +59,19 @@ jobs:
       - name: Install project dependencies
         run: npm ci --ignore-scripts
 
+      - name: Debug sim (temporary)
+        shell: powershell
+        timeout-minutes: 4
+        continue-on-error: true
+        run: |
+          $PSVersionTable.PSVersion
+          $sw = [Diagnostics.Stopwatch]::StartNew()
+          $p = Start-Process powershell -ArgumentList '-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File','test/hwp-native-generate.sim.ps1','-ObjectCount','30','-ChunkSize','10' -PassThru -NoNewWindow -RedirectStandardOutput sim.out -RedirectStandardError sim.err
+          if (-not $p.WaitForExit(90000)) { "TIMEOUT after $($sw.ElapsedMilliseconds)ms"; Stop-Process -Id $p.Id -Force } else { "exit $($p.ExitCode) after $($sw.ElapsedMilliseconds)ms" }
+          "--- stdout"; Get-Content sim.out | ForEach-Object { $_.Substring(0, [Math]::Min(3000, $_.Length)) }
+          "--- stderr"; Get-Content sim.err
+          Get-ChildItem ([IO.Path]::GetTempPath()) -Filter 'hwp-native-sim-*' | ForEach-Object { "--- $($_.FullName)"; Get-ChildItem $_.FullName | ForEach-Object { $_.Name }; Get-Content (Join-Path $_.FullName 'progress.json.log') -ErrorAction SilentlyContinue | Select-Object -Last 40 }
+
       - name: Run manifest and renderer tests
         run: npm test
 

@@ -73,6 +73,8 @@ button, input, textarea, select { font: inherit; }
 .runtime-badge[data-state="ready"] span { background: var(--success); }
 .runtime-badge[data-state="unavailable"] { color: var(--danger); border-color: #e0c5c2; background: #fff8f7; }
 .runtime-badge[data-state="unavailable"] span { background: var(--danger); }
+.runtime-badge[data-state="direct"] { color: var(--warning); border-color: #decda9; background: #fffaf1; }
+.runtime-badge[data-state="direct"] span { background: var(--warning); }
 
 .app-shell {
   height: calc(100vh - 68px);

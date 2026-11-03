@@ -23,7 +23,8 @@ if ($null -eq (Get-Command node -ErrorAction SilentlyContinue)) {
 if ($LASTEXITCODE -ne 0) { throw "네이티브 작도 명세 생성에 실패했습니다." }
 
 [IO.Directory]::CreateDirectory($OutputDirectory) | Out-Null
-$json = & $automationScript -Mode Generate -ManifestPath $manifestPath -OutputPath $outputPath
+$checkpointDirectory = Join-Path ([IO.Path]::GetTempPath()) "orgchart-hwp-verify"
+$json = & $automationScript -Mode Generate -ManifestPath $manifestPath -OutputPath $outputPath -CheckpointDir $checkpointDirectory
 if ($LASTEXITCODE -ne 0) { throw "한글 네이티브 HWPX 생성에 실패했습니다." }
 $result = $json | Select-Object -Last 1 | ConvertFrom-Json
 

@@ -113,6 +113,80 @@ test("쪽 설정은 한글 버전 간 호환되는 HSet 파라미터 API를 사�
   assert.match(script, /\$pageWidth - 420/);
 });
 
+test("한글 작도는 청크 체크포인트·프로세스 재기동·크래시 재개 구조를 가진다", () => {
+  const script = readFileSync(
+    new URL("../desktop/src-tauri/resources/hwp-native.ps1", import.meta.url),
+    "utf8",
+  );
+  // 앱(lib.rs)이 넘기는 인자와 스크립트 파라미터가 맞아야 한다.
+  for (const name of ["ChunkSize", "ProgressPath", "PidPath", "MaxRecoveries"]) {
+    assert.match(script, new RegExp(`\\$${name}\\b`), `${name} 파라미터`);
+  }
+  // 세션마다 임시 경로에 lock:false 로 저장하고, 한글을 완전히 내린 뒤(파일 잠금 해제) 체크포인트로 바꾼다.
+  assert.match(script, /SaveAs\(\$Path, "HWPX", "lock:false;"\)/);
+  const releaseIndex = script.indexOf("Release-HwpObject $script:Hwp\n                $script:Hwp = $null\n                $holder = $null\n                [GC]::Collect()\n                Move-FileAtomic $saving $checkpoint");
+  assert.ok(releaseIndex > 0, "Release(Quit+프로세스 종료) → rename 순서");
+  assert.match(script, /function Move-FileAtomic/);
+  assert.match(script, /\[IO\.File\]::Replace\(\$Source, \$Destination, \[NullString\]::Value\)/);
+  assert.match(script, /function Stop-HwpProcess/);
+  assert.match(script, /Stop-Process -Id \$pidValue -Force/);
+  // 재개는 체크포인트를 다시 열어 기존 앵커 뒤(문단 끝)에서 이어 그린다.
+  assert.match(script, /Open\(\$CheckpointPath, "", "lock:false;forceopen:true;versionwarning:false;"\)/);
+  assert.match(script, /HAction\.Run\("MoveDocEnd"\)/);
+  assert.doesNotMatch(script, /HAction\.Run\("MoveDocBegin"\)/);
+  // 실패 지점은 실제 객체 번호·ID·유형으로 보고하고, 부분 저장본은 남긴다.
+  assert.match(script, /failedIndex = \$current \+ 1/);
+  assert.match(script, /if \(\$succeeded\) \{ try \{ if \(Test-Path -LiteralPath \$checkpoint\)/);
+  // 재개 한도는 '같은 자리 연속'(streak)과 '전체 총량'을 분리한다.
+  assert.match(script, /if \(\$streak -ge \$MaxRecoveries\)/);
+  assert.match(script, /if \(\$recoveries -ge \$MaxTotalRecoveries\)/);
+  // 한글이 죽었을 때만(RPC 단절·프로세스 소멸) 청크를 줄여 재개하고, 그 외 오류는 즉시 실패한다.
+  assert.match(script, /0x800706BA\|0x800706BE\|0x80010108/);
+  assert.match(script, /\[Math\]::Max\(25, \[int\]\[Math\]::Floor\(\$chunk \/ 2\)\)/);
+  // z-order: 선 → 사각형 → 글상자 순서를 하나의 배열로 유지한다.
+  const order = ["\"line\"", "\"rectangle\"", "\"textbox\""].map((type) =>
+    script.indexOf(`$ordered += @($manifest.objects | Where-Object { $_.type -eq ${type} })`),
+  );
+  assert.ok(order.every((index) => index >= 0) && order[0] < order[1] && order[1] < order[2]);
+  // 진행 상태는 앱이 읽는 JSON과 사람이 읽는 로그로 남긴다.
+  assert.match(script, /function Write-ProgressState/);
+  assert.match(script, /"\$ProgressPath\.log"/);
+  // 한컴 자동화 함정 대응: FileNew 금지(보이는 창을 띄움), 창 전부 숨김, 기존 인스턴스 부착 시 중단,
+  // Quit 전 Clear(1), 메시지박스 자동응답 확대, 고아 자동화 한글 정리, 메모리 기준 조기 체크포인트.
+  assert.doesNotMatch(script, /HAction\.Run\("FileNew"\)/);
+  assert.match(script, /\$script:Hwp\.Clear\(1\)/);
+  assert.match(script, /function Hide-HwpWindows/);
+  assert.match(script, /if \(\$holder\.Attached\)/);
+  assert.match(script, /\$Hwp\.Clear\(1\)[\s\S]{0,80}\$Hwp\.Quit\(\)/);
+  assert.match(script, /SetMessageBoxMode\(0x00011011\)/);
+  assert.match(script, /function Stop-OrphanAutomationHwp/);
+  assert.match(script, /CommandLine -match '-Automation'/);
+  assert.match(script, /early checkpoint/);
+  assert.match(script, /GetWindowThreadProcessId/);
+});
+
+test("데스크톱 앱은 객체 수에 비례한 타임아웃과 진행·PID 파일을 한글 작도에 넘긴다", () => {
+  const source = readFileSync(new URL("../desktop/src-tauri/src/lib.rs", import.meta.url), "utf8");
+  assert.match(source, /fn native_generate_timeout_secs\(object_count: usize\) -> u64/);
+  assert.match(source, /estimate\.clamp\(DEFAULT_POWERSHELL_TIMEOUT_SECS, 14_400\)/);
+  // 정체 감지·취소·종료 훅·이미지명 확인 taskkill
+  assert.match(source, /stall_timeout_secs: Some\(NATIVE_STALL_TIMEOUT_SECS\)/);
+  assert.match(source, /fn cancel_native_hwpx\(\)/);
+  assert.match(source, /tauri::RunEvent::Exit/);
+  assert.match(source, /IMAGENAME eq \{image\}/);
+  assert.match(source, /kill_process_id\(pid, Some\("Hwp\.exe"\)\)/);
+  for (const flag of ["-ChunkSize", "-ProgressPath", "-PidPath"]) {
+    assert.match(source, new RegExp(`OsStr::new\\("${flag}"\\)`), flag);
+  }
+  assert.match(source, /kill_process_from_pid_file\(pid_file\)/);
+  assert.match(source, /app_for_progress\.emit\("native-hwpx-progress", state\)/);
+  const ui = readFileSync(new URL("../desktop/ui/app.js", import.meta.url), "utf8");
+  assert.match(ui, /listenEvent\("native-hwpx-progress"/);
+  assert.match(ui, /invoke\("cancel_native_hwpx"\)/);
+  const html = readFileSync(new URL("../desktop/ui/index.html", import.meta.url), "utf8");
+  assert.match(html, /id="cancelButton"/);
+});
+
 test("파일 접근 보안모듈이 없으면 한글 생성을 즉시 중단한다", () => {
   const script = readFileSync(
     new URL("../desktop/src-tauri/resources/hwp-native.ps1", import.meta.url),

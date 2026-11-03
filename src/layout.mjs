@@ -948,7 +948,7 @@ export function layoutPage(graph, page, options = {}) {
     ids.sort((a, b) => {
       const left = graph.nodes.get(a);
       const right = graph.nodes.get(b);
-      return (left?.rank ?? 9) - (right?.rank ?? 9) || left?.name.localeCompare(right?.name, "ko");
+      return (left?.rank ?? 9) - (right?.rank ?? 9) || siblingNameOrder(graph, left, right);
     });
   }
   const roots = page.rootIds
@@ -2020,7 +2020,7 @@ function layoutFlowPage({ graph, frame, parentEdge, roots, selected, depth }) {
     ids.sort((a, b) => {
       const left = graph.nodes.get(a);
       const right = graph.nodes.get(b);
-      return (left?.rank ?? 9) - (right?.rank ?? 9) || left?.name.localeCompare(right?.name, "ko");
+      return (left?.rank ?? 9) - (right?.rank ?? 9) || siblingNameOrder(graph, left, right);
     });
   }
   const columnGap = frame.width / Math.max(1, maxLevel + 1);
@@ -2071,7 +2071,7 @@ function layoutChangeLanesPage({ graph, frame, parentEdge, roots, selected, dept
     .sort((a, b) => {
       const left = graph.nodes.get(a);
       const right = graph.nodes.get(b);
-      return (depth.get(a) ?? 9) - (depth.get(b) ?? 9) || (left?.rank ?? 9) - (right?.rank ?? 9) || left?.name.localeCompare(right?.name, "ko");
+      return (depth.get(a) ?? 9) - (depth.get(b) ?? 9) || (left?.rank ?? 9) - (right?.rank ?? 9) || siblingNameOrder(graph, left, right);
     });
   const lanes = [
     body.filter((id) => !graph.nodes.get(id)?.metadata?.change),
@@ -2189,7 +2189,7 @@ function layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, p
     ids.sort((a, b) => {
       const left = graph.nodes.get(a);
       const right = graph.nodes.get(b);
-      return (left?.rank ?? 9) - (right?.rank ?? 9) || left?.name.localeCompare(right?.name, "ko");
+      return (left?.rank ?? 9) - (right?.rank ?? 9) || siblingNameOrder(graph, left, right);
     });
   }
   const bodyIds = [...selected].filter((id) => !rootIds.includes(id));
@@ -2211,7 +2211,7 @@ function layoutCatalogPage({ graph, frame, parentEdge, roots, selected, depth, p
   const orderedGroupParents = [...groupParentIds].sort((a, b) => {
     const left = graph.nodes.get(a);
     const right = graph.nodes.get(b);
-    return (depth.get(a) ?? 9) - (depth.get(b) ?? 9) || (left?.rank ?? 9) - (right?.rank ?? 9) || left?.name.localeCompare(right?.name, "ko");
+    return (depth.get(a) ?? 9) - (depth.get(b) ?? 9) || (left?.rank ?? 9) - (right?.rank ?? 9) || siblingNameOrder(graph, left, right);
   });
   for (const id of orderedGroupParents) {
     const parentId = parentEdge.get(id)?.parent;
@@ -2551,9 +2551,12 @@ function layoutTwoColumnPage({ graph, pageSize, frame, parentEdge, children, roo
       branchRoots.push({ id: rootId, parent: null });
     }
   }
+  // Split contiguously so each lane keeps the source reading order; greedy
+  // alternation put siblings 1·3·5 left and 2·4·6 right.
+  const branchTotal = branchRoots.reduce((sum, branch) => sum + Math.max(1, leafWeight(branch.id)), 0);
   for (const branch of branchRoots) {
     const weight = Math.max(1, leafWeight(branch.id));
-    const lane = laneWeights[0] <= laneWeights[1] ? 0 : 1;
+    const lane = laneWeights[0] + weight / 2 <= branchTotal / 2 || !laneBranches[0].length ? 0 : 1;
     laneBranches[lane].push(branch);
     laneWeights[lane] += weight;
   }
@@ -2588,6 +2591,23 @@ function layoutTwoColumnPage({ graph, pageSize, frame, parentEdge, children, roo
     }
   };
 
+  // Several headers each own the column under them; two shared lanes would
+  // scatter one header's children under another header.
+  if (headerIds.length > 1) {
+    const columnWidth = frame.width / headerIds.length;
+    headerIds.forEach((rootId, index) => {
+      const branches = branchRoots.filter((branch) => branch.parent === rootId);
+      const total = Math.max(1, branches.reduce((sum, branch) => sum + Math.max(1, leafWeight(branch.id)), 0));
+      let cursor = frame.left + columnWidth * index;
+      for (const branch of branches) {
+        const width = columnWidth * Math.max(1, leafWeight(branch.id)) / total;
+        assign(branch.id, cursor, width, index, 1);
+        cursor += width;
+      }
+    });
+    laneBranches[0] = [];
+    laneBranches[1] = branchRoots.filter((branch) => !branch.parent);
+  }
   for (let lane = 0; lane < 2; lane += 1) {
     const left = lane === 0 ? frame.left : frame.left + laneWidth + laneGap;
     const total = Math.max(1, laneBranches[lane].reduce((sum, branch) => sum + Math.max(1, leafWeight(branch.id)), 0));
@@ -2929,4 +2949,13 @@ export function displayNodeName(node, vertical = false, { showLawCounts = false 
       : "";
   const label = `${node.name}${previousName}${count}${marker}${lawCount}${expiry}${concurrent}${specificRank}`;
   return vertical ? [...label].join("\n") : label;
+}
+
+// Central charts order same-rank siblings by name; local ordinances list
+// 국·과 in their customary order, so local charts keep the source order.
+function siblingNameOrder(graph, left, right) {
+  if (graph.meta?.governmentLevel === "local") {
+    return (left?.sourceOrder ?? 0) - (right?.sourceOrder ?? 0);
+  }
+  return left?.name.localeCompare(right?.name, "ko");
 }

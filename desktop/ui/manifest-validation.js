@@ -83,6 +83,11 @@ function analyzeStyle(object, errors, warnings) {
   if (!finite(style.paddingMm) || style.paddingMm < 0) {
     errors.push(diagnostic("invalid-padding", "글상자 안쪽 여백은 0 이상의 숫자여야 합니다.", object.id));
   }
+  for (const axis of ["paddingXMm", "paddingYMm"]) {
+    if (style[axis] !== undefined && (!finite(style[axis]) || style[axis] < 0)) {
+      errors.push(diagnostic("invalid-padding", `글상자 ${axis}는 0 이상의 숫자여야 합니다.`, object.id));
+    }
+  }
 }
 
 function analyzeGeometry(object, page, errors, warnings) {

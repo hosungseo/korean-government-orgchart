@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     # 한글이 죽는 객체 번호(작도 순서 기준 1부터, "120,260" 처럼 여러 개 가능). 비어 있으면 크래시 없음.
     [string]$CrashAt = "",

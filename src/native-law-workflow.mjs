@@ -146,7 +146,7 @@ export function buildNativeComparisonWorkflow(options = {}) {
   const before = sides[0];
   const after = sides[1];
   const dutyAllocation = compareDutyAllocations(before.graph, after.graph);
-  const dutyLineage = compactDutyLineage(compareDepartmentDutyFunctions(before.graph, after.graph));
+  const dutyLineage = withExplicitTransitions(compactDutyLineage(compareDepartmentDutyFunctions(before.graph, after.graph)), options.transitions);
   const institution = after.institution || before.institution;
   const stacked = onePage && Math.max(before.plans.length, after.plans.length) > 1;
   const pageCount = stacked ? 1 : Math.max(before.plans.length, after.plans.length, 1);
@@ -1742,7 +1742,9 @@ function buildComparisonManifest({
   }
   const transfers = [
     ...correspondenceTransferObjects(beforeTree, afterTree, dividerX, { dutyLineage }),
-    ...lifecycleLabelObjects(beforeTree, afterTree, { dutyLineage }),
+    // Pages pair up by index, so a unit may sit on another page of the other
+    // side: only call it 신설/폐지 when the whole other side lacks it.
+    ...lifecycleLabelObjects(beforeTree, afterTree, { dutyLineage, survivors: { before: unitKeys(before.graph), after: unitKeys(after.graph) } }),
     ...allocationTransferObjects(beforeTree, afterTree, notable, dividerX),
   ];
   labels.push(...allocationLabelObjects(notable));
@@ -1919,9 +1921,33 @@ function correspondencePairs(beforeTree, afterTree, options = {}) {
   return pairs;
 }
 
+// Renames and moves the user declared (e.g. a 개편안 outline) are drawn as
+// correspondences, ahead of any name or function inference.
+function withExplicitTransitions(dutyLineage, transitions) {
+  const explicit = (transitions || []).filter((item) => item?.from && item?.to);
+  return explicit.length ? { ...(dutyLineage || {}), explicit } : dutyLineage;
+}
+
 function correspondenceDestinations(source, afterByName, dutyLineage) {
   const name = source?.metadata?.nodeName || source?.name || "";
   const sourceParent = source?.metadata?.parentName || "";
+  const declared = (dutyLineage?.explicit || []).filter((item) => (
+    item.from === name
+    && (!item.fromParent || item.fromParent === sourceParent)
+    && afterByName.has(item.to)
+  ));
+  if (declared.length) {
+    return declared.map((item) => ({
+      name: item.to,
+      toParent: item.toParent || "",
+      basis: "explicit-amendment-map",
+      confidence: 1,
+      matchedFunctions: null,
+      sourceFunctions: null,
+      evidence: [],
+      reason: item.reason || "개편안에 적힌 명칭 변경·이동",
+    }));
+  }
   const contextual = CONTEXTUAL_TRANSITIONS.find((rule) => (
     rule.sourceName === name
     && (!rule.sourceParent || rule.sourceParent === sourceParent)
@@ -2058,9 +2084,29 @@ function departmentLineage(beforeTree, afterTree, options = {}) {
   };
 }
 
+function unitKeys(graph) {
+  const keys = new Set();
+  if (!graph?.edges) return keys;
+  for (const edge of graph.edges.values()) {
+    const parent = graph.nodes.get(edge.parent)?.name || "";
+    const child = graph.nodes.get(edge.child)?.name || "";
+    if (child) keys.add(`${parent}>${child}`);
+  }
+  return keys;
+}
+
 function lifecycleLabelObjects(beforeTree, afterTree, options = {}) {
   const idPrefix = options.idPrefix ? `${options.idPrefix}-` : "";
-  const { created, abolished } = departmentLineage(beforeTree, afterTree, options);
+  const lineage = departmentLineage(beforeTree, afterTree, options);
+  const key = (box) => `${box.metadata?.parentName || ""}>${box.metadata?.nodeName || ""}`;
+  const declared = options.dutyLineage?.explicit || [];
+  const survivors = options.survivors;
+  const created = lineage.created.filter((box) => !(
+    survivors?.before?.has(key(box)) || declared.some((item) => item.to === box.metadata?.nodeName)
+  ));
+  const abolished = lineage.abolished.filter((box) => !(
+    survivors?.after?.has(key(box)) || declared.some((item) => item.from === box.metadata?.nodeName)
+  ));
   const objects = [];
   const push = (box, status, color) => {
     const geometry = box.geometry;

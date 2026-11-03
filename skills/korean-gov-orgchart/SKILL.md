@@ -4,9 +4,12 @@ description: >-
   Turn Korean government organization law text — a ministry's 직제·직제
   시행규칙 or a local government's 「○○시 행정기구 설치 조례」 and its 시행규칙 —
   into an editable 한글(HWPX) vertical organization chart (세로 조직도) and
-  before/after reorganization sheets (조직개편 전·후 대비표, 2~4단). No Hangul
-  install needed. Use when the user asks for a 조직도·기구도 from 직제 or 조례,
-  wants to draw a 조직개편안, or needs a HWPX chart they can edit in 한글.
+  before/after reorganization sheets (조직개편 전·후 대비표, 2~4단). Also works
+  backwards for local governments: from a 개편안 org chart to the amended
+  조례·시행규칙 text, 개정문 and 신구조문대비표 (HWPX), checked by redrawing it. No
+  Hangul install needed. Use when the user asks for a 조직도·기구도 from 직제 or
+  조례, wants to draw a 조직개편안, needs a HWPX chart they can edit in 한글, or
+  has a 개편안 조직도 and needs the 개정조례안.
 ---
 
 # korean-gov-orgchart
@@ -81,6 +84,39 @@ relative to the current working directory.
 5. **Hand over** the `.hwpx` path, the preview images, the summary JSON the
    script prints (pages, warnings), and what you checked.
 
+## Reorganization: 개편안 조직도 → 개정조례안 (local governments)
+
+When the user has the target chart (사진·HWPX·엑셀·메모, even partial) and needs
+the amended ordinance:
+
+1. **Current outline.** `node <skill>/scripts/orgchart.mjs tree --decree 조례.txt
+   --rule 시행규칙.txt --out 현행.txt` writes the current structure as an indented
+   list (2 spaces per level, `[보좌]` 보좌기관, `[소속]` 직속기관·사업소·하부기관).
+2. **Write the 개편안 outline.** Copy `현행.txt` to `개편안.txt` and edit it to the
+   user's chart: delete lines (폐지), add lines (신설), move lines under another
+   parent (이동), reorder siblings (조례 순서), and mark renames as
+   `새이름 (← 옛이름)` — without the arrow a rename reads as 폐지 + 신설. Ask the
+   user whenever the chart is ambiguous (rename or new unit? which 국? order?).
+   Leave parts the chart does not show as they are.
+3. **Draft.** `node <skill>/scripts/orgchart.mjs draft --decree 조례.txt --rule
+   시행규칙.txt --target 개편안.txt --date <개편 시행 예정일> --out out/`. It edits
+   the current texts in place (lists in "…에 A, B를 둔다", new 국 as 제N조의2,
+   abolished 국·담당관 as "제N조 삭제", 과장 직급 clauses follow moved 과), parses
+   the result again and compares it with the outline. Exit code 2 = mismatch;
+   the summary lists each one.
+4. **Check and hand over.** Read `out/개정안-검토.md` (개정문, 신구조문대비표,
+   to-do list) and the previews. Outputs:
+   `<조례> 일부개정조례안.hwpx`, `<시행규칙> 일부개정규칙안.hwpx` (개정문 + 부칙 +
+   신구조문대비표 with changed words underlined), `<기관>-개편안-조직도.hwpx`,
+   `<기관>-현행-개편안-대비.hwpx`, and the full amended texts in `out/개정후/`.
+   Red `[분장사무 작성 필요]`·`[직급 작성 필요]` mark what the chart cannot
+   decide: fill them only from what the user tells you, never invent 분장사무 or
+   직급. Tell the user the drafts need their 법무 review, that 별표(사무분장) and
+   the 정원 조례 are not edited, and that 부칙 says "공포한 날부터 시행한다" unless
+   `--effective "2026년 7월 1일부터 시행한다"` is given.
+
+Details: `references/reorganization.md`.
+
 ## Fixing a misread
 
 If a unit is missing or drawn under the wrong parent, add directive lines at
@@ -116,5 +152,8 @@ Details and the 군산시 worked example: `references/local-government.md`.
 - 읍·면·동 and 의회사무국 are set by separate ordinances and are not drawn.
 - Names that exist only in HWP 별표 (보건지소 개소 수, 사업소 명단) are not read;
   a 사업소 appears only if the 조례 text names it.
+- Reverse drafting covers 국·과·담당관·직속기관 하부 과 in the 행정기구 설치 조례
+  and its 시행규칙; it needs unique unit names in the outline and does not draft
+  분장사무 or 직급.
 - The HWPX is written directly (not by 한글). It is verified with rhwp; still ask
   the user to open it in 한글 once and report anything that looks off.

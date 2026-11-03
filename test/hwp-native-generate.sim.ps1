@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     # 한글이 죽는 객체 번호(작도 순서 기준 1부터, "120,260" 처럼 여러 개 가능). 비어 있으면 크래시 없음.
     [string]$CrashAt = "",
@@ -130,8 +130,8 @@ $result = @{
     createdOrder = $script:SimCreated
     output = $global:__simOut
     progress = $(if (Test-Path -LiteralPath $progressPath) { Get-Content -LiteralPath $progressPath -Raw | ConvertFrom-Json } else { $null })
-    logTail = $(if (Test-Path -LiteralPath "$progressPath.log") { @(Get-Content -LiteralPath "$progressPath.log" | Select-Object -Last 6) } else { @() })
-    logAll = $(if (Test-Path -LiteralPath "$progressPath.log") { @(Get-Content -LiteralPath "$progressPath.log") } else { @() })
+    logTail = $(if (Test-Path -LiteralPath "$progressPath.log") { @(Get-Content -LiteralPath "$progressPath.log" | Select-Object -Last 6 | ForEach-Object { [string]$_ }) } else { @() })
+    logAll = $(if (Test-Path -LiteralPath "$progressPath.log") { @(Get-Content -LiteralPath "$progressPath.log" | ForEach-Object { [string]$_ }) } else { @() })
     leftovers = @(Get-ChildItem -LiteralPath $work | ForEach-Object { $_.Name })
     outputExists = (Test-Path -LiteralPath $outputPath)
     outputObjects = $(if (Test-Path -LiteralPath $outputPath) { [int](Get-Content -LiteralPath $outputPath -Raw) } else { -1 })

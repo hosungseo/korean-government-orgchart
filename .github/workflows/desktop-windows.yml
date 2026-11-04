@@ -97,9 +97,13 @@ jobs:
           gh release view desktop-latest >/dev/null 2>&1 || gh release create desktop-latest             --prerelease             --title "Windows 데스크톱 최신 빌드"             --notes "main 브랜치 최신 커밋에서 자동 빌드된 NSIS 설치본입니다. 안정판은 native-hwpx-v* 태그 릴리스를 사용하세요."
           gh release upload desktop-latest "$exe" --clobber
           # Keep only the installer just built so nobody downloads an older version by mistake.
-          current=$(basename "$exe")
+          # GitHub strips the Korean product name from asset names, so match on the version suffix.
+          version=$(node -p "require('./desktop/src-tauri/tauri.conf.json').version")
           gh release view desktop-latest --json assets -q '.assets[].name' | while read -r name; do
-            if [ "$name" != "$current" ]; then gh release delete-asset desktop-latest "$name" --yes; fi
+            case "$name" in
+              *"_${version}_x64-setup.exe") ;;
+              *) gh release delete-asset desktop-latest "$name" --yes ;;
+            esac
           done
           gh release edit desktop-latest --notes "main 브랜치 최신 커밋(${GITHUB_SHA::7})에서 자동 빌드된 NSIS 설치본입니다. 안정판은 native-hwpx-v* 태그 릴리스를 사용하세요."
 

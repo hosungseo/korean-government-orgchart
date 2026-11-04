@@ -2,6 +2,7 @@ import { analyzeNativeManifest, healNativeManifest } from "./manifest-validation
 import { buildNativeComparisonWorkflow, buildNativeLawWorkflow } from "./engine/native-law-workflow.mjs";
 import { parseOrganizationTexts } from "./engine/parser.mjs";
 import { flattenLawJson } from "./engine/law-json-core.mjs";
+import { createNativeHwpxBytes } from "./engine/render-native-hwpx.mjs";
 import { compareLawSnapshots, createLawSnapshot, summarizeLawSnapshot } from "./engine/law-history.mjs";
 import {
   COMPARISON_VIDEO_SCHEMA,
@@ -48,7 +49,8 @@ function setStep(id, state) {
 }
 
 function refreshGenerateAvailability() {
-  $("generateButton").disabled = !(invoke && hwpAvailable && manifest && validationReport?.valid);
+  // Without Hangul or its security module the app writes the HWPX itself, so only the manifest gates it.
+  $("generateButton").disabled = !(invoke && manifest && validationReport?.valid);
 }
 
 function refreshVideoExportAvailability() {
@@ -999,29 +1001,69 @@ async function checkRuntime() {
       setRuntime("ready", runtime.version ? `한글 ${runtime.version} 연결됨` : "Windows 한글 연결됨");
       setStep("stepRuntime", "done");
       setStatus("한글 연결 완료", "한글 연결과 파일 접근 보안모듈을 확인했습니다.", "success");
-    } else if (runtime.available) {
-      setRuntime("unavailable", "한글 보안모듈 미등록");
-      setStep("stepRuntime", "failed");
-      setStatus(
-        "파일 접근 보안모듈 필요",
-        "한컴 개발자센터의 Automation 보안모듈을 설치·등록한 뒤 연결 상태를 다시 확인하세요.",
-        "error",
-      );
     } else {
-      setRuntime("unavailable", "Windows 한글 미연결");
-      setStep("stepRuntime", "failed");
-      setStatus("한글을 찾지 못함", runtime.reason || "Windows 한글 설치 상태를 확인하세요.", "error");
+      setDirectRuntime(runtime.available ? "한글 보안모듈이 등록되어 있지 않습니다." : runtime.reason || "Windows 한글을 찾지 못했습니다.");
     }
   } catch (error) {
-    setRuntime("unavailable", "한글 연결 오류");
-    setStep("stepRuntime", "failed");
-    setStatus("한글 연결 오류", String(error), "error");
+    setDirectRuntime(`한글 연결 확인 중 오류가 났습니다: ${error}`);
   }
   refreshGenerateAvailability();
 }
 
+function setDirectRuntime(reason) {
+  setRuntime("direct", "한글 없이 저장");
+  setStep("stepRuntime", "done");
+  setStatus(
+    "한글 없이 HWPX로 저장합니다",
+    `${reason} 한글을 거치지 않고 편집 가능한 HWPX 파일을 바로 씁니다. 결과는 한글에서 그대로 열어 고칠 수 있습니다.`,
+    "warning",
+  );
+}
+
+function bytesToBase64(bytes) {
+  let binary = "";
+  for (let index = 0; index < bytes.length; index += 0x8000) {
+    binary += String.fromCharCode(...bytes.subarray(index, index + 0x8000));
+  }
+  return btoa(binary);
+}
+
+async function generateDirect() {
+  const button = $("generateButton");
+  button.disabled = true;
+  setStep("stepVerify", "active");
+  const objectTotal = Array.isArray(manifest.objects) ? manifest.objects.length : 0;
+  setStatus("HWPX 직접 작성 중", `객체 ${objectTotal.toLocaleString()}개를 HWPX 파일로 씁니다.`, "working");
+  try {
+    const bytes = await createNativeHwpxBytes(manifest, { title: manifest.title });
+    const result = await invoke("save_direct_hwpx", {
+      request: {
+        manifestJson: JSON.stringify(manifest),
+        hwpxBase64: bytesToBase64(bytes),
+        fileName: $("fileName").value,
+        openAfter: $("openAfter").checked,
+      },
+    });
+    $("openFolderButton").hidden = false;
+    setStep("stepVerify", "done");
+    setStatus("편집형 HWPX 저장 완료", `객체 ${result.objectCount}개 · ${result.outputPath}`, "success");
+    $("verification").dataset.state = "success";
+    $("verification").querySelector("span").textContent = "한글 없이 저장";
+    $("verification").querySelector("p").textContent = `작도 명세·법령 근거와 한 묶음으로 저장했습니다. 한글이 없어 재열기 검증은 하지 않았습니다. SHA-256 ${String(result.sha256 || "").slice(0, 12)}…`;
+  } catch (error) {
+    setStep("stepVerify", "failed");
+    setStatus("저장 실패", String(error), "error");
+    $("verification").dataset.state = "error";
+    $("verification").querySelector("span").textContent = "저장 실패";
+    $("verification").querySelector("p").textContent = String(error);
+  } finally {
+    refreshGenerateAvailability();
+  }
+}
+
 async function generate() {
-  if (!invoke || !manifest || !hwpAvailable || !validationReport?.valid) return;
+  if (!invoke || !manifest || !validationReport?.valid) return;
+  if (!hwpAvailable) return generateDirect();
   const button = $("generateButton");
   button.disabled = true;
   setStep("stepVerify", "active");

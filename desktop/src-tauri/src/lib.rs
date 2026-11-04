@@ -37,8 +37,20 @@ const MAX_MANIFEST_BYTES: usize = 10 * 1024 * 1024;
 const MAX_NATIVE_OBJECTS: usize = 5_000;
 const MAX_LAW_HISTORY_BYTES: usize = 64 * 1024 * 1024;
 const MAX_COMPARISON_VIDEO_BYTES: usize = 100 * 1024 * 1024;
+const MAX_DIRECT_HWPX_BYTES: usize = 50 * 1024 * 1024;
 const PAGE_TOLERANCE_MM: f64 = 0.02;
 const CONNECTION_TOLERANCE_MM: f64 = 1.05;
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct DirectHwpxRequest {
+    manifest_json: String,
+    hwpx_base64: String,
+    #[serde(default)]
+    file_name: String,
+    #[serde(default)]
+    open_after: bool,
+}
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -1877,6 +1889,113 @@ fn save_comparison_video(
     }))
 }
 
+fn decode_direct_hwpx(encoded: &str) -> Result<Vec<u8>, String> {
+    if encoded.len() > MAX_DIRECT_HWPX_BYTES.saturating_mul(4) / 3 + 8 {
+        return Err("HWPX 파일은 50MB를 초과할 수 없습니다.".to_string());
+    }
+    let bytes = BASE64_STANDARD
+        .decode(encoded.trim())
+        .map_err(|error| format!("HWPX 데이터를 해독하지 못했습니다: {error}"))?;
+    // An HWPX package is a ZIP whose first stored entry is the mimetype file.
+    let mimetype = b"mimetypeapplication/hwp+zip";
+    if bytes.len() < 30 + mimetype.len() || &bytes[..4] != b"PK\x03\x04" || &bytes[30..30 + mimetype.len()] != mimetype {
+        return Err("HWPX 패키지 형식이 아닙니다.".to_string());
+    }
+    Ok(bytes)
+}
+
+/// Saves an HWPX the UI wrote itself (no Hangul, no security module) through the
+/// same atomic bundle as the Hangul path, so outputs look alike on disk.
+#[tauri::command]
+fn save_direct_hwpx(app: tauri::AppHandle, request: DirectHwpxRequest) -> Result<Value, String> {
+    let (manifest, preflight) = validate_manifest_json(&request.manifest_json)?;
+    let bytes = decode_direct_hwpx(&request.hwpx_base64)?;
+    let manifest_file_name = manifest
+        .get("fileName")
+        .and_then(Value::as_str)
+        .unwrap_or_default();
+    let file_name = sanitize_file_name(if request.file_name.trim().is_empty() {
+        manifest_file_name
+    } else {
+        &request.file_name
+    });
+    let output_dir = output_directory(&app)?;
+    let output_path = unique_hwpx_output_path(&output_dir, &file_name);
+    let staging_token = format!("{}-{}", std::process::id(), unix_time_millis());
+    let staged_output_path = temporary_hwpx_path(&output_path, &staging_token);
+    write_new_synced(&staged_output_path, &bytes)?;
+    let expected_sha256 = sha256_hex(&bytes);
+    let object_count = manifest
+        .get("objects")
+        .and_then(Value::as_array)
+        .map(Vec::len)
+        .unwrap_or_default();
+    let result = json!({
+        "writer": "direct",
+        "verified": true,
+        "objectCount": object_count,
+        "sha256": expected_sha256.clone(),
+    });
+    let verification_document = json!({
+        "schema": "kr.go.mois.orgchart.hwp-native-verification/v1",
+        "generatedAtUnixMs": unix_time_millis(),
+        "manifest": {
+            "schema": manifest.get("schema"),
+            "title": manifest.get("title"),
+            "fileName": manifest.get("fileName"),
+            "source": manifest.get("source"),
+            "page": manifest.get("page"),
+            "verification": manifest.get("verification"),
+        },
+        "integrity": {
+            "sha256": expected_sha256.clone(),
+            "readBackVerified": true,
+            "atomicBundle": true,
+        },
+        "preflight": preflight,
+        "result": result,
+        "note": "한글 없이 직접 작성한 HWPX입니다. 한글 재열기 검증은 하지 않았습니다.",
+    });
+    let pretty = |value: &Value, label: &str| {
+        serde_json::to_string_pretty(value)
+            .map(|text| format!("{text}\n"))
+            .map_err(|error| format!("{label}를 직렬화하지 못했습니다: {error}"))
+    };
+    let staged = staged_output_path.clone();
+    let written = (|| {
+        let manifest_text = pretty(&manifest, "재현용 작도 명세")?;
+        let verification_text = pretty(&verification_document, "검증 리포트")?;
+        let evidence_text = pretty(&legal_evidence_document(&manifest), "법령 근거 리포트")?;
+        write_atomic_hwpx_bundle(&staged, &output_path, &manifest_text, &verification_text, &evidence_text)
+    })();
+    let (paths, verified_sha256) = written.map_err(|error| {
+        let _ = fs::remove_file(&staged_output_path);
+        error
+    })?;
+    if verified_sha256 != expected_sha256 {
+        remove_files(&[
+            paths.hwpx.as_path(),
+            paths.native_manifest.as_path(),
+            paths.verification.as_path(),
+            paths.legal_evidence.as_path(),
+        ]);
+        return Err("HWPX 최종 확정 전후의 SHA-256이 일치하지 않습니다.".to_string());
+    }
+    let opened = request.open_after && launch_output(&paths.hwpx);
+    Ok(json!({
+        "writer": "direct",
+        "saved": true,
+        "opened": opened,
+        "outputPath": paths.hwpx.display().to_string(),
+        "nativeManifestPath": paths.native_manifest.display().to_string(),
+        "verificationReportPath": paths.verification.display().to_string(),
+        "legalEvidencePath": paths.legal_evidence.display().to_string(),
+        "objectCount": object_count,
+        "bytes": bytes.len(),
+        "sha256": verified_sha256,
+    }))
+}
+
 #[tauri::command]
 async fn generate_native_hwpx(
     app: tauri::AppHandle,
@@ -2075,6 +2194,7 @@ pub fn run() {
             load_law_snapshot,
             save_comparison_video,
             generate_native_hwpx,
+            save_direct_hwpx,
             cancel_native_hwpx,
             open_output_directory,
         ])
@@ -2091,6 +2211,17 @@ pub fn run() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn direct_hwpx_requires_a_hwpx_package() {
+        let mut package = b"PK\x03\x04".to_vec();
+        package.extend_from_slice(&[0_u8; 26]);
+        package.extend_from_slice(b"mimetypeapplication/hwp+zip");
+        package.extend_from_slice(b"rest");
+        assert!(decode_direct_hwpx(&BASE64_STANDARD.encode(&package)).is_ok());
+        assert!(decode_direct_hwpx(&BASE64_STANDARD.encode(b"PK\x03\x04 not hwpx")).is_err());
+        assert!(decode_direct_hwpx("@@not-base64@@").is_err());
+    }
 
     #[test]
     fn powershell_writer_keeps_exactly_one_utf8_bom() {

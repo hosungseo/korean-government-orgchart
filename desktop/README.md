@@ -32,8 +32,7 @@
 ## 요구 환경
 
 - Windows 10/11
-- 한컴오피스 한글(Automation의 `HWPFrame.HwpObject`가 등록된 버전)
-- 한컴 개발자센터에서 제공하는 파일 접근 보안모듈(Automation) 설치·등록
+- (선택) 한컴오피스 한글(Automation의 `HWPFrame.HwpObject`가 등록된 버전)과 파일 접근 보안모듈(Automation) 등록. 둘 중 하나라도 없으면 앱이 한글을 거치지 않고 HWPX를 직접 씁니다. 이때 결과 파일은 같지만 한글 재열기 검증은 건너뜁니다.
 - WebView2 Runtime(Tauri 설치본에 부트스트래퍼 포함)
 
 Node.js나 Python은 설치본 실행 시 필요하지 않습니다. 개발·빌드할 때만 Node.js와 Rust가 필요합니다.
@@ -125,6 +124,6 @@ npm run --prefix desktop verify:windows
 
 ## 보안·라이선스
 
-한글의 파일 접근 보안모듈이 등록되지 않은 PC에서는 생성 버튼을 비활성화하고, 명령을 직접 호출해도 즉시 중단합니다. 저장 승인창을 우회하지 않으며, [한컴 Automation 안내](https://developer.hancom.com/hwpautomation)에서 공식 보안모듈을 내려받아 설치·등록한 뒤 사용해야 합니다.
+한글의 파일 접근 보안모듈이 등록되지 않은 PC에서는 한글 Automation을 쓰지 않고, 화면 안의 직접 작성기(`src/render-native-hwpx.mjs`)로 HWPX를 만들어 저장합니다. Automation 명령을 직접 호출해도 보안모듈이 없으면 즉시 중단하며, 저장 승인창을 우회하지 않습니다. 한글 재열기 검증까지 받으려면 [한컴 Automation 안내](https://developer.hancom.com/hwpautomation)의 공식 보안모듈을 설치·등록하세요. 2026년 11월 현재 그 페이지의 보안모듈 내려받기 링크가 404입니다.
 
 한글 Automation은 개인·비상업 용도로 자유롭게 이용할 수 있지만, 상업용 솔루션이나 응용프로그램에 사용하려면 한컴의 별도 승인이 필요합니다. 배포 전 [한컴 Automation 안내](https://developer.hancom.com/hwpautomation)를 확인해야 합니다.

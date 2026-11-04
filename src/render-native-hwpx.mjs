@@ -33,7 +33,7 @@ const VERTICAL_ALIGN = Object.freeze({ top: "TOP", center: "CENTER", bottom: "BO
 export async function createNativeHwpxBytes(manifests, options = {}) {
   const list = Array.isArray(manifests) ? manifests : [manifests];
   if (!list.length) throw new Error("작도 명세가 없습니다.");
-  const template = await JSZip.loadAsync(Buffer.from(HWPX_TEMPLATE_BASE64, "base64"));
+  const template = await JSZip.loadAsync(HWPX_TEMPLATE_BASE64, { base64: true });
   const headerSource = await template.file("Contents/header.xml").async("string");
   const styles = createStyleRegistry(headerSource);
   const ids = createIdFactory();

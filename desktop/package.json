@@ -1,6 +1,6 @@
 {
   "name": "korean-government-orgchart-desktop",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "private": true,
   "type": "module",
   "description": "Windows studio that turns organization-chart manifests into editable native HWPX objects",
